@@ -19,16 +19,17 @@ function smpg_remove_data_on_uninstall( $blog_id = null ) {
 	}
 
     if ( $post_ids ) {
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $wpdb->delete(
                     $wpdb->posts,
                     array( 'post_type' => 'smpg' ),
                     array( '%s' )
             );
-		 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared	
+		 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared	
 		    $post_ids_placeholder = implode( ', ', array_fill( 0, count( $post_ids ), '%d' ) ); 
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$prepared_query = $wpdb->prepare( "DELETE FROM {$wpdb->postmeta} WHERE post_id IN ($post_ids_placeholder)" );
-			$wpdb->query( $prepared_query );            
+			$wpdb->query( $prepared_query );  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared           
     }
                                                         
     //All options                    

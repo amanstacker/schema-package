@@ -159,7 +159,14 @@ It sends youtube video url from posts when VideoObject schema is selected.
 This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
 
 
-#### 3. Yotpo API
+#### 3. Google API
+
+Schema Package connects to Google API to get video details. Its needed to generate VideoObject schema markup.
+
+It sends youtube video vid got from youtube api, api key and part ( 'contentDetails, snippet, statistics' ) when VideoObject schema is selected.
+This service is provided by "Google Inc": [terms of use](https://developers.google.com/terms), [privacy policy](https://developers.google.com/terms/api-services-user-data-policy).
+
+#### 4. Yotpo API
 
 Schema Package connects to Yotpo API to fetch product reviews. Its needed to generate Reviews schema markup for WooCommerce product.
 
@@ -167,12 +174,20 @@ It sends product id, api key when Yotpo option is enabled inside automation meta
 This service is provided by "Yotpo": [terms of use](https://www.yotpo.com/terms-of-service/), [privacy policy](https://www.yotpo.com/privacy-policy/).
 
 
-#### 4. Gravatar API
+#### 5. Gravatar API
 
 Schema Package connects to Gravatar API to validate author avatar.
 
 It sends the author's email in hashkey. Validate the author's avatar which included in schema markup.
 This service is provided by "Gravatar": [terms of use](https://wordpress.com/tos/), [privacy policy](https://automattic.com/privacy/).
+
+
+#### 6. YouTube Image 
+
+Schema Package connects to YouTube Image to get video thumbnail.
+
+It sends youtube video vid got from youtube api when VideoObject schema is selected.
+This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
 
 
 ### Credits

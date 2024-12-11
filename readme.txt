@@ -159,6 +159,7 @@ Schema Package connects to YouTube API to get video details. Its needed to gener
 It sends youtube video url from posts when VideoObject schema is selected.
 This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
 
+
 #### 3. Google API
 
 Schema Package connects to Google API to get video details. Its needed to generate VideoObject schema markup.

@@ -1,0 +1,23 @@
+.smpg-repeater-panel-body{
+    padding: 15px;
+    border: 1px solid darkgrey;
+    margin-bottom: 10px;
+    position: relative;
+}
+.smpg-trash-repeater{
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+.smpg-repeater-i{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 2px;
+    background: #cccccc;
+}
+.smpg-repeater-panel{
+    border:0px solid #fff;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+}

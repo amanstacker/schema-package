@@ -1,0 +1,6 @@
+.smpg-sub-el{
+    padding-left: 15px !important;
+}
+.smpg-misc-table tr td:first-child{ 
+    min-width: 150px !important; 
+}

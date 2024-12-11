@@ -1,0 +1,17 @@
+.smpg-image-preview {
+    width: 160px;    
+    position: relative;
+    margin-top: 8px;
+    border: 1px solid #eaedf3;
+}
+.smpg-image-preview img{
+    width: 100%;
+    padding:8px;    
+}
+.smpg-image-preview a{
+    position: absolute;
+    font-size: 20px;
+    margin-top: -4px;
+    padding-left: 4px;
+    cursor: pointer;
+}

@@ -160,7 +160,9 @@ class SMPG_Api_Controller {
             register_rest_route( 'smpg-route', 'export-settings', array(
                 'methods'    => 'GET',
                 'callback'   => array($this->_apiAction, 'export_settings'),
-                'permission_callback' => '__return_true'
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                 }
             ));                        
             register_rest_route( 'smpg-route', 'get-tags', array(
                 'methods'    => 'GET',

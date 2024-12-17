@@ -76,7 +76,7 @@ Helps you to add versatile schema markup on your websites.
 * SEOPress : [URL](https://wordpress.org/plugins/wp-seopress/)
 
 
-### Report Bug or Contribute fix
+== Report Bug or Contribute fix ==
 
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
 
@@ -86,7 +86,7 @@ Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Sc
 1. Upload the plugin files to the `/wp-content/plugins/my-plugin` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
-### Project Development Setup Guide
+== Project Development Setup Guide ==
 
 This guide will walk you through setting up Schema Package react part and running it locally.
 
@@ -140,7 +140,7 @@ First, clone the repository to your local machine:
 You can now start modifying the project files.
 
 
-### External Services
+== External Services ==
 
 Schema Package uses the following external services:
 
@@ -191,7 +191,7 @@ It sends youtube video vid got from youtube api when VideoObject schema is selec
 This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
 
 
-### Credits
+== Credits ==
 
 Schema Package uses the following third-party libraries:
 

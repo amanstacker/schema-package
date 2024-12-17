@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Helps you to add versatile schema markup on your websites.
 
-### Description
+== Description ==
 
 Helps you to add versatile schema markup on your websites.
 
@@ -81,7 +81,7 @@ Helps you to add versatile schema markup on your websites.
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
 
 
-### Installation
+== Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/my-plugin` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
@@ -224,6 +224,12 @@ Schema Package uses the following third-party libraries:
     - Link: https://github.com/sy4mil/Aqua-Resizer/
     - License: Dual MIT and GPL
 
+
+== Frequently Asked Questions ==
+
+= Where can I ask for help ? =
+
+You can submit a support ticket via the [support forum](https://wordpress.org/support/plugin/schema-package/) at anytime.
 
 
 == Changelog ==

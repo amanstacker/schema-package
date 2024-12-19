@@ -83,61 +83,8 @@ Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Sc
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/my-plugin` directory.
+1. Upload the plugin files to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-
-== Project Development Setup Guide ==
-
-This guide will walk you through setting up Schema Package react part and running it locally.
-
-
-#### 1. Prerequisites
-
-Before you begin, ensure that you have the following installed:
-
-- **PHP** (version 5.6.20 or higher recommended)
-- **MySQL** or **MariaDB** (for the database)
-- **WordPress** (latest stable version)
-- **Git** (for version control)
-- **Node.js** (LTS version) - [Download Node.js](https://nodejs.org/)
-- **npm** (comes with Node.js) or **yarn** (alternative package manager)
-
-
-#### 2. Clone the Repository
-
-First, clone the repository to your local machine:
-
-
-   git clone https://github.com/amanstacker/schema-package.git  
-   cd schema-package/admin/assets/react
-
-#### 3. Set Up a Local WordPress Installation
-
-- If you don't already have a local WordPress environment, you can set up one using tools like [XAMPP](https://www.apachefriends.org/), or [WAMP](https://www.wampserver.com/).
-
-- Download and install WordPress into your local environment.
-- Create a new WordPress site (e.g., your-plugin-site.local).
-- Install and activate the plugin by copying the plugin directory (e.g., schema-package) into the /wp-content/plugins/ directory of your WordPress installation.
-
-#### 4. Install Dependencies   
-
-1. **Using npm**
-   - npm install
-
-2. **Using yarn**
-   - yarn install
-
-#### 5. Start the Development Server   
-
-1. **Using npm**
-   - npm run watch
-
-2. **Using yarn**
-   - yarn run watch
-
-#### 6. Make Changes and Develop
-
-You can now start modifying the project files.
 
 
 == External Services ==

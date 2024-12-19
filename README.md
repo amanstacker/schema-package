@@ -81,7 +81,7 @@ Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Sc
 
 ### Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/my-plugin` directory.
+1. Upload the plugin files to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 

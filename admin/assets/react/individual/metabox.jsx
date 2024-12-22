@@ -74,7 +74,7 @@ const {
       let copyMeta = [...postMeta];    
       copyMeta.splice(i, 1);      
       setPostMeta(copyMeta);  
-      setdataUpdated(true);        
+      setdataUpdated(prevState => !prevState);     
   }
   const handleSchemaDeleteNo = (i,id) => {
       let copyMeta = [...postMeta];
@@ -290,7 +290,7 @@ const {
     let copyMeta = [...postMeta];
         copyMeta[i]['is_setup_popup'] = false;
         setPostMeta(copyMeta);
-        setdataUpdated(true);        
+        setdataUpdated(prevState => !prevState);     
   }
 
   const savewholeSchemaGeneratorData = () => {
@@ -434,7 +434,11 @@ const {
                 Object.entries(result['properties']).map(([key, value]) => {
                     copyMeta.push(value);
                 });
-                setPostMeta(copyMeta);        
+                setPostMeta(copyMeta); 
+                if ( ! init ){
+                    setdataUpdated(prevState => !prevState);
+                }
+                
             }            
                 
         },        

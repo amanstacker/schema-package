@@ -34,7 +34,7 @@ const {
  import { schemaTypes } from '../shared/schemaTypes';
  import ElementGenerator from '../shared/ElementGenerator/ElementGenerator';
 
- const Metabox = () => {    
+ const Metabox = () => {
 
     const {__} = wp.i18n; 
     const [postMeta, setPostMeta] = useState([]);            
@@ -448,7 +448,9 @@ const {
     return (
         <>                    
         <div>
-            <p className="smpg-description">{__('Configure Json-ld for the post. Structured Data is used to display rich results in SERPs.', 'schema-package') } <a>{__('Learn More.', 'schema-package') }</a></p>
+            <p className="smpg-description">{__('Add schema types. Structured Data is used to display rich results in SERPs.', 'schema-package') } 
+                {/* <a>{__('Learn More.', 'schema-package') }</a> */}
+            </p>
         </div>
         {(postMeta.length > 0) ?
         <div className="smpg-individual-schema-list">

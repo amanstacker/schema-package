@@ -68,7 +68,7 @@ function smpg_get_json_ld(){
         $response [] = $contact_page;
     }
 
-    $schema_meta = get_post_meta($post_id, 'smpg_schema_meta_setup', true);
+    $schema_meta = get_post_meta($post_id, '_smpg_schema_meta', true);
     
     if(!empty($schema_meta) && is_array($schema_meta)){
 

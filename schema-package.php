@@ -24,6 +24,7 @@ define('SMPG_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 //Admin
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-controller.php';
+require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-individual-controller.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-action.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-mapper.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/setup.php';

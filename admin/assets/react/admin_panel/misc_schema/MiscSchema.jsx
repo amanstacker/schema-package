@@ -237,7 +237,7 @@ const MiscSchema = () => {
       </table>
       </div>
       <div className="smpg-save-misc-schema-btn">
-        {isLoaded ? <Button secondary onClick={handleSaveMiscSchema}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>{__('Loading', 'schema-package') }</Button>}
+        {isLoaded ? <Button primary onClick={handleSaveMiscSchema}>{__('Save', 'schema-package')}</Button> : <Button loading primary>{__('Loading', 'schema-package') }</Button>}
         </div>    
     </form>
     </>

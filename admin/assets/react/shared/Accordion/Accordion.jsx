@@ -8,7 +8,7 @@ const Accordion = ({ children, title, isExpand = false }) => {
 
   return (
     <div className="smpg-segment ui segment">
-        <a class="smpg-accordion" onClick={() => setExpand(expand => !expand) }><h4>{title}</h4></a>              
+        <a className="smpg-accordion" onClick={() => setExpand(expand => !expand) }><h4>{title}</h4></a>              
         <i className={`dropdown icon smpg-icon ${!expand ? ' smpg-left-arrow' : ''}`}></i>
         <div className="smpg-clearfix"></div>      
       {expand && <div className="smpg-accordion-panel">{children}</div>}

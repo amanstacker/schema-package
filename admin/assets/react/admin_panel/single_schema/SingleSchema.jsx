@@ -87,6 +87,9 @@ const SingleSchema = () => {
       let clonedata = [...schemaLoop];    
       clonedata.splice(currentSelectPostIndex, 1);      
       setSchemaLoop(clonedata);
+      if(clonedata.length == 0){
+        setPostsFound(0);
+      }
     }
     
     setShowDeleteSchemaModal(false);
@@ -178,24 +181,29 @@ const SingleSchema = () => {
             </tr>
           </thead>  
           <tbody >
-            {schemaLoop ? schemaLoop.map( (item, i) => {
+
+            {schemaLoop ? 
+            
+            schemaLoop.map( (item, i) => {
               return(
-              <tr key={i}>
-              <td >{extractSchemaTypeText(item.post_meta.schema_type)}</td>      
-              <td >{item.post.post_modified}</td>      
-              <td >
-              <div className="ui fitted toggle checkbox">
-                <input data-index={i} data-id={item.post.post_id} onChange={handleStatusChange} checked={item.post_meta.current_status ? true : false} type="checkbox" />
-                <label></label>
-              </div>
-              </td>
-              <td>
-              <div className="smpg-action">
-                <Link to={`?page=schema_package&path=single_page&post_id=${item.post.post_id}`}><i aria-hidden="true" className="edit icon"></i></Link>        
-                <a data-index={i} data-id={item.post.post_id} onClick={handleShowDeleteSchemaModal}><i aria-hidden="true" className="trash icon"></i></a>
-              </div>        
-              </td>
-            </tr>)   
+                item.post_meta.schema_type ?  
+                <tr key={i}>
+                <td >{extractSchemaTypeText(item.post_meta.schema_type)}</td>      
+                <td >{item.post.post_modified}</td>      
+                <td >
+                <div className="ui fitted toggle checkbox">
+                  <input data-index={i} data-id={item.post.post_id} onChange={handleStatusChange} checked={item.post_meta.current_status ? true : false} type="checkbox" />
+                  <label></label>
+                </div>
+                </td>
+                <td>
+                <div className="smpg-action">
+                  <Link to={`?page=schema_package&path=single_page&post_id=${item.post.post_id}`}><i aria-hidden="true" className="edit icon"></i></Link>        
+                  <a data-index={i} data-id={item.post.post_id} onClick={handleShowDeleteSchemaModal}><i aria-hidden="true" className="trash icon"></i></a>
+                </div>        
+                </td>
+              </tr> : ''
+            )   
             }) : null}
             
           </tbody>

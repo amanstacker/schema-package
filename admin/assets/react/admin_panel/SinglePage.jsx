@@ -36,7 +36,7 @@ const SinglePage = () => {
   const [postMeta, setPostMeta] = useReducer(
     (state, newState) => ({...state, ...newState}),
     {
-      schema_type             : '',      
+      schema_type             : 'article',
       add_comments            : false,
       add_speakable           : false,
       current_status          : true,
@@ -289,7 +289,7 @@ const SinglePage = () => {
 
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
-                <h4>{__('Add On', 'schema-package') }</h4>
+                <h4>{__('Target On', 'schema-package') }</h4>
                 <table className="smpg-placement-table">
                   <tbody>
                    <tr>
@@ -378,7 +378,7 @@ const SinglePage = () => {
                 </table>
               </div>                  
               <div className="">
-                <h4>{__('Remove From', 'schema-package') }</h4>
+                <h4>{__('Target Off', 'schema-package') }</h4>
                 <table className="smpg-placement-table">
                   <tbody>
                    <tr>
@@ -513,7 +513,7 @@ const SinglePage = () => {
          : ''}           
         
         <div className="smpg-save-schema-btn">
-        {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>Loading</Button>}                  
+        {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>            
       </div>
       </div>

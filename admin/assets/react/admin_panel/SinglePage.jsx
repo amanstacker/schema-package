@@ -513,7 +513,7 @@ const SinglePage = () => {
          : ''}           
         
         <div className="smpg-save-schema-btn">
-        {isLoaded ? <Button secondary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>Loading</Button>}                  
+        {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>Loading</Button>}                  
         </div>            
       </div>
       </div>

@@ -17,11 +17,11 @@ const SettingsNavLink = () => {
       <div>
           <div>
           <div className="ui pointing secondary vertical menu">
-          <Link  to={'admin.php?page=schema_package&path=settings'} className={current == 'settings' ? 'item active' : 'item'}>{__('General', 'schema-package')}</Link>
-          <Link  to={'admin.php?page=schema_package&path=settings_manageconflict'} className={current == 'settings_manageconflict' ? 'item active' : 'item'}>{__('Manage Conflict', 'schema-package')}</Link>                                                          
-          <Link  to={'admin.php?page=schema_package&path=settings_defaultdata'} className={current == 'settings_defaultdata' ? 'item active' : 'item'}>{__('Default Data', 'schema-package')}</Link>                                
-          <Link  to={'admin.php?page=schema_package&path=settings_tools'} className={current == 'settings_tools' ? 'item active' : 'item'}>{__('Tools', 'schema-package')}</Link>                                
-          <Link  to={'admin.php?page=schema_package&path=settings_help'} className={current == 'settings_help' ? 'item active' : 'item'}>{__('Help & Support', 'schema-package')}</Link>                                
+          <Link  to={'admin.php?page=schema_package&path=settings'} className={current == 'settings' ? 'item active' : 'item'}><h4>{__('General', 'schema-package')}</h4></Link>
+          <Link  to={'admin.php?page=schema_package&path=settings_manageconflict'} className={current == 'settings_manageconflict' ? 'item active' : 'item'}><h4>{__('Manage Conflict', 'schema-package')}</h4></Link>                                                          
+          <Link  to={'admin.php?page=schema_package&path=settings_defaultdata'} className={current == 'settings_defaultdata' ? 'item active' : 'item'}><h4>{__('Default Data', 'schema-package')}</h4></Link>                                
+          <Link  to={'admin.php?page=schema_package&path=settings_tools'} className={current == 'settings_tools' ? 'item active' : 'item'}><h4>{__('Tools', 'schema-package')}</h4></Link>                                
+          <Link  to={'admin.php?page=schema_package&path=settings_help'} className={current == 'settings_help' ? 'item active' : 'item'}><h4>{__('Help & Support', 'schema-package')}</h4></Link>                                
           </div>                                                  
         </div>   
         </div>        

@@ -505,7 +505,7 @@ const Settings = () => {
         }
       })()}
       <div className="smpg-save-settings-btn">
-        {isLoaded ? <Button secondary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>Loading</Button>}                  
+        {isLoaded ? <Button primary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading secondary>Loading</Button>}                  
         </div>
       </div>                    
       </div>

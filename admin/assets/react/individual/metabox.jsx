@@ -23,7 +23,8 @@ const {
 	Component,
 	Fragment,
     useState,
-    useEffect  
+    useEffect,
+    useRef
 } = wp.element;
 
 /**
@@ -37,12 +38,18 @@ const {
  const Metabox = () => {
 
     const {__} = wp.i18n; 
-    const [postMeta, setPostMeta] = useState([]);            
+    const hasPageBeenRenderd = useRef({effect:false});
+    const [postMeta, setPostMeta] = useState([]);
+    const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
+    const [selectedSchema, setSelectedSchema]       = useState([]);
+    const [dataUpdated, setdataUpdated]             = useState(false);
     
     const handleSchemaTurnOnOff = (i,id) => {
         let copyMeta = [...postMeta];
         copyMeta[i]['is_enable'] = !copyMeta[i]['is_enable'];
-        setPostMeta(copyMeta);        
+        setPostMeta(copyMeta);            
+        setdataUpdated(prevState => !prevState);
+  
   }
 
   const handleSchemaEdit = (i,id) => {
@@ -66,7 +73,8 @@ const {
   const handleSchemaDeleteYes = (i,id) => {
       let copyMeta = [...postMeta];    
       copyMeta.splice(i, 1);      
-      setPostMeta(copyMeta);        
+      setPostMeta(copyMeta);  
+      setdataUpdated(true);        
   }
   const handleSchemaDeleteNo = (i,id) => {
       let copyMeta = [...postMeta];
@@ -277,11 +285,15 @@ const {
     
   }
   
-  const handleSavePostMeta = (i,id) => {
+  const handleSaveForThePost = ( i ) => {
 
     let copyMeta = [...postMeta];
         copyMeta[i]['is_setup_popup'] = false;
-        setPostMeta(copyMeta);        
+        setPostMeta(copyMeta);
+        setdataUpdated(true);        
+  }
+
+  const savewholeSchemaGeneratorData = () => {
 
     const body_json          = {};
 
@@ -312,9 +324,6 @@ const {
 
   }
       
-  const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
-  const [selectedSchema, setSelectedSchema]         = useState([]);
-
   const handleChooseModalOpen = () => {
     setChooseSchemaModal(true);    
   }
@@ -392,7 +401,7 @@ const {
     
   }
 
-  const handlePostMeta = ( init ) => {
+  const getMetaData = ( init ) => {
 
         setChooseSchemaModal(false);
                 
@@ -438,12 +447,18 @@ const {
   }
 
   useEffect(() => {
-    handlePostMeta(true);    
-  },[])
+    getMetaData(true);    
+  },[]);
 
   useEffect(() => {
+
+    if(hasPageBeenRenderd.current["effect"]){
+        savewholeSchemaGeneratorData();  
+    }
+
+    hasPageBeenRenderd.current["effect"] = true;
     
-  },[postMeta])
+  },[dataUpdated]);
  
     return (
         <>                    
@@ -481,8 +496,8 @@ const {
                                             })
                                         }
                                     </div>
-                                    <Button onClick={() => handleSavePostMeta(i, item.id)} isPrimary >
-                                        {__('Save', 'schema-package') }                                        
+                                    <Button onClick={() => handleSaveForThePost(i)} isPrimary >
+                                        {__('Save For The Post', 'schema-package') }                                        
                                     </Button>
                                 </Modal>
                             ) }
@@ -533,7 +548,7 @@ const {
                         </div>   
                  </div>  
 
-                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> handlePostMeta(false)}>{__('Selected', 'schema-package') }</Button></div>
+                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button></div>
 
                 </Modal>: ''
             }

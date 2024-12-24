@@ -2,7 +2,7 @@
 /*
 Plugin Name: Schema Package - A Structured Data Module
 Description: Helps you to add versatile schema markup on your websites.
-Version: 1.0
+Version: 1.0.1
 Text Domain: schema-package
 Domain Path: /languages
 Author: Aman Kumar Sharma
@@ -13,7 +13,7 @@ License: GPLv2 or later
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('SMPG_VERSION', '1.0');
+define('SMPG_VERSION', '1.0.1');
 define('SMPG_DIR_NAME_FILE', __FILE__ );
 define('SMPG_DIR_NAME', dirname( __FILE__ ));
 define('SMPG_DIR_URI', plugin_dir_url(__FILE__));
@@ -24,6 +24,7 @@ define('SMPG_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 //Admin
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-controller.php';
+require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-individual-controller.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-action.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-mapper.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/setup.php';

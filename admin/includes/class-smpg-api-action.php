@@ -15,6 +15,11 @@ class SMPG_Api_Action {
                                  
         }                        
        
+        public function delete_individual_schema_by_id( $request ) {
+
+
+        }
+
         public function change_post_status($request){
             
             $parameters     = $request->get_params();
@@ -430,10 +435,14 @@ class SMPG_Api_Action {
             $parameters     = $request_data->get_params();                                               
 
             if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) ){
+                                
                 $this->_api_mapper->save_post_meta($parameters);          
                 return array('status' => 'success', 'message' => esc_html__( 'Saved Successfully', 'schema-package' ));
+
             }else{
+
                 return array('status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ));
+
             }
                          
         }
@@ -460,19 +469,23 @@ class SMPG_Api_Action {
 
         }
 
-        public function get_post_meta($request) {
+        public function get_post_meta( $request ) {
             
             $response = [];
             
             $parameters = $request->get_params();
 
-            if(isset($parameters['post_id'])){
+            if ( isset( $parameters['post_id'] ) ) {
+
                 $post_id   = $parameters['post_id'];
                 $post_meta = [];
-                if(get_post_meta( $post_id, 'smpg_schema_meta_setup', true )){
-                    $post_meta =  get_post_meta( $post_id, 'smpg_schema_meta_setup', true );
+                
+                if ( get_post_meta( $post_id, '_smpg_schema_meta', true ) ) {
+                    $post_meta =  get_post_meta( $post_id, '_smpg_schema_meta', true );
                 }                                
+
                 $response  =  array('status' => 'success', 'post_meta' => $post_meta);
+
             }else{
 
                 $response =  array('status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ));

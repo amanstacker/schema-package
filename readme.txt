@@ -4,7 +4,7 @@ Tags: Structured Data, Schema, Rich Results, Product, Event
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 5.6.20
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -181,6 +181,13 @@ You can submit a support ticket via the [support forum](https://wordpress.org/su
 
 == Changelog ==
 
-= 1.0
+= 1.0.1 =
+
+* Tweak : UI Improvement
+* Teak  : About and Contact page tooltip added. 
+* Fixed : Individual schema package generator data was not being saved.
+
+
+= 1.0 =
 
 * Just born

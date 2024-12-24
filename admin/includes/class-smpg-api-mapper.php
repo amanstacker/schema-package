@@ -731,11 +731,11 @@ class SMPG_Api_Mapper {
 
     public function save_post_meta( $parameters ) {
             
-      $post_meta      = $parameters['post_meta'];                                                       
+      $post_meta      = $parameters['post_meta'];
             
       if ( ! empty( $parameters['post_id'] ) ) {
 
-        update_post_meta( $parameters['post_id'], 'smpg_schema_meta_setup', $post_meta );
+        update_post_meta( $parameters['post_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['post_id'];
 
@@ -743,7 +743,7 @@ class SMPG_Api_Mapper {
 
       if ( ! empty($parameters['tag_id'] ) ) {
         
-        update_term_meta( $parameters['tag_id'], 'smpg_schema_meta_setup', $post_meta );
+        update_term_meta( $parameters['tag_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['tag_id'];
       }

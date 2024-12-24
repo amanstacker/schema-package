@@ -23,7 +23,8 @@ const {
 	Component,
 	Fragment,
     useState,
-    useEffect  
+    useEffect,
+    useRef
 } = wp.element;
 
 /**
@@ -34,15 +35,21 @@ const {
  import { schemaTypes } from '../shared/schemaTypes';
  import ElementGenerator from '../shared/ElementGenerator/ElementGenerator';
 
- const Metabox = () => {    
+ const Metabox = () => {
 
     const {__} = wp.i18n; 
-    const [postMeta, setPostMeta] = useState([]);            
+    const hasPageBeenRenderd = useRef({effect:false});
+    const [postMeta, setPostMeta] = useState([]);
+    const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
+    const [selectedSchema, setSelectedSchema]       = useState([]);
+    const [dataUpdated, setdataUpdated]             = useState(false);
     
     const handleSchemaTurnOnOff = (i,id) => {
         let copyMeta = [...postMeta];
         copyMeta[i]['is_enable'] = !copyMeta[i]['is_enable'];
-        setPostMeta(copyMeta);        
+        setPostMeta(copyMeta);            
+        setdataUpdated(prevState => !prevState);
+  
   }
 
   const handleSchemaEdit = (i,id) => {
@@ -66,7 +73,8 @@ const {
   const handleSchemaDeleteYes = (i,id) => {
       let copyMeta = [...postMeta];    
       copyMeta.splice(i, 1);      
-      setPostMeta(copyMeta);        
+      setPostMeta(copyMeta);  
+      setdataUpdated(prevState => !prevState);     
   }
   const handleSchemaDeleteNo = (i,id) => {
       let copyMeta = [...postMeta];
@@ -277,11 +285,15 @@ const {
     
   }
   
-  const handleSavePostMeta = (i,id) => {
+  const handleSaveForThePost = ( i ) => {
 
     let copyMeta = [...postMeta];
         copyMeta[i]['is_setup_popup'] = false;
-        setPostMeta(copyMeta);        
+        setPostMeta(copyMeta);
+        setdataUpdated(prevState => !prevState);     
+  }
+
+  const savewholeSchemaGeneratorData = () => {
 
     const body_json          = {};
 
@@ -312,9 +324,6 @@ const {
 
   }
       
-  const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
-  const [selectedSchema, setSelectedSchema]         = useState([]);
-
   const handleChooseModalOpen = () => {
     setChooseSchemaModal(true);    
   }
@@ -392,7 +401,7 @@ const {
     
   }
 
-  const handlePostMeta = ( init ) => {
+  const getMetaData = ( init ) => {
 
         setChooseSchemaModal(false);
                 
@@ -425,7 +434,11 @@ const {
                 Object.entries(result['properties']).map(([key, value]) => {
                     copyMeta.push(value);
                 });
-                setPostMeta(copyMeta);        
+                setPostMeta(copyMeta); 
+                if ( ! init ){
+                    setdataUpdated(prevState => !prevState);
+                }
+                
             }            
                 
         },        
@@ -438,17 +451,25 @@ const {
   }
 
   useEffect(() => {
-    handlePostMeta(true);    
-  },[])
+    getMetaData(true);    
+  },[]);
 
   useEffect(() => {
+
+    if(hasPageBeenRenderd.current["effect"]){
+        savewholeSchemaGeneratorData();  
+    }
+
+    hasPageBeenRenderd.current["effect"] = true;
     
-  },[postMeta])
+  },[dataUpdated]);
  
     return (
         <>                    
         <div>
-            <p className="smpg-description">{__('Configure Json-ld for the post. Structured Data is used to display rich results in SERPs.', 'schema-package') } <a>{__('Learn More.', 'schema-package') }</a></p>
+            <p className="smpg-description">{__('Add schema types. Structured Data is used to display rich results in SERPs.', 'schema-package') } 
+                {/* <a>{__('Learn More.', 'schema-package') }</a> */}
+            </p>
         </div>
         {(postMeta.length > 0) ?
         <div className="smpg-individual-schema-list">
@@ -479,8 +500,8 @@ const {
                                             })
                                         }
                                     </div>
-                                    <Button onClick={() => handleSavePostMeta(i, item.id)} isPrimary >
-                                        {__('Save', 'schema-package') }                                        
+                                    <Button onClick={() => handleSaveForThePost(i)} isPrimary >
+                                        {__('Save For The Post', 'schema-package') }                                        
                                     </Button>
                                 </Modal>
                             ) }
@@ -531,7 +552,7 @@ const {
                         </div>   
                  </div>  
 
-                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> handlePostMeta(false)}>{__('Selected', 'schema-package') }</Button></div>
+                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button></div>
 
                 </Modal>: ''
             }

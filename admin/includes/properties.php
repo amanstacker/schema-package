@@ -1643,7 +1643,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         
                 case 'product':
         
-                    $properties = [                
+                    $properties = [
                         'is_enable'         => true,
                         'is_delete_popup'   => false, 
                         'is_setup_popup'    => false,

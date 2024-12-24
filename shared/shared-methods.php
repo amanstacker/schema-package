@@ -938,19 +938,22 @@ function smpg_get_request_url() {
 	
 }
 
-function smpg_get_initial_post_meta( $post_id, $tag_id ){
+function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
     $schema_meta = [];
 
-	if(!empty($post_id)){
-		$schema_meta = get_post_meta($post_id, 'smpg_schema_meta_setup', true);
+	if ( ! empty( $post_id ) ) {
+
+		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );
 	}
 
-	if(!empty($tag_id)){
-		$schema_meta = get_term_meta($tag_id, 'smpg_schema_meta_setup', true);
+	if ( ! empty( $tag_id ) ) {
+
+		$schema_meta = get_term_meta( $tag_id, '_smpg_schema_meta', true );
+
 	}    
     
-    if(!empty($schema_meta) && is_array($schema_meta)){
+    if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 
             foreach ($schema_meta as $key => $value) {
 

@@ -18,9 +18,9 @@ const AdminNavLink = () => {
       <div>
           <div>
           <div className="ui pointing secondary menu">
-          <Link  to={'admin.php?page=schema_package'} className={current == 'single' ? 'item active' : 'item'}>{__('Single Schema', 'schema-package')}</Link>
-          <Link  to={'admin.php?page=schema_package&path=misc_schema'} className={current == 'misc_schema' ? 'item active' : 'item'}>{__('Misc Schema', 'schema-package')}</Link>          
-          <Link  to={'admin.php?page=schema_package&path=settings'} className={(current == 'settings' || current == 'settings_tools' || current == 'settings_advanced' || current == 'settings_compatibility' || current == 'settings_defaultdata' || current == 'settings_help' || current == 'settings_manageconflict' ) ? 'item active' : 'item'}>{__('Settings', 'schema-package')}</Link>                    
+          <Link  to={'admin.php?page=schema_package'} className={current == 'single' ? 'item active' : 'item'}><h3>{__('Singular Schema', 'schema-package')}</h3></Link>
+          <Link  to={'admin.php?page=schema_package&path=misc_schema'} className={current == 'misc_schema' ? 'item active' : 'item'}><h3>{__('Misc Schema', 'schema-package')}</h3></Link>          
+          <Link  to={'admin.php?page=schema_package&path=settings'} className={(current == 'settings' || current == 'settings_tools' || current == 'settings_advanced' || current == 'settings_compatibility' || current == 'settings_defaultdata' || current == 'settings_help' || current == 'settings_manageconflict' ) ? 'item active' : 'item'}><h3>{__('Settings', 'schema-package')}</h3></Link>                    
           </div>                                                  
         </div>   
         </div>        

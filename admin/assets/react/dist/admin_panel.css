@@ -125,7 +125,7 @@
   width: 40px;
   height: 40px;
   border-style: solid;
-  border-color: #1b1c1d;
+  border-color: #990000;
   border-top-color: transparent;
   border-width: 4px;
   border-radius: 50%;
@@ -263,12 +263,13 @@
 .smpg-accordion {
   width: 100%;
   display: block;
-  background: #f2f2f2;
+  background: #f7f0f0;
   padding: 12px;
   cursor: pointer; }
 
 .smpg-accordion-panel {
-  padding: 30px; }
+  padding: 30px; 
+}
 
 .smpg-segment .smpg-icon {
   right: 5px;
@@ -280,4 +281,27 @@
   transform: rotate(90deg); }
 
 .smpg-clearfix {
-  clear: both; }
+  clear: both; 
+}
+.item.active h3{
+    color: #990000;
+}
+.item.active h4{
+  color: #990000;
+}
+.ui.secondary.pointing.menu .active.item{
+  border-color:#990000 !important;
+}
+.ui.pointing.secondary.vertical.menu .active.item{
+  border-color:#990000 !important;
+}
+.ui.primary.button, .ui.primary.buttons .button{
+  background-color: #990000 !important;
+}
+.smpg-misc-table td:first-child {
+  width: 300px;
+}
+.smpg-misc-table .ui.fluid.dropdown{
+  width: 80%;
+  display: inline-block;
+}

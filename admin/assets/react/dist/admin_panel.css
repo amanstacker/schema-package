@@ -298,7 +298,7 @@
 .ui.primary.button, .ui.primary.buttons .button{
   background-color: #990000 !important;
 }
-.smpg-misc-table table td:first-child {
+.smpg-misc-table td:first-child {
   width: 300px;
 }
 .smpg-misc-table .ui.fluid.dropdown{

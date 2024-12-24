@@ -5,7 +5,7 @@ Description: Helps you to add versatile schema markup on your websites.
 Version: 1.0.1
 Text Domain: schema-package
 Domain Path: /languages
-Author: Aman Kumar Sharma
+Author: amanstacker
 Author URI: https://profiles.wordpress.org/amanstacker/
 License: GPLv2 or later
 */

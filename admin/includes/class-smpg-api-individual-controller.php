@@ -48,14 +48,7 @@ class SMPG_Api_Individual_Controller {
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }
-            ));
-            register_rest_route( 'smpg-individual-router', 'delete-schema-by-id', array(
-                'methods'    => 'POST',
-                'callback'   => array($this->_apiAction, 'delete_individual_schema_by_id'),
-                'permission_callback' => function(){
-                    return current_user_can( 'manage_options' );
-                }
-            ));
+            ));            
 
         }  
              

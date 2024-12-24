@@ -806,10 +806,7 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
 
         $json_ld['@context']         = smpg_get_context_url();
         $json_ld['@type']            = $properties['article_type']['value'];
-
-        $json_ld['mainEntityOfPage']['@type'] = 'WebPage';
-        $json_ld['mainEntityOfPage']['@id']   = smpg_get_permalink();
-
+        
         if(!empty($properties['url']['value'])){
             $json_ld['url']                = $properties['url']['value'];
         }

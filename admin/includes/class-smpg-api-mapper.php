@@ -731,7 +731,7 @@ class SMPG_Api_Mapper {
 
     public function save_post_meta( $parameters ) {
             
-      $post_meta      = $parameters['post_meta'];                                                       
+      $post_meta      = $parameters['post_meta'];
             
       if ( ! empty( $parameters['post_id'] ) ) {
 

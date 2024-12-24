@@ -173,32 +173,32 @@ const MiscSchema = () => {
       <table className="form-table smpg-misc-table">
       <tbody>
         <tr>
-          <td><label htmlFor="website">{__('Website', 'schema-package')}</label></td>
+          <td><label htmlFor="website"><strong>{__('Website', 'schema-package')}</strong></label></td>
           <td>
               <input type="checkbox" id="website" name="website" onChange={formChangeHandler} checked={miscSchema.website} />
-              <span className="smpg-tooltip"><Popup content={__('It appears on homepage only', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+              <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content of your site. It appears on homepage only.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
         {
           miscSchema.website ?
           <tr>
-            <td className="smpg-sub-el"><label htmlFor="sitelinks_search_box">{__('Sitelinks Search Box', 'schema-package')}</label></td>
+            <td className="smpg-sub-el"><label htmlFor="sitelinks_search_box"><strong>{__('Sitelinks Search Box', 'schema-package')}</strong></label></td>
             <td>
                 <input type="checkbox" id="sitelinks_search_box" name="sitelinks_search_box" onChange={formChangeHandler} checked={miscSchema.sitelinks_search_box} />
-                <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
             </td>
           </tr> 
           : ''
         }        
         <tr>
-          <td><label htmlFor="breadcrumbs">{__('BreadCrumbs', 'schema-package')}</label></td>
+          <td><label htmlFor="breadcrumbs"><strong>{__('BreadCrumbs', 'schema-package')}</strong></label></td>
           <td>
               <input type="checkbox" id="breadcrumbs" name="breadcrumbs" onChange={formChangeHandler} checked={miscSchema.breadcrumbs} />
-              <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+              <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
         <tr>
-          <td>{__('About Pages', 'schema-package') }</td>
+          <td><strong>{__('About Pages', 'schema-package') }</strong></td>
           <td>
                     <Dropdown
                       data_type="about_page"
@@ -213,10 +213,11 @@ const MiscSchema = () => {
                       onSearchChange={handlePageSearch}
                       options={aboutPageList}
                    />
+                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "About Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
         <tr>
-          <td>{__('Contact Pages', 'schema-package') }</td>
+          <td><strong>{__('Contact Pages', 'schema-package') }</strong></td>
           <td>
                     <Dropdown
                       data_type="contact_page"
@@ -231,6 +232,7 @@ const MiscSchema = () => {
                       onSearchChange={handlePageSearch}
                       options={contactPageList}
                    />
+                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "Contact Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
       </tbody>

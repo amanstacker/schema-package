@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schema Package - A Structured Data Module
-Description: Helps you to add versatile schema markup on your websites.
+Description: Helps you to add versatile schema markup on your websites which provides users with more informative and visually appealing search results.
 Version: 1.0.1
 Text Domain: schema-package
 Domain Path: /languages

@@ -12,7 +12,7 @@ Helps you to add versatile schema markup on your websites.
 
 == Description ==
 
-Helps you to add versatile schema markup on your websites.
+Helps you to add versatile schema markup on your websites which provides users with more informative and visually appealing search results.
 
 ### Schema Package Key Features
 

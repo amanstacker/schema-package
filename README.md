@@ -217,6 +217,24 @@ It sends youtube video vid got from youtube api when VideoObject schema is selec
 This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
 
 
+### Notes
+
+The Schema package is a tool for adding schema markup to websites according to search engine guidelines and validating it using tools recommended by search engines. It does not guarantee that your content will appear in search engine results as you desire. It entirely depends on the search engines.
+
+Here are some schema and structured data markup validator tools that can help you validate and troubleshoot your markup:
+
+1. [Google Rich Results Test](https://search.google.com/test/rich-results)
+
+The "Google Rich Results Test" does not validate all types of schema.org markup. It is primarily designed to test the types of schema markup that can generate rich results in Google search, such as Product, Recipe, Event, FAQ and others related to search features.
+
+While it can validate whether your structured data is correctly implemented for rich results, it doesn't support every schema.org type. For example, it may not check more general types like Service, Organization, or CreativeWork, unless they are directly relevant to a rich result display.
+
+
+2. [Schema Markup Validator](https://validator.schema.org/)
+
+The "Schema Markup Validator" by Google validates all schema.org types, not just those that are eligible for rich results. This tool checks whether your structured data is correctly implemented according to the schema.org specifications, regardless of whether the type is eligible for rich results.
+
+
 ### Credits
 
 Schema Package uses the following third-party libraries:

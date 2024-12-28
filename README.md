@@ -71,7 +71,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * Comment : [schema.org url](https://schema.org/Comment)
 
-### Schema Package compatible with plugins
+### Schema package automation and compatibility with plugins.
 
 * WooCommerce : [URL](https://wordpress.org/plugins/woocommerce)
 * Simple Job Board : [URL](https://wordpress.org/plugins/simple-job-board/)

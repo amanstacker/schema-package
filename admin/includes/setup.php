@@ -387,7 +387,8 @@ function smpg_get_schema_type_text($id){
 		'videoobject'               => 'VideoObject',
 		'course'                    => 'Course',
 		'jobposting'                => 'JobPosting',
-		'localbusiness'             => 'LocalBusiness' 
+		'localbusiness'             => 'LocalBusiness',
+		'service'                   => 'Service'
 	];	
 
 	if(array_key_exists($id, $response)){

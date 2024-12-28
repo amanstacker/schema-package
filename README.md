@@ -10,7 +10,34 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ### Description
 
-Helps you to add versatile schema markup on your websites.
+The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Schema markup acts as structured data that helps search engines and other platforms better understand website content. Instead of manually entering the same information twice — once in the actual content and again in the Schema Package Generator metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
+
+We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please contact us, and we will automate it as well.
+
+If you still want to enter schema markup manually, We have provided the Schema Package Generator. It’s a powerful, minimal design, popup-like structure that allows you to smoothly fill in the data for all schema types, one by one.
+
+
+### What is Schema Markup and why is it important? ==
+
+Schema Markup refers to the standardized vocabulary (provided by Schema.org) used to structure data in a format that search engines can understand. JSON-LD is one way to implement Schema Markup; others include Microdata and RDFa. By providing additional context about your content, schema markup can help search engines present more relevant and detailed results to users, benefiting both the website's visibility and user interaction.
+
+
+1. **Enhanced Search Engine Visibility** - By adding schema markup to a webpage, search engines can better understand its content. This often leads to rich snippets, which can appear in search results, such as star ratings, prices, images, and other structured data. These elements increase the visibility of the webpage in search results.
+
+2. **Improved Click-Through Rate (CTR)** - Rich snippets stand out more in search results, leading to higher engagement and more clicks. For example, when a recipe shows cooking times and ratings in the search results, users may be more likely to click.
+
+3. **Better User Experience** - Schema markup helps search engines present content in a more relevant and accessible way. For example, when an article includes structured data, users can find key details like publication date, author, and main topic more easily.
+
+4. **Voice Search Optimization** - Schema markup can help optimize content for voice search, where structured data allows devices like virtual assistants to understand and retrieve the information more efficiently, improving voice search rankings.
+
+5. **Local SEO Improvement** - For businesses with a physical presence, schema markup can improve local SEO by providing location-based data (e.g., business hours, contact information, and address) that helps your business show up in local search results.
+
+6. **Faster Indexing** - Search engines can better interpret and index your content when schema markup is in place, which can help get your pages indexed faster and more accurately.
+
+
+### What is JSON-LD (JavaScript Object Notation for Linked Data)?
+
+JSON-LD is a lightweight Linked Data format that uses JSON to encode structured data. It is one of the formats recommended by all popular search engines for adding schema markup ( structured data ) to web pages. JSON-LD embeds data in the <script> tags of an HTML document without affecting the visual appearance of the page.
 
 ### Schema Package Key Features
 

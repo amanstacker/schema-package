@@ -1241,6 +1241,184 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
 
                     break;  
 
+                    case 'service':
+
+                        $properties = [
+                            'is_enable'         => true,
+                            'is_delete_popup'   => false, 
+                            'is_setup_popup'    => false,
+                            'has_warning'       => false,
+                            'id'                => 'service',           
+                            'text'              => 'Service',
+                            'properties'        => [
+                                'more_specific_service_type' =>  [ 
+                                        'label'       => 'More Specific Service Types',
+                                        'type'        => 'select',
+                                        'value'       => 'Service',
+                                        'options'     => [
+                                            'Service'                   => 'Service',
+                                            'BroadcastService'          => 'BroadcastService', 
+                                            'CableOrSatelliteService'   => 'CableOrSatelliteService',  
+                                            'FinancialProduct'          => 'FinancialProduct',  
+                                            'FoodService'               => 'FoodService',  
+                                            'GovernmentService'         => 'GovernmentService',  
+                                            'TaxiService'               => 'TaxiService',  
+                                            'WebAPI'                    => 'WebAPI',                                                                                
+                                        ],
+                                        'recommended' => true,
+                                        'display'     => true,
+                                    'tooltip'     => 'The author type of this content'
+                                ],
+                                'service_type'          => [
+                                    'label'       => 'Service Type',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'Weekly home cleaning',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'provider_mobility'          => [
+                                    'label'       => 'Provider Mobility',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'e.g. static or dynamic',
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'provider_name'          => [
+                                    'label'       => 'Provider Name',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'name',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'provider_type' =>  [ 
+                                        'label'       => 'Provider Type',
+                                        'type'        => 'select',
+                                        'value'       => 'LocalBusiness',
+                                        'options'     => [
+                                                'LocalBusiness'                => 'Local Business',
+                                                'Airline'                      => 'Airline',
+                                                'Corporation'                  => 'Corporation',
+                                                'EducationalOrganization'      => 'Educational Organization',
+                                                'School'                       => 'School',
+                                                'GovernmentOrganization'       => 'Government Organization',                                                
+                                                'MedicalOrganization'          => 'Medical Organization',  
+                                                'NGO'                          => 'NGO', 
+                                                'PerformingGroup'              => 'Performing Group', 
+                                                'SportsOrganization'           => 'Sports Organization',
+                                        ],
+                                        'recommended' => true,
+                                        'display'     => true,
+                                    'tooltip'     => 'The author type of this content'
+                                ],
+                                'area_served'          => [
+                                    'label'       => 'Area Served',                    
+                                    'type'        => 'textarea',                                    
+                                    'placeholder' => 'New York, Los Angeles',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'service_offered'          => [
+                                    'label'       => 'Service Offered',                    
+                                    'type'        => 'textarea',                                    
+                                    'placeholder' => 'Apartment light cleaning, carpet cleaning',
+                                    'value'       => '',
+                                    'display'     => true
+                                ],                                
+                                'description'        => $description,
+                                'url'                => $url,
+                                'street_address'     => $street_address,
+                                'address_locality'   => $address_locality,
+                                'address_region'     => $address_region,
+                                'postal_code'        => $postal_code,
+                                'address_country'    => $address_country,
+                                'telephone'          => [
+                                    'label'       => 'Telephone',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '+14088717984',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'price_range'          => [
+                                    'label'       => 'Price Range',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '$$$',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'latitude'           => $latitude,
+                                'longitude'          => $longitude,
+                                'image'              => $image,
+                                'opening_hours' => [                            
+                                    'label'         => 'Opening Hours',    
+                                    'button_text'   => 'Add More Opening Hours', 
+                                    'type'          => 'repeater', 
+                                    'display'       => true,
+                                    'elements'      => [
+                                        [
+                                            'monday' => [                                                                                                                                              
+                                                'label'       => 'Monday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'tuesday' => [                                                                                                                                              
+                                                'label'       => 'Tuesday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'wednesday' => [                                                                                                                                              
+                                                'label'       => 'Wednesday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'thursday' => [                                                                                                                                              
+                                                'label'       => 'Thursday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'friday' => [                                                                                                                                              
+                                                'label'       => 'Friday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'saturday' => [                                                                                                                                              
+                                                'label'       => 'Saturday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => true,
+                                                'display'     => true
+                                            ],
+                                            'sunday' => [                                                                                                                                              
+                                                'label'       => 'Sunday',                    
+                                                'type'        => 'checkbox',                                                                                    
+                                                'value'       => false,
+                                                'display'     => true
+                                            ],
+                                            'opens' => [                                                                                                                                              
+                                                'label'       => 'Opens',                    
+                                                'type'        => 'text',                                    
+                                                'placeholder' => '09:00',                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],
+                                            'closes' => [                                                                                                                                              
+                                                'label'       => 'Closes',                    
+                                                'type'        => 'text',                                    
+                                                'placeholder' => '19:00',                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],                                          
+                                        ]
+                                    ]                                                                                                                      
+                                ],
+                            ]                      
+                        ];
+
+                    break;  
+
                 case 'event':
 
                         $properties = [
@@ -1253,7 +1431,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'properties'        => [
                                 'name'             => $name,    
                                 'description'      => $description,
-                                'url'              => $url,  
+                                'url'              => $url,
                                 'start_date'       => $start_date,
                                 'end_date'         => $end_date,
                                 'attendance_mode'      => [                                                                                                                                              

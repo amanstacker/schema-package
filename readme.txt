@@ -14,9 +14,14 @@ Helps you automate and add versatile schema markup to your website, providing us
 
 The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Schema markup acts as structured data that helps search engines and other platforms better understand website content. Instead of manually entering the same information twice — once in the actual content and again in the Schema Package Generator metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
 
-We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please contact us, and we will automate it as well.
+We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
 If you still want to enter schema markup manually, We have provided the Schema Package Generator. It’s a powerful, minimal design, popup-like structure that allows you to smoothly fill in the data for all schema types, one by one.
+
+
+== Your Trust, Our Motive: Exceptional Schema Markup Services ==
+
+As newcomers to the market, earning your trust can be challenging. We invite you to give us a try, and we'll go above and beyond to ensure your satisfaction with setting up schema markup for your site. Don't hesitate to reach out to us for any assistance.
 
 
 == What is Schema Markup and why is it important? ==
@@ -120,6 +125,13 @@ The "Schema Markup Validator" by Google validates all schema.org types, not just
 == Report Bug or Contribute fix ==
 
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
+
+
+== Support Center ==
+
+We currently don't have an official website for the Schema Package, but you can reach out to us through the Schema Package dashboard.
+
+Go To - Schema Package -> Settings -> Help & Support.
 
 
 == Installation ==

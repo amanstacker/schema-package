@@ -10,7 +10,39 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ### Description
 
-Helps you to add versatile schema markup on your websites.
+The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Schema markup acts as structured data that helps search engines and other platforms better understand website content. Instead of manually entering the same information twice — once in the actual content and again in the Schema Package Generator metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
+
+We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
+
+If you still want to enter schema markup manually, We have provided the Schema Package Generator. It’s a powerful, minimal design, popup-like structure that allows you to smoothly fill in the data for all schema types, one by one.
+
+
+### Your Trust, Our Motive: Exceptional Schema Markup Services
+
+As newcomers to the market, earning your trust can be challenging. We invite you to give us a try, and we'll go above and beyond to ensure your satisfaction with setting up schema markup for your site. Don't hesitate to reach out to us for any assistance.
+
+
+### What is Schema Markup and why is it important? ==
+
+Schema Markup refers to the standardized vocabulary (provided by Schema.org) used to structure data in a format that search engines can understand. JSON-LD is one way to implement Schema Markup; others include Microdata and RDFa. By providing additional context about your content, schema markup can help search engines present more relevant and detailed results to users, benefiting both the website's visibility and user interaction.
+
+
+1. **Enhanced Search Engine Visibility** - By adding schema markup to a webpage, search engines can better understand its content. This often leads to rich snippets, which can appear in search results, such as star ratings, prices, images, and other structured data. These elements increase the visibility of the webpage in search results.
+
+2. **Improved Click-Through Rate (CTR)** - Rich snippets stand out more in search results, leading to higher engagement and more clicks. For example, when a recipe shows cooking times and ratings in the search results, users may be more likely to click.
+
+3. **Better User Experience** - Schema markup helps search engines present content in a more relevant and accessible way. For example, when an article includes structured data, users can find key details like publication date, author, and main topic more easily.
+
+4. **Voice Search Optimization** - Schema markup can help optimize content for voice search, where structured data allows devices like virtual assistants to understand and retrieve the information more efficiently, improving voice search rankings.
+
+5. **Local SEO Improvement** - For businesses with a physical presence, schema markup can improve local SEO by providing location-based data (e.g., business hours, contact information, and address) that helps your business show up in local search results.
+
+6. **Faster Indexing** - Search engines can better interpret and index your content when schema markup is in place, which can help get your pages indexed faster and more accurately.
+
+
+### What is JSON-LD (JavaScript Object Notation for Linked Data)?
+
+JSON-LD is a lightweight Linked Data format that uses JSON to encode structured data. It is one of the formats recommended by all popular search engines for adding schema markup ( structured data ) to web pages. JSON-LD embeds data in the <script> tags of an HTML document without affecting the visual appearance of the page.
 
 ### Schema Package Key Features
 
@@ -44,7 +76,7 @@ Helps you to add versatile schema markup on your websites.
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * Comment : [schema.org url](https://schema.org/Comment)
 
-### Schema Package compatible with plugins
+### Schema package automation and compatibility with plugins.
 
 * WooCommerce : [URL](https://wordpress.org/plugins/woocommerce)
 * Simple Job Board : [URL](https://wordpress.org/plugins/simple-job-board/)
@@ -74,10 +106,34 @@ Helps you to add versatile schema markup on your websites.
 * SEOPress : [URL](https://wordpress.org/plugins/wp-seopress/)
 
 
+### Notes
+
+The Schema package is a tool for adding schema markup to websites according to search engine guidelines and validating it using tools recommended by search engines. It does not guarantee that your content will appear in search engine results as you desire. It entirely depends on the search engines.
+
+Here are some schema and structured data markup validator tools that can help you validate and troubleshoot your markup:
+
+1. [Google Rich Results Test](https://search.google.com/test/rich-results)
+
+The "Google Rich Results Test" does not validate all types of schema.org markup. It is primarily designed to test the types of schema markup that can generate rich results in Google search, such as Product, Recipe, Event, FAQ and others related to search features.
+
+While it can validate whether your structured data is correctly implemented for rich results, it doesn't support every schema.org type. For example, it may not check more general types like Service, Organization, or CreativeWork, unless they are directly relevant to a rich result display.
+
+
+2. [Schema Markup Validator](https://validator.schema.org/)
+
+The "Schema Markup Validator" by Google validates all schema.org types, not just those that are eligible for rich results. This tool checks whether your structured data is correctly implemented according to the schema.org specifications, regardless of whether the type is eligible for rich results.
+
+
 ### Report Bug or Contribute fix
 
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
 
+
+### Support Center
+
+We currently don't have an official website for the Schema Package, but you can reach out to us through the Schema Package dashboard.
+
+Go To - Schema Package -> Settings -> Help & Support.
 
 ### Installation
 
@@ -138,6 +194,10 @@ First, clone the repository to your local machine:
 
 You can now start modifying the project files.
 
+
+### WordPress REST API
+
+The Schema Package uses the WordPress REST API to power its single-page application dashboard. If you’re unable to access the Schema Package dashboard, it’s likely that your site is blocking the REST API, or another plugin has restricted access. Please ensure the WordPress REST API is enabled for the Schema Package to function properly.
 
 ### External Services
 

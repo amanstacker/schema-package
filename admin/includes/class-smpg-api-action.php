@@ -345,6 +345,32 @@ class SMPG_Api_Action {
         }
         public function get_schema_loop( $request_data ) {
 
+            $parameters      = $request_data->get_params();   
+
+            $search_param = '';
+            $rvcount      = 10;
+            $attr         = [];
+            $paged        =  1;
+            $offset       =  0;
+            $post_type    = '';
+
+            if ( isset( $parameters['post_type'] ) ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                $post_type = sanitize_text_field( wp_unslash( $parameters['post_type'] ) );
+            }
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+            if ( isset( $_GET['page'] ) ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                $paged    = intval( wp_unslash( $_GET['page'] ) );
+            }
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+            if ( isset($_GET['search_param'] ) ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                $search_param = sanitize_text_field( wp_unslash( $_GET['search_param'] ) );
+            }            
+            $result = $this->_api_mapper->get_schema_loop( $post_type, $attr, $rvcount, $paged, $offset, $search_param );
+            return $result;
+
         }        
         public function get_taxonomies_with_terms( $request_data ) {
             

@@ -19,8 +19,7 @@ const CarouselSchemaEdit = () => {
   const [mainSpinner, setMainSpinner]           = useState(false);
   const [isLoaded, setIsLoaded]                 = useState(true);      
   const [dottedSpinner, setDottedSpinner]       = useState(false); 
-  const [enabledOnOption, setEnabledOnOption]   = useState({});
-  const [disabledOnOption, setDisabledOnOption] = useState({});
+  const [enabledOnOption, setEnabledOnOption]   = useState({});  
   const [automationList, setAutomationList]     = useState([]);
 
   const [postData, setPostData] = useReducer(
@@ -79,9 +78,7 @@ const CarouselSchemaEdit = () => {
           setMainSpinner(false);     
           setPostData(result.post_data);
           setPostMeta(result.post_meta);                    
-          setEnabledOnOption(result.placement_enabled_option);
-          setDisabledOnOption(result.placement_disabled_option)
-
+          setEnabledOnOption(result.placement_enabled_option);          
         },        
         (error) => {         
         }
@@ -192,17 +189,7 @@ const CarouselSchemaEdit = () => {
                 clonedata[type] = newData;            
                 setEnabledOnOption(clonedata);
 
-            }
-
-            if(name.includes('disable')){
-
-                let clonedata = {...disabledOnOption};    
-                let newclone = [...new Set([...clonedata[type],...result])]
-                let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
-                clonedata[type] = newData;            
-                setDisabledOnOption(clonedata);
-
-            }
+            }            
             
           }
                     
@@ -288,6 +275,7 @@ const CarouselSchemaEdit = () => {
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
                 <h4>{__('Taxonomies', 'schema-package') }</h4>
+
                 <table className="smpg-placement-table">
                   <tbody>
                    <tr>
@@ -296,7 +284,7 @@ const CarouselSchemaEdit = () => {
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="enabled_on_post_type" checked={postMeta.enabled_on_post_type} onChange={handleFormChange} />
                   <label></label>
-                </div>                         
+                  </div>                         
                    </td>
                    <td>
                      {enabledOnOption.post_type ? 
@@ -314,63 +302,8 @@ const CarouselSchemaEdit = () => {
                      options={enabledOnOption.post_type}
                    />
                    : ''
-                     }
-                   
+                     }                   
                    </td>
-                   </tr> 
-                   <tr> 
-                   <td><label>{__('Posts', 'schema-package') }</label></td>
-                   <td>
-                   <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_post" checked={postMeta.enabled_on_post} onChange={handleFormChange} />
-                  <label></label>
-                  </div>
-                   </td>
-                   <td>
-                     {
-                       enabledOnOption.post ? 
-                        <Dropdown
-                        data_type="post"
-                        name="enabled_on_post"
-                        placeholder={__('Search For Post', 'schema-package') }
-                        fluid
-                        multiple
-                        search
-                        selection
-                        value={postMeta.enabled_on.post}
-                        onChange={handlePlacementChange}
-                        onSearchChange={handlePlacementSearchChange}
-                        options={enabledOnOption.post}
-                      />
-                  : ''
-                  }                    
-                  </td>
-                   </tr> 
-                   <tr> 
-                   <td><label>{__('Pages', 'schema-package') }</label></td>
-                   <td>
-                   <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_page" checked={postMeta.enabled_on_page} onChange={handleFormChange} />
-                  <label></label>
-                  </div>
-                   </td>
-                   <td>
-                     {enabledOnOption.page ? 
-                     <Dropdown
-                     data_type="page"
-                     name="enabled_on_page"
-                     placeholder='Search For Page'
-                     fluid
-                     multiple
-                     search
-                     selection
-                     value={postMeta.enabled_on.page}
-                     onChange={handlePlacementChange}
-                     onSearchChange={handlePlacementSearchChange}
-                     options={enabledOnOption.page}
-                   /> : ''
-                     }
-                  </td>
                    </tr>                                       
                   </tbody>
                 </table>

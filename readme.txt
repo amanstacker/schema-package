@@ -237,7 +237,7 @@ You can submit a support ticket via the [support forum](https://wordpress.org/su
 = 1.0.1 =
 
 * Tweak : UI Improvement
-* Teak  : About and Contact page tooltip added. 
+* Tweak : About and Contact page tooltip added. 
 * Fixed : Individual schema package generator data was not being saved.
 
 

@@ -8,7 +8,7 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Helps you automate and add versatile schema markup to your website, providing users with more informative and visually appealing search results.
+Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
 
 == Description ==
 
@@ -138,6 +138,11 @@ Go To - Schema Package -> Settings -> Help & Support.
 
 1. Upload the plugin files to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
+
+
+== WordPress REST API ==
+
+The Schema Package uses the WordPress REST API to power its single-page application dashboard. If you’re unable to access the Schema Package dashboard, it’s likely that your site is blocking the REST API, or another plugin has restricted access. Please ensure the WordPress REST API is enabled for the Schema Package to function properly.
 
 
 == External Services ==

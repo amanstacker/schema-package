@@ -314,7 +314,7 @@ function smpg_cached_schema_ids_on_delete($post_id){
 	if ( ! current_user_can( 'manage_options' ) )
 		return;
 
-	if( get_post_type($post_id) == 'smpg' ) {
+	if( get_post_type($post_id) == 'smpg_singular_schema' ) {
 		delete_transient( 'smpg_cached_schema_ids' );
 		smpg_get_added_schema_ids();
 	}
@@ -340,7 +340,7 @@ function smpg_get_added_schema_ids() {
 	if ( false ===  get_transient( 'smpg_cached_schema_ids' )  ) {
 		
 			$args = array(
-				'post_type'			=> 'smpg',
+				'post_type'			=> 'smpg_singular_schema',
 				'post_status'		=> 'publish',
 				'posts_per_page'	=> -1
 			);

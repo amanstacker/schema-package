@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
-import MainSpinner from './../common/main-spinner/MainSpinner';
-import { schemaTypes } from '../../shared/schemaTypes';
-import './SingleSchema.css';
+import MainSpinner from '../common/main-spinner/MainSpinner';
+import { schemaTypes } from '../../shared/carouselSchemaTypes';
+import './CarouselSchema.css';
 
 
-const SingleSchema = () => {
+const CarouselSchema = () => {
   
   const {__} = wp.i18n; 
 
@@ -50,7 +50,7 @@ const SingleSchema = () => {
 
   const getSchemaLoop = (page) => {
     setMainSpinner(true);
-    let url = smpg_local.rest_url + "smpg-route/get-schema-loop?page="+page;
+    let url = smpg_local.rest_url + "smpg-route/get-schema-loop?post_type=smpg_carousel_schema&page="+page;
       
       fetch(url, {
         headers: {                    
@@ -59,7 +59,7 @@ const SingleSchema = () => {
       })
       .then(res => res.json())
       .then(
-        (result) => {    
+        (result) => {             
           setMainSpinner(false);     
           setSchemaLoop(result.posts_data);
           setPostsFound(result.posts_found);
@@ -152,7 +152,7 @@ const SingleSchema = () => {
             <div className="smpg-modal-popup">
             <div className="smpg-modal-popup-content-small">                            
             <div className="smpg-modal-header">{__('Delete Schema', 'schema-package') }</div>
-            <div className="smpg-modal-content">{__('Are you sure you want to delete schema', 'schema-package') }</div>
+            <div className="smpg-modal-content">{__('Are you sure you want to delete schema ?', 'schema-package') }</div>
             <div className="smpg-modal-footer">
             <a onClick={cancelDeletion} className="ui negative button">{__('No', 'schema-package') }</a>
             <a onClick={confirmDeletion} className="ui icon positive right labeled button">{__('Yes', 'schema-package') } <i aria-hidden="true" className="checkmark icon"></i></a>
@@ -165,7 +165,7 @@ const SingleSchema = () => {
           {/* Invisible html ends here */}
 
           <div className="smpg-single-schema-header">
-          <Link to={`?page=schema_package&path=single_page`} className="smpg-add-schema-btn ui icon button primary"><i aria-hidden="true" className="add icon"></i> {__('Add Schema', 'schema-package') }</Link>
+          <Link to={`?page=schema_package&path=carousel_schema_edit`} className="smpg-add-schema-btn ui icon button primary"><i aria-hidden="true" className="add icon"></i> {__('Add Schema', 'schema-package') }</Link>
 
           </div>
           <div className="smpg-single-schema-table">
@@ -198,7 +198,7 @@ const SingleSchema = () => {
                 </td>
                 <td>
                 <div className="smpg-action">
-                  <Link to={`?page=schema_package&path=single_page&post_id=${item.post.post_id}`}><i aria-hidden="true" className="edit icon"></i></Link>        
+                  <Link to={`?page=schema_package&path=carousel_schema_edit&post_id=${item.post.post_id}`}><i aria-hidden="true" className="edit icon"></i></Link>
                   <a data-index={i} data-id={item.post.post_id} onClick={handleShowDeleteSchemaModal}><i aria-hidden="true" className="trash icon"></i></a>
                 </div>        
                 </td>
@@ -234,4 +234,4 @@ const SingleSchema = () => {
     </>
   )
 }
-export default SingleSchema;
+export default CarouselSchema;

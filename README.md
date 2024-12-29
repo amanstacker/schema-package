@@ -195,6 +195,10 @@ First, clone the repository to your local machine:
 You can now start modifying the project files.
 
 
+### WordPress REST API
+
+The Schema Package uses the WordPress REST API to power its single-page application dashboard. If you’re unable to access the Schema Package dashboard, it’s likely that your site is blocking the REST API, or another plugin has restricted access. Please ensure the WordPress REST API is enabled for the Schema Package to function properly.
+
 ### External Services
 
 Schema Package uses the following external services:

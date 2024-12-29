@@ -7,10 +7,10 @@ import {useHistory} from 'react-router-dom';
 import DottedSpinner from './common/dotted-spinner/DottedSpinner';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
-import Accordion from './../shared/Accordion/Accordion'; 
+import Accordion from '../shared/Accordion/Accordion'; 
 
 
-const SinglePage = () => {
+const SingularSchemaEdit = () => {
 
   const {__}    = wp.i18n;        
   const page    = queryString.parse(window.location.search);  
@@ -29,7 +29,7 @@ const SinglePage = () => {
       ID          : null,
       post_title  : 'Untitle',
       post_status : 'publish',
-      post_type   : 'smpg'
+      post_type   : 'smpg_singular_schema'
     }                      
   );
 
@@ -521,4 +521,4 @@ const SinglePage = () => {
   );
 
 }
-export default SinglePage;
+export default SingularSchemaEdit;

@@ -98,7 +98,7 @@ class SMPG_Api_Action {
                 
         public function export_settings(){
             
-            $post_type = array('smpg');
+            $post_type = array('smpg_singular_schema');
             $export_data_all   = []; 
             
             foreach($post_type as $type){
@@ -162,7 +162,7 @@ class SMPG_Api_Action {
         
                 delete_option( 'smpg_settings');  
                 
-                $allposts= get_posts( array('post_type'=>'smpg','numberposts'=>-1) );
+                $allposts= get_posts( array('post_type'=>'smpg_singular_schema','numberposts'=>-1) );
                 
                 foreach ($allposts as $eachpost) {
                     
@@ -343,26 +343,26 @@ class SMPG_Api_Action {
             return $response;
            
         }
-                
-        public function get_schema_loop(){
+        public function get_schema_loop( $request_data ) {
+
+        }        
+        public function get_taxonomies_with_terms( $request_data ) {
             
-            $search_param = '';
-            $rvcount      = 10;
-            $attr         = [];
-            $paged        =  1;
-            $offset       =  0;
-            $post_type    = 'smpg';
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-            if ( isset( $_GET['page'] ) ) {
-                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-                $paged    = intval( wp_unslash( $_GET['page'] ) );
+            $parameters      = $request_data->get_params();            
+
+            $taxonomy_type  = '';
+            $search_param   = '';            
+            
+
+            if ( isset( $parameters['search_param'] ) ) {                                
+                $search_param = sanitize_text_field( wp_unslash( $parameters['search_param'] ) );
             }
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-            if ( isset($_GET['search_param'] ) ) {
-                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-                $search_param = sanitize_text_field( wp_unslash( $_GET['search_param'] ) );
-            }            
-            $result = $this->_api_mapper->get_schema_loop( $post_type, $attr, $rvcount, $paged, $offset, $search_param );
+
+            if ( isset( $parameters['taxonomy_type'] ) ) {
+                $taxonomy_type = sanitize_text_field( wp_unslash( $parameters['taxonomy_type'] ) );
+            }
+                                                            
+            $result = $this->_api_mapper->get_taxonomies_with_terms( $taxonomy_type, $search_param );
             return $result;
                         
         }

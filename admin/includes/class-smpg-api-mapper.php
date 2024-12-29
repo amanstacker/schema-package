@@ -583,7 +583,41 @@ class SMPG_Api_Mapper {
 
     }
 
-     
+    public function get_taxonomies_with_terms( $taxonomy_type = null, $search_param = null ) {
+
+        $result = [];
+        // Get all taxonomies
+        $taxonomies = get_taxonomies( [], 'objects' );
+
+        foreach ( $taxonomies as $taxonomy ) {
+            // Get terms for each taxonomy (limit to 10 terms)
+            $terms = get_terms([
+                'taxonomy'   => $taxonomy->name,
+                'number'     => 10,
+                'hide_empty' => false, // Include empty terms if needed
+            ]);
+
+            if ( ! is_wp_error( $terms ) ) {
+              
+                $result[] = [
+
+                    'taxonomy' => $taxonomy->name,
+                    'label'    => $taxonomy->label,
+                    'terms'    => array_map(function($term) {
+                        return [
+                            'id'   => $term->term_id,
+                            'name' => $term->name,
+                            'slug' => $term->slug,
+                        ];
+                    }, $terms),                    
+                ];
+
+            }
+        }
+
+        return $result;
+
+    }
     public function get_schema_loop($post_type, $attr = null, $rvcount = null, $paged = null, $offset = null, $search_param=null){
             
         $response   = array();                                

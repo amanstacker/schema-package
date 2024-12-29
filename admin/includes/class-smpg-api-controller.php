@@ -64,7 +64,15 @@ class SMPG_Api_Controller {
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }
-            ));   
+            ));
+            
+            register_rest_route( 'smpg-route', 'get-taxonomies-with-terms', array(
+                'methods'    => 'GET',
+                'callback'   => array($this->_apiAction, 'get_taxonomies_with_terms'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ));
                         
             register_rest_route( 'smpg-route', 'change-post-status', array(
                 'methods'    => 'POST',

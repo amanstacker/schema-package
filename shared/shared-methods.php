@@ -13,7 +13,7 @@ function smpg_remove_data_on_uninstall( $blog_id = null ) {
 
 	if ( false === $post_ids ) {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s", 'smpg' ) );
+		$post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s", 'smpg_singular_schema' ) );
 		wp_cache_set( $cache_key, $post_ids );
 
 	}
@@ -22,7 +22,7 @@ function smpg_remove_data_on_uninstall( $blog_id = null ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $wpdb->delete(
                     $wpdb->posts,
-                    array( 'post_type' => 'smpg' ),
+                    array( 'post_type' => 'smpg_singular_schema' ),
                     array( '%s' )
             );
 		 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared	

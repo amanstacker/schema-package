@@ -280,7 +280,36 @@ class SMPG_Api_Action {
             return $response;
 
         }
+        public function carousel_placement_search( $request_data ) {
+
+            $response = [];
+
+            $parameters = $request_data->get_params();            
+
+            if( isset($parameters['type']) && isset($parameters['search']) ) {
+                $response = $this->_api_mapper->get_placement_data($parameters['type'], $parameters['search']);    
+            }
+            
+            return $response;
+
+        }
         public function get_automation_with( $request_data ){
+
+            $response    = [];
+            $schema_type = '';
+            
+            $parameters = $request_data->get_params();
+            
+            if(!empty($parameters['schema_type'])) {
+                $schema_type = $parameters['schema_type'];
+                $result    = $this->_api_mapper->get_automation_with( $schema_type );                 
+                $response = [ 'status' => 'success', 'data' => $result ]; 
+            }else{
+                $response = [ 'status' => 'failed', 'message' => esc_html__( 'Schema type is required', 'schema-package' ) ];
+            }                                    
+            return $response;
+        }
+        public function get_carousel_automation_with( $request_data ) {
 
             $response    = [];
             $schema_type = '';
@@ -326,7 +355,8 @@ class SMPG_Api_Action {
             }                                    
             return $response;
         }
-        public function get_schema_data($request_data){
+
+        public function get_schema_data( $request_data ) {
 
             $response = [];
 
@@ -334,11 +364,28 @@ class SMPG_Api_Action {
 
             $post_id = null;
 
-            if(isset($parameters['post_id'])) {
+            if ( isset( $parameters['post_id'] ) ) {
                 $post_id = $parameters['post_id'];
             }
 
-            $response = $this->_api_mapper->get_schema_data($post_id);
+            $response = $this->_api_mapper->get_schema_data( $post_id );
+
+            return $response;
+           
+        }
+        public function get_carousel_schema_data( $request_data ) {
+
+            $response = [];
+
+            $parameters = $request_data->get_params();
+
+            $post_id = null;
+
+            if ( isset( $parameters['post_id'] ) ) {
+                $post_id = $parameters['post_id'];
+            }
+
+            $response = $this->_api_mapper->get_carousel_schema_data( $post_id );
 
             return $response;
            

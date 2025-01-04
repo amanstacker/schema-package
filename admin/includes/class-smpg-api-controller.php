@@ -87,6 +87,13 @@ class SMPG_Api_Controller {
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }
+            ));
+            register_rest_route( 'smpg-route', 'save-carousel-schema-data', array(
+                'methods'    => 'POST',
+                'callback'   => array($this->_apiAction, 'save_carousel_schema_data'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
             ));                        
             register_rest_route( 'smpg-route', 'update-misc-schema', array(
                 'methods'    => 'POST',
@@ -123,9 +130,23 @@ class SMPG_Api_Controller {
                     return current_user_can( 'manage_options' );
                 }
             ));
+            register_rest_route( 'smpg-route', 'get-carousel-schema-data', array(
+                'methods'    => 'GET',
+                'callback'   => array($this->_apiAction, 'get_carousel_schema_data'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ));
             register_rest_route( 'smpg-route', 'get-automation-with', array(
                 'methods'    => 'GET',
                 'callback'   => array($this->_apiAction, 'get_automation_with'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ));
+            register_rest_route( 'smpg-route', 'get-carousel-automation-with', array(
+                'methods'    => 'GET',
+                'callback'   => array($this->_apiAction, 'get_carousel_automation_with'),
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }
@@ -140,6 +161,13 @@ class SMPG_Api_Controller {
             register_rest_route( 'smpg-route', 'placement-search', array(
                 'methods'    => 'GET',
                 'callback'   => array($this->_apiAction, 'placement_search'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ));
+            register_rest_route( 'smpg-route', 'carousel-placement-search', array(
+                'methods'    => 'GET',
+                'callback'   => array($this->_apiAction, 'carousel_placement_search'),
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }

@@ -165,7 +165,9 @@ class SMPG_Api_Mapper {
       }
 
     }
+    public function get_carousel_placement_data($condition, $search = '', $saved_data = '') {
 
+    }
     public function get_placement_data($condition, $search = '', $saved_data = '') {
 
       $choices      = array();  
@@ -478,35 +480,23 @@ class SMPG_Api_Mapper {
       }    
 
     }
+    public function get_carousel_schema_data( $post_id = null ) {
 
-    public function quads_post_taxonomy_generator(){
-    
-        $taxonomies = '';  
-        $choices    = array();
-            
-        $taxonomies = get_taxonomies( array('public' => true), 'objects' );
-        
-        if($taxonomies){
-            
-          foreach($taxonomies as $taxonomy) {
-              
-            $choices[ $taxonomy->name ] = $taxonomy->labels->name;
-            
-          }
-            
-        }
-        
-          // unset post_format (why is this a public taxonomy?)
-          if( isset($choices['post_format']) ) {
-              
-            unset( $choices['post_format']) ;
-            
-          }
-          
-        return $choices;
+        $response  = array();
+        $meta_data = array();
+        $enabled_on  = array();                                
+                
+        $response['post_data']      = get_post($post_id, ARRAY_A);  
+        $post_meta                  = get_post_meta($post_id);                          
+        $taxonomies                 = $this->get_taxonomies_with_terms();
+
+        $meta_data['taxonomies']    = $taxonomies;
+        $response['post_meta']      = $meta_data;                                               
+                        
+        return $response;
+
     }
-
-    public function get_schema_data( $post_id = null ){
+    public function get_schema_data( $post_id = null ) {
 
         $response  = array();
 
@@ -586,10 +576,13 @@ class SMPG_Api_Mapper {
     public function get_taxonomies_with_terms( $taxonomy_type = null, $search_param = null ) {
 
         $result = [];
-        // Get all taxonomies
-        $taxonomies = get_taxonomies( [], 'objects' );
 
-        foreach ( $taxonomies as $taxonomy ) {
+        $taxonomies = get_taxonomies( [], 'objects' );
+        unset( $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
+
+        if ( $taxonomies ) {
+
+          foreach ( $taxonomies as $taxonomy ) {
             // Get terms for each taxonomy (limit to 10 terms)
             $terms = get_terms([
                 'taxonomy'   => $taxonomy->name,
@@ -600,22 +593,25 @@ class SMPG_Api_Mapper {
             if ( ! is_wp_error( $terms ) ) {
               
                 $result[] = [
-
                     'taxonomy' => $taxonomy->name,
                     'label'    => $taxonomy->label,
-                    'terms'    => array_map(function($term) {
-                        return [
-                            'id'   => $term->term_id,
-                            'name' => $term->name,
-                            'slug' => $term->slug,
+                    'status'   => false,
+                    'value'    => [4,5,1,6,7,8,9],
+                    'options'    => array_map( function( $term ) {
+                        return [                                                              
+                            'key'   => $term->term_id,
+                            'value' => $term->term_id,
+                            'text'  => $term->name,
                         ];
-                    }, $terms),                    
+                    }, $terms ),
                 ];
 
             }
-        }
+          }
 
-        return $result;
+        }        
+
+      return $result;
 
     }
     public function get_schema_loop($post_type, $attr = null, $rvcount = null, $paged = null, $offset = null, $search_param=null){
@@ -794,7 +790,9 @@ class SMPG_Api_Mapper {
       return $response;
       
     }
-                        
+    public function get_carousel_automation_with( $schema_type ) {
+
+    }                    
     public function get_automation_with( $schema_type ){
 
       global $smpg_plugin_list;

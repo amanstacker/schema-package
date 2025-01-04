@@ -1,7 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, TableCell } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import DottedSpinner from './common/dotted-spinner/DottedSpinner';
@@ -18,8 +18,7 @@ const CarouselSchemaEdit = () => {
 
   const [mainSpinner, setMainSpinner]           = useState(false);
   const [isLoaded, setIsLoaded]                 = useState(true);      
-  const [dottedSpinner, setDottedSpinner]       = useState(false); 
-  const [enabledOnOption, setEnabledOnOption]   = useState({});  
+  const [dottedSpinner, setDottedSpinner]       = useState(false);     
   const [automationList, setAutomationList]     = useState([]);
 
   const [postData, setPostData] = useReducer(
@@ -36,16 +35,9 @@ const CarouselSchemaEdit = () => {
     (state, newState) => ({...state, ...newState}),
     {
       schema_type             : 'course',            
-      current_status          : true,
-      enabled_on_post_type    : false,
-      enabled_on_post         : false,
-      enabled_on_page         : false,
-      disabled_on_post_type   : false,
-      disabled_on_post        : false,
-      disabled_on_page        : false,
-      enabled_on              : { post_type:[], post:[], page:[] },
-      disabled_on             : { post_type:[], post:[], page:[] },
+      current_status          : true,                        
       automation_with         : [],
+      taxonomies              : []
     }            
   );
   
@@ -65,7 +57,7 @@ const CarouselSchemaEdit = () => {
     
     setMainSpinner(true);
 
-    let url = smpg_local.rest_url + "smpg-route/get-schema-data?post_id="+post_id;
+    let url = smpg_local.rest_url + "smpg-route/get-carousel-schema-data?post_id="+post_id;
       
       fetch(url, {
         headers: {                    
@@ -77,8 +69,7 @@ const CarouselSchemaEdit = () => {
         (result) => {              
           setMainSpinner(false);     
           setPostData(result.post_data);
-          setPostMeta(result.post_meta);                    
-          setEnabledOnOption(result.placement_enabled_option);          
+          setPostMeta(result.post_meta);                                      
         },        
         (error) => {         
         }
@@ -95,7 +86,7 @@ const CarouselSchemaEdit = () => {
 
       setIsLoaded(false);
 
-      let url = smpg_local.rest_url + 'smpg-route/save-schema-data';
+      let url = smpg_local.rest_url + 'smpg-route/save-carousel-schema-data';
         
       fetch(url,{
         method: "post",
@@ -128,7 +119,7 @@ const CarouselSchemaEdit = () => {
   }
   const handleGetAutomation = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-automation-with?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "smpg-route/get-carousel-automation-with?schema_type="+schema_type;
         
     fetch(url, {
       headers: {                    
@@ -168,7 +159,7 @@ const CarouselSchemaEdit = () => {
   }
   const handlePlacementSearch = (type, search, name) => {
         
-      let url = smpg_local.rest_url + "smpg-route/placement-search?type="+type+"&search="+search;
+      let url = smpg_local.rest_url + "smpg-route/carousel-placement-search?type="+type+"&search="+search;
         
       fetch(url, {
         headers: {                    
@@ -187,7 +178,7 @@ const CarouselSchemaEdit = () => {
                 let newclone = [...new Set([...clonedata[type],...result])]
                 let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
                 clonedata[type] = newData;            
-                setEnabledOnOption(clonedata);
+                //setEnabledOnOption(clonedata);
 
             }            
             
@@ -244,6 +235,11 @@ const CarouselSchemaEdit = () => {
       handleGetAutomation(postMeta.schema_type);    
     }    
   }, [postMeta.schema_type]);
+
+  // useEffect(() => {
+  //   console.log(taxonomies);
+  // }, [taxonomies]);
+
   
 
   return(
@@ -271,21 +267,48 @@ const CarouselSchemaEdit = () => {
               onChange={handleSchemaTypeChange}
           />
       </Accordion>               
-
+    {postMeta.taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
-                <h4>{__('Taxonomies', 'schema-package') }</h4>
+                <h4>{__('Taxonomies List', 'schema-package') }</h4>
 
                 <table className="smpg-placement-table">
-                  <tbody>
-                   <tr>
-                   <td><label>{__('Post Types', 'schema-package') }</label></td>
-                   <td>
-                   <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_post_type" checked={postMeta.enabled_on_post_type} onChange={handleFormChange} />
-                  <label></label>
-                  </div>                         
-                   </td>
+                  <tbody>                    
+                  {
+                    postMeta.taxonomies.map((item, i) => {
+                      return(
+                        <tr key={i}>
+                        <td><label>{item.label}</label></td>                        
+                        <td>
+                          <div className="ui fitted toggle checkbox">
+                          <input type="checkbox" name={item.taxonomy} checked={item.status} onChange={handleFormChange} />
+                          <label></label>
+                          </div>                         
+                        </td>
+                        
+
+                        <td>                        
+                          <Dropdown
+                            name={item.taxonomy}
+                            data_type={item.taxonomy}
+                            placeholder={`Search For ${item.label}`}
+                            fluid
+                            multiple
+                            search
+                            selection
+                            value={item.value}
+                            // onChange={handlePlacementChange}
+                            // onSearchChange={handlePlacementSearchChange}
+                            options={item.options}
+                          />                                          
+                        </td>
+                        </tr>
+                      )
+                    })
+                  }
+
+                   {/* <tr>                   
+                   
                    <td>
                      {enabledOnOption.post_type ? 
                      <Dropdown
@@ -304,12 +327,13 @@ const CarouselSchemaEdit = () => {
                    : ''
                      }                   
                    </td>
-                   </tr>                                       
+                   </tr>                                        */}
                   </tbody>
                 </table>
               </div>                  
               
-    </Accordion>               
+    </Accordion>
+    : null}                   
       </div>
       </div>
       <div className="smpg-right-section">  

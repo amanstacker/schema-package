@@ -483,11 +483,10 @@ class SMPG_Api_Mapper {
     public function get_carousel_schema_data( $post_id = null ) {
 
         $response  = array();
-        $meta_data = array();
-        $enabled_on  = array();                                
+        $meta_data = array();        
                 
-        $response['post_data']      = get_post($post_id, ARRAY_A);  
-        $post_meta                  = get_post_meta($post_id);                          
+        $response['post_data']      = get_post($post_id, ARRAY_A);
+        $post_meta                  = get_post_meta($post_id);
         $taxonomies                 = $this->get_taxonomies_with_terms();
 
         $meta_data['taxonomies']    = $taxonomies;
@@ -572,6 +571,30 @@ class SMPG_Api_Mapper {
         return $response;
 
     }
+    public function get_terms_by_search( $taxonomy_type, $search_param ) {
+
+      $options = [];
+
+      $terms = get_terms( [
+        'taxonomy'   => $taxonomy_type,
+        'name__like' => $search_param,        
+        'hide_empty' => false, // Include empty terms if needed
+      ] );
+
+      if ( ! is_wp_error( $terms ) ) {
+          
+          foreach ($terms as $i => $term) {
+              $options[] = [
+                  'key'   => $i,
+                  'value' => $term->term_id,
+                  'text'  => $term->name,
+              ];
+          }                  
+      }
+
+      return $options;
+
+    }
 
     public function get_taxonomies_with_terms( $taxonomy_type = null, $search_param = null ) {
 
@@ -591,19 +614,23 @@ class SMPG_Api_Mapper {
             ]);
 
             if ( ! is_wp_error( $terms ) ) {
+
+                $options = [];
+                foreach ($terms as $i => $term) {
+                    $options[] = [
+                        'key'   => $i,
+                        'value' => $term->term_id,
+                        'text'  => $term->name,
+                    ];
+                }
               
                 $result[] = [
-                    'taxonomy' => $taxonomy->name,
-                    'label'    => $taxonomy->label,
-                    'status'   => false,
-                    'value'    => [4,5,1,6,7,8,9],
-                    'options'    => array_map( function( $term ) {
-                        return [                                                              
-                            'key'   => $term->term_id,
-                            'value' => $term->term_id,
-                            'text'  => $term->name,
-                        ];
-                    }, $terms ),
+                    'taxonomy'  => $taxonomy->name,
+                    'label'     => $taxonomy->label,
+                    'status'    => false,
+                    //'value'   => [4,5,1,6,7,8,9],
+                    'value'     => [],
+                    'options'   => $options,
                 ];
 
             }

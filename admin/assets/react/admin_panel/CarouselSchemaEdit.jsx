@@ -43,13 +43,16 @@ const CarouselSchemaEdit = () => {
   
   const handleFormChange = e => {
 
-    let { name, value, type } = e.target;
+    let { name, value, type, id } = e.target;
 
-    if(type === "checkbox"){
+    if( type === "checkbox" ){
       value = e.target.checked;
     }
-
-    setPostMeta({[name]: value});
+    
+    let clonedata = {...postMeta};   
+    clonedata.taxonomies[id].status = value
+    console.log(clonedata);
+    setPostMeta(clonedata);
             
   }  
 
@@ -143,21 +146,13 @@ const CarouselSchemaEdit = () => {
   }
   const handlePlacementChange = (e, data) => {
     
-      let data_type = data.data_type;
+      let data_id = data.data_id;      
       let copydata = {...postMeta};
-
-        if((data.name).includes('enabled_on')){
-          copydata.enabled_on[data_type] = data.value;
-        }
-
-        if((data.name).includes('disabled_on')){
-          copydata.disabled_on[data_type] = data.value;
-        }
-        
-        setPostMeta(copydata);    
+      copydata.taxonomies[data_id].value = data.value;
+      setPostMeta(copydata);    
 
   }
-  const handlePlacementSearch = (type, search, name) => {
+  const handlePlacementSearch = (id, type, search, name) => {
         
       let url = smpg_local.rest_url + "smpg-route/carousel-placement-search?type="+type+"&search="+search;
         
@@ -169,18 +164,14 @@ const CarouselSchemaEdit = () => {
       .then(res => res.json())
       .then(
         (result) => {
-                              
-          if(result){
-            
-            if(name.includes('enable')){
-
-                let clonedata = {...enabledOnOption};    
-                let newclone = [...new Set([...clonedata[type],...result])]
+                                         
+          if ( result ) {
+                        
+                let clonedata = {...postMeta};
+                let newclone = [...new Set([...clonedata.taxonomies[id].options, ...result])]
                 let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
-                clonedata[type] = newData;            
-                //setEnabledOnOption(clonedata);
-
-            }            
+                clonedata.taxonomies[id].options = newData;            
+                setPostMeta(clonedata);                        
             
           }
                     
@@ -192,14 +183,15 @@ const CarouselSchemaEdit = () => {
   }
   let timer;
   const handlePlacementSearchChange = (e, data) => {
-                    
+      
+      let id     = data.data_id;
       let type   = data.data_type;
       let name   = data.name;
       let search = data.searchQuery;
 
       if(type && search){
         clearTimeout(timer);
-        timer = setTimeout(()=> handlePlacementSearch(type, search, name), 1000)            
+        timer = setTimeout(()=> handlePlacementSearch(id, type, search, name), 1000)            
       }
       
   }
@@ -236,9 +228,9 @@ const CarouselSchemaEdit = () => {
     }    
   }, [postMeta.schema_type]);
 
-  // useEffect(() => {
-  //   console.log(taxonomies);
-  // }, [taxonomies]);
+  useEffect(() => {
+    console.log(postMeta.taxonomies);
+  }, [postMeta.taxonomies]);
 
   
 
@@ -281,7 +273,7 @@ const CarouselSchemaEdit = () => {
                         <td><label>{item.label}</label></td>                        
                         <td>
                           <div className="ui fitted toggle checkbox">
-                          <input type="checkbox" name={item.taxonomy} checked={item.status} onChange={handleFormChange} />
+                          <input id={i} type="checkbox" name={item.taxonomy} checked={item.status} onChange={handleFormChange} />
                           <label></label>
                           </div>                         
                         </td>
@@ -291,43 +283,22 @@ const CarouselSchemaEdit = () => {
                           <Dropdown
                             name={item.taxonomy}
                             data_type={item.taxonomy}
+                            data_id={i}
                             placeholder={`Search For ${item.label}`}
                             fluid
                             multiple
                             search
                             selection
                             value={item.value}
-                            // onChange={handlePlacementChange}
-                            // onSearchChange={handlePlacementSearchChange}
+                            onChange={handlePlacementChange}
+                            onSearchChange={handlePlacementSearchChange}
                             options={item.options}
                           />                                          
                         </td>
                         </tr>
                       )
                     })
-                  }
-
-                   {/* <tr>                   
-                   
-                   <td>
-                     {enabledOnOption.post_type ? 
-                     <Dropdown
-                     name="enabled_on_post_type"
-                     data_type="post_type"
-                     placeholder={__('Search For Post Type', 'schema-package') }
-                     fluid
-                     multiple
-                     search
-                     selection
-                     value={postMeta.enabled_on.post_type}
-                     onChange={handlePlacementChange}
-                     onSearchChange={handlePlacementSearchChange}
-                     options={enabledOnOption.post_type}
-                   />
-                   : ''
-                     }                   
-                   </td>
-                   </tr>                                        */}
+                  }                   
                   </tbody>
                 </table>
               </div>                  

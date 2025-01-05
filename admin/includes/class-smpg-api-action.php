@@ -287,7 +287,7 @@ class SMPG_Api_Action {
             $parameters = $request_data->get_params();            
 
             if( isset($parameters['type']) && isset($parameters['search']) ) {
-                $response = $this->_api_mapper->get_placement_data($parameters['type'], $parameters['search']);    
+                $response = $this->_api_mapper->get_terms_by_search($parameters['type'], $parameters['search']);    
             }
             
             return $response;

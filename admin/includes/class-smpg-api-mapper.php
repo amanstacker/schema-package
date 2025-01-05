@@ -482,14 +482,52 @@ class SMPG_Api_Mapper {
     }
     public function get_carousel_schema_data( $post_id = null ) {
 
-        $response  = array();
-        $meta_data = array();        
-                
-        $response['post_data']      = get_post($post_id, ARRAY_A);
-        $post_meta                  = get_post_meta($post_id);
-        $taxonomies                 = $this->get_taxonomies_with_terms();
+        $response         = [];
+        $meta_data        = [];        
+        $taxonomies_list  = [];       
+        $response['post_data']      = get_post( $post_id, ARRAY_A );
+        $post_meta                  = get_post_meta( $post_id );   
+        //Taxonomies data starts here     
 
-        $meta_data['taxonomies']    = $taxonomies;
+        $taxonomies = get_taxonomies( [], 'objects' );
+        unset( $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
+
+        if ( $taxonomies ) {
+
+          foreach ( $taxonomies as $taxonomy ) {
+            // Get terms for each taxonomy (limit to 10 terms)
+            $terms = get_terms([
+                'taxonomy'   => $taxonomy->name,
+                'number'     => 10,
+                'hide_empty' => false, // Include empty terms if needed
+            ]);
+
+            if ( ! is_wp_error( $terms ) ) {
+
+                $options = [];
+                foreach ($terms as $i => $term) {
+                    $options[] = [
+                        'key'   => $i,
+                        'value' => $term->term_id,
+                        'text'  => $term->name,
+                    ];
+                }
+              
+                $taxonomies_list[] = [
+                    'taxonomy'  => $taxonomy->name,
+                    'label'     => $taxonomy->label,
+                    'status'    => false,
+                    //'value'   => [4,5,1,6,7,8,9],
+                    'value'     => [],
+                    'options'   => $options,
+                ];
+
+            }
+          }
+
+        }
+        //Taxonomies data ends here
+        $meta_data['taxonomies']    = $taxonomies_list;
         $response['post_meta']      = $meta_data;                                               
                         
         return $response;
@@ -595,52 +633,7 @@ class SMPG_Api_Mapper {
       return $options;
 
     }
-
-    public function get_taxonomies_with_terms( $taxonomy_type = null, $search_param = null ) {
-
-        $result = [];
-
-        $taxonomies = get_taxonomies( [], 'objects' );
-        unset( $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
-
-        if ( $taxonomies ) {
-
-          foreach ( $taxonomies as $taxonomy ) {
-            // Get terms for each taxonomy (limit to 10 terms)
-            $terms = get_terms([
-                'taxonomy'   => $taxonomy->name,
-                'number'     => 10,
-                'hide_empty' => false, // Include empty terms if needed
-            ]);
-
-            if ( ! is_wp_error( $terms ) ) {
-
-                $options = [];
-                foreach ($terms as $i => $term) {
-                    $options[] = [
-                        'key'   => $i,
-                        'value' => $term->term_id,
-                        'text'  => $term->name,
-                    ];
-                }
-              
-                $result[] = [
-                    'taxonomy'  => $taxonomy->name,
-                    'label'     => $taxonomy->label,
-                    'status'    => false,
-                    //'value'   => [4,5,1,6,7,8,9],
-                    'value'     => [],
-                    'options'   => $options,
-                ];
-
-            }
-          }
-
-        }        
-
-      return $result;
-
-    }
+    
     public function get_schema_loop($post_type, $attr = null, $rvcount = null, $paged = null, $offset = null, $search_param=null){
             
         $response   = array();                                

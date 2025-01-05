@@ -419,26 +419,7 @@ class SMPG_Api_Action {
             return $result;
 
         }        
-        public function get_taxonomies_with_terms( $request_data ) {
-            
-            $parameters      = $request_data->get_params();            
-
-            $taxonomy_type  = '';
-            $search_param   = '';            
-            
-
-            if ( isset( $parameters['search_param'] ) ) {                                
-                $search_param = sanitize_text_field( wp_unslash( $parameters['search_param'] ) );
-            }
-
-            if ( isset( $parameters['taxonomy_type'] ) ) {
-                $taxonomy_type = sanitize_text_field( wp_unslash( $parameters['taxonomy_type'] ) );
-            }
-                                                            
-            $result = $this->_api_mapper->get_taxonomies_with_terms( $taxonomy_type, $search_param );
-            return $result;
-                        
-        }
+        
         public function update_misc_schema($request_data){
 
             $response        = [];
@@ -490,6 +471,17 @@ class SMPG_Api_Action {
             }
             
             return $response;    
+        }
+        public function save_carousel_schema_data( $request_data ) {
+
+            $parameters     = $request_data->get_params();                                               
+            $post_id      = $this->_api_mapper->save_schema_data($parameters);                       
+            
+            if($post_id){   
+                return array('status' => 't', 'post_id' => $post_id);
+            }else{
+                return array('status' => 'f', 'post_id' => null);
+            }     
         }
         public function save_schema_data($request_data){
 

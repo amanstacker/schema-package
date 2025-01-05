@@ -4,7 +4,6 @@ import { Link} from 'react-router-dom';
 import { Dropdown, TableCell } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
-import DottedSpinner from './common/dotted-spinner/DottedSpinner';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/carouselSchemaTypes';
 import Accordion from '../shared/Accordion/Accordion'; 
@@ -17,8 +16,7 @@ const CarouselSchemaEdit = () => {
   const history = useHistory();   
 
   const [mainSpinner, setMainSpinner]           = useState(false);
-  const [isLoaded, setIsLoaded]                 = useState(true);      
-  const [dottedSpinner, setDottedSpinner]       = useState(false);     
+  const [isLoaded, setIsLoaded]                 = useState(true);        
   const [automationList, setAutomationList]     = useState([]);
 
   const [postData, setPostData] = useReducer(
@@ -34,8 +32,7 @@ const CarouselSchemaEdit = () => {
   const [postMeta, setPostMeta] = useReducer(
     (state, newState) => ({...state, ...newState}),
     {
-      schema_type             : 'course',            
-      current_status          : true,                        
+      schema_type             : 'course',                                       
       automation_with         : [],
       taxonomies              : []
     }            

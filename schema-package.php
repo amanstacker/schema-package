@@ -33,7 +33,7 @@ require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/properties.php';
 //Frontend
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/generate.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/individual-post.php';
-require_once SMPG_PLUGIN_DIR_PATH .'json-ld/output.php';
+require_once SMPG_PLUGIN_DIR_PATH .'json-ld/markup.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/conditions.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/automation.php';
 

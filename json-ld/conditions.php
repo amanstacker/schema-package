@@ -160,3 +160,13 @@ function smpg_is_placement_match( $schema_data, $post_id ){
 	return $response;
     
 }
+
+function smpg_is_carousel_placement_match( $schema_data, $post_id ){
+
+	$response = true;
+
+	
+
+	return $response;
+    
+}

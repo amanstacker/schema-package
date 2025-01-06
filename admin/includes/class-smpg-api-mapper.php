@@ -165,9 +165,7 @@ class SMPG_Api_Mapper {
       }
 
     }
-    public function get_carousel_placement_data($condition, $search = '', $saved_data = '') {
-
-    }
+    
     public function get_placement_data($condition, $search = '', $saved_data = '') {
 
       $choices      = array();  
@@ -484,17 +482,30 @@ class SMPG_Api_Mapper {
 
         $response         = [];
         $meta_data        = [];        
-        $taxonomies_list  = [];       
+        $taxonomies_list  = [];               
+        $saved_taxonomies = [];
+        $saved_schema     = 'course';
         $response['post_data']      = get_post( $post_id, ARRAY_A );
         $post_meta                  = get_post_meta( $post_id );   
-        //Taxonomies data starts here     
 
+        if ( isset( $post_meta['schema_type'][0] ) ) {
+          $saved_schema = $post_meta['schema_type'][0];
+        }        
+
+        if ( isset( $post_meta['taxonomies'][0] ) && is_serialized( $post_meta['taxonomies'][0] ) ) {
+          $saved_taxonomies = unserialize($post_meta['taxonomies'][0]);
+        }        
+        //Taxonomies data starts here     
+        
         $taxonomies = get_taxonomies( [], 'objects' );
-        unset( $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
+        unset($taxonomies['product_type'], $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
 
         if ( $taxonomies ) {
 
+          $j = 0;
+
           foreach ( $taxonomies as $taxonomy ) {
+            
             // Get terms for each taxonomy (limit to 10 terms)
             $terms = get_terms([
                 'taxonomy'   => $taxonomy->name,
@@ -513,21 +524,34 @@ class SMPG_Api_Mapper {
                     ];
                 }
               
+                $tax_status = false;
+                $tax_value  = [];
+
+                if ( isset( $saved_taxonomies[$j]['status'] ) ) {
+                  $tax_status  = $saved_taxonomies[$j]['status'];
+                }
+
+                if ( isset( $saved_taxonomies[$j]['value'] ) ) {
+                  $tax_value  = $saved_taxonomies[$j]['value'];
+                }
+
                 $taxonomies_list[] = [
                     'taxonomy'  => $taxonomy->name,
                     'label'     => $taxonomy->label,
-                    'status'    => false,
-                    //'value'   => [4,5,1,6,7,8,9],
-                    'value'     => [],
+                    'status'    => $tax_status,
+                    'value'     => $tax_value,                    
                     'options'   => $options,
                 ];
 
             }
+              $j++;
           }
 
         }
         //Taxonomies data ends here
         $meta_data['taxonomies']    = $taxonomies_list;
+        $meta_data['schema_type']   = $saved_schema;
+
         $response['post_meta']      = $meta_data;                                               
                         
         return $response;

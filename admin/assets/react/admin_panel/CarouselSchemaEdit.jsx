@@ -32,6 +32,7 @@ const CarouselSchemaEdit = () => {
   const [postMeta, setPostMeta] = useReducer(
     (state, newState) => ({...state, ...newState}),
     {
+      current_status          : true,
       schema_type             : 'course',                                       
       automation_with         : [],
       taxonomies              : []
@@ -225,12 +226,7 @@ const CarouselSchemaEdit = () => {
     }    
   }, [postMeta.schema_type]);
 
-  useEffect(() => {
-    console.log(postMeta.taxonomies);
-  }, [postMeta.taxonomies]);
-
   
-
   return(
     <div className="smpg-edit-page">
 

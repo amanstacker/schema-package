@@ -60,7 +60,7 @@ const CarouselSchema = () => {
       .then(res => res.json())
       .then(
         (result) => {             
-          setMainSpinner(false);     
+          setMainSpinner(false);           
           setSchemaLoop(result.posts_data);
           setPostsFound(result.posts_found);
         },        

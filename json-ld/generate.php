@@ -96,7 +96,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
     return $json_ld;
 }
 
-function smpg_prepare_carousel_json_ld( $schema_data, $post_id ) {
+function smpg_prepare_carousel_json_ld( $schema_data ) {
 
     global $query_string;
 

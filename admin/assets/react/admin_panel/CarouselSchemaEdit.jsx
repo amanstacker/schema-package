@@ -288,6 +288,7 @@ const CarouselSchemaEdit = () => {
                             options={item.options}
                           />                                          
                         </td>
+                        <td className='smpg-placement-or'>{(i+1) < postMeta.taxonomies.length ? <span>OR</span> : ''}</td>
                         </tr>
                       )
                     })

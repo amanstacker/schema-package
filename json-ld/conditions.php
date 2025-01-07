@@ -146,7 +146,7 @@ function smpg_placement_remove_from( $schema_data, $post_id ){
 
 }
 
-function smpg_is_placement_match( $schema_data, $post_id ){
+function smpg_is_singular_placement_matched( $schema_data, $post_id ){
 
 	$response = false;
 
@@ -161,11 +161,14 @@ function smpg_is_placement_match( $schema_data, $post_id ){
     
 }
 
-function smpg_is_carousel_placement_match( $schema_data, $post_id ){
+function smpg_is_carousel_placement_matched( $schema_data ){
 
-	$response = true;
-
+	$response = false;
 	
+	if ( is_tax() || is_category() || is_tag() ) {
+	
+		$response = true;
+	}	
 
 	return $response;
     

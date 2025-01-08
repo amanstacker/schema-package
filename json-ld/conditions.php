@@ -173,47 +173,20 @@ function smpg_is_carousel_placement_matched( $schema_data ){
 			$unser_schema_data = unserialize($schema_data['taxonomies'][0]);
 		}		
 		
-		foreach ( $unser_schema_data as $value ) {								
+		foreach ( $unser_schema_data as $tax_data ) {
 
-			if ( is_category() && $value['taxonomy'] == 'category' && $value['status'] ) {
+			if ( is_category() && $tax_data['taxonomy'] == 'category' && $tax_data['status'] ) {
 
-				if ( empty( $value['value'] ) ) {
-					$response = true;
-				}else{
-
-					$queried_id = get_queried_object_id();
-
-					if ( in_array( $queried_id, $value['value'] ) ){
-						$response = true;
-					}
-				}
+				smpg_is_carousel_placement_logic_check( $tax_data );		
 				
 
-			} else if ( is_tag() && $value['taxonomy'] == 'post_tag' && $value['status'] ) {
+			} else if ( is_tag() && $tax_data['taxonomy'] == 'post_tag' && $tax_data['status'] ) {
 				
-				if ( empty( $value['value'] ) ) {
-					$response = true;
-				}else{
+				smpg_is_carousel_placement_logic_check( $tax_data );
 
-					$queried_id = get_queried_object_id();
-
-					if ( in_array( $queried_id, $value['value'] ) ){
-						$response = true;
-					}
-				}
-
-			} else if ( is_tax( $value['taxonomy'] ) && $value['status'] ) {
+			} else if ( is_tax( $tax_data['taxonomy'] ) && $tax_data['status'] ) {
 				
-				if ( empty( $value['value'] ) ) {
-					$response = true;
-				}else{
-
-					$queried_id = get_queried_object_id();
-
-					if ( in_array( $queried_id, $value['value'] ) ){
-						$response = true;
-					}
-				}
+				smpg_is_carousel_placement_logic_check( $tax_data );
 
 			} 						
 
@@ -223,4 +196,22 @@ function smpg_is_carousel_placement_matched( $schema_data ){
 
 	return $response;
     
+}
+
+function smpg_is_carousel_placement_logic_check( $tax_data ) {
+
+	$response = false;
+
+	if ( empty( $tax_data['value'] ) ) {
+		$response = true;
+	}else{
+
+		$queried_id = get_queried_object_id();
+
+		if ( in_array( $queried_id, $tax_data['value'] ) ){
+			$response = true;
+		}
+	}
+
+	return $response;
 }

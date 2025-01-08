@@ -97,45 +97,40 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
 }
 
 function smpg_prepare_carousel_json_ld( $schema_data ) {
+    
+        global $query_string;    
+        
+        $json_ld      = [];
+        $list_element = [];    
+    
+        $i = 1;
+        $query_loop = new WP_Query( $query_string );
+        
+        if ( $query_loop->have_posts() ):
 
-    global $query_string;
+            while( $query_loop->have_posts() ): $query_loop->the_post();
+                                                                                    
+                                $list_element[]       =  [
+                                    '@type'    => 'ListItem',
+                                    'position' => $i,
+                                    'url'      => get_permalink()
+                                ];
+                                
+                $i++;
 
-    $json_ld    = [];
-    $list_element = [];    
-
-    if ( ( is_category() ) ) {
-
-            $i = 1;
-            $query_loop = new WP_Query( $query_string );                
-            
-            if ( $query_loop->have_posts() ):
-
-                while( $query_loop->have_posts() ): $query_loop->the_post();
-                                                                                        
-                                    $list_element[]       =  [
-                                        '@type'    => 'ListItem',
-                                        'position' => $i,
-                                        'url'      => get_permalink()
-                                    ];
-                                    
-                    $i++;
-
-                endwhile;
-            endif;		
-            wp_reset_postdata();
+            endwhile;
+        endif;		
+        wp_reset_postdata();
 
 
-            if ( ! empty( $list_element ) ) {
-                $json_ld['@context']           = smpg_get_context_url();
-                $json_ld['@type']              = 'ItemList';
-                $json_ld['itemListElement']    = $list_element;
-            }
+        if ( ! empty( $list_element ) ) {
+            $json_ld['@context']           = smpg_get_context_url();
+            $json_ld['@type']              = 'ItemList';
+            $json_ld['itemListElement']    = $list_element;
+        }
+    
+        return apply_filters( 'smpg_change_carousel_json_ld', $json_ld ); 
 
-    }
-
-
-
-    return apply_filters( 'smpg_change_carousel_json_ld', $json_ld );    
 }
 
 function smpg_prepare_global_json_ld( $schema_data, $post_id ){

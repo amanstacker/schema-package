@@ -166,8 +166,59 @@ function smpg_is_carousel_placement_matched( $schema_data ){
 	$response = false;
 	
 	if ( is_tax() || is_category() || is_tag() ) {
-	
-		$response = true;
+
+		$unser_schema_data = [];
+
+		if ( isset( $schema_data['taxonomies'][0] ) ) {
+			$unser_schema_data = unserialize($schema_data['taxonomies'][0]);
+		}		
+		
+		foreach ( $unser_schema_data as $value ) {								
+
+			if ( is_category() && $value['taxonomy'] == 'category' && $value['status'] ) {
+
+				if ( empty( $value['value'] ) ) {
+					$response = true;
+				}else{
+
+					$queried_id = get_queried_object_id();
+
+					if ( in_array( $queried_id, $value['value'] ) ){
+						$response = true;
+					}
+				}
+				
+
+			} else if ( is_tag() && $value['taxonomy'] == 'post_tag' && $value['status'] ) {
+				
+				if ( empty( $value['value'] ) ) {
+					$response = true;
+				}else{
+
+					$queried_id = get_queried_object_id();
+
+					if ( in_array( $queried_id, $value['value'] ) ){
+						$response = true;
+					}
+				}
+
+			} else if ( is_tax( $value['taxonomy'] ) && $value['status'] ) {
+				
+				if ( empty( $value['value'] ) ) {
+					$response = true;
+				}else{
+
+					$queried_id = get_queried_object_id();
+
+					if ( in_array( $queried_id, $value['value'] ) ){
+						$response = true;
+					}
+				}
+
+			} 						
+
+		}						
+				
 	}	
 
 	return $response;

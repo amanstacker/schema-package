@@ -113,9 +113,9 @@ function smpg_get_json_ld(){
             $schema_meta = get_post_meta( $id );
             
             if ( isset( $schema_meta['current_status'][0] ) && $schema_meta['current_status'][0] == 1 ) {
-
+                
                 if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
-
+                    
                     $response[] = smpg_prepare_carousel_json_ld( $schema_meta );
 
                 }

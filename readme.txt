@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -244,6 +244,10 @@ You can submit a support ticket via the [support forum](https://wordpress.org/su
 
 
 == Changelog ==
+
+= 1.0.2 =
+
+* Feature : Added Carousel Schema
 
 = 1.0.1 =
 

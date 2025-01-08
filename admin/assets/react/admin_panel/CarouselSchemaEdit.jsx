@@ -255,7 +255,7 @@ const CarouselSchemaEdit = () => {
     {postMeta.taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
-                <h4>{__('Taxonomies List', 'schema-package') }</h4>
+                <h4>{__('Target On', 'schema-package') }</h4>
 
                 <table className="smpg-placement-table">
                   <tbody>                    

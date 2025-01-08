@@ -448,7 +448,10 @@ function smpg_entry_page(){
 		}
 		
 		echo '<div id="smpg-entry-div"></div>';
-		echo '<div id="smpg-page-footer"><span style="font-style:italic;font-size:15px;">'.esc_html__( 'Thanks for choosing the Schema Package! Your feedback matters to us', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'share your thoughts to help us improve.', 'schema-package' ).'</a> </span></div>';		
+		echo '<div id="smpg-page-footer">
+		<span>'.esc_html__( 'Thanks for choosing the Schema Package! Your feedback matters to us', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'share your thoughts to help us improve.', 'schema-package' ).'</a> </span>
+		<span class="smpg-version-footer">'.esc_html__( 'Schema Package Version', 'schema-package' ).' '.SMPG_VERSION.'</span>
+		</div>';		
 
 }
 

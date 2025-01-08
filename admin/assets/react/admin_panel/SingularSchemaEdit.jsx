@@ -319,6 +319,7 @@ const SingularSchemaEdit = () => {
                      }
                    
                    </td>
+                   <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
                    <td><label>{__('Posts', 'schema-package') }</label></td>
@@ -347,6 +348,7 @@ const SingularSchemaEdit = () => {
                   : ''
                   }                    
                   </td>
+                    <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
                    <td><label>{__('Pages', 'schema-package') }</label></td>
@@ -407,6 +409,7 @@ const SingularSchemaEdit = () => {
                  : ''
                    }
                    </td>
+                   <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
                    <td><label>{__('Posts', 'schema-package') }</label></td>
@@ -434,6 +437,7 @@ const SingularSchemaEdit = () => {
                   : ''
                     }
                   </td>
+                  <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
                    <td><label>{__('Pages', 'schema-package') }</label></td>

@@ -1,6 +1,6 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
-Tags: Structured Data, Schema, Rich Results, Product, Event
+Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
 Stable tag: 1.0.1
 License: GPLv2 or later
@@ -43,8 +43,13 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 ### Schema Package Key Features
 
-* <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs. No limitation on schema type selection, Add as much as you want.
-* <strong>Targeting</strong>: Add schema types based on your target. Such as posts, pages, post types, taxonomies etc.
+
+* <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
+* <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
+* <strong>Singular Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
+* <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
+* <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
+* <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
 * <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
@@ -71,7 +76,9 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
+* ItemList : [schema.org url](https://schema.org/ItemList)
 * Comment : [schema.org url](https://schema.org/Comment)
+
 
 ### Schema package automation and compatibility with plugins.
 

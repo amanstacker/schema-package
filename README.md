@@ -2,7 +2,7 @@
 
 ### Description
 
-The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Schema markup acts as structured data that helps Search Engines and other platforms better understand website content. Instead of manually entering the same information twice — once in the actual content and again in the Schema Package Generator metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
+The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Instead of manually entering the same information twice — once in the actual content and again in the Schema Package Generator metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
@@ -109,14 +109,14 @@ The Schema package is a tool for adding schema markup to websites according to s
 
 Here are some schema and structured data markup validator tools that can help you validate and troubleshoot your markup:
 
-1. [Google Rich Results Test](https://search.google.com/test/rich-results)
+#### 1. [Google Rich Results Test](https://search.google.com/test/rich-results)
 
 The "Google Rich Results Test" does not validate all types of schema.org markup. It is primarily designed to test the types of schema markup that can generate rich results in Google search, such as Product, Recipe, Event, FAQ and others related to search features.
 
 While it can validate whether your structured data is correctly implemented for rich results, it doesn't support every schema.org type. For example, it may not check more general types like Service, Organization, or CreativeWork, unless they are directly relevant to a rich result display.
 
 
-2. [Schema Markup Validator](https://validator.schema.org/)
+#### 2. [Schema Markup Validator](https://validator.schema.org/)
 
 The "Schema Markup Validator" by Google validates all schema.org types, not just those that are eligible for rich results. This tool checks whether your structured data is correctly implemented according to the schema.org specifications, regardless of whether the type is eligible for rich results.
 

@@ -2,7 +2,8 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_action( 'save_post_smpg', 'smpg_cached_schema_ids', 10, 3 );
+add_action( 'save_post_smpg_singular_schema', 'smpg_cached_singular_schema_ids', 10, 3 );
+add_action( 'save_post_smpg_carousel_schema', 'smpg_cached_carousel_schema_ids', 10, 3 );
 add_action( 'after_delete_post', 'smpg_cached_schema_ids_on_delete', 10, 1 );
 add_action( 'plugins_loaded', 'smpg_set_all_global_data' );
 add_action( 'admin_enqueue_scripts', 'smpg_enqueue_admin_panel', 10);
@@ -309,38 +310,66 @@ function smpg_default_misc_schema_data(){
 
 }
 
-function smpg_cached_schema_ids_on_delete($post_id){
+function smpg_cached_schema_ids_on_delete( $post_id ) {
 	
 	if ( ! current_user_can( 'manage_options' ) )
 		return;
 
-	if( get_post_type($post_id) == 'smpg' ) {
-		delete_transient( 'smpg_cached_schema_ids' );
-		smpg_get_added_schema_ids();
-	}
+		$post_type = get_post_type( $post_id );
+
+		if ( $post_type == 'smpg_singular_schema' ) {
+
+			$cache_key = 'smpg_cached_key_singular_schema';			
+			
+		}
+
+		if ( $post_type == 'smpg_carousel_schema' ) {
+
+			$cache_key = 'smpg_cached_key_carousel_schema';		
+			
+		}
+
+		delete_transient( $cache_key );
+		smpg_get_schema_ids( $cache_key, $post_type );
 				
 }
 
-function smpg_cached_schema_ids( $post_id, $post, $update ) {
+function smpg_cached_singular_schema_ids( $post_id, $post, $update ) {
 	
 	if( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || (defined( 'DOING_AJAX' ) && DOING_AJAX ) ) 
 		return;
 	if ( ! current_user_can( 'manage_options' ) ) 
 		return;			
 
-		delete_transient( 'smpg_cached_schema_ids' );
-		smpg_get_added_schema_ids();
+		$cache_key = 'smpg_cached_key_singular_schema';
+		$post_type = 'smpg_singular_schema';
+		delete_transient( $cache_key );
+		smpg_get_schema_ids( $cache_key, $post_type );
 		
 }
 
-function smpg_get_added_schema_ids() {
+function smpg_cached_carousel_schema_ids( $post_id, $post, $update ) {
+	
+	if( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || (defined( 'DOING_AJAX' ) && DOING_AJAX ) ) 
+		return;
+	if ( ! current_user_can( 'manage_options' ) ) 
+		return;			
+
+		$cache_key = 'smpg_cached_key_carousel_schema';
+		$post_type = 'smpg_carousel_schema';
+		delete_transient( $cache_key );
+		smpg_get_schema_ids( $cache_key, $post_type );
+		
+}
+
+function smpg_get_schema_ids( $cache_key, $post_type ) {
 	
 	$added_ids = array();
 	
-	if ( false ===  get_transient( 'smpg_cached_schema_ids' )  ) {
+	if ( false ===  get_transient( $cache_key )  ) {
 		
 			$args = array(
-				'post_type'			=> 'smpg',
+				'post_type'			=> $post_type,
 				'post_status'		=> 'publish',
 				'posts_per_page'	=> -1
 			);
@@ -359,11 +388,11 @@ function smpg_get_added_schema_ids() {
 
 			wp_reset_postdata();			
 			
-     		set_transient('smpg_cached_schema_ids', $added_ids);  
+     		set_transient( $cache_key, $added_ids );  
 
 	}else{
 
-		$added_ids = get_transient('smpg_cached_schema_ids');
+		$added_ids = get_transient( $cache_key );
 		
 	}
 		
@@ -387,7 +416,8 @@ function smpg_get_schema_type_text($id){
 		'videoobject'               => 'VideoObject',
 		'course'                    => 'Course',
 		'jobposting'                => 'JobPosting',
-		'localbusiness'             => 'LocalBusiness' 
+		'localbusiness'             => 'LocalBusiness',
+		'service'                   => 'Service'
 	];	
 
 	if(array_key_exists($id, $response)){
@@ -417,7 +447,11 @@ function smpg_entry_page(){
 			return;
 		}
 		
-		echo '<div id="smpg-entry-div"><div>';
+		echo '<div id="smpg-entry-div"></div>';
+		echo '<div id="smpg-page-footer">
+		<span>'.esc_html__( 'Thanks for choosing the Schema Package! Your feedback matters to us', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'share your thoughts to help us improve.', 'schema-package' ).'</a> </span>
+		<span class="smpg-version-footer">'.esc_html__( 'Schema Package Version', 'schema-package' ).' '.SMPG_VERSION.'</span>
+		</div>';		
 
 }
 

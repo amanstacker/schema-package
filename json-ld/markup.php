@@ -43,11 +43,15 @@ function smpg_get_json_ld(){
 
     global $post;
 
-    $post_id = $post->ID;
-
+    $post_id     = null;
     $response    = array();
 
+    if ( is_object( $post ) ) {
+        $post_id = $post->ID;
+    }        
+
     $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    
     if(!empty($breadcrumbs)){
         $response [] = $breadcrumbs;
     }
@@ -81,20 +85,43 @@ function smpg_get_json_ld(){
         }
 
     }
-
-    $schema_ids = smpg_get_added_schema_ids();
+    //Singular schema markup addition
+    $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
     
-    if(!empty($schema_ids)){
+    if ( ! empty( $singular_schema_ids ) ) {
 
-        foreach ($schema_ids as $id) {
+        foreach ( $singular_schema_ids as $id ) {
             
-            $schema_meta = get_post_meta($id);
+            $schema_meta = get_post_meta( $id );
             
-            if(isset($schema_meta['current_status'][0]) && $schema_meta['current_status'][0] == 1){
-                if(smpg_is_placement_match($schema_meta, $post_id)){
-                    $response[] = smpg_prepare_global_json_ld($schema_meta, $post_id);
+            if ( isset( $schema_meta['current_status'][0] ) && $schema_meta['current_status'][0] == 1 ) {
+                if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
+                    $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
                 }
             }            
+        }
+
+    }
+
+    //Carousel schema markup addition
+    $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
+    
+    if ( ! empty( $carousel_schema_ids ) ) {
+
+        foreach ( $carousel_schema_ids as $id ) {
+            
+            $schema_meta = get_post_meta( $id );
+            
+            if ( isset( $schema_meta['current_status'][0] ) && $schema_meta['current_status'][0] == 1 ) {
+                
+                if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+                    
+                    $response[] = smpg_prepare_carousel_json_ld( $schema_meta );
+
+                }
+
+            }   
+                     
         }
 
     }

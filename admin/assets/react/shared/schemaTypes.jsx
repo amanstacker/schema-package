@@ -11,5 +11,6 @@ export const schemaTypes = [
     { key: 9, value: 'videoobject', text: 'VideoObject' },
     { key: 10, value: 'course', text: 'Course' },
     { key: 11, value: 'jobposting', text: 'JobPosting' },
-    { key: 12, value: 'localbusiness', text: 'LocalBusiness' }
+    { key: 12, value: 'localbusiness', text: 'LocalBusiness' },
+    { key: 13, value: 'service', text: 'Service' }
 ]

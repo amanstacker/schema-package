@@ -165,7 +165,7 @@ class SMPG_Api_Mapper {
       }
 
     }
-
+    
     public function get_placement_data($condition, $search = '', $saved_data = '') {
 
       $choices      = array();  
@@ -478,35 +478,86 @@ class SMPG_Api_Mapper {
       }    
 
     }
+    public function get_carousel_schema_data( $post_id = null ) {
 
-    public function quads_post_taxonomy_generator(){
-    
-        $taxonomies = '';  
-        $choices    = array();
-            
-        $taxonomies = get_taxonomies( array('public' => true), 'objects' );
+        $response         = [];
+        $meta_data        = [];        
+        $taxonomies_list  = [];               
+        $saved_taxonomies = [];
+        $saved_schema     = 'course';
+        $response['post_data']      = get_post( $post_id, ARRAY_A );
+        $post_meta                  = get_post_meta( $post_id );   
+
+        if ( isset( $post_meta['schema_type'][0] ) ) {
+          $saved_schema = $post_meta['schema_type'][0];
+        }        
+
+        if ( isset( $post_meta['taxonomies'][0] ) && is_serialized( $post_meta['taxonomies'][0] ) ) {
+          $saved_taxonomies = unserialize($post_meta['taxonomies'][0]);
+        }        
+        //Taxonomies data starts here     
         
-        if($taxonomies){
+        $taxonomies = get_taxonomies( [], 'objects' );
+        unset($taxonomies['product_type'], $taxonomies['nav_menu'], $taxonomies['link_category'], $taxonomies['post_format'], $taxonomies['wp_theme'], $taxonomies['wp_template_part_area'], $taxonomies['wp_pattern_category'], $taxonomies['product_visibility'], $taxonomies['product_shipping_class'] );
+
+        if ( $taxonomies ) {
+
+          $j = 0;
+
+          foreach ( $taxonomies as $taxonomy ) {
             
-          foreach($taxonomies as $taxonomy) {
+            // Get terms for each taxonomy (limit to 10 terms)
+            $terms = get_terms([
+                'taxonomy'   => $taxonomy->name,
+                'number'     => 10,
+                'hide_empty' => false, // Include empty terms if needed
+            ]);
+
+            if ( ! is_wp_error( $terms ) ) {
+
+                $options = [];
+                foreach ($terms as $i => $term) {
+                    $options[] = [
+                        'key'   => $i,
+                        'value' => $term->term_id,
+                        'text'  => $term->name,
+                    ];
+                }
               
-            $choices[ $taxonomy->name ] = $taxonomy->labels->name;
-            
+                $tax_status = false;
+                $tax_value  = [];
+
+                if ( isset( $saved_taxonomies[$j]['status'] ) ) {
+                  $tax_status  = $saved_taxonomies[$j]['status'];
+                }
+
+                if ( isset( $saved_taxonomies[$j]['value'] ) ) {
+                  $tax_value  = $saved_taxonomies[$j]['value'];
+                }
+
+                $taxonomies_list[] = [
+                    'taxonomy'  => $taxonomy->name,
+                    'label'     => $taxonomy->label,
+                    'status'    => $tax_status,
+                    'value'     => $tax_value,                    
+                    'options'   => $options,
+                ];
+
+            }
+              $j++;
           }
-            
+
         }
-        
-          // unset post_format (why is this a public taxonomy?)
-          if( isset($choices['post_format']) ) {
-              
-            unset( $choices['post_format']) ;
-            
-          }
-          
-        return $choices;
-    }
+        //Taxonomies data ends here
+        $meta_data['taxonomies']    = $taxonomies_list;
+        $meta_data['schema_type']   = $saved_schema;
 
-    public function get_schema_data( $post_id = null ){
+        $response['post_meta']      = $meta_data;                                               
+                        
+        return $response;
+
+    }
+    public function get_schema_data( $post_id = null ) {
 
         $response  = array();
 
@@ -582,8 +633,31 @@ class SMPG_Api_Mapper {
         return $response;
 
     }
+    public function get_terms_by_search( $taxonomy_type, $search_param ) {
 
-     
+      $options = [];
+
+      $terms = get_terms( [
+        'taxonomy'   => $taxonomy_type,
+        'name__like' => $search_param,        
+        'hide_empty' => false, // Include empty terms if needed
+      ] );
+
+      if ( ! is_wp_error( $terms ) ) {
+          
+          foreach ($terms as $i => $term) {
+              $options[] = [
+                  'key'   => $i,
+                  'value' => $term->term_id,
+                  'text'  => $term->name,
+              ];
+          }                  
+      }
+
+      return $options;
+
+    }
+    
     public function get_schema_loop($post_type, $attr = null, $rvcount = null, $paged = null, $offset = null, $search_param=null){
             
         $response   = array();                                
@@ -760,7 +834,9 @@ class SMPG_Api_Mapper {
       return $response;
       
     }
-                        
+    public function get_carousel_automation_with( $schema_type ) {
+
+    }                    
     public function get_automation_with( $schema_type ){
 
       global $smpg_plugin_list;

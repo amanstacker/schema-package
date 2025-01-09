@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
 import queryString from 'query-string'
 import {Route} from 'react-router-dom';
-import SingleSchema from './single_schema/SingleSchema'
-import ArchiveSchema from './archive_schema/ArchiveSchema'
+import SingularSchema from './singular_schema/SingularSchema'
+import CarouselSchema from './carousel_schema/CarouselSchema'
 import Settings from './settings/Settings'
 import AdminNavLink from './admin-nav-link/AdminNavLink'
 import MiscSchema from './misc_schema/MiscSchema';
@@ -18,14 +18,14 @@ const ListPage = () => {
                 const page = queryString.parse(window.location.search); 
                                                     
                     if(typeof(page.path)  == 'undefined' ) {                           
-                        return <SingleSchema  {...props}/>;                         
+                        return <SingularSchema  {...props}/>;                         
                     }
                     else if(page.path == 'misc_schema') {
                         return <MiscSchema  {...props}/>;
                     }                        
-                    // else if(page.path == 'archive_schema') {
-                    //     return <ArchiveSchema  {...props}/>;
-                    // }
+                    else if(page.path == 'carousel_schema') {
+                        return <CarouselSchema  {...props}/>;
+                    }
                     else if(page.path.includes('settings')) {
                         return <Settings  {...props}/>;
                     }

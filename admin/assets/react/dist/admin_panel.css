@@ -305,3 +305,19 @@
   width: 80%;
   display: inline-block;
 }
+.smpg-placement-or{
+  vertical-align: bottom;
+  padding-left: 5px;
+}
+#smpg-page-footer{
+  margin-top: 20px;
+}
+#smpg-page-footer span{
+  font-style:italic;
+  font-size:13px;
+  color:#50575e;
+}
+.smpg-version-footer{
+  float: right;
+  margin-right: 60px;
+}

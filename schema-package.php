@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Schema Package - A Structured Data Module
-Description: Helps you to add versatile schema markup on your websites.
-Version: 1.0.1
+Description: Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
+Version: 1.0.2
 Text Domain: schema-package
 Domain Path: /languages
-Author: Aman Kumar Sharma
+Author: amanstacker
 Author URI: https://profiles.wordpress.org/amanstacker/
 License: GPLv2 or later
 */
@@ -13,7 +13,7 @@ License: GPLv2 or later
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('SMPG_VERSION', '1.0.1');
+define('SMPG_VERSION', '1.0.2');
 define('SMPG_DIR_NAME_FILE', __FILE__ );
 define('SMPG_DIR_NAME', dirname( __FILE__ ));
 define('SMPG_DIR_URI', plugin_dir_url(__FILE__));
@@ -33,7 +33,7 @@ require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/properties.php';
 //Frontend
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/generate.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/individual-post.php';
-require_once SMPG_PLUGIN_DIR_PATH .'json-ld/output.php';
+require_once SMPG_PLUGIN_DIR_PATH .'json-ld/markup.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/conditions.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/automation.php';
 

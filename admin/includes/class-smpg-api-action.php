@@ -98,7 +98,7 @@ class SMPG_Api_Action {
                 
         public function export_settings(){
             
-            $post_type = array('smpg');
+            $post_type = array('smpg_singular_schema');
             $export_data_all   = []; 
             
             foreach($post_type as $type){
@@ -162,7 +162,7 @@ class SMPG_Api_Action {
         
                 delete_option( 'smpg_settings');  
                 
-                $allposts= get_posts( array('post_type'=>'smpg','numberposts'=>-1) );
+                $allposts= get_posts( array('post_type'=>'smpg_singular_schema','numberposts'=>-1) );
                 
                 foreach ($allposts as $eachpost) {
                     
@@ -280,7 +280,36 @@ class SMPG_Api_Action {
             return $response;
 
         }
+        public function carousel_placement_search( $request_data ) {
+
+            $response = [];
+
+            $parameters = $request_data->get_params();            
+
+            if( isset($parameters['type']) && isset($parameters['search']) ) {
+                $response = $this->_api_mapper->get_terms_by_search($parameters['type'], $parameters['search']);    
+            }
+            
+            return $response;
+
+        }
         public function get_automation_with( $request_data ){
+
+            $response    = [];
+            $schema_type = '';
+            
+            $parameters = $request_data->get_params();
+            
+            if(!empty($parameters['schema_type'])) {
+                $schema_type = $parameters['schema_type'];
+                $result    = $this->_api_mapper->get_automation_with( $schema_type );                 
+                $response = [ 'status' => 'success', 'data' => $result ]; 
+            }else{
+                $response = [ 'status' => 'failed', 'message' => esc_html__( 'Schema type is required', 'schema-package' ) ];
+            }                                    
+            return $response;
+        }
+        public function get_carousel_automation_with( $request_data ) {
 
             $response    = [];
             $schema_type = '';
@@ -326,7 +355,8 @@ class SMPG_Api_Action {
             }                                    
             return $response;
         }
-        public function get_schema_data($request_data){
+
+        public function get_schema_data( $request_data ) {
 
             $response = [];
 
@@ -334,24 +364,47 @@ class SMPG_Api_Action {
 
             $post_id = null;
 
-            if(isset($parameters['post_id'])) {
+            if ( isset( $parameters['post_id'] ) ) {
                 $post_id = $parameters['post_id'];
             }
 
-            $response = $this->_api_mapper->get_schema_data($post_id);
+            $response = $this->_api_mapper->get_schema_data( $post_id );
 
             return $response;
            
         }
-                
-        public function get_schema_loop(){
-            
+        public function get_carousel_schema_data( $request_data ) {
+
+            $response = [];
+
+            $parameters = $request_data->get_params();
+
+            $post_id = null;
+
+            if ( isset( $parameters['post_id'] ) ) {
+                $post_id = $parameters['post_id'];
+            }
+
+            $response = $this->_api_mapper->get_carousel_schema_data( $post_id );
+
+            return $response;
+           
+        }
+        public function get_schema_loop( $request_data ) {
+
+            $parameters      = $request_data->get_params();   
+
             $search_param = '';
             $rvcount      = 10;
             $attr         = [];
             $paged        =  1;
             $offset       =  0;
-            $post_type    = 'smpg';
+            $post_type    = '';
+
+            if ( isset( $parameters['post_type'] ) ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                $post_type = sanitize_text_field( wp_unslash( $parameters['post_type'] ) );
+            }
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
             if ( isset( $_GET['page'] ) ) {
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
@@ -364,8 +417,9 @@ class SMPG_Api_Action {
             }            
             $result = $this->_api_mapper->get_schema_loop( $post_type, $attr, $rvcount, $paged, $offset, $search_param );
             return $result;
-                        
-        }
+
+        }        
+        
         public function update_misc_schema($request_data){
 
             $response        = [];
@@ -417,6 +471,17 @@ class SMPG_Api_Action {
             }
             
             return $response;    
+        }
+        public function save_carousel_schema_data( $request_data ) {
+
+            $parameters     = $request_data->get_params();                                               
+            $post_id      = $this->_api_mapper->save_schema_data($parameters);                       
+            
+            if($post_id){   
+                return array('status' => 't', 'post_id' => $post_id);
+            }else{
+                return array('status' => 'f', 'post_id' => null);
+            }     
         }
         public function save_schema_data($request_data){
 

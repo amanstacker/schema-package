@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import queryString from 'query-string'
 import ListPage from './ListPage'
-import SinglePage from './SinglePage'
-import ArchivePage from './ArchivePage'
+import SingularSchemaEdit from './SingularSchemaEdit'
+import CarouselSchemaEdit from './CarouselSchemaEdit'
 import './style/common.css'
 
 
@@ -16,14 +16,14 @@ const SMPGRootComponent = () => {
                     <Route render={props => {                                        
                         const page = queryString.parse(window.location.search); 
                                                            
-                            if(typeof(page.path)  == 'undefined' || page.path == 'misc_schema' ||page.path == 'archive_schema' || page.path.includes('settings')) {                           
+                            if(typeof(page.path)  == 'undefined' || page.path == 'carousel_schema' || page.path == 'misc_schema' ||page.path == 'archive_schema' || page.path.includes('settings')) {                           
                                 return <ListPage  {...props}/>;                         
                             }                        
-                            else if(page.path == 'single_page') {                                        
-                                return <SinglePage  {...props}/>;
+                            else if(page.path == 'singular_schema_edit') {                                        
+                                return <SingularSchemaEdit  {...props}/>;
                             }
-                            else if(page.path == 'archive_page') {
-                                return <ArchivePage  {...props}/>;
+                            else if(page.path == 'carousel_schema_edit') {
+                                return <CarouselSchemaEdit  {...props}/>;
                             }
                             else{
                                 return null;

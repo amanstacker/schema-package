@@ -428,16 +428,30 @@ function smpg_get_schema_type_text($id){
 	
 }
 
-function smpg_add_menu_links() {	
+function smpg_add_menu_links() {
                        
-	add_menu_page(
-				esc_html__( 'Schema Package', 'schema-package' ),
-				esc_html__( 'Schema Package', 'schema-package' ),
-				'manage_options',
-				'schema_package', 
-				'smpg_entry_page'
-				);	                                           
-														
+		add_menu_page(
+			esc_html__( 'Schema Package', 'schema-package' ),
+			esc_html__( 'Schema Package', 'schema-package' ),
+			'manage_options',
+			'schema_package', 
+			'smpg_entry_page'
+		);	                                           
+				
+		global $menu;
+
+		foreach ( $menu as $key => $item ) {
+			
+			if ( isset( $item[2] ) && $item[2] === 'schema_package' ) {
+
+				if ( isset( $menu[$key][6] ) ) {
+					$menu[$key][6] = SMPG_PLUGIN_URL.'admin/assets/img/icon-20x20.png';
+				}
+				
+			}
+
+		}
+			
 }
 add_action( 'admin_menu', 'smpg_add_menu_links' );
 

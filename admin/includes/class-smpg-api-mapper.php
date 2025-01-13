@@ -174,8 +174,8 @@ class SMPG_Api_Mapper {
       switch($condition){
       
         case "post_type":
-            $post_type   = array();
-            $post_type[] = array('key' => 'all', 'value' => 'all', 'text' => 'All');
+          
+            $post_type   = array();            
             $args['public'] = true;
               
             if(!empty($search) && $search != null){                

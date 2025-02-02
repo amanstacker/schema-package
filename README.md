@@ -70,6 +70,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * VideoObject : [schema.org url](https://schema.org/VideoObject)
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
+* Service : [schema.org url](https://schema.org/Service)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * Comment : [schema.org url](https://schema.org/Comment)
 

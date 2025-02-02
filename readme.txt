@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * VideoObject : [schema.org url](https://schema.org/VideoObject)
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
+* Service : [schema.org url](https://schema.org/Service)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * ItemList : [schema.org url](https://schema.org/ItemList)
 * Comment : [schema.org url](https://schema.org/Comment)
@@ -245,9 +246,13 @@ You can submit a support ticket via the [support forum](https://wordpress.org/su
 
 == Changelog ==
 
+= 1.0.3 =
+
+* Feature : Added Service schema type
+
 = 1.0.2 =
 
-* Feature : Added Carousel Schema
+* Feature : Added Carousel schema type
 
 = 1.0.1 =
 

@@ -1584,3 +1584,28 @@ function smpg_get_steps_json_ld( $json_ld, $properties, $schema_type ){
 
 	return $json_ld;
 }
+
+function smpg_get_commaa_seprated_value ( $data, $type ) {
+
+    $response = array();
+
+    if ( ! empty( $data ) && is_string( $data ) ) {
+
+        $area_served = explode( ',', $data );
+
+        if ( $area_served ) {
+
+            foreach ( $area_served as  $value ) {
+
+                $response[] = array(
+					'@type' => $type,
+					'name'  => $value
+            	);      
+            }
+            
+        }
+
+    }
+    
+    return $response;
+}

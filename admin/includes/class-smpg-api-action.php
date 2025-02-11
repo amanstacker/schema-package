@@ -189,8 +189,8 @@ class SMPG_Api_Action {
              if ( $email && $message ) {
                            
                  //php mailer variables        
-                 $sendto    = 'amanstacker@gmail.com';
-                 $subject   = "SMPG Customer Query";
+                 $sendto    = 'support@schemapackage.com';
+                 $subject   = "Schema Package Customer Query";
                  
                  $headers[] = 'Content-Type: text/html; charset=UTF-8';
                  $headers[] = 'From: '. esc_attr($email);            

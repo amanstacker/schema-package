@@ -14,7 +14,7 @@ If you still want to enter schema markup manually, We have provided the Schema P
 As newcomers to the market, earning your trust can be challenging. We invite you to give us a try, and we'll go above and beyond to ensure your satisfaction with setting up schema markup for your site. Don't hesitate to reach out to us for any assistance.
 
 
-### What is Schema Markup and why is it important? ==
+### What is Schema Markup and why is it important?
 
 Schema Markup refers to the standardized vocabulary (provided by Schema.org) used to structure data in a format that Search Engines or AI Systems can understand. JSON-LD is one way to implement Schema Markup; others include Microdata and RDFa. By providing additional context about your content, schema markup can help Search Engines present more relevant and detailed results to users, benefiting both the website's visibility and user interaction.
 
@@ -70,10 +70,11 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * VideoObject : [schema.org url](https://schema.org/VideoObject)
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
+* Service : [schema.org url](https://schema.org/Service)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * Comment : [schema.org url](https://schema.org/Comment)
 
-### Schema package automation and compatibility with plugins.
+### Schema package automation and compatibility with plugins
 
 * WooCommerce : [URL](https://wordpress.org/plugins/woocommerce)
 * Simple Job Board : [URL](https://wordpress.org/plugins/simple-job-board/)

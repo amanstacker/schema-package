@@ -479,12 +479,12 @@ const SingularSchemaEdit = () => {
         <table className="form-table">
           <tbody>
             <tr>
-             <th>{__('Comments', 'schema-package') }</th>
-             <td><input onChange={handleFormChange} name="add_comments" checked={postMeta.add_comments} type="checkbox"/></td> 
+             <th><label htmlFor="add_comments">{__('Comments', 'schema-package') }</label></th>
+             <td><input id="add_comments" onChange={handleFormChange} name="add_comments" checked={postMeta.add_comments} type="checkbox"/></td> 
             </tr>
             <tr>
-             <th>{__('Speakable', 'schema-package') }</th>
-             <td><input onChange={handleFormChange} name="add_speakable" checked={postMeta.add_speakable} type="checkbox"/></td> 
+             <th><label htmlFor="add_speakable">{__('Speakable', 'schema-package') }</label></th>
+             <td><input id="add_speakable" onChange={handleFormChange} name="add_speakable" checked={postMeta.add_speakable} type="checkbox"/></td> 
             </tr>
           </tbody>  
           </table>

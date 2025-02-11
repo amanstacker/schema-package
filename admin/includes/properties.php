@@ -1251,8 +1251,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => 'service',           
                             'text'              => 'Service',
                             'properties'        => [
-                                'more_specific_service_type' =>  [ 
-                                        'label'       => 'More Specific Service Types',
+                                'service_type_option' =>  [ 
+                                        'label'       => 'Service Types Option',
                                         'type'        => 'select',
                                         'value'       => 'Service',
                                         'options'     => [

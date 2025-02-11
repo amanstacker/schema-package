@@ -2,6 +2,138 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_type ) {
+    
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = $properties['service_type_option']['value'];
+
+    if(!empty($properties['name']['value'])){
+        $json_ld['name']        =      $properties['name']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['service_type']['value'])){
+        $json_ld['serviceType']  =      $properties['service_type']['value'];
+    }    
+
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+     if(!empty($image)){
+         $json_ld['image']              =  $image;   
+     }     
+     
+    if(!empty($properties['provider_type']['value'])){
+        $json_ld['provider']['@type']                = $properties['provider_type']['value'];
+    }
+    if(!empty($properties['provider_name']['value'])){
+        $json_ld['provider']['name']                 = $properties['provider_name']['value'];
+    }
+    if(!empty($properties['provider_mobility']['value'])){
+        $json_ld['provider']['providerMobility']     = $properties['provider_mobility']['value'];
+    }     
+    if(!empty($properties['street_address']['value'])){
+        $json_ld['provider']['address']['@type']                = 'PostalAddress';
+        $json_ld['provider']['address']['streetAddress']         =      $properties['street_address']['value'];
+    }
+    if(!empty($properties['address_locality']['value'])){
+        $json_ld['provider']['address']['addressLocality']         =      $properties['address_locality']['value'];
+    }
+    if(!empty($properties['postal_code']['value'])){
+        $json_ld['provider']['address']['postalCode']         =      $properties['postal_code']['value'];
+    }
+    if(!empty($properties['address_region']['value'])){
+        $json_ld['provider']['address']['addressRegion']         =      $properties['address_region']['value'];
+    }
+    if(!empty($properties['address_country']['value'])){
+        $json_ld['provider']['address']['addressCountry']         =      $properties['address_country']['value'];
+    }
+
+    if(!empty($properties['telephone']['value'])){
+        $json_ld['provider']['telephone'] =      $properties['telephone']['value'];
+    }
+    if(!empty($properties['price_range']['value'])){
+        $json_ld['provider']['priceRange'] =      $properties['price_range']['value'];
+    }
+
+    if(!empty($properties['latitude']['value']) && !empty($properties['longitude']['value']) ){
+        $json_ld['provider']['geo']['@type']     = 'GeoCoordinates';
+        $json_ld['provider']['geo']['latitude']  = $properties['latitude']['value'];
+        $json_ld['provider']['geo']['longitude'] = $properties['longitude']['value'];        
+    }
+    
+    if ( ! empty( $properties['area_served'] ) ) {
+        $json_ld['areaServed'] =      smpg_get_commaa_seprated_value( $properties['area_served']['value'], 'City' );
+    }
+    
+    if(!empty($properties['service_offered']['value'])){
+
+            $service_offer = array();
+
+            $service_explode = explode(',', $properties['service_offered']['value']);
+            foreach( $service_explode as $offer){
+                $service_offer[] = array(
+                    '@type' => 'Offer',
+                    'name'  => $offer
+                );
+            }
+
+        $json_ld['hasOfferCatalog'] = array(
+                        '@type'            => 'OfferCatalog',
+                        'name'             => $properties['service_type_option']['value'],
+                        'itemListElement'  => $service_offer,
+        );
+
+    }
+
+    if(!empty($properties['opening_hours']['elements'])){
+
+        $loopdata = [];
+
+        foreach ($properties['opening_hours']['elements'] as  $value) {
+            
+            $daysofweek = [];
+
+            if(!empty($value['monday']['value'])){
+                $daysofweek[] = 'Monday';
+            }
+            if(!empty($value['tuesday']['value'])){
+                $daysofweek[] = 'Tuesday';
+            }
+            if(!empty($value['wednesday']['value'])){
+                $daysofweek[] = 'Wednesday';
+            }
+            if(!empty($value['thursday']['value'])){
+                $daysofweek[] = 'Thursday';
+            }
+            if(!empty($value['friday']['value'])){
+                $daysofweek[] = 'Friday';
+            }
+            if(!empty($value['saturday']['value'])){
+                $daysofweek[] = 'Saturday';
+            }
+            if(!empty($value['sunday']['value'])){
+                $daysofweek[] = 'Sunday';
+            }
+            
+            $loopdata[] = [
+                '@type'      => 'openingHoursSpecification',
+                'dayOfWeek'  => $daysofweek,
+                'opens'      => $value['opens']['value'],
+                'closes'     => $value['closes']['value'],
+            ];
+        }
+
+        $json_ld['provider']['openingHoursSpecification'] = $loopdata;
+    }
+    
+    return $json_ld;
+    
+}
+
 function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();

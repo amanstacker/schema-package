@@ -86,6 +86,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
             $json_ld = smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type );            
                                 
         break; 
+
+        case 'service':
+
+            $json_ld = smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_type );
+                                
+        break; 
                 
         default:
         

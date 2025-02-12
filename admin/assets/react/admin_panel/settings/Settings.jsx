@@ -352,7 +352,7 @@ const Settings = () => {
                       </td>
                   </tr>                  
                   <tr>
-                    <th><label htmlFor="remove_data_on_uninstall">{__('Remove Data On Uninstall', 'schema-package')}</label></th>
+                    <th><label htmlFor="remove_data_on_uninstall">{__('Delete Data on Uninstall', 'schema-package')}</label></th>
                     <td>
                       <input type="checkbox" id="remove_data_on_uninstall" name="remove_data_on_uninstall" onChange={formChangeHandler} checked={settings.remove_data_on_uninstall} />
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -507,7 +507,30 @@ const Settings = () => {
       <div className="smpg-save-settings-btn">
         {isLoaded ? <Button primary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>
-      </div>                    
+      </div>  
+      <div className='ui card' style={{
+        backgroundColor: "#222222", // Change background color
+        color:"#ffffff",        
+        margin:"auto",
+        marginRight:"inherit"
+      }}>
+        <div className='content'>
+        <div className='header' style={{color:"#ff9e00"}}>Elevate with Premium Features!</div>  
+        <div className='ui list' role='list'>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>WooCommerce Variable Product Automation</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>RealEstate Schema Types & Automation</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Healthcare Schema Types & Automation</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Carousel Schema Details Page List</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Multilinugal Schema Markup Support</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Schema Markup Setup & Error Clean Up</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>24/7 Priority Email Support</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Premium Features On Demand</div></div>                    
+        </div> 
+         <div style={{textAlign:"center"}}>
+          <a target="_blank" href="https://schemapackage.com/premium#pricing" className="ui button upgrade-premium-btn">Unlock</a>
+          </div>         
+        </div>        
+        </div>                  
       </div>
       </form>
     );

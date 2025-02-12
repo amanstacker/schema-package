@@ -508,6 +508,7 @@ const Settings = () => {
         {isLoaded ? <Button primary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>
       </div>  
+      {smpg_local.is_free ? 
       <div className='ui card' style={{
         backgroundColor: "#222222", // Change background color
         color:"#ffffff",        
@@ -531,6 +532,8 @@ const Settings = () => {
           </div>         
         </div>        
         </div>                  
+      : ''}
+      
       </div>
       </form>
     );

@@ -3,8 +3,9 @@ import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
 import { Popup } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
-import { Button } from 'semantic-ui-react'
 import MainSpinner from './../common/main-spinner/MainSpinner';
+import { Button } from "semantic-ui-react";
+import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
 
@@ -13,7 +14,7 @@ const Settings = () => {
   const [isLoaded, setIsLoaded]               = useState(true);  
   const [isQuerySent, setIsQuerySent]         = useState(true);  
   const [mainSpinner, setMainSpinner]         = useState(false);    
-  const [supportEmail, setSupportEmail]       = useState('');
+  const [supportEmail, setSupportEmail]       = useState('');  
   const [supportMessage, setSupportMessage]   = useState('');
   const [supportError, setSupportError]       = useState('');
   const [supportSuccess, setSupportSuccess]   = useState('');
@@ -464,6 +465,11 @@ const Settings = () => {
               </table>
             </div>
           );
+          case "settings_license":  return (
+            <div className="smpg-settings">                    
+              <LicensePage />
+            </div>
+          );
           case "settings_help":  return (
             <div className="smpg-settings">
               <table className="form-table">
@@ -498,15 +504,16 @@ const Settings = () => {
                 </tbody> 
               </table>
               {supportSuccess ? <div className="ui green message">{supportSuccess}</div> : ''}
-                   {supportError ? <div className="ui red message">{supportError}</div> : ''}
+              {supportError ? <div className="ui red message">{supportError}</div> : ''}
             </div>
           );
-          default:      return "generla";
+          default: return "";
         }
       })()}
-      <div className="smpg-save-settings-btn">
+      { (page.path === 'settings_license' || page.path === 'settings_help') ? '' : 
+        <div className="smpg-save-settings-btn">
         {isLoaded ? <Button primary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
-        </div>
+      </div>}      
       </div>  
       {smpg_local.is_free ? 
       <div className='ui card' style={{

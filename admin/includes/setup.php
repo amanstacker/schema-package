@@ -477,14 +477,14 @@ function smpg_enqueue_admin_panel($hook){
 			wp_enqueue_style('smpg-admin-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/admin_panel.css', false, SMPG_VERSION);
 
 			wp_enqueue_style('smpg-semantic-css', SMPG_PLUGIN_URL.'admin/assets/css/semantic.min.css', false, SMPG_VERSION);			
-
-			$data = array(
+			
+			$data = apply_filters( 'smpg_local_filter', array(
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
 				'rest_url'             => esc_url_raw( rest_url() ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
 				'is_free'              => true
-			);
+			) );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', array( 'wp-i18n' ), SMPG_VERSION, true );
 

@@ -73,8 +73,8 @@ class SMPG_Api_Action {
             
             return $response;
 
-        }
-        public function get_tags($request){
+        }                
+        public function get_tags( $request ) {
 
             $response = [];
             $search   = '';

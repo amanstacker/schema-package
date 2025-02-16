@@ -54,3 +54,12 @@ function smpg_load_plugin_textdomain() {
 }
 
 add_action( 'plugins_loaded', 'smpg_load_plugin_textdomain' );
+
+add_filter( 'plugin_action_links_' . SMPG_PLUGIN_BASENAME, 'smpg_plugin_action_links' );
+
+function smpg_plugin_action_links( $actions ) {
+
+     $url = add_query_arg( 'page', 'schema_package&path=settings', self_admin_url( 'admin.php' ) );
+     $actions[]  = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'schema-package' ) . '</a>';
+     return $actions;
+}

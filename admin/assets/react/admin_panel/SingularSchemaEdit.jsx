@@ -1,13 +1,15 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Grid, Header, Divider } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import DottedSpinner from './common/dotted-spinner/DottedSpinner';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
 import Accordion from '../shared/Accordion/Accordion'; 
+import PropertySelector from './mapping/PropertySelector';
+import SchemaMapping from './mapping/SchemaMapping';
 
 
 const SingularSchemaEdit = () => {
@@ -22,6 +24,8 @@ const SingularSchemaEdit = () => {
   const [enabledOnOption, setEnabledOnOption]   = useState({});
   const [disabledOnOption, setDisabledOnOption] = useState({});
   const [automationList, setAutomationList]     = useState([]);
+  const [selectedProperties, setSelectedProperties] = useState([]);
+
 
   const [postData, setPostData] = useReducer(
     (state, newState) => ({...state, ...newState}),
@@ -51,6 +55,15 @@ const SingularSchemaEdit = () => {
       automation_with         : [],
     }            
   );
+
+   // Handle property selection
+  const handlePropertySelection = (key) => {
+    setSelectedProperties((prevSelected) =>
+      prevSelected.includes(key)
+        ? prevSelected.filter((item) => item !== key) // Remove if already selected
+        : [...prevSelected, key] // Add if not selected
+    );
+  };
   
   const handleFormChange = e => {
 
@@ -285,6 +298,14 @@ const SingularSchemaEdit = () => {
               options={schemaTypes}
               onChange={handleSchemaTypeChange}
           />
+       
+       <div>
+            
+      {/* Schema Mapping Section (only show if any property is selected) */}
+      {selectedProperties.length > 0 && <SchemaMapping selectedProperties={selectedProperties} />}
+    </div>
+
+
       </Accordion>               
 
     <Accordion title="Targeting" isExpand={true}>
@@ -473,7 +494,11 @@ const SingularSchemaEdit = () => {
       </div>
       </div>
       <div className="smpg-right-section">  
-
+      <Accordion title="Schema Properties" isExpand={true}>
+        {/* Property Selection Section */}
+        <PropertySelector selectedProperties={selectedProperties} onSelectProperty={handlePropertySelection} />
+      </Accordion>  
+      
        {postMeta.schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
         <table className="form-table">
@@ -515,7 +540,7 @@ const SingularSchemaEdit = () => {
       </Accordion> 
          
          : ''}           
-        
+                
         <div className="smpg-save-schema-btn">
         {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>            

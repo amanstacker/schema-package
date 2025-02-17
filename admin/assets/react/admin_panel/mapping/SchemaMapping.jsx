@@ -35,7 +35,7 @@ const SchemaMapping = ({ selectedProperties }) => {
 
         <Grid.Column textAlign="center">
           <Label as="a" color="blue" ribbon>
-            WordPress Meta Fields
+            Post Meta Fields
           </Label>
         </Grid.Column>
 
@@ -48,18 +48,25 @@ const SchemaMapping = ({ selectedProperties }) => {
 
       {/* Dynamically Display Mapping Rows */}
       {selectedProperties.map((property) => (
-        <Grid.Row key={property}>
-          {/* First Column: Schema Properties */}
-          <Grid.Column>
-            <Segment>
-              <Header as="h4">{schemaProperties.find((p) => p.key === property).text}</Header>
-            </Segment>
-          </Grid.Column>
+        <Grid.Row key={property}>          
+        <Grid.Column>
+        <Segment 
+            style={{
+            padding: "9px",
+            paddingLeft: "14px",
+            boxShadow:"none"            
+            }}
+        >
+            <Header as="h5" style={{ margin: 0, fontWeight: "normal" }}>
+            {schemaProperties.find((p) => p.key === property)?.text}
+            </Header>
+        </Segment>
+        </Grid.Column>
 
           {/* Second Column: WordPress Meta Fields Dropdown */}
           <Grid.Column>
             <Dropdown
-              placeholder="Select WordPress Meta Field"
+              placeholder="Select Meta Field"
               fluid
               selection
               options={wpMetaFields}

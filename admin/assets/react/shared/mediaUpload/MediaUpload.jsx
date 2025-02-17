@@ -78,7 +78,7 @@ const handleImageChoose = (e) => {
 
   return (
     <div className="smpg-media-upload">
-      <div><a onClick={handleImageChoose} className="button"><i className="ui upload icon"></i> Upload</a></div>      
+      <div><a onClick={handleImageChoose} className="ui button"><i className="ui upload icon"></i> Upload</a></div>      
       {imageSrc ? <div className="smpg-image-preview"><img src={imageSrc}/><a onClick={handleRemoveImage}>X</a></div> : ''}
     </div>
   );

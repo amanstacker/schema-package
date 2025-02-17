@@ -149,10 +149,7 @@ class SMPG_Api_Action {
             
             $export_data_all['smpg_settings']         = get_option('smpg_settings');
             $export_data_all['smpg_misc_schema']      = get_option('smpg_misc_schema');
-
-            header( 'Content-Type: application/json; charset=utf-8' );
-	        header('Content-disposition: attachment; filename=smpgbackup.json');
-            header( "Expires: 0" );
+            
             return   $export_data_all;	                   
         }
         
@@ -444,6 +441,7 @@ class SMPG_Api_Action {
             if(isset($file['file']) && is_array($file['file'])){
                 
                 $parts = explode( '.',$file['file']['name'] );                
+                
                 if( end($parts) != 'json' ) {
                     $response = array('status' => 'f', 'msg' =>  esc_html__( 'Please upload a valid .json file', 'schema-package' ));                   
                 }
@@ -462,7 +460,7 @@ class SMPG_Api_Action {
                                                 
             }else{
                 
-                if($parameters){
+                if($parameters){                    
                     $result      = $this->_api_mapper->update_settings($parameters);
                     if($result){
                         $response = array('status' => 't', 'msg' =>  esc_html__( 'Settings has been saved successfully', 'schema-package' ));                                               

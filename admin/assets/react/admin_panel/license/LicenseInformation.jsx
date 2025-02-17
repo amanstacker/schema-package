@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Icon, Label, Modal } from "semantic-ui-react";
+import { Card, Button, Icon, Label, Modal, Message } from "semantic-ui-react";
 
 export default function LicenseInformation({ licenseData, updateLicenseData }) {
   
@@ -52,7 +52,7 @@ export default function LicenseInformation({ licenseData, updateLicenseData }) {
       {/* License Status */}
       <Card fluid>
         <Card.Content>
-          <Card.Header>{__('Account Information', 'schema-package')}</Card.Header>
+          <Card.Header>{__('License Information', 'schema-package')}</Card.Header>
         </Card.Content>
         <Card.Content>
           <div className="ui two column grid">
@@ -86,9 +86,17 @@ export default function LicenseInformation({ licenseData, updateLicenseData }) {
             <div className="column"><Label>{licenseData.customer_email}</Label></div>
           </div>
           <div className="ui two column grid">
-            <div className="column" style={{ width: "40%" }}><strong>{__('Activation Limit:', 'schema-package')}</strong></div>
+            <div className="column" style={{ width: "40%" }}><strong>{__('Left Activation Limit:', 'schema-package')}</strong></div>
             <div className="column"><Label>{licenseData.activations_left}</Label></div>
           </div>
+          
+          <Message icon success>
+          <Icon name="check circle" />
+          <Message.Content>
+            <Message.Header>{__('Your license key is active!', 'schema-package')}</Message.Header>
+            {__('You are receiving updates and priority support.', 'schema-package')}            
+          </Message.Content>
+        </Message>
         </Card.Content>
       </Card>
       

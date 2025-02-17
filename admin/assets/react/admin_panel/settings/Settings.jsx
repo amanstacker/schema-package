@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Popup } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
 import MainSpinner from './../common/main-spinner/MainSpinner';
-import { Button } from "semantic-ui-react";
+import { Button, Input } from "semantic-ui-react";
 import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
 
 const Settings = () => {
 
+  const [loading, setLoading]                 = useState(false);  
   const [isLoaded, setIsLoaded]               = useState(true);  
   const [isQuerySent, setIsQuerySent]         = useState(true);  
   const [mainSpinner, setMainSpinner]         = useState(false);    
@@ -82,8 +83,10 @@ const Settings = () => {
 
     setIsLoaded(false);
     const formData = new FormData();
-        
-    formData.append("file", importFile);        
+
+    if(typeof importFile !== 'undefined'){
+      formData.append("file", importFile);        
+    }        
     formData.append("settings", JSON.stringify(settings));    
     let url = smpg_local.rest_url + 'smpg-route/update-settings';
     fetch(url,{
@@ -264,6 +267,39 @@ const Settings = () => {
     setSettings(copydata);
     
   }
+
+  const handleExport = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    // setError(null);
+    // setSuccess(null);
+    try {
+      let fetch_url = smpg_local.rest_url + 'smpg-route/export-settings';
+      const response = await fetch(fetch_url,{
+        headers: {          
+          'X-WP-Nonce': smpg_local.nonce,                  
+        },        
+      });
+      if (!response.ok) {
+        throw new Error("Failed to export settings");
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "schema-package-data.json");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+    //  setSuccess("Settings exported successfully.");
+    } catch (error) {
+      //setError("Failed to export settings. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   
   const handleSaveSettings = (e) => {
     e.preventDefault();
@@ -339,17 +375,38 @@ const Settings = () => {
                 <tr>
                     <th><label htmlFor="export_smpg">{__('Export Data ', 'schema-package')}</label></th>
                     <td>
-                      <a href={`${smpg_local.rest_url}smpg-route/export-settings`} className="button" id="export_smpg" name="export_smpg"><i className="ui download icon"></i> {__('Export', 'schema-package')}</a>
+                    <Button loading={loading} onClick={handleExport}>
+                      <Icon name='download' />
+                      {__('Export', 'schema-package')}
+                    </Button>                      
                       <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                   </tr>
                   <tr>
                     <th><label htmlFor="import_smpg">{__('Import Data', 'schema-package')}</label></th>
-                    <td>
-                    <div className="smpg-import-td">
-                    <input type="file" name="file" id="import_smpg" onChange={formChangeHandler}  />                    
-                    <span className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <td style={{position:"relative"}}>
+                    <div className="smpg-import-td" style={{float : "left"}}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <Input
+                          style={{width:"220px"}}
+                          value={importFile?.name}
+                          placeholder="Choose a file..."
+                          readOnly
+                          action={
+                            <Button as="label" htmlFor="file-upload" primary>
+                              Choose File
+                            </Button>
+                          }
+                        />                        
+                        <input
+                          id="file-upload"
+                          type="file"
+                          hidden
+                          onChange={formChangeHandler}
+                        />      
+                      </div>                                                              
                     </div>                                              
+                    <span style={{float:'right', position:'absolute', right:"-150px", top:"24px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                  
                   <tr>

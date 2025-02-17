@@ -26,7 +26,7 @@ class SMPG_Api_Mapper {
         $all_schema_post = array();
         
         //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reason: loading local file
-        $json_data       = @file_get_contents($import_file);
+        $json_data       = @file_get_contents($import_file);        
         
         if($json_data){
             
@@ -763,15 +763,15 @@ class SMPG_Api_Mapper {
 
     public function update_settings( $parameters ){
         
-        $settings      = json_decode( $parameters['settings'], true );
+        $settings      = json_decode( $parameters['settings'], true );        
             
         $response = false;
 
-        if ( $settings && is_array($settings) ) {
+        if ( $settings && is_array( $settings ) ) {
 
-          $options = get_option('smpg_settings');
+          $options = (array) get_option( 'smpg_settings' );
           
-          foreach($settings as $key => $val){
+          foreach ( $settings as $key => $val ) {
             $options[$key] = $val;
           }
           

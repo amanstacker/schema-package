@@ -136,6 +136,13 @@ class SMPG_Api_Controller {
                     return current_user_can( 'manage_options' );
                 }
             ));
+            register_rest_route( 'smpg-route', 'get-schema-properties', array(
+                'methods'    => 'GET',
+                'callback'   => array($this->_apiAction, 'get_schema_properties'),
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ));
             register_rest_route( 'smpg-route', 'get-carousel-automation-with', array(
                 'methods'    => 'GET',
                 'callback'   => array($this->_apiAction, 'get_carousel_automation_with'),

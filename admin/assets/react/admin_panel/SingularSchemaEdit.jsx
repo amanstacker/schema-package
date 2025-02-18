@@ -23,8 +23,8 @@ const SingularSchemaEdit = () => {
   const [dottedSpinner, setDottedSpinner]       = useState(false); 
   const [enabledOnOption, setEnabledOnOption]   = useState({});
   const [disabledOnOption, setDisabledOnOption] = useState({});
-  const [automationList, setAutomationList]     = useState([]);
-  const [selectedProperties, setSelectedProperties] = useState([]);
+  const [automationList, setAutomationList]     = useState([]);  
+  const [schemaProperties, setSchemaProperties] = useState([]);
 
 
   const [postData, setPostData] = useReducer(
@@ -41,6 +41,7 @@ const SingularSchemaEdit = () => {
     (state, newState) => ({...state, ...newState}),
     {
       schema_type             : 'article',
+      mapped_properties       : [],
       add_comments            : false,
       add_speakable           : false,
       current_status          : true,
@@ -56,14 +57,26 @@ const SingularSchemaEdit = () => {
     }            
   );
 
-   // Handle property selection
   const handlePropertySelection = (key) => {
-    setSelectedProperties((prevSelected) =>
-      prevSelected.includes(key)
-        ? prevSelected.filter((item) => item !== key) // Remove if already selected
-        : [...prevSelected, key] // Add if not selected
-    );
-  };
+    setPostMeta((prevMeta) => {
+      const updatedMappedProperties = prevMeta.mapped_properties?.includes(key)
+        ? prevMeta.mapped_properties.filter((item) => item !== key) // Remove if already selected
+        : [...prevMeta.mapped_properties, key]; // Add if not selected
+  
+      return { mapped_properties: updatedMappedProperties };
+    });
+  };  
+
+  // const handlePropertySelection = (key) => {
+  //   setPostMeta((prevMeta) => {
+  //     const updatedMappedProperties = prevMeta.mapped_properties.includes(key)
+  //       ? prevMeta.mapped_properties.filter((item) => item !== key) // Remove if already selected
+  //       : [...prevMeta.mapped_properties, key]; // Add if not selected
+  
+  //     return { ...prevMeta, mapped_properties: updatedMappedProperties };
+  //   });
+  // };
+  
   
   const handleFormChange = e => {
 
@@ -142,6 +155,28 @@ const SingularSchemaEdit = () => {
         }
       );   
 
+
+  }
+
+  const handleGetSchemaProperties = (schema_type) => {
+
+    let url = smpg_local.rest_url + "smpg-route/get-schema-properties?schema_type="+schema_type;
+        
+    fetch(url, {
+      headers: {                    
+        'X-WP-Nonce': smpg_local.nonce,
+      }
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {              
+          if(result.status == 'success'){
+            setSchemaProperties(result.data);
+          }
+      },        
+      (error) => {         
+      }
+    ); 
 
   }
   const handleGetAutomation = (schema_type) => {
@@ -270,6 +305,7 @@ const SingularSchemaEdit = () => {
   useEffect(() => {
     if(postMeta.schema_type != ''){
       handleGetAutomation(postMeta.schema_type);    
+      handleGetSchemaProperties(postMeta.schema_type);
     }    
   }, [postMeta.schema_type]);
   
@@ -302,9 +338,8 @@ const SingularSchemaEdit = () => {
        <div>
             
       {/* Schema Mapping Section (only show if any property is selected) */}
-      {selectedProperties.length > 0 && <SchemaMapping selectedProperties={selectedProperties} />}
+      {postMeta.mapped_properties.length > 0 && <SchemaMapping schemaProperties={schemaProperties} mappedProperties={postMeta.mapped_properties} />}
     </div>
-
 
       </Accordion>               
 
@@ -496,7 +531,7 @@ const SingularSchemaEdit = () => {
       <div className="smpg-right-section">  
       <Accordion title="Schema Properties" isExpand={true}>
         {/* Property Selection Section */}
-        <PropertySelector selectedProperties={selectedProperties} onSelectProperty={handlePropertySelection} />
+        <PropertySelector schemaProperties={schemaProperties} mappedProperties={postMeta.mapped_properties} onSelectProperty={handlePropertySelection} />
       </Accordion>  
       
        {postMeta.schema_type == 'article' ?

@@ -581,7 +581,7 @@ class SMPG_Api_Mapper {
         if($post_id){
 
             $response['post_data']      = get_post($post_id, ARRAY_A);  
-            $post_meta                  = get_post_meta($post_id);  
+            $post_meta                  = get_post_meta($post_id);              
             
             if($post_meta){
 
@@ -625,8 +625,11 @@ class SMPG_Api_Mapper {
 
             $response['post_meta'] = $meta_data;
             
+        }else{
+          $meta_data['mapped_properties'] = [];
         }   
-
+        
+        $response['post_meta'] = $meta_data;
         $response['placement_enabled_option']  = $enabled_on;
         $response['placement_disabled_option'] = $disabled_on;
                         

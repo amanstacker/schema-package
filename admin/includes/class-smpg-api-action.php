@@ -306,6 +306,27 @@ class SMPG_Api_Action {
             }                                    
             return $response;
         }
+        public function get_schema_properties( $request_data ){
+
+            $response    = [];
+            $schema_type = '';
+            
+            $parameters = $request_data->get_params();
+            
+            if(!empty($parameters['schema_type'])) {                                
+                
+                $schema_properties = smpg_get_schema_properties( $parameters['schema_type'] );
+
+                $filtered_pro = [];  
+                foreach ( $schema_properties['properties'] as $key => $value ) {
+                    $filtered_pro[] = ['key' => $key, 'text' => $value['label'] ];
+                }
+                $response = [ 'status' => 'success', 'data' => $filtered_pro ]; 
+            }else{
+                $response = [ 'status' => 'failed', 'message' => esc_html__( 'Schema type is required', 'schema-package' ) ];
+            }                                    
+            return $response;
+        }
         public function get_carousel_automation_with( $request_data ) {
 
             $response    = [];

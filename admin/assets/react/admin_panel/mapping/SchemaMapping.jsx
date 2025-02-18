@@ -13,13 +13,10 @@ const customFields = [
   { key: 'publish_date', value: 'publish_date', text: 'Publish Date' },
 ];
 
-const schemaProperties = [
-  { key: 'name', text: 'Name' },
-  { key: 'url', text: 'URL' },
-  { key: 'description', text: 'Description' },
-];
+const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
 
-const SchemaMapping = ({ selectedProperties }) => {
+  const { __ } = wp.i18n;
+  
   return (
     <>
     {/* Divider */}
@@ -29,25 +26,25 @@ const SchemaMapping = ({ selectedProperties }) => {
       <Grid.Row>
         <Grid.Column textAlign="center">
           <Label as="a" color="blue" ribbon>
-            Schema Properties
+            {__('Schema Properties', 'schema-package') }
           </Label>
         </Grid.Column>
 
         <Grid.Column textAlign="center">
           <Label as="a" color="blue" ribbon>
-            Post Meta Fields
+          {__('Post Meta Fields', 'schema-package') }
           </Label>
         </Grid.Column>
 
         <Grid.Column textAlign="center">
           <Label as="a" color="blue" ribbon>
-            Custom Fields
+          {__('Custom Meta Fields', 'schema-package') }            
           </Label>
         </Grid.Column>
       </Grid.Row>
 
       {/* Dynamically Display Mapping Rows */}
-      {selectedProperties.map((property) => (
+      {mappedProperties.map((property) => (
         <Grid.Row key={property}>          
         <Grid.Column>
         <Segment 

@@ -1,14 +1,7 @@
 import React from 'react';
-import { Grid, Checkbox, Label, Form } from 'semantic-ui-react';
+import { Grid, Checkbox, Form } from 'semantic-ui-react';
 
-// Example properties list
-const schemaProperties = [
-  { key: 'name', text: 'Name' },
-  { key: 'url', text: 'URL' },
-  { key: 'description', text: 'Description' },
-];
-
-const PropertySelector = ({ selectedProperties, onSelectProperty }) => {
+const PropertySelector = ({ schemaProperties, mappedProperties, onSelectProperty }) => {
   return (
     <Grid>
       <Grid.Row>
@@ -18,7 +11,7 @@ const PropertySelector = ({ selectedProperties, onSelectProperty }) => {
               <Form.Field key={property.key}>
                 <Checkbox
                   label={property.text}
-                  checked={selectedProperties.includes(property.key)}
+                  checked={mappedProperties?.includes(property.key)}
                   onChange={() => onSelectProperty(property.key)}
                 />
               </Form.Field>

@@ -4,7 +4,6 @@ import { Link} from 'react-router-dom';
 import { Dropdown, Grid, Header, Divider } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
-import DottedSpinner from './common/dotted-spinner/DottedSpinner';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
 import Accordion from '../shared/Accordion/Accordion'; 
@@ -19,8 +18,7 @@ const SingularSchemaEdit = () => {
   const history = useHistory();   
 
   const [mainSpinner, setMainSpinner]           = useState(false);
-  const [isLoaded, setIsLoaded]                 = useState(true);      
-  const [dottedSpinner, setDottedSpinner]       = useState(false); 
+  const [isLoaded, setIsLoaded]                 = useState(true);        
   const [enabledOnOption, setEnabledOnOption]   = useState({});
   const [disabledOnOption, setDisabledOnOption] = useState({});
   const [automationList, setAutomationList]     = useState([]);  
@@ -37,46 +35,38 @@ const SingularSchemaEdit = () => {
     }                      
   );
 
-  const [postMeta, setPostMeta] = useReducer(
-    (state, newState) => ({...state, ...newState}),
-    {
-      schema_type             : 'article',
-      mapped_properties       : [],
-      add_comments            : false,
-      add_speakable           : false,
-      current_status          : true,
-      enabled_on_post_type    : false,
-      enabled_on_post         : false,
-      enabled_on_page         : false,
-      disabled_on_post_type   : false,
-      disabled_on_post        : false,
-      disabled_on_page        : false,
-      enabled_on              : { post_type:[], post:[], page:[] },
-      disabled_on             : { post_type:[], post:[], page:[] },
-      automation_with         : [],
-    }            
-  );
-
+  const postMetaReducer = (state, newState) => {
+    if (typeof newState === "function") {
+      return { ...state, ...newState(state) }; // Handles function-based updates
+    }
+    return { ...state, ...newState };
+  };
+  
+  const [postMeta, setPostMeta] = useReducer(postMetaReducer, {
+    schema_type: "article",
+    mapped_properties: [],
+    add_comments: false,
+    add_speakable: false,
+    current_status: true,
+    enabled_on_post_type: false,
+    enabled_on_post: false,
+    enabled_on_page: false,
+    disabled_on_post_type: false,
+    disabled_on_post: false,
+    disabled_on_page: false,
+    enabled_on: { post_type: [], post: [], page: [] },
+    disabled_on: { post_type: [], post: [], page: [] },
+    automation_with: [],
+  });
+  
   const handlePropertySelection = (key) => {
-    setPostMeta((prevMeta) => {
-      const updatedMappedProperties = prevMeta.mapped_properties?.includes(key)
-        ? prevMeta.mapped_properties.filter((item) => item !== key) // Remove if already selected
-        : [...prevMeta.mapped_properties, key]; // Add if not selected
-  
-      return { mapped_properties: updatedMappedProperties };
-    });
-  };  
-
-  // const handlePropertySelection = (key) => {
-  //   setPostMeta((prevMeta) => {
-  //     const updatedMappedProperties = prevMeta.mapped_properties.includes(key)
-  //       ? prevMeta.mapped_properties.filter((item) => item !== key) // Remove if already selected
-  //       : [...prevMeta.mapped_properties, key]; // Add if not selected
-  
-  //     return { ...prevMeta, mapped_properties: updatedMappedProperties };
-  //   });
-  // };
-  
+    setPostMeta((prevState) => ({
+      ...prevState,
+      mapped_properties: prevState.mapped_properties.includes(key)
+        ? prevState.mapped_properties.filter((item) => item !== key)
+        : [...prevState.mapped_properties, key],
+    }));
+  };
   
   const handleFormChange = e => {
 
@@ -171,7 +161,7 @@ const SingularSchemaEdit = () => {
     .then(
       (result) => {              
           if(result.status == 'success'){
-            setSchemaProperties(result.data);
+            setSchemaProperties(result.data);            
           }
       },        
       (error) => {         
@@ -200,25 +190,34 @@ const SingularSchemaEdit = () => {
     ); 
 
   }
-  const handleSchemaTypeChange = (e, data) => {    
-    setPostMeta({schema_type: data.value});     
+  
+  const handleSchemaTypeChange = (e, data) => {
+
+      setPostMeta(prevState => ({
+        ...prevState,
+        schema_type: data.value,
+        mapped_properties: []
+      }));  
+
   }
+
   const handlePlacementChange = (e, data) => {
     
-      let data_type = data.data_type;
-      let copydata = {...postMeta};
-
-        if((data.name).includes('enabled_on')){
-          copydata.enabled_on[data_type] = data.value;
+    let data_type = data.data_type;
+    
+    setPostMeta(prevState => ({
+        ...prevState,
+        enabled_on: {
+            ...prevState.enabled_on,
+            ...(data.name.includes('enabled_on') && { [data_type]: data.value })
+        },
+        disabled_on: {
+            ...prevState.disabled_on,
+            ...(data.name.includes('disabled_on') && { [data_type]: data.value })
         }
+    }));
+};
 
-        if((data.name).includes('disabled_on')){
-          copydata.disabled_on[data_type] = data.value;
-        }
-        
-        setPostMeta(copydata);    
-
-  }
   const handlePlacementSearch = (type, search, name) => {
         
       let url = smpg_local.rest_url + "smpg-route/placement-search?type="+type+"&search="+search;
@@ -305,7 +304,7 @@ const SingularSchemaEdit = () => {
   useEffect(() => {
     if(postMeta.schema_type != ''){
       handleGetAutomation(postMeta.schema_type);    
-      handleGetSchemaProperties(postMeta.schema_type);
+      handleGetSchemaProperties(postMeta.schema_type);      
     }    
   }, [postMeta.schema_type]);
   

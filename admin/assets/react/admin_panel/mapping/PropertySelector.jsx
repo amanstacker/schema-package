@@ -2,12 +2,16 @@ import React from 'react';
 import { Grid, Checkbox, Form } from 'semantic-ui-react';
 
 const PropertySelector = ({ schemaProperties, mappedProperties, onSelectProperty }) => {
+  const splitIndex = schemaProperties.length > 10 ? Math.ceil(schemaProperties.length / 2) : schemaProperties.length;
+  const firstColumn = schemaProperties.slice(0, splitIndex);
+  const secondColumn = schemaProperties.slice(splitIndex);
+
   return (
     <Grid>
-      <Grid.Row>
-        <Grid.Column width={16}>          
+      <Grid.Row columns={schemaProperties.length > 10 ? 2 : 1}>
+        <Grid.Column>
           <Form>
-            {schemaProperties.map((property) => (
+            {firstColumn.map((property) => (
               <Form.Field key={property.key}>
                 <Checkbox
                   label={property.text}
@@ -18,6 +22,22 @@ const PropertySelector = ({ schemaProperties, mappedProperties, onSelectProperty
             ))}
           </Form>
         </Grid.Column>
+
+        {schemaProperties.length > 10 && (
+          <Grid.Column>
+            <Form>
+              {secondColumn.map((property) => (
+                <Form.Field key={property.key}>
+                  <Checkbox
+                    label={property.text}
+                    checked={mappedProperties?.includes(property.key)}
+                    onChange={() => onSelectProperty(property.key)}
+                  />
+                </Form.Field>
+              ))}
+            </Form>
+          </Grid.Column>
+        )}
       </Grid.Row>
     </Grid>
   );

@@ -16,8 +16,8 @@ class SMPG_Api_Mapper {
       $smpg_settings = get_option('smpg_settings');
             
       return $smpg_settings;
-    }
-    public function import_from_file($import_file){
+    }    
+    public function import_from_file( $import_file ) {
       
         global $wpdb;
         

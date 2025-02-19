@@ -45,7 +45,7 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
 
       {/* Dynamically Display Mapping Rows */}
       {mappedProperties.map((property) => (
-        <Grid.Row key={property}>          
+        <Grid.Row key={property} style={{paddingBottom:"0"}}>          
         <Grid.Column>
         <Segment 
             style={{

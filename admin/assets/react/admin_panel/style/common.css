@@ -20,11 +20,13 @@
 }
 .smpg-left-section{
     padding: 35px;
-    width: 70%;
+    width: 65%;
 }
 .smpg-right-section{
-    width: 29%;
+    width: 34%;
     padding: 35px;
+    padding-left: 10px;
+    padding-right: 40px;
     float: right;
 }
 .smpg-settings{

@@ -552,3 +552,208 @@ function smpg_on_plugin_uninstall() {
 }
 
 add_action('in_admin_header', 'smpg_all_notices_from_smpg_dashboard',999);
+
+function smpg_meta_list() {
+
+	$meta_list = [
+		'text'  => [
+				[
+						'label'     => esc_html__( 'Single Element', 'schema-package' ),
+						'meta-list' => [
+								'blogname'          => esc_html__( 'Site Title', 'schema-package' ),
+								'blogdescription'   => esc_html__( 'Tagline', 'schema-package' ),
+								'site_url'          => esc_html__( 'Site URL', 'schema-package' ),
+								'post_title'        => esc_html__( 'Title', 'schema-package' ),
+								'post_content'      => esc_html__( 'Content', 'schema-package' ),
+								'post_category'     => esc_html__( 'Category', 'schema-package' ),
+								'post_excerpt'      => esc_html__( 'Excerpt', 'schema-package' ),
+								'post_permalink'    => esc_html__( 'Permalink', 'schema-package' ),
+								'author_name'       => esc_html__( 'Author Name', 'schema-package' ),
+								'author_first_name' => esc_html__( 'Author First Name', 'schema-package' ),
+								'author_last_name'  => esc_html__( 'Author Last Name', 'schema-package' ),
+								'post_date'         => esc_html__( 'Publish Date', 'schema-package' ),
+								'post_modified'     => esc_html__( 'Last Modify Date', 'schema-package' ),
+						],
+				],
+				[
+						'label'     => esc_html__( 'Taxonomy Term', 'schema-package' ),
+						'meta-list' => [
+								'taxonomy_term'  => esc_html__( 'Taxonomy Term', 'schema-package' ),                                            
+						],
+				],
+				[
+						'label'     => esc_html__( 'Manual Field', 'schema-package' ),
+						'meta-list' => [
+								'manual_text'  => esc_html__( 'Manual Text', 'schema-package' ),                                            
+						],
+				],
+				[
+						'label'     => esc_html__( 'Custom Field', 'schema-package' ),
+						'meta-list' => [
+								'custom_field' => esc_html__( 'Custom Field', 'schema-package' ),
+						],
+				],
+		],
+		'image' => [
+				
+				[
+						'label'     => esc_html__( 'Single Element', 'schema-package' ),
+						'meta-list' => [
+								'featured_img' => esc_html__( 'Featured image', 'schema-package' ),
+								'author_image' => esc_html__( 'Author image', 'schema-package' ),
+								'site_logo'    => esc_html__( 'Logo', 'schema-package' ),
+						],
+				],
+				[
+						'label'     => esc_html__( 'Manual field', 'schema-package' ),
+						'meta-list' => [   
+								'manual_text'   => esc_html__( 'Manual Image URL', 'schema-package' ),                                           
+						],
+				],
+				[
+						'label'     => esc_html__( 'Custom Field', 'schema-package' ),
+						'meta-list' => [
+								'fixed_image'  => esc_html__( 'Fixed Image', 'schema-package' ),
+								'custom_field' => esc_html__( 'Custom Field', 'schema-package' ),
+						],
+					],
+				[
+					'label'     => esc_html__( 'No Image', 'schema-package' ),
+					'meta-list' => [
+							'no_image'  => esc_html__( 'No Image', 'schema-package' )                                        
+					],
+				],
+			],
+		];
+
+	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );
+
+	return $meta_list;	  
+}
+
+add_filter( 'smpg_meta_list_filter', 'smpg_acf_meta_keys' );
+add_filter( 'smpg_meta_list_filter', 'smpg_cpt_meta_keys' );
+
+function smpg_acf_meta_keys( $fields ) {
+            
+	if ( function_exists( 'acf' ) && class_exists( 'acf' ) ) {
+
+		$post_type = 'acf';
+
+		if ( ( defined( 'ACF_PRO' ) && ACF_PRO ) || ( defined( 'ACF' ) && ACF ) ) {
+			$post_type = 'acf-field-group';
+		}
+		$text_acf_field  = [];
+		$image_acf_field = [];
+		$args            = [
+			'post_type'      => $post_type,
+			'posts_per_page' => -1,
+			'post_status'    => 'publish',
+		];
+
+		$the_query = new WP_Query( $args );
+
+		if ( $the_query->have_posts() ) :
+
+			while ( $the_query->have_posts() ) :
+
+				$the_query->the_post();
+
+				$post_id = get_the_ID();
+				
+				$acf_fields = apply_filters( 'acf/field_group/get_fields', [], $post_id );
+
+				if ( 'acf-field-group' == $post_type ) {
+					$acf_fields = acf_get_fields( $post_id );
+				}
+
+				if ( is_array( $acf_fields ) && ! empty( $acf_fields ) ) {
+					foreach ( $acf_fields as $key => $value ) {
+
+						if ( 'image' == $value['type'] ) {
+							$image_acf_field[ $value['name'] ] = $value['label'];
+						} else {
+							$text_acf_field[ $value['name'] ] = $value['label'];
+						}
+					}
+				}
+			endwhile;
+		endif;
+		wp_reset_postdata();
+
+		if ( ! empty( $text_acf_field ) ) {
+			$fields['text'][] = [
+				'label'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
+				'meta-list' => $text_acf_field,
+			];
+		}
+
+		if ( ! empty( $image_acf_field ) ) {
+			$fields['image'][] = [
+				'label'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
+				'meta-list' => $image_acf_field,
+			];
+		}
+	}
+
+	return $fields;
+	
+}
+
+
+function smpg_cpt_meta_keys( $fields ) {
+        
+	$cpt_text_fields = [];
+	$cpt_file_fields = [];
+
+	if ( class_exists('CPT_Field_Groups') ) {
+		
+		$field_groups = cpt_field_groups()->get_registered_groups();
+
+		$field_groups = get_posts(
+			[
+				'posts_per_page' => -1,
+				'post_type'      => CPT_UI_PREFIX . '_field',
+				'post_status'    => 'publish',
+			]
+		);
+
+		if ( ! empty( $field_groups ) && is_array( $field_groups ) ) {
+
+			foreach ( $field_groups as $grp_key => $grp_value ) {
+				
+				$cpt_fields = [];
+				$cpt_fields       = ! empty( get_post_meta( $grp_value->ID, 'fields', true ) ) ? get_post_meta( $grp_value->ID, 'fields',true ) : [];
+
+				if ( ! empty( $cpt_fields) && is_array($cpt_fields) ) {
+					foreach ( $cpt_fields as $cpt_key => $cpt_value) {
+						if ( ! empty( $cpt_value) && is_array($cpt_value) ) {
+							if ( isset( $cpt_value['key']) && $cpt_value['label']){
+								if ( 'file' == $cpt_value['type'] ) {
+									$cpt_file_fields[$cpt_value['key']] = $cpt_value['label'];
+								}else{
+									$cpt_text_fields[$cpt_value['key']] = $cpt_value['label'];    
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		if ( ! empty( $cpt_text_fields ) ) {
+			$fields['text'][] = [
+				'label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
+				'meta-list' => $cpt_text_fields,
+			];
+		}
+
+		if ( ! empty( $cpt_file_fields ) ) {
+			$fields['image'][] = [
+				'label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
+				'meta-list' => $cpt_file_fields,
+			];
+		}
+	}
+
+	return $fields;
+}

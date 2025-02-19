@@ -323,7 +323,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ],
         'operating_system' => [                        
             'placeholder' => 'ANDROID',                    
-            'label'       => 'operatingSystem',                    
+            'label'       => 'Operating System',
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,

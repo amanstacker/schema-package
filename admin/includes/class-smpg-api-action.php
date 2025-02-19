@@ -391,6 +391,9 @@ class SMPG_Api_Action {
             return $response;
            
         }
+        public function get_mapping_meta_list( $request_data ) {
+            return smpg_meta_list();
+        }
         public function get_carousel_schema_data( $request_data ) {
 
             $response = [];

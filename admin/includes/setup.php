@@ -556,78 +556,36 @@ add_action('in_admin_header', 'smpg_all_notices_from_smpg_dashboard',999);
 function smpg_meta_list() {
 
 	$meta_list = [
-		'text'  => [
-				[
-						'label'     => esc_html__( 'Single Element', 'schema-package' ),
-						'meta-list' => [
-								'blogname'          => esc_html__( 'Site Title', 'schema-package' ),
-								'blogdescription'   => esc_html__( 'Tagline', 'schema-package' ),
-								'site_url'          => esc_html__( 'Site URL', 'schema-package' ),
-								'post_title'        => esc_html__( 'Title', 'schema-package' ),
-								'post_content'      => esc_html__( 'Content', 'schema-package' ),
-								'post_category'     => esc_html__( 'Category', 'schema-package' ),
-								'post_excerpt'      => esc_html__( 'Excerpt', 'schema-package' ),
-								'post_permalink'    => esc_html__( 'Permalink', 'schema-package' ),
-								'author_name'       => esc_html__( 'Author Name', 'schema-package' ),
-								'author_first_name' => esc_html__( 'Author First Name', 'schema-package' ),
-								'author_last_name'  => esc_html__( 'Author Last Name', 'schema-package' ),
-								'post_date'         => esc_html__( 'Publish Date', 'schema-package' ),
-								'post_modified'     => esc_html__( 'Last Modify Date', 'schema-package' ),
-						],
-				],
-				[
-						'label'     => esc_html__( 'Taxonomy Term', 'schema-package' ),
-						'meta-list' => [
-								'taxonomy_term'  => esc_html__( 'Taxonomy Term', 'schema-package' ),                                            
-						],
-				],
-				[
-						'label'     => esc_html__( 'Manual Field', 'schema-package' ),
-						'meta-list' => [
-								'manual_text'  => esc_html__( 'Manual Text', 'schema-package' ),                                            
-						],
-				],
-				[
-						'label'     => esc_html__( 'Custom Field', 'schema-package' ),
-						'meta-list' => [
-								'custom_field' => esc_html__( 'Custom Field', 'schema-package' ),
-						],
-				],
+		'textmeta'  =>  [
+					[ 'key' => 'blogname', 'value' => 'blogname', 'text' => esc_html__( 'Site Title', 'schema-package' ) ],
+					[ 'key' => 'blogdescription', 'value' => 'blogdescription', 'text' => esc_html__( 'Tagline', 'schema-package' ) ],
+					[ 'key' => 'site_url', 'value' => 'site_url', 'text' => esc_html__( 'Site URL', 'schema-package' ) ],
+					[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Title', 'schema-package' ) ],
+					[ 'key' => 'post_content', 'value' => 'post_content', 'text' => esc_html__( 'Content', 'schema-package' ) ],
+					[ 'key' => 'post_category', 'value' => 'post_category', 'text' => esc_html__( 'Category', 'schema-package' ) ],
+					[ 'key' => 'post_excerpt', 'value' => 'post_excerpt', 'text' => esc_html__( 'Excerpt', 'schema-package' ) ],
+					[ 'key' => 'post_permalink', 'value' => 'post_permalink', 'text' => esc_html__( 'Permalink', 'schema-package' ) ],
+					[ 'key' => 'author_name', 'value' => 'author_name', 'text' => esc_html__( 'Author Name', 'schema-package' ) ],
+					[ 'key' => 'author_first_name', 'value' => 'author_first_name', 'text' => esc_html__( 'Author First Name', 'schema-package' ) ],
+					[ 'key' => 'author_last_name', 'value' => 'author_last_name', 'text' => esc_html__( 'Author Last Name', 'schema-package' ) ],
+					[ 'key' => 'post_date', 'value' => 'post_date', 'text' => esc_html__( 'Publish Date', 'schema-package' ) ],
+					[ 'key' => 'post_modified', 'value' => 'post_modified', 'text' => esc_html__( 'Last Modify Date', 'schema-package' ) ],
+					[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
+					[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
+					[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
 		],
-		'image' => [
-				
-				[
-						'label'     => esc_html__( 'Single Element', 'schema-package' ),
-						'meta-list' => [
-								'featured_img' => esc_html__( 'Featured image', 'schema-package' ),
-								'author_image' => esc_html__( 'Author image', 'schema-package' ),
-								'site_logo'    => esc_html__( 'Logo', 'schema-package' ),
-						],
-				],
-				[
-						'label'     => esc_html__( 'Manual field', 'schema-package' ),
-						'meta-list' => [   
-								'manual_text'   => esc_html__( 'Manual Image URL', 'schema-package' ),                                           
-						],
-				],
-				[
-						'label'     => esc_html__( 'Custom Field', 'schema-package' ),
-						'meta-list' => [
-								'fixed_image'  => esc_html__( 'Fixed Image', 'schema-package' ),
-								'custom_field' => esc_html__( 'Custom Field', 'schema-package' ),
-						],
-					],
-				[
-					'label'     => esc_html__( 'No Image', 'schema-package' ),
-					'meta-list' => [
-							'no_image'  => esc_html__( 'No Image', 'schema-package' )                                        
-					],
-				],
+		'imagemeta' => [
+				[ 'key' => 'featured_img', 'value' => 'featured_img', 'text' => esc_html__( 'Featured Image', 'schema-package' ) ],
+				[ 'key' => 'author_image', 'value' => 'author_image', 'text' => esc_html__( 'Author Image', 'schema-package' ) ],
+				[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
+				[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],
+				[ 'key' => 'custom_image_url', 'value' => 'custom_image_url', 'text' => esc_html__( 'Custom Image URL', 'schema-package' ) ],
+				[ 'key' => 'custom_image_field', 'value' => 'custom_image_field', 'text' => esc_html__( 'Custom Image Field', 'schema-package' ) ],
+				[ 'key' => 'no_image', 'value' => 'no_image', 'text' => esc_html__( 'No Image', 'schema-package' ) ],
 			],
 		];
 
-	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );
-
+	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
 	return $meta_list;	  
 }
 
@@ -680,18 +638,22 @@ function smpg_acf_meta_keys( $fields ) {
 			endwhile;
 		endif;
 		wp_reset_postdata();
-
+		
 		if ( ! empty( $text_acf_field ) ) {
-			$fields['text'][] = [
-				'label'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
-				'meta-list' => $text_acf_field,
+
+			$fields['textmeta'][] = [
+				'key'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
+				'value' => $text_acf_field,
+				'text' => $text_acf_field,
+				
 			];
 		}
 
 		if ( ! empty( $image_acf_field ) ) {
-			$fields['image'][] = [
-				'label'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
-				'meta-list' => $image_acf_field,
+			$fields['imagemeta'][] = [
+				'key'     => esc_html__( 'Advanced Custom Fields', 'schema-package' ),
+				'value' => $text_acf_field,
+				'text' => $text_acf_field,
 			];
 		}
 	}
@@ -742,14 +704,14 @@ function smpg_cpt_meta_keys( $fields ) {
 		}
 		if ( ! empty( $cpt_text_fields ) ) {
 			$fields['text'][] = [
-				'label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
+				'group_label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
 				'meta-list' => $cpt_text_fields,
 			];
 		}
 
 		if ( ! empty( $cpt_file_fields ) ) {
 			$fields['image'][] = [
-				'label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
+				'group_label'     => esc_html__( 'TotalPress Custom Fields', 'schema-package' ),
 				'meta-list' => $cpt_file_fields,
 			];
 		}

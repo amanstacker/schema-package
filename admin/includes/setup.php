@@ -556,34 +556,29 @@ add_action('in_admin_header', 'smpg_all_notices_from_smpg_dashboard',999);
 function smpg_meta_list() {
 
 	$meta_list = [
-		'textmeta'  =>  [
-					[ 'key' => 'blogname', 'value' => 'blogname', 'text' => esc_html__( 'Site Title', 'schema-package' ) ],
-					[ 'key' => 'blogdescription', 'value' => 'blogdescription', 'text' => esc_html__( 'Tagline', 'schema-package' ) ],
-					[ 'key' => 'site_url', 'value' => 'site_url', 'text' => esc_html__( 'Site URL', 'schema-package' ) ],
-					[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Title', 'schema-package' ) ],
-					[ 'key' => 'post_content', 'value' => 'post_content', 'text' => esc_html__( 'Content', 'schema-package' ) ],
-					[ 'key' => 'post_category', 'value' => 'post_category', 'text' => esc_html__( 'Category', 'schema-package' ) ],
-					[ 'key' => 'post_excerpt', 'value' => 'post_excerpt', 'text' => esc_html__( 'Excerpt', 'schema-package' ) ],
-					[ 'key' => 'post_permalink', 'value' => 'post_permalink', 'text' => esc_html__( 'Permalink', 'schema-package' ) ],
-					[ 'key' => 'author_name', 'value' => 'author_name', 'text' => esc_html__( 'Author Name', 'schema-package' ) ],
-					[ 'key' => 'author_first_name', 'value' => 'author_first_name', 'text' => esc_html__( 'Author First Name', 'schema-package' ) ],
-					[ 'key' => 'author_last_name', 'value' => 'author_last_name', 'text' => esc_html__( 'Author Last Name', 'schema-package' ) ],
-					[ 'key' => 'post_date', 'value' => 'post_date', 'text' => esc_html__( 'Publish Date', 'schema-package' ) ],
-					[ 'key' => 'post_modified', 'value' => 'post_modified', 'text' => esc_html__( 'Last Modify Date', 'schema-package' ) ],
-					[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
-					[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
-					[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
-		],
-		'imagemeta' => [
-				[ 'key' => 'featured_img', 'value' => 'featured_img', 'text' => esc_html__( 'Featured Image', 'schema-package' ) ],
-				[ 'key' => 'author_image', 'value' => 'author_image', 'text' => esc_html__( 'Author Image', 'schema-package' ) ],
-				[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
-				[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],
-				[ 'key' => 'custom_image_url', 'value' => 'custom_image_url', 'text' => esc_html__( 'Custom Image URL', 'schema-package' ) ],
-				[ 'key' => 'custom_image_field', 'value' => 'custom_image_field', 'text' => esc_html__( 'Custom Image Field', 'schema-package' ) ],
-				[ 'key' => 'no_image', 'value' => 'no_image', 'text' => esc_html__( 'No Image', 'schema-package' ) ],
-			],
-		];
+		[ 'key' => 'blogname', 'value' => 'blogname', 'text' => esc_html__( 'Site Title', 'schema-package' ) ],
+		[ 'key' => 'blogdescription', 'value' => 'blogdescription', 'text' => esc_html__( 'Tagline', 'schema-package' ) ],
+		[ 'key' => 'site_url', 'value' => 'site_url', 'text' => esc_html__( 'Site URL', 'schema-package' ) ],
+		[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Title', 'schema-package' ) ],
+		[ 'key' => 'post_content', 'value' => 'post_content', 'text' => esc_html__( 'Content', 'schema-package' ) ],
+		[ 'key' => 'post_category', 'value' => 'post_category', 'text' => esc_html__( 'Category', 'schema-package' ) ],
+		[ 'key' => 'post_excerpt', 'value' => 'post_excerpt', 'text' => esc_html__( 'Excerpt', 'schema-package' ) ],
+		[ 'key' => 'post_permalink', 'value' => 'post_permalink', 'text' => esc_html__( 'Permalink', 'schema-package' ) ],
+		[ 'key' => 'author_name', 'value' => 'author_name', 'text' => esc_html__( 'Author Name', 'schema-package' ) ],
+		[ 'key' => 'author_first_name', 'value' => 'author_first_name', 'text' => esc_html__( 'Author First Name', 'schema-package' ) ],
+		[ 'key' => 'author_last_name', 'value' => 'author_last_name', 'text' => esc_html__( 'Author Last Name', 'schema-package' ) ],
+		[ 'key' => 'post_date', 'value' => 'post_date', 'text' => esc_html__( 'Publish Date', 'schema-package' ) ],
+		[ 'key' => 'post_modified', 'value' => 'post_modified', 'text' => esc_html__( 'Last Modify Date', 'schema-package' ) ],
+		[ 'key' => 'featured_img', 'value' => 'featured_img', 'text' => esc_html__( 'Featured Image', 'schema-package' ) ],
+		[ 'key' => 'author_image', 'value' => 'author_image', 'text' => esc_html__( 'Author Image', 'schema-package' ) ],
+		[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
+		[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
+		[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
+		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
+		[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],				
+		[ 'key' => 'acf_custom_field', 'value' => 'acf_custom_field', 'text' => esc_html__( 'ACF Custom Field', 'schema-package' ) ],				
+		[ 'key' => 'tp_custom_field', 'value' => 'tp_custom_field', 'text' => esc_html__( 'TP Custom Field', 'schema-package' ) ],				
+	];
 
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
 	return $meta_list;	  

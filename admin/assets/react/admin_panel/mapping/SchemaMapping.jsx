@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Label, Header, Segment, Dropdown, Divider } from 'semantic-ui-react';
+import { Grid, Label, Header, Segment, Dropdown, Divider, TextArea } from 'semantic-ui-react';
 
+// Example taxonomy values
+const taxonomyValues = [
+  { key: "category", value: "category", text: "Category" },
+  { key: "tag", value: "tag", text: "Tag" },
+  { key: "custom_tax", value: "custom_tax", text: "Custom Taxonomy" },
+];
+
+// Example custom fields (for searchable selection)
 const customFields = [
-  { key: 'author_name', value: 'author_name', text: 'Author Name' },
-  { key: 'publish_date', value: 'publish_date', text: 'Publish Date' },
+  { key: "custom_1", value: "custom_1", text: "Custom Field 1" },
+  { key: "custom_2", value: "custom_2", text: "Custom Field 2" },
 ];
 
 const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
 
   const { __ } = wp.i18n;
 
-  const [wpTextMetaFields, setWpTextMetaFields] = useState([]);
-  const [wpImageMetaFields, setWpImageMetaFields]   = useState([]);
+  const [wpMetaList, setWpMetaList] = useState([]);  
+  const [selectedMetaFields, setSelectedMetaFields] = useState({});
+
+  // Handle change in WP Meta Field selection
+  const handleMetaFieldChange = (schemaKey, value) => {
+    setSelectedMetaFields((prev) => ({
+      ...prev,
+      [schemaKey]: value,
+    }));
+  };
 
 
   // Fetch data from API when the component mounts
@@ -24,9 +40,8 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
             'X-WP-Nonce': smpg_local.nonce,
           }
         });
-        const data     = await response.json();              
-        setWpTextMetaFields(data.textmeta);        
-        setWpImageMetaFields(data.imagemeta);        
+        const data     = await response.json();
+        setWpMetaList(data);                
       } catch (error) {
         console.error("Error fetching meta fields:", error);
       }
@@ -57,43 +72,55 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
           </Grid.Column>
         </Grid.Row>
 
-        {mappedProperties.map((property) => (
-          <Grid.Row key={property} style={{ paddingBottom: '0' }}>
-            <Grid.Column>
-              <Segment
-                style={{
-                  padding: '9px',
-                  paddingLeft: '14px',
-                  boxShadow: 'none',
-                }}
-              >
-                <Header as="h5" style={{ margin: 0, fontWeight: 'normal' }}>
-                  {schemaProperties.find((p) => p.key === property)?.text}
-                </Header>
-              </Segment>
-            </Grid.Column>
+        {mappedProperties.map((propertyKey) => {
 
-            {/* Second Column: WordPress Meta Fields Dropdown with Optgroups */}
-            <Grid.Column>
-              <Dropdown
-                placeholder={__('Select Meta Field', 'schema-package')}
-                fluid
-                selection
-                options={wpTextMetaFields}
-              />
-            </Grid.Column>
+          const schemaProperty = schemaProperties.find((p) => p.key === propertyKey);
 
-            {/* Third Column: Custom Fields Dropdown */}
-            <Grid.Column>
-              <Dropdown
-                placeholder={__('Select Custom Field', 'schema-package')}
-                fluid
-                selection
-                options={customFields}
-              />
-            </Grid.Column>
-          </Grid.Row>
-        ))}
+          return (
+            <Grid.Row key={propertyKey} style={{ paddingBottom: "0" }}>
+              <Grid.Column>
+                <Segment style={{ padding: "9px", paddingLeft: "14px", boxShadow: "none" }}>
+                  <Header as="h5" style={{ margin: 0, fontWeight: "normal" }}>
+                    {schemaProperty?.text}
+                  </Header>
+                </Segment>
+              </Grid.Column>
+
+              {/* Second Column: WordPress Meta Fields Dropdown */}
+              <Grid.Column>
+                <Dropdown
+                  placeholder="Select Meta Field"
+                  fluid
+                  selection
+                  options={wpMetaList}
+                  onChange={(_, { value }) => handleMetaFieldChange(propertyKey, value)} // Fix here
+                />
+              </Grid.Column>
+
+              {/* Third Column: Custom Meta Fields */}
+              <Grid.Column>
+                {selectedMetaFields[propertyKey] ? (
+                  selectedMetaFields[propertyKey] === "taxonomy_term" ? (
+                    <Dropdown placeholder="Select Taxonomy" fluid selection options={taxonomyValues} />
+                  ) : selectedMetaFields[propertyKey] === "custom_text" ? (
+                    <TextArea placeholder="Enter custom text..." style={{ width: "100%" }} />
+                  ) : selectedMetaFields[propertyKey] === "custom_field" ? (
+                    <Dropdown
+                      placeholder="Select Custom Field"
+                      fluid
+                      search
+                      selection
+                      options={customFields}
+                    />
+                  ) : null
+                ) : (
+                  <div style={{ display: "none" }} />
+                )}
+              </Grid.Column>
+            </Grid.Row>
+          );
+        })}
+
       </Grid>
     </>    
   );

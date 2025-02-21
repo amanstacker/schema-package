@@ -212,6 +212,20 @@ class SMPG_Api_Controller {
                 'permission_callback' => function(){
                     return current_user_can( 'manage_options' );
                 }
+            ]);
+            register_rest_route( 'smpg-route', 'get-taxonomies', [
+                'methods'    => 'GET',
+                'callback'   => [$this->_apiAction, 'get_taxonomies'],
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ]);            
+            register_rest_route( 'smpg-route', 'get-custom-fields', [
+                'methods'    => 'GET',
+                'callback'   => [$this->_apiAction, 'get_custom_fields'],
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
             ]);            
         }  
              

@@ -486,14 +486,14 @@ class SMPG_Api_Mapper {
         $saved_taxonomies = [];
         $saved_schema     = 'course';
         $response['post_data']      = get_post( $post_id, ARRAY_A );
-        $post_meta                  = get_post_meta( $post_id );   
+        $post_meta                  = get_metadata( 'post', $post_id );   
 
-        if ( isset( $post_meta['schema_type'][0] ) ) {
-          $saved_schema = $post_meta['schema_type'][0];
+        if ( isset( $post_meta['_schema_type'][0] ) ) {
+          $saved_schema = $post_meta['_schema_type'][0];
         }        
 
-        if ( isset( $post_meta['taxonomies'][0] ) && is_serialized( $post_meta['taxonomies'][0] ) ) {
-          $saved_taxonomies = unserialize($post_meta['taxonomies'][0]);
+        if ( isset( $post_meta['_taxonomies'][0] ) && is_serialized( $post_meta['_taxonomies'][0] ) ) {
+          $saved_taxonomies = unserialize($post_meta['_taxonomies'][0]);
         }        
         //Taxonomies data starts here     
         
@@ -549,8 +549,8 @@ class SMPG_Api_Mapper {
 
         }
         //Taxonomies data ends here
-        $meta_data['taxonomies']    = $taxonomies_list;
-        $meta_data['schema_type']   = $saved_schema;
+        $meta_data['_taxonomies']    = $taxonomies_list;
+        $meta_data['_schema_type']   = $saved_schema;
 
         $response['post_meta']      = $meta_data;                                               
                         
@@ -559,12 +559,7 @@ class SMPG_Api_Mapper {
     }
     public function get_schema_data( $post_id = null ) {
 
-        $response  = array();
-
-        $meta_data = array();
-
-        $enabled_on  = array();
-        $disabled_on = array();
+        $response  = $meta_data = $enabled_on = $enabled_on = $disabled_on = [];
 
         $post_type_plc = $this->get_placement_data('post_type');
         $post_plc      = $this->get_placement_data('post');
@@ -591,7 +586,7 @@ class SMPG_Api_Mapper {
                       
                       $meta_data[$key] = unserialize($meta[0]);
                       
-                      if( $key == 'enabled_on' || $key == 'disabled_on' ){
+                      if( $key == '_enabled_on' || $key == '_disabled_on' ){
                         
                         foreach($meta_data[$key] as $ikey => $ival){
                             
@@ -601,11 +596,11 @@ class SMPG_Api_Mapper {
                               
                               if($saved_data){
 
-                                if( $key == 'enabled_on' ){
+                                if( $key == '_enabled_on' ){
                                   $enabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
                                 }
 
-                                if( $key == 'disabled_on' ){
+                                if( $key == '_disabled_on' ){
                                   $disabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
                                 }
                                 
@@ -626,12 +621,12 @@ class SMPG_Api_Mapper {
             $response['post_meta'] = $meta_data;
             
         }else{
-          $meta_data['mapped_properties'] = [];
+          $meta_data['_mapped_properties'] = [];
         }   
         
         $response['post_meta'] = $meta_data;
-        $response['placement_enabled_option']  = $enabled_on;
-        $response['placement_disabled_option'] = $disabled_on;
+        $response['_placement_enabled_option']  = $enabled_on;
+        $response['_placement_disabled_option'] = $disabled_on;
                         
         return $response;
 
@@ -717,7 +712,8 @@ class SMPG_Api_Mapper {
                 $data['post_title']    =  get_the_title();
                 $data['post_status']   =  get_post_status();
                 $data['post_modified'] =  get_the_date('d M, Y');
-                $post_meta             =  get_post_meta(get_the_ID(), '', true);
+                $post_meta             =  get_metadata('post', get_the_ID());
+                
 
                 if($post_meta){
 
@@ -726,7 +722,7 @@ class SMPG_Api_Mapper {
                     }
 
                 }
-                                 
+                           
                 $posts_data[] = array(
                 'post'        => (array) $data,
                 'post_meta'   => $post_meta                

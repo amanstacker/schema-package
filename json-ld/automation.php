@@ -8,9 +8,9 @@ function smpg_jobposting_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("simplejobboard", $automation) && isset($smpg_plugin_list['simplejobboard']['is_active']) ){
 
@@ -80,9 +80,9 @@ function smpg_book_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
         
         if ( in_array("mooberrybookmanager", $automation) && isset($smpg_plugin_list['mooberrybookmanager']['is_active']) ){
 
@@ -286,9 +286,9 @@ function smpg_faqpage_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("accordionfaq", $automation) && isset($smpg_plugin_list['accordionfaq']['is_active']) ){
 
@@ -812,9 +812,9 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
 
     global $smpg_plugin_list;
     
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("woocommerce", $automation) && isset($smpg_plugin_list['woocommerce']['is_active']) ){
             

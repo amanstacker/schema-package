@@ -100,7 +100,7 @@ function smpg_get_json_ld(){
             
             $schema_meta = get_post_meta( $id );
             
-            if ( isset( $schema_meta['current_status'][0] ) && $schema_meta['current_status'][0] == 1 ) {
+            if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                 if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
                     $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
                 }
@@ -118,7 +118,7 @@ function smpg_get_json_ld(){
             
             $schema_meta = get_post_meta( $id );
             
-            if ( isset( $schema_meta['current_status'][0] ) && $schema_meta['current_status'][0] == 1 ) {
+            if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                 
                 if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
                     

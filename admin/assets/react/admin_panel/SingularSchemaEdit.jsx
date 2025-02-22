@@ -43,21 +43,21 @@ const SingularSchemaEdit = () => {
   };
   
   const [postMeta, setPostMeta] = useReducer(postMetaReducer, {
-    schema_type: "article",
+    _schema_type: "article",
     _mapped_properties_key: [],
     _mapped_properties_value: {},
-    add_comments: false,
-    add_speakable: false,
-    current_status: true,
-    enabled_on_post_type: false,
-    enabled_on_post: false,
-    enabled_on_page: false,
-    disabled_on_post_type: false,
-    disabled_on_post: false,
-    disabled_on_page: false,
-    enabled_on: { post_type: [], post: [], page: [] },
-    disabled_on: { post_type: [], post: [], page: [] },
-    automation_with: [],
+    _add_comments: false,
+    _add_speakable: false,
+    _current_status: true,
+    _enabled_on_post_type: false,
+    _enabled_on_post: false,
+    _enabled_on_page: false,
+    _disabled_on_post_type: false,
+    _disabled_on_post: false,
+    _disabled_on_page: false,
+    _enabled_on: { post_type: [], post: [], page: [] },
+    _disabled_on: { post_type: [], post: [], page: [] },
+    _automation_with: [],
   });
   
   const handlePropertySelection = (key) => {
@@ -98,8 +98,8 @@ const SingularSchemaEdit = () => {
           setMainSpinner(false);     
           setPostData(result.post_data);
           setPostMeta(result.post_meta);                    
-          setEnabledOnOption(result.placement_enabled_option);
-          setDisabledOnOption(result.placement_disabled_option)
+          setEnabledOnOption(result._placement_enabled_option);
+          setDisabledOnOption(result._placement_disabled_option)
 
         },        
         (error) => {         
@@ -204,7 +204,7 @@ const SingularSchemaEdit = () => {
 
       setPostMeta(prevState => ({
         ...prevState,
-        schema_type: data.value,
+        _schema_type: data.value,
         _mapped_properties_key: [],
         _mapped_properties_value:{}
       }));  
@@ -217,13 +217,13 @@ const SingularSchemaEdit = () => {
     
     setPostMeta(prevState => ({
         ...prevState,
-        enabled_on: {
-            ...prevState.enabled_on,
-            ...(data.name.includes('enabled_on') && { [data_type]: data.value })
+        _enabled_on: {
+            ...prevState._enabled_on,
+            ...(data.name.includes('_enabled_on') && { [data_type]: data.value })
         },
-        disabled_on: {
-            ...prevState.disabled_on,
-            ...(data.name.includes('disabled_on') && { [data_type]: data.value })
+        _disabled_on: {
+            ...prevState._disabled_on,
+            ...(data.name.includes('_disabled_on') && { [data_type]: data.value })
         }
     }));
 };
@@ -291,12 +291,12 @@ const SingularSchemaEdit = () => {
 
     let copydata = {...postMeta};
 
-    let index = copydata.automation_with.indexOf(name);
+    let index = copydata._automation_with.indexOf(name);
 
     if(index !== -1){  
-      copydata.automation_with.splice(index, 1); 
+      copydata._automation_with.splice(index, 1); 
     }else{
-      copydata.automation_with.push(name);
+      copydata._automation_with.push(name);
     }
     setPostMeta(copydata);
     
@@ -312,11 +312,11 @@ const SingularSchemaEdit = () => {
   }, []);
 
   useEffect(() => {
-    if(postMeta.schema_type != ''){
-      handleGetAutomation(postMeta.schema_type);    
-      handleGetSchemaProperties(postMeta.schema_type);      
+    if(postMeta._schema_type != ''){
+      handleGetAutomation(postMeta._schema_type);    
+      handleGetSchemaProperties(postMeta._schema_type);      
     }    
-  }, [postMeta.schema_type]);
+  }, [postMeta._schema_type]);
   
 
   return(
@@ -339,7 +339,7 @@ const SingularSchemaEdit = () => {
               fluid
               search
               selection
-              value = {postMeta.schema_type}
+              value = {postMeta._schema_type}
               options={schemaTypes}
               onChange={handleSchemaTypeChange}
           />
@@ -361,21 +361,21 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Post Types', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_post_type" checked={postMeta.enabled_on_post_type} onChange={handleFormChange} />
+                  <input type="checkbox" name="_enabled_on_post_type" checked={postMeta._enabled_on_post_type} onChange={handleFormChange} />
                   <label></label>
                 </div>                         
                    </td>
                    <td>
                      {enabledOnOption.post_type ? 
                      <Dropdown
-                     name="enabled_on_post_type"
+                     name="_enabled_on_post_type"
                      data_type="post_type"
                      placeholder={__('Search For Post Type', 'schema-package') }
                      fluid
                      multiple
                      search
                      selection
-                     value={postMeta.enabled_on.post_type}
+                     value={postMeta._enabled_on?.post_type}
                      onChange={handlePlacementChange}
                      onSearchChange={handlePlacementSearchChange}
                      options={enabledOnOption.post_type}
@@ -390,7 +390,7 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Posts', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_post" checked={postMeta.enabled_on_post} onChange={handleFormChange} />
+                  <input type="checkbox" name="_enabled_on_post" checked={postMeta._enabled_on_post} onChange={handleFormChange} />
                   <label></label>
                   </div>
                    </td>
@@ -399,13 +399,13 @@ const SingularSchemaEdit = () => {
                        enabledOnOption.post ? 
                         <Dropdown
                         data_type="post"
-                        name="enabled_on_post"
+                        name="_enabled_on_post"
                         placeholder={__('Search For Post', 'schema-package') }
                         fluid
                         multiple
                         search
                         selection
-                        value={postMeta.enabled_on.post}
+                        value={postMeta._enabled_on?.post}
                         onChange={handlePlacementChange}
                         onSearchChange={handlePlacementSearchChange}
                         options={enabledOnOption.post}
@@ -419,7 +419,7 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Pages', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="enabled_on_page" checked={postMeta.enabled_on_page} onChange={handleFormChange} />
+                  <input type="checkbox" name="_enabled_on_page" checked={postMeta._enabled_on_page} onChange={handleFormChange} />
                   <label></label>
                   </div>
                    </td>
@@ -427,13 +427,13 @@ const SingularSchemaEdit = () => {
                      {enabledOnOption.page ? 
                      <Dropdown
                      data_type="page"
-                     name="enabled_on_page"
+                     name="_enabled_on_page"
                      placeholder='Search For Page'
                      fluid
                      multiple
                      search
                      selection
-                     value={postMeta.enabled_on.page}
+                     value={postMeta._enabled_on?.page}
                      onChange={handlePlacementChange}
                      onSearchChange={handlePlacementSearchChange}
                      options={enabledOnOption.page}
@@ -452,21 +452,21 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Post Types', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="disabled_on_post_type" checked={postMeta.disabled_on_post_type} onChange={handleFormChange} />
+                  <input type="checkbox" name="_disabled_on_post_type" checked={postMeta._disabled_on_post_type} onChange={handleFormChange} />
                   <label></label>
                   </div>                         
                    </td>
                    <td>
-                   {disabledOnOption.post_type ?
+                   {disabledOnOption?.post_type ?
                    <Dropdown
                    data_type="post_type"
-                   name="disabled_on_post_type"
+                   name="_disabled_on_post_type"
                    placeholder='Search For Post Type'
                    fluid
                    multiple
                    search
                    selection
-                   value={postMeta.disabled_on.post_type}
+                   value={postMeta._disabled_on?.post_type}
                    onChange={handlePlacementChange}
                    onSearchChange={handlePlacementSearchChange}
                    options={disabledOnOption.post_type}
@@ -480,21 +480,21 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Posts', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="disabled_on_post" checked={postMeta.disabled_on_post} onChange={handleFormChange} />
+                  <input type="checkbox" name="_disabled_on_post" checked={postMeta._disabled_on_post} onChange={handleFormChange} />
                   <label></label>
                   </div>
                    </td>
                    <td>
-                    {disabledOnOption.post ?
+                    {disabledOnOption?.post ?
                     <Dropdown
                     data_type="post"
-                    name="disabled_on_post"
+                    name="_disabled_on_post"
                     placeholder={__('Search For Post', 'schema-package') }
                     fluid
                     multiple
                     search
                     selection
-                    value={postMeta.disabled_on.post}
+                    value={postMeta._disabled_on?.post}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
                     options={disabledOnOption.post}
@@ -508,21 +508,21 @@ const SingularSchemaEdit = () => {
                    <td><label>{__('Pages', 'schema-package') }</label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
-                  <input type="checkbox" name="disabled_on_page" checked={postMeta.disabled_on_page} onChange={handleFormChange} />
+                  <input type="checkbox" name="_disabled_on_page" checked={postMeta._disabled_on_page} onChange={handleFormChange} />
                   <label></label>
                   </div>
                    </td>
                    <td>
-                    {disabledOnOption.page ?
+                    {disabledOnOption?.page ?
                     <Dropdown
                     data_type="page"
-                    name="disabled_on_page"
+                    name="_disabled_on_page"
                     placeholder={__('Search For Page', 'schema-package') }
                     fluid
                     multiple
                     search
                     selection
-                    value={postMeta.disabled_on.page}
+                    value={postMeta._disabled_on?.page}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
                     options={disabledOnOption.page}
@@ -543,23 +543,23 @@ const SingularSchemaEdit = () => {
         <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
       </Accordion>  
       
-       {postMeta.schema_type == 'article' ?
+       {postMeta._schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
         <table className="form-table">
           <tbody>
             <tr>
-             <th><label htmlFor="add_comments">{__('Comments', 'schema-package') }</label></th>
-             <td><input id="add_comments" onChange={handleFormChange} name="add_comments" checked={postMeta.add_comments} type="checkbox"/></td> 
+             <th><label htmlFor="_add_comments">{__('Comments', 'schema-package') }</label></th>
+             <td><input id="_add_comments" onChange={handleFormChange} name="_add_comments" checked={postMeta._add_comments} type="checkbox"/></td> 
             </tr>
             <tr>
-             <th><label htmlFor="add_speakable">{__('Speakable', 'schema-package') }</label></th>
-             <td><input id="add_speakable" onChange={handleFormChange} name="add_speakable" checked={postMeta.add_speakable} type="checkbox"/></td> 
+             <th><label htmlFor="_add_speakable">{__('Speakable', 'schema-package') }</label></th>
+             <td><input id="_add_speakable" onChange={handleFormChange} name="_add_speakable" checked={postMeta._add_speakable} type="checkbox"/></td> 
             </tr>
           </tbody>  
           </table>
         </Accordion> 
        : '' }                                 
-         {postMeta.schema_type ?                
+         {postMeta._schema_type ?                
         <Accordion title="Automation With" isExpand={true}>      
         <h3></h3>
         {
@@ -571,7 +571,7 @@ const SingularSchemaEdit = () => {
               return(
                 <tr key={i}>
                 <th>{item.name}</th>
-                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta.automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
+                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta._automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
                 </tr>
               )
           })

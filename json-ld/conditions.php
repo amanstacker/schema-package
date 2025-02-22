@@ -48,9 +48,9 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 		$posts      = $condition['post'];
 		$pages      = $condition['page'];
 
-		$post_type_status = $schema_data['enabled_on_post_type'][0];
-		$post_status      = $schema_data['enabled_on_post'][0];
-		$page_status      = $schema_data['enabled_on_page'][0];	
+		$post_type_status = $schema_data['_enabled_on_post_type'][0];
+		$post_status      = $schema_data['_enabled_on_post'][0];
+		$page_status      = $schema_data['_enabled_on_page'][0];	
 
 		
 		if($post_type_status && !empty($post_types)){
@@ -100,9 +100,9 @@ function smpg_placement_remove_from( $schema_data, $post_id ){
 
 		$condition = unserialize($schema_data['disabled_on'][0]);
 			
-		$post_type_status = $schema_data['disabled_on_post_type'][0];
-		$post_status      = $schema_data['disabled_on_post'][0];
-		$page_status      = $schema_data['disabled_on_page'][0];
+		$post_type_status = $schema_data['_disabled_on_post_type'][0];
+		$post_status      = $schema_data['_disabled_on_post'][0];
+		$page_status      = $schema_data['_disabled_on_page'][0];
 
 		$post_types = $condition['post_type'];
 		$posts      = $condition['post'];

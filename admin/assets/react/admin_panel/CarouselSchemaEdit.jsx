@@ -32,10 +32,10 @@ const CarouselSchemaEdit = () => {
   const [postMeta, setPostMeta] = useReducer(
     (state, newState) => ({...state, ...newState}),
     {
-      current_status          : true,
-      schema_type             : 'course',                                       
-      automation_with         : [],
-      taxonomies              : []
+      _current_status          : true,
+      _schema_type             : 'course',                                       
+      _automation_with         : [],
+      _taxonomies              : []
     }            
   );
   
@@ -48,7 +48,7 @@ const CarouselSchemaEdit = () => {
     }
     
     let clonedata = {...postMeta};   
-    clonedata.taxonomies[id].status = value
+    clonedata._taxonomies[id].status = value
     console.log(clonedata);
     setPostMeta(clonedata);
             
@@ -140,13 +140,13 @@ const CarouselSchemaEdit = () => {
 
   }
   const handleSchemaTypeChange = (e, data) => {    
-    setPostMeta({schema_type: data.value});     
+    setPostMeta({_schema_type: data.value});     
   }
   const handlePlacementChange = (e, data) => {
     
       let data_id = data.data_id;      
       let copydata = {...postMeta};
-      copydata.taxonomies[data_id].value = data.value;
+      copydata._taxonomies[data_id].value = data.value;
       setPostMeta(copydata);    
 
   }
@@ -166,9 +166,9 @@ const CarouselSchemaEdit = () => {
           if ( result ) {
                         
                 let clonedata = {...postMeta};
-                let newclone = [...new Set([...clonedata.taxonomies[id].options, ...result])]
+                let newclone = [...new Set([...clonedata._taxonomies[id].options, ...result])]
                 let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
-                clonedata.taxonomies[id].options = newData;            
+                clonedata._taxonomies[id].options = newData;            
                 setPostMeta(clonedata);                        
             
           }
@@ -200,12 +200,12 @@ const CarouselSchemaEdit = () => {
 
     let copydata = {...postMeta};
 
-    let index = copydata.automation_with.indexOf(name);
+    let index = copydata._automation_with.indexOf(name);
 
     if(index !== -1){  
-      copydata.automation_with.splice(index, 1); 
+      copydata._automation_with.splice(index, 1); 
     }else{
-      copydata.automation_with.push(name);
+      copydata._automation_with.push(name);
     }
     setPostMeta(copydata);
     
@@ -221,10 +221,10 @@ const CarouselSchemaEdit = () => {
   }, []);
 
   useEffect(() => {
-    if(postMeta.schema_type != ''){
-      handleGetAutomation(postMeta.schema_type);    
+    if(postMeta._schema_type != ''){
+      handleGetAutomation(postMeta._schema_type);    
     }    
-  }, [postMeta.schema_type]);
+  }, [postMeta._schema_type]);
 
   
   return(
@@ -247,12 +247,12 @@ const CarouselSchemaEdit = () => {
               fluid
               search
               selection
-              value = {postMeta.schema_type}
+              value = {postMeta._schema_type}
               options={schemaTypes}
               onChange={handleSchemaTypeChange}
           />
       </Accordion>               
-    {postMeta.taxonomies ?
+    {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
                 <h4>{__('Target On', 'schema-package') }</h4>
@@ -260,7 +260,7 @@ const CarouselSchemaEdit = () => {
                 <table className="smpg-placement-table">
                   <tbody>                    
                   {
-                    postMeta.taxonomies.map((item, i) => {
+                    postMeta._taxonomies.map((item, i) => {
                       return(
                         <tr key={i}>
                         <td><label>{item.label}</label></td>                        
@@ -288,7 +288,7 @@ const CarouselSchemaEdit = () => {
                             options={item.options}
                           />                                          
                         </td>
-                        <td className='smpg-placement-or'>{(i+1) < postMeta.taxonomies.length ? <span>OR</span> : ''}</td>
+                        <td className='smpg-placement-or'>{(i+1) < postMeta._taxonomies.length ? <span>OR</span> : ''}</td>
                         </tr>
                       )
                     })
@@ -303,7 +303,7 @@ const CarouselSchemaEdit = () => {
       </div>
       <div className="smpg-right-section">  
 
-         {postMeta.schema_type ?                
+         {postMeta._schema_type ?                
         <Accordion title="Automation With" isExpand={true}>      
         <h3></h3>
         {
@@ -315,7 +315,7 @@ const CarouselSchemaEdit = () => {
               return(
                 <tr key={i}>
                 <th>{item.name}</th>
-                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta.automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
+                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta._automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
                 </tr>
               )
           })

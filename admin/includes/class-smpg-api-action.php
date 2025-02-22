@@ -23,17 +23,17 @@ class SMPG_Api_Action {
         public function change_post_status($request){
             
             $parameters     = $request->get_params();
-            $current_status = 1;                  
+            $_current_status = 1;                  
 
             if( isset($parameters['post_id']) ){
                 $post_id                = intval( $parameters['post_id'] );
-                $current_status         = rest_sanitize_boolean( $parameters['current_status'] );
+                $_current_status         = rest_sanitize_boolean( $parameters['_current_status'] );
                 $action                 = sanitize_text_field($parameters['action']);
 
                 switch ($action) {
 
                     case 'change':
-                            update_post_meta($post_id, 'current_status', $current_status);        
+                            update_post_meta($post_id, '_current_status', $_current_status);        
                         break;
 
                     case 'delete':

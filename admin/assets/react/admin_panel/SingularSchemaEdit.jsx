@@ -44,7 +44,8 @@ const SingularSchemaEdit = () => {
   
   const [postMeta, setPostMeta] = useReducer(postMetaReducer, {
     schema_type: "article",
-    mapped_properties: [],
+    _mapped_properties_key: [],
+    _mapped_properties_value: {},
     add_comments: false,
     add_speakable: false,
     current_status: true,
@@ -62,9 +63,9 @@ const SingularSchemaEdit = () => {
   const handlePropertySelection = (key) => {
     setPostMeta((prevState) => ({
       ...prevState,
-      mapped_properties: prevState.mapped_properties.includes(key)
-        ? prevState.mapped_properties.filter((item) => item !== key)
-        : [...prevState.mapped_properties, key],
+      _mapped_properties_key: prevState._mapped_properties_key.includes(key)
+        ? prevState._mapped_properties_key.filter((item) => item !== key)
+        : [...prevState._mapped_properties_key, key],
     }));
   };
   
@@ -191,12 +192,21 @@ const SingularSchemaEdit = () => {
 
   }
   
+  const handleMappedPropertiesValue = ( mappedValue ) => {
+
+    setPostMeta(prevState => ({
+      ...prevState,            
+      _mapped_properties_value:mappedValue
+    }));  
+
+  }
   const handleSchemaTypeChange = (e, data) => {
 
       setPostMeta(prevState => ({
         ...prevState,
         schema_type: data.value,
-        mapped_properties: []
+        _mapped_properties_key: [],
+        _mapped_properties_value:{}
       }));  
 
   }
@@ -337,7 +347,7 @@ const SingularSchemaEdit = () => {
        <div>
             
       {/* Schema Mapping Section (only show if any property is selected) */}
-      {postMeta.mapped_properties.length > 0 && <SchemaMapping schemaProperties={schemaProperties} mappedProperties={postMeta.mapped_properties} />}
+      {postMeta._mapped_properties_key.length > 0 && <SchemaMapping schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} mappedPropertiesValue={postMeta._mapped_properties_value} handleMappedPropertiesValue={handleMappedPropertiesValue} />}
     </div>
 
       </Accordion>               
@@ -530,7 +540,7 @@ const SingularSchemaEdit = () => {
       <div className="smpg-right-section">  
       <Accordion title="Schema Properties" isExpand={true}>
         {/* Property Selection Section */}
-        <PropertySelector schemaProperties={schemaProperties} mappedProperties={postMeta.mapped_properties} onSelectProperty={handlePropertySelection} />
+        <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
       </Accordion>  
       
        {postMeta.schema_type == 'article' ?

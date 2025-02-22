@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Label, Header, Segment, Dropdown, Divider, TextArea, Button, Image } from "semantic-ui-react";
 
-const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
+const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedPropertiesValue, handleMappedPropertiesValue }) => {
   const { __ } = wp.i18n;
 
   const [wpMetaList, setWpMetaList] = useState([]);
   const [customFieldsList, setCustomFieldsList] = useState([]);
   const [taxonomyList, setTaxonomyList] = useState([]);
-  const [selectedMetaFields, setSelectedMetaFields] = useState({});
+  const [selectedMetaFields, setSelectedMetaFields] = useState(mappedPropertiesValue);
   const [customFieldSearch, setCustomFieldSearch] = useState("");
 
   useEffect(() => {
@@ -111,9 +111,9 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
     mediaUploader.open();
   };
 
-  useEffect(() => {
-    console.log(customFieldsList);
-  },[customFieldsList])
+  useEffect(() => {    
+    handleMappedPropertiesValue(selectedMetaFields)
+  },[selectedMetaFields])
 
   return (
     <>
@@ -137,7 +137,7 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
           </Grid.Column>
         </Grid.Row>
 
-        {mappedProperties.map((propertyKey) => {
+        {mappedPropertiesKey.map((propertyKey) => {
           const schemaProperty = schemaProperties.find((p) => p.key === propertyKey);
           const selectedMeta = selectedMetaFields[propertyKey] || {};
 
@@ -196,7 +196,7 @@ const SchemaMapping = ({ schemaProperties, mappedProperties }) => {
                     />
                   ) : selectedMeta.wpMeta === "custom_image" ? (
                     <>
-                      {selectedMeta.customImage && <Image src={selectedMeta.customImage} size="small" />}
+                      {selectedMeta.customImage && <Image src={selectedMeta.customImage} size="small" style={{paddingBottom:"4px"}} />}
                       <Button primary onClick={() => openMediaUploader(propertyKey)}>
                         {selectedMeta.customImage ? __("Change Image", "schema-package") : __("Upload Image", "schema-package")}
                       </Button>

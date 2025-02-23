@@ -10,3 +10,6 @@
 .smpg-default-data-table th, .smpg-default-data-table td{
     display: inline-flex;
 }
+.smpg-settings label{
+    cursor: pointer;
+}

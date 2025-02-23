@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Icon, Popup } from 'semantic-ui-react'
+import { Icon, Popup, Checkbox } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
 import MainSpinner from './../common/main-spinner/MainSpinner';
 import { Button, Input } from "semantic-ui-react";
@@ -327,28 +327,48 @@ const Settings = () => {
                   <tr>
                     <th><label htmlFor="clean_micro_data">{__('Clean MicroData', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="clean_micro_data" name="clean_micro_data" onChange={formChangeHandler} checked={settings.clean_micro_data} />
+                    <Checkbox                     
+                      name='clean_micro_data'
+                      id='clean_micro_data' 
+                      checked={settings.clean_micro_data}
+                      onChange={formChangeHandler}
+                    />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>
                     <th><label htmlFor="clean_rdfa_data">{__('Clean RDFA Data', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="clean_rdfa_data" name="clean_rdfa_data" onChange={formChangeHandler} checked={settings.clean_rdfa_data} />
+                    <Checkbox                     
+                      name='clean_rdfa_data'
+                      id='clean_rdfa_data' 
+                      checked={settings.clean_rdfa_data}
+                      onChange={formChangeHandler}
+                    />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>
                     <th><label htmlFor="image_object">{__('ImageObject', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="image_object" name="image_object" onChange={formChangeHandler} checked={settings.image_object} />
+                    <Checkbox                     
+                      name='image_object'
+                      id='image_object' 
+                      checked={settings.image_object}
+                      onChange={formChangeHandler}
+                    />                       
                       <span className="smpg-tooltip"><Popup content={__('By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>                      
                   <tr>
                     <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="multisize_image" name="multisize_image" onChange={formChangeHandler} checked={settings.multisize_image} />
+                    <Checkbox                     
+                      name='multisize_image'
+                      id='multisize_image' 
+                      checked={settings.multisize_image}
+                      onChange={formChangeHandler}
+                    />                      
                       <span className="smpg-tooltip"><Popup content={__('It generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>                      
@@ -366,7 +386,14 @@ const Settings = () => {
                   return(
                    <tr key={key}>
                    <th><label htmlFor={key}>{value.name}</label></th>
-                   <td><input type="checkbox" name={key} onChange={handleManageConflictChange} checked={ settings.manage_conflict.includes(key) ? true : false } /></td> 
+                   <td>
+                        <Checkbox                     
+                          name={key}  
+                          id={key}                        
+                          checked={settings.manage_conflict.includes(key) ? true : false}
+                          onChange={handleManageConflictChange}
+                        />                                            
+                    </td> 
                    </tr>
                  )
                })
@@ -420,7 +447,12 @@ const Settings = () => {
                   <tr>
                     <th><label htmlFor="remove_data_on_uninstall">{__('Delete Data on Uninstall', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="remove_data_on_uninstall" name="remove_data_on_uninstall" onChange={formChangeHandler} checked={settings.remove_data_on_uninstall} />
+                      <Checkbox                     
+                        name='remove_data_on_uninstall'
+                        id='remove_data_on_uninstall' 
+                        checked={settings.remove_data_on_uninstall}
+                        onChange={formChangeHandler}
+                      />                                            
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                      
@@ -432,21 +464,7 @@ const Settings = () => {
           case "settings_compatibilitys":  return (
             <div className="smpg-settings">
               <table className="form-table">
-                <tbody>
-                  <tr>
-                    <th><label htmlFor="cmp_ampforwp">{__('AMPforWP', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_ampforwp" name="cmp_ampforwp" onChange={formChangeHandler} checked={settings.cmp_ampforwp} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_amp_by_automatic">{__('AMP By Automatic', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_amp_by_automatic" name="cmp_amp_by_automatic" onChange={formChangeHandler} checked={settings.cmp_amp_by_automatic} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>                                                      
+                <tbody>                                    
                   <tr>
                     <th><label htmlFor="cmp_smartcrawl_seo">{__('SmartCrawl Seo', 'schema-package')}</label></th>
                     <td>

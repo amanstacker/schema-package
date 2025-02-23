@@ -504,12 +504,28 @@ function smpg_get_image(){
 	return apply_filters( 'smpg_change_json_ld_image', $json_ld_image );	
 }
 
+function smpg_get_author_image_by_id( $image_id = null ) {
 
-function smpg_get_image_by_image_id( $image_id ) {
+	$img_arr = $author_image = [];
+		
+	if ( function_exists( 'get_avatar_data' ) &&  ! empty( get_option( 'show_avatars' ) ) ) {
+		$author_image	= get_avatar_data( get_the_author_meta( 'ID' ) );
+	}                                                          
+
+	$img_arr['@type']  = 'ImageObject';
+	$img_arr['url']    = $author_image['url'];
+	$img_arr['width']  = $author_image['height']; 
+	$img_arr['height'] = $author_image['width'];
+
+	return $img_arr;
+}
+
+function smpg_get_post_image_by_id( $image_id = null ) {
 	
-	if ( ! isset($image_id) ) 
-		return array();
-	
+	if ( ! isset( $image_id ) ) {
+		$image_id = get_post_thumbnail_id();
+	}
+			
 	$ImageObject = array();
 		
 	$image_attributes = wp_get_attachment_image_src( $image_id, 'full' );
@@ -1608,4 +1624,12 @@ function smpg_get_commaa_seprated_value ( $data, $type ) {
     }
     
     return $response;
+}
+
+function smpg_snake_to_camel_case( $string ) {
+
+	if ( strpos( $string, '_' ) === false ) {
+        return $string; // Return unchanged if there's no underscore
+    }
+    return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
 }

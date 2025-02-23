@@ -31,6 +31,7 @@ require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/setup.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-individual-post.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/properties.php';
 //Frontend
+require_once SMPG_PLUGIN_DIR_PATH .'json-ld/mapping.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/generate.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/individual-post.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/markup.php';

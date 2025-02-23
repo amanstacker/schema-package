@@ -559,7 +559,7 @@ function smpg_meta_list() {
 		[ 'key' => 'blogname', 'value' => 'blogname', 'text' => esc_html__( 'Site Title', 'schema-package' ) ],
 		[ 'key' => 'blogdescription', 'value' => 'blogdescription', 'text' => esc_html__( 'Tagline', 'schema-package' ) ],
 		[ 'key' => 'site_url', 'value' => 'site_url', 'text' => esc_html__( 'Site URL', 'schema-package' ) ],
-		[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Title', 'schema-package' ) ],
+		[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Post Title', 'schema-package' ) ],
 		[ 'key' => 'post_content', 'value' => 'post_content', 'text' => esc_html__( 'Content', 'schema-package' ) ],
 		[ 'key' => 'post_category', 'value' => 'post_category', 'text' => esc_html__( 'Category', 'schema-package' ) ],
 		[ 'key' => 'post_excerpt', 'value' => 'post_excerpt', 'text' => esc_html__( 'Excerpt', 'schema-package' ) ],
@@ -578,6 +578,7 @@ function smpg_meta_list() {
 		[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],				
 		[ 'key' => 'acf_custom_field', 'value' => 'acf_custom_field', 'text' => esc_html__( 'ACF Custom Field', 'schema-package' ) ],				
 		[ 'key' => 'tp_custom_field', 'value' => 'tp_custom_field', 'text' => esc_html__( 'TP Custom Field', 'schema-package' ) ],				
+		[ 'key' => 'no_value', 'value' => 'no_value', 'text' => esc_html__( 'No Value', 'schema-package' ) ],
 	];
 
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	

@@ -139,20 +139,20 @@ function smpg_prepare_carousel_json_ld( $schema_data ) {
 
 }
 
-function smpg_prepare_global_json_ld( $schema_data, $post_id ){
+function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             
     $json_ld = array();    
     
-    if(empty($schema_data['schema_type'][0])){
+    if ( empty( $schema_data['_schema_type'][0] ) ) {
         return $json_ld;
     }      
                               
-    switch ($schema_data['schema_type'][0]) {
+    switch ( $schema_data['_schema_type'][0] ) {
         
         case 'article':     
             
             $json_ld['@context']                  = smpg_get_context_url();
-            $json_ld['@type']                     = smpg_get_schema_type_text($schema_data['schema_type'][0]);            
+            $json_ld['@type']                     = smpg_get_schema_type_text($schema_data['_schema_type'][0]);            
             $json_ld['url']                       = smpg_get_permalink();
             $json_ld['headline']                  = smpg_get_the_title();
             $json_ld['description']               = smpg_get_description();    
@@ -164,26 +164,29 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ){
             $json_ld['keywords']                  = smpg_get_post_tags();                            
             $json_ld['author']                    = smpg_get_author_detail();
 
-            $json_ld['publisher']        = smpg_get_publisher();
+            $json_ld['publisher']                 = smpg_get_publisher();
 
             $image = smpg_get_image();
 
-            if(!empty($image)){                     
-                $json_ld = array_merge($json_ld,$image);                 
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld, $image );
             }
 
-            if(isset($schema_data['add_comments'][0]) && $schema_data['add_comments'][0] == 1){
+            if ( isset( $schema_data['add_comments'][0] ) && $schema_data['add_comments'][0] == 1 ) {
                 $json_ld['comment'] = smpg_get_post_comments($post_id);
             }
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_change_article_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 
         case 'jobposting':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['schema_type'][0]);
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
             $json_ld['url']              = smpg_get_permalink();
 
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_change_jobposting_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
@@ -191,25 +194,39 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ){
         case 'product':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['schema_type'][0]);
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
             $json_ld['url']              = smpg_get_permalink();
 
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_change_product_json_ld', $json_ld, $schema_data, $post_id ); 
 
             break;
 
         case 'faqpage':
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['schema_type'][0]);
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
             $json_ld['url']              = smpg_get_permalink();
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_change_faqpage_json_ld', $json_ld, $schema_data, $post_id ); 
 
             break;    
 
+        case 'softwareapplication':
+            $json_ld['@context']         = smpg_get_context_url();
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
+            $json_ld['url']              = smpg_get_permalink();
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_change_softwareapplication_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
         case 'book':
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['schema_type'][0]);
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
             $json_ld['url']              = smpg_get_permalink();
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_change_book_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;   
@@ -217,7 +234,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ){
         case 'videoobject':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['schema_type'][0]);
+            $json_ld['@type']            = smpg_get_schema_type_text($schema_data['_schema_type'][0]);
             $json_ld['url']              = smpg_get_permalink();
             $json_ld['name']             = smpg_get_the_title();
             $json_ld['description']      = smpg_get_description();    
@@ -241,7 +258,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ){
                 $json_ld['embedUrl']   = $video_data[0]['video_url'];
                 
             }
-
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_change_videoobject_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;   
@@ -255,9 +272,9 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ){
 
 }
 
-function smpg_prepare_breadcrumbs_json_ld(){
+function smpg_prepare_breadcrumbs_json_ld() {
 
-    if(is_front_page() || is_home()){
+    if ( is_front_page() || is_home() ) {
         return [];
     }
 
@@ -267,13 +284,15 @@ function smpg_prepare_breadcrumbs_json_ld(){
     
     $json_ld       = array();
 
-    if(!empty($smpg_misc_schema['breadcrumbs'])){
+    if ( ! empty( $smpg_misc_schema['breadcrumbs'] ) ) {
                             
                 $itemList = array();
 
-                if(!empty($bread_data['itemlist'])){
+                if ( ! empty( $bread_data['itemlist'] ) ) {
+
                     $i = 1;
-                    foreach ($bread_data['itemlist'] as  $value) {
+
+                    foreach ( $bread_data['itemlist'] as  $value ) {
 
                         $itemList[] = [
                             '@type'     => 'ListItem',
@@ -287,7 +306,7 @@ function smpg_prepare_breadcrumbs_json_ld(){
 
                 }
 
-                if(!empty($itemList)){
+                if ( ! empty($itemList) ) {
 
                     $json_ld['@context']        =  smpg_get_context_url();
                     $json_ld['@type']           =  'BreadcrumbList';                
@@ -300,7 +319,7 @@ function smpg_prepare_breadcrumbs_json_ld(){
     return $json_ld;
 }
 
-function smpg_breadcrumbs_data(){
+function smpg_breadcrumbs_data() {
     
     $response    = array();
     $crumbslist  = array();    
@@ -314,13 +333,13 @@ function smpg_breadcrumbs_data(){
     ];
 
 
-        if( is_author() ){
+        if ( is_author() ){
 
             global $authordata;
                 
-                if($authordata){
+                if ( $authordata ) {
                     
-                    $author_url             = get_author_posts_url($authordata->ID);	                        
+                    $author_url             = get_author_posts_url( $authordata->ID );
                     $current_url            = $author_url;
 
                     $crumbslist[] = [
@@ -332,20 +351,20 @@ function smpg_breadcrumbs_data(){
 
         }
 
-        if( is_category() ){
+        if ( is_category() ) {
 
             $current_url   = smpg_get_request_url();
-            $exploded_cat  = explode('/', $current_url);
+            $exploded_cat  = explode( '/', $current_url );
                             
-            if(!empty($exploded_cat) && is_array($exploded_cat)) {
+            if ( ! empty( $exploded_cat ) && is_array( $exploded_cat ) ) {
                                                     
                 foreach ($exploded_cat as $value) {
 
-                    $category_value = get_category_by_slug($value);
+                    $category_value = get_category_by_slug( $value );
                     
-                    if($category_value && is_object($category_value)){
+                    if ( $category_value && is_object( $category_value ) ) {
 
-                        $category_obj           = get_category($category_value);                                        
+                        $category_obj           = get_category( $category_value );                                        
                         $current_url            = get_category_link( $category_value );
 
                         $crumbslist[] = [
@@ -360,25 +379,25 @@ function smpg_breadcrumbs_data(){
 
         }
 
-        if( is_tag() ){
+        if ( is_tag() ) {
 
-                $term_id        = get_query_var('tag_id');                   
-                $get_term       = get_term($term_id);
+                $term_id        = get_query_var( 'tag_id' );
+                $get_term       = get_term( $term_id );
                 
-                if( is_object($get_term) && isset($get_term->name) ){                                
+                if ( is_object( $get_term ) && isset( $get_term->name ) ) {
                     
-                    $current_url            = get_term_link($term_id);
+                    $current_url            = get_term_link( $term_id );
 
                     $crumbslist[] = [
                         'name' => $get_term->name,
-                        'link' => get_term_link($term_id)
+                        'link' => get_term_link( $term_id )
                     ];
                                 
                 }
 
         }
 
-        if( is_singular() ){
+        if ( is_singular() ) {
                                                                         
                 $current_url            = get_permalink();                                                                     
 
@@ -389,17 +408,17 @@ function smpg_breadcrumbs_data(){
 
         }
 
-        if( is_tax() ){
+        if ( is_tax() ) {
                                                         
             $queried_obj = get_queried_object();
             
-            if(is_object($queried_obj)){
+            if ( is_object( $queried_obj ) ) {
 
-                $current_url            = get_term_link($queried_obj->term_id);
+                $current_url            = get_term_link( $queried_obj->term_id );
                 
                 $crumbslist[] = [
                     'name' => get_queried_object()->name,
-                    'link' => get_term_link($queried_obj->term_id)
+                    'link' => get_term_link( $queried_obj->term_id )
                 ];
             }          
 
@@ -407,38 +426,38 @@ function smpg_breadcrumbs_data(){
 
         if ( is_archive() && !is_tax() && !is_category() && !is_tag() && !is_author() ) {
                                                 
-            $current_url           = get_post_type_archive_link(get_post_type());
+            $current_url           = get_post_type_archive_link( get_post_type() );
 
             $crumbslist[] = [
-                'name' => post_type_archive_title('', false),
-                'link' => get_post_type_archive_link(get_post_type())
+                'name' => post_type_archive_title( '', false ),
+                'link' => get_post_type_archive_link( get_post_type() )
             ];
             
         }    
 
-        if(!empty($crumbslist)){
+        if ( ! empty( $crumbslist ) ) {
             $response = [ 'itemlist'=> $crumbslist, 'current_url' => $current_url ];   
         }
 
         return $response;
 }
 
-function smpg_prepare_website_json_ld(){
+function smpg_prepare_website_json_ld() {
 
     global $smpg_misc_schema;
     $json_ld       = array();
 
-    if( !empty($smpg_misc_schema['website']) && ( is_home() || is_front_page() ) ){
+    if ( !empty($smpg_misc_schema['website']) && ( is_home() || is_front_page() ) ) {
     
         $site_url  = get_home_url();
 
-        if( function_exists('pll_home_url') ) {
+        if ( function_exists('pll_home_url') ) {
             $site_url  = pll_home_url();
         }
 
         $site_name = get_bloginfo();
 
-        if($site_url && $site_name){
+        if ( $site_url && $site_name ) {
 
             $json_ld['@context']    = smpg_get_context_url();
             $json_ld['@type']       = 'WebSite';        
@@ -447,10 +466,10 @@ function smpg_prepare_website_json_ld(){
             $json_ld['description'] = smpg_get_blog_description();
             $json_ld['url']         = $site_url;
 
-            if(!empty($smpg_misc_schema['sitelinks_search_box'])){
+            if ( ! empty( $smpg_misc_schema['sitelinks_search_box'] ) ) {
 
                 $json_ld['potentialAction']['@type']       = 'SearchAction';
-                $json_ld['potentialAction']['target']      = trailingslashit($site_url).'?s={search_term_string}';
+                $json_ld['potentialAction']['target']      = trailingslashit( $site_url ).'?s={search_term_string}';
                 $json_ld['potentialAction']['query-input'] = 'required name=search_term_string';
 
             }
@@ -462,7 +481,7 @@ function smpg_prepare_website_json_ld(){
     return $json_ld;
 }
 
-function smpg_prepare_about_page_json_ld(){
+function smpg_prepare_about_page_json_ld() {
 
 	global $smpg_misc_schema;
     
@@ -470,11 +489,11 @@ function smpg_prepare_about_page_json_ld(){
     $json_ld       = array();   
     $pages_arr     = array();
 
-    if(!empty($smpg_misc_schema['about_pages'])){
+    if ( ! empty( $smpg_misc_schema['about_pages'] ) ) {
 
         $pages_arr = $smpg_misc_schema['about_pages'];
 
-        if(in_array($page_id, $pages_arr)){
+        if ( in_array( $page_id, $pages_arr ) ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = 'AboutPage';
@@ -485,8 +504,8 @@ function smpg_prepare_about_page_json_ld(){
 
             $image = smpg_get_image();
 
-            if(!empty($image)){                     
-                $json_ld = array_merge($json_ld,$image);                 
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld,$image );
             }    
 
         }
@@ -497,7 +516,7 @@ function smpg_prepare_about_page_json_ld(){
 	
 }
 
-function smpg_prepare_contact_page_json_ld(){
+function smpg_prepare_contact_page_json_ld() { 
 
 	global $smpg_misc_schema;
     
@@ -505,11 +524,11 @@ function smpg_prepare_contact_page_json_ld(){
     $json_ld       = array();   
     $pages_arr     = array();
 
-    if(!empty($smpg_misc_schema['contact_pages'])){
+    if ( ! empty( $smpg_misc_schema['contact_pages'] ) ) {
 
         $pages_arr = $smpg_misc_schema['contact_pages'];
 
-        if(in_array($page_id, $pages_arr)){
+        if ( in_array( $page_id, $pages_arr ) ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = 'ContactPage';
@@ -520,8 +539,8 @@ function smpg_prepare_contact_page_json_ld(){
 
             $image = smpg_get_image();
 
-            if(!empty($image)){                     
-                $json_ld = array_merge($json_ld,$image);                 
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld,$image );
             }
 
         }

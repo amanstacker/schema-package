@@ -965,7 +965,7 @@ function smpg_get_product_automated_brand($json_ld, $post_id, $automation){
             $json_ld['brand']['name']         = $result[0]['term']['name'];
             $json_ld['brand']['description']  = $result[0]['term']['description'];
             
-            $image = smpg_get_image_by_image_id($result[0]['term_meta']['pwb_brand_image'][0]);
+            $image = smpg_get_post_image_by_id($result[0]['term_meta']['pwb_brand_image'][0]);
 
             if(!empty($image)){
                 $json_ld['brand']['image'] = $image;
@@ -985,7 +985,7 @@ function smpg_get_product_automated_brand($json_ld, $post_id, $automation){
             $json_ld['brand']['name']         = $result[0]['term']['name'];
             $json_ld['brand']['description']  = $result[0]['term']['description'];
             
-            $image = smpg_get_image_by_image_id($result[0]['term_meta']['thumbnail_id'][0]);
+            $image = smpg_get_post_image_by_id($result[0]['term_meta']['thumbnail_id'][0]);
 
             if(!empty($image)){
                 $json_ld['brand']['image'] = $image;

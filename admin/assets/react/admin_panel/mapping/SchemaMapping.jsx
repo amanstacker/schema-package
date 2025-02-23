@@ -78,7 +78,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   const handleMetaFieldChange = (schemaKey, value) => {
     setSelectedMetaFields((prev) => ({
       ...prev,
-      [schemaKey]: { wpMeta: value },
+      [schemaKey]: { meta_field: value },
     }));
   };
 
@@ -86,11 +86,11 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
     setSelectedMetaFields((prev) => ({
       ...prev,
       [schemaKey]: {
-        wpMeta: prev[schemaKey]?.wpMeta,
-        customText: type === "customText" ? value : prev[schemaKey]?.customText || "",
+        meta_field: prev[schemaKey]?.meta_field,
+        custom_text: type === "custom_text" ? value : prev[schemaKey]?.custom_text || "",
         taxonomy: type === "taxonomy" ? value : prev[schemaKey]?.taxonomy || "",
-        customField: type === "customField" ? value : prev[schemaKey]?.customField || "",
-        customImage: type === "customImage" ? value : prev[schemaKey]?.customImage || "",
+        custom_field: type === "custom_field" ? value : prev[schemaKey]?.custom_field || "",
+        custom_image: type === "custom_image" ? value : prev[schemaKey]?.custom_image || "",
       },
     }));
   };
@@ -105,7 +105,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
 
     mediaUploader.on("select", () => {
       const attachment = mediaUploader.state().get("selection").first().toJSON();
-      handleCustomFieldChange(schemaKey, "customImage", attachment.url);
+      handleCustomFieldChange(schemaKey, "custom_image", attachment.url);
     });
 
     mediaUploader.open();
@@ -159,15 +159,15 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
                   fluid
                   selection
                   options={wpMetaList}
-                  value={selectedMeta.wpMeta || ""}
+                  value={selectedMeta.meta_field || ""}
                   onChange={(_, { value }) => handleMetaFieldChange(propertyKey, value)}
                 />
               </Grid.Column>
 
               {/* Third Column: Custom Meta Fields */}
               <Grid.Column>
-                {selectedMeta.wpMeta ? (
-                  selectedMeta.wpMeta === "taxonomy_term" ? (
+                {selectedMeta.meta_field ? (
+                  selectedMeta.meta_field === "taxonomy_term" ? (
                     <Dropdown
                       placeholder="Select Taxonomy"
                       fluid
@@ -176,29 +176,29 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
                       value={selectedMeta.taxonomy || ""}
                       onChange={(_, { value }) => handleCustomFieldChange(propertyKey, "taxonomy", value)}
                     />
-                  ) : selectedMeta.wpMeta === "custom_text" ? (
+                  ) : selectedMeta.meta_field === "custom_text" ? (
                     <TextArea
                       placeholder="Enter custom text..."
                       style={{ width: "100%" }}
-                      value={selectedMeta.customText || ""}
-                      onChange={(e) => handleCustomFieldChange(propertyKey, "customText", e.target.value)}
+                      value={selectedMeta.custom_text || ""}
+                      onChange={(e) => handleCustomFieldChange(propertyKey, "custom_text", e.target.value)}
                     />
-                  ) : selectedMeta.wpMeta === "custom_field" ? (
+                  ) : selectedMeta.meta_field === "custom_field" ? (
                     <Dropdown
                       placeholder="Select Custom Field"
                       fluid
                       search
                       selection
                       options={customFieldsList}
-                      value={selectedMeta.customField || ""}
+                      value={selectedMeta.custom_field || ""}
                       onSearchChange={(_, { searchQuery }) => setCustomFieldSearch(searchQuery)}
-                      onChange={(_, { value }) => handleCustomFieldChange(propertyKey, "customField", value)}
+                      onChange={(_, { value }) => handleCustomFieldChange(propertyKey, "custom_field", value)}
                     />
-                  ) : selectedMeta.wpMeta === "custom_image" ? (
+                  ) : selectedMeta.meta_field === "custom_image" ? (
                     <>
-                      {selectedMeta.customImage && <Image src={selectedMeta.customImage} size="small" style={{paddingBottom:"4px"}} />}
+                      {selectedMeta.custom_image && <Image src={selectedMeta.custom_image} size="small" style={{paddingBottom:"4px"}} />}
                       <Button primary onClick={() => openMediaUploader(propertyKey)}>
-                        {selectedMeta.customImage ? __("Change Image", "schema-package") : __("Upload Image", "schema-package")}
+                        {selectedMeta.custom_image ? __("Change Image", "schema-package") : __("Upload Image", "schema-package")}
                       </Button>
                     </>
                   ) : null

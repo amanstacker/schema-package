@@ -92,7 +92,7 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                 case 'custom_field':                    
                     $json_ld[$key] = get_post_meta( get_the_ID(), $value['custom_field'], true );
                     break;                
-                case 'site_logo':                    
+                case 'site_logo':
                     $logo_id = get_theme_mod( 'custom_logo' );     
 
                     if ( $logo_id ) {

@@ -152,7 +152,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'article':     
             
             $json_ld['@context']                  = smpg_get_context_url();
-            $json_ld['@type']                     = smpg_get_schema_type_text($schema_data['_schema_type'][0]);            
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
             $json_ld['url']                       = smpg_get_permalink();
             $json_ld['headline']                  = smpg_get_the_title();
             $json_ld['description']               = smpg_get_description();    

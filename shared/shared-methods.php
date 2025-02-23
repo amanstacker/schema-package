@@ -173,19 +173,19 @@ function smpg_get_post_category( $post_id = null ){
 
 function smpg_get_author_detail( $post_id = null ) {
 	
-	global $post;
+	global $post, $smpg_settings;
 		
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
+	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
 				
-	$content_post	= get_post($post_id);
-	$post_author	= get_userdata($content_post->post_author);
+	$content_post	= get_post( $post_id );
+	$post_author	= get_userdata( $content_post->post_author );
 	$email 			= $post_author->user_email; 		
 	
-	$author = array (
+	$author = [
 		'@type'	=> 'Person',
 		'name'	=> apply_filters ( 'smpg_change_author_name', $post_author->display_name ),
-		'url'	=> esc_url( get_author_posts_url( $post_author->ID ) )
-	);
+		'url'	=> get_author_posts_url( $post_author->ID )
+	];
 	
 	if ( get_the_author_meta( 'description', $post_author->ID ) ) {
 		$author['description'] = wp_strip_all_tags( get_the_author_meta( 'description', $post_author->ID ) );
@@ -193,20 +193,27 @@ function smpg_get_author_detail( $post_id = null ) {
 	
 	if ( smpg_validate_gravatar( $email ) ) {
 		
-		$image_size	= apply_filters( 'smpg_change_author_img_size', 96 ); 				
-		$args = array(
-						'size' => $image_size,
-					);
+		$image_size	= apply_filters( 'smpg_change_author_img_size', 96 );
+		$args = ['size' => $image_size ];
 		
 		$image_url	= get_avatar_url( $email, $args );
 
 		if ( $image_url ) {
-			$author['image'] = array (
-				'@type'		=> 'ImageObject',
-				'url' 		=> $image_url,
-				'height' 	=> $image_size, 
-				'width' 	=> $image_size
-			);
+
+			if ( ! empty( $smpg_settings['image_object'] ) ) {
+
+				$author['image'] = array (
+					'@type'		=> 'ImageObject',
+					'url' 		=> $image_url,
+					'height' 	=> $image_size, 
+					'width' 	=> $image_size
+				);
+
+			}else{
+
+				$author['image'] = $image_url;
+
+			}			
 		}
 	}
 			
@@ -221,7 +228,7 @@ function smpg_get_author_detail( $post_id = null ) {
 	$tumblr 	= get_the_author_meta( 'tumblr', $post_author->ID );
 	$github 	= get_the_author_meta( 'github', $post_author->ID );
 			
-	$sameAs_links = array( $website, $facebook, $instagram, $youtube, $linkedin, $myspace, $pinterest, $soundcloud, $tumblr, $github );
+	$sameAs_links = [ $website, $facebook, $instagram, $youtube, $linkedin, $myspace, $pinterest, $soundcloud, $tumblr, $github ];
 	
 	$social = array();
 		
@@ -236,7 +243,7 @@ function smpg_get_author_detail( $post_id = null ) {
 	return apply_filters( 'smpg_change_author_detail', $author );
 }
 
-function smpg_get_published_date($post_id = null){
+function smpg_get_published_date( $post_id = null ) {
 
 	global $post;
 
@@ -500,55 +507,78 @@ function smpg_get_image(){
 			}
 										
 		}
-	
+			
 	return apply_filters( 'smpg_change_json_ld_image', $json_ld_image );	
 }
 
 function smpg_get_author_image_by_id( $image_id = null ) {
 
+	global $smpg_settings;
+		
 	$img_arr = $author_image = [];
 		
 	if ( function_exists( 'get_avatar_data' ) &&  ! empty( get_option( 'show_avatars' ) ) ) {
+
 		$author_image	= get_avatar_data( get_the_author_meta( 'ID' ) );
-	}                                                          
 
-	$img_arr['@type']  = 'ImageObject';
-	$img_arr['url']    = $author_image['url'];
-	$img_arr['width']  = $author_image['height']; 
-	$img_arr['height'] = $author_image['width'];
+		if ( ! empty( $author_image ) ) {
 
-	return $img_arr;
+			$img_arr['@type']  = 'ImageObject';
+			$img_arr['url']    = $author_image['url'];
+			$img_arr['width']  = $author_image['height']; 
+			$img_arr['height'] = $author_image['width'];
+			
+			if ( ! empty( $smpg_settings['image_object'] ) ){
+				return $img_arr;	
+			}else{
+				return $author_image['url'];	
+			}
+
+		}
+		
+	}                                                          	
+	
 }
 
 function smpg_get_post_image_by_id( $image_id = null ) {
-	
+
+	global $smpg_settings;
+
 	if ( ! isset( $image_id ) ) {
 		$image_id = get_post_thumbnail_id();
-	}
-			
-	$ImageObject = array();
+	}				
 		
 	$image_attributes = wp_get_attachment_image_src( $image_id, 'full' );
 	
 	if ( isset($image_attributes[0]) ) {
+
 		$url		= $image_attributes[0];
 		$width		= $image_attributes[1];
 		$height		= $image_attributes[2];
-		
-		$ImageObject = array (
-			'@type' 	=> 'ImageObject',
-			'url' 		=> $url,
-			'width'		=> $width,
-			'height' 	=> $height,
-		);
-				
-		$caption = wp_get_attachment_caption( $image_id );
-		if ($caption) { 
-			$ImageObject['caption'] = $caption;
+
+		if ( ! empty( $smpg_settings['image_object'] ) ) {
+
+			$image_object = [];
+
+			$image_object = array (
+				'@type' 	=> 'ImageObject',
+				'url' 		=> $url,
+				'width'		=> $width,
+				'height' 	=> $height,
+			);
+					
+			$caption = wp_get_attachment_caption( $image_id );
+	
+			if ( $caption ) { 
+				$image_object['caption'] = $caption;
+			}
+			return $image_object;
+		}else{
+			return $url;
 		}
+						
 	}		
 	
-	return $ImageObject;
 }
 function smpg_get_home_url( $path = '', $scheme = null ) {
 

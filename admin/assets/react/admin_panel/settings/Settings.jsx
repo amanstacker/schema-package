@@ -32,7 +32,8 @@ const Settings = () => {
       pretty_print_json_ld:     false,  
       clean_micro_data:         false,  
       clean_rdfa_data:          false,  
-      multisize_image:          false,  
+      multisize_image:          false,
+      image_object:             false,
       cmp_ampforwp:             false,              
       cmp_ampforwp:             false,
       cmp_amp_by_automatic:     false,
@@ -337,6 +338,13 @@ const Settings = () => {
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
+                  <tr>
+                    <th><label htmlFor="image_object">{__('ImageObject', 'schema-package')}</label></th>
+                    <td>
+                      <input type="checkbox" id="image_object" name="image_object" onChange={formChangeHandler} checked={settings.image_object} />
+                      <span className="smpg-tooltip"><Popup content={__('By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                      
                   <tr>
                     <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
                     <td>

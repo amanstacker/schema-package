@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_remove_data_on_uninstall( $blog_id = null ) {
+function smpg_delete_data_on_uninstall( $blog_id = null ) {
         
     try{
      

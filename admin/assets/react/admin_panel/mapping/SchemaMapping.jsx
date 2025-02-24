@@ -116,8 +116,8 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   },[selectedMetaFields])
 
   return (
-    <>
-      <Divider style={{ marginTop: "30px" }} />
+    <>        
+      <Divider horizontal style={{ marginTop: "30px" }} >{__("Mapping", "schema-package")}</Divider>
       <Grid columns={3} divided>
         <Grid.Row>
           <Grid.Column textAlign="center">

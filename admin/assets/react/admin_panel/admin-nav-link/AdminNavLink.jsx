@@ -2,7 +2,7 @@ import React from 'react';
 import './AdminNavLink.css';
 import {Link} from 'react-router-dom';
 import queryString from 'query-string'
-
+import { Button, Icon } from "semantic-ui-react";
 
 const AdminNavLink = () => {
 
@@ -23,8 +23,23 @@ const AdminNavLink = () => {
           <Link  to={'admin.php?page=schema_package&path=misc_schema'} className={current == 'misc_schema' ? 'item active' : 'item'}><h3>{__('Misc Schema', 'schema-package')}</h3></Link>          
           <Link  to={'admin.php?page=schema_package&path=settings'} className={(current == 'settings' || current == 'settings_tools' || current == 'settings_advanced' || current == 'settings_compatibility' || current == 'settings_defaultdata' || current == 'settings_help' || current == 'settings_manageconflict' || current == 'settings_license' ) ? 'item active' : 'item'}><h3>{__('Settings', 'schema-package')}</h3></Link>                    
           {smpg_local.is_free ? 
-            <div className="right menu"><div className="item"><a target='_blank' href='https://schemapackage.com/premium/' className="ui button upgrade-premium-btn">{__('Upgrade to Premium', 'schema-package')}</a></div></div>
-          : ''}          
+            <div className="right menu">
+              <div className="item">
+                <a target='_blank' href='https://schemapackage.com/premium/' className="ui button upgrade-premium-btn">{__('Upgrade to Premium', 'schema-package')}</a>                        
+                <a target='_blank' href='https://schemapackage.com/knowledge-base/' >
+                <Icon style={{marginLeft:"15px", cursor:"pointer"}} name="help circle" size='large' />
+                </a>                                        
+              </div>
+            </div>
+          :
+          <div className="right menu">
+              <div className="item">                
+              <a rel="noopener noreferrer" target="_blank" href="https://schemapackage.com/knowledge-base/">
+                <Icon style={{marginLeft:"15px", cursor:"pointer"}} name="help circle" size='large' />
+              </a>                                        
+              </div>
+            </div> 
+          }          
           </div>                                                  
         </div>   
         </div>        

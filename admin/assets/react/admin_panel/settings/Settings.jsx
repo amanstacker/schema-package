@@ -47,7 +47,7 @@ const Settings = () => {
       cmp_rank_math:            false,
       cmp_simple_author_box:    false,
       reset_settings:           false,
-      remove_data_on_uninstall: false,      
+      delete_data_on_uninstall: false,      
       default_logo_id:          null,
       default_image_id:         null,
       default_logo_url:         null,
@@ -289,7 +289,7 @@ const Settings = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "schema-package-data.json");
+      link.setAttribute("download", "schema-package.json");
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -423,13 +423,13 @@ const Settings = () => {
                     <div className="smpg-import-td" style={{float : "left"}}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <Input
-                          style={{width:"220px"}}
+                          style={{width:"163px"}}
                           value={importFile?.name}
-                          placeholder="Choose a file..."
+                          placeholder={__('Choose a file...', 'schema-package')}
                           readOnly
                           action={
                             <Button as="label" htmlFor="file-upload" primary>
-                              Choose File
+                              {__('Choose', 'schema-package')}                              
                             </Button>
                           }
                         />                        
@@ -441,16 +441,16 @@ const Settings = () => {
                         />      
                       </div>                                                              
                     </div>                                              
-                    <span style={{float:'right', position:'absolute', right:"-150px", top:"24px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <span style={{float:'right', position:'absolute', right:"-130px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                  
                   <tr>
-                    <th><label htmlFor="remove_data_on_uninstall">{__('Delete Data on Uninstall', 'schema-package')}</label></th>
+                    <th><label htmlFor="delete_data_on_uninstall">{__('Delete Data on Uninstall', 'schema-package')}</label></th>
                     <td>
                       <Checkbox                     
-                        name='remove_data_on_uninstall'
-                        id='remove_data_on_uninstall' 
-                        checked={settings.remove_data_on_uninstall}
+                        name='delete_data_on_uninstall'
+                        id='delete_data_on_uninstall' 
+                        checked={settings.delete_data_on_uninstall}
                         onChange={formChangeHandler}
                       />                                            
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  

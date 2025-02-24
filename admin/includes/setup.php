@@ -511,21 +511,21 @@ function smpg_on_plugin_uninstall() {
         		 
 	$options = get_option( 'smpg_settings' );
 		
-	if ( isset( $options['remove_data_on_uninstall'] ) ) {
+	if ( isset( $options['delete_data_on_uninstall'] ) ) {
 	 
 		if ( is_multisite() ) {
 
 			foreach ( get_sites() as $site ) {
 
                 switch_to_blog( $site->blog_id );
-                smpg_remove_data_on_uninstall();
+                smpg_delete_data_on_uninstall();
                 restore_current_blog();
 
             }
 
 		 } else {
 
-			smpg_remove_data_on_uninstall();				  
+			smpg_delete_data_on_uninstall();				  
 
 		 }
 			   

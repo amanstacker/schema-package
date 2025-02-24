@@ -35,6 +35,7 @@
 .smpg-tooltip{
     padding-left: 25px;
     cursor: pointer;
+    vertical-align: top;
 }
 .smpg-input-file{
     width: 0.1px;

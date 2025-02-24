@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Icon, Popup, Checkbox } from 'semantic-ui-react'
+import { Button, Input, Icon, Popup, Checkbox, TextArea } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
 import MainSpinner from './../common/main-spinner/MainSpinner';
-import { Button, Input } from "semantic-ui-react";
 import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
@@ -559,23 +558,31 @@ const Settings = () => {
                 <tbody>
                  <tr>
                   <th>{__('Email', 'schema-package')}</th>
-                  <td><input 
-                    placeholder={__('Your email id', 'schema-package') } 
-                    type="text" 
-                    name="user_email" 
-                    value={supportEmail} 
-                    onChange={event => setSupportEmail(event.target.value)}
-                  /></td> 
+                  <td>
+                    <Input 
+                      icon="user"
+                      iconPosition="left"                    
+                      type="email"
+                      placeholder={__('Your email id', 'schema-package') } 
+                      id="user_email"
+                      name="user_email" 
+                      value={supportEmail}
+                      onChange={event => setSupportEmail(event.target.value)}
+                    />
+                    
+                  </td> 
                  </tr>
                  <tr>
                   <th>{__('Query', 'schema-package')}</th>
-                  <td><textarea
-                   value={supportMessage} 
-                   onChange={event => setSupportMessage(event.target.value)}
-                   placeholder={__('Type your query here...', 'schema-package') } 
-                   cols="40" 
-                   rows="6" name="user_query" 
-                   />                   
+                  <td>
+                  <TextArea
+                    value={supportMessage}
+                    onChange={(event) => setSupportMessage(event.target.value)}
+                    placeholder={__('Type your query here...', 'schema-package') }
+                    rows="6"
+                    cols="25"
+                    name="user_query"
+                  />                    
                    </td> 
                  </tr>
                  <tr>

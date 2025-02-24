@@ -1,7 +1,5 @@
 import React, { useEffect, useState,useReducer } from 'react';
-import { Dropdown } from 'semantic-ui-react'
-import { Button } from 'semantic-ui-react'
-import { Popup } from 'semantic-ui-react'
+import { Checkbox, Popup, Button, Dropdown } from 'semantic-ui-react'
 import MainSpinner from './../common/main-spinner/MainSpinner';
 
 import './MiscSchema.css';
@@ -175,7 +173,12 @@ const MiscSchema = () => {
         <tr>
           <td><label htmlFor="website"><strong>{__('Website', 'schema-package')}</strong></label></td>
           <td>
-              <input type="checkbox" id="website" name="website" onChange={formChangeHandler} checked={miscSchema.website} />
+                <Checkbox                     
+                      name='website'
+                      id='website' 
+                      checked={miscSchema.website}
+                      onChange={formChangeHandler}
+                />                                    
               <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content of your site. It appears on homepage only.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
@@ -184,7 +187,12 @@ const MiscSchema = () => {
           <tr>
             <td className="smpg-sub-el"><label htmlFor="sitelinks_search_box"><strong>{__('Sitelinks Search Box', 'schema-package')}</strong></label></td>
             <td>
-                <input type="checkbox" id="sitelinks_search_box" name="sitelinks_search_box" onChange={formChangeHandler} checked={miscSchema.sitelinks_search_box} />
+                <Checkbox                     
+                      name='sitelinks_search_box'
+                      id='sitelinks_search_box' 
+                      checked={miscSchema.sitelinks_search_box}
+                      onChange={formChangeHandler}
+                />                
                 <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
             </td>
           </tr> 
@@ -193,7 +201,12 @@ const MiscSchema = () => {
         <tr>
           <td><label htmlFor="breadcrumbs"><strong>{__('BreadCrumbs', 'schema-package')}</strong></label></td>
           <td>
-              <input type="checkbox" id="breadcrumbs" name="breadcrumbs" onChange={formChangeHandler} checked={miscSchema.breadcrumbs} />
+                <Checkbox                     
+                      name='breadcrumbs'
+                      id='breadcrumbs' 
+                      checked={miscSchema.breadcrumbs}
+                      onChange={formChangeHandler}
+                />              
               <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>

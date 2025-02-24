@@ -4,3 +4,6 @@
 .smpg-misc-table tr td:first-child{ 
     min-width: 150px !important; 
 }
+#smpg_misc_schema_form label{
+    cursor: pointer;
+}

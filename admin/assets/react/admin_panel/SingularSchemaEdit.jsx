@@ -560,7 +560,7 @@ const SingularSchemaEdit = () => {
         </Accordion> 
        : '' }                                 
          {postMeta._schema_type ?                
-        <Accordion title="Automation With" isExpand={true}>      
+        <Accordion title="Automation" isExpand={true}>      
         <h3></h3>
         {
         automationList.length > 0 ? 

@@ -98,36 +98,32 @@ class SMPG_Api_Action {
                 
         public function export_settings(){
             
-            $post_type = array('smpg_singular_schema');
-            $export_data_all   = []; 
-            
-            foreach($post_type as $type){
+            $export_data_all = []; 
+            $post_type       = [ 'smpg_singular_schema', 'smpg_carousel_schema' ];
+                        
+            foreach( $post_type as $type ) {
                 
                 $export_data       = [];                
 
-                $all_schema_post = get_posts(
-
-                    array(
+                $all_schema_post = get_posts( [
                             'post_type' 	     => $type,                                                                                   
                             'posts_per_page'     => -1,   
                             'post_status'        => 'any',
-                    )
+                    ] );                        
 
-                    );                        
-
-                if($all_schema_post){
+                if ( $all_schema_post ) {
                 
-                    foreach($all_schema_post as $schema){    
+                    foreach ( $all_schema_post as $schema ) {
 
                     $export_data[$schema->ID]['post']      = (array)$schema;                    
-                    $post_meta                             = get_post_meta($schema->ID, $key='', true );    
+                    $post_meta                             = get_post_meta( $schema->ID, $key='', true );    
 
-                    if($post_meta){
+                    if ( $post_meta ) {
 
-                        foreach ($post_meta as $key => $meta){
+                        foreach ( $post_meta as $key => $meta ) {
 
-                            if(@unserialize($meta[0]) !== false){
-                                $post_meta[$key] = @unserialize($meta[0]);
+                            if ( @unserialize( $meta[0] ) !== false ) {
+                                $post_meta[$key] = @unserialize( $meta[0] );
                             }else{
                                 $post_meta[$key] = $meta[0];
                             }
@@ -147,10 +143,10 @@ class SMPG_Api_Action {
                 
             }
             
-            $export_data_all['smpg_settings']         = get_option('smpg_settings');
-            $export_data_all['smpg_misc_schema']      = get_option('smpg_misc_schema');
+            $export_data_all['smpg_settings']         = get_option( 'smpg_settings' );
+            $export_data_all['smpg_misc_schema']      = get_option( 'smpg_misc_schema' );
             
-            return   $export_data_all;	                   
+            return   $export_data_all;
         }
         
         public function reset_settings($request){

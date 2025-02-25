@@ -28,50 +28,50 @@ class SMPG_Api_Mapper {
         //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reason: loading local file
         $json_data       = @file_get_contents($import_file);        
         
-        if($json_data){
+        if ( $json_data ) {
             
-          $json_array      = json_decode($json_data, true);   
+          $json_array      = json_decode( $json_data, true );   
       
           $posts_data      = $json_array['posts'];                   
                       
-          if($posts_data){  
+          if ( $posts_data ) {
               
-          foreach($posts_data as $data){
+          foreach( $posts_data as $data ) {
                   
           $all_schema_post = $data;                   
                               
           $schema_post = array();                     
              
-          if($all_schema_post && is_array($all_schema_post)){
+          if ( $all_schema_post && is_array( $all_schema_post ) ) {
           // begin transaction
           //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-          $wpdb->query('START TRANSACTION');
+          $wpdb->query( 'START TRANSACTION' );
           
-          foreach($all_schema_post as $schema_post){  
+          foreach ( $all_schema_post as $schema_post ) {  
                             
               $post_meta =     $schema_post['post_meta'];   
 
               if ( get_post_status( $schema_post['post']['ID'] ) ) {              
                   
-                  $post_id    =     wp_update_post($schema_post['post']);  
+                  $post_id    =     wp_update_post( $schema_post['post'] );  
                    
               }else{
                   
-                  unset($schema_post['post']['ID']);
+                  unset( $schema_post['post']['ID'] );
                   
-                  $post_id    =     wp_insert_post($schema_post['post']); 
+                  $post_id    =     wp_insert_post( $schema_post['post'] ); 
                   
-                  if($post_meta){
+                  if ( $post_meta ) {
                       
-                      foreach($post_meta as $key => $val){
+                      foreach ( $post_meta as $key => $val ) {
 
-                        $explod_key = explode("_",$key);
+                        $explod_key = explode( "_",$key );
 
-                        $exp_count  = count($explod_key);
+                        $exp_count  = count( $explod_key );
 
-                        $explod_key[($exp_count-1)] = $post_id;
+                        $explod_key[( $exp_count-1 )] = $post_id;
 
-                        $explod_key = implode("_", $explod_key);
+                        $explod_key = implode( "_", $explod_key );
 
                         $post_meta[$explod_key] = $val;
 
@@ -81,24 +81,24 @@ class SMPG_Api_Mapper {
                                       
               }
                                                                                         
-              foreach($post_meta as $key => $meta){
+              foreach ( $post_meta as $key => $meta ) {
                   
-                  $meta = wp_unslash($meta);
+                  $meta = wp_unslash( $meta );
                   
-                  if(is_array($meta)){    
+                  if ( is_array( $meta ) ) {
                       
-                      $meta = wp_unslash($meta);
-                      update_post_meta($post_id, $key, $meta);
+                      $meta = wp_unslash( $meta );
+                      update_post_meta( $post_id, $key, $meta );
                       
                   }else{
-                      update_post_meta($post_id, $key, sanitize_text_field($meta));
+                      update_post_meta( $post_id, $key, sanitize_text_field( $meta ) );
                   }
                                                           
               }
                                                                                                                   
-              if(is_wp_error($post_id)){
-                  $errorDesc[] = $result->get_error_message();
-              }
+                if ( is_wp_error( $post_id ) ) {
+                    $errorDesc[] = $result->get_error_message();
+                }
               } 
               
               }      
@@ -107,49 +107,49 @@ class SMPG_Api_Mapper {
               
           }            
           //Saving settings data starts here
-          if(array_key_exists('smpg_settings', $json_array)){
+          if ( array_key_exists( 'smpg_settings', $json_array ) ) {
               
               $smpg_sp_data = $json_array['smpg_settings'];
               
-              foreach($smpg_sp_data as $key => $val){
+              foreach ( $smpg_sp_data as $key => $val ) {
                   
-                  if(is_array($val)){
+                  if ( is_array( $val ) ) {
                       
-                      $smpg_sp_data[$key] = $meta = array_map( 'sanitize_text_field' ,$val);   
+                      $smpg_sp_data[$key] = $meta = array_map( 'sanitize_text_field' ,$val );
                       
                   }else{
                       
-                      $smpg_sp_data[$key] = sanitize_text_field($val);
+                      $smpg_sp_data[$key] = sanitize_text_field( $val );
                       
                   }
                   
               }
               
-              update_option('smpg_settings', $smpg_sp_data); 
+              update_option( 'smpg_settings', $smpg_sp_data );
           } 
           //Saving settings data ends here   
           //Saving misc data starts here
-          if(array_key_exists('smpg_misc_schema', $json_array)){
+          if ( array_key_exists( 'smpg_misc_schema', $json_array ) ) {
               
             $smpg_sp_data = $json_array['smpg_misc_schema'];
             
-            foreach($smpg_sp_data as $key => $val){
+            foreach ( $smpg_sp_data as $key => $val ) {
                 
-                if(is_array($val)){
+                if ( is_array( $val ) ) {
                     
-                    $smpg_sp_data[$key] = $meta = array_map( 'sanitize_text_field' ,$val);   
+                    $smpg_sp_data[$key] = $meta = array_map( 'sanitize_text_field' ,$val );   
                     
                 }else{
                     
-                    $smpg_sp_data[$key] = sanitize_text_field($val);
+                    $smpg_sp_data[$key] = sanitize_text_field( $val );
                     
                 }
                 
             }
             
-            update_option('smpg_settings', $smpg_sp_data); 
+            update_option('smpg_misc_schema', $smpg_sp_data); 
         } 
-        //Saving misc data ends here             
+          //Saving misc data ends here             
            update_option('smpg-file-upload_url','');
           
       }

@@ -18,6 +18,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         break;
 
         case 'article':
+        case 'techarticle':
+        case 'newsarticle':
+        case 'advertisercontentarticle':
+        case 'satiricalarticle':
+        case 'scholarlyarticle':
+        case 'socialmediaposting':
             
             $json_ld = smpg_get_different_article_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -149,7 +155,13 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
                               
     switch ( $schema_data['_schema_type'][0] ) {
         
-        case 'article':     
+            case 'article':
+            case 'techarticle':
+            case 'newsarticle':
+            case 'advertisercontentarticle':
+            case 'satiricalarticle':
+            case 'scholarlyarticle':
+            case 'socialmediaposting':     
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );

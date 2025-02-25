@@ -1,7 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
-import { Dropdown, Grid, Header, Divider } from 'semantic-ui-react'
+import { Dropdown, Checkbox, Grid, Form } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
@@ -545,18 +545,32 @@ const SingularSchemaEdit = () => {
       
        {postMeta._schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
-        <table className="form-table">
-          <tbody>
-            <tr>
-             <th><label htmlFor="_add_comments">{__('Comments', 'schema-package') }</label></th>
-             <td><input id="_add_comments" onChange={handleFormChange} name="_add_comments" checked={postMeta._add_comments} type="checkbox"/></td> 
-            </tr>
-            <tr>
-             <th><label htmlFor="_add_speakable">{__('Speakable', 'schema-package') }</label></th>
-             <td><input id="_add_speakable" onChange={handleFormChange} name="_add_speakable" checked={postMeta._add_speakable} type="checkbox"/></td> 
-            </tr>
-          </tbody>  
-          </table>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Form>
+                  <Form.Field key='_add_comments'>
+                    <Checkbox                     
+                      label={__('Comments', 'schema-package') }
+                      name='_add_comments'
+                      id='_add_comments' 
+                      checked={postMeta._add_comments}
+                      onChange={handleFormChange}
+                    />                                      
+                    </Form.Field>
+                    <Form.Field key='_add_speakable'>
+                      <Checkbox                     
+                        label={__('Speakable', 'schema-package') }
+                        name='_add_speakable'
+                        id='_add_speakable' 
+                        checked={postMeta._add_speakable}
+                        onChange={handleFormChange}
+                      />                              
+                    </Form.Field>
+                </Form>
+              </Grid.Column>
+              </Grid.Row>
+          </Grid>
         </Accordion> 
        : '' }                                 
          {postMeta._schema_type ?                

@@ -364,21 +364,21 @@ function smpg_cached_carousel_schema_ids( $post_id, $post, $update ) {
 
 function smpg_get_schema_ids( $cache_key, $post_type ) {
 	
-	$added_ids = array();
+	$added_ids = [];
 	
 	if ( false ===  get_transient( $cache_key )  ) {
 		
-			$args = array(
+			$args = [
 				'post_type'			=> $post_type,
 				'post_status'		=> 'publish',
 				'posts_per_page'	=> -1
-			);
+			];
 		
 			$schemas_query = new WP_Query( $args );
 
 			$schemas = $schemas_query->get_posts();
 
-			if ( empty($schemas) ) return array();
+			if ( empty($schemas) ) return [];
 
 			foreach( $schemas as $schema ) : 
 													
@@ -399,9 +399,9 @@ function smpg_get_schema_ids( $cache_key, $post_type ) {
 	return $added_ids;
 }
 
-function smpg_get_schema_type_text($id){
+function smpg_get_schema_type_text( $id ) {
 
-	$response = array();
+	$response = [];
 
 	$response = [
 		'article'                   => 'Article',
@@ -426,7 +426,7 @@ function smpg_get_schema_type_text($id){
 		'service'                   => 'Service'
 	];	
 
-	if(array_key_exists($id, $response)){
+	if ( array_key_exists( $id, $response ) ) {
 		return $response[$id];
 	}
 
@@ -505,9 +505,9 @@ function smpg_on_plugin_activation(){
  		
     $first_installation = get_option('smpg_first_installation_date');
     
-    if(!$first_installation){
+    if ( ! $first_installation ) {
         
-        update_option( 'smpg_first_installation_date', gmdate("Y-m-d") );
+        update_option( 'smpg_first_installation_date', gmdate( "Y-m-d" ) );
         
     }
                                               

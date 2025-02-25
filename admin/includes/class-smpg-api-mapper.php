@@ -20,13 +20,11 @@ class SMPG_Api_Mapper {
     public function import_from_file( $import_file ) {
       
         global $wpdb;
-        
-        $result          = null;
-        $errorDesc       = array();
-        $all_schema_post = array();
+                
+        $errorDesc       = $all_schema_post = [];         
         
         //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reason: loading local file
-        $json_data       = @file_get_contents($import_file);        
+        $json_data       = @file_get_contents( $import_file );
         
         if ( $json_data ) {
             
@@ -40,7 +38,7 @@ class SMPG_Api_Mapper {
                   
           $all_schema_post = $data;                   
                               
-          $schema_post = array();                     
+          $schema_post = [];                     
              
           if ( $all_schema_post && is_array( $all_schema_post ) ) {
           // begin transaction
@@ -97,7 +95,7 @@ class SMPG_Api_Mapper {
               }
                                                                                                                   
                 if ( is_wp_error( $post_id ) ) {
-                    $errorDesc[] = $result->get_error_message();
+                    $errorDesc[] = $post_id->get_error_message();
                 }
               } 
               
@@ -148,9 +146,7 @@ class SMPG_Api_Mapper {
             }
             
             update_option('smpg_misc_schema', $smpg_sp_data); 
-        } 
-          //Saving misc data ends here             
-           update_option('smpg-file-upload_url','');
+        }                      
           
       }
                                    
@@ -168,14 +164,14 @@ class SMPG_Api_Mapper {
     
     public function get_placement_data($condition, $search = '', $saved_data = '') {
 
-      $choices      = array();  
+      $choices      = [];  
       $array_search = false;  
   
       switch($condition){
       
         case "post_type":
           
-            $post_type   = array();            
+            $post_type   = [];            
             $args['public'] = true;
               
             if(!empty($search) && $search != null){                
@@ -204,12 +200,12 @@ class SMPG_Api_Mapper {
   
         case "page_template" :
           $array_search = true;
-          $choices[] = array( 'key' => 0, 'value' => 'default', 'text' => 'Default Template' );
+          $choices[] = [ 'key' => 0, 'value' => 'default', 'text' => 'Default Template' ];
   
           $templates = get_page_templates();
           
-          if($saved_data){
-              $new_arr = array();
+          if ( $saved_data ) {
+              $new_arr = [];
               foreach ($templates as $key => $value) {
                   if($value == $saved_data){
                     $new_arr[$key] = $value;
@@ -222,7 +218,7 @@ class SMPG_Api_Mapper {
               $i = 0;
               foreach($templates as $k => $v){
                                
-                   $choices[] = array( 'key' => $i, 'value' => $v, 'text' => $k);
+                   $choices[] = [ 'key' => $i, 'value' => $v, 'text' => $k ];
 
                    $i++;
               }
@@ -267,7 +263,7 @@ class SMPG_Api_Mapper {
                 $i = 0;              
                 foreach($posts['posts_data'] as $post){                                                          
                   
-                  $choices[] = array('key' => $post['post']['post_id'], 'value' => $post['post']['post_id'], 'text' => $post['post']['post_title']);
+                  $choices[] = [ 'key' => $post['post']['post_id'], 'value' => $post['post']['post_id'], 'text' => $post['post']['post_title'] ];
 
                   $i++;
                 }
@@ -282,12 +278,12 @@ class SMPG_Api_Mapper {
   
         case "post_category" :
   
-          $terms = array();
-          $args = array( 
+          $terms = [];
+          $args = [ 
                       'taxonomy'   => 'category',
                       'hide_empty' => false,
                       'number'     => 10, 
-                    );
+          ];
   
           if(!empty($search)){
             $args['name__like'] = $search;
@@ -317,7 +313,7 @@ class SMPG_Api_Mapper {
           global $wp_roles;
   
             $array_search = true;                 
-            $general_arr = array();  
+            $general_arr = [];  
             $choices = $wp_roles->get_names();            
   
             if( is_multisite() ){
@@ -327,7 +323,7 @@ class SMPG_Api_Mapper {
             }
   
             if($saved_data){
-              $new_arr = array();
+              $new_arr = [];
               foreach ($choices as $key => $value) {
                   if($key == $saved_data){
                     $new_arr[$key] = $value;
@@ -348,11 +344,11 @@ class SMPG_Api_Mapper {
         break;
         case "post_format" :
             $array_search = true;                 
-            $general_arr = array();
+            $general_arr = [];
             $choices = get_post_format_strings();
   
             if($saved_data){
-              $new_arr = array();
+              $new_arr = [];
               foreach ($choices as $key => $value) {
                   if($key == $saved_data){
                     $new_arr[$key] = $value;
@@ -460,7 +456,7 @@ class SMPG_Api_Mapper {
           
           if($array_search){
   
-              $search_data = array();
+              $search_data = [];
   
               foreach($choices as $val){
                 if((strpos($val['value'], $search) !== false) || (strpos($val['text'], $search) !== false)){
@@ -658,10 +654,10 @@ class SMPG_Api_Mapper {
     
     public function get_schema_loop($post_type, $attr = null, $rvcount = null, $paged = null, $offset = null, $search_param=null){
             
-        $response   = array();                                
-        $arg        = array();
-        $meta_query = array();
-        $posts_data = array();
+        $response   = [];                                
+        $arg        = [];
+        $meta_query = [];
+        $posts_data = [];
         
         $arg['post_type']      = $post_type;
         $arg['posts_per_page'] = -1;  
@@ -697,14 +693,14 @@ class SMPG_Api_Mapper {
 
     public function getPostsByArg($arg){
       
-      $response = array();
+      $response = [];
 
       $meta_query = new WP_Query($arg);        
               
         if($meta_query->have_posts()) {
              
-            $data = array();  
-            $post_meta = array();        
+            $data = [];  
+            $post_meta = [];        
             while($meta_query->have_posts()) {
 
                 $meta_query->the_post();

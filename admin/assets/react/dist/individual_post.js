@@ -1006,54 +1006,78 @@ var schemaTypes = [{
   text: 'Article'
 }, {
   key: 1,
+  value: 'techarticle',
+  text: 'TechArticle'
+}, {
+  key: 2,
+  value: 'newsarticle',
+  text: 'NewsArticle'
+}, {
+  key: 3,
+  value: 'advertisercontentarticle',
+  text: 'AdvertiserContentArticle'
+}, {
+  key: 4,
+  value: 'satiricalarticle',
+  text: 'SatiricalArticle'
+}, {
+  key: 5,
+  value: 'scholarlyarticle',
+  text: 'ScholarlyArticle'
+}, {
+  key: 6,
+  value: 'socialmediaposting',
+  text: 'SocialMediaPosting'
+}, {
+  key: 7,
   value: 'product',
   text: 'Product'
 }, {
-  key: 2,
+  key: 8,
   value: 'softwareapplication',
   text: 'SoftwareApplication'
 }, {
-  key: 3,
+  key: 9,
   value: 'book',
   text: 'Book'
 }, {
-  key: 4,
+  key: 10,
   value: 'faqpage',
   text: 'FAQs'
 }, {
-  key: 5,
+  key: 11,
   value: 'howto',
   text: 'HowTo'
 }, {
-  key: 6,
+  key: 12,
   value: 'qna',
   text: 'Q&A'
 }, {
-  key: 7,
+  key: 13,
   value: 'event',
   text: 'Event'
 }, {
-  key: 8,
+  key: 14,
   value: 'recipe',
   text: 'Recipe'
 }, {
-  key: 9,
+  key: 15,
   value: 'videoobject',
   text: 'VideoObject'
 }, {
-  key: 10,
+  key: 16,
   value: 'course',
   text: 'Course'
 }, {
-  key: 11,
+  key: 17,
   value: 'jobposting',
   text: 'JobPosting'
 }, {
-  key: 12,
+  key: 18,
   value: 'localbusiness',
   text: 'LocalBusiness'
 }, {
-  key: 13,
+  key: 19,
   value: 'service',
   text: 'Service'
 }];

@@ -404,7 +404,13 @@ function smpg_get_schema_type_text($id){
 	$response = array();
 
 	$response = [
-		'article'  				    => 'Article',		
+		'article'                   => 'Article',
+        'techarticle'               => 'TechArticle',
+        'newsarticle'               => 'NewsArticle',
+        'advertisercontentarticle'  => 'AdvertiserContentArticle',
+        'satiricalarticle'          => 'SatiricalArticle',
+        'scholarlyarticle'          => 'ScholarlyArticle',
+        'socialmediaposting'        => 'SocialMediaPosting',
 		'product'                   => 'Product' ,
 		'softwareapplication'       => 'SoftwareApplication' ,
 		'book'                      => 'Book' ,

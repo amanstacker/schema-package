@@ -642,35 +642,33 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
     ];
 
     extract($common_properties);
-          
-    switch ($schema_id) {
+
+    $article_type = [
+        'article'                  => 'Article',
+        'techarticle'              => 'TechArticle',
+        'newsarticle'              => 'NewsArticle',
+        'advertisercontentarticle' => 'AdvertiserContentArticle',
+        'satiricalarticle'         => 'SatiricalArticle',
+        'scholarlyarticle'         => 'ScholarlyArticle',
+        'socialmediaposting'       => 'SocialMediaPosting',
+    ];       
+    switch ( $schema_id ) {
         
         case 'article':
+        case 'techarticle':
+        case 'newsarticle':
+        case 'advertisercontentarticle':
+        case 'satiricalarticle':
+        case 'scholarlyarticle':
+        case 'socialmediaposting':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 
                 'is_setup_popup'    => false,
                 'has_warning'       => false,
-                'id'                => 'article',           
-                'text'              => 'Article',
-                'properties'        => [
-                    'article_type' => [                                     
-                            'label'       => 'Article Type',                    
-                            'type'        => 'select',
-                            'value'       => 'Article',
-                            'options'      => [
-                                'Article'                  => 'Article',
-                                'TechArticle'              => 'TechArticle',  
-                                'NewsArticle'              => 'NewsArticle',  
-                                'AdvertiserContentArticle' => 'AdvertiserContentArticle',  
-                                'SatiricalArticle'         => 'SatiricalArticle',  
-                                'ScholarlyArticle'         => 'ScholarlyArticle',  
-                                'SocialMediaPosting'       => 'SocialMediaPosting'                      
-                            ],
-                            'recommended' => true,
-                            'display'     => true,
-                            'tooltip'     => 'The author type of this content'
-                    ],
+                'id'                => $schema_id,           
+                'text'              => $article_type[$schema_id],
+                'properties'        => [                    
                     'headline'            => $headline,
                     'description'         => $description,
                     'keywords'            => $keywords,

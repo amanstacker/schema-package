@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class SMPG_Individual_Post {
 
     private static $instance;
-    private $_screen    = ['post', 'page'];
-    private $_taxonomy  = ['category', 'post_tag'];
+    public $_screen    = [];
+    public $_taxonomy  = [];
 
     public static function get_instance()
     {
@@ -19,6 +19,9 @@ class SMPG_Individual_Post {
 
     
     private function __construct(){
+
+        $this->_screen   = apply_filters( 'smpg_filter_spg_post_types', ['post', 'page', 'product'] );
+        $this->_taxonomy = apply_filters( 'smpg_filte_spg_taxonomy', ['category', 'post_tag'] );
             
         if( ! empty( $this->_taxonomy ) ){
 

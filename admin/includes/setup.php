@@ -588,3 +588,15 @@ function smpg_meta_list() {
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
 	return $meta_list;	  
 }
+
+add_action( 'admin_head', 'smpg_remove_notice_on_schema_package' );
+
+function smpg_remove_notice_on_schema_package() {
+
+	$screen = get_current_screen();	
+
+    if ( $screen && strpos($screen->id, 'toplevel_page_schema_package') !== false ) {
+        remove_all_actions('admin_notices');
+        remove_all_actions('all_admin_notices');
+    }
+}

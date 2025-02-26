@@ -812,16 +812,15 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
 
     global $smpg_plugin_list;
     
-    if(!empty($schema_data['_automation_with'][0])){
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
 
         $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("woocommerce", $automation) && isset($smpg_plugin_list['woocommerce']['is_active']) ){
-            
-            global $woocommerce; // This global variable is from WooCommerce Plugin and we are not modifying it in any case, Just using it to grab some data
-
+                        
             $product        = wc_get_product($post_id); 
-            if($product){
+
+            if ( $product ) {
 
                 $json_ld['name']        = $product->get_title();
                 
@@ -881,8 +880,7 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
                 $json_ld['description'] = wp_strip_all_tags(strip_shortcodes(do_shortcode($description)));
                 
                 $simple_price        = 0;
-                $currency            = get_option( 'woocommerce_currency' );                 
-                $product_type        = 'simple';
+                $currency            = get_option( 'woocommerce_currency' );                                 
                 
                 if( get_woocommerce_currency() ){
                    $currency = get_woocommerce_currency();     
@@ -894,41 +892,11 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
                 if( function_exists('wc_get_price_including_tax')) {
                     $simple_price = wc_get_price_including_tax($product);
                 } 
-
-                if(method_exists('WC_Product_Simple', 'get_type')){
-                    $product_type = $product->get_type(); 
-                }
-               
+                               
                 $sale_date = $product->get_date_on_sale_to();
-                
-                $variable_price = [];
-                if($product_type == 'variable'){
-
-                    
-                    $variation_id   = $woocommerce->product_factory->get_product();    
-                    $variations     = $variation_id->get_available_variations();
-
-                    if($variations){
-    
-                        foreach($variations as $value){
-                                $variable_price[] = $value['display_price']; 
-                        }
-                    }                    
-                }
-                                
-                if(!empty($variable_price)){
-
-                    $json_ld['offers']['@type']              = 'AggregateOffer'; 
-                    $json_ld['offers']['lowPrice']           = min($variable_price); 
-                    $json_ld['offers']['highPrice']          = max($variable_price); 
-                    $json_ld['offers']['offerCount']         = count($variable_price); 
-                                                                                
-                }else{
-                    
-                    $json_ld['offers']['@type']           = 'Offer'; 
-                    $json_ld['offers']['price']           = $simple_price; 
-                                                                                
-                }
+                                                                
+                $json_ld['offers']['@type']           = 'Offer'; 
+                $json_ld['offers']['price']           = $simple_price; 
 
                 $json_ld['offers']['priceCurrency']   = $currency; 
                 $json_ld['offers']['priceValidUntil'] = $sale_date ? $sale_date->date('Y-m-d G:i:s') : get_the_modified_date("c"); 

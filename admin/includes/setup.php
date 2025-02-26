@@ -589,9 +589,9 @@ function smpg_meta_list() {
 	return $meta_list;	  
 }
 
-add_action( 'admin_head', 'smpg_remove_notice_on_schema_package' );
+add_action( 'admin_head', 'smpg_rm_notices_on_schema_package' );
 
-function smpg_remove_notice_on_schema_package() {
+function smpg_rm_notices_on_schema_package() {
 
 	$screen = get_current_screen();	
 

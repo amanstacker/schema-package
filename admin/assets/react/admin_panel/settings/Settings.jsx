@@ -560,6 +560,7 @@ const Settings = () => {
                   <th>{__('Email', 'schema-package')}</th>
                   <td>
                     <Input 
+                      style={{width:"297px"}}
                       icon="user"
                       iconPosition="left"                    
                       type="email"
@@ -578,9 +579,9 @@ const Settings = () => {
                   <TextArea
                     value={supportMessage}
                     onChange={(event) => setSupportMessage(event.target.value)}
-                    placeholder={__('Type your query here...', 'schema-package') }
+                    placeholder={__('Enter your question here...', 'schema-package') }
                     rows="6"
-                    cols="25"
+                    cols="38"
                     name="user_query"
                   />                    
                    </td> 
@@ -613,16 +614,16 @@ const Settings = () => {
         marginRight:"inherit"
       }}>
         <div className='content'>
-        <div className='header' style={{color:"#ff9e00"}}>Elevate with Premium Features!</div>  
+        <div className='header' style={{color:"#ff9e00"}}>{__('Elevate with Premium Features!', 'schema-package')}</div>  
         <div className='ui list' role='list'>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>WooCommerce Variable Product Automation</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>RealEstate Schema Types & Automation</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Healthcare Schema Types & Automation</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Carousel Schema Details Page List</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Multilinugal Schema Markup Support</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Schema Markup Setup & Error Clean Up</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>24/7 Priority Email Support</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>Premium Features On Demand</div></div>                    
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('WooCommerce Variable Product Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('RealEstate Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Healthcare Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Carousel Schema Details Page List', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Multilinugal Schema Markup Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Schema Markup Setup & Error Clean Up', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('24/7 Priority Email Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Premium Features on Demand', 'schema-package')}</div></div>                    
         </div> 
          <div style={{textAlign:"center"}}>
           <a target="_blank" href="https://schemapackage.com/premium#pricing" className="ui button upgrade-premium-btn">Unlock</a>

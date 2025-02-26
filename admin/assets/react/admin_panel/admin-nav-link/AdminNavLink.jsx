@@ -26,9 +26,18 @@ const AdminNavLink = () => {
             <div className="right menu">
               <div className="item">
                 <a target='_blank' href='https://schemapackage.com/premium/' className="ui button upgrade-premium-btn">{__('Upgrade to Premium', 'schema-package')}</a>                        
-                <a target='_blank' href='https://schemapackage.com/knowledge-base/' >
-                <Icon style={{marginLeft:"15px", cursor:"pointer"}} name="help circle" size='large' />
-                </a>                                        
+                <Button
+                      as="a"
+                      href="https://schemapackage.com/knowledge-base/"
+                      target="_blank"
+                      circular
+                      rel="noopener noreferrer"
+                      icon
+                      secondary
+                      style={{marginLeft:"15px"}}
+                    >
+                    <Icon name="help" />
+                </Button>                
               </div>
             </div>
           :

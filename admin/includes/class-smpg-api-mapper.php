@@ -832,67 +832,35 @@ class SMPG_Api_Mapper {
     public function get_carousel_automation_with( $schema_type ) {
 
     }                    
-    public function get_automation_with( $schema_type ){
+    public function get_automation_with( $schema_type ) {
 
       global $smpg_plugin_list;
       
-      $response = [];
+      $response = $automate_supports = [];
 
       switch ( $schema_type ) {
         
         case 'product':
         case 'softwareapplication':
 
-          $automate_supports = [ 'woocommerce', 'yotposreviews', 'ryviu', 'pbfwoocommerce', 'yithbrandwoocommerce', 'brandforwoocommerce' ];
-
-          foreach ($automate_supports as $value) {
-            
-            if( $smpg_plugin_list[$value]['is_active'] ){
-                $response[] = $smpg_plugin_list[$value];   
-            }
-
-          }          
+          $automate_supports = [ 'woocommerce', 'yotposreviews', 'ryviu', 'pbfwoocommerce', 'yithbrandwoocommerce', 'brandforwoocommerce' ];                    
                  
           break;
         
         case 'book':      
 
-          $automate_supports = [ 'mooberrybookmanager'];
-
-          foreach ($automate_supports as $value) {
-            
-            if( $smpg_plugin_list[$value]['is_active'] ){
-                $response[] = $smpg_plugin_list[$value];   
-            }
-
-          }
+          $automate_supports = [ 'mooberrybookmanager'];          
 
           break;
         case 'faqpage':
 
-          $automate_supports = [ 'accordion', 'accordionfaq', 'quickandeasyfaq', 'easyaccordion', 'wpresponsivefaq', 'arconixfaq' ];
-
-          foreach ($automate_supports as $value) {
-            
-            if( $smpg_plugin_list[$value]['is_active'] ){
-                $response[] = $smpg_plugin_list[$value];   
-            }
-
-          }
+          $automate_supports = [ 'accordion', 'accordionfaq', 'quickandeasyfaq', 'easyaccordion', 'wpresponsivefaq', 'arconixfaq' ];          
                                   
           break;
         
         case 'jobposting':
 
-          $automate_supports = [ 'simplejobboard'];
-
-          foreach ($automate_supports as $value) {
-            
-            if( $smpg_plugin_list[$value]['is_active'] ){
-                $response[] = $smpg_plugin_list[$value];   
-            }
-
-          }
+          $automate_supports = [ 'simplejobboard' ];          
 
           break;
         case 'localbusiness':
@@ -903,7 +871,19 @@ class SMPG_Api_Mapper {
         
           break;
       }
-
+      
+      if ( ! empty( $automate_supports ) ) {
+          
+        foreach ( $automate_supports as $value ) {
+            
+          if ( $smpg_plugin_list[$value]['is_active'] ) {
+            $response[] = [ 'key' => $value, 'text' => $smpg_plugin_list[$value]['name'] ];
+          }
+  
+        }
+        
+      }
+      
       return $response;
 
     }

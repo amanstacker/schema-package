@@ -18,7 +18,6 @@ function smpg_json_ld_init(){
 }
 
 
-
 function smpg_json_ld_output(){
 	        
     $json_ld = smpg_get_json_ld();
@@ -148,7 +147,13 @@ function smpg_clean_other_format_schema($content){
     }
 
     if(isset($smpg_settings['clean_rdfa_data'])){
-        $content = preg_replace(array('/property=\\"[^\\"]*\\"/i', '/typeof=\\"[^\\"]*\\"/i'), '', $content);
+        $content = preg_replace_callback(
+            '/<(?!meta\b)[^>]+?\s(property|typeof)=\\"[^\\"]*\\"/i',
+            function ($matches) {
+                return preg_replace('/\s(property|typeof)=\\"[^\\"]*\\"/i', '', $matches[0]);
+            },
+            $content
+        );        
     }    
 
     return $content;

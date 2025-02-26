@@ -2,7 +2,7 @@ import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
 import { Dropdown, Checkbox, Grid, Form } from 'semantic-ui-react'
-import { Button } from 'semantic-ui-react'
+import { Button, Divider } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
@@ -23,6 +23,8 @@ const SingularSchemaEdit = () => {
   const [disabledOnOption, setDisabledOnOption] = useState({});
   const [automationList, setAutomationList]     = useState([]);  
   const [schemaProperties, setSchemaProperties] = useState([]);
+  const [isSchemaDataLoaded, setIsSchemaDataLoaded] = useState(false);
+
 
 
   const [postData, setPostData] = useReducer(
@@ -81,32 +83,36 @@ const SingularSchemaEdit = () => {
             
   }  
 
-  const getSchemaData = ( post_id = null ) => {
-    
-    setMainSpinner(true);
 
-    let url = smpg_local.rest_url + "smpg-route/get-schema-data?post_id="+post_id;
-      
-      fetch(url, {
-        headers: {                    
-          'X-WP-Nonce': smpg_local.nonce,
-        }
-      })
-      .then(res => res.json())
-      .then(
-        (result) => {              
-          setMainSpinner(false);     
-          setPostData(result.post_data);
-          setPostMeta(result.post_meta);                    
-          setEnabledOnOption(result._placement_enabled_option);
-          setDisabledOnOption(result._placement_disabled_option)
 
-        },        
-        (error) => {         
-        }
-      ); 
 
-  }
+  const getSchemaData = async (post_id = null) => {
+    try {
+        setMainSpinner(true);
+
+        let url = smpg_local.rest_url + "smpg-route/get-schema-data?post_id=" + post_id;
+        
+        const response = await fetch(url, {
+            headers: {                    
+                'X-WP-Nonce': smpg_local.nonce,
+            }
+        });
+
+        const result = await response.json();
+
+        setMainSpinner(false);
+        setPostData(result.post_data);
+        setPostMeta(result.post_meta);
+        setEnabledOnOption(result._placement_enabled_option);
+        setDisabledOnOption(result._placement_disabled_option);
+        setIsSchemaDataLoaded(true);
+        
+    } catch (error) {
+        console.error("Error fetching schema data:", error);
+        setMainSpinner(false);
+    }
+};
+
 
   const handleSaveFormData = () => {
 
@@ -285,38 +291,30 @@ const SingularSchemaEdit = () => {
       
   }
 
-  const handleAutomationChange = (e) => {
-    
-    let { name } = e.target;
-
-    let copydata = {...postMeta};
-
-    let index = copydata._automation_with.indexOf(name);
-
-    if(index !== -1){  
-      copydata._automation_with.splice(index, 1); 
-    }else{
-      copydata._automation_with.push(name);
-    }
-    setPostMeta(copydata);
-    
-  }
+  const handleAutomationChange = (key) => {
+    setPostMeta((prevState) => ({
+      ...prevState,
+      _automation_with: prevState._automation_with.includes(key)
+        ? prevState._automation_with.filter((item) => item !== key)
+        : [...prevState._automation_with, key],
+    }));
+  };
 
   useEffect(() => {
-    let post_id = '';
-    if( typeof(page.post_id) != 'undefined' ){
-      post_id = page.post_id;
-    }
-    getSchemaData(post_id);
+    if (typeof page !== "undefined" && typeof page.post_id !== "undefined") {
+      getSchemaData(page.post_id);
+  } else {
+      getSchemaData(page.post_id);
+  }
     
   }, []);
 
   useEffect(() => {
-    if(postMeta._schema_type != ''){
-      handleGetAutomation(postMeta._schema_type);    
-      handleGetSchemaProperties(postMeta._schema_type);      
-    }    
-  }, [postMeta._schema_type]);
+    if (isSchemaDataLoaded && postMeta?._schema_type) {
+        handleGetAutomation(postMeta._schema_type);
+        handleGetSchemaProperties(postMeta._schema_type);
+    }
+}, [isSchemaDataLoaded, postMeta?._schema_type]);
   
 
   return(
@@ -573,32 +571,38 @@ const SingularSchemaEdit = () => {
           </Grid>
         </Accordion> 
        : '' }                                 
-         {postMeta._schema_type ?                
+         {postMeta._schema_type ? 
         <Accordion title="Automation" isExpand={true}>      
-        <h3></h3>
-        {
-        automationList.length > 0 ? 
-        <table className="form-table">
-        <tbody>
-          {
-            automationList.map((item, i) => {
-              return(
-                <tr key={i}>
-                <th>{item.name}</th>
-                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta._automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
-                </tr>
-              )
-          })
-          }
-        </tbody>  
-        </table> 
-          : <div>{__('None of the plugins are active where schema markup can be automated. Find the automation list here', 'schema-package') }</div>
-        }                   
-       
-      </Accordion> 
+
+         {automationList.length > 0 ?  
          
-         : ''}           
-                
+         <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Form>
+                  {automationList.map((item) => (
+                      <Form.Field key={item.key}>
+                        <Checkbox
+                          label={item.text}                          
+                          checked={postMeta._automation_with.includes(item.key)}
+                          onChange={() => handleAutomationChange(item.key)}                          
+                        />
+                      </Form.Field>
+                  ))}                                      
+                </Form>
+              </Grid.Column>
+              </Grid.Row>
+          </Grid>
+
+         : <div>
+            <p>{__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
+            <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'>{__('Automation List', 'schema-package')}</a>
+            <Divider />
+            <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'>{__('Feature Request', 'schema-package')}</a>
+          </div>}                 
+        </Accordion>          
+         : ''}                           
         <div className="smpg-save-schema-btn">
         {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>            

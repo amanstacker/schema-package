@@ -2,7 +2,7 @@ import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
 import { Dropdown, Checkbox, Grid, Form } from 'semantic-ui-react'
-import { Button, Divider } from 'semantic-ui-react'
+import { Button, Divider, Icon } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
@@ -595,11 +595,12 @@ const SingularSchemaEdit = () => {
           </Grid>
 
          : <div>
-            <p>{__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
-            <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'>{__('Automation List', 'schema-package')}</a>
+            <p>
+            {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
+            <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>
             <Divider />
             <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
-            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'>{__('Feature Request', 'schema-package')}</a>
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a>
           </div>}                 
         </Accordion>          
          : ''}                           

@@ -1853,6 +1853,6 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             break;
     }
     
-    return $properties;
+    return apply_filters( 'smpg_filter_schema_and_properties', $properties );
 
 }

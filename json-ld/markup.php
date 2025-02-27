@@ -18,9 +18,9 @@ function smpg_json_ld_init(){
 }
 
 
-function smpg_json_ld_output(){
+function smpg_json_ld_output() {
 	        
-    $json_ld = smpg_get_json_ld();
+    $json_ld = apply_filters( 'smpg_filter_final_json_ld', smpg_get_json_ld() );
 
     if ( ! empty($json_ld) ) {
         
@@ -69,8 +69,8 @@ function smpg_get_json_ld(){
 
     if(!empty($contact_page)){
         $response [] = $contact_page;
-    }
-
+    }    
+    //Schema Package Generator schema markup addition
     $schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );    
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
@@ -82,7 +82,7 @@ function smpg_get_json_ld(){
                 $particular_data = smpg_prepare_particular_post_json_ld( $meta, $post_id );
 
                 if ( ! empty( $particular_data ) ) {
-                    $response[] = smpg_prepare_particular_post_json_ld( $meta, $post_id );
+                    $response[] = $particular_data;
                 }
                 
             }

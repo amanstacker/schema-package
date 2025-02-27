@@ -423,7 +423,14 @@ function smpg_get_schema_type_text( $id ) {
 		'course'                    => 'Course',
 		'jobposting'                => 'JobPosting',
 		'localbusiness'             => 'LocalBusiness',
-		'service'                   => 'Service'
+		'service'                   => 'Service',
+		'broadcastservice'          => 'BroadcastService', 
+		'cableorsatelliteservice'   => 'CableOrSatelliteService',  
+		'financialproduct'          => 'FinancialProduct',  
+		'foodservice'               => 'FoodService',  
+		'governmentservice'         => 'GovernmentService',  
+		'taxiservice'               => 'TaxiService',
+		'webapi'                    => 'WebAPI',  
 	];	
 
 	if ( array_key_exists( $id, $response ) ) {

@@ -651,6 +651,16 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'satiricalarticle'         => 'SatiricalArticle',
         'scholarlyarticle'         => 'ScholarlyArticle',
         'socialmediaposting'       => 'SocialMediaPosting',
+    ];
+    $service_type = [
+            'service'                   => 'Service',
+            'broadcastservice'          => 'BroadcastService', 
+            'cableorsatelliteservice'   => 'CableOrSatelliteService',  
+            'financialproduct'          => 'FinancialProduct',  
+            'foodservice'               => 'FoodService',  
+            'governmentservice'         => 'GovernmentService',  
+            'taxiservice'               => 'TaxiService',  
+            'webapi'                    => 'WebAPI',                                                                                
     ];       
     switch ( $schema_id ) {
         
@@ -1240,33 +1250,22 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;  
 
                     case 'service':
+                    case 'broadcastservice':
+                    case 'cableorsatelliteservice':
+                    case 'financialproduct':
+                    case 'foodservice':
+                    case 'governmentservice':
+                    case 'taxiservice':
+                    case 'webapi':
 
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
                             'is_setup_popup'    => false,
                             'has_warning'       => false,
-                            'id'                => 'service',           
-                            'text'              => 'Service',
-                            'properties'        => [
-                                'service_type_option' =>  [ 
-                                        'label'       => 'Service Types Option',
-                                        'type'        => 'select',
-                                        'value'       => 'Service',
-                                        'options'     => [
-                                            'Service'                   => 'Service',
-                                            'BroadcastService'          => 'BroadcastService', 
-                                            'CableOrSatelliteService'   => 'CableOrSatelliteService',  
-                                            'FinancialProduct'          => 'FinancialProduct',  
-                                            'FoodService'               => 'FoodService',  
-                                            'GovernmentService'         => 'GovernmentService',  
-                                            'TaxiService'               => 'TaxiService',  
-                                            'WebAPI'                    => 'WebAPI',                                                                                
-                                        ],
-                                        'recommended' => true,
-                                        'display'     => true,
-                                    'tooltip'     => 'The author type of this content'
-                                ],
+                            'id'                => $schema_id,           
+                            'text'              => $service_type[$schema_id],
+                            'properties'        => [                                
                                 'service_type'          => [
                                     'label'       => 'Service Type',                    
                                     'type'        => 'text',                                    
@@ -1293,6 +1292,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                         'type'        => 'select',
                                         'value'       => 'LocalBusiness',
                                         'options'     => [
+                                                'Organization'                 => 'Organization',
                                                 'LocalBusiness'                => 'Local Business',
                                                 'Airline'                      => 'Airline',
                                                 'Corporation'                  => 'Corporation',
@@ -1340,6 +1340,34 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'label'       => 'Price Range',                    
                                     'type'        => 'text',                                    
                                     'placeholder' => '$$$',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'terms_of_service'          => [
+                                    'label'       => 'Terms Of Service',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'Minimum Entry Age: 18 years, Maximum Entry Age: 85 years',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'annual_percentage_rate'    => [
+                                    'label'       => 'Annual Percentage Rate',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '30%',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'interest_rate'          => [
+                                    'label'       => 'Interest Rate',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '5%',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'fees_And_Commissions_Specification'  => [
+                                    'label'       => 'Fees And Commissions Specification',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '',                    
                                     'value'       => '',
                                     'display'     => true
                                 ],

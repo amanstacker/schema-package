@@ -1,12 +1,28 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Button, Input, Icon, Popup, Checkbox, TextArea } from 'semantic-ui-react'
+import { Button, Input, Icon, Popup, Checkbox, TextArea, Dropdown } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
 import MainSpinner from './../common/main-spinner/MainSpinner';
 import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
+
+const spgPostTypes = [
+  { key: 0,  value: 'posts',  text: 'Posts' },
+  { key: 1,  value: 'pages',  text: 'Pages' },
+  { key: 2,  value: 'products',  text: 'Products' },
+  { key: 3,  value: 'products88',  text: 'Products88' },  
+  { key: 4,  value: 'products44',  text: 'Products44' }    
+];
+
+const spgTaxonomies = [
+  { key: 0,  value: 'posts',  text: 'Posts' },
+  { key: 1,  value: 'pages',  text: 'Pages' },
+  { key: 2,  value: 'products',  text: 'Products' },
+  { key: 3,  value: 'products88',  text: 'Products88' },  
+  { key: 4,  value: 'products44',  text: 'Products44' }    
+];
 
 const Settings = () => {
 
@@ -21,39 +37,45 @@ const Settings = () => {
   const [importFile, setImportFile]           = useState();
   const [pluginList, setPluginList]           = useState({});
 
+  const postMetaReducer = (state, newState) => {
+    if (typeof newState === "function") {
+      return { ...state, ...newState(state) }; // Handles function-based updates
+    }
+    return { ...state, ...newState };
+  };
 
-  const [settings, setSettings] = useReducer(
-    (state, newState) => ({...state, ...newState}),
-    {
-      website_json_ld:          false,
-      defragment_json_ld:       false,  
-      json_ld_in_footer:        false,  
-      pretty_print_json_ld:     false,  
-      clean_micro_data:         false,  
-      clean_rdfa_data:          false,  
-      multisize_image:          false,
-      image_object:             false,
-      cmp_ampforwp:             false,              
-      cmp_ampforwp:             false,
-      cmp_amp_by_automatic:     false,
-      cmp_better_amp:           false,
-      cmp_wp_amp:               false,
-      cmp_amp_wp:               false,
-      cmp_smartcrawl_seo:       false,
-      cmp_seo_press:            false,
-      cmp_the_seo_framework:    false,
-      cmp_all_in_one_seo_pack:  false,
-      cmp_rank_math:            false,
-      cmp_simple_author_box:    false,
-      reset_settings:           false,
-      delete_data_on_uninstall: false,      
-      default_logo_id:          null,
-      default_image_id:         null,
-      default_logo_url:         null,
-      default_image_url:        null,
-      manage_conflict  :        []
-    }            
-  );
+
+  const [settings, setSettings] = useReducer(postMetaReducer, {
+        website_json_ld:          false,
+        defragment_json_ld:       false,  
+        json_ld_in_footer:        false,  
+        pretty_print_json_ld:     false,  
+        clean_micro_data:         false,  
+        clean_rdfa_data:          false,  
+        multisize_image:          false,
+        image_object:             false,
+        cmp_ampforwp:             false,              
+        cmp_ampforwp:             false,
+        cmp_amp_by_automatic:     false,
+        cmp_better_amp:           false,
+        cmp_wp_amp:               false,
+        cmp_amp_wp:               false,
+        cmp_smartcrawl_seo:       false,
+        cmp_seo_press:            false,
+        cmp_the_seo_framework:    false,
+        cmp_all_in_one_seo_pack:  false,
+        cmp_rank_math:            false,
+        cmp_simple_author_box:    false,
+        reset_settings:           false,
+        delete_data_on_uninstall: false,      
+        default_logo_id:          null,
+        default_image_id:         null,
+        default_logo_url:         null,
+        default_image_url:        null,
+        manage_conflict  :        [],
+        spg_post_types   :        [],
+        spg_taxonomies   :        []
+    });
           
   const page = queryString.parse(window.location.search);   
   const {__} = wp.i18n;         
@@ -306,6 +328,23 @@ const Settings = () => {
     saveSettings();
   }  
 
+  const handleSPGPostTypes = (e, data) => {    
+    
+    setSettings(prevState => ({
+        ...prevState,
+        spg_post_types: data.value
+    }));
+  };
+
+  const handleSPGTaxonomies = (e, data) => {    
+    
+    setSettings(prevState => ({
+        ...prevState,
+        spg_taxonomies: data.value
+    }));
+  };
+
+  
   useEffect(() => {
     getSettings();    
     handleGetPluginList();           
@@ -407,6 +446,45 @@ const Settings = () => {
               <table className="form-table">
                 <tbody>
                 <tr>
+                    <th><label htmlFor="export_smpg">{__('SPG for Post Types', 'schema-package')}</label></th>
+                    <td>
+                    <Dropdown
+                      style={{maxWidth:"300px"}}
+                      data_type="spg_post_types"
+                      name="spg_post_types"
+                      placeholder={__('Search For Post Types', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={settings.spg_post_types}
+                      onChange={handleSPGPostTypes}                      
+                      options={spgPostTypes}
+                   />
+                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                    </td>
+                </tr>
+                <tr>
+                    <th><label htmlFor="export_smpg">{__('SPG for Taxonomies', 'schema-package')}</label></th>
+                    <td>
+                    <Dropdown
+                      style={{maxWidth:"300px"}}
+                      data_type="spg_taxonomies"
+                      name="spg_taxonomies"
+                      placeholder={__('Search For Taxonomies', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={settings.spg_taxonomies}
+                      onChange={handleSPGTaxonomies}                      
+                      options={spgTaxonomies}
+                   />
+                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                    </td>
+                </tr>  
+
+                <tr>
                     <th><label htmlFor="export_smpg">{__('Export Data ', 'schema-package')}</label></th>
                     <td>
                     <Button loading={loading} onClick={handleExport}>
@@ -449,7 +527,7 @@ const Settings = () => {
                       <Checkbox                     
                         name='delete_data_on_uninstall'
                         id='delete_data_on_uninstall' 
-                        checked={settings.delete_data_on_uninstall}
+                        checked={settings.delete_data_on_uninstall ? true : false}
                         onChange={formChangeHandler}
                       />                                            
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -611,19 +689,20 @@ const Settings = () => {
         backgroundColor: "#222222", // Change background color
         color:"#ffffff",        
         margin:"auto",
-        marginRight:"inherit"
+        marginRight:"inherit",
+        marginTop:"0px"
       }}>
         <div className='content'>
         <div className='header' style={{color:"#ff9e00"}}>{__('Elevate with Premium Features!', 'schema-package')}</div>  
         <div className='ui list' role='list'>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('WooCommerce Variable Product Automation', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('RealEstate Schema Types & Automation', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Healthcare Schema Types & Automation', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Carousel Schema Details Page List', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Multilinugal Schema Markup Support', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Schema Markup Setup & Error Clean Up', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('24/7 Priority Email Support', 'schema-package')}</div></div>
-          <div role="listitem" className="item"><i aria-hidden="true" class="check square large icon"></i><div className='content'>{__('Premium Features on Demand', 'schema-package')}</div></div>                    
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('WooCommerce Variable Product Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('RealEstate Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Healthcare Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Carousel Schema Details Page List', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Multilinugal Schema Markup Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Schema Markup Setup & Error Clean Up', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('24/7 Priority Email Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Premium Features on Demand', 'schema-package')}</div></div>                    
         </div> 
          <div style={{textAlign:"center"}}>
           <a target="_blank" href="https://schemapackage.com/premium#pricing" className="ui button upgrade-premium-btn">Unlock</a>

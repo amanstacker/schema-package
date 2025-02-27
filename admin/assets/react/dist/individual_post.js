@@ -1080,6 +1080,34 @@ var schemaTypes = [{
   key: 19,
   value: 'service',
   text: 'Service'
+}, {
+  key: 20,
+  value: 'broadcastservice',
+  text: 'BroadcastService'
+}, {
+  key: 21,
+  value: 'cableorsatelliteservice',
+  text: 'CableOrSatelliteService'
+}, {
+  key: 22,
+  value: 'financialproduct',
+  text: 'FinancialProduct'
+}, {
+  key: 23,
+  value: 'foodservice',
+  text: 'FoodService'
+}, {
+  key: 24,
+  value: 'governmentservice',
+  text: 'GovernmentService'
+}, {
+  key: 25,
+  value: 'taxiservice',
+  text: 'TaxiService'
+}, {
+  key: 25,
+  value: 'webapi',
+  text: 'WebAPI'
 }];
 
 /***/ })

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_type ) {
     
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = $properties['service_type_option']['value'];
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );    
 
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];

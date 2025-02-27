@@ -366,17 +366,17 @@ const SingularSchemaEdit = () => {
                    <td>
                      {enabledOnOption.post_type ? 
                      <Dropdown
-                     name="_enabled_on_post_type"
-                     data_type="post_type"
-                     placeholder={__('Search For Post Type', 'schema-package') }
-                     fluid
-                     multiple
-                     search
-                     selection
-                     value={postMeta._enabled_on?.post_type}
-                     onChange={handlePlacementChange}
-                     onSearchChange={handlePlacementSearchChange}
-                     options={enabledOnOption.post_type}
+                      name="_enabled_on_post_type"
+                      data_type="post_type"
+                      placeholder={__('Search For Post Type', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={postMeta._enabled_on?.post_type}
+                      onChange={handlePlacementChange}
+                      onSearchChange={handlePlacementSearchChange}
+                      options={enabledOnOption.post_type}
                    />
                    : ''
                      }

@@ -20,34 +20,41 @@ class SMPG_Individual_Post {
     
     private function __construct(){
         
-        $smpg_settings = smpg_load_smpg_settings();        
+        add_action( 'admin_init', [ $this, 'initialize_metabox' ] );           
+        add_action( 'admin_enqueue_scripts', [$this, 'enqueue_script' ],10);
         
+    }
+
+    public function initialize_metabox() {
+
+        $smpg_settings = smpg_load_smpg_settings();        
+
         if ( isset( $smpg_settings['spg_post_types'] ) ) {
+
             $this->_screen   = apply_filters( 'smpg_filter_spg_post_types', $smpg_settings['spg_post_types'] );
+
+            if( !empty($this->_screen) ){
+
+                foreach ($this->_screen as  $value) {
+                    add_action( "add_meta_boxes_{$value}", array( $this, 'add_meta_boxes' ),10,1 );	                
+                }
+    
+            }
         }
         
         if ( isset( $smpg_settings['spg_taxonomies'] ) ) {
+
             $this->_taxonomy = apply_filters( 'smpg_filte_spg_taxonomy', $smpg_settings['spg_taxonomies'] );
-        }
-                            
-        if( ! empty( $this->_taxonomy ) ){
+            
+            if( ! empty( $this->_taxonomy ) ){
 
-            foreach ( $this->_taxonomy as $value ) {
-                add_action( "{$value}_edit_form_fields", array( $this, 'render_taxonomy_metabox' ),10,2 );
+                foreach ( $this->_taxonomy as $value ) {
+                    add_action( "{$value}_edit_form_fields", array( $this, 'render_taxonomy_metabox' ),10,2 );
+                }
+    
             }
-
         }
-        
-        if( !empty($this->_screen) ){
-
-            foreach ($this->_screen as  $value) {
-                add_action( "add_meta_boxes_{$value}", array( $this, 'add_meta_boxes' ),10,1 );	                
-            }
-
-        }   
-
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_script'),10);
-        
+                                    
     }
 
     public function add_meta_boxes($post){

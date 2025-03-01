@@ -538,11 +538,8 @@ function smpg_enqueue_admin_panel( $hook ) {
 	if ( $hook == 'toplevel_page_schema_package' ) {
 
 			global $smpg_plugin_list;
-			wp_enqueue_media();    
-
-			//wp_enqueue_style('smpg-admin-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/admin_panel.css', false, SMPG_VERSION);
-
-			//wp_enqueue_style('smpg-semantic-css', SMPG_PLUGIN_URL.'admin/assets/css/semantic.min.css', false, SMPG_VERSION);			
+			
+			wp_enqueue_media();    						
 			
 			$data = apply_filters( 'smpg_local_filter', [
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,

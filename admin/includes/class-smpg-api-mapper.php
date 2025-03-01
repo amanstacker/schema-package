@@ -13,7 +13,7 @@ class SMPG_Api_Mapper {
 
     public function get_post_types_options() {
 
-      $post_types = get_post_types( [], 'objects' );
+      $post_types = get_post_types( [ 'public' => true ], 'objects' );
     
       $post_type_list = [];
       $index = 0;
@@ -32,7 +32,7 @@ class SMPG_Api_Mapper {
 
     public function get_taxonomies_options() {
 
-      $taxonomies = get_taxonomies( [], 'objects' );
+      $taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
     
       $taxonomy_list = [];
       $index = 0;

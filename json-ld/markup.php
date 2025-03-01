@@ -71,7 +71,7 @@ function smpg_get_json_ld(){
         $response [] = $contact_page;
     }    
     //Schema Package Generator schema markup addition
-    $schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );    
+    $schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );        
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 
@@ -91,45 +91,55 @@ function smpg_get_json_ld(){
 
     }
     //Singular schema markup addition
-    $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
+
+    if ( is_singular() ) {
+
+        $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
     
-    if ( ! empty( $singular_schema_ids ) ) {
-        
-        foreach ( $singular_schema_ids as $id ) {
+        if ( ! empty( $singular_schema_ids ) ) {
             
-            $schema_meta = get_post_meta( $id );
-            
-            if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
-                if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
-                    $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
-                }
-            }            
+            foreach ( $singular_schema_ids as $id ) {
+                
+                $schema_meta = get_post_meta( $id );            
+                
+                if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
+                    if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
+                        $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
+                    }
+                }            
+            }
+
         }
 
-    }
+
+    }    
 
     //Carousel schema markup addition
-    $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
+    if ( is_tax() || is_category() || is_tag() ) {
+
+        $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
     
-    if ( ! empty( $carousel_schema_ids ) ) {
+        if ( ! empty( $carousel_schema_ids ) ) {
 
-        foreach ( $carousel_schema_ids as $id ) {
-            
-            $schema_meta = get_post_meta( $id );
-            
-            if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
+            foreach ( $carousel_schema_ids as $id ) {
                 
-                if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+                $schema_meta = get_post_meta( $id );
+                
+                if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                     
-                    $response[] = smpg_prepare_carousel_json_ld( $schema_meta );
+                    if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+                        
+                        $response[] = smpg_prepare_carousel_json_ld( $schema_meta );
 
-                }
+                    }
 
-            }   
-                     
+                }   
+                        
+            }
+
         }
 
-    }
+    }    
 
     return $response;
 }

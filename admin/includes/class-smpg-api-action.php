@@ -340,8 +340,8 @@ class SMPG_Api_Action {
             return $response;
         }
         public function get_plugin_list( $request_data ){
-
-            global $smpg_plugin_list;
+            
+            $smpg_plugin_list = smpg_load_smpg_plugin_list_settings();
 
             $response    = [];            
             $result      = [];

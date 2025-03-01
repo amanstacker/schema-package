@@ -6,7 +6,7 @@ class SMPG_Api_Mapper {
     
     public function get_misc_schema(){
               
-      $options = get_option('smpg_misc_schema');
+      $options = smpg_load_smpg_misc_schema_settings();
             
       return $options;
     }
@@ -50,9 +50,9 @@ class SMPG_Api_Mapper {
     }
 
     public function get_settings(){
-
+      
       $response                  = [];
-      $response['smpg_settings'] = get_option('smpg_settings');
+      $response['smpg_settings'] = smpg_load_smpg_settings();
       $response['post_types']    = $this->get_post_types_options();
       $response['taxonomies']    = $this->get_taxonomies_options();
 

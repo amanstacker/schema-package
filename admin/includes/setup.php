@@ -302,32 +302,35 @@ function smpg_load_smpg_plugin_list_settings() {
 
 	}
 	
+	return $smpg_plugin_list;
 	
 }
 
 function smpg_default_settings_data(){
 
     $spg_post_types = $spg_taxonomies = [];	 
-	$post_types = get_post_types( [], 'objects' );	 
-	if($post_types){
-		foreach ($post_types as $value) {
+	$post_types = get_post_types( ['public' => true], 'objects' );	 
+
+	if ( $post_types ) {
+		foreach ( $post_types as $value ) {
 			$spg_post_types[] = $value->name;
 		}
 	}
-	$taxonomies = get_taxonomies( [], 'objects' );
-	if($taxonomies){
-		foreach ($taxonomies as $value) {
+	$taxonomies = get_taxonomies( ['public' => true], 'objects' );
+
+	if ( $taxonomies ) {
+		foreach ( $taxonomies as $value ) {
 			$spg_taxonomies[] = $value->name;
 		}
 	}
 
-	$defaults = array(
+	$defaults = [
 		'website_json_ld' 			=> 1,
 		'defragment_json_ld' 		=> 1,
 		'json_ld_in_footer' 		=> 1,
 		'pretty_print_json_ld' 		=> 1,
-		'clean_micro_data' 			=> 1,
-		'clean_rdfa_data' 			=> 1,
+		'clean_micro_data' 			=> 0,
+		'clean_rdfa_data' 			=> 0,
 		'multisize_image' 			=> 0,
 		'image_object' 				=> 0,
 		'cmp_smartcrawl_seo' 		=> 0,
@@ -338,28 +341,28 @@ function smpg_default_settings_data(){
 		'cmp_simple_author_box'     => 0,
 		'reset_settings' 			=> 1,
 		'delete_data_on_uninstall'  => 0,
-		'default_logo_id' 			=> 1,
-		'default_image_id' 			=> 1,
-		'default_logo_url' 			=> 1,
-		'default_image_url' 		=> 1,
+		'default_logo_id' 			=> null,
+		'default_image_id' 			=> null,
+		'default_logo_url' 			=> '',
+		'default_image_url' 		=> '',
 		'manage_conflict' 			=> [],
 		'spg_post_types' 			=> $spg_post_types,
 		'spg_taxonomies' 			=> $spg_taxonomies,		
-	);	  		
+	];	  		
 	
 	return $defaults;
 
 }
 
-function smpg_default_misc_schema_data(){
+function smpg_default_misc_schema_data() {
         	
-	$defaults = array(
+	$defaults = [
 		'website' 					=> 1,
 		'sitelinks_search_box' 		=> 0,
 		'breadcrumbs' 				=> 1,
 		'about_pages' 				=> [],
 		'contact_pages' 			=> [],
-	);	  		
+	];	  		
 	
 	return $defaults;
 
@@ -537,22 +540,24 @@ function smpg_entry_page(){
 
 }
 
-function smpg_enqueue_admin_panel($hook){
+function smpg_enqueue_admin_panel( $hook ) {
 	
-	if($hook == 'toplevel_page_schema_package'){
+	if ( $hook == 'toplevel_page_schema_package' ) {
+
 			global $smpg_plugin_list;
 			wp_enqueue_media();    
+
 			//wp_enqueue_style('smpg-admin-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/admin_panel.css', false, SMPG_VERSION);
 
 			//wp_enqueue_style('smpg-semantic-css', SMPG_PLUGIN_URL.'admin/assets/css/semantic.min.css', false, SMPG_VERSION);			
 			
-			$data = apply_filters( 'smpg_local_filter', array(
+			$data = apply_filters( 'smpg_local_filter', [
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
 				'rest_url'             => esc_url_raw( rest_url() ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
 				'is_free'              => true
-			) );
+			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', array( 'wp-i18n' ), SMPG_VERSION, true );
 
@@ -563,9 +568,9 @@ function smpg_enqueue_admin_panel($hook){
 		
 }
 
-function smpg_on_plugin_activation(){
+function smpg_on_plugin_activation() {
  		
-    $first_installation = get_option('smpg_first_installation_date');
+    $first_installation = get_option( 'smpg_first_installation_date' );
     
     if ( ! $first_installation ) {
         

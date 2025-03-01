@@ -364,7 +364,7 @@ const SingularSchemaEdit = () => {
                 </div>                         
                    </td>
                    <td>
-                     {enabledOnOption.post_type ? 
+                     {enabledOnOption?.post_type ? 
                      <Dropdown
                       name="_enabled_on_post_type"
                       data_type="post_type"
@@ -376,7 +376,7 @@ const SingularSchemaEdit = () => {
                       value={postMeta._enabled_on?.post_type}
                       onChange={handlePlacementChange}
                       onSearchChange={handlePlacementSearchChange}
-                      options={enabledOnOption.post_type}
+                      options={enabledOnOption?.post_type}
                    />
                    : ''
                      }
@@ -394,7 +394,7 @@ const SingularSchemaEdit = () => {
                    </td>
                    <td>
                      {
-                       enabledOnOption.post ? 
+                       enabledOnOption?.post ? 
                         <Dropdown
                         data_type="post"
                         name="_enabled_on_post"
@@ -406,7 +406,7 @@ const SingularSchemaEdit = () => {
                         value={postMeta._enabled_on?.post}
                         onChange={handlePlacementChange}
                         onSearchChange={handlePlacementSearchChange}
-                        options={enabledOnOption.post}
+                        options={enabledOnOption?.post}
                       />
                   : ''
                   }                    
@@ -422,7 +422,7 @@ const SingularSchemaEdit = () => {
                   </div>
                    </td>
                    <td>
-                     {enabledOnOption.page ? 
+                     {enabledOnOption?.page ? 
                      <Dropdown
                      data_type="page"
                      name="_enabled_on_page"
@@ -434,7 +434,7 @@ const SingularSchemaEdit = () => {
                      value={postMeta._enabled_on?.page}
                      onChange={handlePlacementChange}
                      onSearchChange={handlePlacementSearchChange}
-                     options={enabledOnOption.page}
+                     options={enabledOnOption?.page}
                    /> : ''
                      }
                   </td>
@@ -467,7 +467,7 @@ const SingularSchemaEdit = () => {
                    value={postMeta._disabled_on?.post_type}
                    onChange={handlePlacementChange}
                    onSearchChange={handlePlacementSearchChange}
-                   options={disabledOnOption.post_type}
+                   options={disabledOnOption?.post_type}
                  />
                  : ''
                    }
@@ -495,7 +495,7 @@ const SingularSchemaEdit = () => {
                     value={postMeta._disabled_on?.post}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
-                    options={disabledOnOption.post}
+                    options={disabledOnOption?.post}
                   />
                   : ''
                     }
@@ -523,7 +523,7 @@ const SingularSchemaEdit = () => {
                     value={postMeta._disabled_on?.page}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
-                    options={disabledOnOption.page}
+                    options={disabledOnOption?.page}
                   />
                   : ''
                     }

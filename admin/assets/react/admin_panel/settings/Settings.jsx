@@ -252,8 +252,7 @@ const Settings = () => {
     .then(
       (result) => {              
           if(result.status == 'success'){
-            setPluginList(result.data);
-            console.log(result.data);
+            setPluginList(result.data);            
           }
       },        
       (error) => {         

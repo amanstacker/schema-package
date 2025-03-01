@@ -306,25 +306,17 @@ function smpg_load_smpg_plugin_list_settings() {
 	
 }
 
-function smpg_default_settings_data(){
+function smpg_default_settings_data() {
 
-    $spg_post_types = $spg_taxonomies = [];	 
-	$post_types = get_post_types( ['public' => true], 'objects' );	 
-	unset($post_types['attachment']);
+    $spg_post_types = [];	 
+	$post_types = get_post_types( [ 'public' => true], 'objects' );	 
+	unset( $post_types['attachment'] );
 
 	if ( $post_types ) {
 		foreach ( $post_types as $value ) {
 			$spg_post_types[] = $value->name;
 		}
-	}
-	$taxonomies = get_taxonomies( ['public' => true], 'objects' );
-
-	if ( $taxonomies ) {
-		foreach ( $taxonomies as $value ) {
-			$spg_taxonomies[] = $value->name;
-		}
-	}
-
+	}	
 	$defaults = [
 		'website_json_ld' 			=> 1,
 		'defragment_json_ld' 		=> 1,
@@ -348,7 +340,7 @@ function smpg_default_settings_data(){
 		'default_image_url' 		=> '',
 		'manage_conflict' 			=> [],
 		'spg_post_types' 			=> $spg_post_types,
-		'spg_taxonomies' 			=> $spg_taxonomies,		
+		'spg_taxonomies' 			=> [],		
 	];	  		
 	
 	return $defaults;

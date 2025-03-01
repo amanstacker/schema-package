@@ -1292,7 +1292,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'provider_url'    => [
                                     'label'       => 'Provider URL',                    
                                     'type'        => 'text',                                    
-                                    'placeholder' => 'https://example.com/provier',                    
+                                    'placeholder' => smpg_get_permalink($post_id),    
                                     'value'       => '',
                                     'display'     => true
                                 ],
@@ -1416,7 +1416,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                             ],
                                             'value' => [                                                                                                                                              
                                                 'label'       => 'Value',                    
-                                                'type'        => 'text',                                                                                    
+                                                'type'        => 'textarea',                                                                                    
                                                 'value'       => '',
                                                 'display'     => true
                                             ],                                           

@@ -310,6 +310,7 @@ function smpg_default_settings_data(){
 
     $spg_post_types = $spg_taxonomies = [];	 
 	$post_types = get_post_types( ['public' => true], 'objects' );	 
+	unset($post_types['attachment']);
 
 	if ( $post_types ) {
 		foreach ( $post_types as $value ) {

@@ -468,6 +468,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Item Condition',
             'type'        => 'select',
             'options'      => [
+                     ''                                             => 'Select',
                      'https://schema.org/NewCondition'              => 'New',
                      'https://schema.org/UsedCondition'             => 'Used',
                      'https://schema.org/RefurbishedCondition'      => 'Refurbished',
@@ -483,6 +484,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'https://schema.org/InStock',
             'options'      => [
+                ''                                        => 'Select',
                 'https://schema.org/InStock'              => 'InStock',
                 'https://schema.org/OutOfStock'           => 'OutOfStock',
                 'https://schema.org/SoldOut'              => 'SoldOut',    
@@ -1287,6 +1289,13 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'value'       => '',
                                     'display'     => true
                                 ],
+                                'provider_url'    => [
+                                    'label'       => 'Provider URL',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'https://example.com/provier',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
                                 'provider_type' =>  [ 
                                         'label'       => 'Provider Type',
                                         'type'        => 'select',
@@ -1343,6 +1352,24 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'value'       => '',
                                     'display'     => true
                                 ],
+                                'brand'                  => $brand,     
+                                'offer_type'             => $offer_type,                                                   
+                                'offer_price'            => $offer_price,
+                                'low_price'              => $low_price,
+                                'high_price'             => $high_price,
+                                'offer_count'            => $offer_count, 
+                                'offer_url'              => $offer_url, 
+                                'offer_currency'         => $offer_currency,
+                                'offer_price_validuntil' => $offer_price_validuntil,                                                                      
+                                'offer_item_condition'   => $offer_item_condition,
+                                'offer_availability'     => $offer_availability,                        
+                                'eligible_customer_type'   => [
+                                    'label'       => 'Eligible Customer Type',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '40 - 80 Years',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
                                 'terms_of_service'          => [
                                     'label'       => 'Terms Of Service',                    
                                     'type'        => 'text',                                    
@@ -1374,6 +1401,28 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'latitude'           => $latitude,
                                 'longitude'          => $longitude,
                                 'image'              => $image,
+                                'additional_property' => [                            
+                                    'label'         => 'Additional Property',    
+                                    'button_text'   => 'Add More Properties', 
+                                    'type'          => 'repeater', 
+                                    'display'       => true,
+                                    'elements'      => [
+                                        [
+                                            'name' => [                                                                                                                                              
+                                                'label'       => 'Name',                    
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],
+                                            'value' => [                                                                                                                                              
+                                                'label'       => 'Value',                    
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],                                           
+                                        ]
+                                    ]                                                                                                                      
+                                ],
                                 'opening_hours' => [                            
                                     'label'         => 'Opening Hours',    
                                     'button_text'   => 'Add More Opening Hours', 

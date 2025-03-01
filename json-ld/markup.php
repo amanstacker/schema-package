@@ -29,7 +29,7 @@ function smpg_json_ld_output() {
 		echo "\n";
 		echo '<script type="application/ld+json" class="smpg-json-ld">';
         echo "\n";
-		echo wp_json_encode( $json_ld );
+		echo wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
         echo "\n";
 		echo '</script>';
 		echo "\n\n";		

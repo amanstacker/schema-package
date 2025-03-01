@@ -19,10 +19,17 @@ class SMPG_Individual_Post {
 
     
     private function __construct(){
-
-        $this->_screen   = apply_filters( 'smpg_filter_spg_post_types', ['post', 'page', 'product'] );
-        $this->_taxonomy = apply_filters( 'smpg_filte_spg_taxonomy', ['category', 'post_tag'] );
-            
+        
+        $smpg_settings = smpg_load_smpg_settings();        
+        
+        if ( isset( $smpg_settings['spg_post_types'] ) ) {
+            $this->_screen   = apply_filters( 'smpg_filter_spg_post_types', $smpg_settings['spg_post_types'] );
+        }
+        
+        if ( isset( $smpg_settings['spg_taxonomies'] ) ) {
+            $this->_taxonomy = apply_filters( 'smpg_filte_spg_taxonomy', $smpg_settings['spg_taxonomies'] );
+        }
+                            
         if( ! empty( $this->_taxonomy ) ){
 
             foreach ( $this->_taxonomy as $value ) {

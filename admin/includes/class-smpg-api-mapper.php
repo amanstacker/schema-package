@@ -11,11 +11,52 @@ class SMPG_Api_Mapper {
       return $options;
     }
 
+    public function get_post_types_options() {
+
+      $post_types = get_post_types( [], 'objects' );
+    
+      $post_type_list = [];
+      $index = 0;
+
+      foreach ( $post_types as $post_type ) {
+          $post_type_list[] = [
+              'key'   => $index++,
+              'value' => $post_type->name,
+              'text'  => $post_type->label
+          ];
+      }
+
+      return  $post_type_list ;
+
+    }
+
+    public function get_taxonomies_options() {
+
+      $taxonomies = get_taxonomies( [], 'objects' );
+    
+      $taxonomy_list = [];
+      $index = 0;
+  
+      foreach ( $taxonomies as $taxonomy ) {
+          $taxonomy_list[] = [
+              'key'   => $index++,
+              'value' => $taxonomy->name,  
+              'text'  => $taxonomy->label  
+          ];
+      }
+  
+      return  $taxonomy_list;
+
+    }
+
     public function get_settings(){
-            
-      $smpg_settings = get_option('smpg_settings');
-            
-      return $smpg_settings;
+
+      $response                  = [];
+      $response['smpg_settings'] = get_option('smpg_settings');
+      $response['post_types']    = $this->get_post_types_options();
+      $response['taxonomies']    = $this->get_taxonomies_options();
+
+      return $response;
     }    
     public function import_from_file( $import_file ) {
       

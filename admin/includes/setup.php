@@ -5,16 +5,31 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'save_post_smpg_singular_schema', 'smpg_cached_singular_schema_ids', 10, 3 );
 add_action( 'save_post_smpg_carousel_schema', 'smpg_cached_carousel_schema_ids', 10, 3 );
 add_action( 'after_delete_post', 'smpg_cached_schema_ids_on_delete', 10, 1 );
-add_action( 'plugins_loaded', 'smpg_set_all_global_data' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_settings' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_misc_schema_settings' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_plugin_list_settings' );
 add_action( 'admin_enqueue_scripts', 'smpg_enqueue_admin_panel', 10);
 
-function smpg_set_all_global_data() {
-                           
-	global $smpg_settings, $smpg_misc_schema, $smpg_plugin_list; 
-	
+function smpg_load_smpg_settings() {
+
+	global $smpg_settings; 
 	$smpg_settings    = get_option( 'smpg_settings', smpg_default_settings_data());     	
-	$smpg_misc_schema = get_option( 'smpg_misc_schema', smpg_default_misc_schema_data());   
-	
+	return $smpg_settings;
+
+}
+
+function smpg_load_smpg_misc_schema_settings() {
+
+	global $smpg_misc_schema; 
+	$smpg_misc_schema = get_option( 'smpg_misc_schema', smpg_default_misc_schema_data());  
+	return $smpg_misc_schema;
+
+}
+
+function smpg_load_smpg_plugin_list_settings() {
+                           
+	global $smpg_plugin_list; 
+			 	
 	$smpg_plugin_list['simplejobboard'] = [
 		'is_active'   	  	=> false,
 		'has_own_json_ld' 	=> false,
@@ -291,9 +306,45 @@ function smpg_set_all_global_data() {
 }
 
 function smpg_default_settings_data(){
-        	
+
+    $spg_post_types = $spg_taxonomies = [];	 
+	$post_types = get_post_types( [], 'objects' );	 
+	if($post_types){
+		foreach ($post_types as $value) {
+			$spg_post_types[] = $value->name;
+		}
+	}
+	$taxonomies = get_taxonomies( [], 'objects' );
+	if($taxonomies){
+		foreach ($taxonomies as $value) {
+			$spg_taxonomies[] = $value->name;
+		}
+	}
+
 	$defaults = array(
-																						
+		'website_json_ld' 			=> 1,
+		'defragment_json_ld' 		=> 1,
+		'json_ld_in_footer' 		=> 1,
+		'pretty_print_json_ld' 		=> 1,
+		'clean_micro_data' 			=> 1,
+		'clean_rdfa_data' 			=> 1,
+		'multisize_image' 			=> 0,
+		'image_object' 				=> 0,
+		'cmp_smartcrawl_seo' 		=> 0,
+		'cmp_seo_press' 			=> 0,
+		'cmp_the_seo_framework' 	=> 0,
+		'cmp_all_in_one_seo_pack'   => 0,
+		'cmp_rank_math' 			=> 1,
+		'cmp_simple_author_box'     => 0,
+		'reset_settings' 			=> 1,
+		'delete_data_on_uninstall'  => 0,
+		'default_logo_id' 			=> 1,
+		'default_image_id' 			=> 1,
+		'default_logo_url' 			=> 1,
+		'default_image_url' 		=> 1,
+		'manage_conflict' 			=> [],
+		'spg_post_types' 			=> $spg_post_types,
+		'spg_taxonomies' 			=> $spg_taxonomies,		
 	);	  		
 	
 	return $defaults;
@@ -303,7 +354,11 @@ function smpg_default_settings_data(){
 function smpg_default_misc_schema_data(){
         	
 	$defaults = array(
-																						
+		'website' 					=> 1,
+		'sitelinks_search_box' 		=> 0,
+		'breadcrumbs' 				=> 1,
+		'about_pages' 				=> [],
+		'contact_pages' 			=> [],
 	);	  		
 	
 	return $defaults;

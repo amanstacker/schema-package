@@ -18,8 +18,11 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
     }
     if(!empty($properties['service_type']['value'])){
         $json_ld['serviceType']  =      $properties['service_type']['value'];
-    }    
-
+    }
+    if(!empty($properties['terms_of_service']['value'])){
+        $json_ld['termsOfService']  =      $properties['terms_of_service']['value'];
+    }        
+    
     $image = smpg_make_the_image_json($properties['image']['value'], true);
 
      if(!empty($image)){
@@ -31,6 +34,9 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
     }
     if(!empty($properties['provider_name']['value'])){
         $json_ld['provider']['name']                 = $properties['provider_name']['value'];
+    }
+    if(!empty($properties['provider_url']['value'])){
+        $json_ld['provider']['url']                 = $properties['provider_url']['value'];
     }
     if(!empty($properties['provider_mobility']['value'])){
         $json_ld['provider']['providerMobility']     = $properties['provider_mobility']['value'];
@@ -68,7 +74,48 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
     if ( ! empty( $properties['area_served'] ) ) {
         $json_ld['areaServed'] =      smpg_get_commaa_seprated_value( $properties['area_served']['value'], 'City' );
     }
+    if( $properties['offer_type']['value'] == 'Offer' ){
+
+        if(isset($properties['offer_price']['value'])){
+
+            $json_ld['offers']['@type']            = 'Offer';
+            $json_ld['offers']['url']              = $properties['offer_url']['value'];
+            $json_ld['offers']['priceCurrency']    = $properties['offer_currency']['value'];
+            $json_ld['offers']['price']            = $properties['offer_price']['value'];
+            $json_ld['offers']['priceValidUntil']  = $properties['offer_price_validuntil']['value'];
+            $json_ld['offers']['itemCondition']    = $properties['offer_item_condition']['value'];
+            $json_ld['offers']['availability']     = $properties['offer_availability']['value'];
+
+            if(!empty($properties['eligible_customer_type']['value'])){
+                $json_ld['offers']['eligibleCustomerType']  =      $properties['eligible_customer_type']['value'];
+            }
     
+         }
+
+     }
+	 
+	 
+	 if( $properties['offer_type']['value'] == 'AggregateOffer' ){
+
+        if(isset($properties['high_price']['value']) && isset($properties['low_price']['value'])){
+
+            $json_ld['offers']['@type']            = 'AggregateOffer';
+            $json_ld['offers']['url']              = $properties['offer_url']['value'];
+            $json_ld['offers']['priceCurrency']    = $properties['offer_currency']['value'];
+            $json_ld['offers']['highPrice']        = $properties['high_price']['value'];
+            $json_ld['offers']['lowPrice']         = $properties['low_price']['value'];
+            $json_ld['offers']['offerCount']       = $properties['offer_count']['value'];
+            $json_ld['offers']['priceValidUntil']  = $properties['offer_price_validuntil']['value'];
+            $json_ld['offers']['itemCondition']    = $properties['offer_item_condition']['value'];
+            $json_ld['offers']['availability']     = $properties['offer_availability']['value'];
+
+            if(!empty($properties['eligible_customer_type']['value'])){
+                $json_ld['offers']['eligibleCustomerType']  =      $properties['eligible_customer_type']['value'];
+            }
+    
+         }
+
+     }
     if(!empty($properties['service_offered']['value'])){
 
             $service_offer = array();
@@ -88,7 +135,21 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
         );
 
     }
+    if ( ! empty( $properties['additional_property']['elements'] ) ) {
 
+        $loopdata = [];
+
+        foreach ($properties['additional_property']['elements'] as  $value) {
+                                    
+            $loopdata[] = [
+                '@type'      => 'PropertyValue',
+                'name'       => $value['name']['value'],
+                'value'      => $value['value']['value'],                
+            ];
+        }
+
+        $json_ld['additionalProperty'] = $loopdata;
+    }
     if(!empty($properties['opening_hours']['elements'])){
 
         $loopdata = [];

@@ -8,22 +8,6 @@ import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
 
-const spgPostTypes = [
-  { key: 0,  value: 'posts',  text: 'Posts' },
-  { key: 1,  value: 'pages',  text: 'Pages' },
-  { key: 2,  value: 'products',  text: 'Products' },
-  { key: 3,  value: 'products88',  text: 'Products88' },  
-  { key: 4,  value: 'products44',  text: 'Products44' }    
-];
-
-const spgTaxonomies = [
-  { key: 0,  value: 'posts',  text: 'Posts' },
-  { key: 1,  value: 'pages',  text: 'Pages' },
-  { key: 2,  value: 'products',  text: 'Products' },
-  { key: 3,  value: 'products88',  text: 'Products88' },  
-  { key: 4,  value: 'products44',  text: 'Products44' }    
-];
-
 const Settings = () => {
 
   const [loading, setLoading]                 = useState(false);  
@@ -35,6 +19,8 @@ const Settings = () => {
   const [supportError, setSupportError]       = useState('');
   const [supportSuccess, setSupportSuccess]   = useState('');
   const [importFile, setImportFile]           = useState();
+  const [spgTaxonomies, setSPGTaxonomies]     = useState([]);
+  const [spgPostTypes, setSPGPostTypes]       = useState([]);
   const [pluginList, setPluginList]           = useState({});
 
   const postMetaReducer = (state, newState) => {
@@ -154,7 +140,9 @@ const Settings = () => {
             setMainSpinner(false);
             
           if(result){
-            setSettings(result);
+            setSPGPostTypes(result.post_types);
+            setSPGTaxonomies(result.taxonomies);
+            setSettings(result.smpg_settings);
           }          
             
         },        
@@ -518,7 +506,7 @@ const Settings = () => {
                         />      
                       </div>                                                              
                     </div>                                              
-                    <span style={{float:'right', position:'absolute', right:"-130px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <span style={{float:'right', position:'absolute', right:"-10px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                  
                   <tr>

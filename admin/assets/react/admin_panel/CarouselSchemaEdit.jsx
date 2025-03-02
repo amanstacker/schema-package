@@ -1,7 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
-import { Link} from 'react-router-dom';
-import { Dropdown, TableCell } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import { Dropdown, Grid, Icon, Divider } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
@@ -304,28 +304,38 @@ const CarouselSchemaEdit = () => {
       <div className="smpg-right-section">  
 
          {postMeta._schema_type ?                
-        <Accordion title="Automation With" isExpand={true}>      
-        <h3></h3>
-        {
-        automationList.length > 0 ? 
-        <table className="form-table">
-        <tbody>
-          {
-            automationList.map((item, i) => {
-              return(
-                <tr key={i}>
-                <th>{item.name}</th>
-                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta._automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
-                </tr>
-              )
-          })
-          }
-        </tbody>  
-        </table> 
-          : <div>{__('None of the plugins are active where schema markup can be automated. Find the automation list here', 'schema-package') }</div>
-        }                   
-       
-      </Accordion> 
+        
+        <Accordion title="Automation" isExpand={true}>      
+
+         {automationList.length > 0 ?  
+         
+         <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Form>
+                  {automationList.map((item) => (
+                      <Form.Field key={item.key}>
+                        <Checkbox
+                          label={item.text}                          
+                          checked={!!postMeta._automation_with.includes(item.key)}
+                          onChange={() => handleAutomationChange(item.key)}                          
+                        />
+                      </Form.Field>
+                  ))}                                      
+                </Form>
+              </Grid.Column>
+              </Grid.Row>
+          </Grid>
+
+         : <div>
+            <p>
+            {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
+            <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>
+            <Divider />
+            <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a>
+          </div>}                 
+        </Accordion>          
          
          : ''}           
         

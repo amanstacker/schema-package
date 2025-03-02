@@ -1,10 +1,13 @@
-const isProduction = process.env.NODE_ENV === 'production';
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var path = require('path');
-
 module.exports = {   
-   mode: isProduction ? 'production' : 'development',
-   devtool: isProduction ? false : 'source-map',
+
+   mode: 'production',
+   devtool: false,
+//    mode: 'development',
+//    devtool: 'source-map',
+
    entry: {
        admin_panel: './admin_panel/index.jsx',
        individual_post: './individual/metabox.jsx'
@@ -21,7 +24,7 @@ module.exports = {
                 process.env.NODE_ENV === 'production' 
                   ? MiniCssExtractPlugin.loader 
                   : 'style-loader',  // Ensures styles are applied in development
-                'css-loader'
+                    'css-loader'
               ] 
            },
            {

@@ -529,7 +529,7 @@ const Settings = () => {
                         />      
                       </div>                                                              
                     </div>                                              
-                    <span style={{float:'right', position:'absolute', right:"-10px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <span style={{float:'right', position:'absolute', left:"264px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                  
                   <tr>

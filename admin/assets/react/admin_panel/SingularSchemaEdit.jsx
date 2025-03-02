@@ -1,8 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
-import { Dropdown, Checkbox, Grid, Form } from 'semantic-ui-react'
-import { Button, Divider, Icon } from 'semantic-ui-react'
+import { Dropdown, Checkbox, Grid, Form, Button, Divider, Icon, Label } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
@@ -351,12 +350,12 @@ const SingularSchemaEdit = () => {
       </Accordion>               
 
     <Accordion title="Targeting" isExpand={true}>
-    <div className="">
-                <h4>{__('Target On', 'schema-package') }</h4>
+    <div>
+                <Divider horizontal >{__("Target On", "schema-package")}</Divider>
                 <table className="smpg-placement-table">
                   <tbody>
                    <tr>
-                   <td><label>{__('Post Types', 'schema-package') }</label></td>
+                   <td><Label>{__('Post Types', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_enabled_on_post_type" checked={postMeta._enabled_on_post_type} onChange={handleFormChange} />
@@ -385,7 +384,7 @@ const SingularSchemaEdit = () => {
                    <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
-                   <td><label>{__('Posts', 'schema-package') }</label></td>
+                   <td><Label>{__('Posts', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_enabled_on_post" checked={postMeta._enabled_on_post} onChange={handleFormChange} />
@@ -414,7 +413,7 @@ const SingularSchemaEdit = () => {
                     <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
-                   <td><label>{__('Pages', 'schema-package') }</label></td>
+                   <td><Label>{__('Pages', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_enabled_on_page" checked={postMeta._enabled_on_page} onChange={handleFormChange} />
@@ -443,11 +442,11 @@ const SingularSchemaEdit = () => {
                 </table>
               </div>                  
               <div className="">
-                <h4>{__('Target Off', 'schema-package') }</h4>
+              <Divider horizontal style={{marginTop:"40px"}}>{__("Target Off", "schema-package")}</Divider>
                 <table className="smpg-placement-table">
                   <tbody>
                    <tr>
-                   <td><label>{__('Post Types', 'schema-package') }</label></td>
+                   <td><Label>{__('Post Types', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_disabled_on_post_type" checked={postMeta._disabled_on_post_type} onChange={handleFormChange} />
@@ -475,7 +474,7 @@ const SingularSchemaEdit = () => {
                    <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
-                   <td><label>{__('Posts', 'schema-package') }</label></td>
+                   <td><Label>{__('Posts', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_disabled_on_post" checked={postMeta._disabled_on_post} onChange={handleFormChange} />
@@ -503,7 +502,7 @@ const SingularSchemaEdit = () => {
                   <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr> 
                    <tr> 
-                   <td><label>{__('Pages', 'schema-package') }</label></td>
+                   <td><Label>{__('Pages', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
                   <input type="checkbox" name="_disabled_on_page" checked={postMeta._disabled_on_page} onChange={handleFormChange} />

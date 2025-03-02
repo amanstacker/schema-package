@@ -1,8 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link } from 'react-router-dom';
-import { Dropdown, Grid, Icon, Divider } from 'semantic-ui-react'
-import { Button } from 'semantic-ui-react'
+import { Button, Dropdown, Grid, Icon, Divider, Label } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/carouselSchemaTypes';
@@ -255,7 +254,7 @@ const CarouselSchemaEdit = () => {
     {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
-                <h4>{__('Target On', 'schema-package') }</h4>
+                <Divider horizontal>{__("Target On", "schema-package")}</Divider>
 
                 <table className="smpg-placement-table">
                   <tbody>                    
@@ -263,7 +262,7 @@ const CarouselSchemaEdit = () => {
                     postMeta._taxonomies.map((item, i) => {
                       return(
                         <tr key={i}>
-                        <td><label>{item.label}</label></td>                        
+                        <td><Label>{item.label}</Label></td>                                        
                         <td>
                           <div className="ui fitted toggle checkbox">
                           <input id={i} type="checkbox" name={item.taxonomy} checked={item.status} onChange={handleFormChange} />

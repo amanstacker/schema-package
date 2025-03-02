@@ -176,7 +176,7 @@ const MiscSchema = () => {
                 <Checkbox                     
                       name='website'
                       id='website' 
-                      checked={miscSchema.website}
+                      checked={!!miscSchema.website}
                       onChange={formChangeHandler}
                 />                                    
               <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content of your site. It appears on homepage only.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -190,7 +190,7 @@ const MiscSchema = () => {
                 <Checkbox                     
                       name='sitelinks_search_box'
                       id='sitelinks_search_box' 
-                      checked={miscSchema.sitelinks_search_box}
+                      checked={!!miscSchema.sitelinks_search_box}
                       onChange={formChangeHandler}
                 />                
                 <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -204,7 +204,7 @@ const MiscSchema = () => {
                 <Checkbox                     
                       name='breadcrumbs'
                       id='breadcrumbs' 
-                      checked={miscSchema.breadcrumbs}
+                      checked={!!miscSchema.breadcrumbs}
                       onChange={formChangeHandler}
                 />              
               <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  

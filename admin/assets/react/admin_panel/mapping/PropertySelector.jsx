@@ -15,7 +15,7 @@ const PropertySelector = ({ schemaProperties, mappedPropertiesKey, onSelectPrope
               <Form.Field key={property.key}>
                 <Checkbox
                   label={property.text}
-                  checked={mappedPropertiesKey?.includes(property.key)}
+                  checked={!!mappedPropertiesKey?.includes(property.key)}
                   onChange={() => onSelectProperty(property.key)}
                 />
               </Form.Field>
@@ -30,7 +30,7 @@ const PropertySelector = ({ schemaProperties, mappedPropertiesKey, onSelectPrope
                 <Form.Field key={property.key}>
                   <Checkbox
                     label={property.text}
-                    checked={mappedPropertiesKey?.includes(property.key)}
+                    checked={!!mappedPropertiesKey?.includes(property.key)}
                     onChange={() => onSelectProperty(property.key)}
                   />
                 </Form.Field>

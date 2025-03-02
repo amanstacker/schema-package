@@ -439,7 +439,7 @@ const Settings = () => {
                         <Checkbox                     
                           name={key}  
                           id={key}                        
-                          checked={settings.manage_conflict.includes(key) ? true : false}
+                          checked={!!settings.manage_conflict.includes(key) ? true : false}
                           onChange={handleManageConflictChange}
                         />                                            
                     </td> 

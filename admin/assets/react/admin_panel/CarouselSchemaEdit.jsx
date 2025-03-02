@@ -47,8 +47,7 @@ const CarouselSchemaEdit = () => {
     }
     
     let clonedata = {...postMeta};   
-    clonedata._taxonomies[id].status = value
-    console.log(clonedata);
+    clonedata._taxonomies[id].status = value    
     setPostMeta(clonedata);
             
   }  
@@ -330,10 +329,11 @@ const CarouselSchemaEdit = () => {
             <p>
             {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
             <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>
-            <Divider />
-            <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
-            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a>
-          </div>}                 
+            {/* <Divider /> */}
+            {/* <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a> */}
+          </div>
+          }                 
         </Accordion>          
          
          : ''}           

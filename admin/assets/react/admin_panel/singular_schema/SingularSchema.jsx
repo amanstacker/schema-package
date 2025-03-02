@@ -139,11 +139,7 @@ const SingularSchema = () => {
   
   useEffect(() => {      
     getSchemaLoop(1);
-  }, [])
-
-  useEffect(()=>{
-    console.log(schemaLoop);
-  },[schemaLoop])
+  }, [])  
 
   return (
     <>           

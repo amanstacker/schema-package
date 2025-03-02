@@ -1555,9 +1555,9 @@ var Metabox = function Metabox() {
   }, [dataUpdated]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
     className: "smpg-description"
-  }, __('Add schema types. Structured Data is used to display rich results in SERPs.', 'schema-package'))), postMeta.length > 0 ? /*#__PURE__*/React.createElement("div", {
+  }, __('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package'))), postMeta.length > 0 ? /*#__PURE__*/React.createElement("div", {
     className: "smpg-individual-schema-list"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, __('Schema List', 'schema-package'))), /*#__PURE__*/React.createElement("ul", null, postMeta.map(function (item, i) {
+  }, /*#__PURE__*/React.createElement("ul", null, postMeta.map(function (item, i) {
     return /*#__PURE__*/React.createElement("li", {
       key: i
     }, item.is_setup_popup && /*#__PURE__*/React.createElement(Modal, {

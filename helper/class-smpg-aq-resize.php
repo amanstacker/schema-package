@@ -153,7 +153,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
                         $cdn_url        = explode($dir_name, $cdn_url);
                     }                    
                     if ( ! isset($cdn_url[1]) ) {
-                       $cdn_url = array();
+                       $cdn_url = [];
                        $cdn_url[1] = '';
                     }
                     $hybid_url = $upload_url . $cdn_url[1];
@@ -318,7 +318,7 @@ if(!function_exists('smpg_aq_resize')) {
         $stop_resize = apply_filters('smpg_stop_image_resizer', false );
 
         if( $stop_resize ){
-            return array();
+            return [];
         }
 
          /* EWWW Image Optimizer Plugin By Exactly WWW Compatibility

@@ -34,7 +34,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
 
         if($job_type){
 
-            $job_type_arr = array();
+            $job_type_arr = [];
 
             foreach ($job_type as $value) {
                 $job_type_arr[] = $value->name; 
@@ -46,7 +46,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
         
         if($job_location){
 
-            $vanues_arr = array();
+            $vanues_arr = [];
 
             foreach ($job_location as $value) {
 
@@ -142,7 +142,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
         }
 
         $illustrators     =  wp_get_post_terms( $post_id , 'mbdb_illustrator');
-        $illustrator_arr  = array();
+        $illustrator_arr  = [];
 
         if(!is_wp_error($illustrators)){
         
@@ -162,7 +162,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
         }
 
         $editors       =  wp_get_post_terms( $post_id , 'mbdb_editor');
-        $editors_arr  = array();
+        $editors_arr  = [];
 
         if(!is_wp_error($editors)){
         
@@ -183,7 +183,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
 
         $editions = get_post_meta($post_id, '_mbdb_editions', true);   
         
-        $editions_arr = array();
+        $editions_arr = [];
 
         $format = array('Hardcover', 'Paperback', 'ePub', 'Kindle', 'PDF', 'Audiobook');
 
@@ -207,8 +207,8 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
             }
         }
         
-        $publisher = array();
-        $imprint   = array();
+        $publisher = [];
+        $imprint   = [];
         $cache_key  = 'smpg_mbdb_books_cache_key_'.trim( $post_id );
         $book_table = wp_cache_get( $cache_key );  
 
@@ -710,7 +710,7 @@ function smpg_get_accordion_json_ld( $json_ld, $post_id ){
             $post_id = $atts['id'];
             $accordions_options = get_post_meta($post_id,'accordions_options', true);           
 
-            $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
+            $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : [];
             
             if(!empty($accordions_content)){
 
@@ -1030,9 +1030,9 @@ function smpg_get_product_automated_reviews($json_ld, $post_id, $automation){
 
 function smpg_get_yotpo_product_reviews($product_id){
     
-    $response      = array();
-    $comments      = array();
-    $ratings       = array();
+    $response      = [];
+    $comments      = [];
+    $ratings       = [];
 
     $yotpo_settings = get_option('yotpo_settings');
 
@@ -1117,9 +1117,9 @@ function smpg_get_ryviu_product_reviews ( $product_id ) {
     $shop_url = str_replace( array('https://', 'http://' ), '', $shop_url );
     $handle   = get_post_field( 'post_name', get_post() );
     
-    $response      = array();
-    $comments      = array();
-    $ratings       = array();
+    $response      = [];
+    $comments      = [];
+    $ratings       = [];
 
     if ( ! empty( $shop_url ) ) {
 

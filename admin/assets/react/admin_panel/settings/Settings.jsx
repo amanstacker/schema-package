@@ -32,10 +32,11 @@ const Settings = () => {
 
 
   const [settings, setSettings] = useReducer(postMetaReducer, {
-        website_json_ld:          false,
+        escaped_unicode_json:     true,
+		    minified_json:            true,
+        website_json_ld:          true,
         defragment_json_ld:       false,  
-        json_ld_in_footer:        false,  
-        pretty_print_json_ld:     false,  
+        json_ld_in_footer:        false,          
         clean_micro_data:         false,  
         clean_rdfa_data:          false,  
         multisize_image:          false,
@@ -50,14 +51,13 @@ const Settings = () => {
         cmp_seo_press:            false,
         cmp_the_seo_framework:    false,
         cmp_all_in_one_seo_pack:  false,
-        cmp_rank_math:            false,
-        cmp_simple_author_box:    false,
-        reset_settings:           false,
+        cmp_rank_math:            true,
+        cmp_simple_author_box:    false,        
         delete_data_on_uninstall: false,      
         default_logo_id:          null,
         default_image_id:         null,
-        default_logo_url:         null,
-        default_image_url:        null,
+        default_logo_url:         '',
+        default_image_url:        '',
         manage_conflict  :        [],
         spg_post_types   :        [],
         spg_taxonomies   :        []
@@ -348,14 +348,38 @@ const Settings = () => {
           case "settings":   return (
             <div className="smpg-settings">
               <table className="form-table">
-                <tbody>                  
+                <tbody>
+                <tr>
+                    <th><label htmlFor="minified_json">{__('Minified JSON-LD', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox
+                      name='minified_json'
+                      id='minified_json'
+                      checked={!!settings.minified_json}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Minified JSON-LD reduces file size and improves page load speed by removing unnecessary spaces and line breaks.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                      
+                  <tr>
+                    <th><label htmlFor="escaped_unicode_json">{__('Escaped Unicode JSON-LD', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox
+                      name='escaped_unicode_json'
+                      id='escaped_unicode_json'
+                      checked={!!settings.escaped_unicode_json}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially for special or multilingual characters.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                                        
                   <tr>
                     <th><label htmlFor="clean_micro_data">{__('Clean MicroData', 'schema-package')}</label></th>
                     <td>
                     <Checkbox                     
                       name='clean_micro_data'
                       id='clean_micro_data' 
-                      checked={settings.clean_micro_data}
+                      checked={!!settings.clean_micro_data}
                       onChange={formChangeHandler}
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -367,7 +391,7 @@ const Settings = () => {
                     <Checkbox                     
                       name='clean_rdfa_data'
                       id='clean_rdfa_data' 
-                      checked={settings.clean_rdfa_data}
+                      checked={!!settings.clean_rdfa_data}
                       onChange={formChangeHandler}
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -379,7 +403,7 @@ const Settings = () => {
                     <Checkbox                     
                       name='image_object'
                       id='image_object' 
-                      checked={settings.image_object}
+                      checked={!!settings.image_object}
                       onChange={formChangeHandler}
                     />                       
                       <span className="smpg-tooltip"><Popup content={__('By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
@@ -391,12 +415,12 @@ const Settings = () => {
                     <Checkbox                     
                       name='multisize_image'
                       id='multisize_image' 
-                      checked={settings.multisize_image}
+                      checked={!!settings.multisize_image}
                       onChange={formChangeHandler}
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('It generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
-                  </tr>                      
+                  </tr>                  
                 </tbody>
               </table>
             </div>
@@ -514,7 +538,7 @@ const Settings = () => {
                       <Checkbox                     
                         name='delete_data_on_uninstall'
                         id='delete_data_on_uninstall' 
-                        checked={settings.delete_data_on_uninstall ? true : false}
+                        checked={!!settings.delete_data_on_uninstall ? true : false}
                         onChange={formChangeHandler}
                       />                                            
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  

@@ -40,7 +40,7 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 	
 	if(isset($schema_data['_enabled_on'][0])){
 
-		$stack_contition = array();
+		$stack_contition = [];
 
 		$condition = unserialize($schema_data['_enabled_on'][0]);
 
@@ -96,7 +96,7 @@ function smpg_placement_remove_from( $schema_data, $post_id ){
 
 	if( isset($schema_data['_disabled_on'][0]) ){
 
-		$stack_contition = array();
+		$stack_contition = [];
 
 		$condition = unserialize($schema_data['_disabled_on'][0]);
 			
@@ -163,9 +163,7 @@ function smpg_is_singular_placement_matched( $schema_data, $post_id ){
 
 function smpg_is_carousel_placement_matched( $schema_data ){
 
-	$response = false;
-	
-	if ( is_tax() || is_category() || is_tag() ) {
+		$response = false;		
 
 		$unser_schema_data = [];
 
@@ -191,9 +189,7 @@ function smpg_is_carousel_placement_matched( $schema_data ){
 			} 						
 
 		}						
-				
-	}	
-
+					
 	return $response;
     
 }

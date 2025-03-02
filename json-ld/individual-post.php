@@ -118,7 +118,7 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
      }
     if(!empty($properties['service_offered']['value'])){
 
-            $service_offer = array();
+            $service_offer = [];
 
             $service_explode = explode(',', $properties['service_offered']['value']);
             foreach( $service_explode as $offer){

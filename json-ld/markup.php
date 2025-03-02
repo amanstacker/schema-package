@@ -19,8 +19,9 @@ function smpg_json_ld_init(){
 
 
 function smpg_json_ld_output() {
-	        
-    $json_ld = apply_filters( 'smpg_filter_final_json_ld', smpg_get_json_ld() );
+    
+	global $smpg_settings;        
+    $json_ld = apply_filters( 'smpg_filter_final_json_ld', smpg_get_json_ld() );    
 
     if ( ! empty($json_ld) ) {
         
@@ -29,7 +30,21 @@ function smpg_json_ld_output() {
 		echo "\n";
 		echo '<script type="application/ld+json" class="smpg-json-ld">';
         echo "\n";
-		echo wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
+
+        if ( ! empty( $smpg_settings['minified_json'] ) &&  !empty( $smpg_settings['escaped_unicode_json'] ) ) {            
+            echo wp_json_encode( $json_ld );
+        }else{
+
+            if ( ! empty( $smpg_settings['minified_json'] ) ) {
+                echo wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
+            }elseif( ! empty( $smpg_settings['escaped_unicode_json'] ) ){
+                echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+            }else{
+                echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+            }
+            
+        }        
+		
         echo "\n";
 		echo '</script>';
 		echo "\n\n";		
@@ -43,7 +58,7 @@ function smpg_get_json_ld(){
     global $post;
 
     $post_id     = null;
-    $response    = array();
+    $response    = [];
 
     if ( is_object( $post ) ) {
         $post_id = $post->ID;
@@ -152,11 +167,11 @@ function smpg_clean_other_format_schema($content){
  
     global $smpg_settings;
 
-    if(isset($smpg_settings['clean_micro_data'])){
+    if ( ! empty( $smpg_settings['clean_micro_data'] ) ) {
         $content = preg_replace(array('/itemscope=\\"[^\\"]*\\"/i', '/itemType=\\"[^\\"]*\\"/i', '/itemprop=\\"[^\\"]*\\"/i', '/itemscope/i'), '', $content);       
     }
-
-    if(isset($smpg_settings['clean_rdfa_data'])){
+    
+    if ( ! empty( $smpg_settings['clean_rdfa_data'] ) ) {
         $content = preg_replace_callback(
             '/<(?!meta\b)[^>]+?\s(property|typeof)=\\"[^\\"]*\\"/i',
             function ($matches) {
@@ -173,7 +188,7 @@ function smpg_manage_conflict(){
 
     global $smpg_settings;
 
-    if(!empty($smpg_settings['manage_conflict'])){
+    if ( ! empty( $smpg_settings['manage_conflict'] ) ) {
 
         foreach ($smpg_settings['manage_conflict'] as $value) {
             
@@ -243,7 +258,7 @@ function smpg_manage_conflict(){
 
 function smpg_remove_the_events_calendar_json_ld( $data, $args ){
         
-    return array();
+    return [];
 }
 
 function smpg_remove_yoast_product_json_ld(){
@@ -290,5 +305,5 @@ function smpg_remove_yoast_product_json_ld(){
     remove_action('wp_head', 'seopress_social_website_option',1);                                    
  }
  function smpg_remove_rank_math_json_ld($entry){
-    return array();  
+    return [];  
  }

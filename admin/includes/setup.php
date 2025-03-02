@@ -318,10 +318,11 @@ function smpg_default_settings_data() {
 		}
 	}	
 	$defaults = [
+		'escaped_unicode_json'      => 1,
+		'minified_json'             => 1,
 		'website_json_ld' 			=> 1,
-		'defragment_json_ld' 		=> 1,
-		'json_ld_in_footer' 		=> 1,
-		'pretty_print_json_ld' 		=> 1,
+		'defragment_json_ld' 		=> 0,
+		'json_ld_in_footer' 		=> 0,		
 		'clean_micro_data' 			=> 0,
 		'clean_rdfa_data' 			=> 0,
 		'multisize_image' 			=> 0,
@@ -331,8 +332,7 @@ function smpg_default_settings_data() {
 		'cmp_the_seo_framework' 	=> 0,
 		'cmp_all_in_one_seo_pack'   => 0,
 		'cmp_rank_math' 			=> 1,
-		'cmp_simple_author_box'     => 0,
-		'reset_settings' 			=> 1,
+		'cmp_simple_author_box'     => 0,		
 		'delete_data_on_uninstall'  => 0,
 		'default_logo_id' 			=> null,
 		'default_image_id' 			=> null,
@@ -574,7 +574,7 @@ function smpg_on_plugin_uninstall() {
         		 
 	$options = get_option( 'smpg_settings' );
 		
-	if ( isset( $options['delete_data_on_uninstall'] ) ) {
+	if ( ! empty( $options['delete_data_on_uninstall'] ) ) {
 	 
 		if ( is_multisite() ) {
 

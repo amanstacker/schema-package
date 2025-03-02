@@ -32,12 +32,14 @@ function smpg_json_ld_output() {
         echo "\n";
 
         if ( ! empty( $smpg_settings['minified_json'] ) &&  !empty( $smpg_settings['escaped_unicode_json'] ) ) {            
+
             echo wp_json_encode( $json_ld );
+
         }else{
 
             if ( ! empty( $smpg_settings['minified_json'] ) ) {
                 echo wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
-            }elseif( ! empty( $smpg_settings['escaped_unicode_json'] ) ){
+            }elseif( ! empty( $smpg_settings['escaped_unicode_json'] ) ){                
                 echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
             }else{
                 echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );

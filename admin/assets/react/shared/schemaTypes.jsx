@@ -25,5 +25,5 @@ export const schemaTypes = [
     { key: 23, value: 'foodservice', text: 'FoodService' },
     { key: 24, value: 'governmentservice', text: 'GovernmentService' },
     { key: 25, value: 'taxiservice', text: 'TaxiService' },
-    { key: 25, value: 'webapi', text: 'WebAPI' },
+    { key: 26, value: 'webapi', text: 'WebAPI' },
 ]

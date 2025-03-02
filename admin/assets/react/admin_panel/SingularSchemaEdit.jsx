@@ -552,7 +552,7 @@ const SingularSchemaEdit = () => {
                       label={__('Comments', 'schema-package') }
                       name='_add_comments'
                       id='_add_comments' 
-                      checked={postMeta._add_comments}
+                      checked={!!postMeta._add_comments}
                       onChange={handleFormChange}
                     />                                      
                     </Form.Field>
@@ -561,7 +561,7 @@ const SingularSchemaEdit = () => {
                         label={__('Speakable', 'schema-package') }
                         name='_add_speakable'
                         id='_add_speakable' 
-                        checked={postMeta._add_speakable}
+                        checked={!!postMeta._add_speakable}
                         onChange={handleFormChange}
                       />                              
                     </Form.Field>
@@ -584,7 +584,7 @@ const SingularSchemaEdit = () => {
                       <Form.Field key={item.key}>
                         <Checkbox
                           label={item.text}                          
-                          checked={postMeta._automation_with.includes(item.key)}
+                          checked={!!postMeta._automation_with.includes(item.key)}
                           onChange={() => handleAutomationChange(item.key)}                          
                         />
                       </Form.Field>

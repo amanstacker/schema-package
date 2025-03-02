@@ -1105,7 +1105,7 @@ var schemaTypes = [{
   value: 'taxiservice',
   text: 'TaxiService'
 }, {
-  key: 25,
+  key: 26,
   value: 'webapi',
   text: 'WebAPI'
 }];

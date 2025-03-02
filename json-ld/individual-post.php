@@ -907,7 +907,7 @@ function smpg_get_product_individual_json_ld( $json_ld, $properties, $schema_typ
 function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $properties, $schema_type ){
     
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = $properties['business_type']['value'];
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
@@ -1002,7 +1002,7 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
 function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $schema_type ){
 
         $json_ld['@context']         = smpg_get_context_url();
-        $json_ld['@type']            = $properties['article_type']['value'];
+        $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
         
         if(!empty($properties['url']['value'])){
             $json_ld['url']                = $properties['url']['value'];

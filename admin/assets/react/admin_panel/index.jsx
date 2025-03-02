@@ -6,6 +6,7 @@ import ListPage from './ListPage'
 import SingularSchemaEdit from './SingularSchemaEdit'
 import CarouselSchemaEdit from './CarouselSchemaEdit'
 import './style/common.css'
+import 'semantic-ui-css/semantic.min.css';
 
 
 const SMPGRootComponent = () => {

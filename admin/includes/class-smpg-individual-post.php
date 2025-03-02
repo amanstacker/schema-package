@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class SMPG_Individual_Post {
 
     private static $instance;
-    private $_screen    = ['post', 'page'];
-    private $_taxonomy  = ['category', 'post_tag'];
+    public $_screen    = [];
+    public $_taxonomy  = [];
 
     public static function get_instance()
     {
@@ -19,25 +19,42 @@ class SMPG_Individual_Post {
 
     
     private function __construct(){
-            
-        if( ! empty( $this->_taxonomy ) ){
+        
+        add_action( 'admin_init', [ $this, 'initialize_metabox' ] );           
+        add_action( 'admin_enqueue_scripts', [$this, 'enqueue_script' ],10);
+        
+    }
 
-            foreach ( $this->_taxonomy as $value ) {
-                add_action( "{$value}_edit_form_fields", array( $this, 'render_taxonomy_metabox' ),10,2 );
+    public function initialize_metabox() {
+
+        $smpg_settings = smpg_load_smpg_settings();        
+
+        if ( isset( $smpg_settings['spg_post_types'] ) ) {
+
+            $this->_screen   = apply_filters( 'smpg_filter_spg_post_types', $smpg_settings['spg_post_types'] );
+
+            if( !empty($this->_screen) ){
+
+                foreach ($this->_screen as  $value) {
+                    add_action( "add_meta_boxes_{$value}", array( $this, 'add_meta_boxes' ),10,1 );	                
+                }
+    
             }
-
         }
         
-        if( !empty($this->_screen) ){
+        if ( isset( $smpg_settings['spg_taxonomies'] ) ) {
 
-            foreach ($this->_screen as  $value) {
-                add_action( "add_meta_boxes_{$value}", array( $this, 'add_meta_boxes' ),10,1 );	                
+            $this->_taxonomy = apply_filters( 'smpg_filte_spg_taxonomy', $smpg_settings['spg_taxonomies'] );
+            
+            if( ! empty( $this->_taxonomy ) ){
+
+                foreach ( $this->_taxonomy as $value ) {
+                    add_action( "{$value}_edit_form_fields", array( $this, 'render_taxonomy_metabox' ),10,2 );
+                }
+    
             }
-
-        }   
-
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_script'),10);
-        
+        }
+                                    
     }
 
     public function add_meta_boxes($post){
@@ -83,23 +100,21 @@ class SMPG_Individual_Post {
         echo '</tr>';
     }
     
-    public function to_be_enqueue($hook){
+    public function to_be_enqueue( $hook ) {
 
-            wp_enqueue_media();    
-            
-            wp_enqueue_style('smpg-individual-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/individual_post.css', array('wp-components'), SMPG_VERSION);            
-                    
-            $data = array(
+            $local_data = array(
                 'smpg_plugin_url'      => SMPG_PLUGIN_URL,
                 'rest_url'             => esc_url_raw( rest_url() ),
                 'nonce'                => wp_create_nonce( 'wp_rest' ),
                 'post_id'              => get_the_ID(),
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-                'tag_id'               => !empty($_GET['tag_ID']) ? intval( wp_unslash( $_GET['tag_ID'] ) ) : ''
+                'tag_id'               => ! empty( $_GET['tag_ID'] ) ? intval( wp_unslash( $_GET['tag_ID'] ) ) : ''
             );
-    
+
+            wp_enqueue_media();    
+            wp_enqueue_style( 'wp-components' );
             wp_register_script( 'smpg-individual-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/individual_post.js', array( 'wp-i18n', 'wp-components', 'wp-element', 'wp-api', 'wp-editor', 'wp-blocks' ), SMPG_VERSION, true );    
-            wp_localize_script( 'smpg-individual-script', 'smpg_local', $data );            
+            wp_localize_script( 'smpg-individual-script', 'smpg_local', $local_data );
             wp_enqueue_script( 'smpg-individual-script');
 
     }

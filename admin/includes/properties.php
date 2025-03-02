@@ -323,7 +323,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ],
         'operating_system' => [                        
             'placeholder' => 'ANDROID',                    
-            'label'       => 'operatingSystem',                    
+            'label'       => 'Operating System',
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -367,6 +367,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'Offer',
             'options'     => [
+                ''               => 'Select',
                 'Offer'          => 'Offer',
                 'AggregateOffer' => 'AggregateOffer'
             ],
@@ -468,6 +469,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Item Condition',
             'type'        => 'select',
             'options'      => [
+                     ''                                             => 'Select',
                      'https://schema.org/NewCondition'              => 'New',
                      'https://schema.org/UsedCondition'             => 'Used',
                      'https://schema.org/RefurbishedCondition'      => 'Refurbished',
@@ -483,6 +485,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'https://schema.org/InStock',
             'options'      => [
+                ''                                        => 'Select',
                 'https://schema.org/InStock'              => 'InStock',
                 'https://schema.org/OutOfStock'           => 'OutOfStock',
                 'https://schema.org/SoldOut'              => 'SoldOut',    
@@ -642,35 +645,43 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
     ];
 
     extract($common_properties);
-          
-    switch ($schema_id) {
+
+    $article_type = [
+        'article'                  => 'Article',
+        'techarticle'              => 'TechArticle',
+        'newsarticle'              => 'NewsArticle',
+        'advertisercontentarticle' => 'AdvertiserContentArticle',
+        'satiricalarticle'         => 'SatiricalArticle',
+        'scholarlyarticle'         => 'ScholarlyArticle',
+        'socialmediaposting'       => 'SocialMediaPosting',
+    ];
+    $service_type = [
+            'service'                   => 'Service',
+            'broadcastservice'          => 'BroadcastService', 
+            'cableorsatelliteservice'   => 'CableOrSatelliteService',  
+            'financialproduct'          => 'FinancialProduct',  
+            'foodservice'               => 'FoodService',  
+            'governmentservice'         => 'GovernmentService',  
+            'taxiservice'               => 'TaxiService',  
+            'webapi'                    => 'WebAPI',                                                                                
+    ];       
+    switch ( $schema_id ) {
         
         case 'article':
+        case 'techarticle':
+        case 'newsarticle':
+        case 'advertisercontentarticle':
+        case 'satiricalarticle':
+        case 'scholarlyarticle':
+        case 'socialmediaposting':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 
                 'is_setup_popup'    => false,
                 'has_warning'       => false,
-                'id'                => 'article',           
-                'text'              => 'Article',
-                'properties'        => [
-                    'article_type' => [                                     
-                            'label'       => 'Article Type',                    
-                            'type'        => 'select',
-                            'value'       => 'Article',
-                            'options'      => [
-                                'Article'                  => 'Article',
-                                'TechArticle'              => 'TechArticle',  
-                                'NewsArticle'              => 'NewsArticle',  
-                                'AdvertiserContentArticle' => 'AdvertiserContentArticle',  
-                                'SatiricalArticle'         => 'SatiricalArticle',  
-                                'ScholarlyArticle'         => 'ScholarlyArticle',  
-                                'SocialMediaPosting'       => 'SocialMediaPosting'                      
-                            ],
-                            'recommended' => true,
-                            'display'     => true,
-                            'tooltip'     => 'The author type of this content'
-                    ],
+                'id'                => $schema_id,           
+                'text'              => $article_type[$schema_id],
+                'properties'        => [                    
                     'headline'            => $headline,
                     'description'         => $description,
                     'keywords'            => $keywords,
@@ -1242,33 +1253,22 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;  
 
                     case 'service':
+                    case 'broadcastservice':
+                    case 'cableorsatelliteservice':
+                    case 'financialproduct':
+                    case 'foodservice':
+                    case 'governmentservice':
+                    case 'taxiservice':
+                    case 'webapi':
 
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
                             'is_setup_popup'    => false,
                             'has_warning'       => false,
-                            'id'                => 'service',           
-                            'text'              => 'Service',
-                            'properties'        => [
-                                'service_type_option' =>  [ 
-                                        'label'       => 'Service Types Option',
-                                        'type'        => 'select',
-                                        'value'       => 'Service',
-                                        'options'     => [
-                                            'Service'                   => 'Service',
-                                            'BroadcastService'          => 'BroadcastService', 
-                                            'CableOrSatelliteService'   => 'CableOrSatelliteService',  
-                                            'FinancialProduct'          => 'FinancialProduct',  
-                                            'FoodService'               => 'FoodService',  
-                                            'GovernmentService'         => 'GovernmentService',  
-                                            'TaxiService'               => 'TaxiService',  
-                                            'WebAPI'                    => 'WebAPI',                                                                                
-                                        ],
-                                        'recommended' => true,
-                                        'display'     => true,
-                                    'tooltip'     => 'The author type of this content'
-                                ],
+                            'id'                => $schema_id,           
+                            'text'              => $service_type[$schema_id],
+                            'properties'        => [                                
                                 'service_type'          => [
                                     'label'       => 'Service Type',                    
                                     'type'        => 'text',                                    
@@ -1290,11 +1290,20 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'value'       => '',
                                     'display'     => true
                                 ],
+                                'provider_url'    => [
+                                    'label'       => 'Provider URL',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => smpg_get_permalink($post_id),    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
                                 'provider_type' =>  [ 
                                         'label'       => 'Provider Type',
                                         'type'        => 'select',
                                         'value'       => 'LocalBusiness',
                                         'options'     => [
+                                                ''                             => 'Select',
+                                                'Organization'                 => 'Organization',
                                                 'LocalBusiness'                => 'Local Business',
                                                 'Airline'                      => 'Airline',
                                                 'Corporation'                  => 'Corporation',
@@ -1345,9 +1354,77 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'value'       => '',
                                     'display'     => true
                                 ],
+                                'brand'                  => $brand,     
+                                'offer_type'             => $offer_type,                                                   
+                                'offer_price'            => $offer_price,
+                                'low_price'              => $low_price,
+                                'high_price'             => $high_price,
+                                'offer_count'            => $offer_count, 
+                                'offer_url'              => $offer_url, 
+                                'offer_currency'         => $offer_currency,
+                                'offer_price_validuntil' => $offer_price_validuntil,                                                                      
+                                'offer_item_condition'   => $offer_item_condition,
+                                'offer_availability'     => $offer_availability,                        
+                                'eligible_customer_type'   => [
+                                    'label'       => 'Eligible Customer Type',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '40 - 80 Years',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'terms_of_service'          => [
+                                    'label'       => 'Terms Of Service',                    
+                                    'type'        => 'text',                                    
+                                    'placeholder' => 'Minimum Entry Age: 18 years, Maximum Entry Age: 85 years',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'annual_percentage_rate'    => [
+                                    'label'       => 'Annual Percentage Rate',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '30%',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'interest_rate'          => [
+                                    'label'       => 'Interest Rate',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '5%',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
+                                'fees_And_Commissions_Specification'  => [
+                                    'label'       => 'Fees And Commissions Specification',
+                                    'type'        => 'text',                                    
+                                    'placeholder' => '',                    
+                                    'value'       => '',
+                                    'display'     => true
+                                ],
                                 'latitude'           => $latitude,
                                 'longitude'          => $longitude,
                                 'image'              => $image,
+                                'additional_property' => [                            
+                                    'label'         => 'Additional Property',    
+                                    'button_text'   => 'Add More Properties', 
+                                    'type'          => 'repeater', 
+                                    'display'       => true,
+                                    'elements'      => [
+                                        [
+                                            'name' => [                                                                                                                                              
+                                                'label'       => 'Name',                    
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],
+                                            'value' => [                                                                                                                                              
+                                                'label'       => 'Value',                    
+                                                'type'        => 'textarea',                                                                                    
+                                                'value'       => '',
+                                                'display'     => true
+                                            ],                                           
+                                        ]
+                                    ]                                                                                                                      
+                                ],
                                 'opening_hours' => [                            
                                     'label'         => 'Opening Hours',    
                                     'button_text'   => 'Add More Opening Hours', 
@@ -1855,6 +1932,6 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             break;
     }
     
-    return $properties;
+    return apply_filters( 'smpg_filter_schema_and_properties', $properties );
 
 }

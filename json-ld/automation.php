@@ -8,9 +8,9 @@ function smpg_jobposting_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("simplejobboard", $automation) && isset($smpg_plugin_list['simplejobboard']['is_active']) ){
 
@@ -34,7 +34,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
 
         if($job_type){
 
-            $job_type_arr = array();
+            $job_type_arr = [];
 
             foreach ($job_type as $value) {
                 $job_type_arr[] = $value->name; 
@@ -46,7 +46,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
         
         if($job_location){
 
-            $vanues_arr = array();
+            $vanues_arr = [];
 
             foreach ($job_location as $value) {
 
@@ -80,9 +80,9 @@ function smpg_book_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
         
         if ( in_array("mooberrybookmanager", $automation) && isset($smpg_plugin_list['mooberrybookmanager']['is_active']) ){
 
@@ -142,7 +142,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
         }
 
         $illustrators     =  wp_get_post_terms( $post_id , 'mbdb_illustrator');
-        $illustrator_arr  = array();
+        $illustrator_arr  = [];
 
         if(!is_wp_error($illustrators)){
         
@@ -162,7 +162,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
         }
 
         $editors       =  wp_get_post_terms( $post_id , 'mbdb_editor');
-        $editors_arr  = array();
+        $editors_arr  = [];
 
         if(!is_wp_error($editors)){
         
@@ -183,7 +183,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
 
         $editions = get_post_meta($post_id, '_mbdb_editions', true);   
         
-        $editions_arr = array();
+        $editions_arr = [];
 
         $format = array('Hardcover', 'Paperback', 'ePub', 'Kindle', 'PDF', 'Audiobook');
 
@@ -207,8 +207,8 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
             }
         }
         
-        $publisher = array();
-        $imprint   = array();
+        $publisher = [];
+        $imprint   = [];
         $cache_key  = 'smpg_mbdb_books_cache_key_'.trim( $post_id );
         $book_table = wp_cache_get( $cache_key );  
 
@@ -286,9 +286,9 @@ function smpg_faqpage_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;
 
-    if(!empty($schema_data['automation_with'][0])){
+    if(!empty($schema_data['_automation_with'][0])){
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("accordionfaq", $automation) && isset($smpg_plugin_list['accordionfaq']['is_active']) ){
 
@@ -710,7 +710,7 @@ function smpg_get_accordion_json_ld( $json_ld, $post_id ){
             $post_id = $atts['id'];
             $accordions_options = get_post_meta($post_id,'accordions_options', true);           
 
-            $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
+            $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : [];
             
             if(!empty($accordions_content)){
 
@@ -812,16 +812,15 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
 
     global $smpg_plugin_list;
     
-    if(!empty($schema_data['automation_with'][0])){
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
 
-        $automation = unserialize($schema_data['automation_with'][0]);
+        $automation = unserialize($schema_data['_automation_with'][0]);
 
         if ( in_array("woocommerce", $automation) && isset($smpg_plugin_list['woocommerce']['is_active']) ){
-            
-            global $woocommerce; // This global variable is from WooCommerce Plugin and we are not modifying it in any case, Just using it to grab some data
-
+                        
             $product        = wc_get_product($post_id); 
-            if($product){
+
+            if ( $product ) {
 
                 $json_ld['name']        = $product->get_title();
                 
@@ -881,8 +880,7 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
                 $json_ld['description'] = wp_strip_all_tags(strip_shortcodes(do_shortcode($description)));
                 
                 $simple_price        = 0;
-                $currency            = get_option( 'woocommerce_currency' );                 
-                $product_type        = 'simple';
+                $currency            = get_option( 'woocommerce_currency' );                                 
                 
                 if( get_woocommerce_currency() ){
                    $currency = get_woocommerce_currency();     
@@ -894,41 +892,11 @@ function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $
                 if( function_exists('wc_get_price_including_tax')) {
                     $simple_price = wc_get_price_including_tax($product);
                 } 
-
-                if(method_exists('WC_Product_Simple', 'get_type')){
-                    $product_type = $product->get_type(); 
-                }
-               
+                               
                 $sale_date = $product->get_date_on_sale_to();
-                
-                $variable_price = [];
-                if($product_type == 'variable'){
-
-                    
-                    $variation_id   = $woocommerce->product_factory->get_product();    
-                    $variations     = $variation_id->get_available_variations();
-
-                    if($variations){
-    
-                        foreach($variations as $value){
-                                $variable_price[] = $value['display_price']; 
-                        }
-                    }                    
-                }
-                                
-                if(!empty($variable_price)){
-
-                    $json_ld['offers']['@type']              = 'AggregateOffer'; 
-                    $json_ld['offers']['lowPrice']           = min($variable_price); 
-                    $json_ld['offers']['highPrice']          = max($variable_price); 
-                    $json_ld['offers']['offerCount']         = count($variable_price); 
-                                                                                
-                }else{
-                    
-                    $json_ld['offers']['@type']           = 'Offer'; 
-                    $json_ld['offers']['price']           = $simple_price; 
-                                                                                
-                }
+                                                                
+                $json_ld['offers']['@type']           = 'Offer'; 
+                $json_ld['offers']['price']           = $simple_price; 
 
                 $json_ld['offers']['priceCurrency']   = $currency; 
                 $json_ld['offers']['priceValidUntil'] = $sale_date ? $sale_date->date('Y-m-d G:i:s') : get_the_modified_date("c"); 
@@ -965,7 +933,7 @@ function smpg_get_product_automated_brand($json_ld, $post_id, $automation){
             $json_ld['brand']['name']         = $result[0]['term']['name'];
             $json_ld['brand']['description']  = $result[0]['term']['description'];
             
-            $image = smpg_get_image_by_image_id($result[0]['term_meta']['pwb_brand_image'][0]);
+            $image = smpg_get_post_image_by_id($result[0]['term_meta']['pwb_brand_image'][0]);
 
             if(!empty($image)){
                 $json_ld['brand']['image'] = $image;
@@ -985,7 +953,7 @@ function smpg_get_product_automated_brand($json_ld, $post_id, $automation){
             $json_ld['brand']['name']         = $result[0]['term']['name'];
             $json_ld['brand']['description']  = $result[0]['term']['description'];
             
-            $image = smpg_get_image_by_image_id($result[0]['term_meta']['thumbnail_id'][0]);
+            $image = smpg_get_post_image_by_id($result[0]['term_meta']['thumbnail_id'][0]);
 
             if(!empty($image)){
                 $json_ld['brand']['image'] = $image;
@@ -1062,9 +1030,9 @@ function smpg_get_product_automated_reviews($json_ld, $post_id, $automation){
 
 function smpg_get_yotpo_product_reviews($product_id){
     
-    $response      = array();
-    $comments      = array();
-    $ratings       = array();
+    $response      = [];
+    $comments      = [];
+    $ratings       = [];
 
     $yotpo_settings = get_option('yotpo_settings');
 
@@ -1149,9 +1117,9 @@ function smpg_get_ryviu_product_reviews ( $product_id ) {
     $shop_url = str_replace( array('https://', 'http://' ), '', $shop_url );
     $handle   = get_post_field( 'post_name', get_post() );
     
-    $response      = array();
-    $comments      = array();
-    $ratings       = array();
+    $response      = [];
+    $comments      = [];
+    $ratings       = [];
 
     if ( ! empty( $shop_url ) ) {
 

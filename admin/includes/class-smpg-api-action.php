@@ -23,17 +23,17 @@ class SMPG_Api_Action {
         public function change_post_status($request){
             
             $parameters     = $request->get_params();
-            $current_status = 1;                  
+            $_current_status = 1;                  
 
             if( isset($parameters['post_id']) ){
                 $post_id                = intval( $parameters['post_id'] );
-                $current_status         = rest_sanitize_boolean( $parameters['current_status'] );
+                $_current_status         = rest_sanitize_boolean( $parameters['_current_status'] );
                 $action                 = sanitize_text_field($parameters['action']);
 
                 switch ($action) {
 
                     case 'change':
-                            update_post_meta($post_id, 'current_status', $current_status);        
+                            update_post_meta($post_id, '_current_status', $_current_status);        
                         break;
 
                     case 'delete':
@@ -73,8 +73,8 @@ class SMPG_Api_Action {
             
             return $response;
 
-        }
-        public function get_tags($request){
+        }                
+        public function get_tags( $request ) {
 
             $response = [];
             $search   = '';
@@ -98,36 +98,32 @@ class SMPG_Api_Action {
                 
         public function export_settings(){
             
-            $post_type = array('smpg_singular_schema');
-            $export_data_all   = []; 
-            
-            foreach($post_type as $type){
+            $export_data_all = []; 
+            $post_type       = [ 'smpg_singular_schema', 'smpg_carousel_schema' ];
+                        
+            foreach( $post_type as $type ) {
                 
                 $export_data       = [];                
 
-                $all_schema_post = get_posts(
-
-                    array(
+                $all_schema_post = get_posts( [
                             'post_type' 	     => $type,                                                                                   
                             'posts_per_page'     => -1,   
                             'post_status'        => 'any',
-                    )
+                    ] );                        
 
-                    );                        
-
-                if($all_schema_post){
+                if ( $all_schema_post ) {
                 
-                    foreach($all_schema_post as $schema){    
+                    foreach ( $all_schema_post as $schema ) {
 
                     $export_data[$schema->ID]['post']      = (array)$schema;                    
-                    $post_meta                             = get_post_meta($schema->ID, $key='', true );    
+                    $post_meta                             = get_post_meta( $schema->ID, $key='', true );    
 
-                    if($post_meta){
+                    if ( $post_meta ) {
 
-                        foreach ($post_meta as $key => $meta){
+                        foreach ( $post_meta as $key => $meta ) {
 
-                            if(@unserialize($meta[0]) !== false){
-                                $post_meta[$key] = @unserialize($meta[0]);
+                            if ( @unserialize( $meta[0] ) !== false ) {
+                                $post_meta[$key] = @unserialize( $meta[0] );
                             }else{
                                 $post_meta[$key] = $meta[0];
                             }
@@ -147,13 +143,10 @@ class SMPG_Api_Action {
                 
             }
             
-            $export_data_all['smpg_settings']         = get_option('smpg_settings');
-            $export_data_all['smpg_misc_schema']      = get_option('smpg_misc_schema');
-
-            header( 'Content-Type: application/json; charset=utf-8' );
-	        header('Content-disposition: attachment; filename=smpgbackup.json');
-            header( "Expires: 0" );
-            return   $export_data_all;	                   
+            $export_data_all['smpg_settings']         = get_option( 'smpg_settings' );
+            $export_data_all['smpg_misc_schema']      = get_option( 'smpg_misc_schema' );
+            
+            return   $export_data_all;
         }
         
         public function reset_settings($request){
@@ -309,6 +302,27 @@ class SMPG_Api_Action {
             }                                    
             return $response;
         }
+        public function get_schema_properties( $request_data ){
+
+            $response    = [];
+            $schema_type = '';
+            
+            $parameters = $request_data->get_params();
+            
+            if(!empty($parameters['schema_type'])) {                                
+                
+                $schema_properties = smpg_get_schema_properties( $parameters['schema_type'] );
+
+                $filtered_pro = [];  
+                foreach ( $schema_properties['properties'] as $key => $value ) {
+                    $filtered_pro[] = ['key' => $key, 'text' => $value['label'] ];
+                }
+                $response = [ 'status' => 'success', 'data' => $filtered_pro ]; 
+            }else{
+                $response = [ 'status' => 'failed', 'message' => esc_html__( 'Schema type is required', 'schema-package' ) ];
+            }                                    
+            return $response;
+        }
         public function get_carousel_automation_with( $request_data ) {
 
             $response    = [];
@@ -326,8 +340,8 @@ class SMPG_Api_Action {
             return $response;
         }
         public function get_plugin_list( $request_data ){
-
-            global $smpg_plugin_list;
+            
+            $smpg_plugin_list = smpg_load_smpg_plugin_list_settings();
 
             $response    = [];            
             $result      = [];
@@ -373,6 +387,57 @@ class SMPG_Api_Action {
             return $response;
            
         }
+        public function get_mapping_meta_list( $request_data ) {
+            return smpg_meta_list();
+        }
+        public function get_taxonomies( $request_data ) {
+            // Fetch all public taxonomies
+                $taxonomies = get_taxonomies(['public' => true], 'objects');
+                
+                // Format the response
+                $taxonomy_list = [];
+
+                foreach ($taxonomies as $taxonomy) {
+                    $taxonomy_list[] = [
+                        'slug' => $taxonomy->name,
+                        'name' => $taxonomy->label
+                    ];
+                }
+
+                // Return JSON response
+                return rest_ensure_response($taxonomy_list);
+        }
+        public function get_custom_fields( $request  ) {
+            
+            global $wpdb;
+
+            // Get the search query from the request
+            $search_query = sanitize_text_field($request->get_param('search'));
+
+            // Fetch unique meta keys from the postmeta table
+            $query = "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE meta_key NOT LIKE '\_%'"; // Exclude private fields (_ prefix)
+            
+            if (!empty($search_query)) {
+                $query .= $wpdb->prepare(" AND meta_key LIKE %s", '%' . $wpdb->esc_like($search_query) . '%');
+            }
+
+            $meta_keys = $wpdb->get_col($query);
+
+            // Format response
+            $custom_fields = [];
+
+            foreach ($meta_keys as $meta_key) {
+                $custom_fields[] = [
+                    'id'    => $meta_key,
+                    'value' => $meta_key,
+                    'label' => ucfirst(str_replace('_', ' ', $meta_key)), // Make it more readable
+                ];
+            }
+
+            return rest_ensure_response($custom_fields);
+
+        }
+        
         public function get_carousel_schema_data( $request_data ) {
 
             $response = [];
@@ -444,6 +509,7 @@ class SMPG_Api_Action {
             if(isset($file['file']) && is_array($file['file'])){
                 
                 $parts = explode( '.',$file['file']['name'] );                
+                
                 if( end($parts) != 'json' ) {
                     $response = array('status' => 'f', 'msg' =>  esc_html__( 'Please upload a valid .json file', 'schema-package' ));                   
                 }
@@ -462,7 +528,7 @@ class SMPG_Api_Action {
                                                 
             }else{
                 
-                if($parameters){
+                if($parameters){                    
                     $result      = $this->_api_mapper->update_settings($parameters);
                     if($result){
                         $response = array('status' => 't', 'msg' =>  esc_html__( 'Settings has been saved successfully', 'schema-package' ));                                               

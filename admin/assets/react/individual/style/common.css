@@ -1,5 +1,7 @@
 .smpg-individual-schema-list li{
     padding: 10px;
+    padding-bottom: 4px;
+    overflow: auto;
     margin-bottom: 10px;
     border-radius: 4px;
     border: 1px solid#990000;
@@ -7,12 +9,11 @@
 }
 .smpg-individual-item-actions{
     float: right;
-    display: flex;
-    margin-top: -10px;
+    display: flex;    
     position: relative;
 }
 .smpg-individual-item-actions .components-base-control{
-    margin-top: 9px;
+    margin-top: 2px;
     margin-right: -5px;
 }
 .smpg-individual-item-actions button{
@@ -46,14 +47,10 @@
     width: 60%;
     padding-right: 20px;
 }
-.smpg-delete-popover{
-        
-    line-height: 27px;
+.smpg-delete-popover{            
     background: #ffffff;
     width: 150px;
-    right: 47px;
-    height: 31px;
-    padding-top: 2px;
+    right: 47px;        
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
@@ -61,7 +58,7 @@
     color: #000;
     position: absolute;
     z-index: 999;
-    top: 2px;
+    margin-top: -3px;    
 
 }
 .smpg-form-group{
@@ -135,7 +132,7 @@ textarea.smpg-form-control {
     cursor: pointer;
 }
 .smpg-item-box-selected{
-    border: 3px solid #990000;
+    border: 2px solid #990000;
 }
 .smpg-schema-list{
     width: 800px;

@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
+* <strong>Singular Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
 * <strong>Singular Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
@@ -76,6 +77,13 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
 * Service : [schema.org url](https://schema.org/Service)
+* FinancialProduct : [schema.org url](https://schema.org/FinancialProduct)
+* BroadcastService : [schema.org url](https://schema.org/BroadcastService)
+* CableOrSatelliteService : [schema.org url](https://schema.org/CableOrSatelliteService)
+* FoodService : [schema.org url](https://schema.org/FoodService)
+* GovernmentService : [schema.org url](https://schema.org/GovernmentService)
+* TaxiService : [schema.org url](https://schema.org/TaxiService)
+* WebAPI : [schema.org url](https://schema.org/WebAPI)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * ItemList : [schema.org url](https://schema.org/ItemList)
 * Comment : [schema.org url](https://schema.org/Comment)
@@ -245,6 +253,17 @@ You can submit a support ticket via the [support forum](https://wordpress.org/su
 
 
 == Changelog ==
+
+= 1.0.4 =
+
+* Feature : Added BroadcastService, CableOrSatelliteService, FinancialProduct, FoodService, GovernmentService, TaxiService & WebAPI  schema types
+* Feature : Powerful singular schema mapping
+* Feature : More UI/UX improvement
+* Feature : Added Schema Package Generator control center in settings -> tools ( post types & taxonomies ) 
+* Feature : Added Minified JSON-LD option
+* Feature : Added Escaped Unicode JSON-LD	option
+* Feature : Added ImageObject	option
+* Bug Fix : Minor and major bugs fixed
 
 = 1.0.3 =
 

@@ -1,57 +1,67 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Popup } from 'semantic-ui-react'
+import { Button, Input, Icon, Popup, Checkbox, TextArea, Dropdown } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
-import { Button } from 'semantic-ui-react'
 import MainSpinner from './../common/main-spinner/MainSpinner';
+import LicensePage from '../license/LicensePage';
 
 import './Settings.css';
 
 const Settings = () => {
 
+  const [loading, setLoading]                 = useState(false);  
   const [isLoaded, setIsLoaded]               = useState(true);  
   const [isQuerySent, setIsQuerySent]         = useState(true);  
   const [mainSpinner, setMainSpinner]         = useState(false);    
-  const [supportEmail, setSupportEmail]       = useState('');
+  const [supportEmail, setSupportEmail]       = useState('');  
   const [supportMessage, setSupportMessage]   = useState('');
   const [supportError, setSupportError]       = useState('');
   const [supportSuccess, setSupportSuccess]   = useState('');
   const [importFile, setImportFile]           = useState();
+  const [spgTaxonomies, setSPGTaxonomies]     = useState([]);
+  const [spgPostTypes, setSPGPostTypes]       = useState([]);
   const [pluginList, setPluginList]           = useState({});
 
+  const postMetaReducer = (state, newState) => {
+    if (typeof newState === "function") {
+      return { ...state, ...newState(state) }; // Handles function-based updates
+    }
+    return { ...state, ...newState };
+  };
 
-  const [settings, setSettings] = useReducer(
-    (state, newState) => ({...state, ...newState}),
-    {
-      website_json_ld:          false,
-      defragment_json_ld:       false,  
-      json_ld_in_footer:        false,  
-      pretty_print_json_ld:     false,  
-      clean_micro_data:         false,  
-      clean_rdfa_data:          false,  
-      multisize_image:          false,  
-      cmp_ampforwp:             false,              
-      cmp_ampforwp:             false,
-      cmp_amp_by_automatic:     false,
-      cmp_better_amp:           false,
-      cmp_wp_amp:               false,
-      cmp_amp_wp:               false,
-      cmp_smartcrawl_seo:       false,
-      cmp_seo_press:            false,
-      cmp_the_seo_framework:    false,
-      cmp_all_in_one_seo_pack:  false,
-      cmp_rank_math:            false,
-      cmp_simple_author_box:    false,
-      reset_settings:           false,
-      remove_data_on_uninstall: false,      
-      default_logo_id:          null,
-      default_image_id:         null,
-      default_logo_url:         null,
-      default_image_url:        null,
-      manage_conflict  :        []
-    }            
-  );
+
+  const [settings, setSettings] = useReducer(postMetaReducer, {
+        escaped_unicode_json:     true,
+		    minified_json:            true,
+        website_json_ld:          true,
+        defragment_json_ld:       false,  
+        json_ld_in_footer:        false,          
+        clean_micro_data:         false,  
+        clean_rdfa_data:          false,  
+        multisize_image:          false,
+        image_object:             false,
+        cmp_ampforwp:             false,              
+        cmp_ampforwp:             false,
+        cmp_amp_by_automatic:     false,
+        cmp_better_amp:           false,
+        cmp_wp_amp:               false,
+        cmp_amp_wp:               false,
+        cmp_smartcrawl_seo:       false,
+        cmp_seo_press:            false,
+        cmp_the_seo_framework:    false,
+        cmp_all_in_one_seo_pack:  false,
+        cmp_rank_math:            true,
+        cmp_simple_author_box:    false,        
+        delete_data_on_uninstall: false,      
+        default_logo_id:          null,
+        default_image_id:         null,
+        default_logo_url:         '',
+        default_image_url:        '',
+        manage_conflict  :        [],
+        spg_post_types   :        [],
+        spg_taxonomies   :        []
+    });
           
   const page = queryString.parse(window.location.search);   
   const {__} = wp.i18n;         
@@ -81,8 +91,10 @@ const Settings = () => {
 
     setIsLoaded(false);
     const formData = new FormData();
-        
-    formData.append("file", importFile);        
+
+    if(typeof importFile !== 'undefined'){
+      formData.append("file", importFile);        
+    }        
     formData.append("settings", JSON.stringify(settings));    
     let url = smpg_local.rest_url + 'smpg-route/update-settings';
     fetch(url,{
@@ -128,7 +140,9 @@ const Settings = () => {
             setMainSpinner(false);
             
           if(result){
-            setSettings(result);
+            setSPGPostTypes(result.post_types);
+            setSPGTaxonomies(result.taxonomies);
+            setSettings(result.smpg_settings);
           }          
             
         },        
@@ -238,8 +252,7 @@ const Settings = () => {
     .then(
       (result) => {              
           if(result.status == 'success'){
-            setPluginList(result.data);
-            console.log(result.data);
+            setPluginList(result.data);            
           }
       },        
       (error) => {         
@@ -263,12 +276,62 @@ const Settings = () => {
     setSettings(copydata);
     
   }
+
+  const handleExport = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    // setError(null);
+    // setSuccess(null);
+    try {
+      let fetch_url = smpg_local.rest_url + 'smpg-route/export-settings';
+      const response = await fetch(fetch_url,{
+        headers: {          
+          'X-WP-Nonce': smpg_local.nonce,                  
+        },        
+      });
+      if (!response.ok) {
+        throw new Error("Failed to export settings");
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "schema-package.json");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+    //  setSuccess("Settings exported successfully.");
+    } catch (error) {
+      //setError("Failed to export settings. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   
   const handleSaveSettings = (e) => {
     e.preventDefault();
     saveSettings();
   }  
 
+  const handleSPGPostTypes = (e, data) => {    
+    
+    setSettings(prevState => ({
+        ...prevState,
+        spg_post_types: data.value
+    }));
+  };
+
+  const handleSPGTaxonomies = (e, data) => {    
+    
+    setSettings(prevState => ({
+        ...prevState,
+        spg_taxonomies: data.value
+    }));
+  };
+
+  
   useEffect(() => {
     getSettings();    
     handleGetPluginList();           
@@ -285,28 +348,79 @@ const Settings = () => {
           case "settings":   return (
             <div className="smpg-settings">
               <table className="form-table">
-                <tbody>                  
+                <tbody>
+                <tr>
+                    <th><label htmlFor="minified_json">{__('Minified JSON-LD', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox
+                      name='minified_json'
+                      id='minified_json'
+                      checked={!!settings.minified_json}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Minified JSON-LD reduces file size and improves page load speed by removing unnecessary spaces and line breaks.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                      
+                  <tr>
+                    <th><label htmlFor="escaped_unicode_json">{__('Escaped Unicode JSON-LD', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox
+                      name='escaped_unicode_json'
+                      id='escaped_unicode_json'
+                      checked={!!settings.escaped_unicode_json}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially for special or multilingual characters.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                                        
                   <tr>
                     <th><label htmlFor="clean_micro_data">{__('Clean MicroData', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="clean_micro_data" name="clean_micro_data" onChange={formChangeHandler} checked={settings.clean_micro_data} />
+                    <Checkbox                     
+                      name='clean_micro_data'
+                      id='clean_micro_data' 
+                      checked={!!settings.clean_micro_data}
+                      onChange={formChangeHandler}
+                    />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>
                     <th><label htmlFor="clean_rdfa_data">{__('Clean RDFA Data', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="clean_rdfa_data" name="clean_rdfa_data" onChange={formChangeHandler} checked={settings.clean_rdfa_data} />
+                    <Checkbox                     
+                      name='clean_rdfa_data'
+                      id='clean_rdfa_data' 
+                      checked={!!settings.clean_rdfa_data}
+                      onChange={formChangeHandler}
+                    />                      
                       <span className="smpg-tooltip"><Popup content={__('Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>
-                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
+                    <th><label htmlFor="image_object">{__('ImageObject', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="multisize_image" name="multisize_image" onChange={formChangeHandler} checked={settings.multisize_image} />
-                      <span className="smpg-tooltip"><Popup content={__('It generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <Checkbox                     
+                      name='image_object'
+                      id='image_object' 
+                      checked={!!settings.image_object}
+                      onChange={formChangeHandler}
+                    />                       
+                      <span className="smpg-tooltip"><Popup content={__('By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>                      
+                  <tr>
+                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='multisize_image'
+                      id='multisize_image' 
+                      checked={!!settings.multisize_image}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('It generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                  
                 </tbody>
               </table>
             </div>
@@ -321,7 +435,14 @@ const Settings = () => {
                   return(
                    <tr key={key}>
                    <th><label htmlFor={key}>{value.name}</label></th>
-                   <td><input type="checkbox" name={key} onChange={handleManageConflictChange} checked={ settings.manage_conflict.includes(key) ? true : false } /></td> 
+                   <td>
+                        <Checkbox                     
+                          name={key}  
+                          id={key}                        
+                          checked={!!settings.manage_conflict.includes(key) ? true : false}
+                          onChange={handleManageConflictChange}
+                        />                                            
+                    </td> 
                    </tr>
                  )
                })
@@ -336,25 +457,90 @@ const Settings = () => {
               <table className="form-table">
                 <tbody>
                 <tr>
+                    <th><label htmlFor="export_smpg">{__('SPG for Post Types', 'schema-package')}</label></th>
+                    <td>
+                    <Dropdown
+                      style={{maxWidth:"300px"}}
+                      data_type="spg_post_types"
+                      name="spg_post_types"
+                      placeholder={__('Search For Post Types', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={settings.spg_post_types}
+                      onChange={handleSPGPostTypes}                      
+                      options={spgPostTypes}
+                   />
+                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                    </td>
+                </tr>
+                <tr>
+                    <th><label htmlFor="export_smpg">{__('SPG for Taxonomies', 'schema-package')}</label></th>
+                    <td>
+                    <Dropdown
+                      style={{maxWidth:"300px"}}
+                      data_type="spg_taxonomies"
+                      name="spg_taxonomies"
+                      placeholder={__('Search For Taxonomies', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={settings.spg_taxonomies}
+                      onChange={handleSPGTaxonomies}                      
+                      options={spgTaxonomies}
+                   />
+                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                    </td>
+                </tr>  
+
+                <tr>
                     <th><label htmlFor="export_smpg">{__('Export Data ', 'schema-package')}</label></th>
                     <td>
-                      <a href={`${smpg_local.rest_url}smpg-route/export-settings`} className="button" id="export_smpg" name="export_smpg"><i className="ui download icon"></i> {__('Export', 'schema-package')}</a>
+                    <Button loading={loading} onClick={handleExport}>
+                      <Icon name='download' />
+                      {__('Export', 'schema-package')}
+                    </Button>                      
                       <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                   </tr>
                   <tr>
                     <th><label htmlFor="import_smpg">{__('Import Data', 'schema-package')}</label></th>
-                    <td>
-                    <div className="smpg-import-td">
-                    <input type="file" name="file" id="import_smpg" onChange={formChangeHandler}  />                    
-                    <span className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <td style={{position:"relative"}}>
+                    <div className="smpg-import-td" style={{float : "left"}}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <Input
+                          style={{width:"163px"}}
+                          value={importFile?.name}
+                          placeholder={__('Choose a file...', 'schema-package')}
+                          readOnly
+                          action={
+                            <Button as="label" htmlFor="file-upload" primary>
+                              {__('Choose', 'schema-package')}                              
+                            </Button>
+                          }
+                        />                        
+                        <input
+                          id="file-upload"
+                          type="file"
+                          hidden
+                          onChange={formChangeHandler}
+                        />      
+                      </div>                                                              
                     </div>                                              
+                    <span style={{float:'right', position:'absolute', left:"264px"}} className="smpg-tooltip"><Popup content={__('Restore your data back from previous imported file', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                  
                   <tr>
-                    <th><label htmlFor="remove_data_on_uninstall">{__('Remove Data On Uninstall', 'schema-package')}</label></th>
+                    <th><label htmlFor="delete_data_on_uninstall">{__('Delete Data on Uninstall', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="remove_data_on_uninstall" name="remove_data_on_uninstall" onChange={formChangeHandler} checked={settings.remove_data_on_uninstall} />
+                      <Checkbox                     
+                        name='delete_data_on_uninstall'
+                        id='delete_data_on_uninstall' 
+                        checked={!!settings.delete_data_on_uninstall ? true : false}
+                        onChange={formChangeHandler}
+                      />                                            
                       <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                      
@@ -366,21 +552,7 @@ const Settings = () => {
           case "settings_compatibilitys":  return (
             <div className="smpg-settings">
               <table className="form-table">
-                <tbody>
-                  <tr>
-                    <th><label htmlFor="cmp_ampforwp">{__('AMPforWP', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_ampforwp" name="cmp_ampforwp" onChange={formChangeHandler} checked={settings.cmp_ampforwp} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_amp_by_automatic">{__('AMP By Automatic', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_amp_by_automatic" name="cmp_amp_by_automatic" onChange={formChangeHandler} checked={settings.cmp_amp_by_automatic} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>                                                      
+                <tbody>                                    
                   <tr>
                     <th><label htmlFor="cmp_smartcrawl_seo">{__('SmartCrawl Seo', 'schema-package')}</label></th>
                     <td>
@@ -464,29 +636,43 @@ const Settings = () => {
               </table>
             </div>
           );
+          case "settings_license":  return (
+            <div className="smpg-settings">                    
+              <LicensePage />
+            </div>
+          );
           case "settings_help":  return (
             <div className="smpg-settings">
               <table className="form-table">
                 <tbody>
                  <tr>
                   <th>{__('Email', 'schema-package')}</th>
-                  <td><input 
-                    placeholder={__('Your email id', 'schema-package') } 
-                    type="text" 
-                    name="user_email" 
-                    value={supportEmail} 
-                    onChange={event => setSupportEmail(event.target.value)}
-                  /></td> 
+                  <td>
+                    <Input 
+                      style={{width:"297px"}}
+                      icon="user"
+                      iconPosition="left"                    
+                      type="email"
+                      placeholder={__('Your email id', 'schema-package') } 
+                      id="user_email"
+                      name="user_email" 
+                      value={supportEmail}
+                      onChange={event => setSupportEmail(event.target.value)}
+                    />
+                    
+                  </td> 
                  </tr>
                  <tr>
                   <th>{__('Query', 'schema-package')}</th>
-                  <td><textarea
-                   value={supportMessage} 
-                   onChange={event => setSupportMessage(event.target.value)}
-                   placeholder={__('Type your query here...', 'schema-package') } 
-                   cols="40" 
-                   rows="6" name="user_query" 
-                   />                   
+                  <td>
+                  <TextArea
+                    value={supportMessage}
+                    onChange={(event) => setSupportMessage(event.target.value)}
+                    placeholder={__('Enter your question here...', 'schema-package') }
+                    rows="6"
+                    cols="38"
+                    name="user_query"
+                  />                    
                    </td> 
                  </tr>
                  <tr>
@@ -498,16 +684,44 @@ const Settings = () => {
                 </tbody> 
               </table>
               {supportSuccess ? <div className="ui green message">{supportSuccess}</div> : ''}
-                   {supportError ? <div className="ui red message">{supportError}</div> : ''}
+              {supportError ? <div className="ui red message">{supportError}</div> : ''}
             </div>
           );
-          default:      return "generla";
+          default: return "";
         }
       })()}
-      <div className="smpg-save-settings-btn">
+      { (page.path === 'settings_license' || page.path === 'settings_help') ? '' : 
+        <div className="smpg-save-settings-btn">
         {isLoaded ? <Button primary onClick={handleSaveSettings}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
-        </div>
-      </div>                    
+      </div>}      
+      </div>  
+      {smpg_local.is_free ? 
+      <div className='ui card' style={{
+        backgroundColor: "#222222", // Change background color
+        color:"#ffffff",        
+        margin:"auto",
+        marginRight:"inherit",
+        marginTop:"0px"
+      }}>
+        <div className='content'>
+        <div className='header' style={{color:"#ff9e00"}}>{__('Elevate with Premium Features!', 'schema-package')}</div>  
+        <div className='ui list' role='list'>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('WooCommerce Variable Product Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('RealEstate Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Healthcare Schema Types & Automation', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Carousel Schema Details Page List', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Multilinugal Schema Markup Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Schema Markup Setup & Error Clean Up', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('24/7 Priority Email Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Premium Features on Demand', 'schema-package')}</div></div>                    
+        </div> 
+         <div style={{textAlign:"center"}}>
+          <a target="_blank" href="https://schemapackage.com/premium#pricing" className="ui button upgrade-premium-btn">Unlock</a>
+          </div>         
+        </div>        
+        </div>                  
+      : ''}
+      
       </div>
       </form>
     );

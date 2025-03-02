@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_remove_data_on_uninstall( $blog_id = null ) {
+function smpg_delete_data_on_uninstall( $blog_id = null ) {
         
     try{
      
@@ -22,8 +22,8 @@ function smpg_remove_data_on_uninstall( $blog_id = null ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $wpdb->delete(
                     $wpdb->posts,
-                    array( 'post_type' => 'smpg_singular_schema' ),
-                    array( '%s' )
+                    [ 'post_type' => 'smpg_singular_schema' ],
+                    [ '%s' ]
             );
 		 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared	
 		    $post_ids_placeholder = implode( ', ', array_fill( 0, count( $post_ids ), '%d' ) ); 
@@ -67,14 +67,14 @@ function smpg_sanitize_post_meta( $key, $val ) {
 
 function smpg_get_posts_by_arg( $arg ) {
       
-    $response = array();
+    $response = [];
 
     $meta_query = new WP_Query( $arg );
             
       if ( $meta_query->have_posts() ) {
            
-          $data = array();  
-          $post_meta = array();        
+          $data = [];  
+          $post_meta = [];        
 
           while($meta_query->have_posts()) {
 
@@ -93,10 +93,10 @@ function smpg_get_posts_by_arg( $arg ) {
 
               }
               
-              $posts_data[] = array(
+              $posts_data[] = [
               'post'        => (array) $data,
               'post_meta'   => $post_meta                
-              ); 
+			  ]; 
 
           }
 
@@ -144,7 +144,7 @@ function smpg_get_context_url(){
 
 function smpg_get_publisher( $post_id = null ){
 	
-	$publisher = array();
+	$publisher = [];
 	
 	$name = '';
 	
@@ -164,7 +164,7 @@ function smpg_get_post_category( $post_id = null ){
 	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
 	
 	$cats		= get_the_category($post_id);
-	$cat		= !empty($cats) ? $cats : array();
+	$cat		= !empty($cats) ? $cats : [];
 	$category	= (isset($cat[0]->cat_name)) ? $cat[0]->cat_name : '';
    
    return $category;
@@ -173,19 +173,19 @@ function smpg_get_post_category( $post_id = null ){
 
 function smpg_get_author_detail( $post_id = null ) {
 	
-	global $post;
+	global $post, $smpg_settings;
 		
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
+	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
 				
-	$content_post	= get_post($post_id);
-	$post_author	= get_userdata($content_post->post_author);
+	$content_post	= get_post( $post_id );
+	$post_author	= get_userdata( $content_post->post_author );
 	$email 			= $post_author->user_email; 		
 	
-	$author = array (
+	$author = [
 		'@type'	=> 'Person',
 		'name'	=> apply_filters ( 'smpg_change_author_name', $post_author->display_name ),
-		'url'	=> esc_url( get_author_posts_url( $post_author->ID ) )
-	);
+		'url'	=> get_author_posts_url( $post_author->ID )
+	];
 	
 	if ( get_the_author_meta( 'description', $post_author->ID ) ) {
 		$author['description'] = wp_strip_all_tags( get_the_author_meta( 'description', $post_author->ID ) );
@@ -193,20 +193,27 @@ function smpg_get_author_detail( $post_id = null ) {
 	
 	if ( smpg_validate_gravatar( $email ) ) {
 		
-		$image_size	= apply_filters( 'smpg_change_author_img_size', 96 ); 				
-		$args = array(
-						'size' => $image_size,
-					);
+		$image_size	= apply_filters( 'smpg_change_author_img_size', 96 );
+		$args = ['size' => $image_size ];
 		
 		$image_url	= get_avatar_url( $email, $args );
 
 		if ( $image_url ) {
-			$author['image'] = array (
-				'@type'		=> 'ImageObject',
-				'url' 		=> $image_url,
-				'height' 	=> $image_size, 
-				'width' 	=> $image_size
-			);
+
+			if ( ! empty( $smpg_settings['image_object'] ) ) {
+
+				$author['image'] = array (
+					'@type'		=> 'ImageObject',
+					'url' 		=> $image_url,
+					'height' 	=> $image_size, 
+					'width' 	=> $image_size
+				);
+
+			}else{
+
+				$author['image'] = $image_url;
+
+			}			
 		}
 	}
 			
@@ -221,9 +228,9 @@ function smpg_get_author_detail( $post_id = null ) {
 	$tumblr 	= get_the_author_meta( 'tumblr', $post_author->ID );
 	$github 	= get_the_author_meta( 'github', $post_author->ID );
 			
-	$sameAs_links = array( $website, $facebook, $instagram, $youtube, $linkedin, $myspace, $pinterest, $soundcloud, $tumblr, $github );
+	$sameAs_links = [ $website, $facebook, $instagram, $youtube, $linkedin, $myspace, $pinterest, $soundcloud, $tumblr, $github ];
 	
-	$social = array();
+	$social = [];
 		
 	foreach( $sameAs_links as $sameAs_link ) {
 		if ( $sameAs_link != '' ) $social[] = $sameAs_link;
@@ -236,7 +243,7 @@ function smpg_get_author_detail( $post_id = null ) {
 	return apply_filters( 'smpg_change_author_detail', $author );
 }
 
-function smpg_get_published_date($post_id = null){
+function smpg_get_published_date( $post_id = null ) {
 
 	global $post;
 
@@ -285,7 +292,7 @@ function smpg_get_the_content($post_id = null){
 		$content = wp_strip_all_tags($content);   
 		$content = preg_replace('/\[.*?\]/','', $content);            
 		$content = str_replace('=', '', $content); 
-		$content = str_replace(array("\n","\r\n","\r"), ' ', $content);
+		$content = str_replace( ["\n","\r\n","\r" ], ' ', $content);
 	}
 	
 	return apply_filters('smpg_the_content' ,$content);
@@ -338,11 +345,11 @@ function smpg_get_categories( $post_id = null ) {
 	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
 	
 	$post_categories	= wp_get_post_categories( $post_id );
-	$categories			= array();
+	$categories			= [];
      
 	if ( empty($post_categories) ) return $categories;
 		
-	$cats = array();
+	$cats = [];
 		
 	foreach( $post_categories as $c ){
     	$cat	= get_category( $c );
@@ -356,27 +363,27 @@ function smpg_get_categories( $post_id = null ) {
 	return apply_filters( 'smpg_change_categories', $categories );
 }
 
-function smpg_get_image(){
+function smpg_get_image() {
             
 	global $smpg_settings, $smpg_image;
 
-	$json_ld_image          = array();             
+	$json_ld_image          = [];
 	$multiple_size          = '';
 
-	if(isset($smpg_settings['multisize_image'])){
+	if ( ! empty ( $smpg_settings['multisize_image'] ) ) {
 		$multiple_size = $smpg_settings['multisize_image'];		
 	}	
 
-	if(!$smpg_image){
+	if ( ! $smpg_image ) {
 		$image_id 	            = get_post_thumbnail_id();
-		$smpg_image             = wp_get_attachment_image_src($image_id, 'full');            
+		$smpg_image             = wp_get_attachment_image_src( $image_id, 'full' );
 	}
 
 	$image_details = $smpg_image; 
 
-				if( is_array($image_details) && !empty($image_details)){                                
+				if ( is_array( $image_details ) && ! empty( $image_details ) ) {
 																								
-					if( ( (isset($image_details[1]) && ($image_details[1] < 1200)) || (isset($image_details[2]) && ($image_details[2] < 675)) ) && function_exists('smpg_aq_resize')){
+					if( ( (isset($image_details[1]) && ($image_details[1] < 1200)) || (isset($image_details[2]) && ($image_details[2] < 675)) ) && function_exists('smpg_aq_resize')) {
 							
 						$targetHeight = 1200;
 						
@@ -389,33 +396,33 @@ function smpg_get_image(){
 
 							if($targetHeight < 675){
 
-								$width  = array(1200, 1200, 1200);
-								$height = array(900, 720, 675);
+								$width  = [ 1200, 1200, 1200 ];
+								$height = [ 900, 720, 675 ];
 
 							}else{
 
-								$width  = array(1200, 1200, 1200);
-								$height = array($targetHeight, 900, 675);
+								$width  = [ 1200, 1200, 1200] ;
+								$height = [ $targetHeight, 900, 675 ];
 
 							}
 							
 						}else{
 
-							if($targetHeight < 675){
+							if ( $targetHeight < 675 ) {
 
-								$width  = array(1200);
-								$height = array(720);
+								$width  = [ 1200 ];
+								$height = [ 720 ];
 
 							}else{
 
-								$width  = array(1200);
-								$height = array($targetHeight);
+								$width  = [ 1200 ];
+								$height = [ $targetHeight ];
 								
 							}
 							
 						}                                                                                        
 						
-						for($i = 0; $i < count($width); $i++){
+						for ( $i = 0; $i < count( $width ); $i++ ) {
 							
 							$resize_image = smpg_aq_resize( $image_details[0], $width[$i], $height[$i], true, false, true );
 							
@@ -443,11 +450,11 @@ function smpg_get_image(){
 					}else{
 									
 						if($multiple_size){
-							$width  = array($image_details[1], 1200, 1200);
-							$height = array($image_details[2], 900, 675);
+							$width  = [ $image_details[1], 1200, 1200 ];
+							$height = [ $image_details[2], 900, 675 ];
 						}else{
-							$width  = array($image_details[1]);
-							$height = array($image_details[2]);
+							$width  = [ $image_details[1] ];
+							$height = [ $image_details[2] ];
 						}  
 																			
 							for($i = 0; $i < count($width); $i++){
@@ -500,39 +507,78 @@ function smpg_get_image(){
 			}
 										
 		}
-	
+			
 	return apply_filters( 'smpg_change_json_ld_image', $json_ld_image );	
 }
 
+function smpg_get_author_image_by_id( $image_id = null ) {
 
-function smpg_get_image_by_image_id( $image_id ) {
+	global $smpg_settings;
+		
+	$img_arr = $author_image = [];
+		
+	if ( function_exists( 'get_avatar_data' ) &&  ! empty( get_option( 'show_avatars' ) ) ) {
+
+		$author_image	= get_avatar_data( get_the_author_meta( 'ID' ) );
+
+		if ( ! empty( $author_image ) ) {
+
+			$img_arr['@type']  = 'ImageObject';
+			$img_arr['url']    = $author_image['url'];
+			$img_arr['width']  = $author_image['height']; 
+			$img_arr['height'] = $author_image['width'];
+			
+			if ( ! empty( $smpg_settings['image_object'] ) ){
+				return $img_arr;	
+			}else{
+				return $author_image['url'];	
+			}
+
+		}
+		
+	}                                                          	
 	
-	if ( ! isset($image_id) ) 
-		return array();
-	
-	$ImageObject = array();
+}
+
+function smpg_get_post_image_by_id( $image_id = null ) {
+
+	global $smpg_settings;
+
+	if ( ! isset( $image_id ) ) {
+		$image_id = get_post_thumbnail_id();
+	}				
 		
 	$image_attributes = wp_get_attachment_image_src( $image_id, 'full' );
 	
 	if ( isset($image_attributes[0]) ) {
+
 		$url		= $image_attributes[0];
 		$width		= $image_attributes[1];
 		$height		= $image_attributes[2];
-		
-		$ImageObject = array (
-			'@type' 	=> 'ImageObject',
-			'url' 		=> $url,
-			'width'		=> $width,
-			'height' 	=> $height,
-		);
-				
-		$caption = wp_get_attachment_caption( $image_id );
-		if ($caption) { 
-			$ImageObject['caption'] = $caption;
+
+		if ( ! empty( $smpg_settings['image_object'] ) ) {
+
+			$image_object = [];
+
+			$image_object = array (
+				'@type' 	=> 'ImageObject',
+				'url' 		=> $url,
+				'width'		=> $width,
+				'height' 	=> $height,
+			);
+					
+			$caption = wp_get_attachment_caption( $image_id );
+	
+			if ( $caption ) { 
+				$image_object['caption'] = $caption;
+			}
+			return $image_object;
+		}else{
+			return $url;
 		}
+						
 	}		
 	
-	return $ImageObject;
 }
 function smpg_get_home_url( $path = '', $scheme = null ) {
 
@@ -569,12 +615,12 @@ function smpg_make_the_image_json($data, $img_obj = null){
 
 			if($img_obj){
 
-				$image[] = array(
+				$image[] = [
 					'@type'   => 'ImageObject',
 					'url'     => $value['url'],
 					'width'   => $value['width'],
 					'height'  => $value['height']
-				);
+				];
 				
 			}else{
 				$image[] = $value['url'];
@@ -607,23 +653,23 @@ function smpg_get_the_logo(){
 
 	global $smpg_settings;
 
-	$logo = array();
+	$logo = [];
 
-	if( isset($smpg_settings['default_logo_id']) ){
+	if( ! empty( $smpg_settings['default_logo_id'] ) ) {
 
-		$logo = smpg_get_imageobject_by_id($smpg_settings['default_logo_id']);				
+		$logo = smpg_get_imageobject_by_id( $smpg_settings['default_logo_id'] );
 	}
 
-	if(empty($logo)){
+	if ( empty( $logo ) ) {
 
 		$logo_id            = get_theme_mod( 'custom_logo' );     		
 		$logo_details       = wp_get_attachment_image_src( $logo_id, 'full');
 		
-		if(isset($logo_details[0])){
+		if ( isset( $logo_details[0] ) ) {
 
 			$logo_details = @smpg_aq_resize( $logo_details[0], 600, 60, true, false, true );
 
-			if(!empty($logo_details)){
+			if ( ! empty( $logo_details ) ) {
 
 				    $logo['@type']  = 'ImageObject';
                     $logo['url']    = $logo_details[0];
@@ -638,15 +684,15 @@ function smpg_get_the_logo(){
 
 }
 
-function smpg_get_imageobject_by_id($image_id){
+function smpg_get_imageobject_by_id( $image_id ) {
     
-    $response = array();
+    $response = [];
     
-    if($image_id){
+    if ( $image_id ) {
         
-            $image_details      = wp_get_attachment_image_src($image_id, 'full');                    
+            $image_details      = wp_get_attachment_image_src( $image_id, 'full' );    
             
-            if($image_details){
+            if ( $image_details ) {
                 
                     $response['@type']  = 'ImageObject';
                     $response['url']    = $image_details[0];
@@ -663,7 +709,7 @@ function smpg_get_imageobject_by_id($image_id){
 
 function smpg_get_imageobject_by_url($url){
     
-    $response = array();
+    $response = [];
     
     if($url){        
                 
@@ -702,12 +748,12 @@ function smpg_format_date_time_to_iso( $date, $time = null ) {
 
 function smpg_get_post_native_reviews( $post_id ){
                         
-        $comments      = array();
-        $ratings       = array();
-        $post_comments = array();   
-        $response      = array();
+        $comments      = [];
+        $ratings       = [];
+        $post_comments = [];   
+        $response      = [];
                
-        $post_comments = get_approved_comments( $post_id, array( 'parent'  => 0 ) );                                                                                                                                                                             
+        $post_comments = get_approved_comments( $post_id, [ 'parent'  => 0 ] );                                                                                                                                                                             
               
         if ( count( $post_comments ) ) {
 
@@ -730,31 +776,31 @@ function smpg_get_post_native_reviews( $post_id ){
                                             '@type' => 'Person',
                                             'name'  => $comment->comment_author                                            
                                     ),
-                    'reviewRating'  => array(
+                    'reviewRating'  => [
                             '@type'	        => 'Rating',
                             'bestRating'	=> '5',
                             'ratingValue'	=> $rating,
                             'worstRating'	=> '1',
-               )
+					]
             );
             
             if($sumofrating> 0){
                 $avg_rating = $sumofrating /  count($comments); 
             }
             
-            $ratings =  array(
+            $ratings =  [
                     '@type'         => 'AggregateRating',
                     'ratingValue'	=> $avg_rating,
                     'reviewCount'   => count($comments)
-            );
+			];
 
             }            			
         }                
                 		
     }
 
-    if($comments){
-        $response = array('reviews' => $comments, 'ratings' => $ratings);
+    if ( $comments ) {
+        $response = [ 'reviews' => $comments, 'ratings' => $ratings ];
     }
     
     return apply_filters( 'smpg_change_post_native_reviews',  $response);        
@@ -763,26 +809,26 @@ function smpg_get_post_native_reviews( $post_id ){
 
 function smpg_get_post_comments( $post_id ){
             
-    $comments      = array();
-    $post_comments = array();   
+    $comments      = [];
+    $post_comments = [];   
            
-    $post_comments = get_approved_comments( $post_id, array( 'parent'  => 0 ) );                                                                                                                                                                                             
+    $post_comments = get_approved_comments( $post_id, [ 'parent'  => 0 ] );                                                                                                                                                                                             
       
     if ( count( $post_comments ) ) {
         
 		foreach ( $post_comments as $comment ) {
 					
-			$comments[] = array (
+			$comments[] = [
 					'@type'       => 'Comment',
 					'id'          => trailingslashit(get_permalink()).'comment-'.$comment->comment_ID,
 					'dateCreated' => smpg_format_date_time_to_iso($comment->comment_date),
 					'description' => wp_strip_all_tags($comment->comment_content),
-					'author'      => array (
+					'author'      => [
 													'@type' => 'Person',
-													'name'  => esc_attr($comment->comment_author),
+													'name'  => $comment->comment_author,
 													'url'   => isset($comment->comment_author_url) ? esc_url($comment->comment_author_url): '',
-						),
-			);
+					],
+				];
 		}
                 
 	}
@@ -793,7 +839,7 @@ function smpg_get_post_comments( $post_id ){
 
 function smpg_array_flatten($array) {
 
-	$return = array();
+	$return = [];
 
 	foreach ($array as $key => $value) {
 
@@ -1019,7 +1065,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
 function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id){
 	
-    $response = array();
+    $response = [];
 
     foreach ($slected_ids as $value) {
         $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id);
@@ -1037,7 +1083,7 @@ function smpg_prepare_qna_answers($answers){
 
         foreach($answers as $val){
 
-            $data = array();
+            $data = [];
 
             if($val['text']['value']){
 
@@ -1146,7 +1192,7 @@ function smpg_get_custom_post_terms($post_id, $taxonomy ){
 
 function smpg_extract_shortcode_attrs($shortcode_str, $content){
 
-    $attributes = array();
+    $attributes = [];
 
     $pattern = get_shortcode_regex();
 
@@ -1175,7 +1221,7 @@ function smpg_get_video_metadata($content = ''){
     
 	global $post, $smpg_settings;
   
-	$response = array();
+	$response = [];
 
 	if(!$content){
 		if(is_object($post)){
@@ -1240,7 +1286,7 @@ function smpg_get_video_metadata($content = ''){
 		   foreach($matches as $match){
 
 			  $vurl     = $match[0]; 
-			  $metadata = array();  
+			  $metadata = [];  
 			  if(isset($smpg_settings['smpg-youtube-api']) && $smpg_settings['smpg-youtube-api'] != ''){
 
 				$vid = smpg_get_youtube_vid($vurl);
@@ -1278,7 +1324,7 @@ function smpg_get_video_metadata($content = ''){
 		   foreach($youtubematches as $match){
 			   
 			  $vurl       = $match[1].'youtu.be'.$match[2];                   
-			  $metadata   = array();  
+			  $metadata   = [];  
 
 			  if(isset($smpg_settings['smpg-youtube-api']) && $smpg_settings['smpg-youtube-api'] != ''){
 
@@ -1320,7 +1366,7 @@ function smpg_get_video_metadata($content = ''){
 		if(isset($attributes['attrs']['url'])) {
 
 			   $vurl     = $attributes['attrs']['url']; 
-			   $metadata = array();
+			   $metadata = [];
 			   if(isset($smpg_settings['smpg-youtube-api']) && $smpg_settings['smpg-youtube-api'] != ''){
 
 				$vid = smpg_get_youtube_vid($vurl);
@@ -1367,9 +1413,9 @@ function smpg_get_gutenberg_block_data($block){
     
     global $post;
      
-    $block_list = array();
-    $block_data = array();
-    $response   = array();
+    $block_list = [];
+    $block_data = [];
+    $response   = [];
     
     if(function_exists('parse_blocks') && is_object($post)){
         
@@ -1587,7 +1633,7 @@ function smpg_get_steps_json_ld( $json_ld, $properties, $schema_type ){
 
 function smpg_get_commaa_seprated_value ( $data, $type ) {
 
-    $response = array();
+    $response = [];
 
     if ( ! empty( $data ) && is_string( $data ) ) {
 
@@ -1597,10 +1643,10 @@ function smpg_get_commaa_seprated_value ( $data, $type ) {
 
             foreach ( $area_served as  $value ) {
 
-                $response[] = array(
+                $response[] = [
 					'@type' => $type,
 					'name'  => $value
-            	);      
+				];      
             }
             
         }
@@ -1608,4 +1654,12 @@ function smpg_get_commaa_seprated_value ( $data, $type ) {
     }
     
     return $response;
+}
+
+function smpg_snake_to_camel_case( $string ) {
+
+	if ( strpos( $string, '_' ) === false ) {
+        return $string; // Return unchanged if there's no underscore
+    }
+    return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
 }

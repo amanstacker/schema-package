@@ -467,13 +467,10 @@ const {
     return (
         <>                    
         <div>
-            <p className="smpg-description">{__('Add schema types. Structured Data is used to display rich results in SERPs.', 'schema-package') } 
-                {/* <a>{__('Learn More.', 'schema-package') }</a> */}
-            </p>
+        <p className="smpg-description">{__('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package') }</p>
         </div>
         {(postMeta.length > 0) ?
-        <div className="smpg-individual-schema-list">
-        <div><h4>{__('Schema List', 'schema-package') }</h4></div>        
+        <div className="smpg-individual-schema-list">               
         <ul>
             {
                 postMeta.map( (item, i) =>{
@@ -519,12 +516,18 @@ const {
                                         </div>
                                     : ''
                                 }                                
-                                <ToggleControl                                 
+                                <ToggleControl                                           
                                     checked={item.is_enable}
                                     onChange={() => handleSchemaTurnOnOff(i, item.id)}
                                 />
-                                <Button onClick={() => handleSchemaEdit(i, item.id)} ><span className="dashicons dashicons-edit-large"></span></Button>
-                                <Button onClick={() => handleSchemaDelete(i, item.id)} ><span className="dashicons dashicons-trash"></span></Button>
+                                <Button 
+                                    style={{marginTop:"-10px"}}
+                                    onClick={() => handleSchemaEdit(i, item.id)} >
+                                    <span className="dashicons dashicons-edit-large"></span>                                        
+                                </Button>
+                                <Button style={{marginTop:"-10px"}} onClick={() => handleSchemaDelete(i, item.id)} >
+                                    <span className="dashicons dashicons-trash"></span>
+                                </Button>
                             </span>
                         </li>         
                     )

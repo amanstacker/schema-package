@@ -4,12 +4,12 @@
 .smpg-import-td{
     position: relative;
 }
-.smpg-import-td span{
-    padding-left: 108px;
-}
 .smpg-save-settings-btn{
     padding:40px;
 }
 .smpg-default-data-table th, .smpg-default-data-table td{
     display: inline-flex;
+}
+.smpg-settings label{
+    cursor: pointer;
 }

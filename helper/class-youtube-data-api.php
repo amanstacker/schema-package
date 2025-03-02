@@ -16,7 +16,7 @@ class SMPG_Youtube_Data_Api {
             'id' => $vid,
             'key' => $api_key,
         );
-        $result  = array();
+        $result  = [];
         $api_url = SMPG_Youtube_Data_Api::$api_base . '?' . http_build_query($params);
         $resultset       = wp_remote_get($api_url);
         if ( ! is_wp_error( $resultset) ) {

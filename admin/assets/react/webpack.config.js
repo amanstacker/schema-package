@@ -1,9 +1,13 @@
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var path = require('path');
-
 module.exports = {   
-      mode: 'development',
+
+   mode: 'production',
+   devtool: false,
+//    mode: 'development',
 //    devtool: 'source-map',
+
    entry: {
        admin_panel: './admin_panel/index.jsx',
        individual_post: './individual/metabox.jsx'
@@ -16,7 +20,12 @@ module.exports = {
        rules: [
            {
             test: /\.(css)$/,
-            use: [MiniCssExtractPlugin.loader,'css-loader'] 
+            use: [
+                process.env.NODE_ENV === 'production' 
+                  ? MiniCssExtractPlugin.loader 
+                  : 'style-loader',  // Ensures styles are applied in development
+                    'css-loader'
+              ] 
            },
            {
                test: /\.jsx?$/,
@@ -38,7 +47,7 @@ module.exports = {
    },
    plugins: [
        new MiniCssExtractPlugin({
-           filename: "dist/[name].css"                  
+           filename: "[name].css"                  
        })
    ]
 }

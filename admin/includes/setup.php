@@ -5,16 +5,31 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'save_post_smpg_singular_schema', 'smpg_cached_singular_schema_ids', 10, 3 );
 add_action( 'save_post_smpg_carousel_schema', 'smpg_cached_carousel_schema_ids', 10, 3 );
 add_action( 'after_delete_post', 'smpg_cached_schema_ids_on_delete', 10, 1 );
-add_action( 'plugins_loaded', 'smpg_set_all_global_data' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_settings' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_misc_schema_settings' );
+add_action( 'plugins_loaded', 'smpg_load_smpg_plugin_list_settings' );
 add_action( 'admin_enqueue_scripts', 'smpg_enqueue_admin_panel', 10);
 
-function smpg_set_all_global_data() {
-                           
-	global $smpg_settings, $smpg_misc_schema, $smpg_plugin_list; 
-	
+function smpg_load_smpg_settings() {
+
+	global $smpg_settings; 
 	$smpg_settings    = get_option( 'smpg_settings', smpg_default_settings_data());     	
-	$smpg_misc_schema = get_option( 'smpg_misc_schema', smpg_default_misc_schema_data());   
-	
+	return $smpg_settings;
+
+}
+
+function smpg_load_smpg_misc_schema_settings() {
+
+	global $smpg_misc_schema; 
+	$smpg_misc_schema = get_option( 'smpg_misc_schema', smpg_default_misc_schema_data());  
+	return $smpg_misc_schema;
+
+}
+
+function smpg_load_smpg_plugin_list_settings() {
+                           
+	global $smpg_plugin_list; 
+			 	
 	$smpg_plugin_list['simplejobboard'] = [
 		'is_active'   	  	=> false,
 		'has_own_json_ld' 	=> false,
@@ -287,24 +302,60 @@ function smpg_set_all_global_data() {
 
 	}
 	
+	return $smpg_plugin_list;
 	
 }
 
-function smpg_default_settings_data(){
-        	
-	$defaults = array(
-																						
-	);	  		
+function smpg_default_settings_data() {
+
+    $spg_post_types = [];	 
+	$post_types = get_post_types( [ 'public' => true], 'objects' );	 
+	unset( $post_types['attachment'] );
+
+	if ( $post_types ) {
+		foreach ( $post_types as $value ) {
+			$spg_post_types[] = $value->name;
+		}
+	}	
+	$defaults = [
+		'escaped_unicode_json'      => 1,
+		'minified_json'             => 1,
+		'website_json_ld' 			=> 1,
+		'defragment_json_ld' 		=> 0,
+		'json_ld_in_footer' 		=> 0,		
+		'clean_micro_data' 			=> 0,
+		'clean_rdfa_data' 			=> 0,
+		'multisize_image' 			=> 0,
+		'image_object' 				=> 0,
+		'cmp_smartcrawl_seo' 		=> 0,
+		'cmp_seo_press' 			=> 0,
+		'cmp_the_seo_framework' 	=> 0,
+		'cmp_all_in_one_seo_pack'   => 0,
+		'cmp_rank_math' 			=> 1,
+		'cmp_simple_author_box'     => 0,		
+		'delete_data_on_uninstall'  => 0,
+		'default_logo_id' 			=> null,
+		'default_image_id' 			=> null,
+		'default_logo_url' 			=> '',
+		'default_image_url' 		=> '',
+		'manage_conflict' 			=> [],
+		'spg_post_types' 			=> $spg_post_types,
+		'spg_taxonomies' 			=> [],		
+	];	  		
 	
 	return $defaults;
 
 }
 
-function smpg_default_misc_schema_data(){
+function smpg_default_misc_schema_data() {
         	
-	$defaults = array(
-																						
-	);	  		
+	$defaults = [
+		'website' 					=> 1,
+		'sitelinks_search_box' 		=> 0,
+		'breadcrumbs' 				=> 1,
+		'about_pages' 				=> [],
+		'contact_pages' 			=> [],
+	];	  		
 	
 	return $defaults;
 
@@ -364,21 +415,21 @@ function smpg_cached_carousel_schema_ids( $post_id, $post, $update ) {
 
 function smpg_get_schema_ids( $cache_key, $post_type ) {
 	
-	$added_ids = array();
+	$added_ids = [];
 	
 	if ( false ===  get_transient( $cache_key )  ) {
 		
-			$args = array(
+			$args = [
 				'post_type'			=> $post_type,
 				'post_status'		=> 'publish',
 				'posts_per_page'	=> -1
-			);
+			];
 		
 			$schemas_query = new WP_Query( $args );
 
 			$schemas = $schemas_query->get_posts();
 
-			if ( empty($schemas) ) return array();
+			if ( empty($schemas) ) return [];
 
 			foreach( $schemas as $schema ) : 
 													
@@ -399,12 +450,18 @@ function smpg_get_schema_ids( $cache_key, $post_type ) {
 	return $added_ids;
 }
 
-function smpg_get_schema_type_text($id){
+function smpg_get_schema_type_text( $id ) {
 
-	$response = array();
+	$response = [];
 
 	$response = [
-		'article'  				    => 'Article',		
+		'article'                   => 'Article',
+        'techarticle'               => 'TechArticle',
+        'newsarticle'               => 'NewsArticle',
+        'advertisercontentarticle'  => 'AdvertiserContentArticle',
+        'satiricalarticle'          => 'SatiricalArticle',
+        'scholarlyarticle'          => 'ScholarlyArticle',
+        'socialmediaposting'        => 'SocialMediaPosting',
 		'product'                   => 'Product' ,
 		'softwareapplication'       => 'SoftwareApplication' ,
 		'book'                      => 'Book' ,
@@ -417,10 +474,17 @@ function smpg_get_schema_type_text($id){
 		'course'                    => 'Course',
 		'jobposting'                => 'JobPosting',
 		'localbusiness'             => 'LocalBusiness',
-		'service'                   => 'Service'
+		'service'                   => 'Service',
+		'broadcastservice'          => 'BroadcastService', 
+		'cableorsatelliteservice'   => 'CableOrSatelliteService',  
+		'financialproduct'          => 'FinancialProduct',  
+		'foodservice'               => 'FoodService',  
+		'governmentservice'         => 'GovernmentService',  
+		'taxiservice'               => 'TaxiService',
+		'webapi'                    => 'WebAPI',  
 	];	
 
-	if(array_key_exists($id, $response)){
+	if ( array_key_exists( $id, $response ) ) {
 		return $response[$id];
 	}
 
@@ -469,21 +533,21 @@ function smpg_entry_page(){
 
 }
 
-function smpg_enqueue_admin_panel($hook){
+function smpg_enqueue_admin_panel( $hook ) {
 	
-	if($hook == 'toplevel_page_schema_package'){
+	if ( $hook == 'toplevel_page_schema_package' ) {
+
 			global $smpg_plugin_list;
-			wp_enqueue_media();    
-			wp_enqueue_style('smpg-admin-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/admin_panel.css', false, SMPG_VERSION);
-
-			wp_enqueue_style('smpg-semantic-css', SMPG_PLUGIN_URL.'admin/assets/css/semantic.min.css', false, SMPG_VERSION);			
-
-			$data = array(
+			
+			wp_enqueue_media();    						
+			
+			$data = apply_filters( 'smpg_local_filter', [
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
 				'rest_url'             => esc_url_raw( rest_url() ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
-				'smpg_plugin_list'     => $smpg_plugin_list           
-			);
+				'smpg_plugin_list'     => $smpg_plugin_list,
+				'is_free'              => false
+			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', array( 'wp-i18n' ), SMPG_VERSION, true );
 
@@ -494,13 +558,13 @@ function smpg_enqueue_admin_panel($hook){
 		
 }
 
-function smpg_on_plugin_activation(){
+function smpg_on_plugin_activation() {
  		
-    $first_installation = get_option('smpg_first_installation_date');
+    $first_installation = get_option( 'smpg_first_installation_date' );
     
-    if(!$first_installation){
+    if ( ! $first_installation ) {
         
-        update_option( 'smpg_first_installation_date', gmdate("Y-m-d") );
+        update_option( 'smpg_first_installation_date', gmdate( "Y-m-d" ) );
         
     }
                                               
@@ -510,21 +574,21 @@ function smpg_on_plugin_uninstall() {
         		 
 	$options = get_option( 'smpg_settings' );
 		
-	if ( isset( $options['remove_data_on_uninstall'] ) ) {
+	if ( ! empty( $options['delete_data_on_uninstall'] ) ) {
 	 
 		if ( is_multisite() ) {
 
 			foreach ( get_sites() as $site ) {
 
                 switch_to_blog( $site->blog_id );
-                smpg_remove_data_on_uninstall();
+                smpg_delete_data_on_uninstall();
                 restore_current_blog();
 
             }
 
 		 } else {
 
-			smpg_remove_data_on_uninstall();				  
+			smpg_delete_data_on_uninstall();				  
 
 		 }
 			   
@@ -551,3 +615,45 @@ function smpg_on_plugin_uninstall() {
 }
 
 add_action('in_admin_header', 'smpg_all_notices_from_smpg_dashboard',999);
+
+function smpg_meta_list() {
+
+	$meta_list = [
+		[ 'key' => 'blogname', 'value' => 'blogname', 'text' => esc_html__( 'Site Title', 'schema-package' ) ],
+		[ 'key' => 'blogdescription', 'value' => 'blogdescription', 'text' => esc_html__( 'Tagline', 'schema-package' ) ],
+		[ 'key' => 'site_url', 'value' => 'site_url', 'text' => esc_html__( 'Site URL', 'schema-package' ) ],
+		[ 'key' => 'post_title', 'value' => 'post_title', 'text' => esc_html__( 'Post Title', 'schema-package' ) ],
+		[ 'key' => 'post_content', 'value' => 'post_content', 'text' => esc_html__( 'Content', 'schema-package' ) ],
+		[ 'key' => 'post_category', 'value' => 'post_category', 'text' => esc_html__( 'Category', 'schema-package' ) ],
+		[ 'key' => 'post_excerpt', 'value' => 'post_excerpt', 'text' => esc_html__( 'Excerpt', 'schema-package' ) ],
+		[ 'key' => 'post_permalink', 'value' => 'post_permalink', 'text' => esc_html__( 'Permalink', 'schema-package' ) ],
+		[ 'key' => 'author_name', 'value' => 'author_name', 'text' => esc_html__( 'Author Name', 'schema-package' ) ],
+		[ 'key' => 'author_first_name', 'value' => 'author_first_name', 'text' => esc_html__( 'Author First Name', 'schema-package' ) ],
+		[ 'key' => 'author_last_name', 'value' => 'author_last_name', 'text' => esc_html__( 'Author Last Name', 'schema-package' ) ],
+		[ 'key' => 'post_date', 'value' => 'post_date', 'text' => esc_html__( 'Publish Date', 'schema-package' ) ],
+		[ 'key' => 'post_modified', 'value' => 'post_modified', 'text' => esc_html__( 'Last Modify Date', 'schema-package' ) ],
+		[ 'key' => 'featured_img', 'value' => 'featured_img', 'text' => esc_html__( 'Featured Image', 'schema-package' ) ],
+		[ 'key' => 'author_image', 'value' => 'author_image', 'text' => esc_html__( 'Author Image', 'schema-package' ) ],
+		[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
+		[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
+		[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
+		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
+		[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],						
+		[ 'key' => 'no_value', 'value' => 'no_value', 'text' => esc_html__( 'No Value', 'schema-package' ) ],
+	];
+
+	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
+	return $meta_list;	  
+}
+
+add_action( 'admin_head', 'smpg_rm_notices_on_schema_package' );
+
+function smpg_rm_notices_on_schema_package() {
+
+	$screen = get_current_screen();	
+
+    if ( $screen && strpos($screen->id, 'toplevel_page_schema_package') !== false ) {
+        remove_all_actions('admin_notices');
+        remove_all_actions('all_admin_notices');
+    }
+}

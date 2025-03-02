@@ -22,7 +22,7 @@ const SingularSchema = () => {
     const body_json          = {};
 
     body_json.post_id        = post_id;
-    body_json.current_status = status;
+    body_json._current_status = status;
     body_json.action         = action;
     
     let url = smpg_local.rest_url + 'smpg-route/change-post-status';
@@ -111,7 +111,7 @@ const SingularSchema = () => {
 
     let clonedata = [...schemaLoop];    
     
-    clonedata[index].post_meta.current_status = status;
+    clonedata[index].post_meta._current_status = status;
     setSchemaLoop(clonedata);
     changePostStatusHandler('change', post_id, status);
          
@@ -139,7 +139,7 @@ const SingularSchema = () => {
   
   useEffect(() => {      
     getSchemaLoop(1);
-  }, [])
+  }, [])  
 
   return (
     <>           
@@ -186,13 +186,13 @@ const SingularSchema = () => {
             
             schemaLoop.map( (item, i) => {
               return(
-                item.post_meta.schema_type ?  
+                item.post_meta._schema_type ?  
                 <tr key={i}>
-                <td >{extractSchemaTypeText(item.post_meta.schema_type)}</td>      
+                <td >{extractSchemaTypeText(item.post_meta._schema_type)}</td>      
                 <td >{item.post.post_modified}</td>      
                 <td >
                 <div className="ui fitted toggle checkbox">
-                  <input data-index={i} data-id={item.post.post_id} onChange={handleStatusChange} checked={item.post_meta.current_status ? true : false} type="checkbox" />
+                  <input data-index={i} data-id={item.post.post_id} onChange={handleStatusChange} checked={item.post_meta._current_status ? true : false} type="checkbox" />
                   <label></label>
                 </div>
                 </td>

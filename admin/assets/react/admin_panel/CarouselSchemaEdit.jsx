@@ -1,8 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
-import { Link} from 'react-router-dom';
-import { Dropdown, TableCell } from 'semantic-ui-react'
-import { Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import { Button, Dropdown, Grid, Icon, Divider, Label } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/carouselSchemaTypes';
@@ -32,10 +31,10 @@ const CarouselSchemaEdit = () => {
   const [postMeta, setPostMeta] = useReducer(
     (state, newState) => ({...state, ...newState}),
     {
-      current_status          : true,
-      schema_type             : 'course',                                       
-      automation_with         : [],
-      taxonomies              : []
+      _current_status          : true,
+      _schema_type             : 'course',                                       
+      _automation_with         : [],
+      _taxonomies              : []
     }            
   );
   
@@ -48,8 +47,7 @@ const CarouselSchemaEdit = () => {
     }
     
     let clonedata = {...postMeta};   
-    clonedata.taxonomies[id].status = value
-    console.log(clonedata);
+    clonedata._taxonomies[id].status = value    
     setPostMeta(clonedata);
             
   }  
@@ -140,13 +138,13 @@ const CarouselSchemaEdit = () => {
 
   }
   const handleSchemaTypeChange = (e, data) => {    
-    setPostMeta({schema_type: data.value});     
+    setPostMeta({_schema_type: data.value});     
   }
   const handlePlacementChange = (e, data) => {
     
       let data_id = data.data_id;      
       let copydata = {...postMeta};
-      copydata.taxonomies[data_id].value = data.value;
+      copydata._taxonomies[data_id].value = data.value;
       setPostMeta(copydata);    
 
   }
@@ -166,9 +164,9 @@ const CarouselSchemaEdit = () => {
           if ( result ) {
                         
                 let clonedata = {...postMeta};
-                let newclone = [...new Set([...clonedata.taxonomies[id].options, ...result])]
+                let newclone = [...new Set([...clonedata._taxonomies[id].options, ...result])]
                 let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
-                clonedata.taxonomies[id].options = newData;            
+                clonedata._taxonomies[id].options = newData;            
                 setPostMeta(clonedata);                        
             
           }
@@ -200,12 +198,12 @@ const CarouselSchemaEdit = () => {
 
     let copydata = {...postMeta};
 
-    let index = copydata.automation_with.indexOf(name);
+    let index = copydata._automation_with.indexOf(name);
 
     if(index !== -1){  
-      copydata.automation_with.splice(index, 1); 
+      copydata._automation_with.splice(index, 1); 
     }else{
-      copydata.automation_with.push(name);
+      copydata._automation_with.push(name);
     }
     setPostMeta(copydata);
     
@@ -221,10 +219,10 @@ const CarouselSchemaEdit = () => {
   }, []);
 
   useEffect(() => {
-    if(postMeta.schema_type != ''){
-      handleGetAutomation(postMeta.schema_type);    
+    if(postMeta._schema_type != ''){
+      handleGetAutomation(postMeta._schema_type);    
     }    
-  }, [postMeta.schema_type]);
+  }, [postMeta._schema_type]);
 
   
   return(
@@ -247,23 +245,23 @@ const CarouselSchemaEdit = () => {
               fluid
               search
               selection
-              value = {postMeta.schema_type}
+              value = {postMeta._schema_type}
               options={schemaTypes}
               onChange={handleSchemaTypeChange}
           />
       </Accordion>               
-    {postMeta.taxonomies ?
+    {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
     <div className="">
-                <h4>{__('Target On', 'schema-package') }</h4>
+                <Divider horizontal>{__("Target On", "schema-package")}</Divider>
 
                 <table className="smpg-placement-table">
                   <tbody>                    
                   {
-                    postMeta.taxonomies.map((item, i) => {
+                    postMeta._taxonomies.map((item, i) => {
                       return(
                         <tr key={i}>
-                        <td><label>{item.label}</label></td>                        
+                        <td><Label>{item.label}</Label></td>                                        
                         <td>
                           <div className="ui fitted toggle checkbox">
                           <input id={i} type="checkbox" name={item.taxonomy} checked={item.status} onChange={handleFormChange} />
@@ -288,7 +286,7 @@ const CarouselSchemaEdit = () => {
                             options={item.options}
                           />                                          
                         </td>
-                        <td className='smpg-placement-or'>{(i+1) < postMeta.taxonomies.length ? <span>OR</span> : ''}</td>
+                        <td className='smpg-placement-or'>{(i+1) < postMeta._taxonomies.length ? <span>OR</span> : ''}</td>
                         </tr>
                       )
                     })
@@ -303,29 +301,40 @@ const CarouselSchemaEdit = () => {
       </div>
       <div className="smpg-right-section">  
 
-         {postMeta.schema_type ?                
-        <Accordion title="Automation With" isExpand={true}>      
-        <h3></h3>
-        {
-        automationList.length > 0 ? 
-        <table className="form-table">
-        <tbody>
-          {
-            automationList.map((item, i) => {
-              return(
-                <tr key={i}>
-                <th>{item.name}</th>
-                <td><input onChange={handleAutomationChange} name={item.id} checked={ postMeta.automation_with.includes(item.id) ? true : false } type="checkbox"/></td> 
-                </tr>
-              )
-          })
-          }
-        </tbody>  
-        </table> 
-          : <div>{__('None of the plugins are active where schema markup can be automated. Find the automation list here', 'schema-package') }</div>
-        }                   
-       
-      </Accordion> 
+         {postMeta._schema_type ?                
+        
+        <Accordion title="Automation" isExpand={true}>      
+
+         {automationList.length > 0 ?  
+         
+         <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Form>
+                  {automationList.map((item) => (
+                      <Form.Field key={item.key}>
+                        <Checkbox
+                          label={item.text}                          
+                          checked={!!postMeta._automation_with.includes(item.key)}
+                          onChange={() => handleAutomationChange(item.key)}                          
+                        />
+                      </Form.Field>
+                  ))}                                      
+                </Form>
+              </Grid.Column>
+              </Grid.Row>
+          </Grid>
+
+         : <div>
+            <p>
+            {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
+            <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>
+            {/* <Divider /> */}
+            {/* <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a> */}
+          </div>
+          }                 
+        </Accordion>          
          
          : ''}           
         

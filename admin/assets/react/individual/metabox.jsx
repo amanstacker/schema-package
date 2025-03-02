@@ -519,12 +519,18 @@ const {
                                         </div>
                                     : ''
                                 }                                
-                                <ToggleControl                                 
+                                <ToggleControl                                           
                                     checked={item.is_enable}
                                     onChange={() => handleSchemaTurnOnOff(i, item.id)}
                                 />
-                                <Button onClick={() => handleSchemaEdit(i, item.id)} ><span className="dashicons dashicons-edit-large"></span></Button>
-                                <Button onClick={() => handleSchemaDelete(i, item.id)} ><span className="dashicons dashicons-trash"></span></Button>
+                                <Button 
+                                    style={{marginTop:"-10px"}}
+                                    onClick={() => handleSchemaEdit(i, item.id)} >
+                                    <span className="dashicons dashicons-edit-large"></span>                                        
+                                </Button>
+                                <Button style={{marginTop:"-10px"}} onClick={() => handleSchemaDelete(i, item.id)} >
+                                    <span className="dashicons dashicons-trash"></span>
+                                </Button>
                             </span>
                         </li>         
                     )

@@ -139,22 +139,26 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
 
         $loopdata = [];
 
-        foreach ($properties['additional_property']['elements'] as  $value) {
+        foreach ( $properties['additional_property']['elements'] as  $value ) {
                                     
-            $loopdata[] = [
-                '@type'      => 'PropertyValue',
-                'name'       => $value['name']['value'],
-                'value'      => $value['value']['value'],                
-            ];
+            if ( $value['name']['value'] && $value['value']['value'] ) {
+
+                $loopdata[] = [
+                    '@type'      => 'PropertyValue',
+                    'name'       => $value['name']['value'],
+                    'value'      => $value['value']['value'],                
+                ];
+
+            }            
         }
 
         $json_ld['additionalProperty'] = $loopdata;
     }
-    if(!empty($properties['opening_hours']['elements'])){
+    if ( ! empty( $properties['opening_hours']['elements'] ) ) {
 
         $loopdata = [];
 
-        foreach ($properties['opening_hours']['elements'] as  $value) {
+        foreach ( $properties['opening_hours']['elements'] as  $value ) {
             
             $daysofweek = [];
 

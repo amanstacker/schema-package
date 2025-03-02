@@ -100,23 +100,21 @@ class SMPG_Individual_Post {
         echo '</tr>';
     }
     
-    public function to_be_enqueue($hook){
+    public function to_be_enqueue( $hook ) {
 
-            wp_enqueue_media();    
-            
-            wp_enqueue_style('smpg-individual-style', SMPG_PLUGIN_URL.'admin/assets/react/dist/individual_post.css', array('wp-components'), SMPG_VERSION);            
-                    
-            $data = array(
+            $local_data = array(
                 'smpg_plugin_url'      => SMPG_PLUGIN_URL,
                 'rest_url'             => esc_url_raw( rest_url() ),
                 'nonce'                => wp_create_nonce( 'wp_rest' ),
                 'post_id'              => get_the_ID(),
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-                'tag_id'               => !empty($_GET['tag_ID']) ? intval( wp_unslash( $_GET['tag_ID'] ) ) : ''
+                'tag_id'               => ! empty( $_GET['tag_ID'] ) ? intval( wp_unslash( $_GET['tag_ID'] ) ) : ''
             );
-    
+
+            wp_enqueue_media();    
+            wp_enqueue_style( 'wp-components' );
             wp_register_script( 'smpg-individual-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/individual_post.js', array( 'wp-i18n', 'wp-components', 'wp-element', 'wp-api', 'wp-editor', 'wp-blocks' ), SMPG_VERSION, true );    
-            wp_localize_script( 'smpg-individual-script', 'smpg_local', $data );            
+            wp_localize_script( 'smpg-individual-script', 'smpg_local', $local_data );
             wp_enqueue_script( 'smpg-individual-script');
 
     }

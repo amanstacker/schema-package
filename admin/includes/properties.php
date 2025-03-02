@@ -367,6 +367,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'Offer',
             'options'     => [
+                ''               => 'Select',
                 'Offer'          => 'Offer',
                 'AggregateOffer' => 'AggregateOffer'
             ],
@@ -1301,6 +1302,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                         'type'        => 'select',
                                         'value'       => 'LocalBusiness',
                                         'options'     => [
+                                                ''                             => 'Select',
                                                 'Organization'                 => 'Organization',
                                                 'LocalBusiness'                => 'Local Business',
                                                 'Airline'                      => 'Airline',

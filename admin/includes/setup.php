@@ -366,6 +366,8 @@ function smpg_cached_schema_ids_on_delete( $post_id ) {
 	if ( ! current_user_can( 'manage_options' ) )
 		return;
 
+		$cache_key = '';
+		
 		$post_type = get_post_type( $post_id );
 
 		if ( $post_type == 'smpg_singular_schema' ) {

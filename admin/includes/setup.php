@@ -645,8 +645,14 @@ function smpg_meta_list() {
 	];
 	
 	if ( class_exists( 'ACF' ) ) {
-		$meta_list[] = [ 'key' => 'advanced_custom_field', 'value' => 'advanced_custom_field', 'text' => esc_html__( 'Advanced Custom Field', 'schema-package' ) ];
-	} 
+
+		$acf_text = esc_html__( 'Advanced Custom Field', 'schema-package' );
+
+		if ( function_exists( 'scf_deactivate_other_instances' ) ) {
+			$acf_text = esc_html__( 'Secure Custom Field', 'schema-package' );
+		}
+		$meta_list[] = [ 'key' => 'advanced_custom_field', 'value' => 'advanced_custom_field', 'text' => $acf_text ];
+	}		
 
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
 

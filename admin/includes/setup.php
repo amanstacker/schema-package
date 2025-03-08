@@ -639,12 +639,17 @@ function smpg_meta_list() {
 		[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
 		[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
 		[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
-		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
+		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],		
 		[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],						
 		[ 'key' => 'no_value', 'value' => 'no_value', 'text' => esc_html__( 'No Value', 'schema-package' ) ],
 	];
+	
+	if ( class_exists( 'ACF' ) ) {
+		$meta_list[] = [ 'key' => 'advanced_custom_field', 'value' => 'advanced_custom_field', 'text' => esc_html__( 'Advanced Custom Field', 'schema-package' ) ];
+	} 
 
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
+
 	return $meta_list;	  
 }
 

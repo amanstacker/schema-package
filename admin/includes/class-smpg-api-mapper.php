@@ -658,7 +658,9 @@ class SMPG_Api_Mapper {
             $response['post_meta'] = $meta_data;
             
         }else{
-          $meta_data['_mapped_properties'] = [];
+          $meta_data['_mapped_properties']          = [];
+          $meta_data['_enabled_on_post_type']       = 1;
+          $meta_data['_enabled_on']['post_type'][0] = 'post';
         }   
         
         $response['post_meta'] = $meta_data;

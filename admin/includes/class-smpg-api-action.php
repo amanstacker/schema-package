@@ -65,10 +65,10 @@ class SMPG_Api_Action {
 
             $response = $this->_api_mapper->get_placement_data('page', $search);
 
-            if($response){
-                return array('status' => 't', 'data' => $response);
+            if ( $response ) {
+                return [ 'status' => 't', 'data' => $response ];
             }else{
-                return array('status' => 'f', 'data' => esc_html__( 'data not found', 'schema-package' ) );
+                return [ 'status' => 'f', 'data' => esc_html__( 'data not found', 'schema-package' ) ];
             }
             
             return $response;
@@ -87,9 +87,9 @@ class SMPG_Api_Action {
 
             $response = $this->_api_mapper->get_placement_data('tags', $search, $saved_data = null, 'diff');
             if($response){
-                return array( 'status' => 't', 'data' => $response );
+                return [ 'status' => 't', 'data' => $response ];
             }else{
-                return array( 'status' => 'f', 'data' => esc_html__( 'data not found', 'schema-package' ) );
+                return [ 'status' => 'f', 'data' => esc_html__( 'data not found', 'schema-package' ) ];
             }
             
             return $response;
@@ -155,16 +155,16 @@ class SMPG_Api_Action {
         
                 delete_option( 'smpg_settings');  
                 
-                $allposts= get_posts( array('post_type'=>'smpg_singular_schema','numberposts'=>-1) );
+                $allposts= get_posts( [ 'post_type'=> 'smpg_singular_schema', 'numberposts' => -1 ] );
                 
-                foreach ($allposts as $eachpost) {
+                foreach ( $allposts as $eachpost ) {
                     
                     $result = wp_delete_post( $eachpost->ID, true );
                 
                 }
 
-                if( $result ) {
-                    return array( 'status' => 't' , 'msg' => esc_html__( 'Reset Successfully', 'schema-package' ) );
+                if ( $result ) {
+                    return [ 'status' => 't' , 'msg' => esc_html__( 'Reset Successfully', 'schema-package' ) ];
                 }
 
         }
@@ -193,17 +193,17 @@ class SMPG_Api_Action {
      
                  if ( $sent ){
      
-                    return array( 'status' => 't' );
+                    return [ 'status' => 't' ];
      
                  }else{
      
-                    return array( 'status' => 'f' );
+                    return [ 'status' => 'f' ];
      
                  }
                  
              }else{
 
-                return array( 'status'=> 'f', 'msg' => esc_html__( 'Please provide message and email', 'schema-package' ) );
+                return [ 'status'=> 'f', 'msg' => esc_html__( 'Please provide message and email', 'schema-package' ) ];
 
              }
         }
@@ -254,7 +254,7 @@ class SMPG_Api_Action {
             }
             
 
-            $response = array('misc_schema' => $misc_schema, 'about_pages' => $pages, 'contact_pages' => $pages);
+            $response = [ 'misc_schema' => $misc_schema, 'about_pages' => $pages, 'contact_pages' => $pages ];
 
             return  $response;
 

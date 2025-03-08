@@ -122,17 +122,17 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
 
             $service_explode = explode(',', $properties['service_offered']['value']);
             foreach( $service_explode as $offer){
-                $service_offer[] = array(
+                $service_offer[] = [
                     '@type' => 'Offer',
                     'name'  => $offer
-                );
+                ];
             }
 
-        $json_ld['hasOfferCatalog'] = array(
+        $json_ld['hasOfferCatalog'] = [
                         '@type'            => 'OfferCatalog',
                         'name'             => $properties['service_type_option']['value'],
                         'itemListElement'  => $service_offer,
-        );
+        ];
 
     }
     if ( ! empty( $properties['additional_property']['elements'] ) ) {

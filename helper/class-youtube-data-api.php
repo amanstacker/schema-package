@@ -9,17 +9,17 @@ class SMPG_Youtube_Data_Api {
     static $api_base = 'https://www.googleapis.com/youtube/v3/videos';
     static $thumbnail_base = 'https://i.ytimg.com/vi/';
     
-    public static function getVideoInfo($vid, $api_key)
+    public static function getVideoInfo( $vid, $api_key )
     {
-        $params = array(
+        $params = [
             'part' => 'contentDetails,snippet,statistics',
-            'id' => $vid,
-            'key' => $api_key,
-        );
+            'id'   => $vid,
+            'key'  => $api_key,
+        ];
         $result  = [];
         $api_url = SMPG_Youtube_Data_Api::$api_base . '?' . http_build_query($params);
-        $resultset       = wp_remote_get($api_url);
-        if ( ! is_wp_error( $resultset) ) {
+        $resultset       = wp_remote_get( $api_url );
+        if ( ! is_wp_error( $resultset ) ) {
             $result = json_decode(wp_remote_retrieve_body($resultset), true);
         }
         

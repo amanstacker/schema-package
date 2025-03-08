@@ -87,7 +87,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
                     throw new SMPG_Aq_Exception('$width parameter is required');
 
                 // Caipt'n, ready to hook.
-                if ( true === $upscale ) add_filter( 'image_resize_dimensions', array($this, 'aq_upscale'), 10, 6 );
+                if ( true === $upscale ) add_filter( 'image_resize_dimensions', [ $this, 'aq_upscale' ], 10, 6 );
 
                 // Define upload path & dir.
                 $upload_info = wp_upload_dir();
@@ -97,7 +97,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
                 //Creating custom folder in uploads and save resizable images. Starts here
                 global $smpg_settings;
                 
-                if( isset($smpg_settings['smpg-separate-images-folder']) && $smpg_settings['smpg-separate-images-folder'] == 1 ){
+                if ( isset( $smpg_settings['smpg-separate-images-folder']) && $smpg_settings['smpg-separate-images-folder'] == 1 ) {
                     
                     $make_new_dir = $upload_dir . '/smpg-schema-org';
 
@@ -170,11 +170,11 @@ if(!class_exists('SMPG_Aq_Resize')) {
                 // Check if img path exists, and is an image indeed.
                 if ( ! file_exists( $img_path ) or ! @getimagesize( $img_path ) ){
                     // Return the Original CDN array
-                    return array (
+                    return [
                                 0 => $cdn_url_main,
                                 1 => $width,
                                 2 => $height
-                            );
+                    ];
                 }
                 // Get image info.
                 $info = pathinfo( $img_path );
@@ -213,11 +213,11 @@ if(!class_exists('SMPG_Aq_Resize')) {
                         if ( is_wp_error( $editor ) || is_wp_error( $editor->resize( $width, $height, $crop ) ) ) {
 
                             // Return the Original array
-                            return array (
+                            return [
                                         0 => $url,
                                         1 => $width,
                                         2 => $height
-                                    );
+                            ];
                         }
 
                         $resized_file = $editor->save();
@@ -251,11 +251,11 @@ if(!class_exists('SMPG_Aq_Resize')) {
                     $image = $img_url;
                 } else {
                     // array return.
-                    $image = array (
+                    $image = [
                         0 => $img_url,
                         1 => $dst_w,
                         2 => $dst_h
-                    );
+                    ];
                 }
 
                 return $image;
@@ -326,14 +326,14 @@ if(!function_exists('smpg_aq_resize')) {
          */
         global $exactdn; // This global variable is from EWWW Image Optimizer Plugin and we are not modifying it in any case, Just using it to grab image data
         if ( class_exists( 'ExactDN' ) && $exactdn->get_smpg_exactdn_domain() ) {
-            $args  = array(
+            $args  = [
                 'resize' => "$width, $height",
-            );
-            $image = array(
+            ];
+            $image = [
                 0 => $exactdn->generate_url( $url, $args ),
                 1 => $width,
                 2 => $height,
-            );
+            ];
             return $image;
         } 
         /* Jetpack Compatible*/

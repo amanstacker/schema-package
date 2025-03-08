@@ -2,14 +2,14 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_placement_condition_checker($type, $post_id, $value) {
+function smpg_placement_condition_checker( $type, $post_id, $value ) {
 
 	$response = false;
 
-	switch ($type) {
+	switch ( $type ) {
 
 		case 'post_type':
-				if(get_post_type($post_id) == $value){
+				if ( get_post_type( $post_id ) == $value ) {
 					$response = true;
 				}
 
@@ -18,7 +18,7 @@ function smpg_placement_condition_checker($type, $post_id, $value) {
 		case 'post':
 		case 'page':
 
-				if($post_id == $value){
+				if ( $post_id == $value ) {
 					$response = true;
 				}
 

@@ -16,7 +16,7 @@ class SMPG_Api_Individual_Controller {
 
             }            
                         
-            add_action( 'rest_api_init', array( $this, 'register_admin_routes' ) );
+            add_action( 'rest_api_init', [ $this, 'register_admin_routes' ] );
                                  
         }
                 
@@ -30,27 +30,27 @@ class SMPG_Api_Individual_Controller {
         
         public function register_admin_routes() {
             
-            register_rest_route( 'smpg-individual-router', 'get-repeater-element', array(
+            register_rest_route( 'smpg-individual-router', 'get-repeater-element', [
                 'methods'    => 'GET',
-                'callback'   => array( $this->_apiAction, 'get_repeater_element' ),
+                'callback'   => [ $this->_apiAction, 'get_repeater_element' ],
                 'permission_callback' => function() {
                     return current_user_can( 'manage_options' );
                 }
-            ));            
-            register_rest_route( 'smpg-individual-router', 'get-selected-schema-properties', array(
+            ]);            
+            register_rest_route( 'smpg-individual-router', 'get-selected-schema-properties', [
                 'methods'    => 'POST',
-                'callback'   => array( $this->_apiAction, 'get_selected_schema_properties' ),
+                'callback'   => [ $this->_apiAction, 'get_selected_schema_properties' ],
                 'permission_callback' => function() {
                     return current_user_can( 'manage_options' );
                 }
-            ));   
-            register_rest_route( 'smpg-individual-router', 'save-post-meta', array(
+            ]);   
+            register_rest_route( 'smpg-individual-router', 'save-post-meta', [
                 'methods'    => 'POST',
-                'callback'   => array( $this->_apiAction, 'save_post_meta' ),
+                'callback'   => [ $this->_apiAction, 'save_post_meta' ],
                 'permission_callback' => function() {
                     return current_user_can( 'manage_options' );
                 }
-            ));            
+            ]);            
 
         }  
              

@@ -551,7 +551,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'is_free'              => false
 			] );
 
-			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', array( 'wp-i18n' ), SMPG_VERSION, true );
+			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );
 
 			wp_localize_script( 'smpg-admin-script', 'smpg_local', $data );            
 			wp_enqueue_script( 'smpg-admin-script');

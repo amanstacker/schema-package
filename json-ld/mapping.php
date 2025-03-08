@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 function smpg_mapping_properties( $json_ld, $schema_data ) {
-
+    
     $mp_values = [];
 
     if ( ! empty ( $schema_data['_mapped_properties_value'][0] ) ){
@@ -111,7 +111,7 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
         }
 
     }
-
+    
     return $json_ld;
 
 }

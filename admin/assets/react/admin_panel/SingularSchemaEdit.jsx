@@ -197,14 +197,23 @@ const SingularSchemaEdit = () => {
 
   }
   
-  const handleMappedPropertiesValue = ( mappedValue ) => {
-
-    setPostMeta(prevState => ({
-      ...prevState,            
-      _mapped_properties_value:mappedValue
-    }));  
-
-  }
+  const handleMappedPropertiesValue = (mappedValue) => {
+    setPostMeta(prevState => {
+      // Filter mappedValue to only include keys present in _mapped_properties_key
+      const filteredMappedValue = Object.keys(mappedValue)
+        .filter(key => prevState._mapped_properties_key.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = mappedValue[key];
+          return obj;
+        }, {});
+  
+      return {
+        ...prevState,
+        _mapped_properties_value: filteredMappedValue
+      };
+    });
+  };
+  
   const handleSchemaTypeChange = (e, data) => {
 
       setPostMeta(prevState => ({

@@ -35,21 +35,40 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });
         const data = await response.json();
-
-        const formattedFields = data.map((field) => ({
+  
+        // Format fetched fields
+        const fetchedFields = data.map((field) => ({
           key: field.id,
           value: field.value,
           text: field.label,
         }));
-
-        setCustomFieldsList(formattedFields);
+  
+        setCustomFieldsList((prevList) => {
+          // Get already selected custom fields
+          const selectedFields = Object.values(selectedMetaFields)
+            .filter((meta) => meta.custom_field)
+            .map((meta) => ({
+              key: meta.custom_field,
+              value: meta.custom_field,
+              text: meta.custom_field, // Ensure the label is appropriate
+            }));
+  
+          // Merge with previous list to keep stability during navigation
+          const mergedFields = [...selectedFields, ...prevList, ...fetchedFields].filter(
+            (field, index, self) => index === self.findIndex((f) => f.value === field.value) // Remove duplicates
+          );
+  
+          return mergedFields;
+        });
       } catch (error) {
         console.error("Error fetching custom fields:", error);
       }
     };
-
+  
     fetchCustomFields();
   }, [customFieldSearch]);
+  
+  
 
   useEffect(() => {
     const fetchTaxonomyValues = async () => {

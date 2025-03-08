@@ -1658,7 +1658,7 @@ function smpg_get_commaa_seprated_value ( $data, $type ) {
     return $response;
 }
 
-function smpg_snake_to_camel_case( $string ) {
+function smpg_snake_to_camel_case( $string ) {	
 
 	if ( strpos( $string, '_' ) === false ) {
         return $string; // Return unchanged if there's no underscore

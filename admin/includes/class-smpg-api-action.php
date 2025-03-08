@@ -408,24 +408,25 @@ class SMPG_Api_Action {
                 return rest_ensure_response($taxonomy_list);
         }
         public function get_custom_fields( $request  ) {
-            
             global $wpdb;
-
+        
             // Get the search query from the request
             $search_query = sanitize_text_field($request->get_param('search'));
-
-            // Fetch unique meta keys from the postmeta table
+        
+            // Fetch unique meta keys from the postmeta table with a limit of 10
             $query = "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE meta_key NOT LIKE '\_%'"; // Exclude private fields (_ prefix)
-            
+        
             if (!empty($search_query)) {
                 $query .= $wpdb->prepare(" AND meta_key LIKE %s", '%' . $wpdb->esc_like($search_query) . '%');
             }
-
+        
+            $query .= " LIMIT 10"; // Add the limit
+        
             $meta_keys = $wpdb->get_col($query);
-
+        
             // Format response
             $custom_fields = [];
-
+        
             foreach ($meta_keys as $meta_key) {
                 $custom_fields[] = [
                     'id'    => $meta_key,
@@ -433,10 +434,10 @@ class SMPG_Api_Action {
                     'label' => ucfirst(str_replace('_', ' ', $meta_key)), // Make it more readable
                 ];
             }
-
+        
             return rest_ensure_response($custom_fields);
-
         }
+        
         
         public function get_carousel_schema_data( $request_data ) {
 

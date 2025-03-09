@@ -155,8 +155,25 @@ Go To - Schema Package -> Settings -> Help & Support.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
+1. **Automatic Installation:**
+   - Go to **Plugins > Add New** in your WordPress dashboard.
+   - Search for "Schema Package Plugin".
+   - Click **Install Now**, then **Activate** the plugin.
+
+2. **Manual Installation via WordPress:**
+   - Download the plugin ZIP file from the official source.
+   - Go to **Plugins > Add New** in WordPress.
+   - Click **Upload Plugin**, select the downloaded ZIP file, and click **Install Now**.
+   - Activate the plugin after installation.
+
+3. **Manual Installation via FTP:**
+   - Download the plugin ZIP file and extract it.
+   - Upload the extracted folder to the `/wp-content/plugins/` directory using an FTP client.
+   - Log in to your WordPress dashboard and go to **Plugins > Installed Plugins**.
+   - Find "Schema Package Plugin" and click **Activate**.
+
+4. Navigate to **Settings > Schema Package** to configure the plugin settings.
+5. Start adding Schema markup using the built-in editor and mapping tools.
 
 
 == WordPress REST API ==

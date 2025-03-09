@@ -52,15 +52,15 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
 
                 $vanue_meta = get_term_meta($value->term_id, '', true);
                 
-                $vanues_arr[] = array(
+                $vanues_arr[] = [
                     '@type' => 'Place',
                     'name'  => $value->name,
-                    'address' => array(
+                    'address' => [
                         '@type'           => 'PostalAddress',
                         'streetAddress'   => $value->name,                        
-                    )
+                    ]
                     
-                );
+                ];
 
             }
 
@@ -150,10 +150,10 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
                                                 
                 foreach ($illustrators as $illu) {
                     
-                    $illustrator_arr[] = array(
+                    $illustrator_arr[] = [
                         '@type' => 'Person',
                         'name'  => $illu->name,
-                    );
+                    ];
                 
                 } 
                 
@@ -170,10 +170,10 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
                                                 
                 foreach ($editors as $editor) {
                     
-                    $editors_arr[] = array(
+                    $editors_arr[] = [
                         '@type' => 'Person',
                         'name'  => $editor->name,
-                    );
+                    ];
                 
                 } 
                 
@@ -185,25 +185,25 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
         
         $editions_arr = [];
 
-        $format = array('Hardcover', 'Paperback', 'ePub', 'Kindle', 'PDF', 'Audiobook');
+        $format = [ 'Hardcover', 'Paperback', 'ePub', 'Kindle', 'PDF', 'Audiobook' ];
 
-        if(!empty($editions)){
+        if ( ! empty( $editions ) ) {
 
             foreach ($editions as $value) {
 
-                $editions_arr[] = array(
+                $editions_arr[] = [
                     '@type'         => 'Book',
                     'isbn'          => !empty($value['_mbdb_isbn']) ? $value['_mbdb_isbn'] : '' ,
                     'bookEdition'   => !empty($value['_mbdb_edition_title']) ? $value['_mbdb_edition_title'] : '',
                     'bookFormat'    => $format[$value['_mbdb_format']],
                     'inLanguage'    => !empty($value['_mbdb_language']) ? $value['_mbdb_language'] : '',
                     'numberOfPages' => !empty($value['_mbdb_length']) ? $value['_mbdb_length'] : '',
-                    'offers'      => array(
+                    'offers'      => [
                                         '@type'         => 'Offer',
                                         'price'         => !empty($value['_mbdb_retail_price']) ? $value['_mbdb_retail_price'] : '',
                                         'priceCurrency' => !empty($value['_mbdb_currency']) ? $value['_mbdb_currency'] : ''
-                                    ),
-                );                    
+                    ],
+                ];                    
             }
         }
         
@@ -351,7 +351,7 @@ function smpg_get_arconixfaq_json_ld( $json_ld, $post_id ){
             }
 
             
-            $query  = array(
+            $query  = [
                 'p'              => '',
                 'order'          => 'ASC',
                 'orderby'        => 'title',
@@ -362,7 +362,7 @@ function smpg_get_arconixfaq_json_ld( $json_ld, $post_id ){
                 'group'          => '',
                 'exclude_group'  => '',
                 'hide_title'     => false,
-            );
+            ];
             
             $args = wp_parse_args( $atts, $query );
 
@@ -383,39 +383,41 @@ function smpg_get_arconixfaq_json_ld( $json_ld, $post_id ){
                     }
     
                     // Set up our standard query args.
-                    $query_args = array(
+                    $query_args = [
                         'post_type'      => 'faq',
                         'order'          => $args['order'],
                         'orderby'        => $args['orderby'],
                         'posts_per_page' => $args['posts_per_page'],
-                        'tax_query'      => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-                            array(
+                        'tax_query'      => [ //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+                            [
                                 'taxonomy' => 'group',
                                 'field'    => 'slug',
-                                'terms'    => array( $term->slug ),
+                                'terms'    => [ $term->slug ],
                                 'operator' => 'IN',
-                            ),
-                        ),
-                    );
+                            ],
+                        ],
+                    ];
     
                     // New query just for the tax term we're looping through.
                     $q = new WP_Query( $query_args );
     
                     if ( $q->have_posts() ) {
+
                         if ( ! ( $exclude == $term->slug ) ) {
                                 
                             // Loop through the rest of the posts for the term.
                             while ( $q->have_posts() ) :
+
                                 $q->the_post();
     
-                                $faq_data[] = array(
+                                $faq_data[] = [
                                     '@type' => 'Question',
                                     'name'  => smpg_get_the_title(),
-                                        'acceptedAnswer' => array(
+                                        'acceptedAnswer' => [
                                             '@type' => 'Answer',
                                             'text'  => smpg_get_the_content()
-                                        )
-                                    );
+                                        ]
+                                ];
     
                             endwhile;
                                 
@@ -430,28 +432,29 @@ function smpg_get_arconixfaq_json_ld( $json_ld, $post_id ){
 
                 // Set up our standard query args.
 			$q = new WP_Query(
-				array(
+				[
 					'post_type'      => 'faq',
 					'p'              => $args['p'],
 					'order'          => $args['order'],
 					'orderby'        => $args['orderby'],
 					'posts_per_page' => $args['posts_per_page'],
-				)
+                ]
 			);
 
 			if ( $q->have_posts() ) {
 				
 				while ( $q->have_posts() ) :
+
 					$q->the_post();
 
-					$faq_data[] = array(
+					$faq_data[] = [
                         '@type' => 'Question',
                         'name'  => smpg_get_the_title(),
-                            'acceptedAnswer' => array(
+                            'acceptedAnswer' => [
                                 '@type' => 'Answer',
                                 'text'  => smpg_get_the_content()
-                            )
-                        );
+                            ]
+                    ];
 
 				endwhile;
 				
@@ -485,12 +488,12 @@ function smpg_get_wpresponsivefaq_json_ld( $json_ld, $post_id ){
         
         foreach ($shortcode_attr as $atts) {
             
-            extract(shortcode_atts(array(
+            extract(shortcode_atts([
                 "limit"             => '',
                 "category"          => '',
                 "single_open"       => '',
                 "transition_speed"  => '',
-            ), $atts));
+            ], $atts));
 
             // Define limit
             if( $limit ) { 
@@ -510,15 +513,15 @@ function smpg_get_wpresponsivefaq_json_ld( $json_ld, $post_id ){
             $orderby 		= 'post_date';
             $order 			= 'DESC';
              
-            $args = array ( 
+            $args = [
                 'post_type'      => $post_type, 
                 'orderby'        => $orderby, 
                 'order'          => $order,
                 'posts_per_page' => $posts_per_page,           
-                );
-            if($cat != ""){
+            ];
+            if ( $cat != "" ) {
                 //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-                $args['tax_query'] = array( array( 'taxonomy' => 'faq_cat', 'field' => 'term_id', 'terms' => $cat) );
+                $args['tax_query'] = [ [ 'taxonomy' => 'faq_cat', 'field' => 'term_id', 'terms' => $cat ] ];
             }        
         
             $faq_posts = new \WP_Query( $args );
@@ -527,14 +530,14 @@ function smpg_get_wpresponsivefaq_json_ld( $json_ld, $post_id ){
                     
                 while ( $faq_posts->have_posts() ) : $faq_posts->the_post();                 
                 
-                $faq_data[] = array(
+                $faq_data[] = [
                         '@type' => 'Question',
                         'name'  => smpg_get_the_title(),
-                            'acceptedAnswer' => array(
+                            'acceptedAnswer' => [
                                 '@type' => 'Answer',
                                 'text'  => smpg_get_the_content()
-                            )
-                        );
+                            ]
+                    ];
                 
                 endwhile;
                 
@@ -575,14 +578,14 @@ function smpg_get_easyaccordion_json_ld( $json_ld, $post_id ){
 
                     foreach ($shortcode_data['accordion_content_source'] as $value) {
                         
-                        $faq_data[] = array(
+                        $faq_data[] = [
                             '@type' => 'Question',
                             'name'  => $value['accordion_content_title'],
-                                'acceptedAnswer' => array(
+                                'acceptedAnswer' => [
                                     '@type' => 'Answer',
                                     'text'  => $value['accordion_content_description']
-                                )
-                        );
+                                ]
+                        ];
 
                     }
 
@@ -617,12 +620,12 @@ function smpg_get_quickandeasyfaq_json_ld( $json_ld, $post_id ){
         
             extract(
                 shortcode_atts(
-                    array(
+                    [
                         'style'   => '',    
                         'filter'  => false,
                         'orderby' => 'date',
                         'order'   => 'DESC',
-                    ),
+                    ],
                     $value,
                     'faqs'
                 )
@@ -633,27 +636,27 @@ function smpg_get_quickandeasyfaq_json_ld( $json_ld, $post_id ){
                 $filter = explode( ',', $filter );
             }
 
-            $query = array(
+            $query = [
                 'post_type'      => 'faq',
                 'posts_per_page' => - 1                
-            );
+            ];
 
             if ( $filter && ! is_array( $filter ) ) {
 
                 $terms = get_terms(
-                    array(
+                    [
                         'taxonomy' => 'faq-group',
                         'fields'   => 'slugs',
-                    )
+                    ]
                 );
                 //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-                $query['tax_query'] = array(
-                    array(
+                $query['tax_query'] = [
+                    [
                         'taxonomy' => 'faq-group',
                         'field'    => 'slug',
                         'terms'    => $terms,
-                    ),
-                );
+                    ],
+                ];
 
             }
 
@@ -663,14 +666,14 @@ function smpg_get_quickandeasyfaq_json_ld( $json_ld, $post_id ){
                     
                 while ( $faq_posts->have_posts() ) : $faq_posts->the_post();                 
                 
-                $faq_data[] = array(
+                $faq_data[] = [
                         '@type' => 'Question',
                         'name'  => smpg_get_the_title(),
-                            'acceptedAnswer' => array(
+                            'acceptedAnswer' => [
                                 '@type' => 'Answer',
                                 'text'  => smpg_get_the_content()
-                            )
-                        );
+                            ]
+                    ];
                 
                 endwhile;
                 
@@ -705,7 +708,7 @@ function smpg_get_accordion_json_ld( $json_ld, $post_id ){
 
         foreach ($shortcode_attr as $atts) {
                                                             
-            $atts = shortcode_atts( array('id' => "" ), $atts );
+            $atts = shortcode_atts( [ 'id' => "" ], $atts );
         
             $post_id = $atts['id'];
             $accordions_options = get_post_meta($post_id,'accordions_options', true);           
@@ -716,14 +719,14 @@ function smpg_get_accordion_json_ld( $json_ld, $post_id ){
 
                 foreach ($accordions_content as $value) {
                     
-                    $faq_data[] = array(
+                    $faq_data[] = [
                         '@type' => 'Question',
                         'name'  => $value['header'],
-                            'acceptedAnswer' => array(
+                            'acceptedAnswer' => [
                                 '@type' => 'Answer',
                                 'text'  => $value['body']
-                            )
-                        );
+                            ]
+                    ];
 
                 }
 
@@ -756,7 +759,7 @@ function smpg_get_accordionfaq_json_ld($json_ld, $post_id){
 
             if(isset($value['id'])){
 
-                $query = array(  'p' => $value['id'], 'post_type' => $ac_post_type, 'orderby' => 'ASC');
+                $query = [  'p' => $value['id'], 'post_type' => $ac_post_type, 'orderby' => 'ASC' ];
                 
                 $faq_posts = new WP_Query( $query );
 
@@ -770,14 +773,14 @@ function smpg_get_accordionfaq_json_ld($json_ld, $post_id){
 
                             foreach ($accordion_data as $value) {
 
-                                $faq_data[] = array(
+                                $faq_data[] = [
                                     '@type' => 'Question',
                                     'name'  => $value['accordion_title'],
-                                        'acceptedAnswer' => array(
+                                        'acceptedAnswer' => [
                                             '@type' => 'Answer',
                                             'text'  => $value['accordion_desc']
-                                        )
-                                );
+                                        ]
+                                ];
 
                             }
 
@@ -1034,9 +1037,9 @@ function smpg_get_yotpo_product_reviews($product_id){
     $comments      = [];
     $ratings       = [];
 
-    $yotpo_settings = get_option('yotpo_settings');
+    $yotpo_settings = get_option( 'yotpo_settings' );
 
-    if(isset($yotpo_settings['app_key'])){
+    if ( isset( $yotpo_settings['app_key'] ) ) {
 
         $i          = 1;
         $loop_count = 1; 
@@ -1057,35 +1060,35 @@ function smpg_get_yotpo_product_reviews($product_id){
 
                         $total = $reviews['response']['bottomline']['total_review'];
 
-                        $ratings =  array(
+                        $ratings =  [
                             '@type'         => 'AggregateRating',
                             'ratingValue'	=> $reviews['response']['bottomline']['average_score'],
                             'reviewCount'   => $total
-                        );
+                        ];
                         
-                        if($total > 150){
-                            $loop_count = ceil($total / 150);
+                        if ( $total > 150 ) {
+                            $loop_count = ceil( $total / 150 );
                         }
 
                     }
                     
-                    foreach ($reviews['response']['reviews'] as  $value) {
+                    foreach ( $reviews['response']['reviews'] as  $value ) {
 
-                        $comments[] = array (
+                        $comments[] = [
                             '@type'         => 'Review',
                             'datePublished' => $value['created_at'],
                             'description'   => wp_strip_all_tags($value['content']),
-                            'author'        => array (
+                            'author'        => [
                                                     '@type' => 'Person',
                                                     'name'  => $value['user']['display_name']                                            
-                                            ),
-                            'reviewRating'  => array(
+                            ],
+                            'reviewRating'  => [
                                     '@type'	        => 'Rating',
                                     'bestRating'	=> '5',
                                     'ratingValue'	=> $value['score'],
                                     'worstRating'	=> '1',
-                         )
-                      );                       
+                            ]
+                        ];                       
 
                     }
                     
@@ -1098,8 +1101,8 @@ function smpg_get_yotpo_product_reviews($product_id){
         
     }
 
-    if($comments){
-        $response = array('reviews' => $comments, 'ratings' => $ratings);
+    if ( $comments ) {
+        $response = [ 'reviews' => $comments, 'ratings' => $ratings ];
     }
     
     return $response;
@@ -1114,7 +1117,7 @@ return array
 function smpg_get_ryviu_product_reviews ( $product_id ) {
         
     $shop_url = site_url();
-    $shop_url = str_replace( array('https://', 'http://' ), '', $shop_url );
+    $shop_url = str_replace( [ 'https://', 'http://' ], '', $shop_url );
     $handle   = get_post_field( 'post_name', get_post() );
     
     $response      = [];
@@ -1130,46 +1133,46 @@ function smpg_get_ryviu_product_reviews ( $product_id ) {
 
         do{
             
-            $url  = esc_url_raw("https://app.ryviu.io/frontend/client/get-more-reviews?domain=". $shop_url );
+            $url  = esc_url_raw( "https://app.ryviu.io/frontend/client/get-more-reviews?domain=". $shop_url );
 
-            $body = array(
+            $body = [
                 "domain" 	    => $shop_url,                
                 "handle" 	    => $handle,                
                 "page" 		    => $i,
                 "product_id"    => $product_id,
                 "type"          => "load-more",                
-            );            
+            ];            
             
             $result = wp_remote_post(
                 $url, [
                     'headers'   => [ 'Content-Type' => 'application/json' ],
-                    'body'       => wp_json_encode($body),
+                    'body'       => wp_json_encode( $body ),
                 ]
             );
             
             if ( wp_remote_retrieve_response_code( $result ) == 200 && wp_remote_retrieve_body( $result ) ) {
                 
-                $reviews = json_decode(wp_remote_retrieve_body($result),true);
+                $reviews = json_decode( wp_remote_retrieve_body( $result ), true );
                 
                 if($reviews['more_reviews']){
                     
                     foreach ($reviews['more_reviews'] as  $value) {
 
-                        $comments[] = array (
+                        $comments[] = [
                             '@type'         => 'Review',
                             'datePublished' => $value['created_at'],
                             'description'   => wp_strip_all_tags($value['body_text']),
-                            'author'        => array (
+                            'author'        => [
                                                     '@type' => 'Person',
                                                     'name'  => $value['author']                                            
-                                            ),
-                            'reviewRating'  => array(
+                            ],
+                            'reviewRating'  => [
                                     '@type'	        => 'Rating',
                                     'bestRating'	=> '5',
                                     'ratingValue'	=> $value['rating'],
                                     'worstRating'	=> '1',
-                           )
-                        );   
+                            ]
+                        ];   
 
                         $sumofrating += $value['rating'];
 
@@ -1179,11 +1182,11 @@ function smpg_get_ryviu_product_reviews ( $product_id ) {
                        $avg_rating = $sumofrating /  $reviews['total']; 
                     }
 
-                    $ratings =  array(
+                    $ratings =  [
                         '@type'         => 'AggregateRating',
                         'ratingValue'	=> $avg_rating,
                         'reviewCount'   => $reviews['total']
-                    );
+                    ];
                                        
                     if($reviews['total'] > 10){
                         $loop_count = ceil($reviews['total'] / 10);
@@ -1200,7 +1203,7 @@ function smpg_get_ryviu_product_reviews ( $product_id ) {
     }
     
     if($comments){
-        $response = array('reviews' => $comments, 'ratings' => $ratings);
+        $response = [ 'reviews' => $comments, 'ratings' => $ratings ];
     }
 
     return $response;

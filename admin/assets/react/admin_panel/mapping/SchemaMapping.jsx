@@ -6,9 +6,11 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
 
   const [wpMetaList, setWpMetaList] = useState([]);
   const [customFieldsList, setCustomFieldsList] = useState([]);
+  const [advancedCustomFieldsList, setAdvancedCustomFieldsList] = useState([]);
   const [taxonomyList, setTaxonomyList] = useState([]);
   const [selectedMetaFields, setSelectedMetaFields] = useState(mappedPropertiesValue);
   const [customFieldSearch, setCustomFieldSearch] = useState("");
+  const [advancedCustomFieldSearch, setAdvancedCustomFieldSearch] = useState("");
 
   useEffect(() => {
     const fetchMetaFields = async () => {
@@ -35,21 +37,81 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });
         const data = await response.json();
-
-        const formattedFields = data.map((field) => ({
+  
+        // Format fetched fields
+        const fetchedFields = data.map((field) => ({
           key: field.id,
           value: field.value,
           text: field.label,
         }));
-
-        setCustomFieldsList(formattedFields);
+  
+        setCustomFieldsList((prevList) => {
+          // Get already selected custom fields
+          const selectedFields = Object.values(selectedMetaFields)
+            .filter((meta) => meta.custom_field)
+            .map((meta) => ({
+              key: meta.custom_field,
+              value: meta.custom_field,
+              text: meta.custom_field, // Ensure the label is appropriate
+            }));
+  
+          // Merge with previous list to keep stability during navigation
+          const mergedFields = [...selectedFields, ...prevList, ...fetchedFields].filter(
+            (field, index, self) => index === self.findIndex((f) => f.value === field.value) // Remove duplicates
+          );
+  
+          return mergedFields;
+        });
       } catch (error) {
         console.error("Error fetching custom fields:", error);
       }
     };
-
+  
     fetchCustomFields();
   }, [customFieldSearch]);
+
+  useEffect(() => {
+    const fetchAdvancedCustomFields = async () => {
+      try {
+        const url = `${smpg_local.rest_url}smpg-route/get-advanced-custom-fields?search=${encodeURIComponent(advancedCustomFieldSearch)}`;
+        const response = await fetch(url, {
+          headers: { "X-WP-Nonce": smpg_local.nonce },
+        });
+        const data = await response.json();
+  
+        // Format fetched fields
+        const fetchedFields = data.map((field) => ({
+          key: field.id,
+          value: field.value,
+          text: field.label,
+        }));
+  
+        setAdvancedCustomFieldsList((prevList) => {
+          // Get already selected custom fields
+          const selectedFields = Object.values(selectedMetaFields)
+            .filter((meta) => meta.advanced_custom_field)
+            .map((meta) => ({
+              key: meta.advanced_custom_field,
+              value: meta.advanced_custom_field,
+              text: meta.advanced_custom_field, // Ensure the label is appropriate
+            }));
+  
+          // Merge with previous list to keep stability during navigation
+          const mergedFields = [...selectedFields, ...prevList, ...fetchedFields].filter(
+            (field, index, self) => index === self.findIndex((f) => f.value === field.value) // Remove duplicates
+          );
+  
+          return mergedFields;
+        });
+      } catch (error) {
+        console.error("Error fetching advanced custom fields:", error);
+      }
+    };
+  
+    fetchAdvancedCustomFields();
+  }, [advancedCustomFieldSearch]);
+  
+  
 
   useEffect(() => {
     const fetchTaxonomyValues = async () => {
@@ -90,6 +152,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
         custom_text: type === "custom_text" ? value : prev[schemaKey]?.custom_text || "",
         taxonomy: type === "taxonomy" ? value : prev[schemaKey]?.taxonomy || "",
         custom_field: type === "custom_field" ? value : prev[schemaKey]?.custom_field || "",
+        advanced_custom_field: type === "advanced_custom_field" ? value : prev[schemaKey]?.advanced_custom_field || "",
         custom_image: type === "custom_image" ? value : prev[schemaKey]?.custom_image || "",
       },
     }));
@@ -194,7 +257,18 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
                       onSearchChange={(_, { searchQuery }) => setCustomFieldSearch(searchQuery)}
                       onChange={(_, { value }) => handleCustomFieldChange(propertyKey, "custom_field", value)}
                     />
-                  ) : selectedMeta.meta_field === "custom_image" ? (
+                  ) : selectedMeta.meta_field === "advanced_custom_field" ? (
+                    <Dropdown
+                      placeholder="Select Advanced Custom Field"
+                      fluid
+                      search
+                      selection
+                      options={advancedCustomFieldsList}
+                      value={selectedMeta.advanced_custom_field || ""}
+                      onSearchChange={(_, { searchQuery }) => setAdvancedCustomFieldSearch(searchQuery)}
+                      onChange={(_, { value }) => handleCustomFieldChange(propertyKey, "advanced_custom_field", value)}
+                    />
+                  ): selectedMeta.meta_field === "custom_image" ? (
                     <>
                       {selectedMeta.custom_image && <Image src={selectedMeta.custom_image} size="small" style={{paddingBottom:"4px"}} />}
                       <Button primary onClick={() => openMediaUploader(propertyKey)}>

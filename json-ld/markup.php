@@ -212,7 +212,7 @@ function smpg_manage_conflict(){
                     break;  
                 case 'wpeventmanager':                    
                     if(class_exists('WP_Event_Manager_Post_Types')){
-                        remove_action( 'wp_footer', array( WP_Event_Manager_Post_Types::instance(), 'output_structured_data' ), 10 ); 
+                        remove_action( 'wp_footer', [ WP_Event_Manager_Post_Types::instance(), 'output_structured_data' ], 10 ); 
                     }  
                     break;
                 case 'theeventscalendar':                    
@@ -243,7 +243,7 @@ function smpg_manage_conflict(){
                     break;
                 case 'wpeventmanager':                    
                     if(class_exists('WP_Event_Manager_Post_Types')){
-                        remove_action( 'wp_footer', array( WP_Event_Manager_Post_Types::instance(), 'output_structured_data' ), 10 ); 
+                        remove_action( 'wp_footer', [ WP_Event_Manager_Post_Types::instance(), 'output_structured_data' ], 10 ); 
                     }  
                     break;    
                 

@@ -227,6 +227,13 @@ class SMPG_Api_Controller {
                     return current_user_can( 'manage_options' );
                 }
             ]);            
+            register_rest_route( 'smpg-route', 'get-advanced-custom-fields', [
+                'methods'    => 'GET',
+                'callback'   => [$this->_apiAction, 'get_advanced_custom_fields'],
+                'permission_callback' => function(){
+                    return current_user_can( 'manage_options' );
+                }
+            ]);            
         }  
              
 }

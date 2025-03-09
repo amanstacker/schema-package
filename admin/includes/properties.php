@@ -200,7 +200,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => 'URL of the item.'
         ],
-        'inlanguage' => [                        
+        'in_language' => [                        
             'placeholder' => 'en',                    
             'label'       => 'In Language',                    
             'type'        => 'text',
@@ -688,7 +688,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'word_count'          => $word_count,
                     'article_section'     => $article_section,
                     'url'                 => $url,
-                    'inlanguage'          => $inlanguage,
+                    'in_language'          => $in_language,
                     'date_published'      => $date_published,
                     'date_modified'       => $date_modified,
                     'author_type'         => $author_type,
@@ -960,7 +960,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,
-                            'inlanguage'       => $inlanguage,
+                            'in_language'       => $in_language,
                             'image'            => $image,
                             'author_type'      => $author_type,
                             'author_name'      => $author_name,                            
@@ -1618,7 +1618,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,                                                                                    
-                            'inlanguage'       => $inlanguage,
+                            'in_language'       => $in_language,
                             'image'            => $image,     
                             'date_published'   => $date_published,
                             'prep_time'        => [
@@ -1863,7 +1863,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'hours'            => $hours,
                             'minutes'          => $minutes,
                             'seconds'          => $seconds,
-                            'inlanguage'       => $inlanguage,
+                            'in_language'       => $in_language,
                             'image'            => $image,                            
                             'author_type'      => $author_type,
                             'author_name'      => $author_name,                            

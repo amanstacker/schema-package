@@ -2,14 +2,14 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_placement_condition_checker($type, $post_id, $value) {
+function smpg_placement_condition_checker( $type, $post_id, $value ) {
 
 	$response = false;
 
-	switch ($type) {
+	switch ( $type ) {
 
 		case 'post_type':
-				if(get_post_type($post_id) == $value){
+				if ( get_post_type( $post_id ) == $value ) {
 					$response = true;
 				}
 
@@ -18,7 +18,7 @@ function smpg_placement_condition_checker($type, $post_id, $value) {
 		case 'post':
 		case 'page':
 
-				if($post_id == $value){
+				if ( $post_id == $value ) {
 					$response = true;
 				}
 
@@ -44,9 +44,9 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 
 		$condition = unserialize($schema_data['_enabled_on'][0]);
 
-		$post_types = $condition['post_type'];
-		$posts      = $condition['post'];
-		$pages      = $condition['page'];
+		$post_types = empty( $condition['post_type'] ) ? [] : $condition['post_type'];
+		$posts      = empty( $condition['post'] ) ? [] : $condition['post'];
+		$pages      = empty( $condition['page'] ) ? [] : $condition['page'];
 
 		$post_type_status = $schema_data['_enabled_on_post_type'][0];
 		$post_status      = $schema_data['_enabled_on_post'][0];
@@ -104,9 +104,9 @@ function smpg_placement_remove_from( $schema_data, $post_id ){
 		$post_status      = $schema_data['_disabled_on_post'][0];
 		$page_status      = $schema_data['_disabled_on_page'][0];
 
-		$post_types = $condition['post_type'];
-		$posts      = $condition['post'];
-		$pages      = $condition['page'];
+		$post_types = empty( $condition['post_type'] ) ? [] : $condition['post_type'];
+		$posts      = empty( $condition['post'] ) ? [] : $condition['post'];
+		$pages      = empty( $condition['page'] ) ? [] : $condition['page'];
 
 		
 		if($post_type_status && !empty($post_types)){

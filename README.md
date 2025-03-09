@@ -41,7 +41,11 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
-* <strong>Singular Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
+* <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
+* <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
@@ -55,7 +59,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 ### Schema Package Supported Schema Types
 
 * Article : [schema.org url](https://schema.org/Article)
-* BlogPosting : [schema.org url](https://schema.org/BlogPosting)
+* BlogPosting : [BlogPosting](https://schema.org/BlogPosting)
 * NewsArticle : [schema.org url](https://schema.org/NewsArticle)
 * TechArticle : [schema.org url](https://schema.org/TechArticle)
 * HowTo : [schema.org url](https://schema.org/HowTo)
@@ -71,7 +75,15 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
 * Product : [schema.org url](https://schema.org/Product)
 * Service : [schema.org url](https://schema.org/Service)
+* FinancialProduct : [schema.org url](https://schema.org/FinancialProduct)
+* BroadcastService : [schema.org url](https://schema.org/BroadcastService)
+* CableOrSatelliteService : [schema.org url](https://schema.org/CableOrSatelliteService)
+* FoodService : [schema.org url](https://schema.org/FoodService)
+* GovernmentService : [schema.org url](https://schema.org/GovernmentService)
+* TaxiService : [schema.org url](https://schema.org/TaxiService)
+* WebAPI : [schema.org url](https://schema.org/WebAPI)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
+* ItemList : [schema.org url](https://schema.org/ItemList)
 * Comment : [schema.org url](https://schema.org/Comment)
 
 ### Schema package automation and compatibility with plugins
@@ -102,6 +114,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * Squirrly SEO : [URL](https://wordpress.org/plugins/squirrly-seo/)
 * SmartCrawl Seo : [URL](https://wordpress.org/plugins/smartcrawl-seo/)
 * SEOPress : [URL](https://wordpress.org/plugins/wp-seopress/)
+* Advanced Custom Fields (ACF®) : [URL](https://wordpress.org/plugins/advanced-custom-fields/)
+* Secure Custom Fields : [URL](https://wordpress.org/plugins/secure-custom-fields/)
 
 
 ### Notes
@@ -135,8 +149,25 @@ Go To - Schema Package -> Settings -> Help & Support.
 
 ### Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
+1. **Automatic Installation:**
+   - Go to **Plugins > Add New** in your WordPress dashboard.
+   - Search for "Schema Package Plugin".
+   - Click **Install Now**, then **Activate** the plugin.
+
+2. **Manual Installation via WordPress:**
+   - Download the plugin ZIP file from the official source.
+   - Go to **Plugins > Add New** in WordPress.
+   - Click **Upload Plugin**, select the downloaded ZIP file, and click **Install Now**.
+   - Activate the plugin after installation.
+
+3. **Manual Installation via FTP:**
+   - Download the plugin ZIP file and extract it.
+   - Upload the extracted folder to the `/wp-content/plugins/` directory using an FTP client.
+   - Log in to your WordPress dashboard and go to **Plugins > Installed Plugins**.
+   - Find "Schema Package Plugin" and click **Activate**.
+
+4. Navigate to **Settings > Schema Package** to configure the plugin settings.
+5. Start adding Schema markup using the built-in editor and mapping tools.
 
 
 ### Project Development Setup Guide

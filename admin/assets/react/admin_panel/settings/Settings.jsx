@@ -72,8 +72,15 @@ const Settings = () => {
 
     if(event.target.type === 'file'){
 
-       value = event.target.files[0];       
-       setImportFile(value);
+      const file = event.target.files[0];
+
+      if (file && file.type !== "application/json" && !file.name.endsWith(".json")) {
+          alert("Only JSON files are allowed!");
+          event.target.value = ""; // Clear file input
+          return;
+      }
+
+      setImportFile( file );
 
     }else{
 
@@ -512,7 +519,7 @@ const Settings = () => {
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <Input
                           style={{width:"163px"}}
-                          value={importFile?.name}
+                          value={importFile?.name ?? ""}
                           placeholder={__('Choose a file...', 'schema-package')}
                           readOnly
                           action={
@@ -524,6 +531,7 @@ const Settings = () => {
                         <input
                           id="file-upload"
                           type="file"
+                          accept=".json"
                           hidden
                           onChange={formChangeHandler}
                         />      

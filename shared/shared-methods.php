@@ -74,9 +74,9 @@ function smpg_get_posts_by_arg( $arg ) {
       if ( $meta_query->have_posts() ) {
            
           $data = [];  
-          $post_meta = [];        
+          $post_meta = [];        	
 
-          while($meta_query->have_posts()) {
+          while( $meta_query->have_posts()) {
 
               $meta_query->the_post();
               $data['post_id']       =  get_the_ID();
@@ -202,12 +202,12 @@ function smpg_get_author_detail( $post_id = null ) {
 
 			if ( ! empty( $smpg_settings['image_object'] ) ) {
 
-				$author['image'] = array (
+				$author['image'] = [
 					'@type'		=> 'ImageObject',
 					'url' 		=> $image_url,
 					'height' 	=> $image_size, 
 					'width' 	=> $image_size
-				);
+				];
 
 			}else{
 
@@ -560,12 +560,12 @@ function smpg_get_post_image_by_id( $image_id = null ) {
 
 			$image_object = [];
 
-			$image_object = array (
+			$image_object = [
 				'@type' 	=> 'ImageObject',
 				'url' 		=> $url,
 				'width'		=> $width,
 				'height' 	=> $height,
-			);
+			];
 					
 			$caption = wp_get_attachment_caption( $image_id );
 	
@@ -768,23 +768,23 @@ function smpg_get_post_native_reviews( $post_id ){
 
                 $sumofrating += $rating;
 
-                $comments[] = array (
+                $comments[] = [
 					'@type'         => 'Review',
 					'datePublished' => $comment->comment_date ? gmdate('c',strtotime($comment->comment_date)) : '',
 					'description'   => wp_strip_all_tags($comment->comment_content),
-					'author'        => array (
+					'author'        => [
                                             '@type' => 'Person',
                                             'name'  => $comment->comment_author                                            
-                                    ),
+					],
                     'reviewRating'  => [
                             '@type'	        => 'Rating',
                             'bestRating'	=> '5',
                             'ratingValue'	=> $rating,
                             'worstRating'	=> '1',
 					]
-            );
+				];
             
-            if($sumofrating> 0){
+            if ( $sumofrating> 0 ) {
                 $avg_rating = $sumofrating /  count($comments); 
             }
             
@@ -841,10 +841,10 @@ function smpg_array_flatten($array) {
 
 	$return = [];
 
-	foreach ($array as $key => $value) {
+	foreach ( $array as $key => $value ) {
 
-		if (is_array($value)){
-			$return = array_merge($return, array_flatten($value));
+		if ( is_array( $value ) ) {
+			$return = array_merge( $return, array_flatten( $value ) );
 		}else {
 			$return[$key] = $value;
 		}
@@ -860,9 +860,11 @@ function smpg_validate_gravatar( $email ) {
 	$uri 		= 'https://www.gravatar.com/avatar/' . $hashkey;
 	$data 		= get_transient($hashkey);
 	
-	if (false === $data) {
-		$response = wp_remote_head($uri);
-		if( is_wp_error($response) ) {
+	if ( false === $data ) {
+
+		$response = wp_remote_head( $uri );
+
+		if ( is_wp_error( $response ) ) {
 			$data = 'not200';
 		} else {
 			$data = $response['response']['code'];
@@ -870,7 +872,7 @@ function smpg_validate_gravatar( $email ) {
 	    set_transient( $hashkey, $data, $expiration = 60*5);
 	}		
 	
-	if ($data == '200'){
+	if ( $data == '200' ) {
 		return true;
 	} else {
 		return false;
@@ -1656,7 +1658,7 @@ function smpg_get_commaa_seprated_value ( $data, $type ) {
     return $response;
 }
 
-function smpg_snake_to_camel_case( $string ) {
+function smpg_snake_to_camel_case( $string ) {	
 
 	if ( strpos( $string, '_' ) === false ) {
         return $string; // Return unchanged if there's no underscore

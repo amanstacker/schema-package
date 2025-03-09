@@ -122,17 +122,17 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
 
             $service_explode = explode(',', $properties['service_offered']['value']);
             foreach( $service_explode as $offer){
-                $service_offer[] = array(
+                $service_offer[] = [
                     '@type' => 'Offer',
                     'name'  => $offer
-                );
+                ];
             }
 
-        $json_ld['hasOfferCatalog'] = array(
+        $json_ld['hasOfferCatalog'] = [
                         '@type'            => 'OfferCatalog',
                         'name'             => $properties['service_type_option']['value'],
                         'itemListElement'  => $service_offer,
-        );
+        ];
 
     }
     if ( ! empty( $properties['additional_property']['elements'] ) ) {
@@ -464,8 +464,8 @@ function smpg_get_videoobject_individual_json_ld( $json_ld, $properties, $schema
      if(!empty($properties['url']['value'])){
         $json_ld['url'] =      $properties['url']['value'];
      }
-     if(!empty($properties['inlanguage']['value'])){
-        $json_ld['inLanguage'] =      $properties['inlanguage']['value'];
+     if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
      }
      if(!empty($properties['content_url']['value'])){
         $json_ld['contentUrl'] =      $properties['content_url']['value'];
@@ -563,8 +563,8 @@ function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
      if(!empty($properties['url']['value'])){
         $json_ld['url'] =      $properties['url']['value'];
      }
-     if(!empty($properties['inlanguage']['value'])){
-        $json_ld['inLanguage'] =      $properties['inlanguage']['value'];
+     if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
      }     
 
     if(!empty($properties['author_type']['value'])){
@@ -686,8 +686,8 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
      if(!empty($properties['url']['value'])){
         $json_ld['url'] =      $properties['url']['value'];
      }
-     if(!empty($properties['inlanguage']['value'])){
-        $json_ld['inLanguage'] =      $properties['inlanguage']['value'];
+     if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
      }     
 
     if(!empty($properties['author_type']['value'])){
@@ -1023,8 +1023,8 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
         if(!empty($properties['article_section']['value'])){
             $json_ld['articleSection']     = $properties['article_section']['value'];   
         }            
-        if(!empty($properties['inlanguage']['value'])){
-            $json_ld['inLanguage']         = $properties['inlanguage']['value'];
+        if(!empty($properties['in_language']['value'])){
+            $json_ld['inLanguage']         = $properties['in_language']['value'];
         }
         if(!empty($properties['date_published']['value'])){
             $json_ld['datePublished']      = $properties['date_published']['value'];

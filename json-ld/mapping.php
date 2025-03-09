@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 function smpg_mapping_properties( $json_ld, $schema_data ) {
-
+    
     $mp_values = [];
 
     if ( ! empty ( $schema_data['_mapped_properties_value'][0] ) ){
@@ -79,10 +79,7 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                     break;
                 case 'taxonomy_term':
                     //todo
-                    break;
-                case 'acf_custom_field':                    
-                    //todo
-                    break;
+                    break;                
                 case 'tp_custom_field':                    
                     //todo
                     break;
@@ -91,6 +88,10 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                     break;
                 case 'custom_field':                    
                     $json_ld[$key] = get_post_meta( get_the_ID(), $value['custom_field'], true );
+                    break;                
+                case 'advanced_custom_field':
+                    $json_ld[$key] = smpg_advanced_custom_fields_mapping( $value['advanced_custom_field'] );
+                    $json_ld[$key] = apply_filters( 'smpg_filter_advanced_custom_field_mapping', $json_ld[$key],  $value['advanced_custom_field'] );                    
                     break;                
                 case 'site_logo':
                     $logo_id = get_theme_mod( 'custom_logo' );     
@@ -111,7 +112,31 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
         }
 
     }
-
+    
     return $json_ld;
+
+}
+
+function smpg_advanced_custom_fields_mapping( $field_key ) {
+    
+    if ( function_exists( 'get_field_object') ) {
+
+        $acf_obj = get_field_object( $field_key );
+        
+        switch ( $acf_obj['type'] ) {
+
+            case 'image':
+                $image_id = get_post_meta( get_the_ID(), $field_key, true );                                
+                return smpg_get_post_image_by_id( $image_id );
+                break;
+            case 'repeater':
+                # code...
+                break;               
+            default:
+                return get_post_meta( get_the_ID(), $field_key, true );
+                break;
+        }
+        
+    }
 
 }

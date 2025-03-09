@@ -366,6 +366,8 @@ function smpg_cached_schema_ids_on_delete( $post_id ) {
 	if ( ! current_user_can( 'manage_options' ) )
 		return;
 
+		$cache_key = '';
+		
 		$post_type = get_post_type( $post_id );
 
 		if ( $post_type == 'smpg_singular_schema' ) {
@@ -549,7 +551,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'is_free'              => false
 			] );
 
-			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', array( 'wp-i18n' ), SMPG_VERSION, true );
+			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );
 
 			wp_localize_script( 'smpg-admin-script', 'smpg_local', $data );            
 			wp_enqueue_script( 'smpg-admin-script');
@@ -637,12 +639,23 @@ function smpg_meta_list() {
 		[ 'key' => 'site_logo', 'value' => 'site_logo', 'text' => esc_html__( 'Logo Image', 'schema-package' ) ],
 		[ 'key' => 'taxonomy_term', 'value' => 'taxonomy_term', 'text' => esc_html__( 'Taxonomy Term', 'schema-package' ) ],
 		[ 'key' => 'custom_text', 'value' => 'custom_text', 'text' => esc_html__( 'Custom Text', 'schema-package' ) ],
-		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],
+		[ 'key' => 'custom_field', 'value' => 'custom_field', 'text' => esc_html__( 'Custom Field', 'schema-package' ) ],		
 		[ 'key' => 'custom_image', 'value' => 'custom_image', 'text' => esc_html__( 'Custom Image', 'schema-package' ) ],						
 		[ 'key' => 'no_value', 'value' => 'no_value', 'text' => esc_html__( 'No Value', 'schema-package' ) ],
 	];
+	
+	if ( class_exists( 'ACF' ) ) {
+
+		$acf_text = esc_html__( 'Advanced Custom Field', 'schema-package' );
+
+		if ( function_exists( 'scf_deactivate_other_instances' ) ) {
+			$acf_text = esc_html__( 'Secure Custom Field', 'schema-package' );
+		}
+		$meta_list[] = [ 'key' => 'advanced_custom_field', 'value' => 'advanced_custom_field', 'text' => $acf_text ];
+	}		
 
 	$meta_list = apply_filters( 'smpg_meta_list_filter', $meta_list );	
+
 	return $meta_list;	  
 }
 

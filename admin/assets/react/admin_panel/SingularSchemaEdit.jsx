@@ -102,8 +102,8 @@ const SingularSchemaEdit = () => {
         setMainSpinner(false);
         setPostData(result.post_data);
         setPostMeta(result.post_meta);
-        setEnabledOnOption(result._placement_enabled_option);
-        setDisabledOnOption(result._placement_disabled_option);
+        setEnabledOnOption(result?._placement_enabled_option);
+        setDisabledOnOption(result?._placement_disabled_option);
         setIsSchemaDataLoaded(true);
         
     } catch (error) {
@@ -197,14 +197,23 @@ const SingularSchemaEdit = () => {
 
   }
   
-  const handleMappedPropertiesValue = ( mappedValue ) => {
-
-    setPostMeta(prevState => ({
-      ...prevState,            
-      _mapped_properties_value:mappedValue
-    }));  
-
-  }
+  const handleMappedPropertiesValue = (mappedValue) => {
+    setPostMeta(prevState => {
+      // Filter mappedValue to only include keys present in _mapped_properties_key
+      const filteredMappedValue = Object.keys(mappedValue)
+        .filter(key => prevState._mapped_properties_key.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = mappedValue[key];
+          return obj;
+        }, {});
+  
+      return {
+        ...prevState,
+        _mapped_properties_value: filteredMappedValue
+      };
+    });
+  };
+  
   const handleSchemaTypeChange = (e, data) => {
 
       setPostMeta(prevState => ({
@@ -303,7 +312,7 @@ const SingularSchemaEdit = () => {
     if (typeof page !== "undefined" && typeof page.post_id !== "undefined") {
       getSchemaData(page.post_id);
   } else {
-      getSchemaData(page.post_id);
+      getSchemaData('');
   }
     
   }, []);
@@ -371,11 +380,11 @@ const SingularSchemaEdit = () => {
                       fluid
                       multiple
                       search
-                      selection
-                      value={postMeta._enabled_on?.post_type}
+                      selection                      
+                      value={postMeta._enabled_on?.post_type || []}
                       onChange={handlePlacementChange}
                       onSearchChange={handlePlacementSearchChange}
-                      options={enabledOnOption?.post_type}
+                      options={enabledOnOption?.post_type || []}
                    />
                    : ''
                      }
@@ -401,11 +410,11 @@ const SingularSchemaEdit = () => {
                         fluid
                         multiple
                         search
-                        selection
-                        value={postMeta._enabled_on?.post}
+                        selection                        
+                        value={postMeta._enabled_on?.post || []}
                         onChange={handlePlacementChange}
                         onSearchChange={handlePlacementSearchChange}
-                        options={enabledOnOption?.post}
+                        options={enabledOnOption?.post || []}
                       />
                   : ''
                   }                    
@@ -429,11 +438,11 @@ const SingularSchemaEdit = () => {
                      fluid
                      multiple
                      search
-                     selection
-                     value={postMeta._enabled_on?.page}
+                     selection                     
+                     value={postMeta._enabled_on?.page || []}
                      onChange={handlePlacementChange}
                      onSearchChange={handlePlacementSearchChange}
-                     options={enabledOnOption?.page}
+                     options={enabledOnOption?.page || []}
                    /> : ''
                      }
                   </td>
@@ -462,11 +471,11 @@ const SingularSchemaEdit = () => {
                    fluid
                    multiple
                    search
-                   selection
-                   value={postMeta._disabled_on?.post_type}
+                   selection                   
+                   value={postMeta._disabled_on?.post_type || []}
                    onChange={handlePlacementChange}
                    onSearchChange={handlePlacementSearchChange}
-                   options={disabledOnOption?.post_type}
+                   options={disabledOnOption?.post_type || []}
                  />
                  : ''
                    }
@@ -490,11 +499,11 @@ const SingularSchemaEdit = () => {
                     fluid
                     multiple
                     search
-                    selection
-                    value={postMeta._disabled_on?.post}
+                    selection                    
+                    value={postMeta._disabled_on?.post || []}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
-                    options={disabledOnOption?.post}
+                    options={disabledOnOption?.post || []}
                   />
                   : ''
                     }
@@ -518,11 +527,11 @@ const SingularSchemaEdit = () => {
                     fluid
                     multiple
                     search
-                    selection
-                    value={postMeta._disabled_on?.page}
+                    selection                    
+                    value={postMeta._disabled_on?.page || []}
                     onChange={handlePlacementChange}
                     onSearchChange={handlePlacementSearchChange}
-                    options={disabledOnOption?.page}
+                    options={disabledOnOption?.page || []}
                   />
                   : ''
                     }

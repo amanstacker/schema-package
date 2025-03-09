@@ -231,7 +231,7 @@ class SMPG_Api_Mapper {
 
                 $label = get_post_type_object($key);
 
-                $post_type[] = array( 'key' => $value, 'value' => $value, 'text' => $label->label);
+                $post_type[] = [ 'key' => $value, 'value' => $value, 'text' => $label->label ];
                 $i++;
               }
             }          
@@ -340,7 +340,7 @@ class SMPG_Api_Mapper {
             $i = 0;
             foreach( $terms as $term ) {
   
-              $choices[] = array( 'key' => $i, 'value' => $term->term_id, 'text' => $term->name );                
+              $choices[] = [ 'key' => $i, 'value' => $term->term_id, 'text' => $term->name ];
 
               $i++;
             }
@@ -376,7 +376,7 @@ class SMPG_Api_Mapper {
             if($choices){
               $i = 0;
               foreach($choices as $key =>$value){
-                $general_arr[] = array('key' => $i, 'value' => $key, 'text' => $value);
+                $general_arr[] = [ 'key' => $i, 'value' => $key, 'text' => $value ];
                 $i++;
               }
             }        
@@ -401,7 +401,7 @@ class SMPG_Api_Mapper {
             if($choices){
               $i=0;
               foreach($choices as $key =>$value){
-                $general_arr[] = array( 'key' => $i, 'value' => $key, 'text' => $value);
+                $general_arr[] = [ 'key' => $i, 'value' => $key, 'text' => $value ];
                 $i++;
               }
             }        
@@ -427,7 +427,7 @@ class SMPG_Api_Mapper {
               if($taxonomies){
                   $i = 0;
                   foreach($taxonomies as $taxonomy) {
-                    $choices[] = array('key' => $i, 'value' => $taxonomy->name, 'text' => $taxonomy->labels->name);
+                    $choices[] = [ 'key' => $i, 'value' => $taxonomy->name, 'text' => $taxonomy->labels->name ];
                     $i++;
                   }
                     
@@ -439,21 +439,21 @@ class SMPG_Api_Mapper {
               
           case "all":
   
-              $args = array( 
+              $args = [
                   'hide_empty' => false,
                   'number'     => 10, 
-              );
+              ];
   
-              if(!empty($search)){
+              if ( ! empty( $search ) ) {
                   $args['name__like'] = $search;
               }
   
               $taxonomies =  get_terms( $args );               
               
-              if($taxonomies){
+              if ( $taxonomies ) {
                   $i = 0;
                   foreach($taxonomies as $tax){
-                      $choices[] = array('key'=> $i, 'value' => $tax->slug, 'text' => $tax->name);
+                      $choices[] = [ 'key'=> $i, 'value' => $tax->slug, 'text' => $tax->name ];
                     $i++;
                   }
                   
@@ -463,17 +463,17 @@ class SMPG_Api_Mapper {
   
           default:
           
-          $args = array( 
+          $args = [
               'taxonomy'   => $condition,
               'hide_empty' => false,
               'number'     => 10,               
-          );
+          ];
   
-          if(!empty($search)){
+          if ( ! empty( $search ) ) {
               $args['name__like'] = $search;
           }
   
-          if($saved_data){                         
+          if ( $saved_data ) {                          
               $args['slug'] = $saved_data;
           }   
           $taxonomies    =  get_terms( $args );  
@@ -483,7 +483,7 @@ class SMPG_Api_Mapper {
               foreach($taxonomies as $tax){
   
                   if(is_object($tax)){
-                      $choices[] = array('key' => $i, 'value' => $tax->slug, 'text' => $tax->name);
+                      $choices[] = [ 'key' => $i, 'value' => $tax->slug, 'text' => $tax->name ];
                   }
                   $i++;
                   
@@ -658,7 +658,9 @@ class SMPG_Api_Mapper {
             $response['post_meta'] = $meta_data;
             
         }else{
-          $meta_data['_mapped_properties'] = [];
+          $meta_data['_mapped_properties']          = [];
+          $meta_data['_enabled_on_post_type']       = 1;
+          $meta_data['_enabled_on']['post_type'][0] = 'post';
         }   
         
         $response['post_meta'] = $meta_data;
@@ -760,10 +762,10 @@ class SMPG_Api_Mapper {
 
                 }
                            
-                $posts_data[] = array(
-                'post'        => (array) $data,
-                'post_meta'   => $post_meta                
-                ); 
+                $posts_data[] = [
+                  'post'        => (array) $data,
+                  'post_meta'   => $post_meta                
+                ]; 
 
             }
             wp_reset_postdata(); 
@@ -862,12 +864,7 @@ class SMPG_Api_Mapper {
             
     public function changePostStatus( $ad_id, $action ) {
 
-      $response = wp_update_post(array(
-                    'ID'            =>  $ad_id,
-                    'post_status'   =>  $action
-              ));
-
-      return $response;
+      return wp_update_post( [ 'ID' =>  $ad_id, 'post_status' => $action ] );
       
     }
     public function get_carousel_automation_with( $schema_type ) {

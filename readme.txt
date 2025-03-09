@@ -47,6 +47,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
 * <strong>Singular Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
+* <strong>Singular Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Singular Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Singular Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
@@ -117,6 +119,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * Squirrly SEO : [URL](https://wordpress.org/plugins/squirrly-seo/)
 * SmartCrawl Seo : [URL](https://wordpress.org/plugins/smartcrawl-seo/)
 * SEOPress : [URL](https://wordpress.org/plugins/wp-seopress/)
+* Advanced Custom Fields (ACF®) : [URL](https://wordpress.org/plugins/advanced-custom-fields/)
+* Secure Custom Fields : [URL](https://wordpress.org/plugins/secure-custom-fields/)
 
 
 == Notes ==
@@ -247,10 +251,81 @@ Schema Package uses the following third-party libraries:
 
 == Frequently Asked Questions ==
 
-= Where can I ask for help ? =
+= Does this plugin support multiple schema types? =  
 
-You can submit a support ticket via the [support forum](https://wordpress.org/support/plugin/schema-package/) at anytime.
+Yes, the Schema Package plugin supports various schema types, including Article, Product, Event, FAQ, How-To, Recipe, Local Business, and more. You can select and customize schema types to match your content.  
 
+= Can I customize schema markup for individual posts or pages? =  
+
+Yes, the plugin allows you to modify schema markup for specific posts, pages, or custom post types. You can manually enter structured data or map fields dynamically using Schema Packge Generator.  
+
+= Is this plugin compatible with page builders like Elementor, WPBakery, or Gutenberg? =  
+
+Yes, the Schema Package plugin works seamlessly with popular page builders, including Elementor, WPBakery, and Gutenberg. It detects content dynamically and applies schema markup accordingly.  
+
+= Does Schema Package automatically update schema markup when I update my content? =  
+
+Yes, the plugin automatically refreshes schema markup when you update a post or page. You don't need to manually reapply the schema, making the process seamless and efficient.  
+
+= Can I exclude specific pages from having schema markup? =  
+
+Yes, you can disable schema markup on specific posts, pages, or post types through the Target On or Target Off Option. This is useful if you want to prevent duplicate schema or exclude certain pages.  
+
+= Does this plugin work with WooCommerce? =  
+
+Yes, the Schema Package plugin integrates with WooCommerce to add structured data for products, reviews, offers, and other relevant elements.  
+
+= Will this plugin slow down my website? =  
+
+No, the Schema Package plugin is optimized for performance. It generates lightweight JSON-LD markup that loads asynchronously, ensuring minimal impact on your website's speed.  
+
+= How often is the plugin updated? =  
+
+The plugin is actively maintained and updated to stay compatible with the latest WordPress versions and schema guidelines. Updates are released regularly to improve features and fix bugs.  
+
+= Can I add multiple schema types to a single page? =  
+
+Yes, the plugin allows multiple schema types on a single page. For example, you can add both "FAQ" and "Product" schema to a product page with FAQs.  
+
+= Does Schema Package support multilingual websites? =  
+
+Yes, the plugin is compatible with multilingual plugins such as WPML and Polylang, allowing you to add schema markup in different languages.  
+
+= How do I troubleshoot schema markup errors? =  
+
+If you encounter schema validation errors, use Google’s Rich Results Test or Schema.org Validator to diagnose issues. You can also check the plugin settings and ensure your content fields are correctly mapped.  
+
+= Is the plugin compatible with SEO plugins like Yoast SEO and Rank Math? =  
+
+Yes, the Schema Package plugin works alongside Yoast SEO, Rank Math, and other SEO plugins. It enhances structured data capabilities without conflicting with existing SEO settings.  
+
+= Can I request a new schema type to be added? =  
+
+Yes, if you need support for a specific schema type that isn't currently included, you can submit a feature request via the plugin's support forum or settings page.  
+
+= Does this plugin work with custom post types? =  
+
+Yes, the Schema Package plugin supports custom post types and allows you to apply schema markup to them.  
+
+= Is there an option to add custom fields to schema? =  
+
+Yes, the plugin integrates with Advanced Custom Fields (ACF) and Secure Custom Fields, allowing you to map custom fields to schema properties.  
+
+= Does this plugin require an API key to work? =  
+
+No, the core functionality does not require an API key. However, integrations with external services (such as YouTube for video schema) may require API keys.  
+
+= Is the Schema Package plugin free? =  
+
+Yes, the core plugin is free to use. A premium version with additional features may be introduced in the future.  
+
+= Where can I find the plugin documentation? =  
+
+Official website coming soon
+
+= How do I report a bug or request a feature? =  
+
+You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
 

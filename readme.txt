@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -346,6 +346,16 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.5 =
+
+* Feature : Schema properties mapping for WordPress Core Custom Field
+* Feature : Schema properties mapping for Advanced Custom Field plugin
+* Feature : Schema properties mapping for Secure Custom Field plugin
+* Feature : Default value as post for target on for post type
+* Feature : Validation for import file. Only json file is allowed
+* Fixed   : Undefined variable
+
 
 = 1.0.4 =
 

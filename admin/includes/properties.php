@@ -1928,6 +1928,26 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;  
 
                 case 'customschema':
+
+                    $placeholder_json = '{
+"@context": "https://schema.org",
+"@type": "NewsArticle",
+"headline": "Title of a News Article",
+"image": [
+    "https://example.com/photos/1x1/photo.jpg",                                                        
+    ],
+"datePublished": "2024-01-05T08:00:00+08:00",
+"dateModified": "2024-02-05T09:20:00+08:00",
+"author": [{
+    "@type": "Person",
+    "name": "Jane Doe",
+    "url": "https://example.com/profile/janedoe123"
+},{
+    "@type": "Person",
+    "name": "John Doe",
+    "url": "https://example.com/profile/johndoe123"
+    }]
+}';
     
                     $properties = [
                         'is_enable'         => true,
@@ -1938,7 +1958,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'text'              => 'CustomSchema',
                         'properties'        => [                                                            
                                 'editor'            => [
-                                    'placeholder' => '',                    
+                                    'placeholder' => $placeholder_json,                    
                                     'label'       => 'Editor',
                                     'type'        => 'editor',                                                                        
                                     'recommended' => true,

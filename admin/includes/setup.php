@@ -483,7 +483,8 @@ function smpg_get_schema_type_text( $id ) {
 		'foodservice'               => 'FoodService',  
 		'governmentservice'         => 'GovernmentService',  
 		'taxiservice'               => 'TaxiService',
-		'webapi'                    => 'WebAPI',  
+		'webapi'                    => 'WebAPI',
+		'customschema'              => 'Custom Schema',
 	];	
 
 	if ( array_key_exists( $id, $response ) ) {

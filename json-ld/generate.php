@@ -17,6 +17,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                                     
         break;
 
+        case 'customschema':
+            
+            $json_ld = smpg_get_custom_schema_individual_json_ld($json_ld, $properties, $schema_type);              
+                                    
+        break;
+
         case 'article':
         case 'techarticle':
         case 'newsarticle':

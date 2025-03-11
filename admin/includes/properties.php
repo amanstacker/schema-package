@@ -1926,6 +1926,29 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     ];
         
                     break;  
+
+                case 'customschema':
+    
+                    $properties = [
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'customschema',           
+                        'text'              => 'CustomSchema',
+                        'properties'        => [                                                            
+                                'editor'            => [
+                                    'placeholder' => '',                    
+                                    'label'       => 'Editor',
+                                    'type'        => 'editor',                                                                        
+                                    'recommended' => true,
+                                    'display'     => true,
+                                    'tooltip'     => 'Enter your custom schema (Json-ld). Must be Valid Json'
+                                ],                                
+                        ]                      
+                    ];
+        
+                    break;  
         
         default:
         

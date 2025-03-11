@@ -587,7 +587,23 @@ function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
 
     return $json_ld;
 }
+function smpg_get_custom_schema_individual_json_ld( $json_ld, $properties, $schema_type ) {
 
+    if ( ! empty ( $properties['editor']['value'] ) ) {
+
+        $js_decoded = json_decode( $properties['editor']['value'], true );
+        
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+
+            $json_ld = $js_decoded;
+
+        }
+
+    }
+
+    return $json_ld;
+
+}
 function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();

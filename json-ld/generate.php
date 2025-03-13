@@ -170,6 +170,21 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
                               
     switch ( $schema_data['_schema_type'][0] ) {
         
+            case 'customschema':
+
+            if ( ! empty( $schema_data['_custom_schema'][0] ) ) {
+
+                $js_decoded = json_decode( $schema_data['_custom_schema'][0], true );
+        
+                if ( json_last_error() === JSON_ERROR_NONE ) {
+
+                    $json_ld = $js_decoded;
+
+                }
+            }
+
+            break;
+
             case 'article':
             case 'techarticle':
             case 'newsarticle':

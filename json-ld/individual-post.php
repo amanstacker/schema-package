@@ -244,7 +244,7 @@ function smpg_get_person_individual_json_ld( $json_ld, $properties, $schema_type
      }
 
      return $json_ld;
-     
+
 }
 
 function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type ){
@@ -499,6 +499,70 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
 }
 
 function smpg_get_videoobject_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+     if(!empty($properties['video_name']['value'])){
+        $json_ld['name'] =      $properties['video_name']['value'];
+     }
+     if(!empty($properties['description']['value'])){
+         $json_ld['description'] =      $properties['description']['value'];
+     }
+     if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+     }
+     if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
+     }
+     if(!empty($properties['content_url']['value'])){
+        $json_ld['contentUrl'] =      $properties['content_url']['value'];
+     }
+     if(!empty($properties['embed_url']['value'])){
+        $json_ld['embedUrl '] =      $properties['embed_url']['value'];
+     }
+     if(!empty($properties['upload_date']['value'])){
+        $json_ld['uploadDate'] =      $properties['upload_date']['value'];
+     }
+     $duration = '';
+     if(!empty($properties['hours']['value'])){
+        $duration .=      $properties['hours']['value'].'H';
+     }
+     if(!empty($properties['minutes']['value'])){
+        $duration .=      $properties['minutes']['value'].'M';
+     }
+     if(!empty($properties['seconds']['value'])){
+        $duration .=      $properties['seconds']['value'].'S';
+     }
+     if($duration){
+        $json_ld['duration']              =  'PT'.$duration;    
+     }
+    $image = smpg_make_the_image_json($properties['image']['value'], false);
+
+    if(!empty($image)){
+        $json_ld['thumbnailUrl']              =  $image;   
+    }
+    if(!empty($properties['author_type']['value'])){
+        $json_ld['author']['@type']    = $properties['author_type']['value']; 
+    }
+    if(!empty($properties['author_name']['value'])){
+        $json_ld['author']['name']     = $properties['author_name']['value']; 
+    }                
+    if(!empty($properties['publisher_name']['value'])){
+        $json_ld['publisher']['@type'] = 'Organization'; 
+        $json_ld['publisher']['name']  = $properties['publisher_name']['value'];    
+    }
+
+    $logo  = smpg_make_the_logo_json($properties['publisher_logo']['value']);
+
+    if(!empty($logo)){
+        $json_ld['publisher']['logo']  = $logo;  
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_audioobject_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );

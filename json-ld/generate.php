@@ -81,6 +81,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
             $json_ld = smpg_get_videoobject_individual_json_ld($json_ld, $properties, $schema_type);            
                                 
         break; 
+
+        case 'audioobject':
+
+            $json_ld = smpg_get_audioobject_individual_json_ld($json_ld, $properties, $schema_type);            
+                                
+        break; 
         
         case 'course':
 
@@ -349,6 +355,38 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             }
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_videoobject_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;   
+
+        case 'audioobject':
+
+            $json_ld['@context']         = smpg_get_context_url();
+            $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['url']              = smpg_get_permalink();
+            $json_ld['name']             = smpg_get_the_title();
+            $json_ld['description']      = smpg_get_description();    
+            $json_ld['datePublished']    = smpg_get_published_date();
+            $json_ld['dateModified']     = smpg_get_modified_date();
+            $json_ld['uploadDate']       = smpg_get_modified_date(); 
+            $json_ld['author']           = smpg_get_author_detail();    
+
+            $video_data = smpg_get_video_metadata();            
+
+            if(!empty($video_data[0]['thumbnail_url'])){                                                                        
+                $json_ld['thumbnailUrl']   = $video_data[0]['thumbnail_url'];                                    
+            }
+
+            if(!empty($video_data[0]['duration'])){                                                                        
+                $json_ld['duration']   = $video_data[0]['duration'];                                    
+            }
+            if(!empty($video_data[0]['video_url'])){
+                
+                $json_ld['contentUrl'] = $video_data[0]['video_url'];
+                $json_ld['embedUrl']   = $video_data[0]['video_url'];
+                
+            }
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_audioobject_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;   
         

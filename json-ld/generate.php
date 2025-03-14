@@ -30,6 +30,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'satiricalarticle':
         case 'scholarlyarticle':
         case 'socialmediaposting':
+        case 'creativework':
             
             $json_ld = smpg_get_different_article_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -192,6 +193,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             case 'satiricalarticle':
             case 'scholarlyarticle':
             case 'socialmediaposting':     
+            case 'creativework':
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
@@ -200,8 +202,14 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['description']               = smpg_get_description();    
             $json_ld['datePublished']             = smpg_get_published_date();
             $json_ld['dateModified']              = smpg_get_modified_date();    
-            $json_ld['wordCount']                 = smpg_get_word_count();
-            $json_ld['articleSection']            = smpg_get_categories();
+
+            if ( $schema_data['_schema_type'][0] != 'creativework' ) {
+
+                $json_ld['wordCount']                 = smpg_get_word_count();
+                $json_ld['articleSection']            = smpg_get_categories();
+                
+            }                
+
             $json_ld['inLanguage']                = smpg_get_inlanguage();
             $json_ld['keywords']                  = smpg_get_post_tags();                            
             $json_ld['author']                    = smpg_get_author_detail();

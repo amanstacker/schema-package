@@ -1033,12 +1033,17 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
         if(!empty($properties['keywords']['value'])){
             $json_ld['keywords']           = $properties['keywords']['value'];   
         }
-        if(!empty($properties['word_count']['value'])){
-            $json_ld['wordCount']          = $properties['word_count']['value'];   
-        }
-        if(!empty($properties['article_section']['value'])){
-            $json_ld['articleSection']     = $properties['article_section']['value'];   
-        }            
+
+        if ( $schema_type != 'creativework' ) {
+
+            if(!empty($properties['word_count']['value'])){
+                $json_ld['wordCount']          = $properties['word_count']['value'];   
+            }
+            if(!empty($properties['article_section']['value'])){
+                $json_ld['articleSection']     = $properties['article_section']['value'];   
+            }
+        }        
+
         if(!empty($properties['in_language']['value'])){
             $json_ld['inLanguage']         = $properties['in_language']['value'];
         }

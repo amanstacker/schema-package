@@ -1125,7 +1125,67 @@ var schemaTypes = [{
 }, {
   key: 27,
   value: 'customschema',
-  text: 'Custom Schema'
+  text: 'CustomSchema'
+}, {
+  key: 28,
+  value: 'liveblogposting',
+  text: 'LiveBlogPosting'
+}, {
+  key: 29,
+  value: 'person',
+  text: 'Person'
+}, {
+  key: 30,
+  value: 'musicalbum',
+  text: 'MusicAlbum'
+}, {
+  key: 31,
+  value: 'musicplaylist',
+  text: 'MusicPlaylist'
+}, {
+  key: 32,
+  value: 'audioobject',
+  text: 'AudioObject'
+}, {
+  key: 33,
+  value: 'trip',
+  text: 'Trip'
+}, {
+  key: 34,
+  value: 'mobileapplication',
+  text: 'MobileApplication'
+}, {
+  key: 35,
+  value: 'singlefamilyresidence',
+  text: 'SingleFamilyResidence'
+}, {
+  key: 36,
+  value: 'house',
+  text: 'House'
+}, {
+  key: 37,
+  value: 'apartment',
+  text: 'Apartment'
+}, {
+  key: 38,
+  value: 'photograph',
+  text: 'Photograph'
+}, {
+  key: 39,
+  value: 'imageobject',
+  text: 'ImageObject'
+}, {
+  key: 40,
+  value: 'mediagallery',
+  text: 'MediaGallery'
+}, {
+  key: 41,
+  value: 'imagegallery',
+  text: 'ImageGallery'
+}, {
+  key: 42,
+  value: 'creativework',
+  text: 'CreativeWork'
 }];
 
 /***/ })

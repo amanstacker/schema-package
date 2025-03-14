@@ -93,7 +93,7 @@ const ElementGenerator = (props) => {
     );
   }
   const createTypeEditor = (property, elid, tid, repeater) => {
-    return(                                                                        
+    return(
         <div className="smpg-form-group">
             <label>{property.label}</label>                                                                            
             <textarea placeholder={property.placeholder} className="smpg-form-control" onChange={(e)=>props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater)} rows="10" value={property.value}  />                                                                            

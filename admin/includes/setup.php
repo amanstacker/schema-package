@@ -484,7 +484,22 @@ function smpg_get_schema_type_text( $id ) {
 		'governmentservice'         => 'GovernmentService',  
 		'taxiservice'               => 'TaxiService',
 		'webapi'                    => 'WebAPI',
-		'customschema'              => 'Custom Schema',
+		'customschema'              => 'CustomSchema',
+		'liveblogposting'           => 'LiveBlogPosting',
+		'person'              		=> 'Person',
+		'musicalbum'              	=> 'MusicAlbum',
+		'musicplaylist'             => 'MusicPlaylist',
+		'audioobject'               => 'AudioObject',
+		'trip'              		=> 'Trip',
+		'mobileapplication'         => 'MobileApplication',
+		'singlefamilyresidence'     => 'SingleFamilyResidence',
+		'house'              		=> 'House',
+		'apartment'              	=> 'Apartment',
+		'photograph'              	=> 'Photograph',
+		'imageobject'              	=> 'ImageObject',
+		'mediagallery'              => 'MediaGallery',
+		'imagegallery'              => 'ImageGallery',
+		'creativework'              => 'CreativeWork',
 	];	
 
 	if ( array_key_exists( $id, $response ) ) {

@@ -654,6 +654,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'satiricalarticle'         => 'SatiricalArticle',
         'scholarlyarticle'         => 'ScholarlyArticle',
         'socialmediaposting'       => 'SocialMediaPosting',
+        'creativework'             => 'creativework',
     ];
     $service_type = [
             'service'                   => 'Service',
@@ -674,6 +675,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         case 'satiricalarticle':
         case 'scholarlyarticle':
         case 'socialmediaposting':
+        case 'creativework':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 
@@ -702,6 +704,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'image'               => $image
                 ]
             ];
+            
+            if ( $schema_id == 'creativework' ) {
+                unset( $properties['properties']['word_count'] );
+                unset( $properties['properties']['article_section'] );
+            }
+
             break;        
         case 'qna':
 

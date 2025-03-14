@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null){
+function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null ) {
     
     $properties = [];
 
@@ -111,16 +111,41 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'placeholder' => 'Enter Name',                    
             'label'       => 'Name',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
+        ],
+        'email' => [
+            'placeholder' => 'Enter Email',
+            'label'       => 'Email',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Email of the Person'        
+        ],
+        'telephone'          => [
+            'label'       => 'Telephone',                    
+            'type'        => 'text',                                    
+            'placeholder' => '+14088717984',                    
+            'value'       => '',
+            'display'     => true
+        ],
+        'job_title' => [                        
+            'placeholder' => 'Enter Job Title',                    
+            'label'       => 'Job Title',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Job Title of the item'
         ],
         'title' => [                        
             'placeholder' => 'Enter Title',                    
             'label'       => 'Title',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Title of the item'        
@@ -130,7 +155,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Name',
             'type'        => 'text',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
@@ -139,7 +164,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'placeholder' => 'Headline',                    
             'label'       => 'Headline',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Headline of the article.'        
@@ -149,7 +174,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Description',                    
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_description($post_id),
+            'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'A description of the item.'
@@ -159,7 +184,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Description',                    
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_description($post_id),
+            'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'A description of the item.'
@@ -644,7 +669,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ]        
     ];
 
-    extract($common_properties);
+    extract( $common_properties );
 
     $article_type = [
         'article'                  => 'Article',
@@ -690,7 +715,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'word_count'          => $word_count,
                     'article_section'     => $article_section,
                     'url'                 => $url,
-                    'in_language'          => $in_language,
+                    'in_language'         => $in_language,
                     'date_published'      => $date_published,
                     'date_modified'       => $date_modified,
                     'author_type'         => $author_type,
@@ -1173,13 +1198,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'address_region'     => $address_region,
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
-                                'telephone'          => [
-                                    'label'       => 'Telephone',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '+14088717984',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'telephone'          => $telephone,
                                 'price_range'          => [
                                     'label'       => 'Price Range',                    
                                     'type'        => 'text',                                    
@@ -1348,13 +1367,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'address_region'     => $address_region,
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
-                                'telephone'          => [
-                                    'label'       => 'Telephone',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '+14088717984',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'telephone'          => $telephone,
                                 'price_range'          => [
                                     'label'       => 'Price Range',                    
                                     'type'        => 'text',                                    
@@ -1898,6 +1911,33 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'image'                => $image,
                                 'offer_currency'       => $offer_currency,
                                 'offer_price'          => $offer_price                                                                                              
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'person':
+    
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'person',           
+                        'text'              => 'Person',
+                        'properties'        => [
+                                'name'               => $name,
+                                'job_title'          => $job_title,
+                                'email'              => $email,
+                                'telephone'          => $telephone, 
+                                'url'                => $url,                                                                                                
+                                'street_address'     => $street_address,
+                                'address_locality'   => $address_locality,
+                                'address_region'     => $address_region,
+                                'postal_code'        => $postal_code,
+                                'address_country'    => $address_country,
+                                'image'              => $image,                                
         
                         ]                      
                     ];

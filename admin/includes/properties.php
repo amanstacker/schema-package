@@ -690,7 +690,18 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'governmentservice'         => 'GovernmentService',  
             'taxiservice'               => 'TaxiService',  
             'webapi'                    => 'WebAPI',                                                                                
-    ];       
+    ];
+    $business_type = [
+        'localbusiness'            => 'LocalBusiness',
+        'store'                    => 'Store', 
+        'bakery'                   => 'Bakery',  
+        'barorpub'                 => 'BarOrPub',  
+        'cafeorcoffeeshop'         => 'CafeOrCoffeeShop',  
+        'fastfoodrestaurant'       => 'FastFoodRestaurant',  
+        'icecreamshop'             => 'IceCreamShop',  
+        'restaurant'               => 'Restaurant',
+    ];
+
     switch ( $schema_id ) {
         
         case 'article':
@@ -1162,33 +1173,22 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;  
 
                     case 'localbusiness':
+                    case 'store':
+                    case 'bakery':
+                    case 'barorpub':
+                    case 'cafeorcoffeeshop':
+                    case 'fastfoodrestaurant':
+                    case 'icecreamshop':
+                    case 'restaurant':
 
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
                             'is_setup_popup'    => false,
                             'has_warning'       => false,
-                            'id'                => 'localbusiness',           
-                            'text'              => 'LocalBusiness',
-                            'properties'        => [
-                                'business_type' =>  [                                     
-                                        'label'       => 'Business Type',                    
-                                        'type'        => 'select',
-                                        'value'       => 'LocalBusiness',
-                                        'options'      => [
-                                            'LocalBusiness'            => 'LocalBusiness',
-                                            'Store'                    => 'Store', 
-                                            'Bakery'                   => 'Bakery',  
-                                            'BarOrPub'                 => 'BarOrPub',  
-                                            'CafeOrCoffeeShop'         => 'CafeOrCoffeeShop',  
-                                            'FastFoodRestaurant'       => 'FastFoodRestaurant',  
-                                            'IceCreamShop'             => 'IceCreamShop',  
-                                            'Restaurant'               => 'Restaurant',                                                                                
-                                        ],
-                                        'recommended' => true,
-                                        'display'     => true,
-                                    'tooltip'     => 'The author type of this content'
-                                ],
+                            'id'                => $schema_id,           
+                            'text'              => $business_type[$schema_id],
+                            'properties'        => [                                
                                 'name'             => $name,    
                                 'description'      => $description,
                                 'url'              => $url,                                                                                                                    
@@ -1945,6 +1945,234 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'image'                => $image,
                                 'offer_currency'       => $offer_currency,
                                 'offer_price'          => $offer_price                                                                                              
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'imagegallery':
+    
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'imagegallery',
+                        'text'              => 'ImageGallery',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description,                                
+                                'url'                  => $url                                
+        
+                        ]                      
+                    ];
+        
+                    break;
+                
+                case 'mediagallery':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'mediagallery',
+                        'text'              => 'MediaGallery',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;    
+
+                case 'imageobject':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'imageobject',
+                        'text'              => 'ImageObject',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+                    
+                case 'photograph':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'photograph',
+                        'text'              => 'Photograph',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'apartment':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'apartment',
+                        'text'              => 'Apartment',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'house':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'house',
+                        'text'              => 'House',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'singlefamilyresidence':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'singlefamilyresidence',
+                        'text'              => 'SingleFamilyResidence',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'mobileapplication':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'mobileapplication',
+                        'text'              => 'MobileApplication',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'trip':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'trip',
+                        'text'              => 'Trip',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'musicplaylist':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'musicplaylist',
+                        'text'              => 'MusicPlaylist',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'musicalbum':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'musicalbum',
+                        'text'              => 'MusicAlbum',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'liveblogposting':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'liveblogposting',
+                        'text'              => 'LiveBlogPosting',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
         
                         ]                      
                     ];

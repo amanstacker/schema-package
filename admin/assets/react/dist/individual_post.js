@@ -1092,98 +1092,126 @@ var schemaTypes = [{
   text: 'LocalBusiness'
 }, {
   key: 19,
+  value: 'store',
+  text: 'Store'
+}, {
+  key: 20,
+  value: 'bakery',
+  text: 'Bakery'
+}, {
+  key: 21,
+  value: 'barorpub',
+  text: 'BarOrPub'
+}, {
+  key: 22,
+  value: 'cafeorcoffeeshop',
+  text: 'CafeOrCoffeeShop'
+}, {
+  key: 23,
+  value: 'fastfoodrestaurant',
+  text: 'FastFoodRestaurant'
+}, {
+  key: 24,
+  value: 'icecreamshop',
+  text: 'IceCreamShop'
+}, {
+  key: 25,
+  value: 'restaurant',
+  text: 'Restaurant'
+}, {
+  key: 26,
   value: 'service',
   text: 'Service'
 }, {
-  key: 20,
+  key: 27,
   value: 'broadcastservice',
   text: 'BroadcastService'
 }, {
-  key: 21,
+  key: 28,
   value: 'cableorsatelliteservice',
   text: 'CableOrSatelliteService'
 }, {
-  key: 22,
+  key: 29,
   value: 'financialproduct',
   text: 'FinancialProduct'
 }, {
-  key: 23,
+  key: 30,
   value: 'foodservice',
   text: 'FoodService'
 }, {
-  key: 24,
+  key: 31,
   value: 'governmentservice',
   text: 'GovernmentService'
 }, {
-  key: 25,
+  key: 32,
   value: 'taxiservice',
   text: 'TaxiService'
 }, {
-  key: 26,
+  key: 33,
   value: 'webapi',
   text: 'WebAPI'
 }, {
-  key: 27,
+  key: 34,
   value: 'customschema',
   text: 'CustomSchema'
 }, {
-  key: 28,
+  key: 35,
   value: 'liveblogposting',
   text: 'LiveBlogPosting'
 }, {
-  key: 29,
+  key: 36,
   value: 'person',
   text: 'Person'
 }, {
-  key: 30,
+  key: 37,
   value: 'musicalbum',
   text: 'MusicAlbum'
 }, {
-  key: 31,
+  key: 38,
   value: 'musicplaylist',
   text: 'MusicPlaylist'
 }, {
-  key: 32,
+  key: 39,
   value: 'audioobject',
   text: 'AudioObject'
 }, {
-  key: 33,
+  key: 40,
   value: 'trip',
   text: 'Trip'
 }, {
-  key: 34,
+  key: 41,
   value: 'mobileapplication',
   text: 'MobileApplication'
 }, {
-  key: 35,
+  key: 42,
   value: 'singlefamilyresidence',
   text: 'SingleFamilyResidence'
 }, {
-  key: 36,
+  key: 43,
   value: 'house',
   text: 'House'
 }, {
-  key: 37,
+  key: 44,
   value: 'apartment',
   text: 'Apartment'
 }, {
-  key: 38,
+  key: 45,
   value: 'photograph',
   text: 'Photograph'
 }, {
-  key: 39,
+  key: 46,
   value: 'imageobject',
   text: 'ImageObject'
 }, {
-  key: 40,
+  key: 47,
   value: 'mediagallery',
   text: 'MediaGallery'
 }, {
-  key: 41,
+  key: 48,
   value: 'imagegallery',
   text: 'ImageGallery'
 }, {
-  key: 42,
+  key: 49,
   value: 'creativework',
   text: 'CreativeWork'
 }];

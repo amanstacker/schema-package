@@ -475,7 +475,14 @@ function smpg_get_schema_type_text( $id ) {
 		'videoobject'               => 'VideoObject',
 		'course'                    => 'Course',
 		'jobposting'                => 'JobPosting',
-		'localbusiness'             => 'LocalBusiness',
+		'localbusiness'             => 'LocalBusiness',		
+		'store'                     => 'Store', 
+		'bakery'                    => 'Bakery',  
+		'barorpub'                  => 'BarOrPub',  
+		'cafeorcoffeeshop'          => 'CafeOrCoffeeShop',  
+		'fastfoodrestaurant'        => 'FastFoodRestaurant',  
+		'icecreamshop'              => 'IceCreamShop',  
+		'restaurant'                => 'Restaurant',                                                                                
 		'service'                   => 'Service',
 		'broadcastservice'          => 'BroadcastService', 
 		'cableorsatelliteservice'   => 'CableOrSatelliteService',  
@@ -500,6 +507,7 @@ function smpg_get_schema_type_text( $id ) {
 		'mediagallery'              => 'MediaGallery',
 		'imagegallery'              => 'ImageGallery',
 		'creativework'              => 'CreativeWork',
+
 	];	
 
 	if ( array_key_exists( $id, $response ) ) {

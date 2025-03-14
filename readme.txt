@@ -63,6 +63,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 ### Schema Package Supported Schema Types
 
+We support all schema types available on Schema.org. If a schema type is missing in the Schema Package plugin, feel free to request it!
+
 * Article : [schema.org url](https://schema.org/Article)
 * BlogPosting : [BlogPosting](https://schema.org/BlogPosting)
 * NewsArticle : [schema.org url](https://schema.org/NewsArticle)

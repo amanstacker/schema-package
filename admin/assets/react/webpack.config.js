@@ -3,10 +3,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var path = require('path');
 module.exports = {   
 
-//    mode: 'production',
-//    devtool: false,
-   mode: 'development',
-   devtool: 'source-map',
+   mode: 'production',
+   devtool: false,
+   //mode: 'development',
+   //devtool: 'source-map',
 
    entry: {
        admin_panel: './admin_panel/index.jsx',

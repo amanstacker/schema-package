@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
+* <strong>Custom Schema</strong>: Custom Schema allows users to enter their own JSON-LD markup, giving them full control over structured data implementation. This feature enables advanced customization beyond predefined schema types, ensuring flexibility. 
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
@@ -111,6 +112,7 @@ We support all schema types available on Schema.org. If a schema type is missing
 * MediaGallery : [schema.org url](https://schema.org/MediaGallery)
 * imagegallery : [schema.org url](https://schema.org/imagegallery)
 * Comment : [schema.org url](https://schema.org/Comment)
+* AudioObject : [schema.org url](https://schema.org/AudioObject)
 
 
 ### Schema package automation and compatibility with plugins.
@@ -367,6 +369,12 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.6 =
+
+* Feature : Added Custom Schema Textarea
+* Feature : Added multiple schema types. Those are Store, Bakery, BarOrPub, CafeOrCoffeeShop, FastFoodRestaurant, IceCreamShop, Restaurant, LiveBlogPosting, MusicAlbum, MusicPlaylist, Trip, MobileApplication, SingleFamilyResidence, House, Apartment, Photograph, ImageObject, MediaGallery, ImageGallery, AudioObject
+* Fixed   : Minor bug fixes.
 
 = 1.0.5 =
 

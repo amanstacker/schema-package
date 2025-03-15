@@ -47,6 +47,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
+* <strong>Custom Schema</strong>: Custom Schema allows users to enter their own JSON-LD markup, giving them full control over structured data implementation. This feature enables advanced customization beyond predefined schema types, ensuring flexibility. 
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
@@ -106,6 +107,8 @@ We support all schema types available on Schema.org. If a schema type is missing
 * MediaGallery : [schema.org url](https://schema.org/MediaGallery)
 * imagegallery : [schema.org url](https://schema.org/imagegallery)
 * Comment : [schema.org url](https://schema.org/Comment)
+* AudioObject : [schema.org url](https://schema.org/AudioObject)
+
 
 ### Schema package automation and compatibility with plugins
 

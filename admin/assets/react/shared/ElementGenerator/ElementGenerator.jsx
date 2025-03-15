@@ -92,6 +92,15 @@ const ElementGenerator = (props) => {
         </div>                                                                                                                                                
     );
   }
+  const createTypeEditor = (property, elid, tid, repeater) => {
+    return(
+        <div className="smpg-form-group">
+            <label>{property.label}</label>                                                                            
+            <textarea placeholder={property.placeholder} className="smpg-form-control" onChange={(e)=>props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater)} rows="10" value={property.value}  />                                                                            
+            <p className="smpg-description">{property.tooltip}</p>
+        </div>                                                                                                                                                
+    );
+  }
 
   const createTypeSelect = (property, elid, tid, repeater) => {
     return(                                                                        
@@ -211,6 +220,10 @@ const ElementGenerator = (props) => {
             case 'textarea':
                 return(
                     createTypeTextarea(propertyObj, null, null, null)
+                )
+            case 'editor':
+                return(
+                    createTypeEditor(propertyObj, null, null, null)
                 )
             case 'media':
                 return(

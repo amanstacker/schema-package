@@ -1,14 +1,14 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link} from 'react-router-dom';
-import { Dropdown, Checkbox, Grid, Form, Button, Divider, Icon, Label } from 'semantic-ui-react'
+import { Dropdown, Checkbox, Grid, Form, Button, Divider, Icon, Label, TextArea, Message } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/schemaTypes';
 import Accordion from '../shared/Accordion/Accordion'; 
 import PropertySelector from './mapping/PropertySelector';
 import SchemaMapping from './mapping/SchemaMapping';
-
+import CustomSchema from './common/CustomSchema';
 
 const SingularSchemaEdit = () => {
 
@@ -59,6 +59,7 @@ const SingularSchemaEdit = () => {
     _enabled_on: { post_type: [], post: [], page: [] },
     _disabled_on: { post_type: [], post: [], page: [] },
     _automation_with: [],
+    _custom_schema: '',
   });
   
   const handlePropertySelection = (key) => {
@@ -70,6 +71,12 @@ const SingularSchemaEdit = () => {
     }));
   };
   
+  const handleCustomSchema = ( value ) => {
+        
+    setPostMeta({'_custom_schema': value});
+            
+  }
+
   const handleFormChange = e => {
 
     let { name, value, type } = e.target;
@@ -323,7 +330,6 @@ const SingularSchemaEdit = () => {
         handleGetSchemaProperties(postMeta._schema_type);
     }
 }, [isSchemaDataLoaded, postMeta?._schema_type]);
-  
 
   return(
     <div className="smpg-edit-page">
@@ -356,6 +362,10 @@ const SingularSchemaEdit = () => {
       {postMeta._mapped_properties_key.length > 0 && <SchemaMapping schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} mappedPropertiesValue={postMeta._mapped_properties_value} handleMappedPropertiesValue={handleMappedPropertiesValue} />}
     </div>
 
+    { postMeta._schema_type == 'customschema' ? 
+      <CustomSchema setCustomSchema={handleCustomSchema} customSchemaValue={postMeta._custom_schema} /> :
+    '' }
+    
       </Accordion>               
 
     <Accordion title="Targeting" isExpand={true}>
@@ -543,11 +553,13 @@ const SingularSchemaEdit = () => {
     </Accordion>               
       </div>
       </div>
+      
       <div className="smpg-right-section">  
-      <Accordion title="Schema Properties" isExpand={true}>
-        {/* Property Selection Section */}
-        <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
-      </Accordion>  
+      { postMeta._schema_type != 'customschema' ?
+        <Accordion title="Schema Properties" isExpand={true}>        
+          <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
+        </Accordion>
+      : '' }        
       
        {postMeta._schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
@@ -578,7 +590,8 @@ const SingularSchemaEdit = () => {
               </Grid.Row>
           </Grid>
         </Accordion> 
-       : '' }                                 
+       : '' }  
+
          {postMeta._schema_type ? 
         <Accordion title="Automation" isExpand={true}>      
 
@@ -615,7 +628,8 @@ const SingularSchemaEdit = () => {
         <div className="smpg-save-schema-btn">
         {isLoaded ? <Button primary onClick={handleSaveFormData}>{__('Save', 'schema-package')}</Button> : <Button loading primary>Loading</Button>}                  
         </div>            
-      </div>
+      </div>                 
+
       </div>
     </div>
   );

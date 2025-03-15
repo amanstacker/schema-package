@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null){
+function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null ) {
     
     $properties = [];
 
@@ -111,16 +111,41 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'placeholder' => 'Enter Name',                    
             'label'       => 'Name',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
+        ],
+        'email' => [
+            'placeholder' => 'Enter Email',
+            'label'       => 'Email',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Email of the Person'        
+        ],
+        'telephone'          => [
+            'label'       => 'Telephone',                    
+            'type'        => 'text',                                    
+            'placeholder' => '+14088717984',                    
+            'value'       => '',
+            'display'     => true
+        ],
+        'job_title' => [                        
+            'placeholder' => 'Enter Job Title',                    
+            'label'       => 'Job Title',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Job Title of the item'
         ],
         'title' => [                        
             'placeholder' => 'Enter Title',                    
             'label'       => 'Title',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Title of the item'        
@@ -130,7 +155,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Name',
             'type'        => 'text',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
@@ -139,7 +164,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'placeholder' => 'Headline',                    
             'label'       => 'Headline',
             'type'        => 'text',
-            'value'       => smpg_get_the_title($post_id),
+            'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Headline of the article.'        
@@ -149,7 +174,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Description',                    
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_description($post_id),
+            'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'A description of the item.'
@@ -159,7 +184,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'label'       => 'Description',                    
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
-            'value'       => smpg_get_description($post_id),
+            'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'A description of the item.'
@@ -644,7 +669,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ]        
     ];
 
-    extract($common_properties);
+    extract( $common_properties );
 
     $article_type = [
         'article'                  => 'Article',
@@ -654,6 +679,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'satiricalarticle'         => 'SatiricalArticle',
         'scholarlyarticle'         => 'ScholarlyArticle',
         'socialmediaposting'       => 'SocialMediaPosting',
+        'creativework'             => 'creativework',
     ];
     $service_type = [
             'service'                   => 'Service',
@@ -664,7 +690,18 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'governmentservice'         => 'GovernmentService',  
             'taxiservice'               => 'TaxiService',  
             'webapi'                    => 'WebAPI',                                                                                
-    ];       
+    ];
+    $business_type = [
+        'localbusiness'            => 'LocalBusiness',
+        'store'                    => 'Store', 
+        'bakery'                   => 'Bakery',  
+        'barorpub'                 => 'BarOrPub',  
+        'cafeorcoffeeshop'         => 'CafeOrCoffeeShop',  
+        'fastfoodrestaurant'       => 'FastFoodRestaurant',  
+        'icecreamshop'             => 'IceCreamShop',  
+        'restaurant'               => 'Restaurant',
+    ];
+
     switch ( $schema_id ) {
         
         case 'article':
@@ -674,6 +711,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         case 'satiricalarticle':
         case 'scholarlyarticle':
         case 'socialmediaposting':
+        case 'creativework':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 
@@ -688,7 +726,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'word_count'          => $word_count,
                     'article_section'     => $article_section,
                     'url'                 => $url,
-                    'in_language'          => $in_language,
+                    'in_language'         => $in_language,
                     'date_published'      => $date_published,
                     'date_modified'       => $date_modified,
                     'author_type'         => $author_type,
@@ -702,6 +740,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'image'               => $image
                 ]
             ];
+            
+            if ( $schema_id == 'creativework' ) {
+                unset( $properties['properties']['word_count'] );
+                unset( $properties['properties']['article_section'] );
+            }
+
             break;        
         case 'qna':
 
@@ -1129,33 +1173,22 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;  
 
                     case 'localbusiness':
+                    case 'store':
+                    case 'bakery':
+                    case 'barorpub':
+                    case 'cafeorcoffeeshop':
+                    case 'fastfoodrestaurant':
+                    case 'icecreamshop':
+                    case 'restaurant':
 
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
                             'is_setup_popup'    => false,
                             'has_warning'       => false,
-                            'id'                => 'localbusiness',           
-                            'text'              => 'LocalBusiness',
-                            'properties'        => [
-                                'business_type' =>  [                                     
-                                        'label'       => 'Business Type',                    
-                                        'type'        => 'select',
-                                        'value'       => 'LocalBusiness',
-                                        'options'      => [
-                                            'LocalBusiness'            => 'LocalBusiness',
-                                            'Store'                    => 'Store', 
-                                            'Bakery'                   => 'Bakery',  
-                                            'BarOrPub'                 => 'BarOrPub',  
-                                            'CafeOrCoffeeShop'         => 'CafeOrCoffeeShop',  
-                                            'FastFoodRestaurant'       => 'FastFoodRestaurant',  
-                                            'IceCreamShop'             => 'IceCreamShop',  
-                                            'Restaurant'               => 'Restaurant',                                                                                
-                                        ],
-                                        'recommended' => true,
-                                        'display'     => true,
-                                    'tooltip'     => 'The author type of this content'
-                                ],
+                            'id'                => $schema_id,           
+                            'text'              => $business_type[$schema_id],
+                            'properties'        => [                                
                                 'name'             => $name,    
                                 'description'      => $description,
                                 'url'              => $url,                                                                                                                    
@@ -1165,13 +1198,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'address_region'     => $address_region,
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
-                                'telephone'          => [
-                                    'label'       => 'Telephone',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '+14088717984',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'telephone'          => $telephone,
                                 'price_range'          => [
                                     'label'       => 'Price Range',                    
                                     'type'        => 'text',                                    
@@ -1340,13 +1367,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'address_region'     => $address_region,
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
-                                'telephone'          => [
-                                    'label'       => 'Telephone',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '+14088717984',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'telephone'          => $telephone,
                                 'price_range'          => [
                                     'label'       => 'Price Range',                    
                                     'type'        => 'text',                                    
@@ -1872,6 +1893,40 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         ]                      
                     ];                    
                     break;    
+
+                case 'audioobject':
+
+                    $image['label']    = 'Thumbnail Images';
+                    $hours['label']    = 'Duration ( Hours )';
+                    $minutes['label']  = 'Duration ( minutes )';
+                    $seconds['label']  = 'Duration ( seconds )';
+
+                    $properties = [
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'audioobject',           
+                        'text'              => 'AudioObject',
+                        'properties'        => [
+                            'name'             => $name,    
+                            'description'      => $description,
+                            'url'              => $url,
+                            'content_url'      => $content_url,
+                            'embed_url'        => $embed_url,
+                            'upload_date'      => $upload_date,
+                            'hours'            => $hours,
+                            'minutes'          => $minutes,
+                            'seconds'          => $seconds,
+                            'in_language'       => $in_language,
+                            'image'            => $image,                            
+                            'author_type'      => $author_type,
+                            'author_name'      => $author_name,                            
+                            'publisher_name'   => $publisher_name,
+                            'publisher_logo'   => $publisher_logo                                                                      
+                        ]                      
+                    ];                    
+                    break;    
                 
                 case 'softwareapplication':
         
@@ -1890,6 +1945,261 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'image'                => $image,
                                 'offer_currency'       => $offer_currency,
                                 'offer_price'          => $offer_price                                                                                              
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'imagegallery':
+    
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'imagegallery',
+                        'text'              => 'ImageGallery',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description,                                
+                                'url'                  => $url                                
+        
+                        ]                      
+                    ];
+        
+                    break;
+                
+                case 'mediagallery':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'mediagallery',
+                        'text'              => 'MediaGallery',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;    
+
+                case 'imageobject':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'imageobject',
+                        'text'              => 'ImageObject',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+                    
+                case 'photograph':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'photograph',
+                        'text'              => 'Photograph',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'apartment':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'apartment',
+                        'text'              => 'Apartment',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'house':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'house',
+                        'text'              => 'House',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'singlefamilyresidence':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'singlefamilyresidence',
+                        'text'              => 'SingleFamilyResidence',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'mobileapplication':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'mobileapplication',
+                        'text'              => 'MobileApplication',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'trip':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'trip',
+                        'text'              => 'Trip',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'musicplaylist':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'musicplaylist',
+                        'text'              => 'MusicPlaylist',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'musicalbum':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'musicalbum',
+                        'text'              => 'MusicAlbum',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'liveblogposting':
+
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'liveblogposting',
+                        'text'              => 'LiveBlogPosting',
+                        'properties'        => [
+                                'name'                 => $name, 
+                                'description'          => $description, 
+                                'url'                  => $url                                                                                          
+        
+                        ]                      
+                    ];
+        
+                    break;
+
+                case 'person':
+    
+                    $properties = [                
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'person',           
+                        'text'              => 'Person',
+                        'properties'        => [
+                                'name'               => $name,
+                                'job_title'          => $job_title,
+                                'email'              => $email,
+                                'telephone'          => $telephone, 
+                                'url'                => $url,                                                                                                
+                                'street_address'     => $street_address,
+                                'address_locality'   => $address_locality,
+                                'address_region'     => $address_region,
+                                'postal_code'        => $postal_code,
+                                'address_country'    => $address_country,
+                                'image'              => $image,                                
         
                         ]                      
                     ];
@@ -1922,6 +2232,49 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'offer_price_validuntil' => $offer_price_validuntil,                                                                      
                                 'offer_item_condition'   => $offer_item_condition,
                                 'offer_availability'     => $offer_availability                        
+                        ]                      
+                    ];
+        
+                    break;  
+
+                case 'customschema':
+
+                    $placeholder_json = '{
+"@context": "https://schema.org",
+"@type": "NewsArticle",
+"headline": "Title of a News Article",
+"image": [
+    "https://example.com/photos/1x1/photo.jpg",                                                        
+    ],
+"datePublished": "2024-01-05T08:00:00+08:00",
+"dateModified": "2024-02-05T09:20:00+08:00",
+"author": [{
+    "@type": "Person",
+    "name": "Jane Doe",
+    "url": "https://example.com/profile/janedoe123"
+},{
+    "@type": "Person",
+    "name": "John Doe",
+    "url": "https://example.com/profile/johndoe123"
+    }]
+}';
+    
+                    $properties = [
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'customschema',           
+                        'text'              => 'CustomSchema',
+                        'properties'        => [                                                            
+                                'editor'            => [
+                                    'placeholder' => $placeholder_json,                    
+                                    'label'       => 'Editor',
+                                    'type'        => 'editor',                                                                        
+                                    'recommended' => true,
+                                    'display'     => true,
+                                    'tooltip'     => 'Enter your custom schema (Json-ld). Must be Valid Json'
+                                ],                                
                         ]                      
                     ];
         

@@ -47,6 +47,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
+* <strong>Custom Schema</strong>: Custom Schema allows users to enter their own JSON-LD markup, giving them full control over structured data implementation. This feature enables advanced customization beyond predefined schema types, ensuring flexibility. 
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
@@ -57,6 +58,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 
 ### Schema Package Supported Schema Types
+
+We support all schema types available on Schema.org. If a schema type is missing in the Schema Package plugin, feel free to request it!
 
 * Article : [schema.org url](https://schema.org/Article)
 * BlogPosting : [BlogPosting](https://schema.org/BlogPosting)
@@ -69,6 +72,13 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * Course : [schema.org url](https://schema.org/Course)
 * JobPosting : [schema.org url](https://schema.org/JobPosting)
 * LocalBusiness : [schema.org url](https://schema.org/LocalBusiness)
+* Store : [schema.org url](https://schema.org/Store)
+* Bakery : [schema.org url](https://schema.org/Bakery)
+* BarOrPub : [schema.org url](https://schema.org/BarOrPub)
+* CafeOrCoffeeShop : [schema.org url](https://schema.org/CafeOrCoffeeShop)
+* FastFoodRestaurant : [schema.org url](https://schema.org/FastFoodRestaurant)
+* IceCreamShop : [schema.org url](https://schema.org/IceCreamShop)
+* Restaurant : [schema.org url](https://schema.org/Restaurant)
 * Event : [schema.org url](https://schema.org/Event)
 * Recipe : [schema.org url](https://schema.org/Recipe)
 * VideoObject : [schema.org url](https://schema.org/VideoObject)
@@ -84,7 +94,21 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * WebAPI : [schema.org url](https://schema.org/WebAPI)
 * BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
 * ItemList : [schema.org url](https://schema.org/ItemList)
+* LiveBlogPosting : [schema.org url](https://schema.org/LiveBlogPosting)
+* MusicAlbum : [schema.org url](https://schema.org/MusicAlbum)
+* MusicPlaylist : [schema.org url](https://schema.org/MusicPlaylist)
+* Trip : [schema.org url](https://schema.org/Trip)
+* MobileApplication : [schema.org url](https://schema.org/MobileApplication)
+* SingleFamilyResidence : [schema.org url](https://schema.org/SingleFamilyResidence)
+* House : [schema.org url](https://schema.org/House)
+* Apartment : [schema.org url](https://schema.org/Apartment)
+* Photograph : [schema.org url](https://schema.org/Photograph)
+* ImageObject : [schema.org url](https://schema.org/ImageObject)
+* MediaGallery : [schema.org url](https://schema.org/MediaGallery)
+* imagegallery : [schema.org url](https://schema.org/imagegallery)
 * Comment : [schema.org url](https://schema.org/Comment)
+* AudioObject : [schema.org url](https://schema.org/AudioObject)
+
 
 ### Schema package automation and compatibility with plugins
 

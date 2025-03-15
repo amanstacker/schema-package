@@ -199,10 +199,58 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
     
 }
 
+function smpg_get_person_individual_json_ld( $json_ld, $properties, $schema_type ) {
+    
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+    
+    if(!empty($properties['name']['value'])){
+        $json_ld['name']        =      $properties['name']['value'];
+    }
+    if(!empty($properties['email']['value'])){
+        $json_ld['email']        =      $properties['email']['value'];
+    }
+    if(!empty($properties['job_title']['value'])){
+        $json_ld['jobTitle']        =      $properties['job_title']['value'];
+    }    
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }    
+    if(!empty($properties['street_address']['value'])){
+        $json_ld['address']['@type']                = 'PostalAddress';
+        $json_ld['address']['streetAddress']         =      $properties['street_address']['value'];
+    }
+    if(!empty($properties['address_locality']['value'])){
+        $json_ld['address']['addressLocality']         =      $properties['address_locality']['value'];
+    }
+    if(!empty($properties['postal_code']['value'])){
+        $json_ld['address']['postalCode']         =      $properties['postal_code']['value'];
+    }
+    if(!empty($properties['address_region']['value'])){
+        $json_ld['address']['addressRegion']         =      $properties['address_region']['value'];
+    }
+    if(!empty($properties['address_country']['value'])){
+        $json_ld['address']['addressCountry']         =      $properties['address_country']['value'];
+    }
+
+    if(!empty($properties['telephone']['value'])){
+        $json_ld['telephone'] =      $properties['telephone']['value'];
+    }
+
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+     if(!empty($image)){
+         $json_ld['image']              =  $image;   
+     }
+
+     return $json_ld;
+
+}
+
 function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
     
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
@@ -327,7 +375,7 @@ function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type 
 function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
     if(!empty($properties['title']['value'])){
        $json_ld['title'] =      $properties['title']['value'];
@@ -424,7 +472,7 @@ function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_
 function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
@@ -453,7 +501,71 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
 function smpg_get_videoobject_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+     if(!empty($properties['video_name']['value'])){
+        $json_ld['name'] =      $properties['video_name']['value'];
+     }
+     if(!empty($properties['description']['value'])){
+         $json_ld['description'] =      $properties['description']['value'];
+     }
+     if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+     }
+     if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
+     }
+     if(!empty($properties['content_url']['value'])){
+        $json_ld['contentUrl'] =      $properties['content_url']['value'];
+     }
+     if(!empty($properties['embed_url']['value'])){
+        $json_ld['embedUrl '] =      $properties['embed_url']['value'];
+     }
+     if(!empty($properties['upload_date']['value'])){
+        $json_ld['uploadDate'] =      $properties['upload_date']['value'];
+     }
+     $duration = '';
+     if(!empty($properties['hours']['value'])){
+        $duration .=      $properties['hours']['value'].'H';
+     }
+     if(!empty($properties['minutes']['value'])){
+        $duration .=      $properties['minutes']['value'].'M';
+     }
+     if(!empty($properties['seconds']['value'])){
+        $duration .=      $properties['seconds']['value'].'S';
+     }
+     if($duration){
+        $json_ld['duration']              =  'PT'.$duration;    
+     }
+    $image = smpg_make_the_image_json($properties['image']['value'], false);
+
+    if(!empty($image)){
+        $json_ld['thumbnailUrl']              =  $image;   
+    }
+    if(!empty($properties['author_type']['value'])){
+        $json_ld['author']['@type']    = $properties['author_type']['value']; 
+    }
+    if(!empty($properties['author_name']['value'])){
+        $json_ld['author']['name']     = $properties['author_name']['value']; 
+    }                
+    if(!empty($properties['publisher_name']['value'])){
+        $json_ld['publisher']['@type'] = 'Organization'; 
+        $json_ld['publisher']['name']  = $properties['publisher_name']['value'];    
+    }
+
+    $logo  = smpg_make_the_logo_json($properties['publisher_logo']['value']);
+
+    if(!empty($logo)){
+        $json_ld['publisher']['logo']  = $logo;  
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_audioobject_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
      if(!empty($properties['video_name']['value'])){
         $json_ld['name'] =      $properties['video_name']['value'];
@@ -517,7 +629,7 @@ function smpg_get_videoobject_individual_json_ld( $json_ld, $properties, $schema
 function smpg_get_qna_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
     $json_ld['mainEntity']['@type'] = 'Question';
 
@@ -552,7 +664,7 @@ function smpg_get_qna_individual_json_ld( $json_ld, $properties, $schema_type ){
 function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
         
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
@@ -587,11 +699,27 @@ function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
 
     return $json_ld;
 }
+function smpg_get_custom_schema_individual_json_ld( $json_ld, $properties, $schema_type ) {
 
+    if ( ! empty ( $properties['editor']['value'] ) ) {
+
+        $js_decoded = json_decode( $properties['editor']['value'], true );
+        
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+
+            $json_ld = $js_decoded;
+
+        }
+
+    }
+
+    return $json_ld;
+
+}
 function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
@@ -714,7 +842,7 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
 function smpg_get_howto_individual_json_ld( $json_ld, $properties, $schema_type){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
@@ -808,7 +936,7 @@ function smpg_get_howto_individual_json_ld( $json_ld, $properties, $schema_type)
 function smpg_get_softwareapplication_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
@@ -837,10 +965,226 @@ function smpg_get_softwareapplication_individual_json_ld( $json_ld, $properties,
    return $json_ld;
 }
 
+function smpg_get_imagegallery_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_mediagallery_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_imageobject_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_photograph_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_apartment_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_house_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_singlefamilyresidence_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_mobileapplication_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_trip_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_musicplaylist_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_musicalbum_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
+function smpg_get_liveblogposting_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
 function smpg_get_product_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
@@ -1017,12 +1361,17 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
         if(!empty($properties['keywords']['value'])){
             $json_ld['keywords']           = $properties['keywords']['value'];   
         }
-        if(!empty($properties['word_count']['value'])){
-            $json_ld['wordCount']          = $properties['word_count']['value'];   
-        }
-        if(!empty($properties['article_section']['value'])){
-            $json_ld['articleSection']     = $properties['article_section']['value'];   
-        }            
+
+        if ( $schema_type != 'creativework' ) {
+
+            if(!empty($properties['word_count']['value'])){
+                $json_ld['wordCount']          = $properties['word_count']['value'];   
+            }
+            if(!empty($properties['article_section']['value'])){
+                $json_ld['articleSection']     = $properties['article_section']['value'];   
+            }
+        }        
+
         if(!empty($properties['in_language']['value'])){
             $json_ld['inLanguage']         = $properties['in_language']['value'];
         }
@@ -1066,7 +1415,7 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
 function smpg_get_faq_individual_json_ld( $json_ld, $properties, $schema_type ){
 
         $json_ld['@context']         = smpg_get_context_url();
-        $json_ld['@type']            = smpg_get_schema_type_text($schema_type);
+        $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
             $main_entity = [];
             $data        = [];

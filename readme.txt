@@ -62,57 +62,138 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
 
-### Schema Package Supported Schema Types
+== Schema Package Supported Schema Types ==
 
-We support all schema types available on Schema.org. If a schema type is missing in the Schema Package plugin, feel free to request it!
+The Schema Package plugin supports a wide range of Schema.org types, covering various industries and use cases. Below is the complete list:
 
-* Article : [schema.org url](https://schema.org/Article)
-* BlogPosting : [BlogPosting](https://schema.org/BlogPosting)
-* NewsArticle : [schema.org url](https://schema.org/NewsArticle)
-* TechArticle : [schema.org url](https://schema.org/TechArticle)
-* HowTo : [schema.org url](https://schema.org/HowTo)
-* FAQPage : [schema.org url](https://schema.org/FAQPage)
-* QAPage : [schema.org url](https://schema.org/QAPage)
-* Book : [schema.org url](https://schema.org/Book)
-* Course : [schema.org url](https://schema.org/Course)
-* JobPosting : [schema.org url](https://schema.org/JobPosting)
-* LocalBusiness : [schema.org url](https://schema.org/LocalBusiness)
-* Store : [schema.org url](https://schema.org/Store)
-* Bakery : [schema.org url](https://schema.org/Bakery)
-* BarOrPub : [schema.org url](https://schema.org/BarOrPub)
-* CafeOrCoffeeShop : [schema.org url](https://schema.org/CafeOrCoffeeShop)
-* FastFoodRestaurant : [schema.org url](https://schema.org/FastFoodRestaurant)
-* IceCreamShop : [schema.org url](https://schema.org/IceCreamShop)
-* Restaurant : [schema.org url](https://schema.org/Restaurant)
-* Event : [schema.org url](https://schema.org/Event)
-* Recipe : [schema.org url](https://schema.org/Recipe)
-* VideoObject : [schema.org url](https://schema.org/VideoObject)
-* SoftwareApplication : [schema.org url](https://schema.org/SoftwareApplication)
-* Product : [schema.org url](https://schema.org/Product)
-* Service : [schema.org url](https://schema.org/Service)
-* FinancialProduct : [schema.org url](https://schema.org/FinancialProduct)
-* BroadcastService : [schema.org url](https://schema.org/BroadcastService)
-* CableOrSatelliteService : [schema.org url](https://schema.org/CableOrSatelliteService)
-* FoodService : [schema.org url](https://schema.org/FoodService)
-* GovernmentService : [schema.org url](https://schema.org/GovernmentService)
-* TaxiService : [schema.org url](https://schema.org/TaxiService)
-* WebAPI : [schema.org url](https://schema.org/WebAPI)
-* BreadcrumbList : [schema.org url](https://schema.org/BreadcrumbList)
-* ItemList : [schema.org url](https://schema.org/ItemList)
-* LiveBlogPosting : [schema.org url](https://schema.org/LiveBlogPosting)
-* MusicAlbum : [schema.org url](https://schema.org/MusicAlbum)
-* MusicPlaylist : [schema.org url](https://schema.org/MusicPlaylist)
-* Trip : [schema.org url](https://schema.org/Trip)
-* MobileApplication : [schema.org url](https://schema.org/MobileApplication)
-* SingleFamilyResidence : [schema.org url](https://schema.org/SingleFamilyResidence)
-* House : [schema.org url](https://schema.org/House)
-* Apartment : [schema.org url](https://schema.org/Apartment)
-* Photograph : [schema.org url](https://schema.org/Photograph)
-* ImageObject : [schema.org url](https://schema.org/ImageObject)
-* MediaGallery : [schema.org url](https://schema.org/MediaGallery)
-* imagegallery : [schema.org url](https://schema.org/imagegallery)
-* Comment : [schema.org url](https://schema.org/Comment)
-* AudioObject : [schema.org url](https://schema.org/AudioObject)
+=== 1. Organization & Business ===
+- [Organization](https://schema.org/Organization)
+- [LocalBusiness](https://schema.org/LocalBusiness)
+- [Corporation](https://schema.org/Corporation)
+- [NGO](https://schema.org/NGO)
+- [GovernmentOrganization](https://schema.org/GovernmentOrganization)
+- [EducationalOrganization](https://schema.org/EducationalOrganization)
+- [MedicalOrganization](https://schema.org/MedicalOrganization)
+- [SportsOrganization](https://schema.org/SportsOrganization)
+- [Store](https://schema.org/Store)
+
+=== 2. Website & Content ===
+- [WebSite](https://schema.org/WebSite)
+- [WebPage](https://schema.org/WebPage)
+- [Article](https://schema.org/Article)
+- [NewsArticle](https://schema.org/NewsArticle)
+- [BlogPosting](https://schema.org/BlogPosting)
+- [FAQPage](https://schema.org/FAQPage)
+- [HowTo](https://schema.org/HowTo)
+- [BreadcrumbList](https://schema.org/BreadcrumbList)
+- [ItemList](https://schema.org/ItemList)
+- [LiveBlogPosting](https://schema.org/LiveBlogPosting)
+- [QAPage](https://schema.org/QAPage)
+- [TechArticle](https://schema.org/TechArticle)
+- [Comment](https://schema.org/Comment)
+
+=== 3. E-commerce & Products ===
+- [Product](https://schema.org/Product)
+- [Offer](https://schema.org/Offer)
+- [AggregateOffer](https://schema.org/AggregateOffer)
+- [Brand](https://schema.org/Brand)
+- [Review](https://schema.org/Review)
+- [AggregateRating](https://schema.org/AggregateRating)
+- [Service](https://schema.org/Service)
+- [FinancialProduct](https://schema.org/FinancialProduct)
+
+=== 4. Events ===
+- [Event](https://schema.org/Event)
+- [BusinessEvent](https://schema.org/BusinessEvent)
+- [EducationEvent](https://schema.org/EducationEvent)
+- [Festival](https://schema.org/Festival)
+- [MusicEvent](https://schema.org/MusicEvent)
+- [SportsEvent](https://schema.org/SportsEvent)
+- [TheaterEvent](https://schema.org/TheaterEvent)
+- [VisualArtsEvent](https://schema.org/VisualArtsEvent)
+- [ExhibitionEvent](https://schema.org/ExhibitionEvent)
+- [CourseInstance](https://schema.org/CourseInstance)
+
+=== 5. Jobs & Employment ===
+- [JobPosting](https://schema.org/JobPosting)
+- [Occupation](https://schema.org/Occupation)
+- [EmployeeRole](https://schema.org/EmployeeRole)
+- [WorkBasedProgram](https://schema.org/WorkBasedProgram)
+
+=== 6. People & Personal Profiles ===
+- [Person](https://schema.org/Person)
+- [Author](https://schema.org/Person)
+- [Celebrity](https://schema.org/Person)
+- [Teacher](https://schema.org/Person)
+- [Parent](https://schema.org/Person)
+- [Patient](https://schema.org/Person)
+- [Musician](https://schema.org/Musician)
+- [Actor](https://schema.org/Person)
+- [Athlete](https://schema.org/Person)
+- [Politician](https://schema.org/Person)
+
+=== 7. Health & Medical ===
+- [MedicalOrganization](https://schema.org/MedicalOrganization)
+- [Hospital](https://schema.org/Hospital)
+- [Physician](https://schema.org/Physician)
+- [Clinic](https://schema.org/MedicalClinic)
+- [MedicalProcedure](https://schema.org/MedicalProcedure)
+- [MedicalCondition](https://schema.org/MedicalCondition)
+- [Drug](https://schema.org/Drug)
+
+=== 8. Recipes & Food ===
+- [Recipe](https://schema.org/Recipe)
+- [Cookbook](https://schema.org/Book)
+- [Menu](https://schema.org/Menu)
+- [Restaurant](https://schema.org/Restaurant)
+- [CafeOrCoffeeShop](https://schema.org/CafeOrCoffeeShop)
+- [FoodEstablishment](https://schema.org/FoodEstablishment)
+- [Bakery](https://schema.org/Bakery)
+- [BarOrPub](https://schema.org/BarOrPub)
+- [FastFoodRestaurant](https://schema.org/FastFoodRestaurant)
+- [IceCreamShop](https://schema.org/IceCreamShop)
+- [FoodService](https://schema.org/FoodService)
+
+=== 9. Real Estate & Property ===
+- [RealEstateListing](https://schema.org/RealEstateListing)
+- [Apartment](https://schema.org/Apartment)
+- [House](https://schema.org/House)
+- [SingleFamilyResidence](https://schema.org/SingleFamilyResidence)
+
+=== 10. Travel & Transportation ===
+- [Flight](https://schema.org/Flight)
+- [Trip](https://schema.org/Trip)
+- [TouristTrip](https://schema.org/TouristTrip)
+- [TaxiService](https://schema.org/TaxiService)
+
+=== 11. Education & Courses ===
+- [EducationalOrganization](https://schema.org/EducationalOrganization)
+- [School](https://schema.org/School)
+- [CollegeOrUniversity](https://schema.org/CollegeOrUniversity)
+- [Course](https://schema.org/Course)
+- [CourseInstance](https://schema.org/CourseInstance)
+
+=== 12. Media & Entertainment ===
+- [Book](https://schema.org/Book)
+- [Movie](https://schema.org/Movie)
+- [TVSeries](https://schema.org/TVSeries)
+- [MusicAlbum](https://schema.org/MusicAlbum)
+- [MusicPlaylist](https://schema.org/MusicPlaylist)
+- [VideoObject](https://schema.org/VideoObject)
+- [AudioObject](https://schema.org/AudioObject)
+- [BroadcastService](https://schema.org/BroadcastService)
+- [CableOrSatelliteService](https://schema.org/CableOrSatelliteService)
+
+=== 13. Technology & Software ===
+- [SoftwareApplication](https://schema.org/SoftwareApplication)
+- [MobileApplication](https://schema.org/MobileApplication)
+- [WebAPI](https://schema.org/WebAPI)
+
+=== 14. Visual & Image Content ===
+- [ImageObject](https://schema.org/ImageObject)
+- [MediaGallery](https://schema.org/MediaGallery)
+- [ImageGallery](https://schema.org/ImageGallery)
+- [Photograph](https://schema.org/Photograph)
 
 
 ### Schema package automation and compatibility with plugins.

@@ -48,5 +48,6 @@ export const schemaTypes = [
     { key: 46, value: 'imageobject', text: 'ImageObject' },
     { key: 47, value: 'mediagallery', text: 'MediaGallery' },
     { key: 48, value: 'imagegallery', text: 'ImageGallery' },
-    { key: 49, value: 'creativework', text: 'CreativeWork' }
+    { key: 49, value: 'creativework', text: 'CreativeWork' },
+    { key: 50, value: 'review', text: 'Review' },
 ];

@@ -1073,6 +1073,90 @@ function smpg_get_house_individual_json_ld( $json_ld, $properties, $schema_type 
    return $json_ld;
 }
 
+function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['review_body']['value'])){
+        $json_ld['reviewBody'] =      $properties['review_body']['value'];
+    }
+    if(!empty($properties['item_reviewed']['value'])){
+        $json_ld['itemReviewed']['@type'] =      $properties['item_reviewed']['value'];
+    }
+    if(!empty($properties['name']['value'])){
+       $json_ld['itemReviewed']['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['itemReviewed']['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['itemReviewed']['description'] =      $properties['description']['value'];
+    }
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+    if(!empty($image)){
+        $json_ld['itemReviewed']['image']              =  $image;   
+    }
+    if(!empty($properties['street_address']['value'])){
+        $json_ld['itemReviewed']['address']['@type']                = 'PostalAddress';
+        $json_ld['itemReviewed']['address']['streetAddress']         =      $properties['street_address']['value'];
+    }
+    if(!empty($properties['address_locality']['value'])){
+        $json_ld['itemReviewed']['address']['addressLocality']         =      $properties['address_locality']['value'];
+    }
+    if(!empty($properties['postal_code']['value'])){
+        $json_ld['itemReviewed']['address']['postalCode']         =      $properties['postal_code']['value'];
+    }
+    if(!empty($properties['address_region']['value'])){
+        $json_ld['itemReviewed']['address']['addressRegion']         =      $properties['address_region']['value'];
+    }
+    if(!empty($properties['address_country']['value'])){
+        $json_ld['itemReviewed']['address']['addressCountry']         =      $properties['address_country']['value'];
+    }
+
+    if(!empty($properties['telephone']['value'])){
+        $json_ld['itemReviewed']['telephone'] =      $properties['telephone']['value'];
+    }
+    if(!empty($properties['price_range']['value'])){
+        $json_ld['itemReviewed']['priceRange'] =      $properties['price_range']['value'];
+    }    
+    if(!empty($properties['author_type']['value'])){
+        $json_ld['author']['@type']    = $properties['author_type']['value']; 
+    }
+    if(!empty($properties['author_name']['value'])){
+        $json_ld['author']['name']     = $properties['author_name']['value']; 
+    }                
+    if(!empty($properties['publisher_name']['value'])){
+        $json_ld['publisher']['@type'] = 'Organization'; 
+        $json_ld['publisher']['name']  = $properties['publisher_name']['value'];    
+    }
+
+    $logo  = smpg_make_the_logo_json($properties['publisher_logo']['value']);
+
+    if(!empty($logo)){
+        $json_ld['publisher']['logo']  = $logo;  
+    }
+     
+    if(!empty($properties['rating_value']['value'])){
+        $json_ld['reviewRating']['@type']       =      'Rating';
+        $json_ld['reviewRating']['ratingValue'] =      $properties['rating_value']['value'];
+    }
+
+    if(!empty($properties['worst_rating']['value'])){        
+        $json_ld['reviewRating']['worstRating'] =      $properties['worst_rating']['value'];
+    }
+    if(!empty($properties['best_rating']['value'])){        
+        $json_ld['reviewRating']['bestRating'] =      $properties['best_rating']['value'];
+    }
+    if(!empty($properties['review_aspect']['value'])){
+        $json_ld['reviewRating']['reviewAspect'] =      $properties['review_aspect']['value'];
+    }
+
+   return $json_ld;
+   
+}
+
 function smpg_get_singlefamilyresidence_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();

@@ -4,10 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function smpg_mapping_properties( $json_ld, $schema_data ) {
     
-    $mp_values = [];
+    $mp_values = $properties = [];
 
     if ( ! empty ( $schema_data['_mapped_properties_value'][0] ) ){
+
         $mp_values = unserialize( $schema_data['_mapped_properties_value'][0] );
+        
+        $properties = smpg_get_schema_properties( $schema_data['_schema_type'][0] );
+                
     }
     
     if ( ! empty( $mp_values ) ) {

@@ -2,7 +2,44 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter('smpg_change_jobposting_json_ld', 'smpg_jobposting_automation',10,3);
+add_filter('smpg_filter_review_json_ld', 'smpg_review_automation',10,3);
+
+function smpg_review_automation( $json_ld, $schema_data, $post_id ){
+
+    global $smpg_plugin_list;
+
+    if(!empty($schema_data['_automation_with'][0])){
+
+        $automation = unserialize($schema_data['_automation_with'][0]);
+
+        if ( in_array("absolutereviews", $automation) && isset($smpg_plugin_list['absolutereviews']['is_active']) ){
+
+            $json_ld = smpg_get_absolutereviews_json_ld($json_ld, $post_id);
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
+
+        $abr_settings        = get_post_meta( $post_id, '_abr_review_settings', true );
+
+        if ( ! empty( $abr_settings ) ) {
+
+            $json_ld['reviewRating']['@type']       =      'Rating';
+            $json_ld['reviewRating']['ratingValue'] =      5;
+            $json_ld['reviewRating']['worstRating'] =      1;
+            $json_ld['reviewRating']['bestRating']  =      5;
+
+        }
+                                    
+        return $json_ld;
+}
+
+add_filter('smpg_filter_jobposting_json_ld', 'smpg_jobposting_automation',10,3);
 
 function smpg_jobposting_automation( $json_ld, $schema_data, $post_id ){
 
@@ -74,7 +111,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
     return $json_ld;
 }
 
-add_filter('smpg_change_book_json_ld', 'smpg_book_automation',10,3);
+add_filter('smpg_filter_book_json_ld', 'smpg_book_automation',10,3);
 
 function smpg_book_automation( $json_ld, $schema_data, $post_id ){
 
@@ -280,7 +317,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
     return $json_ld;
 }
 
-add_filter('smpg_change_faqpage_json_ld', 'smpg_faqpage_automation',10,3);
+add_filter('smpg_filter_faqpage_json_ld', 'smpg_faqpage_automation',10,3);
 
 function smpg_faqpage_automation( $json_ld, $schema_data, $post_id ){
 
@@ -806,7 +843,7 @@ function smpg_get_accordionfaq_json_ld($json_ld, $post_id){
     return $json_ld;
 }
 
-add_filter('smpg_change_product_json_ld', 'smpg_woocommerce_product_singular_automation',10,3);
+add_filter('smpg_filter_product_json_ld', 'smpg_woocommerce_product_singular_automation',10,3);
 
 /* WooCommerce Plugin By Automattic
    Plugin URL : https://wordpress.org/plugins/woocommerce/

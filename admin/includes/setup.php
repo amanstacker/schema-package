@@ -49,6 +49,16 @@ function smpg_load_smpg_plugin_list_settings() {
 		'slug_pro_v'  		=> 'mooberry-book-manager/mooberry-book-manager.php',
 		'wp_org_url'  		=> 'https://wordpress.org/plugins/mooberry-book-manager'
 	];
+
+	$smpg_plugin_list['absolutereviews'] = [
+		'is_active'   		=> false,
+		'has_own_json_ld' 	=> false,
+		'id'          		=> 'absolutereviews',
+		'name'        		=> 'Absolute Reviews',		
+		'slug_free_v' 		=> 'absolute-reviews/absolute-reviews.php',
+		'slug_pro_v'  		=> 'absolute-reviews/absolute-reviews.php',
+		'wp_org_url'  		=> 'https://wordpress.org/plugins/absolute-reviews/'
+	];
 		
 	$smpg_plugin_list['brandforwoocommerce'] = [
 		'is_active'   		=> false,
@@ -507,6 +517,7 @@ function smpg_get_schema_type_text( $id ) {
 		'mediagallery'              => 'MediaGallery',
 		'imagegallery'              => 'ImageGallery',
 		'creativework'              => 'CreativeWork',
+		'review'                    => 'Review',
 
 	];	
 

@@ -887,7 +887,13 @@ class SMPG_Api_Mapper {
         
         case 'book':      
 
-          $automate_supports = [ 'mooberrybookmanager'];          
+          $automate_supports = [ 'mooberrybookmanager' ];          
+
+          break;
+
+        case 'review':      
+
+          $automate_supports = [ 'absolutereviews' ];          
 
           break;
         case 'faqpage':

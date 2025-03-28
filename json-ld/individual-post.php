@@ -1081,6 +1081,9 @@ function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type
     if(!empty($properties['review_body']['value'])){
         $json_ld['reviewBody'] =      $properties['review_body']['value'];
     }
+    if(!empty($properties['date_published']['value'])){
+        $json_ld['datePublished']      = $properties['date_published']['value'];
+    }
     if(!empty($properties['item_reviewed']['value'])){
         $json_ld['itemReviewed']['@type'] =      $properties['item_reviewed']['value'];
     }
@@ -1120,6 +1123,20 @@ function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type
     }
     if(!empty($properties['price_range']['value'])){
         $json_ld['itemReviewed']['priceRange'] =      $properties['price_range']['value'];
+    }    
+    if(!empty($properties['offer_price']['value'])){
+        $json_ld['itemReviewed']['offers']['@type']         = 'Offer';
+        $json_ld['itemReviewed']['offers']['price']         = $properties['offer_price']['value'];
+    }    
+    if(!empty($properties['offer_currency']['value'])){
+        $json_ld['itemReviewed']['offers']['priceCurrency'] = $properties['offer_currency']['value'];
+    }
+
+    if(!empty($properties['seller_type']['value'])){
+        $json_ld['itemReviewed']['offers']['seller']['@type']    = $properties['seller_type']['value']; 
+    }
+    if(!empty($properties['seller_name']['value'])){
+        $json_ld['itemReviewed']['offers']['seller']['name']    = $properties['seller_name']['value']; 
     }    
     if(!empty($properties['author_type']['value'])){
         $json_ld['author']['@type']    = $properties['author_type']['value']; 

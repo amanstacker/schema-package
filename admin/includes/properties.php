@@ -340,12 +340,26 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'Person',
             'options'      => [
+                ''                 => 'Select',
                 'Person'           => 'Person',
                 'Organization'     => 'Organization',                        
             ],
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'The author type of this content'
+        ],
+        'seller_type' => [                                     
+            'label'       => 'Seller Type',
+            'type'        => 'select',
+            'value'       => 'Person',
+            'options'      => [
+                ''                 => 'Select',
+                'Person'           => 'Person',
+                'Organization'     => 'Organization',                        
+            ],
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'The seller type for the product'
         ],
         'employment_type' => [                          
             'label'       => 'Employment Type',                    
@@ -373,6 +387,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'The author name of this content'
+        ],
+        'seller_name' => [                                     
+            'placeholder' => 'Seller Name',                    
+            'label'       => 'Seller Name',                    
+            'type'        => 'text',
+            'value'       => '',            
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'The seller name for the product'
         ],
         'publisher_name' => [                        
             'placeholder' => 'Publisher Name',                    
@@ -1950,7 +1973,10 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     $postal_code['label']         = 'Item Reviewed Postal Code';
                     $address_country['label']     = 'Item Reviewed Country';
                     $image['label']               = 'Item Reviewed Image';
-
+                    $offer_price['label']          = 'Item Reviewed Price';
+                    $offer_currency['label']       = 'Item Reviewed Currency';
+                    $seller_type['label']          = 'Item Reviewed Seller Type';
+                    $seller_name['label']          = 'Item Reviewed Seller Name';                    
                     $name['parent']                = 'itemReviewed';
                     $description['parent']         = 'itemReviewed';
                     $price_range['parent']         = 'itemReviewed';
@@ -1973,7 +1999,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'review',
                         'text'              => 'Review',
                         'properties'        => [                                                      
-                            'review_body'      => $review_body,
+                            'review_body'         => $review_body,
+                            'date_published'      => $date_published,
                             'item_reviewed' =>  [
                                         'label'       => 'Item Reviewed',
                                         'type'        => 'select',
@@ -2004,7 +2031,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,
                             'description'      => $description,
                             'url'              => $url,
+                            'date_published'   => $date_published,
                             'price_range'      => $price_range,
+                            'offer_price'      => $offer_price,
+                            'offer_currency'   => $offer_currency,
+                            'seller_type'      => $seller_type,
+                            'seller_name'      => $seller_name,
                             'image'            => $image,
                             'street_address'   => $street_address,
                             'address_locality' => $address_locality,

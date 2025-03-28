@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.7
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,6 +121,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [WorkBasedProgram](https://schema.org/WorkBasedProgram)
 
 === 6. People & Personal Profiles ===
+- [ProfilePage](https://schema.org/ProfilePage)
 - [Person](https://schema.org/Person)
 - [Author](https://schema.org/Person)
 - [Celebrity](https://schema.org/Person)
@@ -450,6 +451,12 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.7 =
+
+* Feature : Added compatibility with the Absolute Reviews Plugin for Product and Review Schema types.
+* Feature : Added the Review Schema type as a parent.
+* Fixed   : Minor bug fixes.
 
 = 1.0.6 =
 

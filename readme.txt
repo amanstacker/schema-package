@@ -227,6 +227,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [SEOPress](https://wordpress.org/plugins/wp-seopress/)
 * [Advanced Custom Fields (ACF®)](https://wordpress.org/plugins/advanced-custom-fields/)
 * [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/)
+* [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 
 
 == Notes ==

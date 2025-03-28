@@ -1163,7 +1163,7 @@ function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type
     if(isset($properties['worst_rating']['value'])){        
         $json_ld['reviewRating']['worstRating'] =      $properties['worst_rating']['value'];
     }
-    if(isset($properties['best_rating']['value'])){        
+    if(isset($properties['best_rating']['value'])){
         $json_ld['reviewRating']['bestRating'] =      $properties['best_rating']['value'];
     }
     if(!empty($properties['review_aspect']['value'])){

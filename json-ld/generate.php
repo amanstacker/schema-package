@@ -113,6 +113,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                             
             break;
 
+        case 'review':
+
+            $json_ld = smpg_get_review_individual_json_ld($json_ld, $properties, $schema_type);            
+                            
+            break;
+
         case 'mobileapplication':
 
             $json_ld = smpg_get_mobileapplication_individual_json_ld($json_ld, $properties, $schema_type);            
@@ -348,6 +354,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
             $json_ld['url']              = smpg_get_permalink();
+            $json_ld['name']             = smpg_get_the_title();
+            $json_ld['description']      = smpg_get_description();    
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_product_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -445,6 +453,20 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_house_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'review':
+            $json_ld['@context']                         = smpg_get_context_url();
+            $json_ld['@type']                            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['reviewBody']                       = smpg_get_description();    
+            $json_ld['itemReviewed']['@type']            = 'Organization';
+            $json_ld['itemReviewed']['url']              = smpg_get_permalink();
+            $json_ld['itemReviewed']['name']             = smpg_get_the_title();
+            $json_ld['itemReviewed']['description']      = smpg_get_description();    
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_review_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 

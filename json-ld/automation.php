@@ -2,7 +2,95 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter('smpg_change_jobposting_json_ld', 'smpg_jobposting_automation',10,3);
+add_filter('smpg_filter_product_json_ld', 'smpg_review_automation',10,3);
+add_filter('smpg_filter_review_json_ld', 'smpg_review_automation',10,3);
+
+function smpg_review_automation( $json_ld, $schema_data, $post_id ){
+
+    global $smpg_plugin_list;
+
+    if(!empty($schema_data['_automation_with'][0])){
+
+        $automation = unserialize($schema_data['_automation_with'][0]);
+
+        if ( in_array("absolutereviews", $automation) && isset($smpg_plugin_list['absolutereviews']['is_active']) ){
+
+            $json_ld = smpg_get_absolutereviews_json_ld($json_ld, $post_id);
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
+
+        $abr_settings        = get_post_meta( $post_id, '_abr_review_settings', true );
+        $score_number        = get_post_meta( $post_id, '_abr_review_total_score_number', true );
+        $review_type         = get_post_meta( $post_id, '_abr_review_type', true );
+        $item_reviewed       = get_post_meta( $post_id, '_abr_review_schema_heading', true );
+        $review_body         = get_post_meta( $post_id, '_abr_review_schema_desc', true );
+
+        $best_rating         = 5;
+    
+            switch ( $review_type ) {
+                case 'percentage':
+                    $best_rating = 100;
+                    break;
+                case 'point-5':
+                    $best_rating = 5;
+                    break;
+                case 'point-10':
+                    $best_rating = 10;
+                    break;
+                case 'star':
+                    $best_rating = 5;
+                    break;
+        }
+        
+
+        if ( $json_ld['@type'] == 'Product' ) {
+
+                $json_ld['review']['@type']                       = 'Review';
+                $json_ld['review']['author']                      = smpg_get_author_detail();  
+                $json_ld['review']['datePublished']               = smpg_get_published_date();
+
+                if ( $review_body ) {
+                    $json_ld['review']['reviewBody'] = $review_body;
+                }
+
+                $json_ld['review']['reviewRating']['@type']       =      'Rating';
+                $json_ld['review']['reviewRating']['ratingValue'] =      $score_number;            
+                $json_ld['review']['reviewRating']['bestRating']  =      $best_rating;
+                $json_ld['review']['reviewRating']['worstRating'] =      0;
+            
+        }
+
+        if ( $json_ld['@type'] == 'Review' ) {
+
+            if ( $item_reviewed ) {            
+                $json_ld['itemReviewed']['@type'] = $item_reviewed;
+            }
+            if ( $review_body ) {
+                $json_ld['reviewBody'] = $review_body;
+            }                
+            
+            if ( ! empty( $abr_settings ) ) {
+    
+                $json_ld['reviewRating']['@type']       =      'Rating';
+                $json_ld['reviewRating']['ratingValue'] =      $score_number;            
+                $json_ld['reviewRating']['bestRating']  =      $best_rating;
+                $json_ld['reviewRating']['worstRating'] =      0;
+    
+            }
+
+        }        
+                                    
+        return $json_ld;
+}
+
+add_filter('smpg_filter_jobposting_json_ld', 'smpg_jobposting_automation',10,3);
 
 function smpg_jobposting_automation( $json_ld, $schema_data, $post_id ){
 
@@ -74,7 +162,7 @@ function smpg_get_simplejobboard_json_ld( $json_ld, $post_id ){
     return $json_ld;
 }
 
-add_filter('smpg_change_book_json_ld', 'smpg_book_automation',10,3);
+add_filter('smpg_filter_book_json_ld', 'smpg_book_automation',10,3);
 
 function smpg_book_automation( $json_ld, $schema_data, $post_id ){
 
@@ -280,7 +368,7 @@ function smpg_get_mooberrybookmanager_json_ld( $json_ld, $post_id ){
     return $json_ld;
 }
 
-add_filter('smpg_change_faqpage_json_ld', 'smpg_faqpage_automation',10,3);
+add_filter('smpg_filter_faqpage_json_ld', 'smpg_faqpage_automation',10,3);
 
 function smpg_faqpage_automation( $json_ld, $schema_data, $post_id ){
 
@@ -806,7 +894,7 @@ function smpg_get_accordionfaq_json_ld($json_ld, $post_id){
     return $json_ld;
 }
 
-add_filter('smpg_change_product_json_ld', 'smpg_woocommerce_product_singular_automation',10,3);
+add_filter('smpg_filter_product_json_ld', 'smpg_woocommerce_product_singular_automation',10,3);
 
 /* WooCommerce Plugin By Automattic
    Plugin URL : https://wordpress.org/plugins/woocommerce/

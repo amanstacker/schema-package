@@ -61,6 +61,42 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => ''        
+        ],
+        'rating_value' => [                        
+            'placeholder' => '5',                    
+            'label'       => 'Rating Value',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
+        ],
+        'worst_rating' => [             
+            'placeholder' => '0',                    
+            'label'       => 'Worst Rating',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
+        ],
+        'best_rating' => [                        
+            'placeholder' => '5',                    
+            'label'       => 'Best Rating',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
+        ],
+        'review_aspect' => [                        
+            'placeholder' => 'Ambiance',                    
+            'label'       => 'Review Aspect',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
         ],        
         'street_address' => [                        
             'placeholder' => '555 Clancy St',                    
@@ -115,6 +151,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
+        ],
+        'price_range' => [
+            'placeholder' => '$$$',                    
+            'label'       => 'Price Range',                    
+            'type'        => 'text',                                                
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Price Range of an item'        
         ],
         'email' => [
             'placeholder' => 'Enter Email',
@@ -178,6 +223,16 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'A description of the item.'
+        ],
+        'review_body' => [                        
+            'placeholder' => 'Review Body Text',                    
+            'label'       => 'Review Body',                    
+            'type'        => 'textarea',
+            'class'       => ['smpg_common_properties'],
+            'value'       => smpg_get_description( $post_id ),
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Review body content'
         ],
         'video_description' => [                        
             'placeholder' => 'Description',                    
@@ -285,12 +340,26 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'type'        => 'select',
             'value'       => 'Person',
             'options'      => [
+                ''                 => 'Select',
                 'Person'           => 'Person',
                 'Organization'     => 'Organization',                        
             ],
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'The author type of this content'
+        ],
+        'seller_type' => [                                     
+            'label'       => 'Seller Type',
+            'type'        => 'select',
+            'value'       => 'Person',
+            'options'      => [
+                ''                 => 'Select',
+                'Person'           => 'Person',
+                'Organization'     => 'Organization',                        
+            ],
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'The seller type for the product'
         ],
         'employment_type' => [                          
             'label'       => 'Employment Type',                    
@@ -318,6 +387,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'The author name of this content'
+        ],
+        'seller_name' => [                                     
+            'placeholder' => 'Seller Name',                    
+            'label'       => 'Seller Name',                    
+            'type'        => 'text',
+            'value'       => '',            
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'The seller name for the product'
         ],
         'publisher_name' => [                        
             'placeholder' => 'Publisher Name',                    
@@ -700,6 +778,24 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'fastfoodrestaurant'       => 'FastFoodRestaurant',  
         'icecreamshop'             => 'IceCreamShop',  
         'restaurant'               => 'Restaurant',
+    ];
+
+    $reviews_elements = [
+        'name'                => $name,
+        'date_published'      => $date_published,
+        'author_name'         => $author_name,
+        'review_body'         => $review_body,
+        'rating_value'        => $rating_value,
+        'best_rating'         => $best_rating,
+        'worst_rating'        => $worst_rating,
+    ];
+
+    $reviews  =   [                            
+                'label'         => 'Reviews',    
+                'button_text'   => 'Add More Reviews', 
+                'type'          => 'repeater',
+                'display'       => true, 
+                'elements'      => [ $reviews_elements ]
     ];
 
     switch ( $schema_id ) {
@@ -1199,13 +1295,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
                                 'telephone'          => $telephone,
-                                'price_range'          => [
-                                    'label'       => 'Price Range',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '$$$',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'price_range'        => $price_range,
                                 'latitude'           => $latitude,
                                 'longitude'          => $longitude,
                                 'opening_hours' => [                            
@@ -1368,13 +1458,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'postal_code'        => $postal_code,
                                 'address_country'    => $address_country,
                                 'telephone'          => $telephone,
-                                'price_range'          => [
-                                    'label'       => 'Price Range',                    
-                                    'type'        => 'text',                                    
-                                    'placeholder' => '$$$',                    
-                                    'value'       => '',
-                                    'display'     => true
-                                ],
+                                'price_range'        => $price_range,
                                 'brand'                  => $brand,     
                                 'offer_type'             => $offer_type,                                                   
                                 'offer_price'            => $offer_price,
@@ -1894,6 +1978,102 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     ];                    
                     break;    
 
+                case 'review':  
+                    
+                    $name['label']                = 'Item Reviewed Name';
+                    $description['label']         = 'Item Reviewed Description';
+                    $price_range['label']         = 'Item Reviewed Price Range';
+                    $telephone['label']           = 'Item Reviewed Telephone';
+                    $url['label']                 = 'Item Reviewed URL';
+                    $street_address['label']      = 'Item Reviewed Street Address';
+                    $address_locality['label']    = 'Item Reviewed Locality';
+                    $address_region['label']      = 'Item Reviewed Region';
+                    $postal_code['label']         = 'Item Reviewed Postal Code';
+                    $address_country['label']     = 'Item Reviewed Country';
+                    $image['label']               = 'Item Reviewed Image';
+                    $offer_price['label']          = 'Item Reviewed Price';
+                    $offer_currency['label']       = 'Item Reviewed Currency';
+                    $seller_type['label']          = 'Item Reviewed Seller Type';
+                    $seller_name['label']          = 'Item Reviewed Seller Name';                    
+                    $name['parent']                = 'itemReviewed';
+                    $description['parent']         = 'itemReviewed';
+                    $price_range['parent']         = 'itemReviewed';
+                    $telephone['parent']           = 'itemReviewed';
+                    $url['parent']                 = 'itemReviewed';
+                    $street_address['parent']      = 'itemReviewed';
+                    $address_locality['parent']    = 'itemReviewed';
+                    $address_region['parent']      = 'itemReviewed';
+                    $postal_code['parent']         = 'itemReviewed';
+                    $address_country['parent']     = 'itemReviewed';
+                    $image['parent']               = 'itemReviewed';
+
+                                                                                                                                                                                                                 
+
+                    $properties = [
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'review',
+                        'text'              => 'Review',
+                        'properties'        => [                                                      
+                            'review_body'         => $review_body,
+                            'date_published'      => $date_published,
+                            'item_reviewed' =>  [
+                                        'label'       => 'Item Reviewed',
+                                        'type'        => 'select',
+                                        'value'       => 'LocalBusiness',
+                                        'options'     => [
+                                                ''                       => 'Select',
+                                                'Book'                   => 'Book',
+                                                'Course'                 => 'Course',
+                                                'CreativeWorkSeason'     => 'CreativeWorkSeason',
+                                                'CreativeWorkSeries'     => 'CreativeWorkSeries',
+                                                'Episode'                => 'Episode',
+                                                'Event'                  => 'Event',
+                                                'Game'                   => 'Game',
+                                                'LocalBusiness'          => 'LocalBusiness',                                                
+                                                'MediaObject'            => 'MediaObject',  
+                                                'Movie'                  => 'Movie', 
+                                                'MusicPlaylist'          => 'MusicPlaylist', 
+                                                'MusicRecording'         => 'MusicRecording',
+                                                'Organization'           => 'Organization',
+                                                'Product'                => 'Product',
+                                                'Recipe'                 => 'Recipe',
+                                                'SoftwareApplication'    => 'SoftwareApplication',
+                                        ],
+                                        'recommended' => true,
+                                        'display'     => true,
+                                    'tooltip'     => 'Select Item Reviewwed type'
+                            ],                              
+                            'name'             => $name,
+                            'description'      => $description,
+                            'url'              => $url,
+                            'date_published'   => $date_published,
+                            'price_range'      => $price_range,
+                            'offer_price'      => $offer_price,
+                            'offer_currency'   => $offer_currency,
+                            'seller_type'      => $seller_type,
+                            'seller_name'      => $seller_name,
+                            'image'            => $image,
+                            'street_address'   => $street_address,
+                            'address_locality' => $address_locality,
+                            'address_region'   => $address_region,
+                            'postal_code'      => $postal_code,
+                            'address_country'  => $address_country,
+                            'telephone'        => $telephone,
+                            'rating_value'     => $rating_value,
+                            'worst_rating'     => $worst_rating,
+                            'best_rating'      => $best_rating,
+                            'review_aspect'    => $review_aspect,
+                            'author_type'      => $author_type,
+                            'author_name'      => $author_name,                            
+                            'publisher_name'   => $publisher_name,
+                            'publisher_logo'   => $publisher_logo                                                                      
+                        ]                      
+                    ];                    
+                    break;    
+
                 case 'audioobject':
 
                     $image['label']    = 'Thumbnail Images';
@@ -2231,7 +2411,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'offer_currency'         => $offer_currency,
                                 'offer_price_validuntil' => $offer_price_validuntil,                                                                      
                                 'offer_item_condition'   => $offer_item_condition,
-                                'offer_availability'     => $offer_availability                        
+                                'offer_availability'     => $offer_availability,
+                                'reviews'                => $reviews
                         ]                      
                     ];
         

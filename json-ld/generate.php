@@ -354,6 +354,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
             $json_ld['url']              = smpg_get_permalink();
+            $json_ld['name']             = smpg_get_the_title();
+            $json_ld['description']      = smpg_get_description();    
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_product_json_ld', $json_ld, $schema_data, $post_id ); 

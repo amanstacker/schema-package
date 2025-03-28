@@ -1160,10 +1160,10 @@ function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type
         $json_ld['reviewRating']['ratingValue'] =      $properties['rating_value']['value'];
     }
 
-    if(!empty($properties['worst_rating']['value'])){        
+    if(isset($properties['worst_rating']['value'])){        
         $json_ld['reviewRating']['worstRating'] =      $properties['worst_rating']['value'];
     }
-    if(!empty($properties['best_rating']['value'])){        
+    if(isset($properties['best_rating']['value'])){        
         $json_ld['reviewRating']['bestRating'] =      $properties['best_rating']['value'];
     }
     if(!empty($properties['review_aspect']['value'])){
@@ -1343,7 +1343,11 @@ function smpg_get_product_individual_json_ld( $json_ld, $properties, $schema_typ
     
          }
 
-     }     
+    }     
+
+    if ( ! empty( $properties['reviews']['elements'] ) ) {
+        $json_ld = smpg_prepare_reviews( $json_ld, $properties['reviews']['elements'] );
+    }
                     
     return $json_ld;
 }

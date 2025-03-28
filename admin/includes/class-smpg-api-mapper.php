@@ -881,13 +881,13 @@ class SMPG_Api_Mapper {
         case 'product':
         case 'softwareapplication':
 
-          $automate_supports = [ 'woocommerce', 'yotposreviews', 'ryviu', 'pbfwoocommerce', 'yithbrandwoocommerce', 'brandforwoocommerce' ];                    
+          $automate_supports = [ 'woocommerce', 'yotposreviews', 'ryviu', 'pbfwoocommerce', 'yithbrandwoocommerce', 'brandforwoocommerce', 'absolutereviews' ];                    
                  
           break;
         
         case 'book':      
 
-          $automate_supports = [ 'mooberrybookmanager' ];          
+          $automate_supports = [ 'mooberrybookmanager', 'absolutereviews' ];          
 
           break;
 

@@ -1003,35 +1003,36 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 
-            foreach ($schema_meta as $key => $value) {
+            foreach ( $schema_meta as $key => $value ) {
 
-                $schema                             = smpg_get_schema_properties($value['id'], $post_id, $tag_id);                
+                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id );
                 
-                if(!empty($schema)){
+                if ( ! empty( $schema ) ) {
 
-                    foreach($schema['properties'] as $pkey => $pval){
+                    foreach( $schema['properties'] as $pkey => $pval ) {
                         
-                        if($pval['type'] == 'repeater'){   
+                        if ( $pval['type'] == 'repeater' ) {   
                             
                             $new_elements = [];
 							$reptcount    = 1;
-							if(isset($value['properties'][$pkey]['elements'])){
-								$reptcount = count($value['properties'][$pkey]['elements']);
+
+							if ( isset( $value['properties'][$pkey]['elements'] ) ) {
+								$reptcount = count( $value['properties'][$pkey]['elements'] );
 							}
                             
-                            for( $i = 0; $i < $reptcount; $i++ ){
+                            for ( $i = 0; $i < $reptcount; $i++ ) {
                                 $new_elements[] = $schema['properties'][$pkey]['elements'][0];    
                             }
 
-                            foreach ($new_elements as $nkey => $nval) {
+                            foreach ( $new_elements as $nkey => $nval ) {
 
-                                    foreach ($nval as $zkey => $zval) {
+                                    foreach ( $nval as $zkey => $zval ) {
 
-										if($value['properties'][$pkey]['elements'][$nkey][$zkey]['value']){
+										if ( isset( $value['properties'][$pkey]['elements'][$nkey][$zkey]['value'] ) ) {
 											$new_elements[$nkey][$zkey]['value'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['value'];
 										}
 
-										if( is_array($value['properties'][$pkey]['elements'][$nkey][$zkey]) && array_key_exists( 'display',  $value['properties'][$pkey]['elements'][$nkey][$zkey]) ){
+										if ( is_array( $value['properties'][$pkey]['elements'][$nkey][$zkey] ) && array_key_exists( 'display',  $value['properties'][$pkey]['elements'][$nkey][$zkey] ) ) {
 											$new_elements[$nkey][$zkey]['display'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['display'];
 										}
 										                                        
@@ -1042,11 +1043,11 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 							
                         }else{
 
-							if($value['properties'][$pkey]['value']){
+							if( isset( $value['properties'][$pkey]['value'] ) ){
 								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];
 							}
 
-							if( is_array($value['properties'][$pkey]) && array_key_exists('display', $value['properties'][$pkey])){
+							if ( is_array( $value['properties'][$pkey]) && array_key_exists( 'display', $value['properties'][$pkey] ) ) {
 								$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
 							}
 							                            
@@ -1074,6 +1075,58 @@ function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, i
     }
 
     return $response;
+
+}
+
+function smpg_prepare_reviews( $json_ld, $reviews ) {
+	     
+	if ( ! empty( $reviews ) ) {
+
+		$response = [];
+
+        foreach ( $reviews as $val ) {
+
+            $data = [];
+
+            if ( $val['rating_value']['value'] ) {
+
+                $data['@type']          		      = 'Review';
+				$data['reviewRating']['@type']        = 'Rating';
+				$data['reviewRating']['ratingValue']  = $val['rating_value']['value'];
+
+				if ( isset ( $val['best_rating']['value'] ) ) {
+                    $data['reviewRating']['bestRating']  = $val['best_rating']['value'];
+                }
+				if ( isset( $val['worst_rating']['value'] ) ) {
+                    $data['reviewRating']['worstRating']  = $val['worst_rating']['value'];
+                }
+
+                $data['name'] 			= $val['name']['value'];
+                $data['reviewBody']     = $val['review_body']['value'];
+                $data['datePublished']  = $val['date_published']['value'];
+
+				if ( ! empty($val['author_name']['value'] ) ) {
+                    $data['author']['@type'] = 'Person'; 
+                    $data['author']['name']  = $val['author_name']['value'];                    
+                }
+                if ( ! empty( $val['author_name']['value'] ) ) {
+                    $data['author']['@type'] = 'Person'; 
+                    $data['author']['name']  = $val['author_name']['value'];                    
+                }
+                
+            }
+
+           $response[] =  $data;
+        }
+       
+		if ( count( $response ) > 1 ) {
+			$json_ld['review'] = $response;
+		}else{
+			$json_ld['review'] = $response[0];
+		}				
+    }
+	
+	return $json_ld;
 
 }
 

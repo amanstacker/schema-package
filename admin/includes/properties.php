@@ -71,8 +71,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => ''        
         ],
-        'worst_rating' => [                        
-            'placeholder' => '1',                    
+        'worst_rating' => [             
+            'placeholder' => '0',                    
             'label'       => 'Worst Rating',
             'type'        => 'number',
             'value'       => '',
@@ -778,6 +778,24 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'fastfoodrestaurant'       => 'FastFoodRestaurant',  
         'icecreamshop'             => 'IceCreamShop',  
         'restaurant'               => 'Restaurant',
+    ];
+
+    $reviews_elements = [
+        'name'                => $name,
+        'date_published'      => $date_published,
+        'author_name'         => $author_name,
+        'review_body'         => $review_body,
+        'rating_value'        => $rating_value,
+        'best_rating'         => $best_rating,
+        'worst_rating'        => $worst_rating,
+    ];
+
+    $reviews  =   [                            
+                'label'         => 'Reviews',    
+                'button_text'   => 'Add More Reviews', 
+                'type'          => 'repeater',
+                'display'       => true, 
+                'elements'      => [ $reviews_elements ]
     ];
 
     switch ( $schema_id ) {
@@ -2393,7 +2411,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'offer_currency'         => $offer_currency,
                                 'offer_price_validuntil' => $offer_price_validuntil,                                                                      
                                 'offer_item_condition'   => $offer_item_condition,
-                                'offer_availability'     => $offer_availability                        
+                                'offer_availability'     => $offer_availability,
+                                'reviews'                => $reviews
                         ]                      
                     ];
         

@@ -518,6 +518,7 @@ function smpg_get_schema_type_text( $id ) {
 		'imagegallery'              => 'ImageGallery',
 		'creativework'              => 'CreativeWork',
 		'review'                    => 'Review',
+		'profilepage'               => 'ProfilePage',
 
 	];	
 

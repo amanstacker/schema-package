@@ -247,6 +247,111 @@ function smpg_get_person_individual_json_ld( $json_ld, $properties, $schema_type
 
 }
 
+function smpg_get_profilepage_individual_json_ld( $json_ld, $properties, $schema_type ) {
+    
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+    
+    if(!empty($properties['date_created']['value'])){
+        $json_ld['dateCreated']       = $properties['date_created']['value'];
+    }
+    if(!empty($properties['date_modified']['value'])){
+        $json_ld['dateModified']       = $properties['date_modified']['value'];
+    }   
+    $json_ld['mainEntity']['@type']        =      'Person'; 
+    if(!empty($properties['name']['value'])){
+        $json_ld['mainEntity']['name']        =      $properties['name']['value'];
+    }
+    if(!empty($properties['alternate_name']['value'])){
+        $json_ld['mainEntity']['alternateName']  =      $properties['alternate_name']['value'];
+    }
+    if(!empty($properties['identifier']['value'])){
+        $json_ld['mainEntity']['identifier']        =      $properties['identifier']['value'];
+    }        
+    if(!empty($properties['url']['value'])){
+        $json_ld['mainEntity']['url'] =      $properties['url']['value'];
+    }    
+    if(!empty($properties['street_address']['value'])){
+        $json_ld['mainEntity']['address']['@type']                = 'PostalAddress';
+        $json_ld['mainEntity']['address']['streetAddress']         =      $properties['street_address']['value'];
+    }
+    if(!empty($properties['address_locality']['value'])){
+        $json_ld['mainEntity']['address']['addressLocality']         =      $properties['address_locality']['value'];
+    }
+    if(!empty($properties['postal_code']['value'])){
+        $json_ld['mainEntity']['address']['postalCode']         =      $properties['postal_code']['value'];
+    }
+    if(!empty($properties['address_region']['value'])){
+        $json_ld['mainEntity']['address']['addressRegion']         =      $properties['address_region']['value'];
+    }
+    if(!empty($properties['address_country']['value'])){
+        $json_ld['mainEntity']['address']['addressCountry']         =      $properties['address_country']['value'];
+    }
+
+    if(!empty($properties['telephone']['value'])){
+        $json_ld['mainEntity']['telephone'] =      $properties['telephone']['value'];
+    }
+
+    if(!empty($properties['social_links']['elements'])){
+        $same_as = [];
+        foreach ( $properties['social_links']['elements'] as $value ) {            
+            $same_as[] = $value['url']['value']; 
+        }
+        $json_ld['mainEntity']['sameAs'] = $same_as;
+    }
+
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+     if(!empty($image)){
+         $json_ld['mainEntity']['image']              =  $image;   
+     }
+
+     $statistic = [];
+
+     if ( ! empty( $properties['follow_count']['value'] ) ) {
+        $statistic[] =  [
+            '@type'                => 'InteractionCounter',
+            'interactionType'      => 'https://schema.org/FollowAction',
+            'userInteractionCount' => $properties['follow_count']['value'],
+        ];
+     }
+     if ( ! empty( $properties['like_count']['value'] ) ) {
+        $statistic[] =  [
+            '@type'                => 'InteractionCounter',
+            'interactionType'      => 'https://schema.org/LikeAction',
+            'userInteractionCount' => $properties['like_count']['value'],
+        ];
+     }
+     if ( ! empty( $properties['comment_count']['value'] ) ) {
+        $statistic[] =  [
+            '@type'                => 'InteractionCounter',
+            'interactionType'      => 'https://schema.org/CommentAction',
+            'userInteractionCount' => $properties['comment_count']['value'],
+        ];
+     }
+     if ( ! empty( $properties['share_count']['value'] ) ) {
+        $statistic[] =  [
+            '@type'                => 'InteractionCounter',
+            'interactionType'      => 'https://schema.org/ShareAction',
+            'userInteractionCount' => $properties['share_count']['value'],
+        ];
+     }
+     if ( ! empty( $properties['post_count']['value'] ) ) {
+        $statistic[] =  [
+            '@type'                => 'InteractionCounter',
+            'interactionType'      => 'https://schema.org/WriteAction',
+            'userInteractionCount' => $properties['post_count']['value'],
+        ];
+     }
+
+     if ( $statistic ) {
+        $json_ld['mainEntity']['interactionStatistic'] = $statistic;
+     }
+
+     return $json_ld;
+
+}
+
 function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
@@ -418,9 +523,9 @@ function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_
        $json_ld['hiringOrganization']['@type'] = 'Organization'; 
        $json_ld['hiringOrganization']['name']  = $properties['hiring_org_name']['value'];    
     }
-    if(!empty($properties['hiring_org_social_links']['elements'])){
+    if(!empty($properties['social_links']['elements'])){
         $same_as = [];
-        foreach ( $properties['hiring_org_social_links']['elements'] as $value ) {            
+        foreach ( $properties['social_links']['elements'] as $value ) {            
             $same_as[] = $value['url']['value']; 
         }
         $json_ld['hiringOrganization']['sameAs'] = $same_as;

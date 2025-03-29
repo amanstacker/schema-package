@@ -2339,8 +2339,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'properties'        => [
                                 'name'                 => $name, 
                                 'description'          => $description, 
-                                'url'                  => $url                                                                                          
-        
+                                'url'                  => $url,
+                                'image'                => $image                                                                                                  
                         ]                      
                     ];
         

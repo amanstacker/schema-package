@@ -1193,6 +1193,12 @@ function smpg_get_photograph_individual_json_ld( $json_ld, $properties, $schema_
     if(!empty($properties['description']['value'])){
         $json_ld['description'] =      $properties['description']['value'];
     }
+
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+    if(!empty($image)){
+        $json_ld['image']              =  $image;   
+    }
                            
    return $json_ld;
 }

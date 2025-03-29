@@ -62,7 +62,7 @@ function smpg_get_json_ld(){
     $post_id     = null;
     $response    = [];
 
-    if ( is_object( $post ) ) {
+    if ( is_object( $post ) && is_singular() ) {
         $post_id = $post->ID;
     }        
 
@@ -70,6 +70,11 @@ function smpg_get_json_ld(){
     
     if(!empty($breadcrumbs)){
         $response [] = $breadcrumbs;
+    }
+
+    $profilepage       = smpg_prepare_profilepage_json_ld();    
+    if(!empty($profilepage)){
+        $response [] = $profilepage;
     }
 
     $website       = smpg_prepare_website_json_ld();    
@@ -96,7 +101,7 @@ function smpg_get_json_ld(){
             
             if ( isset( $meta['is_enable'] ) && $meta['is_enable'] == 1 ) {
 
-                $particular_data = smpg_prepare_particular_post_json_ld( $meta, $post_id );
+                $particular_data = smpg_prepare_particular_post_json_ld( $meta, $post_id );                
 
                 if ( ! empty( $particular_data ) ) {
                     $response[] = $particular_data;
@@ -110,7 +115,7 @@ function smpg_get_json_ld(){
     //Singular schema markup addition
 
     if ( is_singular() ) {
-
+        
         $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
     
         if ( ! empty( $singular_schema_ids ) ) {

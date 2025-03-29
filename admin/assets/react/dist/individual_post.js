@@ -1222,6 +1222,10 @@ var schemaTypes = [{
   key: 51,
   value: 'profilepage',
   text: 'ProfilePage'
+}, {
+  key: 52,
+  value: 'webpage',
+  text: 'WebPage'
 }];
 
 /***/ })

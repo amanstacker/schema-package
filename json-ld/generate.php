@@ -203,6 +203,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                           
         break;
 
+        case 'webpage':
+            
+            $json_ld = smpg_get_webpage_individual_json_ld( $json_ld, $properties, $schema_type );            
+                          
+        break;
+
         case 'service':
         case 'broadcastservice':
         case 'cableorsatelliteservice':
@@ -330,6 +336,25 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             }
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_article_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'webpage':
+            
+            $json_ld['@context']                  = smpg_get_context_url();
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['url']                       = smpg_get_permalink();            
+            $json_ld['description']               = smpg_get_description();                     
+            $json_ld['inLanguage']                = smpg_get_inlanguage();
+
+            $image = smpg_get_image();
+
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld, $image );
+            }
+            
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_webpage_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 

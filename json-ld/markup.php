@@ -64,34 +64,7 @@ function smpg_get_json_ld(){
 
     if ( is_object( $post ) && is_singular() ) {
         $post_id = $post->ID;
-    }        
-
-    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
-    
-    if(!empty($breadcrumbs)){
-        $response [] = $breadcrumbs;
-    }
-
-    $profilepage       = smpg_prepare_profilepage_json_ld();    
-    if(!empty($profilepage)){
-        $response [] = $profilepage;
-    }
-
-    $website       = smpg_prepare_website_json_ld();    
-    if(!empty($website)){
-        $response [] = $website;
-    }
-
-    $about_page    = smpg_prepare_about_page_json_ld();
-    if(!empty($about_page)){
-        $response [] = $about_page;
-    }
-
-    $contact_page  = smpg_prepare_contact_page_json_ld();  
-
-    if(!empty($contact_page)){
-        $response [] = $contact_page;
-    }    
+    }                
     //Schema Package Generator schema markup addition
     $schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );        
     
@@ -162,6 +135,34 @@ function smpg_get_json_ld(){
         }
 
     }    
+    
+    //MISC Schema Output
+    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    
+    if(!empty($breadcrumbs)){
+        $response [] = $breadcrumbs;
+    }
+
+    $profilepage       = smpg_prepare_profilepage_json_ld();    
+    if(!empty($profilepage)){
+        $response [] = $profilepage;
+    }
+
+    $website       = smpg_prepare_website_json_ld();    
+    if(!empty($website)){
+        $response [] = $website;
+    }
+
+    $about_page    = smpg_prepare_about_page_json_ld();
+    if(!empty($about_page)){
+        $response [] = $about_page;
+    }
+
+    $contact_page  = smpg_prepare_contact_page_json_ld();  
+
+    if(!empty($contact_page)){
+        $response [] = $contact_page;
+    }
 
     return $response;
 }

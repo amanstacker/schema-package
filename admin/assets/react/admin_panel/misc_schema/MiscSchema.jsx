@@ -200,7 +200,7 @@ const MiscSchema = () => {
           : ''
         }        
         <tr>
-          <td><label htmlFor="breadcrumbs"><strong>{__('BreadCrumbs', 'schema-package')}</strong></label></td>
+          <td><label htmlFor="breadcrumbs"><strong>{__('Breadcrumbs', 'schema-package')}</strong></label></td>
           <td>
                 <Checkbox                     
                       name='breadcrumbs'
@@ -212,7 +212,7 @@ const MiscSchema = () => {
           </td>
         </tr>
         <tr>
-          <td><label htmlFor="profilepage"><strong>{__('ProfilePage', 'schema-package')}</strong></label></td>
+          <td><label htmlFor="profilepage"><strong>{__('Profile Page', 'schema-package')}</strong></label></td>
           <td>
                 <Checkbox                     
                       name='profilepage'

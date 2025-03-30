@@ -464,7 +464,7 @@ const Settings = () => {
               <table className="form-table">
                 <tbody>
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('SPG for Post Types', 'schema-package')}</label></th>
+                    <th><strong>{__('SPG for Post Types', 'schema-package')}</strong></th>
                     <td>
                     <Dropdown
                       style={{maxWidth:"300px"}}
@@ -483,7 +483,7 @@ const Settings = () => {
                     </td>
                 </tr>
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('SPG for Taxonomies', 'schema-package')}</label></th>
+                    <th><strong>{__('SPG for Taxonomies', 'schema-package')}</strong></th>
                     <td>
                     <Dropdown
                       style={{maxWidth:"300px"}}
@@ -503,7 +503,7 @@ const Settings = () => {
                 </tr>  
 
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('Export Data ', 'schema-package')}</label></th>
+                    <th><strong>{__('Export Data ', 'schema-package')}</strong></th>
                     <td>
                     <Button loading={loading} onClick={handleExport}>
                       <Icon name='download' />
@@ -513,7 +513,7 @@ const Settings = () => {
                     </td>
                   </tr>
                   <tr>
-                    <th><label htmlFor="import_smpg">{__('Import Data', 'schema-package')}</label></th>
+                    <th><strong>{__('Import Data', 'schema-package')}</strong></th>
                     <td style={{position:"relative"}}>
                     <div className="smpg-import-td" style={{float : "left"}}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>

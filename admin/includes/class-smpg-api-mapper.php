@@ -801,26 +801,18 @@ class SMPG_Api_Mapper {
     }
 
     public function update_settings( $parameters ){
-        
-        $settings      = json_decode( $parameters['settings'], true );        
-            
-        $response = false;
 
-        if ( $settings && is_array( $settings ) ) {
-
-          $options = (array) get_option( 'smpg_settings' );
-          
-          foreach ( $settings as $key => $val ) {
-            $options[$key] = $val;
-          }
-          
-         $response =  update_option( 'smpg_settings', $options );
-
+      if ( ! empty( $parameters['settings'] ) ) {
+       
+        $settings = json_decode( wp_unslash( $parameters['settings'] ), true );
+                                              
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+          return update_option( 'smpg_settings', smpg_sanitize_schema_meta( $settings ) );          
         }
 
-        return $response;
-    }
+      } 
 
+    }
     
     public function save_schema_data( $parameters ) {
                                                     

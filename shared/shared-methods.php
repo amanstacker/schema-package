@@ -44,25 +44,39 @@ function smpg_delete_data_on_uninstall( $blog_id = null ) {
             
 }
 
-function smpg_sanitize_post_meta( $key, $val ) {
+function smpg_sanitize_schema_meta( $data ) {
 
-    $response = '';
+    if ( is_array( $data ) ) {
 
-    switch ( $key ) {
-
-        case 'schema_type':
-
-            $response = sanitize_text_field($val);
-            break;
+        $sanitized_data = array();
         
-        default:
+        foreach ( $data as $key => $value ) {
+            
+            $sanitized_key = sanitize_key( $key );
 
-            $response = $val;    
-            break;
+            if ( is_array( $value ) ) {
+                // Recursively sanitize nested arrays
+                $sanitized_data[ $sanitized_key ] = smpg_sanitize_schema_meta( $value );
+            } elseif ( is_numeric( $value ) ) {
+                // Sanitize numbers
+                $sanitized_data[ $sanitized_key ] = intval( $value );
+            } elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+                // Sanitize URLs
+                $sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
+            } elseif ( is_bool( $value ) || $value === '1' || $value === '0' ) {
+                // Sanitize boolean values
+                $sanitized_data[ $sanitized_key ] = boolval( $value );
+            } else {
+                // Default sanitization for text
+                $sanitized_data[ $sanitized_key ] = sanitize_text_field( $value );
+            }
+        }
+
+        return $sanitized_data;
+
     }
-
-    return $response;
-
+    
+    return sanitize_text_field( $data );
 }
 
 function smpg_get_posts_by_arg( $arg ) {

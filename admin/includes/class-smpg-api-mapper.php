@@ -822,31 +822,32 @@ class SMPG_Api_Mapper {
 
     
     public function save_schema_data( $parameters ) {
-            
-            $post_meta      = $parameters['post_meta'];                                                 
-            $post_data      = $parameters['post_data'];                                                                  
-                                    
-            $post_id = wp_insert_post( $post_data );                        
-            
-            if ( $post_meta ) {
-                
-                foreach( $post_meta as $key => $val ){
-                    
-                    $sanitized_data = smpg_sanitize_post_meta( $key, $val );
+                                                    
+            if ( ! empty( $parameters['post_data'] ) ) {
 
-                    update_post_meta( $post_id, $key, $sanitized_data );
+              $post_data = smpg_sanitize_schema_meta( $parameters['post_data'] );
+              $post_id   = wp_insert_post( $post_data );                        
+
+              if ( ! empty( $parameters['post_meta'] ) ) {
+                
+                foreach ( $parameters['post_meta'] as $key => $val ) {
+                    
+                    $sanitized_data = smpg_sanitize_schema_meta( $val );             
+                    update_post_meta( $post_id, sanitize_key( $key ), $sanitized_data );
+
                 }                               
-            }
+
+              }
             
-            return  $post_id;
+              return  $post_id;
+        }                                                
     }
 
     public function save_post_meta( $parameters ) {
-            
-      $post_meta      = $parameters['post_meta'];
-            
+                              
       if ( ! empty( $parameters['post_id'] ) ) {
-
+        
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
         update_post_meta( $parameters['post_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['post_id'];
@@ -854,7 +855,8 @@ class SMPG_Api_Mapper {
       }
 
       if ( ! empty($parameters['tag_id'] ) ) {
-        
+
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
         update_term_meta( $parameters['tag_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['tag_id'];
@@ -864,7 +866,7 @@ class SMPG_Api_Mapper {
             
     public function changePostStatus( $ad_id, $action ) {
 
-      return wp_update_post( [ 'ID' =>  $ad_id, 'post_status' => $action ] );
+      return wp_update_post( [ 'ID' =>  intval( $ad_id ), 'post_status' => boolval( $action ) ] );
       
     }
     public function get_carousel_automation_with( $schema_type ) {

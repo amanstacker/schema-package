@@ -191,8 +191,14 @@ function smpg_sanitize_schema_meta( $data ) {
                     $sanitized_data[$sanitized_key] = smpg_sanitize_schema_meta( $value );
                 }
             } else {
-                // Fallback: sanitize as text
-                $sanitized_data[$sanitized_key] = sanitize_text_field( $value );
+                
+				if ( is_bool( $value ) || $value === '1' || $value === '0' ) {
+					$sanitized_data[$sanitized_key] = boolval( $value );
+				}else{
+					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );
+				}
+
+                
             }
         }
 

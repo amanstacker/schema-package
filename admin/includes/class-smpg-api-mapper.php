@@ -825,11 +825,14 @@ class SMPG_Api_Mapper {
                                                     
             if ( ! empty( $parameters['post_data'] ) ) {
 
+              $id =  $parameters['post_data']['ID'];
+              unset( $parameters['post_data']['ID'] );
               $post_data = smpg_sanitize_schema_meta( $parameters['post_data'] );
+              $post_data['ID'] = intval( $id );              
               $post_id   = wp_insert_post( $post_data );                        
 
               if ( ! empty( $parameters['post_meta'] ) ) {
-                
+                 
                 foreach ( $parameters['post_meta'] as $key => $val ) {
                     
                     $sanitized_data = smpg_sanitize_schema_meta( $val );             

@@ -438,35 +438,39 @@ class SMPG_Api_Action {
             return rest_ensure_response($custom_fields);
         }
         public function get_advanced_custom_fields( $request ) {
-            // Get the search query from the request.
-            $search_query = sanitize_text_field( $request->get_param( 'search' ) );
+
+            $custom_fields = []; 
+
+            $search_query  = sanitize_text_field( $request->get_param( 'search' ) );
         
-            // Get all ACF field groups.
-            $field_groups   = acf_get_field_groups();
-            $custom_fields = array();
-        
-            if ( ! empty( $field_groups ) ) {
-                foreach ( $field_groups as $group ) {
-                    // Get fields within the group.
-                    $fields = acf_get_fields( $group['ID'] );
-        
-                    if ( $fields ) {
-                        foreach ( $fields as $field ) {
-                            // Apply search filter if needed.
-                            if ( ! empty( $search_query ) && false === stripos( $field['name'], $search_query ) ) {
-                                continue;
+            if ( function_exists( 'acf_get_field_groups' ) ) {
+
+                $field_groups   = acf_get_field_groups();
+                    
+                if ( ! empty( $field_groups ) ) {
+                    foreach ( $field_groups as $group ) {
+                        // Get fields within the group.
+                        $fields = acf_get_fields( $group['ID'] );
+            
+                        if ( $fields ) {
+                            foreach ( $fields as $field ) {
+                                // Apply search filter if needed.
+                                if ( ! empty( $search_query ) && false === stripos( $field['name'], $search_query ) ) {
+                                    continue;
+                                }
+            
+                                $custom_fields[] = array(
+                                    'id'    => $field['name'],
+                                    'value' => $field['name'],
+                                    'label' => $field['label'], // Use ACF's label for readability.
+                                );
                             }
-        
-                            $custom_fields[] = array(
-                                'id'    => $field['name'],
-                                'value' => $field['name'],
-                                'label' => $field['label'], // Use ACF's label for readability.
-                            );
                         }
                     }
                 }
+
             }
-        
+                                
             return rest_ensure_response( $custom_fields );
         }                                
         

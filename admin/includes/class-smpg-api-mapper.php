@@ -599,7 +599,7 @@ class SMPG_Api_Mapper {
         $response  = $meta_data = $enabled_on = $enabled_on = $disabled_on = [];
 
         $post_type_plc = $this->get_placement_data('post_type');
-        $post_plc      = $this->get_placement_data('post');
+        $post_plc      = $this->get_placement_data('post');        
         $page_plc      = $this->get_placement_data('page');
 
         $enabled_on['post_type'] = $post_type_plc;
@@ -631,14 +631,15 @@ class SMPG_Api_Mapper {
                               
                               $saved_data = $this->get_placement_data($ikey, '', $jval);
                               
-                              if($saved_data){
+                              if ( $saved_data ) {
 
                                 if( $key == '_enabled_on' ){
-                                  $enabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
+                                  
+                                  $enabled_on[$ikey]      = array_values(array_unique(array_merge($enabled_on[$ikey], $saved_data), SORT_REGULAR));
                                 }
 
-                                if( $key == '_disabled_on' ){
-                                  $disabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
+                                if( $key == '_disabled_on' ){                                 
+                                  $disabled_on[$ikey]      = array_values(array_unique(array_merge($enabled_on[$ikey], $saved_data), SORT_REGULAR));
                                 }
                                 
                               }
@@ -830,15 +831,16 @@ class SMPG_Api_Mapper {
               $post_data = smpg_sanitize_schema_meta( $parameters['post_data'] );
               $post_data['ID'] = intval( $id );              
               $post_id   = wp_insert_post( $post_data );                        
-
+              
               if ( ! empty( $parameters['post_meta'] ) ) {
                  
                 foreach ( $parameters['post_meta'] as $key => $val ) {
-                    
-                    $sanitized_data = smpg_sanitize_schema_meta( $val );             
-                    update_post_meta( $post_id, sanitize_key( $key ), $sanitized_data );
+                
+                     $sanitized_data = smpg_sanitize_schema_meta( $val );             
+                     update_post_meta( $post_id, sanitize_key( $key ), $sanitized_data );
 
                 }                               
+                
 
               }
             

@@ -194,10 +194,14 @@ function smpg_sanitize_schema_meta( $data ) {
                 
 				if ( is_bool( $value ) || $value === '1' || $value === '0' ) {
 					$sanitized_data[$sanitized_key] = boolval( $value );
+				}elseif ( is_numeric( $value ) ) {					
+					$sanitized_data[ $sanitized_key ] = intval( $value );
+				}elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+					// Sanitize URLs
+					$sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
 				}else{
 					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );
 				}
-
                 
             }
         }

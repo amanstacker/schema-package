@@ -44,38 +44,161 @@ function smpg_delete_data_on_uninstall( $blog_id = null ) {
             
 }
 
+function smpg_sanitize_schema_array( $input_array, $field_type ) {
+
+	if ( ! is_array( $input_array ) ) {
+		return [];
+	}
+
+	$sanitized_array = array();
+
+	foreach ( $input_array as $key => $value ) {
+
+		$sanitized_key = sanitize_key( $key );
+
+		switch ( $sanitized_key ) {
+			
+			case 'value':
+				
+				switch ( $field_type ) {
+
+					case 'text':					
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+					case 'select':					
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+					
+					case 'checkbox':							
+						$sanitized_array[ $sanitized_key ] = boolval( $value );
+						break;
+
+					case 'textarea':
+						$sanitized_array[ $sanitized_key ] = sanitize_textarea_field( $value );
+						break;
+
+					case 'editor':
+						$sanitized_array[ $sanitized_key ] = wp_kses_post( $value );
+						break;
+
+					case 'number':
+						$sanitized_array[ $sanitized_key ] = intval( $value );
+						break;
+					case 'media':
+						$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
+                                    return [
+                                        'id'     => isset( $media['id'] ) ? intval( $media['id'] ) : 0,
+                                        'url'    => isset( $media['url'] ) ? esc_url_raw( $media['url'] ) : '',
+                                        'width'  => isset( $media['width'] ) ? intval( $media['width'] ) : 0,
+                                        'height' => isset( $media['height'] ) ? intval( $media['height'] ) : 0,
+                                    ];
+                        		}, $value );
+						break;
+					
+					default:
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+				}
+												
+				break;			
+			
+			case 'tooltip':			
+				$sanitized_array[ $sanitized_key ] = sanitize_textarea_field( $value );
+				break;
+
+			case 'options':			
+
+				$santize_opt = [];
+
+				if ( is_array( $value ) ) {
+					foreach ( $value as $optkey => $optvalue ) {
+						$santize_opt[ sanitize_key( $optkey ) ] = sanitize_text_field( $optvalue );
+					}
+				}
+				
+				$sanitized_array[ $sanitized_key ] = $santize_opt;
+				break;	
+
+			case 'recommended':
+			case 'display':				
+				$sanitized_array[ $sanitized_key ] = boolval( $value );
+				break;
+
+			default:
+				// Default text sanitization for unexpected keys.
+				$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+				break;
+		}
+	}
+
+	return $sanitized_array;
+}
+
+
 function smpg_sanitize_schema_meta( $data ) {
 
     if ( is_array( $data ) ) {
 
-        $sanitized_data = array();
-        
+        $sanitized_data = [];
+
         foreach ( $data as $key => $value ) {
-            
+            // Sanitize key
             $sanitized_key = sanitize_key( $key );
 
             if ( is_array( $value ) ) {
-                // Recursively sanitize nested arrays
-                $sanitized_data[ $sanitized_key ] = smpg_sanitize_schema_meta( $value );
-            } elseif ( is_numeric( $value ) ) {
-                // Sanitize numbers
-                $sanitized_data[ $sanitized_key ] = intval( $value );
-            } elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
-                // Sanitize URLs
-                $sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
-            } elseif ( is_bool( $value ) || $value === '1' || $value === '0' ) {
-                // Sanitize boolean values
-                $sanitized_data[ $sanitized_key ] = boolval( $value );
+                // Check if schema property has 'type' and 'value'
+                if ( isset( $value['type'] ) && isset( $value['value'] ) ) {
+					
+                    switch ( $value['type'] ) {
+                        case 'text':
+                        case 'checkbox':							
+                            $sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );							
+                            break;
+
+						case 'select':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+							break;
+                        case 'textarea':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;
+
+						case 'editor':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );							
+							break;
+
+                        case 'number':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;
+                        case 'media':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;
+
+                        case 'repeater':
+                            if ( isset( $value['elements'] ) && is_array( $value['elements'] ) ) {
+                                $sanitized_data[$sanitized_key]['elements'] = array_map( 'smpg_sanitize_schema_meta', $value['elements'] );
+                            } else {
+                                $sanitized_data[$sanitized_key]['elements'] = [];
+                            }
+                            break;
+
+                        default:
+                            // Unknown type, sanitize as text
+                            $sanitized_data[$sanitized_key] = sanitize_text_field( $value['value'] );
+                            break;
+                    }
+                } else {
+                    // Recursively sanitize nested arrays
+                    $sanitized_data[$sanitized_key] = smpg_sanitize_schema_meta( $value );
+                }
             } else {
-                // Default sanitization for text
-                $sanitized_data[ $sanitized_key ] = sanitize_text_field( $value );
+                // Fallback: sanitize as text
+                $sanitized_data[$sanitized_key] = sanitize_text_field( $value );
             }
         }
 
         return $sanitized_data;
-
     }
-    
+
     return sanitize_text_field( $data );
 }
 

@@ -780,23 +780,15 @@ class SMPG_Api_Mapper {
 
     public function update_misc_schema( $parameters ) {
 
-        $data      = json_decode( $parameters['misc_schema'], true );
-            
-        $response = false;
-
-        if ( $data && is_array( $data ) ) {
-
-          $options = get_option('smpg_misc_schema');
-          
-          foreach($data as $key => $val){
-            $options[$key] = $val;
-          }
-          
-         $response =  update_option( 'smpg_misc_schema', $options );
-
+      if ( ! empty( $parameters['misc_schema'] ) ) {
+       
+        $settings = json_decode( wp_unslash( $parameters['misc_schema'] ), true );
+                                              
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+          return update_option( 'smpg_misc_schema', smpg_sanitize_schema_meta( $settings ) );          
         }
 
-        return $response;
+      }  
 
     }
 
@@ -833,7 +825,6 @@ class SMPG_Api_Mapper {
 
                 }                               
                 
-
               }
             
               return  $post_id;

@@ -6,7 +6,7 @@ add_action( 'init', 'smpg_json_ld_init');
 
 function smpg_json_ld_init(){
 
-    if ( is_admin() ){
+    if ( is_admin() || ( defined('REST_REQUEST') && REST_REQUEST ) ) {
         return; 
     }
 

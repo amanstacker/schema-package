@@ -60,7 +60,8 @@ const Settings = () => {
         default_image_url:        '',
         manage_conflict  :        [],
         spg_post_types   :        [],
-        spg_taxonomies   :        []
+        spg_taxonomies   :        [],
+        spg_author       :        false
     });
           
   const page = queryString.parse(window.location.search);   
@@ -501,6 +502,19 @@ const Settings = () => {
                       {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
                     </td>
                 </tr>  
+
+                <tr>
+                    <th><label htmlFor="spg_author">{__('SPG for Author', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='spg_author'
+                        id='spg_author' 
+                        checked={!!settings.spg_author ? true : false}
+                        onChange={formChangeHandler}
+                      />                                            
+                      {/* <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      </td>
+                  </tr>
 
                 <tr>
                     <th><strong>{__('Export Data ', 'schema-package')}</strong></th>

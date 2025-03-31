@@ -602,7 +602,7 @@ class SMPG_Api_Action {
 
             $parameters     = $request_data->get_params();                                               
 
-            if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) ){
+            if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ){
                                 
                 $this->_api_mapper->save_post_meta($parameters);          
                 return array('status' => 'success', 'message' => esc_html__( 'Saved Successfully', 'schema-package' ));
@@ -669,12 +669,12 @@ class SMPG_Api_Action {
             $parameters = $request->get_params();                        
             
             if(!empty($parameters['init'])){
-                $result    =  smpg_get_initial_post_meta($parameters['post_id'], $parameters['tag_id']);
+                $result    =  smpg_get_initial_post_meta($parameters['post_id'], $parameters['tag_id'], $parameters['user_id']);
                 $response  =  array('status' => 'success', 'properties' => $result);
             }else{
                 
-                if( isset($parameters['selected']) && ( !empty($parameters['post_id']) || !empty($parameters['tag_id']) ) ){
-                    $result    =  smpg_get_multiple_schema_properties($parameters['selected'], (int)$parameters['post_id'], (int)$parameters['tag_id']);
+                if( isset($parameters['selected']) && ( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ) ){
+                    $result    =  smpg_get_multiple_schema_properties($parameters['selected'], (int)$parameters['post_id'], (int)$parameters['tag_id'], (int)$parameters['user_id'] );
                     $response  =  array('status' => 'success', 'properties' => $result);
                 }else{    
                     $response =  array('status' => 'failed', 'message' => esc_html__( 'Properties not found', 'schema-package' ));

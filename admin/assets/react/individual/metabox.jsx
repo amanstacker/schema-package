@@ -313,6 +313,7 @@ const {
 
     body_json.post_id        = smpg_local.post_id;
     body_json.tag_id         = smpg_local.tag_id;
+    body_json.user_id        = smpg_local.user_id;
     body_json.post_meta      = postMeta;        
     
     let url = smpg_local.rest_url + 'smpg-route/save-post-meta';
@@ -424,6 +425,7 @@ const {
         body_json.selected      = selectedSchema;        
         body_json.post_id       = smpg_local.post_id;
         body_json.tag_id        = smpg_local.tag_id;
+        body_json.user_id       = smpg_local.user_id;
         body_json.init          = init;        
         
         let url = smpg_local.rest_url + 'smpg-route/get-selected-schema-properties';

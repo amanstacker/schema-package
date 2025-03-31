@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null ) {
+function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null, $user_id = null ) {
     
     $properties = [];
 

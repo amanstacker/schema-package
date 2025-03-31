@@ -849,6 +849,14 @@ class SMPG_Api_Mapper {
 
         return  $parameters['tag_id'];
       }
+
+      if ( ! empty($parameters['user_id'] ) ) {
+
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
+        update_user_meta( $parameters['user_id'], '_smpg_schema_meta', $post_meta );
+
+        return  $parameters['user_id'];
+      }
                    
     }
             

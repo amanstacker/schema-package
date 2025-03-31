@@ -171,6 +171,12 @@ textarea.smpg-form-control {
     padding: 15px;
 }
 
+.smpg_spg_author_page{
+    background: #fff;
+    padding: 20px;
+    width: 55%;
+}
+
 @media (max-width: 600px) {
     .smpg-i-schema-setup{
         width: auto;

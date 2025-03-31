@@ -66,8 +66,8 @@ function smpg_get_json_ld(){
 
         $spg_id = get_queried_object_id();
         $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );      
-        //Carousel schema markup addition
 
+        //Carousel schema markup addition
         $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
     
         if ( ! empty( $carousel_schema_ids ) ) {
@@ -121,6 +121,12 @@ function smpg_get_json_ld(){
         }
 
     }            
+
+    if ( is_author() ) {
+
+        $spg_id = get_queried_object_id();        
+        $spg_schema_meta = get_user_meta( $spg_id, '_smpg_schema_meta', true );      
+    }
 
     //Schema Package Generator schema markup addition
         

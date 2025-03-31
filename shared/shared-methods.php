@@ -1124,7 +1124,7 @@ function smpg_get_request_url() {
 	
 }
 
-function smpg_get_initial_post_meta( $post_id, $tag_id ) {
+function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
 
     $schema_meta = [];
 
@@ -1137,13 +1137,18 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
 		$schema_meta = get_term_meta( $tag_id, '_smpg_schema_meta', true );
 
+	}
+	if ( ! empty( $user_id ) ) {
+
+		$schema_meta = get_user_meta( $user_id, '_smpg_schema_meta', true );
+
 	}    
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 
             foreach ( $schema_meta as $key => $value ) {
 
-                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id );
+                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id, $user_id );
                 
                 if ( ! empty( $schema ) ) {
 
@@ -1184,7 +1189,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 							$new_elements = $schema['properties'][$pkey]['elements'];
 							
 							foreach ( $new_elements as $nkey => $nval ) {
-																
+
 								$new_elements[$nkey]['value'] =  $value['properties'][$pkey]['elements'][$nkey]['value'];
 							}
 
@@ -1218,12 +1223,12 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
 }
 
-function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id){
+function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id, int $user_id ) {
 	
     $response = [];
 
     foreach ($slected_ids as $value) {
-        $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id);
+        $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id, $user_id);
     }
 
     return $response;

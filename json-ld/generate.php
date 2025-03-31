@@ -511,6 +511,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['@context']                         = smpg_get_context_url();
             $json_ld['@type']                            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
             $json_ld['reviewBody']                       = smpg_get_description();    
+            $json_ld['datePublished']                    = smpg_get_published_date();
             $json_ld['itemReviewed']['@type']            = 'Organization';
             $json_ld['itemReviewed']['url']              = smpg_get_permalink();
             $json_ld['itemReviewed']['name']             = smpg_get_the_title();

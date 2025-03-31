@@ -21,3 +21,21 @@
     border-right: 1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
 }
+
+/* groups elements css starts here */
+.smpg-groups-elements {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px; /* Space between items */
+}
+
+.smpg-groups-elements .smpg-form-group {
+	display: flex;
+	align-items: center;
+	gap: 5px;	
+	padding: 8px 10px;		
+}
+
+.smpg-groups-elements .smpg-form-group label {
+	margin: 0;	
+}

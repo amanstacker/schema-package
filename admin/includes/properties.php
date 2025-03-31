@@ -390,21 +390,60 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ],
         'employment_type' => [                          
             'label'       => 'Employment Type',                    
-            'type'        => 'multiselect',
-            'value'       => 'FULL_TIME',
-            'options'      => [
-                'FULL_TIME'     => 'FULL_TIME',
-                'PART_TIME'     => 'PART_TIME',                        
-                'CONTRACTOR'    => 'CONTRACTOR',
-                'TEMPORARY'     => 'TEMPORARY',                        
-                'INTERN'        => 'INTERN',
-                'VOLUNTEER'     => 'VOLUNTEER',                        
-                'PER_DIEM'      => 'PER_DIEM',
-                'OTHER'         => 'OTHER',                        
-            ],
+            'type'        => 'groups',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author type of this content'
+            'tooltip'     => 'Employment types',
+            'elements'      => [
+                'full_time' => [                                                                                                                                              
+                    'label'       => 'Full Time',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'part_time' => [                                                                                                                                              
+                    'label'       => 'Part Time',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'contractor' => [                                                                                                                                              
+                    'label'       => 'Contractor',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'temporary' => [                                                                                                                                              
+                    'label'       => 'Temporary',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'intern' => [                                                                                                                                              
+                    'label'       => 'Intern',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'volunteer' => [
+                    'label'       => 'Volunteer',
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'per_diem' => [                                                                                                                                              
+                    'label'       => 'Per Diem',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'other' => [                                                                                                                                              
+                    'label'       => 'Other',        
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],                
+            ]            
         ],
         'author_name' => [                                     
             'placeholder' => 'Author Name',                    
@@ -1295,7 +1334,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'date_posted'      => $date_posted,
                                 'valid_through'    => $valid_through,
                                 'employment_type'  => $employment_type,
-                                'jobLocation_type'      => [                                                                                                                                              
+                                'job_location_type'      => [
                                     'label'       => 'JobLocation Type',                    
                                     'type'        => 'text',                                    
                                     'placeholder' => 'TELECOMMUTE',                    

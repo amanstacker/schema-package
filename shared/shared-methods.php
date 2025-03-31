@@ -136,7 +136,7 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 
 
 function smpg_sanitize_schema_meta( $data ) {
-
+	
     if ( is_array( $data ) ) {
 
         $sanitized_data = [];
@@ -171,16 +171,7 @@ function smpg_sanitize_schema_meta( $data ) {
                             break;
                         case 'media':
 							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
-                            break;
-
-                        case 'repeater':
-                            if ( isset( $value['elements'] ) && is_array( $value['elements'] ) ) {
-                                $sanitized_data[$sanitized_key]['elements'] = array_map( 'smpg_sanitize_schema_meta', $value['elements'] );
-                            } else {
-                                $sanitized_data[$sanitized_key]['elements'] = [];
-                            }
-                            break;
-
+                            break;                        
                         default:
                             // Unknown type, sanitize as text
                             $sanitized_data[$sanitized_key] = sanitize_text_field( $value['value'] );
@@ -1139,7 +1130,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
 	if ( ! empty( $post_id ) ) {
 
-		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );
+		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );		
 	}
 
 	if ( ! empty( $tag_id ) ) {
@@ -1188,15 +1179,29 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
                             
                             $schema['properties'][$pkey]['elements'] = $new_elements;
 							
-                        }else{
+                        }elseif( $pval['type'] == 'groups' ){
 
-							if( isset( $value['properties'][$pkey]['value'] ) ){
-								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];
+							$new_elements = $schema['properties'][$pkey]['elements'];
+							
+							foreach ( $new_elements as $nkey => $nval ) {
+																
+								$new_elements[$nkey]['value'] =  $value['properties'][$pkey]['elements'][$nkey]['value'];
 							}
 
-							if ( is_array( $value['properties'][$pkey]) && array_key_exists( 'display', $value['properties'][$pkey] ) ) {
-								$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
-							}
+							$schema['properties'][$pkey]['elements'] = $new_elements;
+
+						}
+						else{
+
+							if ( is_array( $value['properties'][$pkey] ) ) {
+								
+								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];								
+	
+								if ( array_key_exists( 'display', $value['properties'][$pkey] ) ) {
+									$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
+								}
+
+							}							
 							                            
                         }                        
 

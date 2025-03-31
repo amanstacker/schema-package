@@ -25,9 +25,10 @@ class SMPG_Api_Action {
             $parameters     = $request->get_params();
             $_current_status = 1;                  
 
-            if( isset($parameters['post_id']) ){
+            if ( isset($parameters['post_id']) ) {
+
                 $post_id                = intval( $parameters['post_id'] );
-                $_current_status         = rest_sanitize_boolean( $parameters['_current_status'] );
+                $_current_status        = boolval( $parameters['_current_status'] );
                 $action                 = sanitize_text_field($parameters['action']);
 
                 switch ($action) {

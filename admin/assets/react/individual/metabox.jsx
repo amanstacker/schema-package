@@ -160,17 +160,36 @@ const {
     }else{     
         
       if(repeater){
-            
-        let value;
-
-        if(copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox'){
-            value = e.target.checked;
-        }else{
-            value = e.target.value;                
-        }
         
-        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;              
-        setPostMeta(copyMeta);  
+        if ( repeater === 'repeater' ) {
+
+            let value;
+
+            if(copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox'){
+                value = e.target.checked;
+            }else{
+                value = e.target.value;                
+            }
+            
+            copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;              
+            setPostMeta(copyMeta);  
+
+        }   
+
+        if ( repeater === 'groups' ) {
+            
+            let value;
+
+            if(copyMeta[i]['properties'][j]['elements'][tid]['type'] == 'checkbox'){
+                value = e.target.checked;
+            }else{
+                value = e.target.value;                
+            }
+            
+            copyMeta[i]['properties'][j]['elements'][tid]['value'] = value;              
+            setPostMeta(copyMeta);  
+            
+        }
         
       }else{
 
@@ -248,11 +267,6 @@ const {
           copyMeta[i]['properties'][j]['value'] = value;   
           
           setPostMeta(copyMeta);    
-
-        }else if( property_type == 'multiselect' ){
-            let value = Array.from(e.target.selectedOptions, (item) => item.value);
-            copyMeta[i]['properties'][j]['value'] = value;      
-            setPostMeta(copyMeta);    
 
         }else{
 

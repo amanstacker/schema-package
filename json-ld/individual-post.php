@@ -532,7 +532,7 @@ function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type 
     return $json_ld;
 }
 
-function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_type ){
+function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_type ) {
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
@@ -553,8 +553,23 @@ function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_
     if(!empty($properties['valid_through']['value'])){
         $json_ld['validThrough'] =      $properties['valid_through']['value'];
     }
-    if(!empty($properties['employment_type']['value'])){
-        $json_ld['employmentType'] =      $properties['employment_type']['value'];
+    
+    if ( ! empty( $properties['employment_type']['elements'] ) ) {
+
+        $emp_type = [];
+
+        foreach ($properties['employment_type']['elements'] as $key => $value) {
+            
+            if ( ! empty( $value['value'] ) ) {
+                $emp_type[] = strtoupper( $key );
+            }
+
+        }
+        
+        if ( $emp_type ) {
+            $json_ld['employmentType'] =      $emp_type;
+        }
+        
     }
 
     if(!empty($properties['b_salary']['value']) || !empty($properties['b_salary_min']['value']) || !empty($properties['b_salary_max']['value'])){

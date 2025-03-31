@@ -300,7 +300,26 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.smpg-repeater-panel-body{
     border:0px solid #fff;
     border-right: 1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
-}`, "",{"version":3,"sources":["webpack://./shared/ElementGenerator/ElementGenerator.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,0BAA0B;IAC1B,mBAAmB;IACnB,kBAAkB;AACtB;AACA;IACI,kBAAkB;IAClB,WAAW;IACX,eAAe;AACnB;AACA;IACI,kBAAkB;IAClB,SAAS;IACT,QAAQ;IACR,YAAY;IACZ,mBAAmB;AACvB;AACA;IACI,qBAAqB;IACrB,+BAA+B;IAC/B,8BAA8B;AAClC","sourcesContent":[".smpg-repeater-panel-body{\r\n    padding: 15px;\r\n    border: 1px solid darkgrey;\r\n    margin-bottom: 10px;\r\n    position: relative;\r\n}\r\n.smpg-trash-repeater{\r\n    position: absolute;\r\n    right: 20px;\r\n    cursor: pointer;\r\n}\r\n.smpg-repeater-i{\r\n    position: absolute;\r\n    left: 0px;\r\n    top: 0px;\r\n    padding: 2px;\r\n    background: #cccccc;\r\n}\r\n.smpg-repeater-panel{\r\n    border:0px solid #fff;\r\n    border-right: 1px solid #e0e0e0;\r\n    border-left: 1px solid #e0e0e0;\r\n}"],"sourceRoot":""}]);
+}
+
+/* groups elements css starts here */
+.smpg-groups-elements {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px; /* Space between items */
+}
+
+.smpg-groups-elements .smpg-form-group {
+	display: flex;
+	align-items: center;
+	gap: 5px;	
+	padding: 8px 10px;		
+}
+
+.smpg-groups-elements .smpg-form-group label {
+	margin: 0;	
+}
+`, "",{"version":3,"sources":["webpack://./shared/ElementGenerator/ElementGenerator.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,0BAA0B;IAC1B,mBAAmB;IACnB,kBAAkB;AACtB;AACA;IACI,kBAAkB;IAClB,WAAW;IACX,eAAe;AACnB;AACA;IACI,kBAAkB;IAClB,SAAS;IACT,QAAQ;IACR,YAAY;IACZ,mBAAmB;AACvB;AACA;IACI,qBAAqB;IACrB,+BAA+B;IAC/B,8BAA8B;AAClC;;AAEA,oCAAoC;AACpC;CACC,aAAa;CACb,eAAe;CACf,QAAQ,EAAE,wBAAwB;AACnC;;AAEA;CACC,aAAa;CACb,mBAAmB;CACnB,QAAQ;CACR,iBAAiB;AAClB;;AAEA;CACC,SAAS;AACV","sourcesContent":[".smpg-repeater-panel-body{\r\n    padding: 15px;\r\n    border: 1px solid darkgrey;\r\n    margin-bottom: 10px;\r\n    position: relative;\r\n}\r\n.smpg-trash-repeater{\r\n    position: absolute;\r\n    right: 20px;\r\n    cursor: pointer;\r\n}\r\n.smpg-repeater-i{\r\n    position: absolute;\r\n    left: 0px;\r\n    top: 0px;\r\n    padding: 2px;\r\n    background: #cccccc;\r\n}\r\n.smpg-repeater-panel{\r\n    border:0px solid #fff;\r\n    border-right: 1px solid #e0e0e0;\r\n    border-left: 1px solid #e0e0e0;\r\n}\r\n\r\n/* groups elements css starts here */\r\n.smpg-groups-elements {\r\n\tdisplay: flex;\r\n\tflex-wrap: wrap;\r\n\tgap: 5px; /* Space between items */\r\n}\r\n\r\n.smpg-groups-elements .smpg-form-group {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tgap: 5px;\t\r\n\tpadding: 8px 10px;\t\t\r\n}\r\n\r\n.smpg-groups-elements .smpg-form-group label {\r\n\tmargin: 0;\t\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -911,31 +930,34 @@ var ElementGenerator = function ElementGenerator(props) {
       className: "smpg-description"
     }, property.tooltip));
   };
-  var createTypeMultiSelect = function createTypeMultiSelect(property, elid, tid, repeater) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "smpg-form-group"
-    }, /*#__PURE__*/React.createElement("label", null, property.label), /*#__PURE__*/React.createElement("select", {
-      multiple: true,
-      className: "smpg-form-control",
-      onChange: function onChange(e) {
-        return props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater);
-      },
-      value: property.value
-    }, Object.entries(property.options).map(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 2),
-        key = _ref4[0],
-        value = _ref4[1];
-      return /*#__PURE__*/React.createElement("option", {
-        value: key
-      }, value);
-    })), /*#__PURE__*/React.createElement("p", {
-      className: "smpg-description"
-    }, property.tooltip));
-  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, function () {
     if (propertyObj.display) {
       var rcount = 0;
       switch (propertyObj.type) {
+        case 'groups':
+          return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", null, propertyObj.label), /*#__PURE__*/React.createElement("div", {
+            className: "smpg-groups-elements"
+          }, Object.entries(propertyObj.elements).map(function (_ref3) {
+            var _ref4 = _slicedToArray(_ref3, 2),
+              tid = _ref4[0],
+              tags = _ref4[1];
+            if (tags.display) {
+              switch (tags.type) {
+                case 'number':
+                  return createTypeNumber(tags, null, tid, 'groups');
+                case 'textarea':
+                  return createTypeTextarea(tags, null, tid, 'groups');
+                case 'media':
+                  return createTypeMedia(tags, null, tid, 'groups');
+                case 'select':
+                  return createTypeSelect(tags, null, tid, 'groups');
+                case 'checkbox':
+                  return createTypeCheckbox(tags, null, tid, 'groups');
+                default:
+                  return createTypeText(tags, null, tid, 'groups');
+              }
+            }
+          })));
         case 'repeater':
           return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Panel, {
             className: "smpg-repeater-panel"
@@ -982,8 +1004,6 @@ var ElementGenerator = function ElementGenerator(props) {
           }, propertyObj.button_text)))));
         case 'select':
           return createTypeSelect(propertyObj, null, null, null);
-        case 'multiselect':
-          return createTypeMultiSelect(propertyObj, null, null, null);
         case 'textarea':
           return createTypeTextarea(propertyObj, null, null, null);
         case 'editor':
@@ -1468,26 +1488,38 @@ var Metabox = function Metabox() {
       }).open();
     } else {
       if (repeater) {
-        var value;
-        if (copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox') {
-          value = e.target.checked;
-        } else {
-          value = e.target.value;
+        if (repeater === 'repeater') {
+          var value;
+          if (copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox') {
+            value = e.target.checked;
+          } else {
+            value = e.target.value;
+          }
+          copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;
+          setPostMeta(copyMeta);
         }
-        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;
-        setPostMeta(copyMeta);
+        if (repeater === 'groups') {
+          var _value;
+          if (copyMeta[i]['properties'][j]['elements'][tid]['type'] == 'checkbox') {
+            _value = e.target.checked;
+          } else {
+            _value = e.target.value;
+          }
+          copyMeta[i]['properties'][j]['elements'][tid]['value'] = _value;
+          setPostMeta(copyMeta);
+        }
       } else {
         if (property_type == 'checkbox') {
-          var _value = e.target.checked;
+          var _value2 = e.target.checked;
           if (j == 'speakable') {
-            if (_value) {
+            if (_value2) {
               copyMeta[i]['properties']['speakable_selectors']['display'] = true;
             } else {
               copyMeta[i]['properties']['speakable_selectors']['display'] = false;
             }
           }
           if (j == 'is_paywalled') {
-            if (_value) {
+            if (_value2) {
               copyMeta[i]['properties']['paywalled_selectors']['display'] = true;
             } else {
               copyMeta[i]['properties']['paywalled_selectors']['display'] = false;
@@ -1500,7 +1532,7 @@ var Metabox = function Metabox() {
                   Object.keys(item).forEach(function (ekey) {
                     if (typeof item[ekey]['class'] !== "undefined") {
                       if (item[ekey]['class'].includes('smpg_common_properties')) {
-                        if (_value) {
+                        if (_value2) {
                           item[ekey]['display'] = true;
                         } else {
                           item[ekey]['display'] = false;
@@ -1512,7 +1544,7 @@ var Metabox = function Metabox() {
               } else {
                 if (typeof copyMeta[i]['properties'][key]['class'] !== "undefined") {
                   if (copyMeta[i]['properties'][key]['class'].includes('smpg_common_properties')) {
-                    if (_value) {
+                    if (_value2) {
                       copyMeta[i]['properties'][key]['display'] = true;
                     } else {
                       copyMeta[i]['properties'][key]['display'] = false;
@@ -1522,12 +1554,6 @@ var Metabox = function Metabox() {
               }
             });
           }
-          copyMeta[i]['properties'][j]['value'] = _value;
-          setPostMeta(copyMeta);
-        } else if (property_type == 'multiselect') {
-          var _value2 = Array.from(e.target.selectedOptions, function (item) {
-            return item.value;
-          });
           copyMeta[i]['properties'][j]['value'] = _value2;
           setPostMeta(copyMeta);
         } else {

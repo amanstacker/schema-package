@@ -31,6 +31,8 @@ function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
         $review_type         = get_post_meta( $post_id, '_abr_review_type', true );
         $item_reviewed       = get_post_meta( $post_id, '_abr_review_schema_heading', true );
         $review_body         = get_post_meta( $post_id, '_abr_review_schema_desc', true );
+        $author_type         = get_post_meta( $post_id, '_abr_review_schema_author', true );        
+        $review_author       = get_post_meta( $post_id, '_abr_review_schema_author_custom', true );        
 
         $best_rating         = 5;
     
@@ -52,9 +54,17 @@ function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
 
         if ( $json_ld['@type'] == 'Product' ) {
 
-                $json_ld['review']['@type']                       = 'Review';
-                $json_ld['review']['author']                      = smpg_get_author_detail();  
+                $json_ld['review']['@type']                       = 'Review';                 
                 $json_ld['review']['datePublished']               = smpg_get_published_date();
+
+                if ( $author_type == 'custom' && $review_author ) {
+                                                                        
+                    $json_ld['review']['author']['@type']      = 'Person';
+                    $json_ld['review']['author']['name']       = $review_author;     
+
+                }else{
+                    $json_ld['review']['author']                      = smpg_get_author_detail(); 
+                }                
 
                 if ( $review_body ) {
                     $json_ld['review']['reviewBody'] = $review_body;
@@ -74,7 +84,13 @@ function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
             }
             if ( $review_body ) {
                 $json_ld['reviewBody'] = $review_body;
-            }                
+            }
+            
+            if ( $author_type == 'custom' && $review_author ) {
+                unset($json_ld['author']);
+                $json_ld['author']['@type']  = 'Person';
+                $json_ld['author']['name']   = $review_author;     
+            }
             
             if ( ! empty( $abr_settings ) ) {
     
@@ -86,7 +102,7 @@ function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
             }
 
         }        
-                                    
+                                 
         return $json_ld;
 }
 

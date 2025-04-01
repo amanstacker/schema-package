@@ -70,7 +70,7 @@ function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
         if ( $json_ld['@type'] == 'Review' ) {
 
             if ( $item_reviewed ) {            
-                $json_ld['itemReviewed']['@type'] = $item_reviewed;
+                $json_ld['itemReviewed']['name'] = $item_reviewed;
             }
             if ( $review_body ) {
                 $json_ld['reviewBody'] = $review_body;

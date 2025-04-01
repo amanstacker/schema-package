@@ -117,29 +117,62 @@ const ElementGenerator = (props) => {
         </div>                                                                                                                                                
     );
   }
-
-  const createTypeMultiSelect = (property, elid, tid, repeater) => {
-    return(                                                                        
-        <div className="smpg-form-group">
-            <label>{property.label}</label>                                                                            
-            <select multiple={true} className="smpg-form-control" onChange={(e)=>props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater)} value={property.value}>
-            {
-                Object.entries(property.options).map(([key, value]) => {
-                    return(<option value={key}>{value}</option>)
-                })                                                                                
-            }
-            </select>                      
-            <p className="smpg-description">{property.tooltip}</p>                                                     
-        </div>                                                                                                                                                
-    );
-  }
-
+  
   return (
     <>    
     {(() => {
        if(propertyObj.display){
         let rcount = 0;
         switch (propertyObj.type) {
+
+            case 'groups':
+                 
+                return(
+                    <>
+                    <h3>{propertyObj.label}</h3>
+                    <div className='smpg-groups-elements'>
+                    {Object.entries(propertyObj.elements).map(([tid, tags]) => {
+                        
+                    if(tags.display){
+
+                        switch (tags.type) {
+
+                            case 'number':
+                                return(
+                                    createTypeNumber(tags, null, tid, 'groups')
+                                );                                
+
+                            case 'textarea':
+                                return(
+                                    createTypeTextarea(tags, null, tid, 'groups')
+                                );                                
+
+                            case 'media':
+                                return(
+                                    createTypeMedia(tags, null, tid, 'groups')
+                                );                                    
+
+                            case 'select':
+                                return(
+                                    createTypeSelect(tags, null, tid, 'groups')
+                                ); 
+                            case 'checkbox':
+                                return(
+                                    createTypeCheckbox(tags, null, tid, 'groups')
+                                );                                         
+                        
+                            default:
+                                return(
+                                    createTypeText(tags, null, tid, 'groups')
+                                );                                                                
+                        }
+                    }
+
+                    }                        
+                    )}                                                
+                    </div>
+                    </>
+                );
 
              case 'repeater':
                  
@@ -211,12 +244,7 @@ const ElementGenerator = (props) => {
             case 'select':
                 return(
                     createTypeSelect(propertyObj, null, null, null)
-                )
-            case 'multiselect':
-                return(
-                    createTypeMultiSelect(propertyObj, null, null, null)
-                )    
-
+                )                
             case 'textarea':
                 return(
                     createTypeTextarea(propertyObj, null, null, null)

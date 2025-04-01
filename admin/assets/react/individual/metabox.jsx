@@ -160,17 +160,36 @@ const {
     }else{     
         
       if(repeater){
-            
-        let value;
-
-        if(copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox'){
-            value = e.target.checked;
-        }else{
-            value = e.target.value;                
-        }
         
-        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;              
-        setPostMeta(copyMeta);  
+        if ( repeater === 'repeater' ) {
+
+            let value;
+
+            if(copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox'){
+                value = e.target.checked;
+            }else{
+                value = e.target.value;                
+            }
+            
+            copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;              
+            setPostMeta(copyMeta);  
+
+        }   
+
+        if ( repeater === 'groups' ) {
+            
+            let value;
+
+            if(copyMeta[i]['properties'][j]['elements'][tid]['type'] == 'checkbox'){
+                value = e.target.checked;
+            }else{
+                value = e.target.value;                
+            }
+            
+            copyMeta[i]['properties'][j]['elements'][tid]['value'] = value;              
+            setPostMeta(copyMeta);  
+            
+        }
         
       }else{
 
@@ -249,11 +268,6 @@ const {
           
           setPostMeta(copyMeta);    
 
-        }else if( property_type == 'multiselect' ){
-            let value = Array.from(e.target.selectedOptions, (item) => item.value);
-            copyMeta[i]['properties'][j]['value'] = value;      
-            setPostMeta(copyMeta);    
-
         }else{
 
             let {value} = e.target;
@@ -299,6 +313,7 @@ const {
 
     body_json.post_id        = smpg_local.post_id;
     body_json.tag_id         = smpg_local.tag_id;
+    body_json.user_id        = smpg_local.user_id;
     body_json.post_meta      = postMeta;        
     
     let url = smpg_local.rest_url + 'smpg-route/save-post-meta';
@@ -410,6 +425,7 @@ const {
         body_json.selected      = selectedSchema;        
         body_json.post_id       = smpg_local.post_id;
         body_json.tag_id        = smpg_local.tag_id;
+        body_json.user_id       = smpg_local.user_id;
         body_json.init          = init;        
         
         let url = smpg_local.rest_url + 'smpg-route/get-selected-schema-properties';

@@ -350,7 +350,8 @@ function smpg_default_settings_data() {
 		'default_image_url' 		=> '',
 		'manage_conflict' 			=> [],
 		'spg_post_types' 			=> $spg_post_types,
-		'spg_taxonomies' 			=> [],		
+		'spg_taxonomies' 			=> [],	
+		'spg_author' 			    => 0,
 	];	  		
 	
 	return $defaults;
@@ -518,6 +519,8 @@ function smpg_get_schema_type_text( $id ) {
 		'imagegallery'              => 'ImageGallery',
 		'creativework'              => 'CreativeWork',
 		'review'                    => 'Review',
+		'profilepage'               => 'ProfilePage',
+		'webpage'                   => 'WebPage',
 
 	];	
 

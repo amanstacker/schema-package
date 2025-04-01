@@ -44,25 +44,163 @@ function smpg_delete_data_on_uninstall( $blog_id = null ) {
             
 }
 
-function smpg_sanitize_post_meta( $key, $val ) {
+function smpg_sanitize_schema_array( $input_array, $field_type ) {
 
-    $response = '';
+	if ( ! is_array( $input_array ) ) {
+		return [];
+	}
 
-    switch ( $key ) {
+	$sanitized_array = array();
 
-        case 'schema_type':
+	foreach ( $input_array as $key => $value ) {
 
-            $response = sanitize_text_field($val);
-            break;
-        
-        default:
+		$sanitized_key = sanitize_key( $key );
 
-            $response = $val;    
-            break;
+		switch ( $sanitized_key ) {
+			
+			case 'value':
+				
+				switch ( $field_type ) {
+
+					case 'text':					
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+					case 'select':					
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+					
+					case 'checkbox':							
+						$sanitized_array[ $sanitized_key ] = boolval( $value );
+						break;
+
+					case 'textarea':
+						$sanitized_array[ $sanitized_key ] = sanitize_textarea_field( $value );
+						break;
+
+					case 'editor':
+						$sanitized_array[ $sanitized_key ] = wp_kses_post( $value );
+						break;
+
+					case 'number':
+						$sanitized_array[ $sanitized_key ] = intval( $value );
+						break;
+					case 'media':
+						$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
+                                    return [
+                                        'id'     => isset( $media['id'] ) ? intval( $media['id'] ) : 0,
+                                        'url'    => isset( $media['url'] ) ? esc_url_raw( $media['url'] ) : '',
+                                        'width'  => isset( $media['width'] ) ? intval( $media['width'] ) : 0,
+                                        'height' => isset( $media['height'] ) ? intval( $media['height'] ) : 0,
+                                    ];
+                        		}, $value );
+						break;
+					
+					default:
+						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						break;
+				}
+												
+				break;			
+			
+			case 'tooltip':			
+				$sanitized_array[ $sanitized_key ] = sanitize_textarea_field( $value );
+				break;
+
+			case 'options':			
+
+				$santize_opt = [];
+
+				if ( is_array( $value ) ) {
+					foreach ( $value as $optkey => $optvalue ) {
+						$santize_opt[ sanitize_key( $optkey ) ] = sanitize_text_field( $optvalue );
+					}
+				}
+				
+				$sanitized_array[ $sanitized_key ] = $santize_opt;
+				break;	
+
+			case 'recommended':
+			case 'display':				
+				$sanitized_array[ $sanitized_key ] = boolval( $value );
+				break;
+
+			default:
+				// Default text sanitization for unexpected keys.
+				$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+				break;
+		}
+	}
+
+	return $sanitized_array;
+}
+
+
+function smpg_sanitize_schema_meta( $data ) {
+	
+    if ( is_array( $data ) ) {
+
+        $sanitized_data = [];
+
+        foreach ( $data as $key => $value ) {
+            // Sanitize key
+            $sanitized_key = sanitize_key( $key );
+
+            if ( is_array( $value ) ) {
+                // Check if schema property has 'type' and 'value'
+                if ( isset( $value['type'] ) && isset( $value['value'] ) ) {
+					
+                    switch ( $value['type'] ) {
+                        case 'text':
+                        case 'checkbox':							
+                            $sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );							
+                            break;
+
+						case 'select':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+							break;
+                        case 'textarea':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;
+
+						case 'editor':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );							
+							break;
+
+                        case 'number':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;
+                        case 'media':
+							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
+                            break;                        
+                        default:
+                            // Unknown type, sanitize as text
+                            $sanitized_data[$sanitized_key] = sanitize_text_field( $value['value'] );
+                            break;
+                    }
+                } else {
+                    // Recursively sanitize nested arrays
+                    $sanitized_data[$sanitized_key] = smpg_sanitize_schema_meta( $value );
+                }
+            } else {
+                
+				if ( is_bool( $value ) || $value === '1' || $value === '0' ) {
+					$sanitized_data[$sanitized_key] = boolval( $value );
+				}elseif ( is_numeric( $value ) ) {					
+					$sanitized_data[ $sanitized_key ] = intval( $value );
+				}elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+					// Sanitize URLs
+					$sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
+				}else{
+					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );
+				}
+                
+            }
+        }
+
+        return $sanitized_data;
     }
 
-    return $response;
-
+    return sanitize_text_field( $data );
 }
 
 function smpg_get_posts_by_arg( $arg ) {
@@ -986,18 +1124,23 @@ function smpg_get_request_url() {
 	
 }
 
-function smpg_get_initial_post_meta( $post_id, $tag_id ) {
+function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
 
     $schema_meta = [];
 
 	if ( ! empty( $post_id ) ) {
 
-		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );
+		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );		
 	}
 
 	if ( ! empty( $tag_id ) ) {
 
 		$schema_meta = get_term_meta( $tag_id, '_smpg_schema_meta', true );
+
+	}
+	if ( ! empty( $user_id ) ) {
+
+		$schema_meta = get_user_meta( $user_id, '_smpg_schema_meta', true );
 
 	}    
     
@@ -1005,7 +1148,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
             foreach ( $schema_meta as $key => $value ) {
 
-                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id );
+                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id, $user_id );
                 
                 if ( ! empty( $schema ) ) {
 
@@ -1041,15 +1184,29 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
                             
                             $schema['properties'][$pkey]['elements'] = $new_elements;
 							
-                        }else{
+                        }elseif( $pval['type'] == 'groups' ){
 
-							if( isset( $value['properties'][$pkey]['value'] ) ){
-								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];
+							$new_elements = $schema['properties'][$pkey]['elements'];
+							
+							foreach ( $new_elements as $nkey => $nval ) {
+
+								$new_elements[$nkey]['value'] =  $value['properties'][$pkey]['elements'][$nkey]['value'];
 							}
 
-							if ( is_array( $value['properties'][$pkey]) && array_key_exists( 'display', $value['properties'][$pkey] ) ) {
-								$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
-							}
+							$schema['properties'][$pkey]['elements'] = $new_elements;
+
+						}
+						else{
+
+							if ( is_array( $value['properties'][$pkey] ) ) {
+								
+								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];								
+	
+								if ( array_key_exists( 'display', $value['properties'][$pkey] ) ) {
+									$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
+								}
+
+							}							
 							                            
                         }                        
 
@@ -1066,12 +1223,12 @@ function smpg_get_initial_post_meta( $post_id, $tag_id ) {
 
 }
 
-function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id){
+function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id, int $user_id ) {
 	
     $response = [];
 
     foreach ($slected_ids as $value) {
-        $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id);
+        $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id, $user_id);
     }
 
     return $response;

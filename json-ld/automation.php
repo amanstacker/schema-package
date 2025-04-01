@@ -27,67 +27,90 @@ function smpg_review_automation( $json_ld, $schema_data, $post_id ){
 function smpg_get_absolutereviews_json_ld( $json_ld, $post_id ) {
 
         $abr_settings        = get_post_meta( $post_id, '_abr_review_settings', true );
-        $score_number        = get_post_meta( $post_id, '_abr_review_total_score_number', true );
-        $review_type         = get_post_meta( $post_id, '_abr_review_type', true );
-        $item_reviewed       = get_post_meta( $post_id, '_abr_review_schema_heading', true );
-        $review_body         = get_post_meta( $post_id, '_abr_review_schema_desc', true );
 
-        $best_rating         = 5;
-    
-            switch ( $review_type ) {
-                case 'percentage':
-                    $best_rating = 100;
-                    break;
-                case 'point-5':
-                    $best_rating = 5;
-                    break;
-                case 'point-10':
-                    $best_rating = 10;
-                    break;
-                case 'star':
-                    $best_rating = 5;
-                    break;
-        }
+        if ( ! empty( $abr_settings ) ) {
+
+            $score_number        = get_post_meta( $post_id, '_abr_review_total_score_number', true );
+            $review_type         = get_post_meta( $post_id, '_abr_review_type', true );
+            $item_reviewed       = get_post_meta( $post_id, '_abr_review_schema_heading', true );
+            $review_body         = get_post_meta( $post_id, '_abr_review_schema_desc', true );
+            $author_type         = get_post_meta( $post_id, '_abr_review_schema_author', true );        
+            $review_author       = get_post_meta( $post_id, '_abr_review_schema_author_custom', true );        
+
+            $best_rating         = 5;
+        
+                switch ( $review_type ) {
+                    case 'percentage':
+                        $best_rating = 100;
+                        break;
+                    case 'point-5':
+                        $best_rating = 5;
+                        break;
+                    case 'point-10':
+                        $best_rating = 10;
+                        break;
+                    case 'star':
+                        $best_rating = 5;
+                        break;
+            }
         
 
-        if ( $json_ld['@type'] == 'Product' ) {
+            if ( $json_ld['@type'] == 'Product' ) {
 
-                $json_ld['review']['@type']                       = 'Review';
-                $json_ld['review']['author']                      = smpg_get_author_detail();  
-                $json_ld['review']['datePublished']               = smpg_get_published_date();
+                    $json_ld['review']['@type']                       = 'Review';                 
+                    $json_ld['review']['datePublished']               = smpg_get_published_date();
 
+                    if ( $author_type == 'custom' && $review_author ) {
+                                                                            
+                        $json_ld['review']['author']['@type']      = 'Person';
+                        $json_ld['review']['author']['name']       = $review_author;     
+
+                    }else{
+                        $json_ld['review']['author']                      = smpg_get_author_detail(); 
+                    }                
+
+                    if ( $review_body ) {
+                        $json_ld['review']['reviewBody'] = $review_body;
+                    }
+
+                    $json_ld['review']['reviewRating']['@type']       =      'Rating';
+                    $json_ld['review']['reviewRating']['ratingValue'] =      $score_number;            
+                    $json_ld['review']['reviewRating']['bestRating']  =      $best_rating;
+                    $json_ld['review']['reviewRating']['worstRating'] =      0;
+                
+            }
+
+            if ( $json_ld['@type'] == 'Review' ) {
+
+                if ( $item_reviewed ) {            
+                    $json_ld['itemReviewed']['name'] = $item_reviewed;
+                }
                 if ( $review_body ) {
-                    $json_ld['review']['reviewBody'] = $review_body;
+                    $json_ld['reviewBody'] = $review_body;
+                }
+                
+                if ( $author_type == 'custom' && $review_author ) {
+                    unset($json_ld['author']);
+                    $json_ld['author']['@type']  = 'Person';
+                    $json_ld['author']['name']   = $review_author;     
+                }
+                
+                if ( ! empty( $abr_settings ) ) {
+        
+                    $json_ld['reviewRating']['@type']       =      'Rating';
+                    $json_ld['reviewRating']['ratingValue'] =      $score_number;            
+                    $json_ld['reviewRating']['bestRating']  =      $best_rating;
+                    $json_ld['reviewRating']['worstRating'] =      0;
+        
                 }
 
-                $json_ld['review']['reviewRating']['@type']       =      'Rating';
-                $json_ld['review']['reviewRating']['ratingValue'] =      $score_number;            
-                $json_ld['review']['reviewRating']['bestRating']  =      $best_rating;
-                $json_ld['review']['reviewRating']['worstRating'] =      0;
-            
-        }
+            }        
+                                 
+            return $json_ld;
 
-        if ( $json_ld['@type'] == 'Review' ) {
-
-            if ( $item_reviewed ) {            
-                $json_ld['itemReviewed']['@type'] = $item_reviewed;
-            }
-            if ( $review_body ) {
-                $json_ld['reviewBody'] = $review_body;
-            }                
-            
-            if ( ! empty( $abr_settings ) ) {
-    
-                $json_ld['reviewRating']['@type']       =      'Rating';
-                $json_ld['reviewRating']['ratingValue'] =      $score_number;            
-                $json_ld['reviewRating']['bestRating']  =      $best_rating;
-                $json_ld['reviewRating']['worstRating'] =      0;
-    
-            }
-
+        }else{
+            return [];
         }        
-                                    
-        return $json_ld;
 }
 
 add_filter('smpg_filter_jobposting_json_ld', 'smpg_jobposting_automation',10,3);

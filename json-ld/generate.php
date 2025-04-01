@@ -197,6 +197,18 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                           
         break;
 
+        case 'profilepage':
+            
+            $json_ld = smpg_get_profilepage_individual_json_ld( $json_ld, $properties, $schema_type );            
+                          
+        break;
+
+        case 'webpage':
+            
+            $json_ld = smpg_get_webpage_individual_json_ld( $json_ld, $properties, $schema_type );            
+                          
+        break;
+
         case 'service':
         case 'broadcastservice':
         case 'cableorsatelliteservice':
@@ -324,6 +336,45 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             }
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_article_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'webpage':
+            
+            $json_ld['@context']                  = smpg_get_context_url();
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['url']                       = smpg_get_permalink();            
+            $json_ld['description']               = smpg_get_description();                     
+            $json_ld['inLanguage']                = smpg_get_inlanguage();
+
+            $image = smpg_get_image();
+
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld, $image );
+            }
+            
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_webpage_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'profilepage':
+            
+            $json_ld['@context']                  = smpg_get_context_url();
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['url']                       = smpg_get_permalink();            
+            $json_ld['description']               = smpg_get_description();    
+            $json_ld['dateCreated']               = smpg_get_published_date();                                        
+            $json_ld['inLanguage']                = smpg_get_inlanguage();
+
+            $image = smpg_get_image();
+
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld, $image );
+            }
+            
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_profilepage_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 
@@ -460,7 +511,9 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['@context']                         = smpg_get_context_url();
             $json_ld['@type']                            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
             $json_ld['reviewBody']                       = smpg_get_description();    
-            $json_ld['itemReviewed']['@type']            = 'Organization';
+            $json_ld['datePublished']                    = smpg_get_published_date();
+            $json_ld['author']                           = smpg_get_author_detail();
+            $json_ld['itemReviewed']['@type']            = 'Product';
             $json_ld['itemReviewed']['url']              = smpg_get_permalink();
             $json_ld['itemReviewed']['name']             = smpg_get_the_title();
             $json_ld['itemReviewed']['description']      = smpg_get_description();    
@@ -831,6 +884,52 @@ function smpg_breadcrumbs_data() {
         }
 
         return $response;
+}
+
+function smpg_prepare_profilepage_json_ld() {
+
+    global $smpg_misc_schema;
+    $json_ld = [];
+
+    if ( ! empty( $smpg_misc_schema['profilepage'] ) && is_author() ) {
+
+        $author_id    = get_queried_object_id();
+        $author_name  = get_the_author_meta( 'display_name', $author_id );
+        $author_url   = get_author_posts_url( $author_id );
+        $author_desc  = get_the_author_meta( 'description', $author_id );
+        $author_image = get_avatar_url( $author_id, [ 'size' => 300 ] );
+        $job_title    = get_the_author_meta( 'job_title', $author_id ); 
+
+        // Fetch social profiles if available (Twitter, Facebook, LinkedIn, etc.)
+        $social_profiles = [];
+        $social_meta_keys = [ 'twitter', 'facebook', 'linkedin', 'instagram', 'youtube' ];
+
+        foreach ( $social_meta_keys as $key ) {
+            $social_url = get_the_author_meta( $key, $author_id );
+            if ( ! empty( $social_url ) ) {
+                $social_profiles[] = esc_url( $social_url );
+            }
+        }
+
+        $json_ld = [
+            '@context'  => 'https://schema.org',
+            '@type'     => 'ProfilePage',
+            'mainEntity' => [
+                '@type'        => 'Person',
+                'name'         => esc_html( $author_name ),
+                'url'          => esc_url( $author_url ),
+                'description'  => ! empty( $author_desc ) ? esc_html( $author_desc ) : null,
+                'image'        => esc_url( $author_image ),
+                'jobTitle'     => ! empty( $job_title ) ? esc_html( $job_title ) : null,
+                'sameAs'       => ! empty( $social_profiles ) ? $social_profiles : null,
+            ],
+        ];
+
+        // Remove null values to keep JSON clean
+        $json_ld['mainEntity'] = array_filter( $json_ld['mainEntity'] );
+    }
+
+    return $json_ld;
 }
 
 function smpg_prepare_website_json_ld() {

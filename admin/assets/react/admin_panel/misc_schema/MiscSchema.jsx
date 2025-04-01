@@ -19,6 +19,7 @@ const MiscSchema = () => {
       website              : true,      
       sitelinks_search_box : false,
       breadcrumbs          : false,
+      profilepage          : false,
       about_pages          : [],
       contact_pages        : []
     }            
@@ -199,7 +200,7 @@ const MiscSchema = () => {
           : ''
         }        
         <tr>
-          <td><label htmlFor="breadcrumbs"><strong>{__('BreadCrumbs', 'schema-package')}</strong></label></td>
+          <td><label htmlFor="breadcrumbs"><strong>{__('Breadcrumbs', 'schema-package')}</strong></label></td>
           <td>
                 <Checkbox                     
                       name='breadcrumbs'
@@ -208,6 +209,18 @@ const MiscSchema = () => {
                       onChange={formChangeHandler}
                 />              
               <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+          </td>
+        </tr>
+        <tr>
+          <td><label htmlFor="profilepage"><strong>{__('Profile Page', 'schema-package')}</strong></label></td>
+          <td>
+                <Checkbox                     
+                      name='profilepage'
+                      id='profilepage' 
+                      checked={!!miscSchema.profilepage}
+                      onChange={formChangeHandler}
+                />              
+              <span className="smpg-tooltip"><Popup content={__("Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
           </td>
         </tr>
         <tr>

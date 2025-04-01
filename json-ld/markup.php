@@ -6,7 +6,7 @@ add_action( 'init', 'smpg_json_ld_init');
 
 function smpg_json_ld_init(){
 
-    if ( is_admin() ){
+    if ( is_admin() || ( defined('REST_REQUEST') && REST_REQUEST ) ) {
         return; 
     }
 
@@ -59,81 +59,15 @@ function smpg_get_json_ld(){
 
     global $post;
 
-    $post_id     = null;
-    $response    = [];
-
-    if ( is_object( $post ) ) {
-        $post_id = $post->ID;
-    }        
-
-    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    $post_id     = $spg_id = null;
+    $response    = $spg_schema_meta = [];            
     
-    if(!empty($breadcrumbs)){
-        $response [] = $breadcrumbs;
-    }
-
-    $website       = smpg_prepare_website_json_ld();    
-    if(!empty($website)){
-        $response [] = $website;
-    }
-
-    $about_page    = smpg_prepare_about_page_json_ld();
-    if(!empty($about_page)){
-        $response [] = $about_page;
-    }
-
-    $contact_page  = smpg_prepare_contact_page_json_ld();  
-
-    if(!empty($contact_page)){
-        $response [] = $contact_page;
-    }    
-    //Schema Package Generator schema markup addition
-    $schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );        
-    
-    if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
-
-        foreach ( $schema_meta as $meta ) {
-            
-            if ( isset( $meta['is_enable'] ) && $meta['is_enable'] == 1 ) {
-
-                $particular_data = smpg_prepare_particular_post_json_ld( $meta, $post_id );
-
-                if ( ! empty( $particular_data ) ) {
-                    $response[] = $particular_data;
-                }
-                
-            }
-
-        }
-
-    }
-    //Singular schema markup addition
-
-    if ( is_singular() ) {
-
-        $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
-    
-        if ( ! empty( $singular_schema_ids ) ) {
-            
-            foreach ( $singular_schema_ids as $id ) {
-                
-                $schema_meta = get_post_meta( $id );            
-                
-                if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
-                    if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
-                        $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
-                    }
-                }            
-            }
-
-        }
-
-
-    }    
-
-    //Carousel schema markup addition
     if ( is_tax() || is_category() || is_tag() ) {
 
+        $spg_id = get_queried_object_id();
+        $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );      
+
+        //Carousel schema markup addition
         $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
     
         if ( ! empty( $carousel_schema_ids ) ) {
@@ -156,7 +90,91 @@ function smpg_get_json_ld(){
 
         }
 
-    }    
+
+        ///
+    }
+    
+    //Singular schema markup addition
+
+    if ( is_singular() ) {
+
+        $post_id = $post->ID;
+        $spg_id  = $post_id;
+        
+        $spg_schema_meta = get_post_meta( $spg_id, '_smpg_schema_meta', true );        
+
+        $singular_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_singular_schema' , 'smpg_singular_schema' );
+    
+        if ( ! empty( $singular_schema_ids ) ) {
+            
+            foreach ( $singular_schema_ids as $id ) {
+                
+                $schema_meta = get_post_meta( $id );            
+                
+                if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
+                    if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
+                        $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
+                    }
+                }            
+            }
+
+        }
+
+    }            
+
+    if ( is_author() ) {
+
+        $spg_id = get_queried_object_id();        
+        $spg_schema_meta = get_user_meta( $spg_id, '_smpg_schema_meta', true );      
+    }
+
+    //Schema Package Generator schema markup addition
+        
+    if ( ! empty( $spg_schema_meta ) && is_array( $spg_schema_meta ) ) {
+
+        foreach ( $spg_schema_meta as $meta ) {
+            
+            if ( isset( $meta['is_enable'] ) && $meta['is_enable'] == 1 ) {
+
+                $particular_data = smpg_prepare_particular_post_json_ld( $meta, $spg_id );                
+
+                if ( ! empty( $particular_data ) ) {
+                    $response[] = $particular_data;
+                }
+                
+            }
+
+        }
+
+    }
+
+    //MISC Schema Output
+    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    
+    if(!empty($breadcrumbs)){
+        $response [] = $breadcrumbs;
+    }
+
+    $profilepage       = smpg_prepare_profilepage_json_ld();    
+    if(!empty($profilepage)){
+        $response [] = $profilepage;
+    }
+
+    $website       = smpg_prepare_website_json_ld();    
+    if(!empty($website)){
+        $response [] = $website;
+    }
+
+    $about_page    = smpg_prepare_about_page_json_ld();
+    if(!empty($about_page)){
+        $response [] = $about_page;
+    }
+
+    $contact_page  = smpg_prepare_contact_page_json_ld();  
+
+    if(!empty($contact_page)){
+        $response [] = $contact_page;
+    }
 
     return $response;
 }

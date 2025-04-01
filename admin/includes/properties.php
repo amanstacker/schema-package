@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null ) {
+function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null, $user_id = null ) {
     
     $properties = [];
 
@@ -151,6 +151,24 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Name of the item'        
+        ],
+        'identifier' => [                        
+            'placeholder' => 'Enter Identifier',                    
+            'label'       => 'Identifier',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Identifier of the item'        
+        ],
+        'alternate_name' => [                        
+            'placeholder' => 'Enter Alternate Name',                    
+            'label'       => 'Alternate Name ',
+            'type'        => 'text',
+            'value'       => smpg_get_the_title( $post_id ),
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'Alternate Name of the item or person'
         ],
         'price_range' => [
             'placeholder' => '$$$',                    
@@ -335,6 +353,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => 'The date on which the article was most recently modified'
         ],
+        'date_created' => [                        
+            'placeholder' => '2015-02-05T09:20:00+08:00',                    
+            'label'       => 'Date Created',                    
+            'type'        => 'text',
+            'value'       => smpg_get_modified_date($post_id),
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'The date on which things created'
+        ],
         'author_type' => [                                     
             'label'       => 'Author Type',                    
             'type'        => 'select',
@@ -363,21 +390,60 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         ],
         'employment_type' => [                          
             'label'       => 'Employment Type',                    
-            'type'        => 'multiselect',
-            'value'       => 'FULL_TIME',
-            'options'      => [
-                'FULL_TIME'     => 'FULL_TIME',
-                'PART_TIME'     => 'PART_TIME',                        
-                'CONTRACTOR'    => 'CONTRACTOR',
-                'TEMPORARY'     => 'TEMPORARY',                        
-                'INTERN'        => 'INTERN',
-                'VOLUNTEER'     => 'VOLUNTEER',                        
-                'PER_DIEM'      => 'PER_DIEM',
-                'OTHER'         => 'OTHER',                        
-            ],
+            'type'        => 'groups',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author type of this content'
+            'tooltip'     => 'Employment types',
+            'elements'      => [
+                'full_time' => [                                                                                                                                              
+                    'label'       => 'Full Time',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'part_time' => [                                                                                                                                              
+                    'label'       => 'Part Time',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'contractor' => [                                                                                                                                              
+                    'label'       => 'Contractor',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'temporary' => [                                                                                                                                              
+                    'label'       => 'Temporary',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'intern' => [                                                                                                                                              
+                    'label'       => 'Intern',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'volunteer' => [
+                    'label'       => 'Volunteer',
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'per_diem' => [                                                                                                                                              
+                    'label'       => 'Per Diem',                    
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],
+                'other' => [                                                                                                                                              
+                    'label'       => 'Other',        
+                    'type'        => 'checkbox',                                                                                    
+                    'value'       => true,
+                    'display'     => true
+                ],                
+            ]            
         ],
         'author_name' => [                                     
             'placeholder' => 'Author Name',                    
@@ -499,7 +565,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'high_price' => [                        
             'placeholder' => '25.36',                    
             'label'       => 'High Price',
-            'type'        => 'text',
+            'type'        => 'number',
             'value'       => '',
             'recommended' => true,
             'display'     => false,
@@ -508,7 +574,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'low_price' => [                        
             'placeholder' => '12.36',                    
             'label'       => 'Low Price',
-            'type'        => 'text',
+            'type'        => 'number',
             'value'       => '',
             'recommended' => true,
             'display'     => false,
@@ -517,11 +583,56 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'offer_count' => [                        
             'placeholder' => '2',                    
             'label'       => 'Offer Count',
-            'type'        => 'text',
+            'type'        => 'number',
             'value'       => '',
             'recommended' => true,
             'display'     => false,
             'tooltip'     => ''        
+        ],
+        'follow_count' => [                        
+            'placeholder' => '2',                    
+            'label'       => 'Follow Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Number of times the profile has been followed'        
+        ],
+        'like_count' => [                        
+            'placeholder' => '2',                    
+            'label'       => 'Like Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Number of likes received'        
+        ],
+        'comment_count' => [                        
+            'placeholder' => '10',                    
+            'label'       => 'Comment Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Number of comments'        
+        ],
+        'share_count' => [                        
+            'placeholder' => '5',                    
+            'label'       => 'Share Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Number of times the profile has been shared'        
+        ],
+        'post_count' => [                        
+            'placeholder' => '100',                    
+            'label'       => 'Post Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Number of posts/articles written by the profile owner'        
         ],
         'offer_price' => [                        
             'placeholder' => '119.99',                    
@@ -798,6 +909,18 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                 'elements'      => [ $reviews_elements ]
     ];
 
+    $social_links = [                            
+        'label'         => 'Social Links',
+        'button_text'   => 'Add More Social Links', 
+        'type'          => 'repeater', 
+        'display'       => true,
+        'elements'      => [
+            [
+                'url'     => $url,                                            
+            ]
+        ]                                                                                                                      
+    ];
+
     switch ( $schema_id ) {
         
         case 'article':
@@ -843,6 +966,39 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             }
 
             break;        
+
+        case 'webpage':
+            $properties = [                
+                'is_enable'         => true,
+                'is_delete_popup'   => false, 
+                'is_setup_popup'    => false,
+                'has_warning'       => false,
+                'id'                => 'webpage',
+                'text'              => 'WebPage',
+                'properties'        => [                    
+                    'headline'            => $headline,
+                    'description'         => $description,
+                    'keywords'            => $keywords,
+                    'word_count'          => $word_count,                    
+                    'url'                 => $url,
+                    'in_language'         => $in_language,
+                    'date_published'      => $date_published,
+                    'date_modified'       => $date_modified,
+                    'author_type'         => $author_type,
+                    'author_name'         => $author_name,
+                    'publisher_name'      => $publisher_name,                    
+                    'publisher_logo'      => $publisher_logo,
+                    'image'               => $image
+                ]
+            ];
+            
+            if ( $schema_id == 'creativework' ) {
+                unset( $properties['properties']['word_count'] );
+                unset( $properties['properties']['article_section'] );
+            }
+
+            break;        
+
         case 'qna':
 
             $qna_answer = [
@@ -853,13 +1009,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'display'     => true,                    
                     'value'       => ''
                 ],
-                'date_created' => [                                                                                                                                              
-                    'label'       => 'Date Created',                    
-                    'type'        => 'text',
-                    'placeholder' => '2016-11-02T21:11Z', 
-                    'display'     => true,                   
-                    'value'       => ''
-                ],
+                'date_created' => $date_created,                
                 'vote' => [                                                                                                                                              
                     'label'       => 'Up Vote Count',                    
                     'type'        => 'number',
@@ -1087,6 +1237,42 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     ]
                 ];
                 break;   
+                
+                case 'profilepage':
+
+                    $image['label']          = 'Person Image';
+                    $name['label']           = 'Person Name';
+                    $alternate_name['label'] = 'Person Alternate Name';
+                    $description['label']    = 'Person Description';                    
+                    $social_links['label']   = 'Person Social Links';
+
+                    $properties = [
+                        'is_enable'         => true,
+                        'is_delete_popup'   => false, 
+                        'is_setup_popup'    => false,
+                        'has_warning'       => false,
+                        'id'                => 'profilepage',           
+                        'text'              => 'ProfilePage',
+                        'properties'        => [
+                            'date_created'     => $date_created,    
+                            'date_modified'    => $date_modified,
+                            'url'              => $url,
+                            'in_language'      => $in_language,
+                            'name'             => $name,
+                            'alternate_name'   => $alternate_name,
+                            'identifier'       => $identifier,
+                            'description'      => $description,
+                            'image'            => $image,
+                            'follow_count'     => $follow_count,                            
+                            'like_count'       => $like_count,                            
+                            'comment_count'    => $comment_count,
+                            'share_count'      => $share_count,
+                            'post_count'       => $post_count,
+                            'social_links'     => $social_links,
+                        ]                      
+                    ];                    
+                    break;
+
                 case 'book':
 
                     $properties = [
@@ -1132,6 +1318,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;
                     case 'jobposting':
 
+                        $social_links['label'] = 'Hiring Organization Social Links';
+
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
@@ -1146,7 +1334,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'date_posted'      => $date_posted,
                                 'valid_through'    => $valid_through,
                                 'employment_type'  => $employment_type,
-                                'jobLocation_type'      => [                                                                                                                                              
+                                'job_location_type'      => [
                                     'label'       => 'JobLocation Type',                    
                                     'type'        => 'text',                                    
                                     'placeholder' => 'TELECOMMUTE',                    
@@ -1188,17 +1376,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'value'       => '',
                                     'display'     => true
                                 ],
-                                'hiring_org_social_links' => [                            
-                                    'label'         => 'Hiring Organization Social Links',    
-                                    'button_text'   => 'Add More Social Links', 
-                                    'type'          => 'repeater', 
-                                    'display'       => true,
-                                    'elements'      => [
-                                        [
-                                            'url'     => $url,                                            
-                                        ]
-                                    ]                                                                                                                      
-                                ],
+                                'social_links'  => $social_links,                                
                                 'hiring_org_logo'      => [                                                                                                                                              
                                     'label'       => 'Hiring Organization Logo',                    
                                     'type'        => 'media',                                                                                          
@@ -2200,8 +2378,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'properties'        => [
                                 'name'                 => $name, 
                                 'description'          => $description, 
-                                'url'                  => $url                                                                                          
-        
+                                'url'                  => $url,
+                                'image'                => $image                                                                                                  
                         ]                      
                     ];
         

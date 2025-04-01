@@ -60,7 +60,8 @@ const Settings = () => {
         default_image_url:        '',
         manage_conflict  :        [],
         spg_post_types   :        [],
-        spg_taxonomies   :        []
+        spg_taxonomies   :        [],
+        spg_author       :        false
     });
           
   const page = queryString.parse(window.location.search);   
@@ -464,7 +465,7 @@ const Settings = () => {
               <table className="form-table">
                 <tbody>
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('SPG for Post Types', 'schema-package')}</label></th>
+                    <th><strong>{__('SPG for Post Types', 'schema-package')}</strong></th>
                     <td>
                     <Dropdown
                       style={{maxWidth:"300px"}}
@@ -483,7 +484,7 @@ const Settings = () => {
                     </td>
                 </tr>
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('SPG for Taxonomies', 'schema-package')}</label></th>
+                    <th><strong>{__('SPG for Taxonomies', 'schema-package')}</strong></th>
                     <td>
                     <Dropdown
                       style={{maxWidth:"300px"}}
@@ -503,7 +504,20 @@ const Settings = () => {
                 </tr>  
 
                 <tr>
-                    <th><label htmlFor="export_smpg">{__('Export Data ', 'schema-package')}</label></th>
+                    <th><label htmlFor="spg_author">{__('SPG for Author', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='spg_author'
+                        id='spg_author' 
+                        checked={!!settings.spg_author ? true : false}
+                        onChange={formChangeHandler}
+                      />                                            
+                      {/* <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      </td>
+                  </tr>
+
+                <tr>
+                    <th><strong>{__('Export Data ', 'schema-package')}</strong></th>
                     <td>
                     <Button loading={loading} onClick={handleExport}>
                       <Icon name='download' />
@@ -513,7 +527,7 @@ const Settings = () => {
                     </td>
                   </tr>
                   <tr>
-                    <th><label htmlFor="import_smpg">{__('Import Data', 'schema-package')}</label></th>
+                    <th><strong>{__('Import Data', 'schema-package')}</strong></th>
                     <td style={{position:"relative"}}>
                     <div className="smpg-import-td" style={{float : "left"}}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>

@@ -599,7 +599,7 @@ class SMPG_Api_Mapper {
         $response  = $meta_data = $enabled_on = $enabled_on = $disabled_on = [];
 
         $post_type_plc = $this->get_placement_data('post_type');
-        $post_plc      = $this->get_placement_data('post');
+        $post_plc      = $this->get_placement_data('post');        
         $page_plc      = $this->get_placement_data('page');
 
         $enabled_on['post_type'] = $post_type_plc;
@@ -631,14 +631,15 @@ class SMPG_Api_Mapper {
                               
                               $saved_data = $this->get_placement_data($ikey, '', $jval);
                               
-                              if($saved_data){
+                              if ( $saved_data ) {
 
                                 if( $key == '_enabled_on' ){
-                                  $enabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
+                                  
+                                  $enabled_on[$ikey]      = array_values(array_unique(array_merge($enabled_on[$ikey], $saved_data), SORT_REGULAR));
                                 }
 
-                                if( $key == '_disabled_on' ){
-                                  $disabled_on[$ikey]      = array_merge($enabled_on[$ikey], $saved_data);
+                                if( $key == '_disabled_on' ){                                 
+                                  $disabled_on[$ikey]      = array_values(array_unique(array_merge($enabled_on[$ikey], $saved_data), SORT_REGULAR));
                                 }
                                 
                               }
@@ -779,74 +780,62 @@ class SMPG_Api_Mapper {
 
     public function update_misc_schema( $parameters ) {
 
-        $data      = json_decode( $parameters['misc_schema'], true );
-            
-        $response = false;
-
-        if ( $data && is_array( $data ) ) {
-
-          $options = get_option('smpg_misc_schema');
-          
-          foreach($data as $key => $val){
-            $options[$key] = $val;
-          }
-          
-         $response =  update_option( 'smpg_misc_schema', $options );
-
+      if ( ! empty( $parameters['misc_schema'] ) ) {
+       
+        $settings = json_decode( wp_unslash( $parameters['misc_schema'] ), true );
+                                              
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+          return update_option( 'smpg_misc_schema', smpg_sanitize_schema_meta( $settings ) );          
         }
 
-        return $response;
+      }  
 
     }
 
     public function update_settings( $parameters ){
-        
-        $settings      = json_decode( $parameters['settings'], true );        
-            
-        $response = false;
 
-        if ( $settings && is_array( $settings ) ) {
-
-          $options = (array) get_option( 'smpg_settings' );
-          
-          foreach ( $settings as $key => $val ) {
-            $options[$key] = $val;
-          }
-          
-         $response =  update_option( 'smpg_settings', $options );
-
+      if ( ! empty( $parameters['settings'] ) ) {
+       
+        $settings = json_decode( wp_unslash( $parameters['settings'] ), true );
+                                              
+        if ( json_last_error() === JSON_ERROR_NONE ) {
+          return update_option( 'smpg_settings', smpg_sanitize_schema_meta( $settings ) );          
         }
 
-        return $response;
-    }
+      } 
 
+    }
     
     public function save_schema_data( $parameters ) {
-            
-            $post_meta      = $parameters['post_meta'];                                                 
-            $post_data      = $parameters['post_data'];                                                                  
-                                    
-            $post_id = wp_insert_post( $post_data );                        
-            
-            if ( $post_meta ) {
-                
-                foreach( $post_meta as $key => $val ){
-                    
-                    $sanitized_data = smpg_sanitize_post_meta( $key, $val );
+                                                    
+            if ( ! empty( $parameters['post_data'] ) ) {
 
-                    update_post_meta( $post_id, $key, $sanitized_data );
+              $id =  $parameters['post_data']['ID'];
+              unset( $parameters['post_data']['ID'] );
+              $post_data = smpg_sanitize_schema_meta( $parameters['post_data'] );
+              $post_data['ID'] = intval( $id );              
+              $post_id   = wp_insert_post( $post_data );                        
+              
+              if ( ! empty( $parameters['post_meta'] ) ) {
+                 
+                foreach ( $parameters['post_meta'] as $key => $val ) {
+                
+                     $sanitized_data = smpg_sanitize_schema_meta( $val );             
+                     update_post_meta( $post_id, sanitize_key( $key ), $sanitized_data );
+
                 }                               
-            }
+                
+              }
             
-            return  $post_id;
+              return  $post_id;
+        }                                                
     }
 
     public function save_post_meta( $parameters ) {
-            
-      $post_meta      = $parameters['post_meta'];
-            
+                              
       if ( ! empty( $parameters['post_id'] ) ) {
-
+        
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
         update_post_meta( $parameters['post_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['post_id'];
@@ -854,17 +843,26 @@ class SMPG_Api_Mapper {
       }
 
       if ( ! empty($parameters['tag_id'] ) ) {
-        
+
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
         update_term_meta( $parameters['tag_id'], '_smpg_schema_meta', $post_meta );
 
         return  $parameters['tag_id'];
+      }
+
+      if ( ! empty($parameters['user_id'] ) ) {
+
+        $post_meta = smpg_sanitize_schema_meta( $parameters['post_meta'] );
+        update_user_meta( $parameters['user_id'], '_smpg_schema_meta', $post_meta );
+
+        return  $parameters['user_id'];
       }
                    
     }
             
     public function changePostStatus( $ad_id, $action ) {
 
-      return wp_update_post( [ 'ID' =>  $ad_id, 'post_status' => $action ] );
+      return wp_update_post( [ 'ID' =>  intval( $ad_id ), 'post_status' => boolval( $action ) ] );
       
     }
     public function get_carousel_automation_with( $schema_type ) {

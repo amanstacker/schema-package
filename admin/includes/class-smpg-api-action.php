@@ -25,9 +25,10 @@ class SMPG_Api_Action {
             $parameters     = $request->get_params();
             $_current_status = 1;                  
 
-            if( isset($parameters['post_id']) ){
+            if ( isset($parameters['post_id']) ) {
+
                 $post_id                = intval( $parameters['post_id'] );
-                $_current_status         = rest_sanitize_boolean( $parameters['_current_status'] );
+                $_current_status        = boolval( $parameters['_current_status'] );
                 $action                 = sanitize_text_field($parameters['action']);
 
                 switch ($action) {
@@ -438,35 +439,39 @@ class SMPG_Api_Action {
             return rest_ensure_response($custom_fields);
         }
         public function get_advanced_custom_fields( $request ) {
-            // Get the search query from the request.
-            $search_query = sanitize_text_field( $request->get_param( 'search' ) );
+
+            $custom_fields = []; 
+
+            $search_query  = sanitize_text_field( $request->get_param( 'search' ) );
         
-            // Get all ACF field groups.
-            $field_groups   = acf_get_field_groups();
-            $custom_fields = array();
-        
-            if ( ! empty( $field_groups ) ) {
-                foreach ( $field_groups as $group ) {
-                    // Get fields within the group.
-                    $fields = acf_get_fields( $group['ID'] );
-        
-                    if ( $fields ) {
-                        foreach ( $fields as $field ) {
-                            // Apply search filter if needed.
-                            if ( ! empty( $search_query ) && false === stripos( $field['name'], $search_query ) ) {
-                                continue;
+            if ( function_exists( 'acf_get_field_groups' ) ) {
+
+                $field_groups   = acf_get_field_groups();
+                    
+                if ( ! empty( $field_groups ) ) {
+                    foreach ( $field_groups as $group ) {
+                        // Get fields within the group.
+                        $fields = acf_get_fields( $group['ID'] );
+            
+                        if ( $fields ) {
+                            foreach ( $fields as $field ) {
+                                // Apply search filter if needed.
+                                if ( ! empty( $search_query ) && false === stripos( $field['name'], $search_query ) ) {
+                                    continue;
+                                }
+            
+                                $custom_fields[] = array(
+                                    'id'    => $field['name'],
+                                    'value' => $field['name'],
+                                    'label' => $field['label'], // Use ACF's label for readability.
+                                );
                             }
-        
-                            $custom_fields[] = array(
-                                'id'    => $field['name'],
-                                'value' => $field['name'],
-                                'label' => $field['label'], // Use ACF's label for readability.
-                            );
                         }
                     }
                 }
+
             }
-        
+                                
             return rest_ensure_response( $custom_fields );
         }                                
         
@@ -597,7 +602,7 @@ class SMPG_Api_Action {
 
             $parameters     = $request_data->get_params();                                               
 
-            if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) ){
+            if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ){
                                 
                 $this->_api_mapper->save_post_meta($parameters);          
                 return array('status' => 'success', 'message' => esc_html__( 'Saved Successfully', 'schema-package' ));
@@ -664,12 +669,12 @@ class SMPG_Api_Action {
             $parameters = $request->get_params();                        
             
             if(!empty($parameters['init'])){
-                $result    =  smpg_get_initial_post_meta($parameters['post_id'], $parameters['tag_id']);
+                $result    =  smpg_get_initial_post_meta($parameters['post_id'], $parameters['tag_id'], $parameters['user_id']);
                 $response  =  array('status' => 'success', 'properties' => $result);
             }else{
                 
-                if( isset($parameters['selected']) && ( !empty($parameters['post_id']) || !empty($parameters['tag_id']) ) ){
-                    $result    =  smpg_get_multiple_schema_properties($parameters['selected'], (int)$parameters['post_id'], (int)$parameters['tag_id']);
+                if( isset($parameters['selected']) && ( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ) ){
+                    $result    =  smpg_get_multiple_schema_properties($parameters['selected'], (int)$parameters['post_id'], (int)$parameters['tag_id'], (int)$parameters['user_id'] );
                     $response  =  array('status' => 'success', 'properties' => $result);
                 }else{    
                     $response =  array('status' => 'failed', 'message' => esc_html__( 'Properties not found', 'schema-package' ));

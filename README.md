@@ -83,6 +83,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
 - [ItemList](https://schema.org/ItemList)
+- [CollectionPage](https://schema.org/CollectionPage)
 - [LiveBlogPosting](https://schema.org/LiveBlogPosting)
 - [QAPage](https://schema.org/QAPage)
 - [TechArticle](https://schema.org/TechArticle)

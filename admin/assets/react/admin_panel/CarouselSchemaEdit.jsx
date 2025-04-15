@@ -1,7 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import queryString from 'query-string'
 import { Link } from 'react-router-dom';
-import { Button, Dropdown, Grid, Icon, Divider, Label } from 'semantic-ui-react'
+import { Button, Dropdown, Grid, Icon, Divider, Label, Form, Checkbox } from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom';
 import MainSpinner from './common/main-spinner/MainSpinner';
 import { schemaTypes } from '../shared/carouselSchemaTypes';
@@ -310,7 +310,7 @@ const CarouselSchemaEdit = () => {
          <Grid>
             <Grid.Row>
               <Grid.Column>
-                <Form>
+                {/* <Form>
                   {automationList.map((item) => (
                       <Form.Field key={item.key}>
                         <Checkbox
@@ -320,12 +320,13 @@ const CarouselSchemaEdit = () => {
                         />
                       </Form.Field>
                   ))}                                      
-                </Form>
+                </Form> */}
               </Grid.Column>
               </Grid.Row>
           </Grid>
 
-         : <div>
+         : 
+         <div>
             <p>
             {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
             <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>

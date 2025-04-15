@@ -1,7 +1,7 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

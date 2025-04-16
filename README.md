@@ -6,7 +6,7 @@ The main purpose of the Schema Package is to automate the creation of schema mar
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
-If you still want to enter schema markup manually, We have provided the **Schema Package Generator**. It’s a powerful, minimal design, popup-like structure that allows you to smoothly fill in the data for all schema types, one by one.
+In some cases, automation isn't enough and requires manual data entry. For such situations, we've provided the **Schema Package Generator** — a powerful, minimalistic, popup-style interface that allows you to smoothly enter data for all schema types, one by one.
 
 
 ### Your Trust, Our Motive: Exceptional Schema Markup Services
@@ -83,6 +83,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
 - [ItemList](https://schema.org/ItemList)
+- [CollectionPage](https://schema.org/CollectionPage)
 - [LiveBlogPosting](https://schema.org/LiveBlogPosting)
 - [QAPage](https://schema.org/QAPage)
 - [TechArticle](https://schema.org/TechArticle)
@@ -90,6 +91,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 
 #### 3. E-commerce & Products
 - [Product](https://schema.org/Product)
+- [ProductGroup](https://schema.org/ProductGroup)
 - [Offer](https://schema.org/Offer)
 - [AggregateOffer](https://schema.org/AggregateOffer)
 - [Brand](https://schema.org/Brand)
@@ -168,6 +170,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [CollegeOrUniversity](https://schema.org/CollegeOrUniversity)
 - [Course](https://schema.org/Course)
 - [CourseInstance](https://schema.org/CourseInstance)
+- [LearningResource](https://schema.org/LearningResource)
 
 #### 12. Media & Entertainment
 - [Book](https://schema.org/Book)

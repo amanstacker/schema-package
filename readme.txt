@@ -1,8 +1,8 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
-Tested up to: 6.7
-Stable tag: 1.0.8
+Tested up to: 6.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ The main purpose of the Schema Package is to automate the creation of schema mar
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
-If you still want to enter schema markup manually, We have provided the **Schema Package Generator**. It’s a powerful, minimal design, popup-like structure that allows you to smoothly fill in the data for all schema types, one by one.
+In some cases, automation isn't enough and requires manual data entry. For such situations, we've provided the **Schema Package Generator** — a powerful, minimalistic, popup-style interface that allows you to smoothly enter data for all schema types, one by one.
 
 
 == Your Trust, Our Motive: Exceptional Schema Markup Services ==
@@ -88,10 +88,12 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
 - [ItemList](https://schema.org/ItemList)
+- [CollectionPage](https://schema.org/CollectionPage)
 - [LiveBlogPosting](https://schema.org/LiveBlogPosting)
 - [QAPage](https://schema.org/QAPage)
 - [TechArticle](https://schema.org/TechArticle)
 - [Comment](https://schema.org/Comment)
+- [SiteNavigationElement](https://schema.org/SiteNavigationElement)
 
 === 3. E-commerce & Products ===
 - [Product](https://schema.org/Product)
@@ -174,6 +176,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [CollegeOrUniversity](https://schema.org/CollegeOrUniversity)
 - [Course](https://schema.org/Course)
 - [CourseInstance](https://schema.org/CourseInstance)
+- [LearningResource](https://schema.org/LearningResource)
 
 === 12. Media & Entertainment ===
 - [Book](https://schema.org/Book)
@@ -280,8 +283,8 @@ Go To - Schema Package -> Settings -> Help & Support.
    - Log in to your WordPress dashboard and go to **Plugins > Installed Plugins**.
    - Find "Schema Package Plugin" and click **Activate**.
 
-4. Navigate to **Settings > Schema Package** to configure the plugin settings.
-5. Start adding Schema markup using the built-in editor and mapping tools.
+4. From the WordPress dashboard, navigate to the **Schema Package** menu to access and configure the plugin settings.
+5. Start adding Schema markup using the built-in **Schema Package Generator** and mapping tools.
 
 
 == WordPress REST API ==
@@ -453,6 +456,12 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.9 =
+
+* Tested with WordPress 6.8
+* Fixed   : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
+* Fixed   : Form is Undefined when selecting product schema type in Carousel Schema
 
 = 1.0.8 =
 

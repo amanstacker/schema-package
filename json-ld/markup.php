@@ -79,8 +79,13 @@ function smpg_get_json_ld(){
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                     
                     if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+
+                        $carousel_json_ld = smpg_prepare_carousel_json_ld( $schema_meta );
+
+                        if ( ! empty( $carousel_json_ld ) ) {
+                            $response[] = $carousel_json_ld;
+                        }
                         
-                        $response[] = smpg_prepare_carousel_json_ld( $schema_meta );
 
                     }
 
@@ -113,7 +118,13 @@ function smpg_get_json_ld(){
                 
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                     if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
-                        $response[] = smpg_prepare_global_json_ld( $schema_meta, $post_id );
+
+                        $global_json_ld = smpg_prepare_global_json_ld( $schema_meta, $post_id );
+
+                        if ( ! empty( $global_json_ld ) ) {
+                            $response[] = $global_json_ld;
+                        }
+                        
                     }
                 }            
             }
@@ -146,8 +157,7 @@ function smpg_get_json_ld(){
 
         }
 
-    }
-
+    }    
     //MISC Schema Output
     $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
     
@@ -174,8 +184,8 @@ function smpg_get_json_ld(){
 
     if(!empty($contact_page)){
         $response [] = $contact_page;
-    }
-
+    }    
+    
     return $response;
 }
 /**

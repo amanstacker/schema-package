@@ -2,7 +2,7 @@
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Tested up to: 6.8
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -456,6 +456,12 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.9 =
+
+* Tested with WordPress 6.8
+* Fixed   : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
+* Fixed   : Form is Undefined when selecting product schema type in Carousel Schema
 
 = 1.0.8 =
 

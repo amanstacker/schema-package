@@ -1,8 +1,10 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
+Requires PHP: 5.6.20
+Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -457,11 +459,16 @@ You can report bugs or request features through the WordPress.org support forum 
 
 == Changelog ==
 
+= 1.0.10 =
+
+* Fixed : Resolved an issue where the Schema Package Generator, when enabled for authors, was not working correctly on posts.
+* Added : Require PHP and WordPress version.
+
 = 1.0.9 =
 
 * Tested with WordPress 6.8
-* Fixed   : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
-* Fixed   : Form is Undefined when selecting product schema type in Carousel Schema
+* Fixed : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
+* Fixed : Form is Undefined when selecting product schema type in Carousel Schema
 
 = 1.0.8 =
 

@@ -124,14 +124,21 @@ class SMPG_Individual_Post {
     }
     
     public function to_be_enqueue( $hook ) {
+            
+            $user_id = null;
 
-            $user_id = get_current_user_id();
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-            if ( isset( $_GET['user_id'] ) ) {
-                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
-                $user_id = intval( $_GET['user_id'] );                
+            if ( $hook == 'profile.php' ) {
+                $user_id = get_current_user_id();
             }
 
+            if ( $hook == 'user-edit.php' ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                if ( isset( $_GET['user_id'] ) ) {
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                    $user_id = intval( $_GET['user_id'] );                
+                }
+            }
+                        
             $local_data = [
                 'smpg_plugin_url'      => SMPG_PLUGIN_URL,
                 'rest_url'             => esc_url_raw( rest_url() ),

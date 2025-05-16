@@ -1931,7 +1931,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'display'     => true,
                                     'tooltip'     => ''    
                             ], 
-                            'servings'        => [
+                            'recipe_yield'        => [
                                     'placeholder' => '50',                    
                                     'label'       => 'Number Of Servings',
                                     'type'        => 'number',

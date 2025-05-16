@@ -1941,7 +1941,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'tooltip'     => ''    
                             ], 
                             'recipe_category' => [
-                                    'placeholder' => 'Dessert',                    
+                                    'placeholder' => 'Recipe Category',
                                     'label'       => 'Recipe Category',
                                     'type'        => 'text',
                                     'value'       => '',
@@ -1949,7 +1949,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'display'     => true,
                                     'tooltip'     => ''    
                             ],
-                            
+                            'recipe_cuisine' => [
+                                    'placeholder' => 'Recipe Cuisine',                    
+                                    'label'       => 'Recipe Cuisine',
+                                    'type'        => 'text',
+                                    'value'       => '',
+                                    'recommended' => true,
+                                    'display'     => true,
+                                    'tooltip'     => ''    
+                            ],                            
                             'calories' => [
                                 'placeholder' => '240 calories',                    
                                 'label'       => 'Calories',

@@ -1128,21 +1128,35 @@ function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
 
     $schema_meta = [];
 
-	if ( ! empty( $post_id ) ) {
+	if ( ! empty( $user_id ) ) {
 
-		$schema_meta = get_post_meta( $post_id, '_smpg_schema_meta', true );		
-	}
+		$user_meta_data = get_user_meta( $user_id, '_smpg_schema_meta', true );
+
+		if ( ! empty( $user_meta_data ) ) {
+			$schema_meta = $user_meta_data;
+		}
+
+	}	
 
 	if ( ! empty( $tag_id ) ) {
 
-		$schema_meta = get_term_meta( $tag_id, '_smpg_schema_meta', true );
+		$term_meta_data = get_term_meta( $tag_id, '_smpg_schema_meta', true );
 
+		if ( ! empty( $term_meta_data ) ) {
+			$schema_meta = $term_meta_data;
+		}
+
+	}	    
+
+	if ( ! empty( $post_id ) ) {
+
+		$post_meta_data = get_post_meta( $post_id, '_smpg_schema_meta', true );
+
+		if ( ! empty( $post_meta_data ) ) {
+			$schema_meta = $post_meta_data;
+		}
+		
 	}
-	if ( ! empty( $user_id ) ) {
-
-		$schema_meta = get_user_meta( $user_id, '_smpg_schema_meta', true );
-
-	}    
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 

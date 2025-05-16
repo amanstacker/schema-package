@@ -1,8 +1,10 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
+Requires PHP: 5.6.20
+Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +62,10 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
+* <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
+* <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
+* <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
+* <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
 
@@ -457,11 +463,16 @@ You can report bugs or request features through the WordPress.org support forum 
 
 == Changelog ==
 
+= 1.0.10 =
+
+* Fixed : Resolved an issue where the Schema Package Generator, when enabled for authors, was not working correctly on posts.
+* Added : Require PHP and WordPress version.
+
 = 1.0.9 =
 
 * Tested with WordPress 6.8
-* Fixed   : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
-* Fixed   : Form is Undefined when selecting product schema type in Carousel Schema
+* Fixed : Errors for incorrect array usage where the top array statement is empty inside the opening array bracket.
+* Fixed : Form is Undefined when selecting product schema type in Carousel Schema
 
 = 1.0.8 =
 

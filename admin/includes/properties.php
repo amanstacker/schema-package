@@ -42,7 +42,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',                                            
         ],
         'latitude' => [                        
             'placeholder' => '40.761293',                    
@@ -51,7 +51,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',                    
         ],
         'longitude' => [                        
             'placeholder' => '-73.982294',                    
@@ -60,7 +60,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',                    
         ],
         'rating_value' => [                        
             'placeholder' => '5',                    
@@ -105,7 +105,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',                                
         ],
         'address_locality' => [                        
             'placeholder' => 'Detroit',                    
@@ -452,7 +452,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',            
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author name of this content'
+            'tooltip'     => 'The author name of this content',
+            'parent_data'   => [
+                'key'       => 'author', 
+                'type'      => 'Person',
+                'child_key' => 'name'
+            ]
         ],
         'seller_name' => [                                     
             'placeholder' => 'Seller Name',                    
@@ -470,7 +475,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The publisher of the creative work.'
+            'tooltip'     => 'The publisher of the creative work.',
+            'parent_data'   => [
+                'key'       => 'publisher', 
+                'type'      => 'Organization',
+                'child_key' => 'name'
+            ]
         ],
         'publisher_logo' => [                                            
             'label'       => 'Logo',                    
@@ -479,7 +489,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => [],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'An associated logo.'
+            'tooltip'     => 'An associated logo.',
+            'parent_data'   => [
+                'key'       => 'publisher', 
+                'type'      => 'Organization',
+                'child_key' => 'logo'
+            ]
         ],
         'image' => [                                                      
             'label'       => 'Images',                    
@@ -1781,6 +1796,26 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
 
                 case 'event':
 
+                        $place_name['parent_data'] = [
+                            'key'       => 'location', 
+                            'type'      => 'Place',
+                            'child_key' => 'name'
+                        ];
+                        $latitude['parent_data'] = [
+                            'key'       => 'location.geo', 
+                            'type'      => 'Place.GeoCoordinates',
+                            'child_key' => 'latitude'
+                        ];
+                        $longitude['parent_data'] = [
+                            'key'       => 'location.geo', 
+                            'type'      => 'Place.GeoCoordinates',
+                            'child_key' => 'longitude'
+                        ];
+                        $street_address['parent_data'] = [
+                            'key'       => 'location.address', 
+                            'type'      => 'Place.PostalAddress',
+                            'child_key' => 'streetAddress'
+                        ];
                         $properties = [
                             'is_enable'         => true,
                             'is_delete_popup'   => false, 
@@ -1833,6 +1868,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'address_region'       => $address_region,
                                 'postal_code'          => $postal_code,
                                 'address_country'      => $address_country,
+                                'latitude'             => $latitude,
+                                'longitude'            => $longitude,
                                 'offer_currency'       => $offer_currency,
                                 'offer_price'          => $offer_price,
                                 'offer_availability'   => $offer_availability,
@@ -1965,7 +2002,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'calories'
+                                ]                                
                             ],
                             'carbohydrate' => [
                                 'placeholder' => '9 grams carbohydrates',                    
@@ -1974,7 +2016,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'carbohydrateContent'
+                                ]
                             ],
                             'cholesterol' => [
                                 'placeholder' => '10 milligrams cholesterol',                    
@@ -1983,35 +2030,55 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
-                        ],
-                        'fat' => [
-                            'placeholder' => '11 grams fat',                    
-                            'label'       => 'Fat Content',
-                            'type'        => 'text',
-                            'value'       => '',
-                            'recommended' => true,
-                            'display'     => true,
-                            'tooltip'     => ''    
-                        ],
-                        'fiber' => [
-                            'placeholder' => '15 grams fiber',
-                            'label'       => 'Fiber Content',
-                            'type'        => 'text',
-                            'value'       => '',
-                            'recommended' => true,
-                            'display'     => true,
-                            'tooltip'     => ''    
-                        ],
-                        'protein' => [
-                            'placeholder' => '10 grams protein',                    
-                            'label'       => 'Protein Content',
-                            'type'        => 'text',
-                            'value'       => '',
-                            'recommended' => true,
-                            'display'     => true,
-                            'tooltip'     => ''    
-                        ],
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'cholesterolContent'
+                                ]
+                            ],
+                            'fat' => [
+                                'placeholder' => '11 grams fat',                    
+                                'label'       => 'Fat Content',
+                                'type'        => 'text',
+                                'value'       => '',
+                                'recommended' => true,
+                                'display'     => true,
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'fatContent'
+                                ]
+                            ],
+                            'fiber' => [
+                                'placeholder' => '15 grams fiber',
+                                'label'       => 'Fiber Content',
+                                'type'        => 'text',
+                                'value'       => '',
+                                'recommended' => true,
+                                'display'     => true,
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'fiberContent'
+                                ]
+                            ],
+                            'protein' => [
+                                'placeholder' => '10 grams protein',                    
+                                'label'       => 'Protein Content',
+                                'type'        => 'text',
+                                'value'       => '',
+                                'recommended' => true,
+                                'display'     => true,
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'proteinContent'
+                                ]
+                            ],
                             'saturated_fat' => [
                                 'placeholder' => '5 grams saturated fat',                    
                                 'label'       => 'Saturated Fat Content',
@@ -2019,7 +2086,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'saturatedFatContent'
+                                ]
                             ],
                             'sodium' => [
                                 'placeholder' => '3 milligrams sodium',                    
@@ -2028,7 +2100,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'sodiumContent'
+                                ]
                             ],
                             'sugar' => [
                                 'placeholder' => '15 grams sugar',                    
@@ -2037,7 +2114,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',                                
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'sugarContent'
+                                ]
                             ],
                             'trans_fat' => [
                                 'placeholder' => '12 grams trans fat',                    
@@ -2046,7 +2128,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',                                 
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'transFatContent'
+                                ]
                             ],
                             'unsaturated_fat' => [
                                 'placeholder' => '16 grams unsaturated fat',                    
@@ -2055,7 +2142,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'value'       => '',
                                 'recommended' => true,
                                 'display'     => true,
-                                'tooltip'     => ''    
+                                'tooltip'     => '',
+                                'parent_data'   => [
+                                    'key'       => 'nutrition', 
+                                    'type'      => 'NutritionInformation',
+                                    'child_key' => 'unsaturatedFatContent'
+                                ]
                             ],
                             'keywords'            => $keywords, 
                             'include_video'       => $include_video,                              

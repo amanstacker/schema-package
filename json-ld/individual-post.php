@@ -902,9 +902,9 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
      if(!empty($properties['description']['value'])){
          $json_ld['description'] =      $properties['description']['value'];
      }
-
-     if(!empty($properties['description']['value'])){
-        $json_ld['datePublished'] =      $properties['description']['value'];
+     
+     if(!empty($properties['date_published']['value'])){
+        $json_ld['datePublished'] =      $properties['date_published']['value'];
     }
     if(!empty($properties['prep_time']['value'])){
         $json_ld['prepTime'] =      'PT'.$properties['prep_time']['value'].'M';
@@ -915,17 +915,17 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
     if(!empty($properties['total_time']['value'])){
         $json_ld['totalTime'] =      'PT'.$properties['total_time']['value'].'M';
     }
-    if(!empty($properties['description']['value'])){
-        $json_ld['keywords'] =      $properties['description']['value'];
+    if(!empty($properties['keywords']['value'])){
+        $json_ld['keywords'] =      $properties['keywords']['value'];
     }
-    if(!empty($properties['description']['value'])){
-        $json_ld['recipeYield'] =      $properties['description']['value'];
+    if(!empty($properties['recipe_yield']['value'])){
+        $json_ld['recipeYield'] =      $properties['recipe_yield']['value'];
     }
-    if(!empty($properties['description']['value'])){
-        $json_ld['recipeCategory'] =      $properties['description']['value'];
+    if(!empty($properties['recipe_category']['value'])){
+        $json_ld['recipeCategory'] =      $properties['recipe_category']['value'];
     }
-    if(!empty($properties['description']['value'])){
-        $json_ld['recipeCuisine'] =      $properties['description']['value'];
+    if(!empty($properties['recipe_cuisine']['value'])){
+        $json_ld['recipeCuisine'] =      $properties['recipe_cuisine']['value'];
     }
 
     $json_ld['nutrition']['@type'] = 'NutritionInformation';

@@ -4,7 +4,7 @@ Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -462,6 +462,13 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.11 =
+
+* Added : recipeCuisine property in recipe schema type
+* Fixed : Mapping of nested properties was not working.
+* Fixed : Minor bug fixes.
+* Tested with WordPress 6.8.1
 
 = 1.0.10 =
 

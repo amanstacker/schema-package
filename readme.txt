@@ -467,7 +467,7 @@ You can report bugs or request features through the WordPress.org support forum 
 
 * Added : recipeCuisine property in recipe schema type
 * Fixed : Mapping of nested properties was not working.
-* Fixed   : Minor bug fixes.
+* Fixed : Minor bug fixes.
 * Tested with WordPress 6.8.1
 
 = 1.0.10 =

@@ -267,7 +267,7 @@ Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Sc
 
 We currently don't have an official website for the Schema Package, but you can reach out to us through the Schema Package dashboard.
 
-Go To - Schema Package -> Settings -> Help & Support.
+**Go To - Schema Package -> Settings -> Help & Support.**
 
 
 == Installation ==

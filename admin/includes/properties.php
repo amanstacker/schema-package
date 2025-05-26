@@ -71,9 +71,18 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => ''        
         ],
-        'worst_rating' => [             
-            'placeholder' => '0',                    
-            'label'       => 'Worst Rating',
+        'rating_count' => [                        
+            'placeholder' => '100',                    
+            'label'       => 'Rating Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
+        ],
+        'review_count' => [                        
+            'placeholder' => '100',                    
+            'label'       => 'Review Count',
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -89,6 +98,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => ''        
         ],
+        'worst_rating' => [             
+            'placeholder' => '0',                    
+            'label'       => 'Worst Rating',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => ''        
+        ],        
         'review_aspect' => [                        
             'placeholder' => 'Ambiance',                    
             'label'       => 'Review Aspect',
@@ -1925,8 +1943,34 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     $upload_date['display']       = false;
                     $hours['display']             = false;
                     $minutes['display']           = false;
-                    $seconds['display']           = false;                    
-
+                    $seconds['display']           = false;   
+                    
+                    $rating_value['parent_data'] = [
+                                    'key'       => 'aggregateRating', 
+                                    'type'      => 'AggregateRating',
+                                    'child_key' => 'ratingValue',
+                    ];
+                    $best_rating['parent_data'] = [
+                                    'key'       => 'aggregateRating', 
+                                    'type'      => 'AggregateRating',
+                                    'child_key' => 'bestRating',
+                    ];
+                    $worst_rating['parent_data'] = [
+                                    'key'       => 'aggregateRating', 
+                                    'type'      => 'AggregateRating',
+                                    'child_key' => 'worstRating',
+                    ];
+                    $rating_count['parent_data'] = [
+                                    'key'       => 'aggregateRating', 
+                                    'type'      => 'AggregateRating',
+                                    'child_key' => 'ratingCount',
+                    ];
+                    $review_count['parent_data'] = [
+                                    'key'       => 'aggregateRating', 
+                                    'type'      => 'AggregateRating',
+                                    'child_key' => 'reviewCount',
+                    ];
+                                        
                     $properties = [
                         'is_enable'         => true,
                         'is_delete_popup'   => false, 
@@ -1938,9 +1982,10 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,                                                                                    
-                            'in_language'       => $in_language,
+                            'in_language'      => $in_language,
                             'image'            => $image,     
                             'date_published'   => $date_published,
+                            'keywords'         => $keywords,
                             'prep_time'        => [
                                 'placeholder' => 'MM',                    
                                 'label'       => 'Prepare Time',
@@ -2173,6 +2218,11 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'author_name'      => $author_name,                            
                             'publisher_name'   => $publisher_name,
                             'publisher_logo'   => $publisher_logo,
+                            'rating_value'     => $rating_value,
+                            'best_rating'      => $best_rating,
+                            'worst_rating'     => $worst_rating,
+                            'rating_count'     => $rating_count,
+                            'review_count'     => $review_count,
                             'ingredient' => [                            
                                 'label'         => 'Ingredient',    
                                 'button_text'   => 'Add More Ingredient', 

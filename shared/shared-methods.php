@@ -82,8 +82,13 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 						break;
 
 					case 'number':
-						$sanitized_array[ $sanitized_key ] = intval( $value );
+						if ( $value === '' ) {
+							$sanitized_array[ $sanitized_key ] = '';
+						} else {
+							$sanitized_array[ $sanitized_key ] = floatval( $value );
+						}
 						break;
+
 					case 'media':
 						$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
                                     return [
@@ -1888,4 +1893,31 @@ function smpg_snake_to_camel_case( $string ) {
         return $string; // Return unchanged if there's no underscore
     }
     return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
+}
+
+function smpg_prepare_aggregate_rating( $json_ld, $properties ) {
+
+	if ( $properties['rating_value']['value'] != '' || $properties['best_rating']['value'] != '' || $properties['worst_rating']['value'] != '' || $properties['rating_count']['value'] != '' || $properties['review_count']['value'] != '' ) {
+        
+        $json_ld['aggregateRating']['@type'] = 'AggregateRating';
+
+        if ( $properties['rating_value']['value'] != '' ){
+            $json_ld['aggregateRating']['ratingValue'] = $properties['rating_value']['value'];
+        }
+        if ( $properties['best_rating']['value'] != '' ){
+            $json_ld['aggregateRating']['bestRating'] = $properties['best_rating']['value'];
+        }
+        if ( $properties['worst_rating']['value'] != '' ){
+            $json_ld['aggregateRating']['worstRating'] = $properties['worst_rating']['value'];
+        }
+        if ( $properties['rating_count']['value'] != '' ){
+            $json_ld['aggregateRating']['ratingCount'] = $properties['rating_count']['value'];
+        }
+        if ( $properties['review_count']['value'] != '' ){
+            $json_ld['aggregateRating']['reviewCount'] = $properties['review_count']['value'];
+        }
+        
+    }
+
+	return $json_ld;
 }

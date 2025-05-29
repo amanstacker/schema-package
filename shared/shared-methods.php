@@ -1803,9 +1803,9 @@ function smpg_get_video_json_ld( $json_ld, $properties ){
 
 function smpg_get_steps_json_ld( $json_ld, $properties, $schema_type ){
 
-	if(!empty($properties['steps']['elements'])){
+	if(!empty($properties['recipe_instructions']['elements'])){
         
-        $steps = $properties['steps']['elements'];
+        $steps = $properties['recipe_instructions']['elements'];
         
         $steps_data = [];
         $clips_data = [];

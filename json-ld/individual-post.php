@@ -972,10 +972,10 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
 
     $json_ld = smpg_get_video_json_ld( $json_ld, $properties );
     
-    if(!empty($properties['ingredient']['elements'])){
+    if(!empty($properties['recipe_ingredient']['elements'])){
 
         $ing_data = [];    
-        $ing      = $properties['ingredient']['elements'];
+        $ing      = $properties['recipe_ingredient']['elements'];
 
         foreach ($ing as $value) {
             $ing_data[] = $value['name']['value'];    

@@ -238,6 +238,8 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Advanced Custom Fields (ACF®)](https://wordpress.org/plugins/advanced-custom-fields/)
 * [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/)
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
+* [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
+* [Meta Box](https://wordpress.org/plugins/meta-box/)
 
 
 == Notes ==

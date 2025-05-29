@@ -1921,3 +1921,56 @@ function smpg_prepare_aggregate_rating( $json_ld, $properties ) {
 
 	return $json_ld;
 }
+
+/**
+ * Convert minutes to ISO 8601 duration (e.g., PT1H30M for minutes).
+ *
+ * @param int $minutes_total Total minutes to convert.
+ * @return string ISO 8601 duration string.
+ */
+function smpg_convert_number_to_iso_time( $minutes_total ) {
+
+    if ( ! is_numeric( $minutes_total ) ) {
+        // Return PT0M for invalid input
+        return $minutes_total;
+    }
+
+    $minutes_total = intval( $minutes_total );
+    $hours   = floor( $minutes_total / 60 );
+    $minutes = $minutes_total % 60;
+
+    $duration = 'PT';
+    if ( $hours > 0 ) {
+        $duration .= $hours . 'H';
+    }
+    if ( $minutes > 0 ) {
+        $duration .= $minutes . 'M';
+    }
+
+    // If both are zero, default to PT0M
+    return ( $duration === 'PT' ) ? 'PT0M' : $duration;
+}
+
+/**
+ * Convert instructions array to Google-recommended format.
+ *
+ * @param array $instructions Array of instruction strings.
+ * @return array Google-recommended recipeInstructions array.
+ */
+function smpg_convert_instructions_to_howto_format( $instructions ) {
+	
+	if ( ! is_array( $instructions ) ) {
+		return $instructions;
+	}
+
+	$howto_instructions = [];
+
+	foreach ( $instructions as $instruction ) {
+		$howto_instructions[] = array(
+			'@type' => 'HowToStep',
+			'text'  => $instruction,
+		);
+	}
+
+	return $howto_instructions;
+}

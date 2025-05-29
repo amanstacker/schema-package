@@ -416,7 +416,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             ],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author type of this content'
+            'tooltip'     => 'The author type of this content',
+            'parent_data'   => [
+                'key'       => 'author', 
+                'type'      => '',
+                'child_key' => '@type'
+            ]
         ],
         'seller_type' => [                                     
             'label'       => 'Seller Type',
@@ -2241,15 +2246,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'worst_rating'     => $worst_rating,
                             'rating_count'     => $rating_count,
                             'review_count'     => $review_count,
-                            'ingredient' => [                            
-                                'label'         => 'Ingredient',    
+                            'recipe_ingredient' => [
+                                'label'         => 'Recipe Ingredient',
                                 'button_text'   => 'Add More Ingredient', 
                                 'type'          => 'repeater', 
                                 'display'       => true,
                                 'elements'      => [['name'   => $name ]]                                                                                                                      
                             ],
-                            'steps'  =>   [                        
-                                'label'         => 'Instructions',    
+                            'recipe_instructions'  =>   [                        
+                                'label'         => 'Recipe Instructions',    
                                 'button_text'   => 'Add More Instructions', 
                                 'type'          => 'repeater',
                                 'display'     => true, 

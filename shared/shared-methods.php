@@ -82,8 +82,13 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 						break;
 
 					case 'number':
-						$sanitized_array[ $sanitized_key ] = intval( $value );
+						if ( $value === '' ) {
+							$sanitized_array[ $sanitized_key ] = '';
+						} else {
+							$sanitized_array[ $sanitized_key ] = floatval( $value );
+						}
 						break;
+
 					case 'media':
 						$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
                                     return [
@@ -1798,9 +1803,9 @@ function smpg_get_video_json_ld( $json_ld, $properties ){
 
 function smpg_get_steps_json_ld( $json_ld, $properties, $schema_type ){
 
-	if(!empty($properties['steps']['elements'])){
+	if(!empty($properties['recipe_instructions']['elements'])){
         
-        $steps = $properties['steps']['elements'];
+        $steps = $properties['recipe_instructions']['elements'];
         
         $steps_data = [];
         $clips_data = [];
@@ -1888,4 +1893,90 @@ function smpg_snake_to_camel_case( $string ) {
         return $string; // Return unchanged if there's no underscore
     }
     return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
+}
+
+function smpg_prepare_aggregate_rating( $json_ld, $properties ) {
+
+	if ( 
+		( isset( $properties['rating_value']['value'] ) && $properties['rating_value']['value'] != '' ) ||
+		( isset( $properties['best_rating']['value'] ) && $properties['best_rating']['value'] != '' ) ||
+		( isset( $properties['worst_rating']['value'] ) && $properties['worst_rating']['value'] != '' ) ||
+		( isset( $properties['rating_count']['value'] ) && $properties['rating_count']['value'] != '' ) ||
+		( isset( $properties['review_count']['value'] ) && $properties['review_count']['value'] != '' )		
+	) {
+        
+        $json_ld['aggregateRating']['@type'] = 'AggregateRating';
+
+        if ( isset( $properties['rating_value']['value'] ) && $properties['rating_value']['value'] != '' ){
+            $json_ld['aggregateRating']['ratingValue'] =  $properties['rating_value']['value'];
+        }
+        if ( isset( $properties['best_rating']['value'] ) && $properties['best_rating']['value'] != '' ){
+            $json_ld['aggregateRating']['bestRating'] =  $properties['best_rating']['value'];
+        }
+        if ( isset( $properties['worst_rating']['value'] ) && $properties['worst_rating']['value'] != '' ){
+            $json_ld['aggregateRating']['worstRating'] =  $properties['worst_rating']['value'];
+        }
+        if ( isset( $properties['rating_count']['value'] ) && $properties['rating_count']['value'] != '' ){
+            $json_ld['aggregateRating']['ratingCount'] =  $properties['rating_count']['value'];
+        }
+        if ( isset( $properties['review_count']['value'] ) && $properties['review_count']['value'] != '' ){
+            $json_ld['aggregateRating']['reviewCount'] =  $properties['review_count']['value'];
+        }
+        
+    }	
+	
+	return $json_ld;
+}
+
+/**
+ * Convert minutes to ISO 8601 duration (e.g., PT1H30M for minutes).
+ *
+ * @param int $minutes_total Total minutes to convert.
+ * @return string ISO 8601 duration string.
+ */
+function smpg_convert_number_to_iso_time( $minutes_total ) {
+
+    if ( ! is_numeric( $minutes_total ) ) {
+        // Return PT0M for invalid input
+        return $minutes_total;
+    }
+
+    $minutes_total = intval( $minutes_total );
+    $hours   = floor( $minutes_total / 60 );
+    $minutes = $minutes_total % 60;
+
+    $duration = 'PT';
+    if ( $hours > 0 ) {
+        $duration .= $hours . 'H';
+    }
+    if ( $minutes > 0 ) {
+        $duration .= $minutes . 'M';
+    }
+
+    // If both are zero, default to PT0M
+    return ( $duration === 'PT' ) ? 'PT0M' : $duration;
+}
+
+/**
+ * Convert instructions array to Google-recommended format.
+ *
+ * @param array $instructions Array of instruction strings.
+ * @return array Google-recommended recipeInstructions array.
+ */
+function smpg_convert_instructions_to_howto_format( $instructions ) {
+	
+	if ( ! is_array( $instructions ) ) {
+		return $instructions;
+	}
+
+	$howto_instructions = [];
+
+	foreach ( $instructions as $instruction ) {
+		$howto_instructions[] = array(
+			'@type' => 'HowToStep',
+			'text'  => $instruction,
+		);
+	}
+
+	return $howto_instructions;
 }

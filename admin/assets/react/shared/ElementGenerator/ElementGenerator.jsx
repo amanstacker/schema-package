@@ -77,7 +77,7 @@ const ElementGenerator = (props) => {
     return(                                                                        
         <div className="smpg-form-group">
                         <label>{property.label}</label>                                                                            
-                        <input placeholder={property.placeholder} onChange={(e)=>props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater)} type="number" className="smpg-form-control" value={property.value} />                                                                            
+                        <input placeholder={property.placeholder} onChange={(e)=>props.handlePropertyChange(e, props.i, props.j, property.type, null, elid, tid, repeater)} type="number" className="smpg-form-control" value={property.value} step="any" />                                                                            
                         <p className="smpg-description">{property.tooltip}</p>
         </div>                                                                                                                                                
     );

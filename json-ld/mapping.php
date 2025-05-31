@@ -133,8 +133,20 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                             smpg_map_nested_schema_property( $json_ld, $properties, $key, $mapped_value );
                             
                     }else{
+                        
+                        if ( $key === 'prepTime' || $key === 'cookTime' || $key === 'totalTime' ) {
+                            
+                            $json_ld[$key] = smpg_convert_number_to_iso_time( $mapped_value );
 
-                        $json_ld[$key] = $mapped_value;
+                        } else if ( $key === 'recipeInstructions' ) {
+
+                            $json_ld[$key] = smpg_convert_instructions_to_howto_format( $mapped_value );
+
+                        } else {
+
+                            $json_ld[$key] = $mapped_value;
+                            
+                        }
 
                     }
                     

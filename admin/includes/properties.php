@@ -69,16 +69,40 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data' => [
+                'key'       => 'aggregateRating', 
+                'type'      => 'AggregateRating',
+                'child_key' => 'ratingValue',
+            ]       
         ],
-        'worst_rating' => [             
-            'placeholder' => '0',                    
-            'label'       => 'Worst Rating',
+        'rating_count' => [                        
+            'placeholder' => '100',                    
+            'label'       => 'Rating Count',
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data' => [
+                'key'       => 'aggregateRating', 
+                'type'      => 'AggregateRating',
+                'child_key' => 'ratingCount',
+            ]        
+        ],
+        'review_count' => [                        
+            'placeholder' => '100',                    
+            'label'       => 'Review Count',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => '',
+            'parent_data' => [
+                'key'       => 'aggregateRating', 
+                'type'      => 'AggregateRating',
+                'child_key' => 'reviewCount',
+            ]        
         ],
         'best_rating' => [                        
             'placeholder' => '5',                    
@@ -87,8 +111,27 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data' => [
+                'key'       => 'aggregateRating', 
+                'type'      => 'AggregateRating',
+                'child_key' => 'bestRating',
+            ]        
         ],
+        'worst_rating' => [             
+            'placeholder' => '0',                    
+            'label'       => 'Worst Rating',
+            'type'        => 'number',
+            'value'       => '',
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => '',
+            'parent_data' => [
+                'key'       => 'aggregateRating', 
+                'type'      => 'AggregateRating',
+                'child_key' => 'worstRating',
+            ]        
+        ],        
         'review_aspect' => [                        
             'placeholder' => 'Ambiance',                    
             'label'       => 'Review Aspect',
@@ -373,7 +416,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             ],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author type of this content'
+            'tooltip'     => 'The author type of this content',
+            'parent_data'   => [
+                'key'       => 'author', 
+                'type'      => '',
+                'child_key' => '@type'
+            ]
         ],
         'seller_type' => [                                     
             'label'       => 'Seller Type',
@@ -1301,12 +1349,17 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,
-                            'in_language'       => $in_language,
+                            'in_language'      => $in_language,
                             'image'            => $image,
                             'author_type'      => $author_type,
                             'author_name'      => $author_name,                            
                             'publisher_name'   => $publisher_name,
-                            'publisher_logo'   => $publisher_logo                                                                      
+                            'publisher_logo'   => $publisher_logo,
+                            'rating_value'     => $rating_value,
+                            'best_rating'      => $best_rating,
+                            'worst_rating'     => $worst_rating,
+                            'rating_count'     => $rating_count,
+                            'review_count'     => $review_count,                                                                      
                         ]                      
                     ];                    
                     break;
@@ -1326,7 +1379,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'url'              => $url,                                                                                                                    
                             'image'            => $image,
                             'publisher_name'   => $publisher_name,
-                            'publisher_logo'   => $publisher_logo    
+                            'publisher_logo'   => $publisher_logo,
+                            'rating_value'     => $rating_value,
+                            'best_rating'      => $best_rating,
+                            'worst_rating'     => $worst_rating,
+                            'rating_count'     => $rating_count,
+                            'review_count'     => $review_count,    
 
                         ]                      
                     ];
@@ -1491,6 +1549,11 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'price_range'        => $price_range,
                                 'latitude'           => $latitude,
                                 'longitude'          => $longitude,
+                                'rating_value'     => $rating_value,
+                                'best_rating'      => $best_rating,
+                                'worst_rating'     => $worst_rating,
+                                'rating_count'     => $rating_count,
+                                'review_count'     => $review_count,
                                 'opening_hours' => [                            
                                     'label'         => 'Opening Hours',    
                                     'button_text'   => 'Add More Opening Hours', 
@@ -1884,6 +1947,11 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                         'tooltip'     => ''    
                                 ],
                                 'image'                => $image,                                                            
+                                'rating_value'     => $rating_value,
+                                'best_rating'      => $best_rating,
+                                'worst_rating'     => $worst_rating,
+                                'rating_count'     => $rating_count,
+                                'review_count'     => $review_count,
                                 'performer' => [                            
                                     'label'         => 'Performer',    
                                     'button_text'   => 'Add More Performer', 
@@ -1925,8 +1993,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     $upload_date['display']       = false;
                     $hours['display']             = false;
                     $minutes['display']           = false;
-                    $seconds['display']           = false;                    
-
+                    $seconds['display']           = false;   
+                                                                                
                     $properties = [
                         'is_enable'         => true,
                         'is_delete_popup'   => false, 
@@ -1938,9 +2006,10 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,                                                                                    
-                            'in_language'       => $in_language,
+                            'in_language'      => $in_language,
                             'image'            => $image,     
                             'date_published'   => $date_published,
+                            'keywords'         => $keywords,
                             'prep_time'        => [
                                 'placeholder' => 'MM',                    
                                 'label'       => 'Prepare Time',
@@ -2148,8 +2217,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                     'type'      => 'NutritionInformation',
                                     'child_key' => 'unsaturatedFatContent'
                                 ]
-                            ],
-                            'keywords'            => $keywords, 
+                            ],                            
                             'include_video'       => $include_video,                              
                             'video_name'          => $video_name,    
                             'video_description'   => $video_description,                            
@@ -2173,15 +2241,20 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'author_name'      => $author_name,                            
                             'publisher_name'   => $publisher_name,
                             'publisher_logo'   => $publisher_logo,
-                            'ingredient' => [                            
-                                'label'         => 'Ingredient',    
+                            'rating_value'     => $rating_value,
+                            'best_rating'      => $best_rating,
+                            'worst_rating'     => $worst_rating,
+                            'rating_count'     => $rating_count,
+                            'review_count'     => $review_count,
+                            'recipe_ingredient' => [
+                                'label'         => 'Recipe Ingredient',
                                 'button_text'   => 'Add More Ingredient', 
                                 'type'          => 'repeater', 
                                 'display'       => true,
                                 'elements'      => [['name'   => $name ]]                                                                                                                      
                             ],
-                            'steps'  =>   [                        
-                                'label'         => 'Instructions',    
+                            'recipe_instructions'  =>   [                        
+                                'label'         => 'Recipe Instructions',    
                                 'button_text'   => 'Add More Instructions', 
                                 'type'          => 'repeater',
                                 'display'     => true, 
@@ -2284,9 +2357,9 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     $postal_code['parent']         = 'itemReviewed';
                     $address_country['parent']     = 'itemReviewed';
                     $image['parent']               = 'itemReviewed';
-
+                    
+                    unset( $rating_value['parent_data'], $best_rating['parent_data'], $worst_rating['parent_data'], $rating_count['parent_data'], $review_count['parent_data'] );
                                                                                                                                                                                                                  
-
                     $properties = [
                         'is_enable'         => true,
                         'is_delete_popup'   => false, 
@@ -2402,7 +2475,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'application_category' => $application_category,                        
                                 'image'                => $image,
                                 'offer_currency'       => $offer_currency,
-                                'offer_price'          => $offer_price                                                                                              
+                                'offer_price'          => $offer_price,
+                                'rating_value'         => $rating_value,
+                                'best_rating'          => $best_rating,
+                                'worst_rating'         => $worst_rating,
+                                'rating_count'         => $rating_count,
+                                'review_count'         => $review_count,                                                                                              
         
                         ]                      
                     ];
@@ -2690,6 +2768,11 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                                 'offer_price_validuntil' => $offer_price_validuntil,                                                                      
                                 'offer_item_condition'   => $offer_item_condition,
                                 'offer_availability'     => $offer_availability,
+                                'rating_value'           => $rating_value,
+                                'best_rating'            => $best_rating,
+                                'worst_rating'           => $worst_rating,
+                                'rating_count'           => $rating_count,
+                                'review_count'           => $review_count,
                                 'reviews'                => $reviews
                         ]                      
                     ];

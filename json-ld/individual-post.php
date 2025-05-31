@@ -528,6 +528,8 @@ function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type 
 
         $json_ld['organizer'] = $loopdata;
     }
+
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
         
     return $json_ld;
 }
@@ -669,6 +671,8 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
     if(!empty($logo)){
         $json_ld['provider']['logo']  = $logo;  
     }
+
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
 
     return $json_ld;
 }
@@ -872,6 +876,8 @@ function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
         $json_ld['publisher']['logo']  = $logo;  
     }
 
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
+
     return $json_ld;
 }
 function smpg_get_custom_schema_individual_json_ld( $json_ld, $properties, $schema_type ) {
@@ -966,10 +972,10 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
 
     $json_ld = smpg_get_video_json_ld( $json_ld, $properties );
     
-    if(!empty($properties['ingredient']['elements'])){
+    if(!empty($properties['recipe_ingredient']['elements'])){
 
         $ing_data = [];    
-        $ing      = $properties['ingredient']['elements'];
+        $ing      = $properties['recipe_ingredient']['elements'];
 
         foreach ($ing as $value) {
             $ing_data[] = $value['name']['value'];    
@@ -1010,7 +1016,9 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
     if(!empty($logo)){
         $json_ld['publisher']['logo']  = $logo;  
     }
-    
+
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
+        
     return $json_ld;
 }
 
@@ -1136,6 +1144,8 @@ function smpg_get_softwareapplication_individual_json_ld( $json_ld, $properties,
     $json_ld['offers']['@type']            = 'Offer';       
     $json_ld['offers']['priceCurrency']    = !empty($properties['offer_currency']['value']) ? $properties['offer_currency']['value'] : 'USD';
     $json_ld['offers']['price']            = isset($properties['offer_price']['value']) ? $properties['offer_price']['value'] : 0;       
+
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
                        
    return $json_ld;
 }
@@ -1530,6 +1540,8 @@ function smpg_get_product_individual_json_ld( $json_ld, $properties, $schema_typ
         $json_ld = smpg_prepare_reviews( $json_ld, $properties['reviews']['elements'] );
     }
                     
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
+
     return $json_ld;
 }
 
@@ -1625,6 +1637,8 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
 
         $json_ld['openingHoursSpecification'] = $loopdata;
     }
+
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
     
     return $json_ld;
 }

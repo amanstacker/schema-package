@@ -198,14 +198,14 @@ function smpg_clean_other_format_schema($content){
     global $smpg_settings;
 
     if ( ! empty( $smpg_settings['clean_micro_data'] ) ) {
-        $content = preg_replace(array('/itemscope=\\"[^\\"]*\\"/i', '/itemType=\\"[^\\"]*\\"/i', '/itemprop=\\"[^\\"]*\\"/i', '/itemscope/i'), '', $content);       
+        $content = preg_replace( [ '/itemscope=\\"[^\\"]*\\"/i', '/itemType=\\"[^\\"]*\\"/i', '/itemprop=\\"[^\\"]*\\"/i', '/itemscope/i' ], '', $content );
     }
     
     if ( ! empty( $smpg_settings['clean_rdfa_data'] ) ) {
         $content = preg_replace_callback(
             '/<(?!meta\b)[^>]+?\s(property|typeof)=\\"[^\\"]*\\"/i',
-            function ($matches) {
-                return preg_replace('/\s(property|typeof)=\\"[^\\"]*\\"/i', '', $matches[0]);
+            function ( $matches ) {
+                return preg_replace( '/\s(property|typeof)=\\"[^\\"]*\\"/i', '', $matches[0] );
             },
             $content
         );        
@@ -214,7 +214,7 @@ function smpg_clean_other_format_schema($content){
     return $content;
 }
 
-function smpg_manage_conflict(){
+function smpg_manage_conflict() {
 
     global $smpg_settings;
 
@@ -226,7 +226,7 @@ function smpg_manage_conflict(){
 
                 case 'woocommerce':                    
                     if(class_exists('WooCommerce')){            
-                        remove_action( 'wp_footer', array( WC()->structured_data, 'output_structured_data' ), 10 ); // This removes structured data from all frontend pages                                                
+                        remove_action( 'wp_footer', [ WC()->structured_data, 'output_structured_data' ], 10 ); // This removes structured data from all frontend pages                                                
                     }                
                     break;                                
                 case 'yetanotherstarsrating':                    

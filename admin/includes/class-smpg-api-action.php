@@ -460,11 +460,11 @@ class SMPG_Api_Action {
                                     continue;
                                 }
             
-                                $custom_fields[] = array(
+                                $custom_fields[] = [
                                     'id'    => $field['name'],
                                     'value' => $field['name'],
                                     'label' => $field['label'], // Use ACF's label for readability.
-                                );
+                                ];
                             }
                         }
                     }
@@ -531,7 +531,7 @@ class SMPG_Api_Action {
             if($parameters){
                 $result      = $this->_api_mapper->update_misc_schema($parameters);
                 if($result){
-                    $response = array('status' => 'success', 'message' =>  esc_html__( 'Data has been saved successfully', 'schema-package' ));                                               
+                    $response = ['status' => 'success', 'message' =>  esc_html__( 'Data has been saved successfully', 'schema-package' )];                                               
                 }
             }
 
@@ -548,27 +548,27 @@ class SMPG_Api_Action {
                 $parts = explode( '.',$file['file']['name'] );                
                 
                 if( end($parts) != 'json' ) {
-                    $response = array('status' => 'f', 'msg' =>  esc_html__( 'Please upload a valid .json file', 'schema-package' ));                   
+                    $response = ['status' => 'f', 'msg' =>  esc_html__( 'Please upload a valid .json file', 'schema-package' )];                   
                 }
               
                 $import_file = $file['file']['tmp_name'];
                 if( empty( $import_file ) ) {
-                    $response = array('status' => 'f', 'msg' =>  esc_html__( 'Please upload a file to import', 'schema-package' ));                                       
+                    $response = ['status' => 'f', 'msg' =>  esc_html__( 'Please upload a file to import', 'schema-package' )];                                       
                 }
                                                 
                 if($import_file){
                     $result      = $this->_api_mapper->import_from_file($import_file);    
-                    $response = array('file_status' => 't','status' => 't', 'msg' =>  esc_html__( 'file uploaded successfully', 'schema-package' ));                                       
+                    $response = ['file_status' => 't','status' => 't', 'msg' =>  esc_html__( 'file uploaded successfully', 'schema-package' )];                                       
                 }else{
-                    $response = array('status' => 'f', 'msg' =>  esc_html__( 'File not found', 'schema-package' ));                   
+                    $response = ['status' => 'f', 'msg' =>  esc_html__( 'File not found', 'schema-package' )];                   
                 }
                                                 
             }else{
                 
-                if($parameters){                    
-                    $result      = $this->_api_mapper->update_settings($parameters);
-                    if($result){
-                        $response = array('status' => 't', 'msg' =>  esc_html__( 'Settings has been saved successfully', 'schema-package' ));                                               
+                if ( $parameters ) {
+                    $result      = $this->_api_mapper->update_settings( $parameters );
+                    if ( $result ) {
+                        $response = ['status' => 't', 'msg' =>  esc_html__( 'Settings has been saved successfully', 'schema-package' )];                                               
                     }
                 }
             }
@@ -578,38 +578,38 @@ class SMPG_Api_Action {
         public function save_carousel_schema_data( $request_data ) {
 
             $parameters     = $request_data->get_params();                                               
-            $post_id      = $this->_api_mapper->save_schema_data($parameters);                       
+            $post_id      = $this->_api_mapper->save_schema_data( $parameters ); 
             
-            if($post_id){   
-                return array('status' => 't', 'post_id' => $post_id);
+            if ( $post_id ) {   
+                return [ 'status' => 't', 'post_id' => $post_id ];
             }else{
-                return array('status' => 'f', 'post_id' => null);
+                return [ 'status' => 'f', 'post_id' => null ];
             }     
         }
-        public function save_schema_data($request_data){
+        public function save_schema_data( $request_data ) {
 
             $parameters     = $request_data->get_params();                                               
-            $post_id      = $this->_api_mapper->save_schema_data($parameters);                       
+            $post_id      = $this->_api_mapper->save_schema_data( $parameters );
             
-            if($post_id){   
-                return array('status' => 't', 'post_id' => $post_id);
+            if ( $post_id ) {   
+                return [ 'status' => 't', 'post_id' => $post_id ];
             }else{
-                return array('status' => 'f', 'post_id' => null);
+                return [ 'status' => 'f', 'post_id' => null ];
             }     
         }
         
-        public function save_post_meta($request_data){
+        public function save_post_meta( $request_data ) {
 
             $parameters     = $request_data->get_params();                                               
 
             if( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ){
                                 
                 $this->_api_mapper->save_post_meta($parameters);          
-                return array('status' => 'success', 'message' => esc_html__( 'Saved Successfully', 'schema-package' ));
+                return [ 'status' => 'success', 'message' => esc_html__( 'Saved Successfully', 'schema-package' )];
 
             }else{
 
-                return array('status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ));
+                return [ 'status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ) ];
 
             }
                          
@@ -626,9 +626,9 @@ class SMPG_Api_Action {
 
                 if($result){
                     $data = $result['properties'][$parameters['element_name']]['elements'][0];
-                    $response = array('status' => 'success', 'data' => $data);
+                    $response = [ 'status' => 'success', 'data' => $data ];
                 }else{
-                    $response = array('status' => 'failed', 'data' => []);
+                    $response = [ 'status' => 'failed', 'data' => [] ];
                 }
 
             }    
@@ -652,11 +652,11 @@ class SMPG_Api_Action {
                     $post_meta =  get_post_meta( $post_id, '_smpg_schema_meta', true );
                 }                                
 
-                $response  =  array('status' => 'success', 'post_meta' => $post_meta);
+                $response  =  [ 'status' => 'success', 'post_meta' => $post_meta ];
 
             }else{
 
-                $response =  array('status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ));
+                $response =  [ 'status' => 'failed', 'message' => esc_html__( 'Post id is missing', 'schema-package' ) ];
             }
             
             return $response;
@@ -670,14 +670,14 @@ class SMPG_Api_Action {
             
             if(!empty($parameters['init'])){
                 $result    =  smpg_get_initial_post_meta($parameters['post_id'], $parameters['tag_id'], $parameters['user_id']);
-                $response  =  array('status' => 'success', 'properties' => $result);
+                $response  =  [ 'status' => 'success', 'properties' => $result ];
             }else{
                 
                 if( isset($parameters['selected']) && ( !empty($parameters['post_id']) || !empty($parameters['tag_id']) || !empty($parameters['user_id']) ) ){
                     $result    =  smpg_get_multiple_schema_properties($parameters['selected'], (int)$parameters['post_id'], (int)$parameters['tag_id'], (int)$parameters['user_id'] );
-                    $response  =  array('status' => 'success', 'properties' => $result);
+                    $response  =  [ 'status' => 'success', 'properties' => $result ];
                 }else{    
-                    $response =  array('status' => 'failed', 'message' => esc_html__( 'Properties not found', 'schema-package' ));
+                    $response =  [ 'status' => 'failed', 'message' => esc_html__( 'Properties not found', 'schema-package' ) ];
                 }
             }            
             

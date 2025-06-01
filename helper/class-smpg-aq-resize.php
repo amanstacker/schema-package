@@ -134,7 +134,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
                     $upload_url = str_replace($https_prefix,$http_prefix,$upload_url);
                 }
                 elseif(!strncmp($url,$relative_prefix,strlen($relative_prefix))){ //if url begins with // make $upload_url begin with // as well
-                    $upload_url = str_replace(array( 0 => "$http_prefix", 1 => "$https_prefix"),$relative_prefix,$upload_url);
+                    $upload_url = str_replace( [ 0 => "$http_prefix", 1 => "$https_prefix" ],$relative_prefix,$upload_url);
                 }
                 $is_cdn  = false;
                 $cdn_url = '';
@@ -243,7 +243,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
                 }
 
                 // Okay, leave the ship.
-                if ( true === $upscale ) remove_filter( 'image_resize_dimensions', array( $this, 'aq_upscale' ) );
+                if ( true === $upscale ) remove_filter( 'image_resize_dimensions', [ $this, 'aq_upscale' ] );
 
                 // Return the output.
                 if ( $single ) {
@@ -302,7 +302,7 @@ if(!class_exists('SMPG_Aq_Resize')) {
             $s_x = floor( ( $orig_w - $crop_w ) / 2 );
             $s_y = floor( ( $orig_h - $crop_h ) / 2 );
 
-            return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
+            return [ 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h ];
         }
     }
 }

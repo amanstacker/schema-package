@@ -1712,40 +1712,45 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
 
 }
 
-function smpg_get_faq_individual_json_ld( $json_ld, $properties, $schema_type ){
+function smpg_get_faq_individual_json_ld( $json_ld, $properties, $schema_type ) {
 
         $json_ld['@context']         = smpg_get_context_url();
         $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
-            $main_entity = [];
-            $data        = [];
-            
-            if(!empty($properties['main_entity']['elements'])){
+        $main_entity = [];
+        $data        = [];
+        
+        if ( ! empty( $properties['main_entity']['elements'] ) ) {
 
-                $data = $properties['main_entity']['elements'];
+            $data = $properties['main_entity']['elements'];
 
-                foreach ($data as $value) {
-                    
-                    if(!empty($value['question']['value']) && !empty($value['answer']['value'])) {
+            foreach ( $data as $value ) {
+                
+                if ( ! empty( $value['question']['value'] ) && ! empty( $value['answer']['value'] ) ) {
 
-                        $main_entity[] = [
-                            '@type' => 'Question',
-                            'name'  => $value['question']['value'],
-                            'acceptedAnswer' => [
-                                '@type' => 'Answer',
-                                'text'  => $value['answer']['value']
-                            ]
-                        ];
+                    $entity = [];
 
+                    $entity['@type']                   = 'Question';
+                    $entity['name']                    = $value['question']['value'];
+
+                    if ( ! empty( $value['image']['value'] ) ) {
+                        $entity['image'] = smpg_make_the_image_json( $value['image']['value'], true );
                     }
-                    
-                }
 
-                if($main_entity){
-                    $json_ld['mainEntity'] = $main_entity;
+                    $entity['acceptedAnswer']['@type'] = 'Answer';
+                    $entity['acceptedAnswer']['text']  = $value['answer']['value'];                    
+
+                    $main_entity[] = $entity;
+
                 }
                 
             }
 
-            return $json_ld;
+            if ( $main_entity ) {
+                $json_ld['mainEntity'] = $main_entity;
+            }
+            
+        }
+
+        return $json_ld;
 }

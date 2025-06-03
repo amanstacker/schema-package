@@ -50,7 +50,7 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 		return [];
 	}
 
-	$sanitized_array = array();
+	$sanitized_array = [];
 
 	foreach ( $input_array as $key => $value ) {
 
@@ -1972,10 +1972,10 @@ function smpg_convert_instructions_to_howto_format( $instructions ) {
 	$howto_instructions = [];
 
 	foreach ( $instructions as $instruction ) {
-		$howto_instructions[] = array(
+		$howto_instructions[] = [
 			'@type' => 'HowToStep',
 			'text'  => $instruction,
-		);
+		];
 	}
 
 	return $howto_instructions;

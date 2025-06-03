@@ -1,5 +1,8 @@
 # Schema Package - A Structured Data Module
 
+**Download from WordPress.org**: 👉 [https://wordpress.org/plugins/schema-package/](https://wordpress.org/plugins/schema-package/)
+
+
 ### Description
 
 The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Instead of manually entering the same information twice — once in the actual content and again in the **Schema Package Generator** metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.

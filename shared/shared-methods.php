@@ -90,14 +90,16 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 						break;
 
 					case 'media':
-						$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
-                                    return [
-                                        'id'     => isset( $media['id'] ) ? intval( $media['id'] ) : 0,
-                                        'url'    => isset( $media['url'] ) ? esc_url_raw( $media['url'] ) : '',
-                                        'width'  => isset( $media['width'] ) ? intval( $media['width'] ) : 0,
-                                        'height' => isset( $media['height'] ) ? intval( $media['height'] ) : 0,
-                                    ];
-                        		}, $value );
+						if ( is_array( $value ) ) {
+							$sanitized_array[ $sanitized_key ] = array_map( function( $media ) {
+								return [
+									'id'     => isset( $media['id'] ) ? intval( $media['id'] ) : 0,
+									'url'    => isset( $media['url'] ) ? esc_url_raw( $media['url'] ) : '',
+									'width'  => isset( $media['width'] ) ? intval( $media['width'] ) : 0,
+									'height' => isset( $media['height'] ) ? intval( $media['height'] ) : 0,
+								];
+							}, $value );
+						} 
 						break;
 					
 					default:
@@ -748,15 +750,15 @@ function smpg_get_home_url( $path = '', $scheme = null ) {
 	return apply_filters( 'smpg_change_home_url', $home_url );
 }
 
-function smpg_make_the_image_json($data, $img_obj = null){
+function smpg_make_the_image_json( $data, $img_obj = null ) {
 
 	$image = [];
 
-	if(!empty($data)){
+	if ( ! empty( $data ) ) {
 
-		foreach ($data as $value) {
+		foreach ( $data as $value ) {
 
-			if($img_obj){
+			if ( $img_obj ) {
 
 				$image[] = [
 					'@type'   => 'ImageObject',
@@ -775,11 +777,11 @@ function smpg_make_the_image_json($data, $img_obj = null){
 	return $image;
 }
 
-function smpg_make_the_logo_json($data){
+function smpg_make_the_logo_json( $data ) {
 
 	$logo = [];
 
-	if(isset($data[0])){
+	if ( isset( $data[0] ) ) {
 
 		$logo['@type']  = 'ImageObject';
 		$logo['url']    = $data[0]['url'];
@@ -792,7 +794,7 @@ function smpg_make_the_logo_json($data){
 
 }
 
-function smpg_get_the_logo(){
+function smpg_get_the_logo() {
 
 	global $smpg_settings;
 
@@ -806,7 +808,7 @@ function smpg_get_the_logo(){
 	if ( empty( $logo ) ) {
 
 		$logo_id            = get_theme_mod( 'custom_logo' );     		
-		$logo_details       = wp_get_attachment_image_src( $logo_id, 'full');
+		$logo_details       = wp_get_attachment_image_src( $logo_id, 'full' );
 		
 		if ( isset( $logo_details[0] ) ) {
 

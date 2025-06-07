@@ -563,7 +563,7 @@ const Settings = () => {
                         checked={!!settings.delete_data_on_uninstall ? true : false}
                         onChange={formChangeHandler}
                       />                                            
-                      <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                      <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                      
                 </tbody>

@@ -211,7 +211,7 @@ const SingularSchema = () => {
               : <div className="one column row">
                   <div className="column">
                     <div className="ui info message">
-                    {__('You have not setup any schema types. Please add schema to continue...', 'schema-package') }
+                    {__('You have not configured any schema types. Please add one or more schemas to continue.', 'schema-package') }
                     </div>
                   </div>
               </div>

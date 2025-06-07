@@ -1332,7 +1332,7 @@ var CarouselSchema = function CarouselSchema() {
     className: "column"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ui info message"
-  }, __('You have not setup any schema types. Please add schema to continue...', 'schema-package'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, __('You have not configured any schema types. Please add one or more schemas to continue.', 'schema-package'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-single-schema-footer"
   }, postsFound > 10 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
     defaultActivePage: 1,
@@ -3648,7 +3648,7 @@ var Settings = function Settings() {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           className: "smpg-tooltip"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          content: __('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package'),
+          content: __('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space.', 'schema-package'),
           trigger: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
             "aria-hidden": "true",
             className: "question circle outline icon"
@@ -4237,7 +4237,7 @@ var SingularSchema = function SingularSchema() {
     className: "column"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ui info message"
-  }, __('You have not setup any schema types. Please add schema to continue...', 'schema-package'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, __('You have not configured any schema types. Please add one or more schemas to continue.', 'schema-package'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-single-schema-footer"
   }, postsFound > 10 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
     defaultActivePage: 1,

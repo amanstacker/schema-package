@@ -2,6 +2,35 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// MasterStudy LMS WordPress Plugin – for Online Courses and Education
+
+add_filter( 'smpg_filter_course_json_ld', 'smpg_masterstudy_singular_automation',10,3 );
+
+function smpg_masterstudy_singular_automation( $json_ld, $schema_data, $post_id ) {
+
+    global $smpg_plugin_list;
+
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
+
+        $automation = unserialize( $schema_data['_automation_with'][0] );
+
+        if ( in_array( "masterstudy", $automation ) && isset( $smpg_plugin_list['masterstudy']['is_active'] ) ) {
+
+            $json_ld = smpg_get_masterstudy_json_ld( $json_ld, $post_id );
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_masterstudy_json_ld( $json_ld, $post_id ) {
+
+
+    return $json_ld;
+}
+
 add_filter('smpg_filter_product_json_ld', 'smpg_review_automation',10,3);
 add_filter('smpg_filter_review_json_ld', 'smpg_review_automation',10,3);
 

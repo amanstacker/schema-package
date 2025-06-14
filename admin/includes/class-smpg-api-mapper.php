@@ -908,6 +908,12 @@ class SMPG_Api_Mapper {
         case 'localbusiness':
 
           break;
+
+        case 'course':
+
+          $automate_supports = [ 'masterstudy' ];          
+
+        break;
         
         default:
         

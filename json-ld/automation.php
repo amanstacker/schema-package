@@ -27,6 +27,53 @@ function smpg_masterstudy_singular_automation( $json_ld, $schema_data, $post_id 
 
 function smpg_get_masterstudy_json_ld( $json_ld, $post_id ) {
 
+    $reviews = [];
+
+    $stm_reviews = get_posts( [
+                            'post_type' 	     => 'stm-reviews', 
+                            'posts_per_page'     => -1,   
+                            'post_status'        => 'publish',
+                    ] );
+        
+    if ( $stm_reviews ) {
+        
+        foreach ( $stm_reviews as $key => $value ) {
+            
+		    $mark   = get_post_meta( $value->ID, 'review_mark', true );
+		    $user   = get_post_meta( $value->ID, 'review_user', true );
+            $user_data  = get_user_by( 'id', $user );
+
+            if ( is_wp_error( $user_data ) ) {
+                continue;
+            }            
+
+            $reviews[] = [
+                '@type' => 'Review',
+                'reviewRating' => [
+                    '@type'         => 'Rating',
+                    'ratingValue'   => $mark,                    
+                ],
+                'author' => [
+                    '@type'         => 'Person',
+                    'name'          => $user_data->data->display_name,                    
+                ],
+                'reviewBody' => $value->post_content
+            ];
+        }
+    }                
+
+    if ( $reviews ) {
+
+        $reviews_avg = get_post_meta( $post_id, 'course_mark_average', true );        
+
+        $json_ld['review'] = $reviews;
+        $json_ld['aggregateRating'] = [
+            '@type' => 'AggregateRating',
+            'ratingValue' => $reviews_avg,
+            'reviewCount' => count( $reviews ),
+        ];
+
+    }
 
     return $json_ld;
 }

@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // MasterStudy LMS WordPress Plugin – for Online Courses and Education
 
-add_filter( 'smpg_filter_course_json_ld', 'smpg_masterstudy_singular_automation',10,3 );
+add_filter( 'smpg_filter_faqpage_json_ld', 'smpg_masterstudy_singular_faqs_automation',10,3 );
 
-function smpg_masterstudy_singular_automation( $json_ld, $schema_data, $post_id ) {
+function smpg_masterstudy_singular_faqs_automation( $json_ld, $schema_data, $post_id ) {
 
     global $smpg_plugin_list;
 
@@ -16,7 +16,7 @@ function smpg_masterstudy_singular_automation( $json_ld, $schema_data, $post_id 
 
         if ( in_array( "masterstudy", $automation ) && isset( $smpg_plugin_list['masterstudy']['is_active'] ) ) {
 
-            $json_ld = smpg_get_masterstudy_json_ld( $json_ld, $post_id );
+            $json_ld = smpg_get_masterstudy_faqs_json_ld( $json_ld, $post_id );
                                 
         }
 
@@ -25,9 +25,77 @@ function smpg_masterstudy_singular_automation( $json_ld, $schema_data, $post_id 
     return $json_ld;
 }
 
-function smpg_get_masterstudy_json_ld( $json_ld, $post_id ) {
+add_filter( 'smpg_filter_course_json_ld', 'smpg_masterstudy_singular_course_automation',10,3 );
+
+function smpg_masterstudy_singular_course_automation( $json_ld, $schema_data, $post_id ) {
+
+    global $smpg_plugin_list;
+
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
+
+        $automation = unserialize( $schema_data['_automation_with'][0] );
+
+        if ( in_array( "masterstudy", $automation ) && isset( $smpg_plugin_list['masterstudy']['is_active'] ) ) {
+
+            $json_ld = smpg_get_masterstudy_course_json_ld( $json_ld, $post_id );
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_masterstudy_faqs_json_ld( $json_ld, $post_id ) {
+    
+    if ( class_exists( '\MasterStudy\Lms\Repositories\FaqRepository' ) ) {
+
+        $faq = ( new \MasterStudy\Lms\Repositories\FaqRepository() )->find_for_course( $post_id );
+
+        if ( ! empty( $faq ) ) {
+
+            $faq_data = [];
+
+            foreach ( $faq as $index => $item ) {
+
+                if ( empty( $item['answer'] ) || empty( $item['question'] ) ) {
+                    continue;
+                }
+
+                $faq_data[] = [
+                        '@type' => 'Question',
+                        'name'  => $item['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text'  => $item['answer']
+                            ]
+                ];
+
+            }
+
+            if ( $faq_data ) {
+                $json_ld['mainEntity'] = $faq_data;
+            }
+            return $json_ld;
+
+        } else {
+            return [];
+        }
+    
+    }
+    
+}
+
+function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
 
     $reviews = [];
+
+    $json_ld['offers'] = [
+        '@type'         => 'Offer',
+        'price'         => 0.0,
+        'priceCurrency' => 'USD',
+        'category'      => 'Free'
+    ];
 
     $stm_reviews = get_posts( [
                             'post_type' 	     => 'stm-reviews', 
@@ -39,8 +107,8 @@ function smpg_get_masterstudy_json_ld( $json_ld, $post_id ) {
         
         foreach ( $stm_reviews as $key => $value ) {
             
-		    $mark   = get_post_meta( $value->ID, 'review_mark', true );
-		    $user   = get_post_meta( $value->ID, 'review_user', true );
+		    $mark       = get_post_meta( $value->ID, 'review_mark', true );
+		    $user       = get_post_meta( $value->ID, 'review_user', true );
             $user_data  = get_user_by( 'id', $user );
 
             if ( is_wp_error( $user_data ) ) {

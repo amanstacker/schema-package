@@ -90,13 +90,26 @@ function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
 
     $reviews = [];
 
-    $json_ld['offers'] = [
-        '@type'         => 'Offer',
-        'price'         => 0.0,
-        'priceCurrency' => 'USD',
-        'category'      => 'Free'
-    ];
+    if ( class_exists( 'STM_LMS_Helpers' ) && class_exists( 'STM_LMS_Options' ) ) {
 
+        $sale_price_active = STM_LMS_Helpers::is_sale_price_active( $post_id );
+
+        if ( $sale_price_active ) {
+
+            $sale_price = get_post_meta( $post_id, 'sale_price', true );        
+            $symbol     = STM_LMS_Options::get_option( 'currency_symbol', '$' );
+
+            $json_ld['offers'] = [
+                '@type'         => 'Offer',
+                'price'         => $sale_price,
+                'priceCurrency' => $symbol,
+                'category'      => 'Paid'
+            ];
+
+        }
+
+    }
+            
     $stm_reviews = get_posts( [
                             'post_type' 	     => 'stm-reviews', 
                             'posts_per_page'     => -1,   

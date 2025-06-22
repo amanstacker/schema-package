@@ -4,7 +4,7 @@ Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.14
+Stable tag: 1.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -241,6 +241,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
+* [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
 == Notes ==
@@ -465,6 +466,12 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.15 =
+
+* Added : Compatibility for MasterStudy LMS WordPress Plugin – for Online Courses and Education
+* Fixed : Course Schema was not being added when setup from schema package schema selection.
+
 
 = 1.0.14 =
 

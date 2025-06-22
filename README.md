@@ -236,6 +236,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
+* [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
 ### Notes

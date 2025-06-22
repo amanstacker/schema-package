@@ -1984,23 +1984,33 @@ function smpg_convert_instructions_to_howto_format( $instructions ) {
 }
 
 function smpg_convert_to_schema_duration( $input ) {
+	if ( ! is_string( $input ) || trim( $input ) === '' ) {
+		return null;
+	}
+
 	$input = strtolower(trim($input));
 
-	// Remove content in parentheses
+	// Remove anything inside parentheses (e.g., lesson info)
 	$input_cleaned = preg_replace('/\s*\(.*?\)\s*/', '', $input);
 
-	// Initialize duration parts
-	$period = 'P'; // For days, weeks, months, years
-	$time   = 'T'; // For hours, minutes
+	// Initialize duration strings
+	$period = 'P'; // For years, months, weeks, days
+	$time   = 'T'; // For hours, minutes, seconds
 
-	// Match all relevant time units
-	preg_match_all('/(\d+)\s*(year|month|week|day|hour|minute|second)s?/i', $input_cleaned, $matches, PREG_SET_ORDER);
+	// Use preg_match_all safely
+	if ( ! preg_match_all('/(\d+)\s*(year|month|week|day|hour|minute|second)s?/i', $input_cleaned, $matches, PREG_SET_ORDER) ) {
+		return null;
+	}
 
-	foreach ($matches as $match) {
-		$value = $match[1];
-		$unit  = strtolower($match[2]);
+	foreach ( $matches as $match ) {
+		$value = isset($match[1]) ? (int) $match[1] : 0;
+		$unit  = isset($match[2]) ? strtolower($match[2]) : '';
 
-		switch ($unit) {
+		if ( $value <= 0 || $unit === '' ) {
+			continue;
+		}
+
+		switch ( $unit ) {
 			case 'year':
 				$period .= $value . 'Y';
 				break;
@@ -2025,12 +2035,11 @@ function smpg_convert_to_schema_duration( $input ) {
 		}
 	}
 
-	// Combine period and time parts
-	$duration = $period;
-	if ($time !== 'T') {
-		$duration .= $time;
+	// If neither part has content, return null
+	if ( $period === 'P' && $time === 'T' ) {
+		return null;
 	}
 
-	// Return null if duration is only P or T (i.e., nothing matched)
-	return ($duration !== 'P' && $duration !== 'PT') ? $duration : null;
+	// Return valid duration
+	return ( $time !== 'T' ) ? $period . $time : $period;
 }

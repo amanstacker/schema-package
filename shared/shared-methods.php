@@ -1982,3 +1982,55 @@ function smpg_convert_instructions_to_howto_format( $instructions ) {
 
 	return $howto_instructions;
 }
+
+function smpg_convert_to_schema_duration( $input ) {
+	$input = strtolower(trim($input));
+
+	// Remove content in parentheses
+	$input_cleaned = preg_replace('/\s*\(.*?\)\s*/', '', $input);
+
+	// Initialize duration parts
+	$period = 'P'; // For days, weeks, months, years
+	$time   = 'T'; // For hours, minutes
+
+	// Match all relevant time units
+	preg_match_all('/(\d+)\s*(year|month|week|day|hour|minute|second)s?/i', $input_cleaned, $matches, PREG_SET_ORDER);
+
+	foreach ($matches as $match) {
+		$value = $match[1];
+		$unit  = strtolower($match[2]);
+
+		switch ($unit) {
+			case 'year':
+				$period .= $value . 'Y';
+				break;
+			case 'month':
+				$period .= $value . 'M';
+				break;
+			case 'week':
+				$period .= $value . 'W';
+				break;
+			case 'day':
+				$period .= $value . 'D';
+				break;
+			case 'hour':
+				$time .= $value . 'H';
+				break;
+			case 'minute':
+				$time .= $value . 'M';
+				break;
+			case 'second':
+				$time .= $value . 'S';
+				break;
+		}
+	}
+
+	// Combine period and time parts
+	$duration = $period;
+	if ($time !== 'T') {
+		$duration .= $time;
+	}
+
+	// Return null if duration is only P or T (i.e., nothing matched)
+	return ($duration !== 'P' && $duration !== 'PT') ? $duration : null;
+}

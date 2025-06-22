@@ -109,6 +109,17 @@ function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
         }
 
     }
+
+    $duration_info = get_post_meta( $post_id, 'duration_info', true );        
+
+    if ( $duration_info ) {
+
+        $json_ld['hasCourseInstance'] = [
+                '@type'          => 'CourseInstance',
+                'courseMode'     => 'Online',
+                'courseWorkload' => smpg_convert_to_schema_duration( $duration_info )       
+        ];
+    }        
             
     $stm_reviews = get_posts( [
                             'post_type' 	     => 'stm-reviews', 

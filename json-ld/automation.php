@@ -125,6 +125,13 @@ function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
                             'post_type' 	     => 'stm-reviews', 
                             'posts_per_page'     => -1,   
                             'post_status'        => 'publish',
+                            'meta_query'     => [
+                                [
+                                    'key'     => 'review_course',
+                                    'compare' => '=',
+                                    'value'   => intval( $post_id ),
+                                ],
+                            ],
                     ] );
         
     if ( $stm_reviews ) {

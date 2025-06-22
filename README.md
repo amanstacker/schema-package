@@ -107,6 +107,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [AggregateRating](https://schema.org/AggregateRating)
 - [Service](https://schema.org/Service)
 - [FinancialProduct](https://schema.org/FinancialProduct)
+- [MemberProgram](https://schema.org/MemberProgram)
 
 #### 4. Events
 - [Event](https://schema.org/Event)

@@ -88,28 +88,22 @@ function smpg_get_masterstudy_faqs_json_ld( $json_ld, $post_id ) {
 
 function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
 
-    $reviews = [];
+    $reviews = [];            
+    
+    $sale_price    = get_post_meta( $post_id, 'sale_price', true );        
+    $regular_price = get_post_meta( $post_id, 'price', true );        
 
-    if ( class_exists( 'STM_LMS_Helpers' ) && class_exists( 'STM_LMS_Options' ) ) {
+    if ( $sale_price || $regular_price ) {                        
 
-        $sale_price_active = STM_LMS_Helpers::is_sale_price_active( $post_id );
-
-        if ( $sale_price_active ) {
-
-            $sale_price = get_post_meta( $post_id, 'sale_price', true );        
-            $symbol     = STM_LMS_Options::get_option( 'currency_symbol', '$' );
-
-            $json_ld['offers'] = [
-                '@type'         => 'Offer',
-                'price'         => $sale_price,
-                'priceCurrency' => $symbol,
-                'category'      => 'Paid'
-            ];
-
-        }
+        $json_ld['offers'] = [
+            '@type'         => 'Offer',
+            'price'         => $sale_price ? $sale_price : $regular_price,
+            'priceCurrency' => 'USD',
+            'category'      => 'Paid'
+        ];
 
     }
-
+    
     $duration_info = get_post_meta( $post_id, 'duration_info', true );        
 
     if ( $duration_info ) {

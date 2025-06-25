@@ -213,6 +213,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Perfect Brands for WooCommerce](https://wordpress.org/plugins/perfect-woocommerce-brands)
 * [Ryviu – Product Reviews for WooCommerce](https://wordpress.org/plugins/ryviu)
 * [Customer Reviews for WooCommerce](https://wordpress.org/plugins/customer-reviews-woocommerce)
+* [Site Reviews](https://wordpress.org/plugins/site-reviews/)
 * [YITH WooCommerce Brands Add-On](https://wordpress.org/plugins/yith-woocommerce-brands-add-on)
 * [Ultimate Reviews](https://wordpress.org/plugins/ultimate-reviews)
 * [Yotpo: Product & Photo Reviews for WooCommerce](https://wordpress.org/plugins/yotpo-social-reviews-for-woocommerce)

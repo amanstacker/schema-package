@@ -1,6 +1,7 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
+Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8

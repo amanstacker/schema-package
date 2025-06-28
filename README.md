@@ -40,7 +40,7 @@ Schema Markup refers to the standardized vocabulary (provided by Schema.org) use
 
 JSON-LD is a lightweight Linked Data format that uses JSON to encode structured data. It is one of the formats recommended by all popular search engines for adding schema markup ( structured data ) to web pages. JSON-LD embeds data in the <script> tags of an HTML document without affecting the visual appearance of the page.
 
-### Schema Package Key Features
+### ðŸŽ¯ Schema Package Key Features
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.

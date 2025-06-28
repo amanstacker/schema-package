@@ -59,6 +59,16 @@ function smpg_load_smpg_plugin_list_settings() {
 		'slug_pro_v'  		=> 'absolute-reviews/absolute-reviews.php',
 		'wp_org_url'  		=> 'https://wordpress.org/plugins/absolute-reviews/'
 	];
+
+	$smpg_plugin_list['masterstudy'] = [
+		'is_active'   		=> false,
+		'has_own_json_ld' 	=> false,
+		'id'          		=> 'masterstudy',
+		'name'        		=> 'MasterStudy LMS WordPress Plugin',		
+		'slug_free_v' 		=> 'masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php',
+		'slug_pro_v'  		=> 'masterstudy-lms-learning-management-system-pro/masterstudy-lms-learning-management-system-pro.php',
+		'wp_org_url'  		=> 'https://wordpress.org/plugins/masterstudy-lms-learning-management-system/'
+	];
 		
 	$smpg_plugin_list['brandforwoocommerce'] = [
 		'is_active'   		=> false,

@@ -4,7 +4,7 @@ Tags: Structured Data, Schema, Rich Results, carousel schema, Product
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.13
+Stable tag: 1.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [AggregateRating](https://schema.org/AggregateRating)
 - [Service](https://schema.org/Service)
 - [FinancialProduct](https://schema.org/FinancialProduct)
+- [MemberProgram](https://schema.org/MemberProgram)
 
 === 4. Events ===
 - [Event](https://schema.org/Event)
@@ -217,6 +218,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Perfect Brands for WooCommerce](https://wordpress.org/plugins/perfect-woocommerce-brands)
 * [Ryviu – Product Reviews for WooCommerce](https://wordpress.org/plugins/ryviu)
 * [Customer Reviews for WooCommerce](https://wordpress.org/plugins/customer-reviews-woocommerce)
+* [Site Reviews](https://wordpress.org/plugins/site-reviews/)
 * [YITH WooCommerce Brands Add-On](https://wordpress.org/plugins/yith-woocommerce-brands-add-on)
 * [Ultimate Reviews](https://wordpress.org/plugins/ultimate-reviews)
 * [Yotpo: Product & Photo Reviews for WooCommerce](https://wordpress.org/plugins/yotpo-social-reviews-for-woocommerce)
@@ -241,6 +243,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
+* [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
 == Notes ==
@@ -465,6 +468,19 @@ Official website coming soon
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
 == Changelog ==
+
+= 1.0.15 =
+
+* Added : Compatibility for MasterStudy LMS WordPress Plugin – for Online Courses and Education
+* Fixed : Course Schema was not being added when setup from schema package schema selection.
+
+
+= 1.0.14 =
+
+* Added : Offers" and "hasCourseInstance" properties in course schema
+* Added : Support email above support form
+* Improvement : Enhanced several messages for better readability.
+
 
 = 1.0.13 =
 

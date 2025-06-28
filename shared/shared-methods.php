@@ -1982,3 +1982,76 @@ function smpg_convert_instructions_to_howto_format( $instructions ) {
 
 	return $howto_instructions;
 }
+
+function smpg_convert_to_schema_duration( $input ) {
+	if ( ! is_string( $input ) || trim( $input ) === '' ) {
+		return null;
+	}
+
+	$input = strtolower(trim($input));
+	$input = preg_replace('/\s*\(.*?\)\s*/u', '', $input); // remove (12 درس), etc.
+
+	// Arabic and English time unit map to ISO 8601
+	$unit_map = [
+		// Arabic => [Schema Unit, default value if number missing]
+		'يوم'      => ['D', 1],
+		'أيام'     => ['D', 1],
+		'يومًا'    => ['D', 1],
+		'أسبوع'    => ['W', 1],
+		'أسبوعان'  => ['W', 2],
+		'أسبوعين'  => ['W', 2],
+		'أسابيع'   => ['W', 1],
+		'شهر'      => ['M', 1],
+		'شهور'     => ['M', 1],
+		'ساعة'     => ['H', 1],
+		'ساعات'    => ['H', 1],
+		'دقيقة'    => ['M', 1],
+		'دقائق'    => ['M', 1],
+		'ثانية'    => ['S', 1],
+		'ثواني'    => ['S', 1],
+
+		// English => [Schema Unit, default value]
+		'day'      => ['D', 1],
+		'days'     => ['D', 1],
+		'week'     => ['W', 1],
+		'weeks'    => ['W', 1],
+		'month'    => ['M', 1],
+		'months'   => ['M', 1],
+		'hour'     => ['H', 1],
+		'hours'    => ['H', 1],
+		'minute'   => ['M', 1],
+		'minutes'  => ['M', 1],
+		'second'   => ['S', 1],
+		'seconds'  => ['S', 1],
+	];
+
+	$period = 'P';
+	$time   = 'T';
+
+	// Match both digit+unit and unit-only (Arabic dual/plural)
+	preg_match_all('/(?:(\d+)\s*)?(\p{Arabic}+|\w+)/u', $input, $matches, PREG_SET_ORDER);
+
+	foreach ( $matches as $match ) {
+		$value = isset($match[1]) && is_numeric($match[1]) ? (int) $match[1] : null;
+		$unit  = isset($match[2]) ? trim($match[2]) : '';
+
+		if ( ! isset( $unit_map[ $unit ] ) ) {
+			continue;
+		}
+
+		list($schema_unit, $default_value) = $unit_map[ $unit ];
+		$value = isset($value) ? $value : $default_value;
+
+		if ( in_array( $schema_unit, ['Y', 'M', 'W', 'D'] ) ) {
+			$period .= $value . $schema_unit;
+		} elseif ( in_array( $schema_unit, ['H', 'M', 'S'] ) ) {
+			$time .= $value . $schema_unit;
+		}
+	}
+
+	if ( $period === 'P' && $time === 'T' ) {
+		return null;
+	}
+
+	return $time !== 'T' ? $period . $time : $period;
+}

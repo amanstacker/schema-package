@@ -2,7 +2,7 @@
 /*
 Plugin Name: Schema Package - A Structured Data Module
 Description: Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
-Version: 1.0.13
+Version: 1.0.15
 Text Domain: schema-package
 Domain Path: /languages
 Author: amanstacker
@@ -13,7 +13,7 @@ License: GPLv2 or later
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('SMPG_VERSION', '1.0.13');
+define('SMPG_VERSION', '1.0.15');
 define('SMPG_DIR_NAME_FILE', __FILE__ );
 define('SMPG_DIR_NAME', dirname( __FILE__ ));
 define('SMPG_DIR_URI', plugin_dir_url(__FILE__));

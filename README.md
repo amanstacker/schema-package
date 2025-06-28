@@ -107,6 +107,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [AggregateRating](https://schema.org/AggregateRating)
 - [Service](https://schema.org/Service)
 - [FinancialProduct](https://schema.org/FinancialProduct)
+- [MemberProgram](https://schema.org/MemberProgram)
 
 #### 4. Events
 - [Event](https://schema.org/Event)
@@ -212,6 +213,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Perfect Brands for WooCommerce](https://wordpress.org/plugins/perfect-woocommerce-brands)
 * [Ryviu – Product Reviews for WooCommerce](https://wordpress.org/plugins/ryviu)
 * [Customer Reviews for WooCommerce](https://wordpress.org/plugins/customer-reviews-woocommerce)
+* [Site Reviews](https://wordpress.org/plugins/site-reviews/)
 * [YITH WooCommerce Brands Add-On](https://wordpress.org/plugins/yith-woocommerce-brands-add-on)
 * [Ultimate Reviews](https://wordpress.org/plugins/ultimate-reviews)
 * [Yotpo: Product & Photo Reviews for WooCommerce](https://wordpress.org/plugins/yotpo-social-reviews-for-woocommerce)
@@ -236,6 +238,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
+* [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
 ### Notes

@@ -896,7 +896,7 @@ class SMPG_Api_Mapper {
           break;
         case 'faqpage':
 
-          $automate_supports = [ 'accordion', 'accordionfaq', 'quickandeasyfaq', 'easyaccordion', 'wpresponsivefaq', 'arconixfaq' ];          
+          $automate_supports = [ 'accordion', 'accordionfaq', 'quickandeasyfaq', 'easyaccordion', 'wpresponsivefaq', 'arconixfaq', 'masterstudy' ];          
                                   
           break;
         
@@ -908,6 +908,12 @@ class SMPG_Api_Mapper {
         case 'localbusiness':
 
           break;
+
+        case 'course':
+
+          $automate_supports = [ 'masterstudy' ];          
+
+        break;
         
         default:
         

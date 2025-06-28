@@ -666,6 +666,84 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
         $json_ld['provider']['name']  = $properties['publisher_name']['value'];    
      }
 
+     if ( $properties['offer_type']['value'] == 'Offer' ) {
+
+        if ( isset( $properties['offer_price']['value'] ) ) {
+
+            $json_ld['offers']['@type']            = 'Offer';            
+            $json_ld['offers']['category']         = $properties['offer_category']['value'];
+            $json_ld['offers']['priceCurrency']    = $properties['offer_currency']['value'];
+            $json_ld['offers']['price']            = $properties['offer_price']['value'];            
+    
+         }
+
+     }  
+
+     if ( $properties['offer_type']['value'] == 'AggregateOffer' ) {
+
+        if ( isset( $properties['high_price']['value'] ) && isset( $properties['low_price']['value'] ) ) {
+
+            $json_ld['offers']['@type']            = 'AggregateOffer';            
+            $json_ld['offers']['category']         = $properties['offer_category']['value'];
+            $json_ld['offers']['priceCurrency']    = $properties['offer_currency']['value'];
+            $json_ld['offers']['highPrice']        = $properties['high_price']['value'];
+            $json_ld['offers']['lowPrice']         = $properties['low_price']['value'];
+            $json_ld['offers']['offerCount']       = $properties['offer_count']['value'];            
+    
+         }
+
+    }
+    
+    if ( ! empty( $properties['has_course_instance']['elements'] ) ) {
+
+        $course_instance = [];
+
+        foreach ( $properties['has_course_instance']['elements'] as  $value ) {
+                                    
+            if ( ! empty( $value['course_mode']['value'] ) || ! empty( $value['course_workload']['value'] ) || ! empty( $value['repeat_count']['value'] ) ) {
+
+                $loopdata = [];
+
+                $loopdata['@type']      = 'CourseInstance';
+
+                if ( ! empty( $value['course_mode']['value'] ) ) {
+                    $loopdata['courseMode'] = $value['course_mode']['value'];
+                }
+                if ( ! empty( $value['location']['value'] ) ) {
+                    $loopdata['location'] = $value['location']['value'];
+                }
+                if ( ! empty( $value['course_workload']['value'] ) ) {
+                    $loopdata['courseWorkload'] = $value['course_workload']['value'];
+                }
+
+                //Schedule
+
+                if ( ! empty( $value['repeat_count']['value'] ) ) {
+                    $loopdata['courseSchedule']['@type'] = 'Schedule';
+                    $loopdata['courseSchedule']['repeatCount'] = $value['repeat_count']['value'];
+                }
+                if ( ! empty( $value['repeat_frequency']['value'] ) ) {
+                    $loopdata['courseSchedule']['@type'] = 'Schedule';
+                    $loopdata['courseSchedule']['repeatFrequency'] = $value['repeat_frequency']['value'];
+                }
+                if ( ! empty( $value['duration']['value'] ) ) {
+                    $loopdata['courseSchedule']['duration'] = $value['duration']['value'];
+                }
+                if ( ! empty( $value['start_date']['value'] ) ) {
+                    $loopdata['courseSchedule']['startDate'] = $value['start_date']['value'];
+                }
+                if ( ! empty( $value['end_date']['value'] ) ) {
+                    $loopdata['courseSchedule']['endDate'] = $value['end_date']['value'];
+                }
+
+                $course_instance[] = $loopdata;
+
+            }            
+        }
+
+        $json_ld['hasCourseInstance'] = $course_instance;
+    }
+
     $logo  = smpg_make_the_logo_json($properties['publisher_logo']['value']);
 
     if(!empty($logo)){
@@ -673,7 +751,7 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
     }
 
     $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
-
+    
     return $json_ld;
 }
 

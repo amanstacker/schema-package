@@ -563,7 +563,7 @@ const Settings = () => {
                         checked={!!settings.delete_data_on_uninstall ? true : false}
                         onChange={formChangeHandler}
                       />                                            
-                      <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                      <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>                      
                 </tbody>
@@ -667,15 +667,21 @@ const Settings = () => {
             <div className="smpg-settings">
               <table className="form-table">
                 <tbody>
+                  <tr>
+                  <th>{__('Reach Out via Email', 'schema-package')}</th>
+                  <td>
+                      <a href="mailto:support@schemapackage.com" style={{ fontWeight: 'bold' }}>support@schemapackage.com</a>
+                  </td> 
+                 </tr>                 
                  <tr>
-                  <th>{__('Email', 'schema-package')}</th>
+                  <th>{__('Your Email', 'schema-package')}</th>
                   <td>
                     <Input 
                       style={{width:"297px"}}
                       icon="user"
                       iconPosition="left"                    
                       type="email"
-                      placeholder={__('Your email id', 'schema-package') } 
+                      placeholder={__('Your email', 'schema-package') } 
                       id="user_email"
                       name="user_email" 
                       value={supportEmail}
@@ -685,12 +691,12 @@ const Settings = () => {
                   </td> 
                  </tr>
                  <tr>
-                  <th>{__('Query', 'schema-package')}</th>
+                  <th>{__('Your Query', 'schema-package')}</th>
                   <td>
                   <TextArea
                     value={supportMessage}
                     onChange={(event) => setSupportMessage(event.target.value)}
-                    placeholder={__('Enter your question here...', 'schema-package') }
+                    placeholder={__('Enter your query here...', 'schema-package') }
                     rows="6"
                     cols="38"
                     name="user_query"

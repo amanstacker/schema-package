@@ -2,6 +2,175 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// MasterStudy LMS WordPress Plugin – for Online Courses and Education
+
+add_filter( 'smpg_filter_faqpage_json_ld', 'smpg_masterstudy_singular_faqs_automation',10,3 );
+
+function smpg_masterstudy_singular_faqs_automation( $json_ld, $schema_data, $post_id ) {
+
+    global $smpg_plugin_list;
+
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
+
+        $automation = unserialize( $schema_data['_automation_with'][0] );
+
+        if ( in_array( "masterstudy", $automation ) && isset( $smpg_plugin_list['masterstudy']['is_active'] ) ) {
+
+            $json_ld = smpg_get_masterstudy_faqs_json_ld( $json_ld, $post_id );
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+add_filter( 'smpg_filter_course_json_ld', 'smpg_masterstudy_singular_course_automation',10,3 );
+
+function smpg_masterstudy_singular_course_automation( $json_ld, $schema_data, $post_id ) {
+
+    global $smpg_plugin_list;
+
+    if ( ! empty( $schema_data['_automation_with'][0] ) ) {
+
+        $automation = unserialize( $schema_data['_automation_with'][0] );
+
+        if ( in_array( "masterstudy", $automation ) && isset( $smpg_plugin_list['masterstudy']['is_active'] ) ) {
+
+            $json_ld = smpg_get_masterstudy_course_json_ld( $json_ld, $post_id );
+                                
+        }
+
+    }
+
+    return $json_ld;
+}
+
+function smpg_get_masterstudy_faqs_json_ld( $json_ld, $post_id ) {
+    
+    if ( class_exists( '\MasterStudy\Lms\Repositories\FaqRepository' ) ) {
+
+        $faq = ( new \MasterStudy\Lms\Repositories\FaqRepository() )->find_for_course( $post_id );
+
+        if ( ! empty( $faq ) ) {
+
+            $faq_data = [];
+
+            foreach ( $faq as $index => $item ) {
+
+                if ( empty( $item['answer'] ) || empty( $item['question'] ) ) {
+                    continue;
+                }
+
+                $faq_data[] = [
+                        '@type' => 'Question',
+                        'name'  => $item['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text'  => $item['answer']
+                            ]
+                ];
+
+            }
+
+            if ( $faq_data ) {
+                $json_ld['mainEntity'] = $faq_data;
+            }
+            return $json_ld;
+
+        } else {
+            return [];
+        }
+    
+    }
+    
+}
+
+function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
+
+    $reviews = [];            
+    
+    $sale_price    = get_post_meta( $post_id, 'sale_price', true );        
+    $regular_price = get_post_meta( $post_id, 'price', true );        
+
+    if ( $sale_price || $regular_price ) {                        
+
+        $json_ld['offers'] = [
+            '@type'         => 'Offer',
+            'price'         => $sale_price ? $sale_price : $regular_price,
+            'priceCurrency' => 'USD',
+            'category'      => 'Paid'
+        ];
+
+    }
+    
+    $duration_info = get_post_meta( $post_id, 'duration_info', true );        
+
+    if ( $duration_info ) {
+
+        $json_ld['hasCourseInstance'] = [
+                '@type'          => 'CourseInstance',
+                'courseMode'     => 'Online',
+                'courseWorkload' => smpg_convert_to_schema_duration( $duration_info )       
+        ];
+    }        
+            
+    $stm_reviews = get_posts( [
+                            'post_type' 	     => 'stm-reviews', 
+                            'posts_per_page'     => -1,   
+                            'post_status'        => 'publish',
+                            'meta_query'     => [
+                                [
+                                    'key'     => 'review_course',
+                                    'compare' => '=',
+                                    'value'   => intval( $post_id ),
+                                ],
+                            ],
+                    ] );
+        
+    if ( $stm_reviews ) {
+        
+        foreach ( $stm_reviews as $key => $value ) {
+            
+		    $mark       = get_post_meta( $value->ID, 'review_mark', true );
+		    $user       = get_post_meta( $value->ID, 'review_user', true );
+            $user_data  = get_user_by( 'id', $user );
+
+            if ( is_wp_error( $user_data ) ) {
+                continue;
+            }            
+
+            $reviews[] = [
+                '@type' => 'Review',
+                'reviewRating' => [
+                    '@type'         => 'Rating',
+                    'ratingValue'   => $mark,                    
+                ],
+                'author' => [
+                    '@type'         => 'Person',
+                    'name'          => $user_data->data->display_name,                    
+                ],
+                'reviewBody' => $value->post_content
+            ];
+        }
+    }                
+
+    if ( $reviews ) {
+
+        $reviews_avg = get_post_meta( $post_id, 'course_mark_average', true );        
+
+        $json_ld['review'] = $reviews;
+        $json_ld['aggregateRating'] = [
+            '@type' => 'AggregateRating',
+            'ratingValue' => $reviews_avg,
+            'reviewCount' => count( $reviews ),
+        ];
+
+    }
+
+    return $json_ld;
+}
+
 add_filter('smpg_filter_product_json_ld', 'smpg_review_automation',10,3);
 add_filter('smpg_filter_review_json_ld', 'smpg_review_automation',10,3);
 

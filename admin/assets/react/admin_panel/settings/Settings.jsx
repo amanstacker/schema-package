@@ -36,7 +36,8 @@ const Settings = () => {
 		    minified_json:            true,
         website_json_ld:          true,
         defragment_json_ld:       false,  
-        json_ld_in_footer:        false,          
+        json_ld_in_footer:        false,
+        json_ld_in_rest:          false,          
         clean_micro_data:         false,  
         clean_rdfa_data:          false,  
         multisize_image:          false,
@@ -427,6 +428,18 @@ const Settings = () => {
                       onChange={formChangeHandler}
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('It generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="json_ld_in_rest">{__('JSON-LD in Rest API', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='json_ld_in_rest'
+                      id='json_ld_in_rest' 
+                      checked={!!settings.json_ld_in_rest}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>                  
                 </tbody>

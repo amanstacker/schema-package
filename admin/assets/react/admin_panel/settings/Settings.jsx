@@ -37,23 +37,13 @@ const Settings = () => {
         website_json_ld:          true,
         defragment_json_ld:       false,  
         json_ld_in_footer:        false,
-        json_ld_in_rest:          false,          
+        json_ld_in_rest:          false,        
         clean_micro_data:         false,  
         clean_rdfa_data:          false,  
         multisize_image:          false,
         image_object:             false,
-        cmp_ampforwp:             false,              
-        cmp_ampforwp:             false,
-        cmp_amp_by_automatic:     false,
-        cmp_better_amp:           false,
-        cmp_wp_amp:               false,
-        cmp_amp_wp:               false,
-        cmp_smartcrawl_seo:       false,
-        cmp_seo_press:            false,
-        cmp_the_seo_framework:    false,
-        cmp_all_in_one_seo_pack:  false,
-        cmp_rank_math:            true,
-        cmp_simple_author_box:    false,        
+        wpgraphql_cmp:            false,          
+        simple_author_box_cmp:    false,        
         delete_data_on_uninstall: false,      
         default_logo_id:          null,
         default_image_id:         null,
@@ -437,7 +427,7 @@ const Settings = () => {
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
-                  </tr> 
+                  </tr>                  
                   <tr>
                     <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
                     <td>
@@ -478,7 +468,14 @@ const Settings = () => {
               }        
               </tbody>      
            </table>
-              : <div>{__('There is no any conflict with other plugins', 'schema-package') }</div>}
+              : 
+              <div className="ui positive message">
+                <div className="header">
+                  {__('No Conflicts Detected', 'schema-package')}
+                </div>
+                <p>{__('This plugin does not conflict with any other installed plugins.', 'schema-package')}</p>
+              </div>
+            }
             </div>  
           );
           case "settings_tools": return (
@@ -592,66 +589,22 @@ const Settings = () => {
             </div>
           );
           
-          case "settings_compatibilitys":  return (
+          case "settings_compatibility":  return (
             <div className="smpg-settings">
               <table className="form-table">
                 <tbody>                                    
                   <tr>
-                    <th><label htmlFor="cmp_smartcrawl_seo">{__('SmartCrawl Seo', 'schema-package')}</label></th>
+                    <th><label htmlFor="wpgraphql_cmp">{__('WPGraphQL', 'schema-package')}</label></th>
                     <td>
-                      <input type="checkbox" id="cmp_smartcrawl_seo" name="cmp_smartcrawl_seo" onChange={formChangeHandler} checked={settings.cmp_smartcrawl_seo} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    <Checkbox                     
+                      name='wpgraphql_cmp'
+                      id='wpgraphql_cmp' 
+                      checked={!!settings.wpgraphql_cmp}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_seo_press">{__('SEOPress', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_seo_press" name="cmp_seo_press" onChange={formChangeHandler} checked={settings.cmp_seo_press} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_the_seo_framework">{__('The SEO Framework', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_the_seo_framework" name="cmp_the_seo_framework" onChange={formChangeHandler} checked={settings.cmp_the_seo_framework} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_all_in_one_seo_pack">{__('All in One SEO Pack', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_all_in_one_seo_pack" name="cmp_all_in_one_seo_pack" onChange={formChangeHandler} checked={settings.cmp_all_in_one_seo_pack} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_squirrly">{__('Squirrly Seo', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_squirrly" name="cmp_squirrly" onChange={formChangeHandler} checked={settings.cmp_squirrly} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_rank_math">{__('Rank Malth', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_rank_math" name="cmp_rank_math" onChange={formChangeHandler} checked={settings.cmp_rank_math} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="multisize_image">{__('Total Recipe Generator', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="multisize_image" name="multisize_image" onChange={formChangeHandler} checked={settings.multisize_image} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>
-                  <tr>
-                    <th><label htmlFor="cmp_simple_author_box">{__('Simple Author Box', 'schema-package')}</label></th>
-                    <td>
-                      <input type="checkbox" id="cmp_simple_author_box" name="cmp_simple_author_box" onChange={formChangeHandler} checked={settings.cmp_simple_author_box} />
-                      <span className="smpg-tooltip"><Popup content={__('Add users to your feed', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                      </td>  
-                  </tr>                      
+                  </tr> 
                 </tbody>
               </table>
             </div>

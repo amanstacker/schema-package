@@ -1,10 +1,11 @@
 ﻿=== Schema Package - A Structured Data Module ===
 Contributors: amanstacker
 Tags: Structured Data, Schema, Rich Results, carousel schema, Product
+Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.15
+Stable tag: 1.0.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -269,11 +270,31 @@ The "Schema Markup Validator" by Google validates all schema.org types, not just
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
 
 
-== Support Center ==
+== Support & Documentation ==
 
-We currently don't have an official website for the Schema Package, but you can reach out to us through the Schema Package dashboard.
+For help, documentation, and tutorials, visit our official website:
+📚 [Knowledge Base](https://schemapackage.com/knowledge-base/)
+💬 [Help & Support](https://schemapackage.com/contactus/)
 
-**Go To - Schema Package -> Settings -> Help & Support.**
+Inside WordPress, you can also go to:  
+**Schema Package → Settings → Help & Support**
+
+== Premium Features ==
+
+Take your schema & structured data to the next level with **Schema Package Premium**:
+
+* WooCommerce Variable Product Automation
+* RealEstate Schema Types & Automation
+* Healthcare Schema Types & Automation
+* Carousel Schema Details Page List
+* Multilingual Schema Markup Support
+* Advanced ACF/SCF Mapping
+* Schema Markup Setup & Error Clean Up
+* 24/7 Priority Support
+* Premium Features On Demand
+* ...and more!
+
+Learn more: https://schemapackage.com/premium/
 
 
 == Installation ==
@@ -457,17 +478,36 @@ No, the core functionality does not require an API key. However, integrations wi
 
 = Is the Schema Package plugin free? =  
 
-Yes, the core plugin is free to use. A premium version with additional features may be introduced in the future.  
+Yes, the core Schema Package plugin is completely free to use. A premium version with advanced features and automation tools is also available for users who want to take their structured data to the next level.  
 
 = Where can I find the plugin documentation? =  
 
-Official website coming soon
+You can access the full documentation, tutorials, and guides on our official website:  
+📚 Knowledge Base: https://schemapackage.com/knowledge-base/
 
 = How do I report a bug or request a feature? =  
 
 You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
 
+= Where can I learn more about premium features? =
+
+Visit our premium page for a detailed list of features and benefits:  
+🔗 https://schemapackage.com/premium/
+
+
+
 == Changelog ==
+
+= 1.0.16 =
+
+* Intro : Introduced premium features and plugin
+* Added : An option to output schema markup in the WordPress REST API.
+* Added : Compatibility tab for flexibility
+* Added : Donation link
+* Added : WPGraphQL Support
+* Added : Official website, support link and knowledge base link
+* Fixed : Moved 'Multiple Size Images' option to new Advanced tab
+* Improvement : Improvement No Conflicts Detected messages.
 
 = 1.0.15 =
 

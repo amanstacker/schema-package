@@ -342,17 +342,14 @@ function smpg_default_settings_data() {
 		'minified_json'             => 1,
 		'website_json_ld' 			=> 1,
 		'defragment_json_ld' 		=> 0,
-		'json_ld_in_footer' 		=> 0,		
+		'json_ld_in_footer' 		=> 0,
+		'json_ld_in_rest' 		    => 0,						
 		'clean_micro_data' 			=> 0,
 		'clean_rdfa_data' 			=> 0,
 		'multisize_image' 			=> 0,
 		'image_object' 				=> 0,
-		'cmp_smartcrawl_seo' 		=> 0,
-		'cmp_seo_press' 			=> 0,
-		'cmp_the_seo_framework' 	=> 0,
-		'cmp_all_in_one_seo_pack'   => 0,
-		'cmp_rank_math' 			=> 1,
-		'cmp_simple_author_box'     => 0,		
+		'wpgraphql_cmp' 		    => 0,
+		'simple_author_box_cmp'     => 0,		
 		'delete_data_on_uninstall'  => 0,
 		'default_logo_id' 			=> null,
 		'default_image_id' 			=> null,
@@ -596,7 +593,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'rest_url'             => esc_url_raw( rest_url() ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
-				'is_free'              => false
+				'is_free'              => true
 			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );

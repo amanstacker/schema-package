@@ -28,7 +28,7 @@ const AdminNavLink = () => {
                 { smpg_local.is_free ?
                  <a target='_blank' href='https://schemapackage.com/premium/' className="ui button upgrade-premium-btn">{__('Upgrade to Premium', 'schema-package')}</a>
                 : ''}                
-                {/* <Button
+                <Button
                       as="a"
                       href="https://schemapackage.com/knowledge-base/"
                       target="_blank"
@@ -39,7 +39,7 @@ const AdminNavLink = () => {
                       style={{marginLeft:"15px"}}
                     >
                   <Icon name="help" />
-                </Button>                 */}
+                </Button>                
               </div>
             </div>
                                          

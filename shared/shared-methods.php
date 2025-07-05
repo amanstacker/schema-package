@@ -2,6 +2,27 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+function smpg_is_admin_rest_request() {
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+	$referer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+		    
+	if ( strpos( $request_uri, '/wp-json/smpg-route/' ) !== false ) {
+		return true;
+	}						
+	
+	if ( strpos( $request_uri, 'wp-admin/post.php' ) !== false || strpos( $request_uri, 'wp-admin/post-new.php' ) !== false ) {
+		return true;
+	}
+
+	if ( strpos( $referer, 'wp-admin/post.php' ) !== false || strpos( $referer, 'wp-admin/post-new.php' ) !== false ) {
+		return true;
+	}
+
+	return false;
+}
+
+
 function smpg_delete_data_on_uninstall( $blog_id = null ) {
         
     try{

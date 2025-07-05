@@ -264,11 +264,31 @@ The "Schema Markup Validator" by Google validates all schema.org types, not just
 Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Schema Package repository on [GitHub](https://github.com/amanstacker/schema-package). Please be aware that GitHub is not a support forum, but rather a streamlined platform for effectively addressing and solving problems.
 
 
-### Support Center
+### Support & Documentation
 
-We currently don't have an official website for the Schema Package, but you can reach out to us through the Schema Package dashboard.
+For help, documentation, and tutorials, visit our official website:
+📚 [Knowledge Base](https://schemapackage.com/knowledge-base/)
+💬 [Help & Support](https://schemapackage.com/contactus/)
 
-Go To - Schema Package -> Settings -> Help & Support.
+Inside WordPress, you can also go to:  
+**Schema Package → Settings → Help & Support**
+
+### Premium Features
+
+Take your schema & structured data to the next level with **Schema Package Premium**:
+
+* WooCommerce Variable Product Automation
+* RealEstate Schema Types & Automation
+* Healthcare Schema Types & Automation
+* Carousel Schema Details Page List
+* Multilingual Schema Markup Support
+* Advanced ACF/SCF Mapping
+* Schema Markup Setup & Error Clean Up
+* 24/7 Priority Support
+* Premium Features On Demand
+* ...and more!
+
+Learn more: https://schemapackage.com/premium/
 
 ### Installation
 

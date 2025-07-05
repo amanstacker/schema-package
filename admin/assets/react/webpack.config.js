@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {   
 
    mode: 'production',
-   devtool: false,
+   //devtool: false,
    //mode: 'development',
    //devtool: 'source-map',
 

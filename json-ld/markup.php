@@ -2,6 +2,106 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+//Expose Jsonld in WPGraphQL starts here
+
+add_action( 'graphql_register_types', 'smpg_register_jsonld_wpgraphql_field' );
+
+/**
+ * Register `jsonld` GraphQL field if the option is enabled.
+ */
+function smpg_register_jsonld_wpgraphql_field() {
+    
+    global $smpg_settings; 
+    
+    if ( ! empty( $smpg_settings['wpgraphql_cmp'] ) ) {
+        
+        $post_types = apply_filters( 'smpg_jsonld_wpgraphql_for_post_types', ['post'] );
+
+        if ( $post_types ) {
+
+            foreach ( $post_types as $graphql_type ) {
+
+                register_graphql_field( $graphql_type, 'schema_package_jsonld', array(
+                    'type'        => 'String',
+                    'description' => esc_html__( 'Schema Package JSON-LD', 'schema-package' ),
+                    'resolve'     => 'smpg_resolve_wpgraphql_jsonld',
+                ) );
+
+            }
+
+        }
+
+    }            
+    
+}
+
+/**
+ * Resolver for the GraphQL `jsonld` field.
+ *
+ * @param array $post WPGraphQL post object.
+ * @return string JSON-LD schema.
+ */
+function smpg_resolve_wpgraphql_jsonld( $post ) {
+
+    global $smpg_settings; 
+    $post_id   = isset( $post->ID ) ? (int) $post->ID : 0;
+    
+    if ( $post_id > 0 ){
+
+        $json_ld = smpg_get_json_ld( $post_id );
+
+        return smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings );        
+
+    }
+        
+}
+
+//Expose Jsonld in WPGraphQL ends here
+
+//Expose Jsonld in WordPress REST API starts here
+add_action( 'rest_api_init', 'smpg_register_jsonld_rest_field' );
+
+function smpg_register_jsonld_rest_field() {
+        	
+    global $smpg_settings; 
+    
+    if ( empty( $smpg_settings['json_ld_in_rest'] ) ) {
+        return;
+    }
+
+    if ( smpg_is_admin_rest_request() ) {
+		return;
+	}
+    
+    $post_types = apply_filters( 'smpg_jsonld_rest_for_post_types', [ 'post' ] );
+
+    if ( $post_types ) {
+
+        foreach ( $post_types as $value ) {
+     
+            register_rest_field(
+            $value,
+            'schema_package_jsonld',
+                array(
+                    'get_callback' => 'smpg_get_jsonld_for_rest',
+                    'schema'       => null,
+                )
+            );
+
+        }
+
+    }    	
+
+}
+
+function smpg_get_jsonld_for_rest( $post_arr ) {
+
+    if ( isset( $post_arr['id'] ) ) {
+        return smpg_get_json_ld( $post_arr['id'] );
+    }
+	
+}
+//Expose Jsonld in WordPress REST API ends here
 add_action( 'init', 'smpg_json_ld_init');
 
 function smpg_json_ld_init(){
@@ -37,13 +137,7 @@ function smpg_json_ld_output() {
 
         }else{
 
-            if ( ! empty( $smpg_settings['minified_json'] ) ) {
-                echo wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
-            }elseif( ! empty( $smpg_settings['escaped_unicode_json'] ) ){                
-                echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
-            }else{
-                echo wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-            }
+            echo smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings );
             
         }        
 		
@@ -55,7 +149,19 @@ function smpg_json_ld_output() {
 
 }
 
-function smpg_get_json_ld(){
+function smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings ) {
+
+    if ( ! empty( $smpg_settings['minified_json'] ) ) {
+        return wp_json_encode( $json_ld, JSON_UNESCAPED_UNICODE );
+    }elseif( ! empty( $smpg_settings['escaped_unicode_json'] ) ){                
+        return wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+    }else{
+        return wp_json_encode( $json_ld, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+    }
+
+}
+
+function smpg_get_json_ld( $post_id = null ) {
 
     global $post;
 
@@ -101,7 +207,7 @@ function smpg_get_json_ld(){
     
     //Singular schema markup addition
 
-    if ( is_singular() ) {
+    if ( is_singular() || (  defined( 'REST_REQUEST' ) && REST_REQUEST  ) ) {
 
         $post_id = $post->ID;
         $spg_id  = $post_id;

@@ -713,6 +713,7 @@ const Settings = () => {
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Healthcare Schema Types & Automation', 'schema-package')}</div></div>
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Carousel Schema Details Page List', 'schema-package')}</div></div>
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Multilinugal Schema Markup Support', 'schema-package')}</div></div>
+          <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Advanced ACF/SCF Mapping', 'schema-package')}</div></div>
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Schema Markup Setup & Error Clean Up', 'schema-package')}</div></div>
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('24/7 Priority Email Support', 'schema-package')}</div></div>
           <div role="listitem" className="item"><i aria-hidden="true" className="check square large icon"></i><div className='content'>{__('Premium Features on Demand', 'schema-package')}</div></div>                    

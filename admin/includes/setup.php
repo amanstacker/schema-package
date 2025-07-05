@@ -593,7 +593,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'rest_url'             => esc_url_raw( rest_url() ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
-				'is_free'              => false
+				'is_free'              => true
 			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );

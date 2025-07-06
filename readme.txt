@@ -44,7 +44,7 @@ Schema Markup refers to the standardized vocabulary (provided by Schema.org) use
 JSON-LD is a lightweight Linked Data format that uses JSON to encode structured data. It is one of the formats recommended by all popular Search Engines for adding schema markup ( structured data ) to web pages. JSON-LD embeds data in the <script> tags of an HTML document without affecting the visual appearance of the page.
 
 
-### Schema Package Key Features
+== Schema Package Key Features ==
 
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
@@ -68,6 +68,23 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
 * <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
+
+== Schema Package Premium Features ==
+
+Take your schema & structured data to the next level with **Schema Package Premium**:
+
+* WooCommerce Variable Product Automation
+* RealEstate Schema Types & Automation
+* Healthcare Schema Types & Automation
+* Carousel Schema Details Page List
+* Multilingual Schema Markup Support
+* Advanced ACF/SCF Mapping
+* Schema Markup Setup & Error Clean Up
+* 24/7 Priority Support
+* Premium Features On Demand
+* ...and more!
+
+[Learn more](https://schemapackage.com/premium/)
 
 
 == Schema Package Supported Schema Types ==
@@ -278,23 +295,6 @@ For help, documentation, and tutorials, visit our official website:
 
 Inside WordPress, you can also go to:  
 **Schema Package → Settings → Help & Support**
-
-== Premium Features ==
-
-Take your schema & structured data to the next level with **Schema Package Premium**:
-
-* WooCommerce Variable Product Automation
-* RealEstate Schema Types & Automation
-* Healthcare Schema Types & Automation
-* Carousel Schema Details Page List
-* Multilingual Schema Markup Support
-* Advanced ACF/SCF Mapping
-* Schema Markup Setup & Error Clean Up
-* 24/7 Priority Support
-* Premium Features On Demand
-* ...and more!
-
-Learn more: https://schemapackage.com/premium/
 
 
 == Installation ==

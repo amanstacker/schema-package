@@ -65,6 +65,24 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
 
+### Schema Package Premium Features
+
+Take your schema & structured data to the next level with **Schema Package Premium**:
+
+* WooCommerce Variable Product Automation
+* RealEstate Schema Types & Automation
+* Healthcare Schema Types & Automation
+* Carousel Schema Details Page List
+* Multilingual Schema Markup Support
+* Advanced ACF/SCF Mapping
+* Schema Markup Setup & Error Clean Up
+* 24/7 Priority Support
+* Premium Features On Demand
+* ...and more!
+
+[Learn more](https://schemapackage.com/premium/)
+
+
 ### Schema Package Supported Schema Types
 
 The Schema Package plugin supports a wide range of Schema.org types, covering various industries and use cases. Below is the complete list:
@@ -273,22 +291,6 @@ For help, documentation, and tutorials, visit our official website:
 Inside WordPress, you can also go to:  
 **Schema Package → Settings → Help & Support**
 
-### Premium Features
-
-Take your schema & structured data to the next level with **Schema Package Premium**:
-
-* WooCommerce Variable Product Automation
-* RealEstate Schema Types & Automation
-* Healthcare Schema Types & Automation
-* Carousel Schema Details Page List
-* Multilingual Schema Markup Support
-* Advanced ACF/SCF Mapping
-* Schema Markup Setup & Error Clean Up
-* 24/7 Priority Support
-* Premium Features On Demand
-* ...and more!
-
-Learn more: https://schemapackage.com/premium/
 
 ### Installation
 

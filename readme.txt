@@ -15,7 +15,7 @@ Helps website owners automate and add versatile schema markup to their websites,
 
 The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Instead of manually entering the same information twice — once in the actual content and again in the **Schema Package Generator** metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
 
-[Home](https://schemapackage.com/) | [Knowledge Base](https://schemapackage.com/knowledge-base/) | [Help & Support](https://schemapackage.com/contactus/) | [Premium](https://schemapackage.com/premium/) 
+[Home](https://schemapackage.com/) | [Knowledge Base](https://schemapackage.com/knowledge-base/) | [Help & Support](https://schemapackage.com/contactus/) | [Premium](https://schemapackage.com/premium/)
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 

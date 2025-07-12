@@ -417,86 +417,94 @@ Schema Package uses the following third-party libraries:
 
 == Frequently Asked Questions ==
 
-= Does this plugin support multiple schema types? =  
+= Does the Schema Package plugin support multiple schema types? =  
 
-Yes, the Schema Package plugin supports various schema types, including Article, Product, Event, FAQ, How-To, Recipe, Local Business, and more. You can select and customize schema types to match your content.  
+Absolutely! Schema Package supports a wide range of schema types including Article, Product, Event, FAQ, How-To, Recipe, Local Business, and more. You can choose and customize the schema type that best fits your content.
 
-= Can I customize schema markup for individual posts or pages? =  
+= Can I customize schema markup for individual posts or pages using Schema Package? =  
 
-Yes, the plugin allows you to modify schema markup for specific posts, pages, or custom post types. You can manually enter structured data or map fields dynamically using Schema Packge Generator.  
+Yes! The Schema Package plugin lets you customize schema markup for individual posts, pages, or custom post types. You can manually enter structured data or dynamically map fields using the Schema Package Generator.
 
-= Is this plugin compatible with page builders like Elementor, WPBakery, or Gutenberg? =  
+= Is Schema Package compatible with page builders like Elementor, WPBakery, or Gutenberg? =  
 
-Yes, the Schema Package plugin works seamlessly with popular page builders, including Elementor, WPBakery, and Gutenberg. It detects content dynamically and applies schema markup accordingly.  
+Yes, Schema Package works flawlessly with Elementor, WPBakery, Gutenberg, and other popular page builders. It automatically detects your content and applies the correct schema markup.
 
-= Does Schema Package automatically update schema markup when I update my content? =  
+= Will Schema Package update the schema when I update my content? =  
 
-Yes, the plugin automatically refreshes schema markup when you update a post or page. You don't need to manually reapply the schema, making the process seamless and efficient.  
+Yes, Schema Package automatically refreshes the schema markup every time you update your content. There’s no need to reapply it manually—it’s a seamless experience.
 
-= Can I exclude specific pages from having schema markup? =  
+= Can I exclude schema markup from certain pages using Schema Package? =  
 
-Yes, you can disable schema markup on specific posts, pages, or post types through the Target On or Target Off Option. This is useful if you want to prevent duplicate schema or exclude certain pages.  
+Definitely. You can disable schema markup for specific posts, pages, or post types using the Target On / Target Off option in Schema Package. Perfect for avoiding duplicate schemas or excluding unwanted pages.
 
-= Does this plugin work with WooCommerce? =  
+= Is Schema Package compatible with WooCommerce? =  
 
-Yes, the Schema Package plugin integrates with WooCommerce to add structured data for products, reviews, offers, and other relevant elements.  
+Yes, Schema Package integrates deeply with WooCommerce, allowing you to add structured data for products, reviews, offers, and more—enhancing your product pages for rich search results.
 
-= Will this plugin slow down my website? =  
+= Will the Schema Package plugin slow down my website? =  
 
-No, the Schema Package plugin is optimized for performance. It generates lightweight JSON-LD markup that loads asynchronously, ensuring minimal impact on your website's speed.  
+Not at all! Schema Package is performance-optimized. It outputs lightweight JSON-LD markup that loads asynchronously, so your site speed stays fast and smooth.
 
-= How often is the plugin updated? =  
+= How frequently is Schema Package updated? =  
 
-The plugin is actively maintained and updated to stay compatible with the latest WordPress versions and schema guidelines. Updates are released regularly to improve features and fix bugs.  
+Schema Package is actively maintained. We regularly release updates to ensure compatibility with the latest WordPress and schema.org standards, as well as to introduce new features and improvements.
 
-= Can I add multiple schema types to a single page? =  
+= Can I use more than one schema type on a page with Schema Package? =  
 
-Yes, the plugin allows multiple schema types on a single page. For example, you can add both "FAQ" and "Product" schema to a product page with FAQs.  
+Yes! Schema Package lets you add multiple schema types to a single page. For example, you can combine Product and FAQ schema on the same product page to boost your SEO even more.
 
 = Does Schema Package support multilingual websites? =  
 
 Yes, the plugin is compatible with multilingual plugins such as WPML and Polylang, allowing you to add schema markup in different languages.  
 
-= How do I troubleshoot schema markup errors? =  
+= How can I fix schema markup errors in Schema Package? =
 
-If you encounter schema validation errors, use Google’s Rich Results Test or Schema.org Validator to diagnose issues. You can also check the plugin settings and ensure your content fields are correctly mapped.  
+If you notice schema validation errors, don’t worry! Simply enter your page URL into tools like [Google’s Rich Results](https://search.google.com/test/rich-results) Test or the [Schema.org Validator](https://validator.schema.org/) to identify the issue. Then, go back to your Schema Package settings and make sure all required fields are correctly mapped and filled. This usually resolves most common errors.
 
-= Is the plugin compatible with SEO plugins like Yoast SEO and Rank Math? =  
+= Does Schema Package work with SEO plugins like Yoast SEO or Rank Math? =
 
-Yes, the Schema Package plugin works alongside Yoast SEO, Rank Math, and other SEO plugins. It enhances structured data capabilities without conflicting with existing SEO settings.  
+Yes! Schema Package is fully compatible with popular SEO plugins like Yoast SEO, Rank Math, All in One SEO, and more. It seamlessly enhances your structured data without interfering with your existing SEO settings.
 
-= Can I request a new schema type to be added? =  
+= Can I request a new schema type in Schema Package? =
 
-Yes, if you need support for a specific schema type that isn't currently included, you can submit a feature request via the plugin's support forum or settings page.  
+Yes! If there's a specific Schema.org type you need that isn't currently available in the Schema Package plugin, you can easily submit a feature request through the plugin’s support forum or directly from the plugin settings page. We’re always open to adding new types based on user feedback.
 
-= Does this plugin work with custom post types? =  
+= Does Schema Package work with custom post types? =  
 
-Yes, the Schema Package plugin supports custom post types and allows you to apply schema markup to them.  
+Yes, the Schema Package plugin fully supports custom post types. You can easily apply schema markup to any custom post type on your website, just like you do with regular posts and pages.
 
-= Is there an option to add custom fields to schema? =  
+= Can I add custom fields to Schema Markup using Schema Package? =
 
-Yes, the plugin integrates with Advanced Custom Fields (ACF) and Secure Custom Fields, allowing you to map custom fields to schema properties.  
+Yes, the Schema Package plugin allows you to add custom fields to your schema. It seamlessly integrates with popular custom field plugins like Advanced Custom Fields (ACF) and Secure Custom Fields (TP Custom Fields), enabling you to map custom fields to Schema.org properties for precise and dynamic structured data generation.
 
-= Does this plugin require an API key to work? =  
+= Does Schema Package plugin require an API key to work? =
 
-No, the core functionality does not require an API key. However, integrations with external services (such as YouTube for video schema) may require API keys.  
+No, the Schema Package plugin works out of the box without requiring an API key for its core features. However, if you enable certain integrations with third-party services like YouTube (for Video Schema Markup) or other external APIs, you may need to provide API keys for those specific features to function properly.
 
 = Is the Schema Package plugin free? =  
 
 Yes, the core Schema Package plugin is completely free to use. A premium version with advanced features and automation tools is also available for users who want to take their structured data to the next level.  
 
-= Where can I find the plugin documentation? =  
+= Where can I find the Schema Package plugin documentation? =
 
-You can access the full documentation, tutorials, and guides on our official website:  
-📚 Knowledge Base: https://schemapackage.com/knowledge-base/
+You can access complete documentation, setup guides, and tutorials for the Schema Package plugin on our official website:
+📚 Knowledge Base – https://schemapackage.com/knowledge-base/
 
-= How do I report a bug or request a feature? =  
+The Knowledge Base covers everything you need to know about installing, configuring, and using Schema Package.
 
-You can report bugs or request features through the WordPress.org support forum for this plugin or create new ticket on github [URL](https://github.com/amanstacker/schema-package).
+= How do I report a bug or request a new feature in Schema Package? =
 
-= Where can I learn more about premium features? =
+To report a bug or suggest a new feature for the Schema Package plugin, you can use one of the following options:
 
-Visit our premium page for a detailed list of features and benefits:  
+- Contact us directly through our [Support Contact Page](https://schemapackage.com/contactus/)
+- Post your issue in the [WordPress.org support forum](https://wordpress.org/support/plugin/schema-package/)
+- Open a new ticket on our [GitHub repository](https://github.com/amanstacker/schema-package)
+
+We actively monitor both channels to improve the plugin based on user feedback.
+
+= Where can I learn more about the Schema Package premium features? =
+
+To explore all the advanced features and benefits included in the Schema Package Premium version, visit:  
 🔗 https://schemapackage.com/premium/
 
 

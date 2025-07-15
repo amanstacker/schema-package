@@ -1,4 +1,4 @@
-# Schema Package - A Structured Data Module
+# Schema Package - Structured Data & Rich Snippets Tool for SEO
 
 **Download from WordPress.org**: 👉 [https://wordpress.org/plugins/schema-package/](https://wordpress.org/plugins/schema-package/)
 

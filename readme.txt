@@ -1,6 +1,6 @@
-﻿=== Schema Package - A Structured Data Module ===
+﻿=== Schema Package - Structured Data & Rich Snippets Tool for SEO ===
 Contributors: amanstacker
-Tags: Structured Data, Schema, Rich Results, carousel schema, Product
+Tags: Structured Data, Schema, Rich Results, carousel schema, json-ld
 Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0

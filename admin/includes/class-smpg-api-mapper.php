@@ -914,6 +914,12 @@ class SMPG_Api_Mapper {
           $automate_supports = [ 'masterstudy' ];          
 
         break;
+
+        case 'event':
+
+          $automate_supports = [ 'wpeventmanager', 'wooeventmanager', 'theeventscalendar' ];          
+
+        break;
         
         default:
         

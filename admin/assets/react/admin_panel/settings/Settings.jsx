@@ -346,7 +346,7 @@ const Settings = () => {
         switch (page.path) {
           case "settings":   return (
             <div className="smpg-settings">              
-            <div style={{ fontSize: '15px', marginBottom: '8px' }}>              
+            <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/schema-package-general-settings/"
                 target="_blank"
@@ -424,8 +424,7 @@ const Settings = () => {
           );
           case "settings_advanced":   return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/schema-package-advanced-settings/"
                 target="_blank"
@@ -467,8 +466,7 @@ const Settings = () => {
           );
           case "settings_manageconflict":   return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/how-to-manage-conflicts-with-other-schema-and-structured-data-plugins/"
                 target="_blank"
@@ -512,8 +510,7 @@ const Settings = () => {
           );
           case "settings_tools": return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/schema-package-import-export-settings/"
                 target="_blank"
@@ -634,8 +631,7 @@ const Settings = () => {
           
           case "settings_compatibility":  return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/schema-package-compatibility-settings/"
                 target="_blank"
@@ -665,8 +661,7 @@ const Settings = () => {
           );
           case "settings_defaultdata":  return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/how-to-set-up-default-data-in-schema-package/"
                 target="_blank"
@@ -699,8 +694,7 @@ const Settings = () => {
           );
           case "settings_license":  return (
             <div className="smpg-settings">
-              <div style={{ fontSize: '15px', marginBottom: '8px' }}>
-              
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
                 href="https://schemapackage.com/knowledge-base/schema-package-general-settings/"
                 target="_blank"

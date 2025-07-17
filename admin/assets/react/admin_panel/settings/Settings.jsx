@@ -696,7 +696,7 @@ const Settings = () => {
             <div className="smpg-settings">
               <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
               <a
-                href="https://schemapackage.com/knowledge-base/schema-package-general-settings/"
+                href="https://schemapackage.com/knowledge-base/category/payment-billing/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

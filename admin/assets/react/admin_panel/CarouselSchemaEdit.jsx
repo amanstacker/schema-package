@@ -241,7 +241,7 @@ const CarouselSchemaEdit = () => {
         
       <Accordion title="Carousel Type" isExpand={true}>
         <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/carousel-schema/'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
         <Dropdown
@@ -258,7 +258,7 @@ const CarouselSchemaEdit = () => {
     {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
       <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
                 <Divider horizontal>{__("Target On", "schema-package")}</Divider>
@@ -313,7 +313,7 @@ const CarouselSchemaEdit = () => {
         
         <Accordion title="Automation" isExpand={true}>  
         <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/automation/'>{__('Learn More', 'schema-package')}</a>
         </div>    
           <div className="smpg-accordion-body">
          {automationList.length > 0 ?  

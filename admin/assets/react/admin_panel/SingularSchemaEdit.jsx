@@ -347,7 +347,7 @@ const SingularSchemaEdit = () => {
         
       <Accordion title="Schema Type" isExpand={true}>
         <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/schema-types/'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
       <Dropdown
@@ -374,7 +374,7 @@ const SingularSchemaEdit = () => {
 
     <Accordion title="Targeting" isExpand={true}>
       <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
         </div>
       <div className="smpg-accordion-body">
     <div>
@@ -567,7 +567,7 @@ const SingularSchemaEdit = () => {
       { postMeta._schema_type != 'customschema' ?
         <Accordion title="Schema Properties" isExpand={true}>  
         <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
           <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
@@ -578,7 +578,7 @@ const SingularSchemaEdit = () => {
        {postMeta._schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
           <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
         </div>
           <div className="smpg-accordion-body">
           <Grid>
@@ -614,7 +614,7 @@ const SingularSchemaEdit = () => {
          {postMeta._schema_type ? 
         <Accordion title="Automation" isExpand={true}>      
         <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/automation/'>{__('Learn More', 'schema-package')}</a>
         </div>
           <div className="smpg-accordion-body">
          {automationList.length > 0 ?  

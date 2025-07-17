@@ -92,3 +92,10 @@
     float: right;
     margin-right: 60px;
 }
+.smpg-learn-more-acc{
+    padding-top: 5px;
+    padding-right: 10px;
+    display: block;
+    text-align: right;
+    font-weight: 600;
+}

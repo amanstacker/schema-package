@@ -352,7 +352,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -431,7 +431,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -474,7 +474,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -519,7 +519,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -641,7 +641,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -672,7 +672,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />
@@ -706,7 +706,7 @@ const Settings = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {__('Read full guide', 'schema-package')}    
+                {__('Read Full Guide', 'schema-package')}    
               </a>
             </div>
             <Divider style={{ margin: '5px 0' }} />                    

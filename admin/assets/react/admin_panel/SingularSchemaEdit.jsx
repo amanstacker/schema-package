@@ -346,6 +346,10 @@ const SingularSchemaEdit = () => {
       <div className="smpg-edit-page-content">
         
       <Accordion title="Schema Type" isExpand={true}>
+        <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+        <div className="smpg-accordion-body">
       <Dropdown
               placeholder={__('Select Schema', 'schema-package') }
               fluid
@@ -365,10 +369,14 @@ const SingularSchemaEdit = () => {
     { postMeta._schema_type == 'customschema' ? 
       <CustomSchema setCustomSchema={handleCustomSchema} customSchemaValue={postMeta._custom_schema} /> :
     '' }
-    
+    </div>
       </Accordion>               
 
     <Accordion title="Targeting" isExpand={true}>
+      <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+      <div className="smpg-accordion-body">
     <div>
                 <Divider horizontal >{__("Target On", "schema-package")}</Divider>
                 <table className="smpg-placement-table">
@@ -460,7 +468,7 @@ const SingularSchemaEdit = () => {
                   </tbody>
                 </table>
               </div>                  
-              <div className="">
+              <div>
               <Divider horizontal style={{marginTop:"40px"}}>{__("Target Off", "schema-package")}</Divider>
                 <table className="smpg-placement-table">
                   <tbody>
@@ -550,19 +558,29 @@ const SingularSchemaEdit = () => {
                   </tbody>
                 </table>
               </div>  
+      </div>
     </Accordion>               
       </div>
       </div>
       
       <div className="smpg-right-section">  
       { postMeta._schema_type != 'customschema' ?
-        <Accordion title="Schema Properties" isExpand={true}>        
+        <Accordion title="Schema Properties" isExpand={true}>  
+        <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+        <div className="smpg-accordion-body">
           <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
+        </div>      
         </Accordion>
       : '' }        
       
        {postMeta._schema_type == 'article' ?
         <Accordion title="Additional Schema" isExpand={true}>
+          <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+          <div className="smpg-accordion-body">
           <Grid>
             <Grid.Row>
               <Grid.Column>
@@ -589,12 +607,16 @@ const SingularSchemaEdit = () => {
               </Grid.Column>
               </Grid.Row>
           </Grid>
+        </div>
         </Accordion> 
        : '' }  
 
          {postMeta._schema_type ? 
         <Accordion title="Automation" isExpand={true}>      
-
+        <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+          <div className="smpg-accordion-body">
          {automationList.length > 0 ?  
          
          <Grid>
@@ -622,7 +644,8 @@ const SingularSchemaEdit = () => {
             <Divider />
             <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
             <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a>
-          </div>}                 
+          </div>}     
+          </div>            
         </Accordion>          
          : ''}                           
         <div className="smpg-save-schema-btn">

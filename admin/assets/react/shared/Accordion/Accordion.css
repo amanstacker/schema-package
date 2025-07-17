@@ -9,8 +9,9 @@
     padding: 12px;
     cursor: pointer;
 }
-.smpg-accordion-panel{
-    padding: 30px;
+.smpg-accordion-body{
+    margin: 30px;
+    margin-top: 15px;
 }
 .smpg-segment .smpg-icon{
     right: 5px;

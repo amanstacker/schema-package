@@ -45,7 +45,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 ### Schema Package Key Features
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
-* <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
+* <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.

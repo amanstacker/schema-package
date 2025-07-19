@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Schema Package - A Structured Data Module
+Plugin Name: Schema Package - Structured Data & Rich Snippets Tool for SEO
 Description: Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
 Version: 1.0.16
 Text Domain: schema-package
@@ -23,6 +23,8 @@ define('SMPG_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('SMPG_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 //Admin
+
+require_once SMPG_PLUGIN_DIR_PATH .'admin/feedback/feedback.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-controller.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-individual-controller.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-action.php';

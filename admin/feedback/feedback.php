@@ -1,0 +1,177 @@
+<?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) )
+    exit;
+
+function smpg_is_plugins_page() {
+
+    if ( function_exists( 'get_current_screen' ) ) {
+
+        $screen = get_current_screen();
+
+            if ( is_object( $screen ) ) {
+
+                if ( $screen->id == 'plugins' || $screen->id == 'plugins-network' ) {
+                    return true;
+                }
+
+            }
+    }
+    return false;
+}
+
+add_filter( 'admin_footer', 'smpg_deactivation_feedback_modal' );
+
+function smpg_deactivation_feedback_modal() {
+
+    if ( is_admin() && smpg_is_plugins_page() ) {
+
+        $email = '';
+
+        if ( function_exists( 'wp_get_current_user' ) ) {
+
+            $current_user = wp_get_current_user();
+
+            if ( $current_user instanceof WP_User ) {
+                $email = trim( $current_user->user_email );	
+            }
+
+        }
+        
+        ?>
+
+<div id="smpg-reloaded-feedback-overlay" style="display: none;">
+	
+    <div id="smpg-reloaded-feedback-content">
+		<div class="smpg-dp-header">
+            <h3><?php esc_html_e('Deactivating Schema Package', 'schema-package') ?></h3>
+            <button class="close dashicons dashicons-no smpg-feedback-not-deactivate">
+                <span class="screen-reader-text"></span>
+            </button>
+        </div>
+	<form action="" method="post">
+		<div class="smpg-dp-body">
+	    <p><strong><?php esc_html_e('Help us improve — why are you deactivating the plugin?', 'schema-package'); ?></strong></p>
+	 <ul class="smpg-dp-reasons">
+    <li>
+        <input type="radio" id="reason1" name="smpg_disable_reason" required value="temporary" />
+        <label for="reason1"><?php esc_html_e('The deactivation is temporary.', 'schema-package') ?></label>
+    </li>
+    <li>
+        <input type="radio" id="reason2" name="smpg_disable_reason" required value="stopped showing toc" />
+        <label for="reason2"><?php esc_html_e('No longer using schema markup', 'schema-package') ?></label>
+    </li>
+    <li>
+        <input type="radio" id="reason3" name="smpg_disable_reason" required value="missing feature" />
+        <label for="reason3"><?php esc_html_e('Needed feature not available', 'schema-package') ?></label>
+    </li>
+    <li>
+        <input type="radio" id="reason4" name="smpg_disable_reason" required value="technical issue" />
+        <label for="reason4"><?php esc_html_e('Facing Technical Difficulties', 'schema-package') ?></label>
+    </li>
+    <li>
+        <input type="radio" id="reason5" name="smpg_disable_reason" required value="other plugin" />
+        <label for="reason5"><?php esc_html_e('Switched to a different plugin', 'schema-package') ?></label>
+    </li>
+    <li>
+        <input type="radio" id="reason6" name="smpg_disable_reason" required value="other" />
+        <label for="reason6"><?php esc_html_e('Other reason', 'schema-package') ?></label>
+    </li>
+</ul>
+	    <div class="smpg-reason-details smpg-display-none">
+				<textarea rows="3" name="smpg_disable_text[]" placeholder=""></textarea>
+		</div>
+		</div>
+		<hr/>
+		<div class="smpg-dp-footer">
+			<?php if( null !== $email && !empty( $email ) ) : ?>
+    	    	<input type="hidden" name="smpg_disable_from" value="<?php echo esc_attr($email); ?>" />
+	    	<?php endif; ?>
+
+			<input id="smpg-feedback-submit" class="button button-primary" type="submit" name="smpg_disable_submit" value="<?php esc_html_e('Submit & Deactivate', 'schema-package'); ?>"/>
+	    	<a class="button smpg-only-deactivate"><?php esc_html_e('Only Deactivate', 'schema-package'); ?></a>
+	    	<a class="button smpg-dt-de smpg-feedback-not-deactivate" href="#"><?php esc_html_e('Don\'t Deactivate', 'schema-package'); ?></a>
+		</div>	    
+	</form>
+    </div>
+</div>
+<?php
+        
+
+    }
+    
+}
+
+
+function smpg_send_feedback() {
+
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die();
+    }
+
+        //phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason : Since form is serialised nonce is verified after parsing the recieved data.
+    if ( isset( $_POST['data'] ) ) {
+        //phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason : Since form is serialised nonce is verified after parsing the recieved data.
+        parse_str( $_POST['data'], $form );
+    }
+    
+    if ( ! isset( $form['smpg_security_nonce'] ) || isset( $form['smpg_security_nonce'] ) && !wp_verify_nonce( sanitize_text_field( $form['smpg_security_nonce'] ), 'smpg_ajax_check_nonce' ) ) {
+
+        echo esc_html__('Nonce Not Verified', 'schema-package');
+        
+        wp_die();
+    }    
+    
+    $text = '';
+    if( isset( $form['smpg_disable_text'] ) && !is_array( $form['smpg_disable_text'] ) ) {
+        $text = implode( "\n\r", $form['smpg_disable_text'] );
+    }
+
+    $headers = array();
+
+    $from = isset( $form['smpg_disable_from'] ) ? $form['smpg_disable_from'] : '';
+    if( $from ) {
+        $headers[] = "From: $from";
+        $headers[] = "Reply-To: $from";
+    }
+
+    $subject = isset( $form['smpg_disable_reason'] ) ? $form['smpg_disable_reason'] : '(no reason given)';
+
+    if($subject == 'technical issue'){
+
+          $subject  = 'Schema Package '.$subject;
+          $text = trim($text);
+
+          if(!empty($text)){
+
+            $text = 'technical issue description: '.$text;
+
+          }else{
+
+            $text = 'no description: '.$text;
+          }
+      
+    }
+
+    wp_mail( 'support@schemapackage.com', $subject, $text, $headers );
+    
+    echo 'sent';
+    wp_die();
+
+}
+
+add_action( 'wp_ajax_smpg_send_feedback', 'smpg_send_feedback' );
+
+function smpg_enqueue_feedback_scripts() {
+
+    if ( is_admin() && smpg_is_plugins_page() ) {
+
+        $min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+        wp_enqueue_script( 'smpg-feedback-js', SMPG_PLUGIN_URL . "admin/feedback/feedback{$min}.js", array( 'jquery' ),  SMPG_VERSION, true );
+        wp_enqueue_style( 'smpg-feedback-css', SMPG_PLUGIN_URL . "admin/feedback/feedback{$min}.css", false,  SMPG_VERSION );
+    }
+    
+}
+
+add_action( 'admin_enqueue_scripts', 'smpg_enqueue_feedback_scripts' );

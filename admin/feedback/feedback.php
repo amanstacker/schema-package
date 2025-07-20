@@ -183,7 +183,7 @@ function smpg_send_feedback() {
     
     wp_mail( 'support@schemapackage.com', $subject, $text, $headers );
     
-    echo esc_html__( 'Sent', 'schema-package' );
+    echo 'sent';
     wp_die();
 
 }

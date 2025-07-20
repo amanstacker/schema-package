@@ -12,10 +12,10 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
 
         // only show feedback form once per 30 days
-        var c_value = smpg_admin_get_cookie("smpg_hide_deactivate_feedback");
+        var c_value = smpg_admin_get_cookie("smpg_keep_hidden_feedback_popup");
 
         if (c_value === undefined) {
-            $('#smpg-reloaded-feedback-overlay').show();
+            $('#smpg-feedback-overlay').show();
         } else {
             // click on the link
             window.location.href = smpg_deactivate_link_url;
@@ -35,21 +35,21 @@ jQuery(document).ready(function ($) {
 
 
     // send form or close it
-    $('#smpg-reloaded-feedback-content form').submit(function (e) {
+    $('#smpg-feedback-content form').submit(function (e) {
         e.preventDefault();
 
         smpg_set_feedback_cookie();
 
         // Send form data
-        $.post(ajaxurl, {
+        $.post(smpg_feedback_local.ajax_url, {
             action: 'smpg_send_feedback',
-            data: $('#smpg-reloaded-feedback-content form').serialize() + "&smpg_security_nonce=" + cn_toc_admin_data.smpg_security_nonce
+            data: $('#smpg-feedback-content form').serialize() + "&smpg_security_nonce=" + smpg_feedback_local.smpg_security_nonce
         },
                 function (data) {
 
                     if (data == 'sent') {
                         // deactivate the plugin and close the popup
-                        $('#smpg-reloaded-feedback-overlay').remove();
+                        $('#smpg-feedback-overlay').remove();
                         window.location.href = smpg_deactivate_link_url;
                     } else {
                         console.log('Error: ' + data);
@@ -59,19 +59,19 @@ jQuery(document).ready(function ($) {
         );
     });
 
-    $("#smpg-reloaded-feedback-content .smpg-only-deactivate").click(function (e) {
+    $("#smpg-feedback-content .smpg-only-deactivate").click(function (e) {
         e.preventDefault();
 
         smpg_set_feedback_cookie();        
-        $('#smpg-reloaded-feedback-overlay').remove();
+        $('#smpg-feedback-overlay').remove();
         window.location.href = smpg_deactivate_link_url;
     });
 
     // close form without doing anything
-    $('.smpg-feedback-not-deactivate').click(function (e) {
-        $('#smpg-reloaded-feedback-content form')[0].reset();                
+    $('.smpg-fd-stop-deactivation').click(function (e) {
+        $('#smpg-feedback-content form')[0].reset();                
         $('.smpg-reason-details textarea').addClass('smpg-d-none');
-        $('#smpg-reloaded-feedback-overlay').hide();
+        $('#smpg-feedback-overlay').hide();
         $(".smpg-reason-details").addClass('smpg-display-none')        
     });
 
@@ -93,6 +93,6 @@ jQuery(document).ready(function ($) {
         // set cookie for 30 days
         var exdate = new Date();
         exdate.setSeconds(exdate.getSeconds() + 2592000);
-        document.cookie = "smpg_hide_deactivate_feedback=1; expires=" + exdate.toUTCString() + "; path=/";
+        document.cookie = "smpg_keep_hidden_feedback_popup=1; expires=" + exdate.toUTCString() + "; path=/";
     }
 });

@@ -55,27 +55,27 @@ function smpg_deactivation_feedback_modal() {
 	    <p><strong><?php esc_html_e('Help us improve — why are you deactivating the plugin?', 'schema-package'); ?></strong></p>
         <ul class="smpg-dp-reasons">
             <li>
-                <input type="radio" id="smpg-reason1" name="smpg_disable_reason" required value="temporary" />
+                <input type="radio" id="smpg-reason1" name="smpg_disable_reason" value="temporary" />
                 <label for="smpg-reason1"><?php esc_html_e('The deactivation is temporary', 'schema-package') ?></label>
             </li>
             <li>
-                <input type="radio" id="smpg-reason2" name="smpg_disable_reason" required value="stopped_using" />
+                <input type="radio" id="smpg-reason2" name="smpg_disable_reason" value="stopped_using" />
                 <label for="smpg-reason2"><?php esc_html_e('No longer using schema markup', 'schema-package') ?></label>
             </li>
             <li>
-                <input type="radio" id="smpg-reason3" name="smpg_disable_reason" required value="missing_feature" />
+                <input type="radio" id="smpg-reason3" name="smpg_disable_reason" value="missing_feature" />
                 <label for="smpg-reason3"><?php esc_html_e('Needed feature not available', 'schema-package') ?></label>
             </li>
             <li>
-                <input type="radio" id="smpg-reason4" name="smpg_disable_reason" required value="technical_difficulties" />
+                <input type="radio" id="smpg-reason4" name="smpg_disable_reason" value="technical_difficulties" />
                 <label for="smpg-reason4"><?php esc_html_e('Facing Technical Difficulties', 'schema-package') ?></label>
             </li>
             <li>
-                <input type="radio" id="smpg-reason5" name="smpg_disable_reason" required value="switched_plugin" />
+                <input type="radio" id="smpg-reason5" name="smpg_disable_reason" value="switched_plugin" />
                 <label for="smpg-reason5"><?php esc_html_e('Switched to a different plugin', 'schema-package') ?></label>
             </li>
             <li>
-                <input type="radio" id="smpg-reason6" name="smpg_disable_reason" required value="other_reason" />
+                <input type="radio" id="smpg-reason6" name="smpg_disable_reason" value="other_reason" />
                 <label for="smpg-reason6"><?php esc_html_e('Other reason', 'schema-package') ?></label>
             </li>
         </ul>

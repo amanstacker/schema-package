@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.16
+Stable tag: 1.0.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -510,6 +510,16 @@ To explore all the advanced features and benefits included in the Schema Package
 
 
 == Changelog ==
+
+= 1.0.17 =
+
+* Added : Learn More & knowledge base links to respective features
+* Added : Feedback form on plugin deactivation
+* Fixed : WP Eventmanager plugin was not showing in automation list.
+* Fixed : WP Eventmanager plugin was not showing in automation list.
+* Fixed : Minor bug fixes.
+* Tested with WordPress 6.8.2
+* Improvement : Screenshots & Banner updated.
 
 = 1.0.16 =
 

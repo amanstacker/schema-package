@@ -23,7 +23,6 @@ define('SMPG_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('SMPG_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 //Admin
-
 require_once SMPG_PLUGIN_DIR_PATH .'admin/feedback/feedback.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-controller.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-individual-controller.php';

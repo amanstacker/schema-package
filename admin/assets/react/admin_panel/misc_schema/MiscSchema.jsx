@@ -180,7 +180,9 @@ const MiscSchema = () => {
                       checked={!!miscSchema.website}
                       onChange={formChangeHandler}
                 />                                    
-              <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content of your site. It appears on homepage only.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+              <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content of your site. It appears on homepage only.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+              <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-website-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+              </span>  
           </td>
         </tr>
         {
@@ -194,7 +196,7 @@ const MiscSchema = () => {
                       checked={!!miscSchema.sitelinks_search_box}
                       onChange={formChangeHandler}
                 />                
-                <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                <span className="smpg-tooltip"><Popup content={__('A sitelinks search box is a quick way for people to search your site or app immediately on the search results page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>                  
             </td>
           </tr> 
           : ''
@@ -208,7 +210,9 @@ const MiscSchema = () => {
                       checked={!!miscSchema.breadcrumbs}
                       onChange={formChangeHandler}
                 />              
-              <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+              <span className="smpg-tooltip"><Popup content={__("A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+              <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-breadcrumb-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+              </span>  
           </td>
         </tr>
         <tr>
@@ -220,7 +224,9 @@ const MiscSchema = () => {
                       checked={!!miscSchema.profilepage}
                       onChange={formChangeHandler}
                 />              
-              <span className="smpg-tooltip"><Popup content={__("Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+              <span className="smpg-tooltip"><Popup content={__("Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page.", 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+                <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-profilepage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+              </span>  
           </td>
         </tr>
         <tr>
@@ -239,7 +245,9 @@ const MiscSchema = () => {
                       onSearchChange={handlePageSearch}
                       options={aboutPageList}
                    />
-                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "About Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "About Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+                   <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-an-aboutpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+                   </span>  
           </td>
         </tr>
         <tr>
@@ -258,7 +266,9 @@ const MiscSchema = () => {
                       onSearchChange={handlePageSearch}
                       options={contactPageList}
                    />
-                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "Contact Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the content and purpose of an "Contact Us" page on a website.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+                   <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-contactpage-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+                   </span>  
           </td>
         </tr>
       </tbody>

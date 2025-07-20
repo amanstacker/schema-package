@@ -240,19 +240,27 @@ const CarouselSchemaEdit = () => {
       <div className="smpg-edit-page-content">
         
       <Accordion title="Carousel Type" isExpand={true}>
-      <Dropdown
-              placeholder={__('Select Schema', 'schema-package') }
-              fluid
-              search
-              selection
-              value = {postMeta._schema_type}
-              options={schemaTypes}
-              onChange={handleSchemaTypeChange}
-          />
+        <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/carousel-schema/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+        <div className="smpg-accordion-body">
+        <Dropdown
+                placeholder={__('Select Schema', 'schema-package') }
+                fluid
+                search
+                selection
+                value = {postMeta._schema_type}
+                options={schemaTypes}
+                onChange={handleSchemaTypeChange}
+            />
+      </div>
       </Accordion>               
     {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
-    <div className="">
+      <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
+        </div>
+        <div className="smpg-accordion-body">
                 <Divider horizontal>{__("Target On", "schema-package")}</Divider>
 
                 <table className="smpg-placement-table">
@@ -303,14 +311,17 @@ const CarouselSchemaEdit = () => {
 
          {postMeta._schema_type ?                
         
-        <Accordion title="Automation" isExpand={true}>      
-
+        <Accordion title="Automation" isExpand={true}>  
+        <div className="smpg-learn-more-acc">
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/automation/'>{__('Learn More', 'schema-package')}</a>
+        </div>    
+          <div className="smpg-accordion-body">
          {automationList.length > 0 ?  
          
          <Grid>
             <Grid.Row>
               <Grid.Column>
-                {/* <Form>
+                <Form>
                   {automationList.map((item) => (
                       <Form.Field key={item.key}>
                         <Checkbox
@@ -320,7 +331,7 @@ const CarouselSchemaEdit = () => {
                         />
                       </Form.Field>
                   ))}                                      
-                </Form> */}
+                </Form>
               </Grid.Column>
               </Grid.Row>
           </Grid>
@@ -330,11 +341,12 @@ const CarouselSchemaEdit = () => {
             <p>
             {__('None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup.', 'schema-package') }</p>
             <a target='_blank' rel="noopener noreferrer" href='https://wordpress.org/plugins/schema-package/'><Icon name="list alternate outline" />{__('Automation List', 'schema-package')}</a>
-            {/* <Divider /> */}
-            {/* <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
-            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a> */}
+            <Divider />
+            <p>{__('Can\'t find your plugin in the list? Request automation from us!', 'schema-package') }</p>            
+            <a target='_blank' rel="noopener noreferrer" href='https://schemapackage.com/contactus/'><Icon name="paper plane" />{__('Feature Request', 'schema-package')}</a>
           </div>
           }                 
+          </div>
         </Accordion>          
          
          : ''}           

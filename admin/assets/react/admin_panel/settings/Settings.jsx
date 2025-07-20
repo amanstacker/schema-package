@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import queryString from 'query-string'
 import SettingsNavLink from './../settings-nav-link/SettingsNavLink'
-import { Button, Input, Icon, Popup, Checkbox, TextArea, Dropdown } from 'semantic-ui-react'
+import { Button, Input, Icon, Popup, Checkbox, TextArea, Dropdown, Divider } from 'semantic-ui-react'
 import MediaUpload from '../../shared/mediaUpload/MediaUpload'
 import MainSpinner from './../common/main-spinner/MainSpinner';
 import LicensePage from '../license/LicensePage';
@@ -345,7 +345,17 @@ const Settings = () => {
       {(() => {
         switch (page.path) {
           case "settings":   return (
-            <div className="smpg-settings">
+            <div className="smpg-settings">              
+            <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/schema-package-general-settings/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>
                 <tr>
@@ -414,6 +424,16 @@ const Settings = () => {
           );
           case "settings_advanced":   return (
             <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/schema-package-advanced-settings/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                                    
                   <tr>
@@ -446,6 +466,16 @@ const Settings = () => {
           );
           case "settings_manageconflict":   return (
             <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/how-to-manage-conflicts-with-other-schema-and-structured-data-plugins/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               {Object.keys(pluginList).length > 0 ?
               <table className="form-table">
                 <tbody>
@@ -480,6 +510,16 @@ const Settings = () => {
           );
           case "settings_tools": return (
             <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/schema-package-import-export-settings/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>
                 <tr>
@@ -591,6 +631,16 @@ const Settings = () => {
           
           case "settings_compatibility":  return (
             <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/schema-package-compatibility-settings/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                    
                   <tr>
@@ -611,6 +661,16 @@ const Settings = () => {
           );
           case "settings_defaultdata":  return (
             <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/how-to-set-up-default-data-in-schema-package/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />
               <table className="form-table smpg-default-data-table">
                 <tbody>
                   <tr>
@@ -633,7 +693,17 @@ const Settings = () => {
             </div>
           );
           case "settings_license":  return (
-            <div className="smpg-settings">                    
+            <div className="smpg-settings">
+              <div style={{ fontSize: '15px', marginBottom: '8px', fontWeight:600 }}>              
+              <a
+                href="https://schemapackage.com/knowledge-base/category/payment-billing/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {__('Read Full Guide', 'schema-package')}    
+              </a>
+            </div>
+            <Divider style={{ margin: '5px 0' }} />                    
               <LicensePage />
             </div>
           );

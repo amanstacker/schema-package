@@ -1,4 +1,4 @@
-# Schema Package - A Structured Data Module
+# Schema Package - Structured Data & Rich Snippets Tool for SEO
 
 **Download from WordPress.org**: 👉 [https://wordpress.org/plugins/schema-package/](https://wordpress.org/plugins/schema-package/)
 
@@ -6,6 +6,8 @@
 ### Description
 
 The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Instead of manually entering the same information twice — once in the actual content and again in the **Schema Package Generator** metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
+
+[Home](https://schemapackage.com/) | [Knowledge Base](https://schemapackage.com/knowledge-base/) | [Help & Support](https://schemapackage.com/contactus/) | [Premium](https://schemapackage.com/premium/)
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
@@ -43,14 +45,14 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 ### Schema Package Key Features
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
-* <strong>Singular Schema</strong>: Select different kinds of schema based on your needs globally.
+* <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
-* <strong>Custom Schema</strong>: Custom Schema allows users to enter their own JSON-LD markup, giving them full control over structured data implementation. This feature enables advanced customization beyond predefined schema types, ensuring flexibility. 
+* <strong>Custom Schema</strong>: Custom Schema lets you add your own JSON-LD markup to individual posts or across your entire site, giving you full control and advanced flexibility beyond built-in schema types.
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>Schema Package Generator Control Center</strong>: Enable SPG based on selected post types, taxonomies or author profile.
@@ -58,11 +60,30 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
+* <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
 * <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
+
+
+### Schema Package Premium Features
+
+Take your schema & structured data to the next level with **Schema Package Premium**:
+
+* WooCommerce Variable Product Automation
+* RealEstate Schema Types & Automation
+* Healthcare Schema Types & Automation
+* Carousel Schema Details Page List
+* Multilingual Schema Markup Support
+* Advanced ACF/SCF Mapping
+* Schema Markup Setup & Error Clean Up
+* 24/7 Priority Support
+* Premium Features On Demand
+* ...and more!
+
+[Learn more](https://schemapackage.com/premium/)
 
 
 ### Schema Package Supported Schema Types
@@ -235,9 +256,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [SEOPress](https://wordpress.org/plugins/wp-seopress/)
 * [Advanced Custom Fields (ACF®)](https://wordpress.org/plugins/advanced-custom-fields/)
 * [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/)
+* [Smart Custom Fields](https://wordpress.org/plugins/smart-custom-fields/)
 * [Absolute Reviews](https://wordpress.org/plugins/absolute-reviews/)
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
+* [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
 * [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
@@ -273,22 +296,6 @@ For help, documentation, and tutorials, visit our official website:
 Inside WordPress, you can also go to:  
 **Schema Package → Settings → Help & Support**
 
-### Premium Features
-
-Take your schema & structured data to the next level with **Schema Package Premium**:
-
-* WooCommerce Variable Product Automation
-* RealEstate Schema Types & Automation
-* Healthcare Schema Types & Automation
-* Carousel Schema Details Page List
-* Multilingual Schema Markup Support
-* Advanced ACF/SCF Mapping
-* Schema Markup Setup & Error Clean Up
-* 24/7 Priority Support
-* Premium Features On Demand
-* ...and more!
-
-Learn more: https://schemapackage.com/premium/
 
 ### Installation
 

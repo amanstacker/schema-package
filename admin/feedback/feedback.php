@@ -49,37 +49,40 @@ function smpg_deactivation_feedback_modal() {
                 <span class="screen-reader-text"></span>
             </button>
         </div>
-	<form action="" method="post">
+    	<form action="" method="post">
 		<div class="smpg-dp-body">
 	    <p><strong><?php esc_html_e('Help us improve — why are you deactivating the plugin?', 'schema-package'); ?></strong></p>
-	 <ul class="smpg-dp-reasons">
-    <li>
-        <input type="radio" id="reason1" name="smpg_disable_reason" required value="temporary" />
-        <label for="reason1"><?php esc_html_e('The deactivation is temporary.', 'schema-package') ?></label>
-    </li>
-    <li>
-        <input type="radio" id="reason2" name="smpg_disable_reason" required value="stopped showing toc" />
-        <label for="reason2"><?php esc_html_e('No longer using schema markup', 'schema-package') ?></label>
-    </li>
-    <li>
-        <input type="radio" id="reason3" name="smpg_disable_reason" required value="missing feature" />
-        <label for="reason3"><?php esc_html_e('Needed feature not available', 'schema-package') ?></label>
-    </li>
-    <li>
-        <input type="radio" id="reason4" name="smpg_disable_reason" required value="technical issue" />
-        <label for="reason4"><?php esc_html_e('Facing Technical Difficulties', 'schema-package') ?></label>
-    </li>
-    <li>
-        <input type="radio" id="reason5" name="smpg_disable_reason" required value="other plugin" />
-        <label for="reason5"><?php esc_html_e('Switched to a different plugin', 'schema-package') ?></label>
-    </li>
-    <li>
-        <input type="radio" id="reason6" name="smpg_disable_reason" required value="other" />
-        <label for="reason6"><?php esc_html_e('Other reason', 'schema-package') ?></label>
-    </li>
-</ul>
-	    <div class="smpg-reason-details smpg-display-none">
-				<textarea rows="3" name="smpg_disable_text[]" placeholder=""></textarea>
+        <ul class="smpg-dp-reasons">
+            <li>
+                <input type="radio" id="smpg-reason1" name="smpg_disable_reason" required value="temporary" />
+                <label for="smpg-reason1"><?php esc_html_e('The deactivation is temporary.', 'schema-package') ?></label>
+            </li>
+            <li>
+                <input type="radio" id="smpg-reason2" name="smpg_disable_reason" required value="stopped showing toc" />
+                <label for="smpg-reason2"><?php esc_html_e('No longer using schema markup', 'schema-package') ?></label>
+            </li>
+            <li>
+                <input type="radio" id="smpg-reason3" name="smpg_disable_reason" required value="missing feature" />
+                <label for="smpg-reason3"><?php esc_html_e('Needed feature not available', 'schema-package') ?></label>
+            </li>
+            <li>
+                <input type="radio" id="smpg-reason4" name="smpg_disable_reason" required value="technical issue" />
+                <label for="smpg-reason4"><?php esc_html_e('Facing Technical Difficulties', 'schema-package') ?></label>
+            </li>
+            <li>
+                <input type="radio" id="smpg-reason5" name="smpg_disable_reason" required value="other plugin" />
+                <label for="smpg-reason5"><?php esc_html_e('Switched to a different plugin', 'schema-package') ?></label>
+            </li>
+            <li>
+                <input type="radio" id="smpg-reason6" name="smpg_disable_reason" required value="other" />
+                <label for="smpg-reason6"><?php esc_html_e('Other reason', 'schema-package') ?></label>
+            </li>
+        </ul>
+	    <div class="smpg-reason-details">
+				<textarea data-id="smpg-reason3" class="smpg-d-none" rows="3" name="smpg_disable_text[]" placeholder="<?php esc_attr_e( 'Kindly describe the feature you found missing.', 'schema-package' ); ?>"></textarea>
+                <textarea data-id="smpg-reason4" class="smpg-d-none" rows="3" name="smpg_disable_text[]" placeholder="<?php esc_attr_e( 'Kindly provide details about the difficulties you\'re facing.', 'schema-package' ); ?>"></textarea>
+                <textarea data-id="smpg-reason5" class="smpg-d-none" rows="3" name="smpg_disable_text[]" placeholder="<?php esc_attr_e( 'If you don\'t mind, name the plugin you switched to.', 'schema-package' ); ?>"></textarea>
+                <textarea data-id="smpg-reason6" class="smpg-d-none" rows="3" name="smpg_disable_text[]" placeholder="<?php esc_attr_e( 'Kindly provide a brief explanation.', 'schema-package' ); ?>"></textarea>
 		</div>
 		</div>
 		<hr/>
@@ -89,7 +92,7 @@ function smpg_deactivation_feedback_modal() {
 	    	<?php endif; ?>
 
 			<input id="smpg-feedback-submit" class="button button-primary" type="submit" name="smpg_disable_submit" value="<?php esc_html_e('Submit & Deactivate', 'schema-package'); ?>"/>
-	    	<a class="button smpg-only-deactivate"><?php esc_html_e('Only Deactivate', 'schema-package'); ?></a>
+	    	<a class="button smpg-only-deactivate"><?php esc_html_e('Skip & Deactivate', 'schema-package'); ?></a>
 	    	<a class="button smpg-dt-de smpg-feedback-not-deactivate" href="#"><?php esc_html_e('Don\'t Deactivate', 'schema-package'); ?></a>
 		</div>	    
 	</form>
@@ -135,18 +138,18 @@ function smpg_send_feedback() {
         $headers[] = "Reply-To: $from";
     }
 
-    $subject = isset( $form['smpg_disable_reason'] ) ? $form['smpg_disable_reason'] : '(no reason given)';
+    $subject = isset( $form['smpg_disable_reason'] ) ? $form['smpg_disable_reason'] : 'No Reason Given';
 
-    if($subject == 'technical issue'){
+    if ( $subject == 'technical issue' ) {
 
           $subject  = 'Schema Package '.$subject;
-          $text = trim($text);
+          $text = trim( $text );
 
-          if(!empty($text)){
+          if ( ! empty( $text ) ) {
 
             $text = 'technical issue description: '.$text;
 
-          }else{
+          } else {
 
             $text = 'no description: '.$text;
           }

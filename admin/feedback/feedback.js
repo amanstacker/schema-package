@@ -22,10 +22,18 @@ jQuery(document).ready(function ($) {
         }
     });
     // show text fields
-    $('#smpg-reloaded-feedback-content input[type="radio"]').click(function () {
-        // show text field if there is one
-        $(".smpg-reason-details").removeClass('smpg-display-none')        
+    
+    $('input[name="smpg_disable_reason"]').on('change', function() {
+        const selectedId = $(this).attr('id');
+
+        // Hide all textareas first
+        $('.smpg-reason-details textarea').addClass('smpg-d-none');
+
+        // Show the matching textarea if it exists
+        $('.smpg-reason-details textarea[data-id="' + selectedId + '"]').removeClass('smpg-d-none');
     });
+
+
     // send form or close it
     $('#smpg-reloaded-feedback-content form').submit(function (e) {
         e.preventDefault();
@@ -54,15 +62,15 @@ jQuery(document).ready(function ($) {
     $("#smpg-reloaded-feedback-content .smpg-only-deactivate").click(function (e) {
         e.preventDefault();
 
-        smpg_set_feedback_cookie();
-
+        smpg_set_feedback_cookie();        
         $('#smpg-reloaded-feedback-overlay').remove();
         window.location.href = smpg_deactivate_link_url;
     });
 
     // close form without doing anything
     $('.smpg-feedback-not-deactivate').click(function (e) {
-        $('#smpg-reloaded-feedback-content form')[0].reset();        
+        $('#smpg-reloaded-feedback-content form')[0].reset();                
+        $('.smpg-reason-details textarea').addClass('smpg-d-none');
         $('#smpg-reloaded-feedback-overlay').hide();
         $(".smpg-reason-details").addClass('smpg-display-none')        
     });

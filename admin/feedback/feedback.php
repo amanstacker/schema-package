@@ -94,7 +94,7 @@ function smpg_deactivation_feedback_modal() {
 
 			<input id="smpg-feedback-submit" class="button button-primary" type="submit" name="smpg_disable_submit" value="<?php esc_html_e('Submit & Deactivate', 'schema-package'); ?>"/>
 	    	<a class="button smpg-only-deactivate"><?php esc_html_e('Skip & Deactivate', 'schema-package'); ?></a>
-	    	<a class="button smpg-dt-de smpg-fd-stop-deactivation" href="#"><?php esc_html_e('Don\'t Deactivate', 'schema-package'); ?></a>
+	    	<a class="button smpg-dt-de smpg-fd-stop-deactivation"><?php esc_html_e('Don\'t Deactivate', 'schema-package'); ?></a>
 		</div>	    
 	</form>
     </div>

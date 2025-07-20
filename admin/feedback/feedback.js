@@ -69,6 +69,7 @@ jQuery(document).ready(function ($) {
 
     // close form without doing anything
     $('.smpg-fd-stop-deactivation').click(function (e) {
+        e.preventDefault();
         $('#smpg-feedback-content form')[0].reset();                
         $('.smpg-reason-details textarea').addClass('smpg-d-none');
         $('#smpg-feedback-overlay').hide();

@@ -1379,6 +1379,37 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     ];                    
                     break;
 
+                case 'organization':
+
+                $properties = [
+                    'is_enable'         => true,
+                    'is_delete_popup'   => false, 
+                    'is_setup_popup'    => false,
+                    'has_warning'       => false,
+                    'id'                => 'book',           
+                    'text'              => 'Book',
+                    'properties'        => [
+                        'name'             => $name,    
+                        'description'      => $description,
+                        'url'              => $url,                                                
+                        'street_address'   => $street_address,
+                        'address_locality' => $address_locality,
+                        'address_region'   => $address_region,
+                        'postal_code'      => $postal_code,
+                        'address_country'  => $address_country,
+                        'telephone'        => $telephone,
+                        'email'            => $email,
+                        'logo'             => $publisher_logo,
+                        'social_links'     => $social_links,
+                        'rating_value'     => $rating_value,
+                        'best_rating'      => $best_rating,
+                        'worst_rating'     => $worst_rating,
+                        'rating_count'     => $rating_count,
+                        'review_count'     => $review_count,                                                                      
+                    ]                      
+                ];                    
+                break;
+
                 case 'course':
 
                     $start_date['label'] = 'Course Schedule Start Date';

@@ -1386,8 +1386,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'is_delete_popup'   => false, 
                     'is_setup_popup'    => false,
                     'has_warning'       => false,
-                    'id'                => 'book',           
-                    'text'              => 'Book',
+                    'id'                => 'organization',           
+                    'text'              => 'Organization',
                     'properties'        => [
                         'name'             => $name,    
                         'description'      => $description,

@@ -1638,11 +1638,14 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
         $json_ld['url'] =      $properties['url']['value'];
     }    
 
-    $image = smpg_make_the_image_json($properties['image']['value'], true);
+    if(!empty($properties['image']['value'])){
+        
+        $image = smpg_make_the_image_json($properties['image']['value'], true);
 
-     if(!empty($image)){
-         $json_ld['image']              =  $image;   
-     }     
+        if(!empty($image)){
+             $json_ld['image']              =  $image;   
+        }
+    }              
 
     if(!empty($properties['street_address']['value'])){
         $json_ld['address']['@type']                = 'PostalAddress';
@@ -1677,103 +1680,6 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
             $same_as[] = $value['url']['value']; 
         }
         $json_ld['sameAs'] = $same_as;
-    }
-
-    if(!empty($properties['latitude']['value']) && !empty($properties['longitude']['value']) ){
-        $json_ld['geo']['@type']     = 'GeoCoordinates';
-        $json_ld['geo']['latitude']  = $properties['latitude']['value'];
-        $json_ld['geo']['longitude'] = $properties['longitude']['value'];        
-    }
-
-    if(!empty($properties['opening_hours']['elements'])){
-
-        $loopdata = [];
-
-        foreach ($properties['opening_hours']['elements'] as  $value) {
-            
-            $daysofweek = [];
-
-            if(!empty($value['monday']['value'])){
-                $daysofweek[] = 'Monday';
-            }
-            if(!empty($value['tuesday']['value'])){
-                $daysofweek[] = 'Tuesday';
-            }
-            if(!empty($value['wednesday']['value'])){
-                $daysofweek[] = 'Wednesday';
-            }
-            if(!empty($value['thursday']['value'])){
-                $daysofweek[] = 'Thursday';
-            }
-            if(!empty($value['friday']['value'])){
-                $daysofweek[] = 'Friday';
-            }
-            if(!empty($value['saturday']['value'])){
-                $daysofweek[] = 'Saturday';
-            }
-            if(!empty($value['sunday']['value'])){
-                $daysofweek[] = 'Sunday';
-            }
-            
-            $loopdata[] = [
-                '@type'      => 'openingHoursSpecification',
-                'dayOfWeek'  => $daysofweek,
-                'opens'      => $value['opens']['value'],
-                'closes'     => $value['closes']['value'],
-            ];
-        }
-
-        $json_ld['openingHoursSpecification'] = $loopdata;
-    }
-
-    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
-    
-    return $json_ld;
-}
-
-function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $properties, $schema_type ){
-    
-    $json_ld['@context']         = smpg_get_context_url();
-    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
-
-    if(!empty($properties['name']['value'])){
-        $json_ld['name']        =      $properties['name']['value'];
-    }
-    if(!empty($properties['description']['value'])){
-        $json_ld['description'] =      $properties['description']['value'];
-    }
-    if(!empty($properties['url']['value'])){
-        $json_ld['url'] =      $properties['url']['value'];
-    }    
-
-    $image = smpg_make_the_image_json($properties['image']['value'], true);
-
-     if(!empty($image)){
-         $json_ld['image']              =  $image;   
-     }     
-
-    if(!empty($properties['street_address']['value'])){
-        $json_ld['address']['@type']                = 'PostalAddress';
-        $json_ld['address']['streetAddress']         =      $properties['street_address']['value'];
-    }
-    if(!empty($properties['address_locality']['value'])){
-        $json_ld['address']['addressLocality']         =      $properties['address_locality']['value'];
-    }
-    if(!empty($properties['postal_code']['value'])){
-        $json_ld['address']['postalCode']         =      $properties['postal_code']['value'];
-    }
-    if(!empty($properties['address_region']['value'])){
-        $json_ld['address']['addressRegion']         =      $properties['address_region']['value'];
-    }
-    if(!empty($properties['address_country']['value'])){
-        $json_ld['address']['addressCountry']         =      $properties['address_country']['value'];
-    }
-
-    if(!empty($properties['telephone']['value'])){
-        $json_ld['telephone'] =      $properties['telephone']['value'];
-    }
-    if(!empty($properties['price_range']['value'])){
-        $json_ld['priceRange'] =      $properties['price_range']['value'];
     }
 
     if(!empty($properties['latitude']['value']) && !empty($properties['longitude']['value']) ){

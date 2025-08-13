@@ -1515,6 +1515,187 @@ function smpg_get_musicplaylist_individual_json_ld( $json_ld, $properties, $sche
    return $json_ld;
 }
 
+function smpg_get_vacationrental_individual_json_ld( $json_ld, $properties, $schema_type ) {
+    
+    $json_ld['@context'] = smpg_get_context_url();
+    $json_ld['@type']    = smpg_get_schema_type_text( $schema_type );
+
+    // Basic details
+    if ( ! empty( $properties['name']['value'] ) ) {
+        $json_ld['name'] = $properties['name']['value'];
+    }
+    if ( ! empty( $properties['additional_type']['value'] ) ) {
+        $json_ld['additionalType'] = $properties['additional_type']['value'];
+    }
+    if ( ! empty( $properties['identifier']['value'] ) ) {
+        $json_ld['identifier'] = $properties['identifier']['value'];
+    }
+    if ( ! empty( $properties['description']['value'] ) ) {
+        $json_ld['description'] = $properties['description']['value'];
+    }
+    if ( ! empty( $properties['url']['value'] ) ) {
+        $json_ld['url'] = $properties['url']['value'];
+    }
+
+    // Brand
+    if ( ! empty( $properties['brand']['value'] ) ) {
+        $json_ld['brand'] = [
+            '@type' => 'Brand',
+            'name'  => $properties['brand']['value'],
+        ];
+    }
+
+    // Geo coordinates
+    if ( ! empty( $properties['latitude']['value'] ) && ! empty( $properties['longitude']['value'] ) ) {
+        $json_ld['latitude']  = $properties['latitude']['value'];
+        $json_ld['longitude'] = $properties['longitude']['value'];
+    }
+
+    // Address
+    $address = [];
+    if ( ! empty( $properties['street_address']['value'] ) ) {
+        $address['streetAddress'] = $properties['street_address']['value'];
+    }
+    if ( ! empty( $properties['address_locality']['value'] ) ) {
+        $address['addressLocality'] = $properties['address_locality']['value'];
+    }
+    if ( ! empty( $properties['address_region']['value'] ) ) {
+        $address['addressRegion'] = $properties['address_region']['value'];
+    }
+    if ( ! empty( $properties['postal_code']['value'] ) ) {
+        $address['postalCode'] = $properties['postal_code']['value'];
+    }
+    if ( ! empty( $properties['address_country']['value'] ) ) {
+        $address['addressCountry'] = $properties['address_country']['value'];
+    }
+    if ( ! empty( $address ) ) {
+        $json_ld['address'] = $address;
+    }
+
+    $images = []; 
+
+    if ( ! empty( $properties['images']['elements'] ) && is_array( $properties['images']['elements'] ) ) {
+        foreach ( $properties['images']['elements'] as $element ) {
+            if ( ! empty( $element['image']['value'] ) && is_array( $element['image']['value'] ) ) {
+                foreach ( $element['image']['value'] as $img ) {
+                    if ( ! empty( $img['url'] ) ) {
+                        $images[] = $img['url'];
+                    }
+                }
+            }
+        }
+    }
+
+    // Add to schema
+    if ( ! empty( $images ) ) {
+        $json_ld['image'] = $images;
+    }
+
+    // Checkin / Checkout
+    if ( ! empty( $properties['checkin_time']['value'] ) ) {
+        $json_ld['checkinTime'] = $properties['checkin_time']['value'];
+    }
+    if ( ! empty( $properties['checkout_time']['value'] ) ) {
+        $json_ld['checkoutTime'] = $properties['checkout_time']['value'];
+    }
+
+    // Knows Language
+    if ( ! empty( $properties['knows_language']['elements'] ) ) {
+        $langs = [];
+        foreach ( $properties['knows_language']['elements'] as $lang ) {
+            if ( ! empty( $lang['language']['value'] ) ) {
+                $langs[] = $lang['language']['value'];
+            }
+        }
+        if ( $langs ) {
+            $json_ld['knowsLanguage'] = $langs;
+        }
+    }
+
+    // Contains Place (Accommodation details)
+    $containsPlace = [];
+    if ( ! empty( $properties['type_of_room']['value'] ) ) {
+        $containsPlace['@type'] = 'Accommodation';
+        $containsPlace['additionalType'] = $properties['type_of_room']['value'];
+    }
+
+    // Beds
+    if ( ! empty( $properties['bed']['elements'] ) ) {
+        $beds = [];
+        foreach ( $properties['bed']['elements'] as $bed ) {
+            $bed_item = [ '@type' => 'BedDetails' ];
+            if ( ! empty( $bed['number_of_beds']['value'] ) ) {
+                $bed_item['numberOfBeds'] = (int) $bed['number_of_beds']['value'];
+            }
+            if ( ! empty( $bed['type_of_bed']['value'] ) ) {
+                $bed_item['typeOfBed'] = $bed['type_of_bed']['value'];
+            }
+            $beds[] = $bed_item;
+        }
+        $containsPlace['bed'] = $beds;
+    }
+
+    // Occupancy
+    if ( ! empty( $properties['occupancy']['value'] ) ) {
+        $containsPlace['occupancy'] = [
+            '@type' => 'QuantitativeValue',
+            'value' => (int) $properties['occupancy']['value'],
+        ];
+    }
+
+    // Amenity Feature
+    if ( ! empty( $properties['amenity_feature']['elements'] ) ) {
+        $features = [];
+        foreach ( $properties['amenity_feature']['elements'] as $amenity ) {
+            if ( ! empty( $amenity['name']['value'] ) ) {
+                $features[] = [
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => $amenity['name']['value'],
+                    'value' => filter_var( $amenity['value']['value'], FILTER_VALIDATE_BOOLEAN ),
+                ];
+            }
+        }
+        if ( $features ) {
+            $containsPlace['amenityFeature'] = $features;
+        }
+    }
+
+    // Floor size
+    if ( ! empty( $properties['floor_size']['value'] ) ) {
+        $containsPlace['floorSize'] = [
+            '@type'    => 'QuantitativeValue',
+            'value'    => (float) $properties['floor_size']['value'],
+            'unitCode' => ! empty( $properties['floor_size_unit_text']['value'] ) ? $properties['floor_size_unit_text']['value'] : 'MTK',
+        ];
+    }
+
+    // Room counts
+    if ( ! empty( $properties['number_of_bathrooms_total']['value'] ) ) {
+        $containsPlace['numberOfBathroomsTotal'] = (int) $properties['number_of_bathrooms_total']['value'];
+    }
+    if ( ! empty( $properties['number_of_bedrooms']['value'] ) ) {
+        $containsPlace['numberOfBedrooms'] = (int) $properties['number_of_bedrooms']['value'];
+    }
+    if ( ! empty( $properties['number_of_rooms']['value'] ) ) {
+        $containsPlace['numberOfRooms'] = (int) $properties['number_of_rooms']['value'];
+    }
+
+    if ( $containsPlace ) {
+        $json_ld['containsPlace'] = $containsPlace;
+    }
+
+    // Reviews
+    if ( ! empty( $properties['reviews']['elements'] ) ) {
+        $json_ld = smpg_prepare_reviews( $json_ld, $properties['reviews']['elements'] );
+    }
+
+    // Aggregate rating
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
+
+    return $json_ld;
+}
+
+
 function smpg_get_musicalbum_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();

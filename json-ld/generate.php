@@ -19,6 +19,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'fastfoodrestaurant':
         case 'icecreamshop':
         case 'restaurant':
+        case 'organization':
             
             $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -125,6 +126,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                             
             break;
 
+        case 'organization':
+
+            $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);            
+                        
+        break;
+
         case 'trip':
 
             $json_ld = smpg_get_trip_individual_json_ld($json_ld, $properties, $schema_type);            
@@ -137,11 +144,23 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                             
             break;
 
+        case 'certification':
+
+            $json_ld = smpg_get_certification_individual_json_ld($json_ld, $properties, $schema_type);            
+                            
+            break;
+
+        case 'vacationrental':
+
+            $json_ld = smpg_get_vacationrental_individual_json_ld($json_ld, $properties, $schema_type);            
+                        
+        break;
+
         case 'musicalbum':
 
             $json_ld = smpg_get_musicalbum_individual_json_ld($json_ld, $properties, $schema_type);            
-                            
-            break;
+                        
+        break;
 
         case 'liveblogposting':
 
@@ -542,6 +561,15 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         break;
 
+        case 'organization':
+            
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_organization_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
         case 'trip':
             
             $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
@@ -591,6 +619,24 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_liveblogposting_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'vacationrental':
+            
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_vacationrental_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+        
+        case 'certification':
+            
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_certification_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 

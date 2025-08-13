@@ -528,6 +528,9 @@ function smpg_get_schema_type_text( $id ) {
 		'review'                    => 'Review',
 		'profilepage'               => 'ProfilePage',
 		'webpage'                   => 'WebPage',
+		'organization'              => 'Organization',
+		'certification'             => 'Certification',
+		'vacationrental'            => 'VacationRental',
 
 	];	
 

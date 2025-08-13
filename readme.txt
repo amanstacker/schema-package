@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.18
+Stable tag: 1.0.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -486,6 +486,12 @@ To explore all the advanced features and benefits included in the Schema Package
 
 
 == Changelog ==
+
+= 1.0.19 =
+
+* Added : Certification schema type.
+* Added : VacationRental schema type.
+* Fixed : Minor bug fixes.
 
 = 1.0.18 =
 

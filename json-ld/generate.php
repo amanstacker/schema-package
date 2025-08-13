@@ -144,11 +144,17 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
                             
             break;
 
+        case 'certification':
+
+            $json_ld = smpg_get_certification_individual_json_ld($json_ld, $properties, $schema_type);            
+                            
+            break;
+
         case 'vacationrental':
 
             $json_ld = smpg_get_vacationrental_individual_json_ld($json_ld, $properties, $schema_type);            
-                            
-            break;
+                        
+        break;
 
         case 'musicalbum':
 
@@ -623,7 +629,16 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_vacationrental_json_ld', $json_ld, $schema_data, $post_id ); 
 
-        break; 
+        break;
+        
+        case 'certification':
+            
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_certification_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
 
         case 'localbusiness':
         case 'store':

@@ -1952,6 +1952,24 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
 
                     break;  
 
+                    case 'certification':
+
+                        $properties = [
+                            'is_enable'         => true,
+                            'is_delete_popup'   => false, 
+                            'is_setup_popup'    => false,
+                            'has_warning'       => false,
+                            'id'                => 'certification',           
+                            'text'              => 'Certification',
+                            'properties'        => [                                
+                                'name'             => $name,    
+                                'description'      => $description,
+                                'url'              => $url                                
+                            ]            
+                        ];
+
+                    break;  
+
                     case 'service':
                     case 'broadcastservice':
                     case 'cableorsatelliteservice':

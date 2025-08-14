@@ -276,6 +276,11 @@ function smpg_get_json_ld( $post_id = null ) {
         $response [] = $profilepage;
     }
 
+    $site_navigation       = smpg_prepare_site_navigation_json_ld();    
+    if(!empty($site_navigation)){
+        $response [] = $site_navigation;
+    }
+
     $website       = smpg_prepare_website_json_ld();    
     if(!empty($website)){
         $response [] = $website;

@@ -1004,6 +1004,20 @@ function smpg_prepare_website_json_ld() {
     return $json_ld;
 }
 
+function smpg_prepare_site_navigation_json_ld() {
+
+    global $smpg_misc_schema;
+    $json_ld       = [];
+
+    if ( !empty($smpg_misc_schema['site_navigations']) && ( is_home() || is_front_page() ) ) {
+    
+        
+
+    }
+    
+    return $json_ld;
+}
+
 function smpg_prepare_about_page_json_ld() {
 
 	global $smpg_misc_schema;

@@ -316,6 +316,35 @@ class SMPG_Api_Mapper {
           }
           
           break;
+
+          case "menu":
+
+          // Get all registered menus
+          $menus = wp_get_nav_menus();
+
+          if ( ! empty( $menus ) ) {
+              foreach ( $menus as $menu ) {
+
+                  // If there's a search term, skip if it doesn't match
+                  if ( ! empty( $search ) && stripos( $menu->name, $search ) === false ) {
+                      continue;
+                  }
+
+                  // If saved_data is given, only include matching ID
+                  if ( ! empty( $saved_data ) && $menu->term_id != $saved_data ) {
+                      continue;
+                  }
+
+                  $choices[] = [
+                      'key'   => $menu->term_id,
+                      'value' => $menu->term_id,
+                      'text'  => $menu->name,
+                  ];
+              }
+          }
+
+          break;
+
   
         case "post_category" :
   

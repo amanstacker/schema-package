@@ -218,13 +218,28 @@ class SMPG_Api_Action {
 
         }
         
-        public function get_misc_schema($request_data){
+        public function get_misc_schema( $request_data ) {
             
             $response = [];
 
             $misc_schema    = $this->_api_mapper->get_misc_schema();
-            $pages          = $this->_api_mapper->get_placement_data('page');
+            $pages          = $this->_api_mapper->get_placement_data('page');            
+            $menus          = $this->_api_mapper->get_placement_data('menu');
             
+
+            if(!empty($misc_schema['site_navigations'])){
+
+                $about_pages = [];
+
+                foreach ($misc_schema['site_navigations'] as $value) {
+                    $saved_data = $this->_api_mapper->get_placement_data('menu', '', $value);
+                    if(!empty($saved_data)){
+                        $about_pages  = array_merge($about_pages, $saved_data);
+                    }
+                }
+                
+                $pages = array_merge($pages, $about_pages);                            
+            }
 
             if(!empty($misc_schema['about_pages'])){
 
@@ -255,7 +270,7 @@ class SMPG_Api_Action {
             }
             
 
-            $response = [ 'misc_schema' => $misc_schema, 'about_pages' => $pages, 'contact_pages' => $pages ];
+            $response = [ 'misc_schema' => $misc_schema, 'about_pages' => $pages, 'contact_pages' => $pages, 'site_navigations' => $menus ];
 
             return  $response;
 

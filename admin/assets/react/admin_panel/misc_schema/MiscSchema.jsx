@@ -253,7 +253,7 @@ const MiscSchema = () => {
                     <Dropdown
                       data_type="site_navigation"
                       name="site_navigation"
-                      placeholder={__('Search For Menus', 'schema-package') }
+                      placeholder={__('Search for Menus', 'schema-package') }
                       fluid
                       multiple
                       search
@@ -274,7 +274,7 @@ const MiscSchema = () => {
                     <Dropdown
                       data_type="about_page"
                       name="about_page"
-                      placeholder={__('Search For Page', 'schema-package') }
+                      placeholder={__('Search for Page', 'schema-package') }
                       fluid
                       multiple
                       search
@@ -295,7 +295,7 @@ const MiscSchema = () => {
                     <Dropdown
                       data_type="contact_page"
                       name="contact_page"
-                      placeholder={__('Search For Page', 'schema-package') }
+                      placeholder={__('Search for Page', 'schema-package') }
                       fluid
                       multiple
                       search

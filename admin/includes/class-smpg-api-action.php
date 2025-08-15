@@ -229,16 +229,17 @@ class SMPG_Api_Action {
 
             if(!empty($misc_schema['site_navigations'])){
 
-                $about_pages = [];
+                $menus_ids = [];
 
                 foreach ($misc_schema['site_navigations'] as $value) {
                     $saved_data = $this->_api_mapper->get_placement_data('menu', '', $value);
                     if(!empty($saved_data)){
-                        $about_pages  = array_merge($about_pages, $saved_data);
+                        $menus_ids  = array_merge($menus_ids, $saved_data);
                     }
                 }
                 
-                $pages = array_merge($pages, $about_pages);                            
+                $menus = array_merge($menus, $menus_ids);                            
+                
             }
 
             if(!empty($misc_schema['about_pages'])){

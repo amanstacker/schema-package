@@ -232,7 +232,8 @@ function Edit({
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "faq-header-right",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-                icon: "no-alt",
+                icon: "trash" // changed from "no-alt" to "trash"
+                ,
                 label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Remove FAQ', 'faq-block'),
                 onClick: () => removeFaq(index),
                 className: "faq-remove-icon",
@@ -243,7 +244,7 @@ function Edit({
             className: "faq-answer-wrapper",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
               tagName: "p",
-              placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter answer…', 'faq-block'),
+              placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter the answer to the question…', 'faq-block'),
               value: faq.answer,
               onChange: value => updateFaq(index, 'answer', value)
             })
@@ -278,7 +279,7 @@ function Edit({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         variant: "primary",
         onClick: addFaq,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add FAQ', 'faq-block')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add More FAQ', 'faq-block')
       })]
     })]
   });

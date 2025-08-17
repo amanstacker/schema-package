@@ -189,7 +189,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 								<div className="faq-header-right">
 									<Button
-										icon="no-alt"
+										icon="trash" // changed from "no-alt" to "trash"
 										label={__('Remove FAQ', 'faq-block')}
 										onClick={() => removeFaq(index)}
 										className="faq-remove-icon"
@@ -202,7 +202,7 @@ export default function Edit({ attributes, setAttributes }) {
 							<div className="faq-answer-wrapper">
 								<RichText
 									tagName="p"
-									placeholder={__('Enter answer…', 'faq-block')}
+									placeholder={__('Enter the answer to the question…', 'faq-block')}
 									value={faq.answer}
 									onChange={(value) => updateFaq(index, 'answer', value)}
 								/>
@@ -248,7 +248,7 @@ export default function Edit({ attributes, setAttributes }) {
 				})}
 
 				<Button variant="primary" onClick={addFaq}>
-					{__('Add FAQ', 'faq-block')}
+					{__('Add More FAQ', 'faq-block')}
 				</Button>
 			</div>
 		</>

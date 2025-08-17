@@ -1,28 +1,15 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
 export default function save({ attributes }) {
-	const { faqs = [] } = attributes;
+	const {
+		faqs = [],
+		showNumbering = false,
+		headingLevel = 4,
+		listStyle = 'decimal',
+	} = attributes;
 
-	if (!faqs.length) {
-		return null;
-	}
+	if (!faqs.length) return null;
 
-	// Generate FAQ schema data
 	const schemaData = {
 		"@context": "https://schema.org",
 		"@type": "FAQPage",
@@ -36,16 +23,31 @@ export default function save({ attributes }) {
 		}))
 	};
 
+	const getMarkerForIndex = (i) => {
+		switch (listStyle) {
+			case 'disc': return '•';
+			case 'circle': return '○';
+			case 'square': return '■';
+			case 'decimal':
+			default: return `${i + 1}.`;
+		}
+	};
+
+	const HeadingTag = `h${headingLevel}`;
+
 	return (
-		<div { ...useBlockProps.save() } className="sp-faq-block">
+		<div {...useBlockProps.save()} className="sp-faq-block">
 			{faqs.map((faq, index) => (
 				<div key={index} className="sp-faq-item">
-					{/* Question */}
-					<RichText.Content
-						tagName="h3"
-						className="sp-faq-question"
-						value={faq.question}
-					/>
+					{/* Question with optional marker */}
+					<HeadingTag className="sp-faq-question">
+						{showNumbering && (
+							<span className={`faq-marker marker-${listStyle}`}>
+								{getMarkerForIndex(index)}{' '}
+							</span>
+						)}
+						{faq.question}
+					</HeadingTag>
 
 					{/* Answer */}
 					<RichText.Content
@@ -54,7 +56,7 @@ export default function save({ attributes }) {
 						value={faq.answer}
 					/>
 
-					{/* Answer Image (optional) */}
+					{/* Image */}
 					{faq.imageUrl && (
 						<div className="sp-faq-image">
 							<img src={faq.imageUrl} alt="" />
@@ -62,7 +64,8 @@ export default function save({ attributes }) {
 					)}
 				</div>
 			))}
-			{/* Schema Markup Output */}
+
+			{/* Schema Markup */}
 			<script type="application/ld+json">
 				{JSON.stringify(schemaData)}
 			</script>

@@ -28,6 +28,11 @@ import {
 } from '@wordpress/components';
 
 /**
+ * React hook
+ */
+import { useEffect } from '@wordpress/element';
+
+/**
  * Custom CSS for editor.
  */
 import './editor.scss';
@@ -39,10 +44,19 @@ export default function Edit({ attributes, setAttributes }) {
 	const {
 		faqs = [],
 		boxStyle = 'bordered',
-		showNumbering = false,           // used to show/hide the header marker (number or bullet)
-		headingLevel = 4,                // core Heading dropdown uses number
-		listStyle = 'decimal',           // marker style for the heading label: decimal|disc|circle|square
+		showNumbering = false,
+		headingLevel = 4,
+		listStyle = 'decimal',
 	} = attributes;
+
+	/**
+	 * Ensure at least one FAQ exists when block is first added
+	 */
+	useEffect(() => {
+		if (faqs.length === 0) {
+			setAttributes({ faqs: [{ question: '', answer: '', imageUrl: '' }] });
+		}
+	}, []); // Run only once on mount
 
 	/**
 	 * Add a new FAQ item.
@@ -71,8 +85,6 @@ export default function Edit({ attributes, setAttributes }) {
 
 	/**
 	 * Get the visible marker text for the header label based on listStyle.
-	 * - 'decimal' shows 1., 2., ...
-	 * - bullets use unicode so no extra CSS is required
 	 */
 	const getMarkerForIndex = (i) => {
 		switch (listStyle) {
@@ -90,7 +102,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
-			{/* Top toolbar with Gutenberg style heading selector */}
+			{/* Top toolbar with Gutenberg heading selector */}
 			<BlockControls>
 				<ToolbarGroup>
 					<HeadingLevelDropdown
@@ -120,6 +132,22 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(value) => setAttributes({ showNumbering: value })}
 					/>
 
+					{/* Heading Label Style appears directly below toggle */}
+					{showNumbering && (
+						<SelectControl
+							label={__('Heading Label Style', 'faq-block')}
+							value={listStyle}
+							options={[
+								{ label: __('1, 2, 3 (Decimal)', 'faq-block'), value: 'decimal' },
+								{ label: __('• (Disc)', 'faq-block'), value: 'disc' },
+								{ label: __('○ (Circle)', 'faq-block'), value: 'circle' },
+								{ label: __('■ (Square)', 'faq-block'), value: 'square' },
+							]}
+							onChange={(value) => setAttributes({ listStyle: value })}
+							help={__('Controls the marker shown before each question heading.', 'faq-block')}
+						/>
+					)}
+
 					<SelectControl
 						label={__('Heading Level', 'faq-block')}
 						value={headingLevel}
@@ -128,20 +156,6 @@ export default function Edit({ attributes, setAttributes }) {
 							value: level,
 						}))}
 						onChange={(value) => setAttributes({ headingLevel: parseInt(value, 10) })}
-					/>
-
-					{/* List style now controls the HEADER marker style */}
-					<SelectControl
-						label={__('Heading Label Style', 'faq-block')}
-						value={listStyle}
-						options={[
-							{ label: __('1, 2, 3 (Decimal)', 'faq-block'), value: 'decimal' },
-							{ label: __('• (Disc)', 'faq-block'), value: 'disc' },
-							{ label: __('○ (Circle)', 'faq-block'), value: 'circle' },
-							{ label: __('■ (Square)', 'faq-block'), value: 'square' },
-						]}
-						onChange={(value) => setAttributes({ listStyle: value })}
-						help={__('Controls the marker shown before each question heading.', 'faq-block')}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -153,11 +167,11 @@ export default function Edit({ attributes, setAttributes }) {
 				)}
 
 				{faqs.map((faq, index) => {
-					const HeadingTag = `h${headingLevel}`; // dynamic heading
+					const HeadingTag = `h${headingLevel}`;
 
 					return (
 						<div key={index} className={`faq-item faq-style-${boxStyle}`}>
-							{/* FAQ Header: left (marker + question) | right (actions) */}
+							{/* FAQ Header */}
 							<div className="faq-header">
 								<div className="faq-header-left">
 									{showNumbering && (
@@ -211,7 +225,9 @@ export default function Edit({ attributes, setAttributes }) {
 											allowedTypes={['image']}
 											render={({ open }) => (
 												<Button isSecondary onClick={open}>
-													{faq.imageUrl ? __('Change Image', 'faq-block') : __('Upload Image', 'faq-block')}
+													{faq.imageUrl
+														? __('Change Image', 'faq-block')
+														: __('Upload Image', 'faq-block')}
 												</Button>
 											)}
 										/>

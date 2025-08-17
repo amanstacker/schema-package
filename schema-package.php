@@ -46,9 +46,6 @@ require_once SMPG_PLUGIN_DIR_PATH.'helper/class-youtube-data-api.php';
 //Shared Files
 require_once SMPG_PLUGIN_DIR_PATH .'shared/shared-methods.php';
 
-//Gutenberg Blocks Files
-require_once SMPG_PLUGIN_DIR_PATH .'blocks/gutenberg/faq-block/faq-block.php';
-
 register_uninstall_hook( __FILE__, 'smpg_on_plugin_uninstall' );
 register_activation_hook( __FILE__, 'smpg_on_plugin_activation' );
 

@@ -8,10 +8,11 @@ const MiscSchema = () => {
 
   const {__} = wp.i18n;         
 
-  const [mainSpinner, setMainSpinner]           = useState(false);
-  const [aboutPageList, setAboutPageList]       = useState([]);
-  const [contactPageList, setContactPageList]   = useState([]);
-  const [isLoaded, setIsLoaded]                 = useState(true);  
+  const [mainSpinner, setMainSpinner]               = useState(false);
+  const [aboutPageList, setAboutPageList]           = useState([]);
+  const [siteNavigationList, setSiteNavigationList] = useState([]);
+  const [contactPageList, setContactPageList]       = useState([]);
+  const [isLoaded, setIsLoaded]                     = useState(true);
 
   const [miscSchema, setMiscSchema] = useReducer(
     (state, newState) => ({...state, ...newState}),
@@ -21,6 +22,7 @@ const MiscSchema = () => {
       breadcrumbs          : false,
       profilepage          : false,
       about_pages          : [],
+      site_navigations     : [],
       contact_pages        : []
     }            
   );
@@ -83,6 +85,7 @@ const MiscSchema = () => {
                  
           setAboutPageList(Array.from(new Set(result.about_pages.map(JSON.stringify))).map(JSON.parse));
           setContactPageList( Array.from(new Set(result.contact_pages.map(JSON.stringify))).map(JSON.parse));
+          setSiteNavigationList( Array.from(new Set(result.site_navigations.map(JSON.stringify))).map(JSON.parse));
           setMiscSchema(result.misc_schema);
           setMainSpinner(false);
         }        
@@ -103,15 +106,23 @@ const MiscSchema = () => {
     if((data.name).includes('contact_page')){
       copydata.contact_pages = data.value;
     }
+
+    if((data.name).includes('site_navigation')){
+      copydata.site_navigations = data.value;
+    }
     
     setMiscSchema(copydata);    
 
   }
 
   const handlePlacementSearch = (search, name) => {
-        
+    
     let url = smpg_local.rest_url + "smpg-route/placement-search?type=page&search="+search;
-      
+
+    if((name).includes('site_navigation')){
+        url = smpg_local.rest_url + "smpg-route/placement-search?type=menu&search="+search;
+    }
+          
     fetch(url, {
       headers: {                    
         'X-WP-Nonce': smpg_local.nonce,
@@ -135,6 +146,13 @@ const MiscSchema = () => {
                 let newclone = [...new Set([...aboutPageList ,...result])]
                 let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
                 setContactPageList(newData);
+            }
+
+            if((name).includes('site_navigation')){
+                            
+                let newclone = [...new Set([...siteNavigationList ,...result])]
+                let newData = Array.from(new Set(newclone.map(JSON.stringify))).map(JSON.parse);    
+                setSiteNavigationList(newData);
             }
                         
         }
@@ -230,12 +248,33 @@ const MiscSchema = () => {
           </td>
         </tr>
         <tr>
+          <td><strong>{__('Site Navigation Element', 'schema-package') }</strong></td>
+          <td>
+                    <Dropdown
+                      data_type="site_navigation"
+                      name="site_navigation"
+                      placeholder={__('Search for Menus', 'schema-package') }
+                      fluid
+                      multiple
+                      search
+                      selection
+                      value={miscSchema.site_navigations}
+                      onChange={handlePageChange}
+                      onSearchChange={handlePageSearch}
+                      options={siteNavigationList}
+                   />
+                   <span className="smpg-tooltip"><Popup content={__('Helps search engines understand the structure of your site\'s navigation menus and how different pages are connected.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} />
+                    <a className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/what-is-a-sitenavigationelement-schema-and-how-can-it-be-set-up-using-the-schema-package/'>{__('Learn More', 'schema-package')}</a>
+                   </span>  
+          </td>
+        </tr>
+        <tr>
           <td><strong>{__('About Pages', 'schema-package') }</strong></td>
           <td>
                     <Dropdown
                       data_type="about_page"
                       name="about_page"
-                      placeholder={__('Search For Page', 'schema-package') }
+                      placeholder={__('Search for Page', 'schema-package') }
                       fluid
                       multiple
                       search
@@ -256,7 +295,7 @@ const MiscSchema = () => {
                     <Dropdown
                       data_type="contact_page"
                       name="contact_page"
-                      placeholder={__('Search For Page', 'schema-package') }
+                      placeholder={__('Search for Page', 'schema-package') }
                       fluid
                       multiple
                       search

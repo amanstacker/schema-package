@@ -1004,6 +1004,55 @@ function smpg_prepare_website_json_ld() {
     return $json_ld;
 }
 
+function smpg_prepare_site_navigation_json_ld() {
+
+	global $smpg_misc_schema;
+	$json_ld = [];
+
+	// Run only if there are menus selected and we're on home or front page
+	if ( ! empty( $smpg_misc_schema['site_navigations'] ) && ( is_home() || is_front_page() ) ) {
+
+		$nav_items = [];
+
+		// Loop through each selected menu ID
+		foreach ( $smpg_misc_schema['site_navigations'] as $menu_id ) {
+
+			$menu_obj   = wp_get_nav_menu_object( $menu_id );
+			$menu_name  = $menu_obj ? $menu_obj->name : 'menu-' . $menu_id;
+			$menu_items = wp_get_nav_menu_items( $menu_id );
+
+			if ( ! empty( $menu_items ) && ! is_wp_error( $menu_items ) ) {
+
+				foreach ( $menu_items as $item ) {
+
+					// Skip invalid or empty URLs
+					if ( empty( $item->url ) ) {
+						continue;
+					}
+
+					$nav_items[] = [
+                        '@context' => smpg_get_context_url(),
+						'@type'    => 'SiteNavigationElement',
+						'@id'      => trailingslashit( get_home_url() ) . '#' . $menu_name,
+						'name'     => wp_strip_all_tags( $item->title ),
+						'url'      => $item->url,
+					];
+				}
+			}
+		}
+
+		if ( ! empty( $nav_items ) ) {
+			$json_ld = [
+				'@context' => smpg_get_context_url(),
+				'@graph'   => $nav_items,
+			];
+		}
+	}
+
+	return $json_ld;
+}
+
+
 function smpg_prepare_about_page_json_ld() {
 
 	global $smpg_misc_schema;

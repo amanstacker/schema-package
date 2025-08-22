@@ -371,8 +371,10 @@ function smpg_default_misc_schema_data() {
 		'website' 					=> 1,
 		'sitelinks_search_box' 		=> 0,
 		'breadcrumbs' 				=> 1,
+		'profilepage'				=> 0,
 		'about_pages' 				=> [],
 		'contact_pages' 			=> [],
+		'site_navigations' 			=> [],
 	];	  		
 	
 	return $defaults;

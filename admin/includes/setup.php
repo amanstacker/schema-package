@@ -595,7 +595,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 			
 			$data = apply_filters( 'smpg_local_filter', [
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
-				'rest_url'             => esc_url_raw( rest_url() ),
+				'rest_url'             => esc_url_raw( rest_url( 'smpg-route/' ) ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
 				'is_free'              => true

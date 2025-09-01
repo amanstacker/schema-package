@@ -16,7 +16,7 @@ const LicensePage = () => {
     };
 
     useEffect(() => {
-        let url = smpg_local.rest_url + 'smpg-route/license-data';
+        let url = smpg_local.rest_url + 'license-data';
         fetch(url,{
             headers: {
                 'Accept': 'application/json', 

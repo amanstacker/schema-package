@@ -14,7 +14,7 @@ export default function LicenseInformation({ licenseData, updateLicenseData }) {
   const handleApiRequest = async (edd_action) => {
     setLoading(edd_action);
     try {
-      let url = smpg_local.rest_url + 'smpg-route/license-action';
+      let url = smpg_local.rest_url + 'license-action';
       const response = await fetch(url, {
         method: "POST",
         headers: { 

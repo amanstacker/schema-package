@@ -95,7 +95,7 @@ const Settings = () => {
       formData.append("file", importFile);        
     }        
     formData.append("settings", JSON.stringify(settings));    
-    let url = smpg_local.rest_url + 'smpg-route/update-settings';
+    let url = smpg_local.rest_url + 'update-settings';
     fetch(url,{
       method: "post",
       headers: {
@@ -125,7 +125,7 @@ const Settings = () => {
     
     setMainSpinner(true);
 
-    let url = smpg_local.rest_url + "smpg-route/get-settings";
+    let url = smpg_local.rest_url + "get-settings";
       
       fetch(url, {
         headers: {                    
@@ -181,7 +181,7 @@ const Settings = () => {
       body_json.message  = supportMessage;
       body_json.email    = supportEmail;
       
-      let url = smpg_local.rest_url + 'smpg-route/send-customer-query';
+      let url = smpg_local.rest_url + 'send-customer-query';
 
       setIsQuerySent(false);
 
@@ -240,7 +240,7 @@ const Settings = () => {
 
   const handleGetPluginList = () => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-plugin-list?filter=has_own_json_ld";
+    let url = smpg_local.rest_url + "get-plugin-list" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "filter=has_own_json_ld";
         
     fetch(url, {
       headers: {                    
@@ -282,7 +282,7 @@ const Settings = () => {
     // setError(null);
     // setSuccess(null);
     try {
-      let fetch_url = smpg_local.rest_url + 'smpg-route/export-settings';
+      let fetch_url = smpg_local.rest_url + 'export-settings';
       const response = await fetch(fetch_url,{
         headers: {          
           'X-WP-Nonce': smpg_local.nonce,                  

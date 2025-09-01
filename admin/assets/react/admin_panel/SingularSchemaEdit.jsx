@@ -96,7 +96,7 @@ const SingularSchemaEdit = () => {
     try {
         setMainSpinner(true);
 
-        let url = smpg_local.rest_url + "smpg-route/get-schema-data?post_id=" + post_id;
+        let url = smpg_local.rest_url + "get-schema-data" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "post_id=" + post_id;        
         
         const response = await fetch(url, {
             headers: {                    
@@ -129,7 +129,7 @@ const SingularSchemaEdit = () => {
 
       setIsLoaded(false);
 
-      let url = smpg_local.rest_url + 'smpg-route/save-schema-data';
+      let url = smpg_local.rest_url + 'save-schema-data';
         
       fetch(url,{
         method: "post",
@@ -163,7 +163,7 @@ const SingularSchemaEdit = () => {
 
   const handleGetSchemaProperties = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-schema-properties?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "get-schema-properties" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_type=" + schema_type;
         
     fetch(url, {
       headers: {                    
@@ -184,7 +184,7 @@ const SingularSchemaEdit = () => {
   }
   const handleGetAutomation = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-automation-with?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "get-automation-with" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_type=" + schema_type;
         
     fetch(url, {
       headers: {                    
@@ -251,7 +251,7 @@ const SingularSchemaEdit = () => {
 
   const handlePlacementSearch = (type, search, name) => {
         
-      let url = smpg_local.rest_url + "smpg-route/placement-search?type="+type+"&search="+search;
+      let url = smpg_local.rest_url + "placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=" + type + "&search=" + search;
         
       fetch(url, {
         headers: {                    

@@ -565,17 +565,15 @@ const SingularSchemaEdit = () => {
       
       <div className="smpg-right-section">  
       { postMeta._schema_type != 'customschema' ?
-        <Accordion title="Schema Properties" isExpand={true}>  
-        <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
-        </div>
+        <Accordion title="Schema Properties" isExpand={true}>                  
         <div className="smpg-accordion-body">
+          <p>{__('No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values.', 'schema-package')} <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a></p>                              
           <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
         </div>      
         </Accordion>
       : '' }        
       
-       {postMeta._schema_type == 'article' ?
+       { ( postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' ) ?
         <Accordion title="Additional Schema" isExpand={true}>
           <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>

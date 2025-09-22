@@ -7,6 +7,9 @@ function smpg_get_service_individual_json_ld( $json_ld, $properties, $schema_typ
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );    
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
     }
@@ -203,6 +206,10 @@ function smpg_get_person_individual_json_ld( $json_ld, $properties, $schema_type
     
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
     
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
@@ -251,6 +258,10 @@ function smpg_get_webpage_individual_json_ld( $json_ld, $properties, $schema_typ
 
         $json_ld['@context']         = smpg_get_context_url();
         $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+        if(!empty($properties['id']['value'])){
+          $json_ld['@id'] =      $properties['id']['value'];
+        }
         
         if(!empty($properties['url']['value'])){
             $json_ld['url']                = $properties['url']['value'];
@@ -306,7 +317,10 @@ function smpg_get_profilepage_individual_json_ld( $json_ld, $properties, $schema
     
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
-    
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['date_created']['value'])){
         $json_ld['dateCreated']       = $properties['date_created']['value'];
     }
@@ -411,7 +425,10 @@ function smpg_get_event_individual_json_ld( $json_ld, $properties, $schema_type 
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
-    
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }    
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
     }
@@ -539,6 +556,9 @@ function smpg_get_jobposting_individual_json_ld( $json_ld, $properties, $schema_
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['title']['value'])){
        $json_ld['title'] =      $properties['title']['value'];
     }
@@ -651,6 +671,9 @@ function smpg_get_course_individual_json_ld( $json_ld, $properties, $schema_type
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+     if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
      }
@@ -760,6 +783,9 @@ function smpg_get_videoobject_individual_json_ld( $json_ld, $properties, $schema
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+     if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
      if(!empty($properties['video_name']['value'])){
         $json_ld['name'] =      $properties['video_name']['value'];
      }
@@ -824,6 +850,9 @@ function smpg_get_audioobject_individual_json_ld( $json_ld, $properties, $schema
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+     if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
      if(!empty($properties['video_name']['value'])){
         $json_ld['name'] =      $properties['video_name']['value'];
      }
@@ -922,7 +951,10 @@ function smpg_get_book_individual_json_ld($json_ld, $properties, $schema_type){
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
-        
+     
+     if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }     
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
      }
@@ -979,6 +1011,10 @@ function smpg_get_recipe_individual_json_ld( $json_ld, $properties, $schema_type
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
 
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
@@ -1105,6 +1141,9 @@ function smpg_get_howto_individual_json_ld( $json_ld, $properties, $schema_type)
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1199,6 +1238,9 @@ function smpg_get_softwareapplication_individual_json_ld( $json_ld, $properties,
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1233,6 +1275,9 @@ function smpg_get_imagegallery_individual_json_ld( $json_ld, $properties, $schem
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1251,6 +1296,9 @@ function smpg_get_mediagallery_individual_json_ld( $json_ld, $properties, $schem
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1269,6 +1317,9 @@ function smpg_get_imageobject_individual_json_ld( $json_ld, $properties, $schema
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1287,6 +1338,9 @@ function smpg_get_photograph_individual_json_ld( $json_ld, $properties, $schema_
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1311,6 +1365,9 @@ function smpg_get_apartment_individual_json_ld( $json_ld, $properties, $schema_t
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1329,6 +1386,9 @@ function smpg_get_house_individual_json_ld( $json_ld, $properties, $schema_type 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1347,6 +1407,9 @@ function smpg_get_review_individual_json_ld( $json_ld, $properties, $schema_type
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['review_body']['value'])){
         $json_ld['reviewBody'] =      $properties['review_body']['value'];
     }
@@ -1448,6 +1511,9 @@ function smpg_get_singlefamilyresidence_individual_json_ld( $json_ld, $propertie
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1466,6 +1532,9 @@ function smpg_get_mobileapplication_individual_json_ld( $json_ld, $properties, $
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1484,6 +1553,9 @@ function smpg_get_trip_individual_json_ld( $json_ld, $properties, $schema_type )
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1502,6 +1574,9 @@ function smpg_get_musicplaylist_individual_json_ld( $json_ld, $properties, $sche
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1520,6 +1595,9 @@ function smpg_get_certification_individual_json_ld( $json_ld, $properties, $sche
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1538,6 +1616,9 @@ function smpg_get_vacationrental_individual_json_ld( $json_ld, $properties, $sch
     $json_ld['@context'] = smpg_get_context_url();
     $json_ld['@type']    = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     // Basic details
     if ( ! empty( $properties['name']['value'] ) ) {
         $json_ld['name'] = $properties['name']['value'];
@@ -1719,6 +1800,9 @@ function smpg_get_musicalbum_individual_json_ld( $json_ld, $properties, $schema_
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1737,6 +1821,9 @@ function smpg_get_liveblogposting_individual_json_ld( $json_ld, $properties, $sc
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
     if(!empty($properties['name']['value'])){
        $json_ld['name'] =      $properties['name']['value'];
     }
@@ -1755,6 +1842,9 @@ function smpg_get_product_individual_json_ld( $json_ld, $properties, $schema_typ
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
      if(!empty($properties['name']['value'])){
         $json_ld['name'] =      $properties['name']['value'];
      }
@@ -1827,6 +1917,9 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
 
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+     }
     if(!empty($properties['name']['value'])){
         $json_ld['name']        =      $properties['name']['value'];
     }
@@ -1937,11 +2030,13 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
 
         $json_ld['@context']         = smpg_get_context_url();
         $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
-        
+
+        if(!empty($properties['id']['value'])){
+            $json_ld['@id'] =      $properties['id']['value'];
+        }    
         if(!empty($properties['url']['value'])){
             $json_ld['url']                = $properties['url']['value'];
-        }
-        
+        }        
         if(!empty($properties['headline']['value'])){
             $json_ld['headline']           = $properties['headline']['value'];
         }

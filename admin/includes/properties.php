@@ -266,6 +266,15 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'display'     => true,
             'tooltip'     => 'Name of the item'        
         ],               
+        'id' => [                        
+            'placeholder' => 'https://example.com/blog/post_name/#schema_type',
+            'label'       => 'ID',
+            'type'        => 'text',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => 'Globally unique identifier (IRI/URL) that you assign to a particular entity.'        
+        ],
         'headline' => [                        
             'placeholder' => 'Headline',                    
             'label'       => 'Headline',
@@ -274,7 +283,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'recommended' => true,
             'display'     => true,
             'tooltip'     => 'Headline of the article.'        
-        ],    
+        ],
         'description' => [                        
             'placeholder' => 'Description',                    
             'label'       => 'Description',                    
@@ -1019,6 +1028,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                 'id'                => $schema_id,           
                 'text'              => $article_type[$schema_id],
                 'properties'        => [                    
+                    'id'                  => $id,
                     'headline'            => $headline,
                     'description'         => $description,
                     'keywords'            => $keywords,
@@ -1067,6 +1077,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                 'id'                => 'webpage',
                 'text'              => 'WebPage',
                 'properties'        => [                    
+                    'id'                  => $id,
                     'headline'            => $headline,
                     'description'         => $description,
                     'keywords'            => $keywords,
@@ -1125,7 +1136,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                 'has_warning'       => false,
                 'id'                => 'qna',
                 'text'              => 'Q&A',
-                'properties'        => [                     
+                'properties'        => [         
+                    'id'                  => $id,            
                     'q_title' => [                                                                                                                                              
                         'label'       => 'Question Title',                    
                         'type'        => 'text',
@@ -1229,6 +1241,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'id'                => 'howto',
                     'text'              => 'HowTo',
                     'properties'        => [ 
+                            'id'                  => $id,
                             'name'                => $name,
                             'description'         => $description,                            
                             'e_cost_currency'     => $e_cost_currency,
@@ -1345,6 +1358,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'profilepage',           
                         'text'              => 'ProfilePage',
                         'properties'        => [
+                            'id'               => $id,
                             'date_created'     => $date_created,    
                             'date_modified'    => $date_modified,
                             'url'              => $url,
@@ -1374,6 +1388,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'book',           
                         'text'              => 'Book',
                         'properties'        => [
+                            'id'               => $id,
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,
@@ -1402,6 +1417,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'id'                => 'organization',           
                     'text'              => 'Organization',
                     'properties'        => [
+                        'id'               => $id,
                         'name'             => $name,    
                         'description'      => $description,
                         'url'              => $url,                                                
@@ -1436,6 +1452,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'course',           
                         'text'              => 'Course',
                         'properties'        => [
+                            'id'               => $id,
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,                                                                                                                    
@@ -1536,6 +1553,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => 'jobposting',           
                             'text'              => 'JobPosting',
                             'properties'        => [
+                                'id'               => $id,
                                 'title'            => $title,    
                                 'description'      => $description,
                                 'url'              => $url,
@@ -1664,6 +1682,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => 'vacationrental',           
                             'text'              => 'VacationRental',                            
                             'properties'        => [                                
+                                'id'               => $id,
                                 'name'             => $name,    
                                 'additional_type'          => [
                                     'label'       => 'Vacation Rental Type',
@@ -1876,6 +1895,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => $schema_id,           
                             'text'              => $business_type[$schema_id],
                             'properties'        => [                                
+                                'id'               => $id,
                                 'name'             => $name,    
                                 'description'      => $description,
                                 'url'              => $url,                                                                                                                    
@@ -1975,6 +1995,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => 'certification',           
                             'text'              => 'Certification',
                             'properties'        => [                                
+                                'id'               => $id,
                                 'name'             => $name,    
                                 'description'      => $description,
                                 'url'              => $url                                
@@ -1999,7 +2020,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'has_warning'       => false,
                             'id'                => $schema_id,           
                             'text'              => $service_type[$schema_id],
-                            'properties'        => [                                
+                            'properties'        => [
+                                'id'              => $id,                                
                                 'service_type'          => [
                                     'label'       => 'Service Type',                    
                                     'type'        => 'text',                                    
@@ -2245,6 +2267,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'id'                => 'event',           
                             'text'              => 'Event',
                             'properties'        => [
+                                'id'               => $id,
                                 'name'             => $name,    
                                 'description'      => $description,
                                 'url'              => $url,
@@ -2361,6 +2384,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'recipe',           
                         'text'              => 'Recipe',
                         'properties'        => [
+                            'id'               => $id,
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,                                                                                    
@@ -2668,6 +2692,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'videoobject',           
                         'text'              => 'VideoObject',
                         'properties'        => [
+                            'id'               => $id,
                             'video_name'       => $video_name,    
                             'description'      => $description,
                             'url'              => $url,
@@ -2726,6 +2751,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'review',
                         'text'              => 'Review',
                         'properties'        => [                                                      
+                            'id'                  => $id,
                             'review_body'         => $review_body,
                             'date_published'      => $date_published,
                             'item_reviewed' =>  [
@@ -2798,6 +2824,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'audioobject',           
                         'text'              => 'AudioObject',
                         'properties'        => [
+                            'id'               => $id,
                             'name'             => $name,    
                             'description'      => $description,
                             'url'              => $url,
@@ -2827,6 +2854,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'softwareapplication',           
                         'text'              => 'SoftwareApplication',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description,
                                 'operating_system'     => $operating_system,
@@ -2855,6 +2883,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'imagegallery',
                         'text'              => 'ImageGallery',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description,                                
                                 'url'                  => $url                                
@@ -2874,6 +2903,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'mediagallery',
                         'text'              => 'MediaGallery',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -2893,6 +2923,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'imageobject',
                         'text'              => 'ImageObject',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -2912,6 +2943,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'photograph',
                         'text'              => 'Photograph',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url,
@@ -2931,6 +2963,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'apartment',
                         'text'              => 'Apartment',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -2950,6 +2983,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'house',
                         'text'              => 'House',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -2969,6 +3003,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'singlefamilyresidence',
                         'text'              => 'SingleFamilyResidence',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -2988,6 +3023,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'mobileapplication',
                         'text'              => 'MobileApplication',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -3007,6 +3043,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'trip',
                         'text'              => 'Trip',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -3026,6 +3063,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'musicplaylist',
                         'text'              => 'MusicPlaylist',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -3045,6 +3083,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'musicalbum',
                         'text'              => 'MusicAlbum',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -3064,6 +3103,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'liveblogposting',
                         'text'              => 'LiveBlogPosting',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                 => $name, 
                                 'description'          => $description, 
                                 'url'                  => $url                                                                                          
@@ -3083,6 +3123,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'person',           
                         'text'              => 'Person',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'               => $name,
                                 'job_title'          => $job_title,
                                 'email'              => $email,
@@ -3110,6 +3151,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'                => 'product',           
                         'text'              => 'Product',
                         'properties'        => [
+                                'id'                  => $id,
                                 'name'                   => $name,
                                 'description'            => $description,                           
                                 'image'                  => $image,

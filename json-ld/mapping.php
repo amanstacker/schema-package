@@ -134,19 +134,27 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                             
                     }else{
                         
-                        if ( $key === 'prepTime' || $key === 'cookTime' || $key === 'totalTime' ) {
-                            
-                            $json_ld[$key] = smpg_convert_number_to_iso_time( $mapped_value );
+                        switch ( $key ) {
 
-                        } else if ( $key === 'recipeInstructions' ) {
+                            case 'prepTime':
+                            case 'cookTime':
+                            case 'totalTime':
+                                $json_ld[ $key ] = smpg_convert_number_to_iso_time( $mapped_value );
+                                break;
 
-                            $json_ld[$key] = smpg_convert_instructions_to_howto_format( $mapped_value );
+                            case 'recipeInstructions':
+                                $json_ld[ $key ] = smpg_convert_instructions_to_howto_format( $mapped_value );
+                                break;
 
-                        } else {
+                            case 'id':
+                                $json_ld['@id'] = $mapped_value;
+                                break;
 
-                            $json_ld[$key] = $mapped_value;
-                            
+                            default:
+                                $json_ld[ $key ] = $mapped_value;
+                                break;
                         }
+
 
                     }
                     

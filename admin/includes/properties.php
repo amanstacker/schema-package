@@ -946,7 +946,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'satiricalarticle'         => 'SatiricalArticle',
         'scholarlyarticle'         => 'ScholarlyArticle',
         'socialmediaposting'       => 'SocialMediaPosting',
-        'creativework'             => 'creativework',
+        'creativework'             => 'CreativeWork',
+        'report'                   => 'Report',
     ];
     $service_type = [
             'service'                   => 'Service',
@@ -1009,6 +1010,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         case 'scholarlyarticle':
         case 'socialmediaposting':
         case 'creativework':
+        case 'report':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 
@@ -1037,6 +1039,17 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'image'               => $image
                 ]
             ];
+
+            if ( $schema_id == 'report' ) {
+                
+                $properties['properties']['report_number'] = [
+                                    'label'       => 'Report Number',
+                                    'type'        => 'text',
+                                    'placeholder' => '75847575',
+                                    'value'       => '',
+                                    'display'     => true
+                            ];
+            }
             
             if ( $schema_id == 'creativework' ) {
                 unset( $properties['properties']['word_count'] );

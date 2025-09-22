@@ -54,5 +54,6 @@ export const schemaTypes = [
     { key: 52, value: 'webpage', text: 'WebPage' },
     { key: 53, value: 'organization', text: 'Organization' },
     { key: 54, value: 'certification', text: 'Certification' },
-    { key: 55, value: 'vacationrental', text: 'VacationRental' }
+    { key: 55, value: 'vacationrental', text: 'VacationRental' },
+    { key: 56, value: 'report', text: 'Report' }
 ];

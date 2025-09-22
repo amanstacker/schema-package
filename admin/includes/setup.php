@@ -533,7 +533,7 @@ function smpg_get_schema_type_text( $id ) {
 		'organization'              => 'Organization',
 		'certification'             => 'Certification',
 		'vacationrental'            => 'VacationRental',
-
+		'report'            	    => 'Report',
 	];	
 
 	if ( array_key_exists( $id, $response ) ) {

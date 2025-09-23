@@ -107,9 +107,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [WebSite](https://schema.org/WebSite)
 - [WebPage](https://schema.org/WebPage)
 - [Article](https://schema.org/Article)
+- [Report](https://schema.org/Report)
 - [NewsArticle](https://schema.org/NewsArticle)
 - [BlogPosting](https://schema.org/BlogPosting)
 - [Guide](https://schema.org/Guide)
+- [DiscussionForumPosting](https://schema.org/DiscussionForumPosting)
 - [FAQPage](https://schema.org/FAQPage)
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
@@ -162,7 +164,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Athlete](https://schema.org/Person)
 - [Politician](https://schema.org/Person)
 
-#### 7. Health & Medical
+#### 7. Health & Medical ( Premium )
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [Hospital](https://schema.org/Hospital)
 - [Physician](https://schema.org/Physician)

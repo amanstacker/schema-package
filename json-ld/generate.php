@@ -40,6 +40,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'socialmediaposting':
         case 'creativework':
         case 'report':
+        case 'discussionforumposting':
             
             $json_ld = smpg_get_different_article_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -326,6 +327,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             case 'socialmediaposting':     
             case 'creativework':
             case 'report':
+            case 'discussionforumposting':
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );

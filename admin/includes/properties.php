@@ -957,6 +957,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'socialmediaposting'       => 'SocialMediaPosting',
         'creativework'             => 'CreativeWork',
         'report'                   => 'Report',
+        'discussionforumposting'   => 'DiscussionForumPosting',
     ];
     $service_type = [
             'service'                   => 'Service',
@@ -1020,6 +1021,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         case 'socialmediaposting':
         case 'creativework':
         case 'report':
+        case 'discussionforumposting':
             $properties = [                
                 'is_enable'         => true,
                 'is_delete_popup'   => false, 

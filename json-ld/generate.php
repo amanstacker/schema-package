@@ -6,8 +6,9 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
 
     $json_ld = [];    
     
-    $properties  = $schema_data['properties'];  
-    $schema_type = $schema_data['id'];  
+    $properties    = $schema_data['properties'];  
+    $properties    = smpg_replace_properties_placeholders( $properties );
+    $schema_type   = $schema_data['id'];  
             
     switch ( $schema_type ) {
         

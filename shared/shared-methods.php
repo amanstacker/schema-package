@@ -84,7 +84,7 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 				switch ( $field_type ) {
 
 					case 'text':					
-						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
+						$sanitized_array[ $sanitized_key ] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value ) ? $value : sanitize_text_field( $value );						
 						break;
 					case 'select':					
 						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
@@ -201,8 +201,8 @@ function smpg_sanitize_schema_meta( $data ) {
 							$sanitized_data[$sanitized_key] = smpg_sanitize_schema_array( $value, $value['type'] );                            
                             break;                        
                         default:
-                            // Unknown type, sanitize as text
-                            $sanitized_data[$sanitized_key] = sanitize_text_field( $value['value'] );
+                            // Unknown type, sanitize as text                            
+							$sanitized_data[$sanitized_key] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value['value'] ) ? $value['value'] : sanitize_text_field( $value['value'] );
                             break;
                     }
                 } else {
@@ -218,8 +218,9 @@ function smpg_sanitize_schema_meta( $data ) {
 				}elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
 					// Sanitize URLs
 					$sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
-				}else{
-					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );					
+				}else{					
+					// Allow placeholders like %%post_title%%
+                    $sanitized_data[$sanitized_key] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value) ? $value : sanitize_text_field( $value );
 				}
                 
             }

@@ -80,7 +80,7 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                         $mapped_value = get_the_content();
                         break;
                     case 'custom_text':                                        
-                        $mapped_value = $value['custom_text'];                    
+                        $mapped_value = smpg_replace_variables_and_placeholders( $value['custom_text'] );
                         break;
                     case 'custom_image':                
                         $mapped_value = $value['custom_image'];
@@ -228,6 +228,45 @@ function smpg_map_nested_schema_property( &$json_ld, $properties, $key, $child_v
 }
 
 /**
+ * Replace placeholder values in a schema properties array.
+ *
+ * @param array $properties Schema properties array (like the one you provided).
+ * @return array Updated properties array with replaced values.
+ */
+function smpg_replace_properties_placeholders( $properties ) {
+    
+    global $smpg_settings; 
+    
+    if ( empty( $smpg_settings['dynamic_placeholders'] ) ) {
+        return $properties;
+    }
+
+    if ( ! is_array( $properties ) ) {
+        return $properties;
+    }
+
+    foreach ( $properties as $key => $property ) {
+        // Only replace if 'value' exists
+        if ( isset( $property['value'] ) && $property['value'] !== '' && !is_array( $property['value'] ) ) {
+            $properties[ $key ]['value'] = smpg_replace_variables_and_placeholders( $property['value'] );
+        }
+
+        // Recursively handle nested arrays, e.g., media arrays or complex structures
+        if ( is_array( $property ) ) {
+            foreach ( $property as $sub_key => $sub_value ) {
+                if ( is_array( $sub_value ) ) {
+                    $properties[ $key ][ $sub_key ] = smpg_replace_properties_placeholders( $sub_value );
+                }
+            }
+        }        
+        
+    }
+
+    return $properties;
+}
+
+
+/**
  * Replace Schema placeholders with dynamic values (multi-author supported).
  *
  * @param string $schema JSON-LD schema string with placeholders.
@@ -236,7 +275,11 @@ function smpg_map_nested_schema_property( &$json_ld, $properties, $key, $child_v
  */
 function smpg_replace_variables_and_placeholders( $schema, $post_id = null ) {
 
-	global $post;
+	global $post, $smpg_settings;
+
+    if ( empty( $smpg_settings['dynamic_placeholders'] ) ) {
+        return $schema;
+    }
 
 	if ( ! $post_id && $post ) {
 		$post_id = $post->ID;

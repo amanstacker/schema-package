@@ -37,7 +37,8 @@ const Settings = () => {
         website_json_ld:          true,
         defragment_json_ld:       false,  
         json_ld_in_footer:        false,
-        json_ld_in_rest:          false,        
+        json_ld_in_rest:          false, 
+        dynamic_placeholders:     false,        
         clean_micro_data:         false,  
         clean_rdfa_data:          false,  
         multisize_image:          false,
@@ -436,6 +437,18 @@ const Settings = () => {
             <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                                    
+                  <tr>
+                    <th><label htmlFor="dynamic_placeholders">{__('Dynamic Placeholders', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='dynamic_placeholders'
+                      id='dynamic_placeholders' 
+                      checked={!!settings.dynamic_placeholders}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                  
                   <tr>
                     <th><label htmlFor="json_ld_in_rest">{__('JSON-LD in Rest API', 'schema-package')}</label></th>
                     <td>

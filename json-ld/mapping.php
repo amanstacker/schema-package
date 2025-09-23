@@ -226,3 +226,174 @@ function smpg_map_nested_schema_property( &$json_ld, $properties, $key, $child_v
 
     $ref[$child_key] = $child_value;
 }
+
+/**
+ * Replace Schema placeholders with dynamic values (multi-author supported).
+ *
+ * @param string $schema JSON-LD schema string with placeholders.
+ * @param int|null $post_id Post ID (optional, defaults to current post).
+ * @return string Schema with replaced values.
+ */
+function smpg_replace_variables_and_placeholders( $schema, $post_id = null ) {
+
+	global $post;
+
+	if ( ! $post_id && $post ) {
+		$post_id = $post->ID;
+	}
+
+	if ( ! $post_id ) {
+		return $schema;
+	}
+
+	// Basic post data.
+	$post_obj         = get_post( $post_id );
+	$post_title       = get_the_title( $post_id );
+	$post_excerpt     = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : '';
+	$post_content     = wp_strip_all_tags( $post_obj->post_content );
+	$post_url         = get_permalink( $post_id );
+	$post_type        = get_post_type( $post_id );
+	$date_published   = get_the_date( 'c', $post_id );
+	$date_modified    = get_the_modified_date( 'c', $post_id );
+	$featured_image   = get_the_post_thumbnail_url( $post_id, 'full' );
+
+	// Handle authors (default single + multi-author if plugin exists).
+	$authors = [];
+
+	// Co-Authors Plus support.
+	if ( function_exists( 'get_coauthors' ) ) {
+		$coauthors = get_coauthors( $post_id );
+		foreach ( $coauthors as $author ) {
+			$authors[] = [
+				'name'   => $author->display_name,
+				'first'  => $author->first_name,
+				'last'   => $author->last_name,
+				'url'    => get_author_posts_url( $author->ID ),
+				'bio'    => $author->description,
+				'avatar' => get_avatar_url( $author->ID ),
+			];
+		}
+	} else {
+		// Default WP single author.
+		$author_id = $post_obj->post_author;
+		$authors[] = [
+			'name'   => get_the_author_meta( 'display_name', $author_id ),
+			'first'  => get_the_author_meta( 'first_name', $author_id ),
+			'last'   => get_the_author_meta( 'last_name', $author_id ),
+			'url'    => get_author_posts_url( $author_id ),
+			'bio'    => get_the_author_meta( 'description', $author_id ),
+			'avatar' => get_avatar_url( $author_id ),
+		];
+	}
+
+	// Site data.
+	$site_name        = get_bloginfo( 'name' );
+	$site_description = get_bloginfo( 'description' );
+	$site_url         = home_url();
+	$site_email       = get_bloginfo( 'admin_email' );
+
+	// Try site logo from WP core.
+	$custom_logo_id   = get_theme_mod( 'custom_logo' );
+	$site_logo        = $custom_logo_id ? wp_get_attachment_image_url( $custom_logo_id, 'full' ) : '';
+
+	// Categories and tags.
+	$categories       = implode( ', ', wp_get_post_terms( $post_id, 'category', [ 'fields' => 'names' ] ) );
+	$tags             = implode( ', ', wp_get_post_terms( $post_id, 'post_tag', [ 'fields' => 'names' ] ) );
+
+	// Additional images (gallery/attachments).
+	$attachments      = get_attached_media( 'image', $post_id );
+	$images           = [];
+	if ( $attachments ) {
+		foreach ( $attachments as $attachment ) {
+			$images[] = wp_get_attachment_url( $attachment->ID );
+		}
+	}
+	$image_1 = isset( $images[0] ) ? $images[0] : '';
+	$image_2 = isset( $images[1] ) ? $images[1] : '';
+	$image_3 = isset( $images[2] ) ? $images[2] : '';
+
+	// Core placeholder replacements.
+	$replacements = [
+		'%%post_title%%'        => $post_title,
+		'%%post_excerpt%%'      => $post_excerpt,
+		'%%post_content%%'      => $post_content,
+		'%%post_url%%'          => $post_url,
+		'%%post_id%%'           => $post_id,
+		'%%post_type%%'         => $post_type,
+		'%%date_published%%'    => $date_published,
+		'%%date_modified%%'     => $date_modified,
+		'%%featured_image%%'    => $featured_image,
+		'%%image_1%%'           => $image_1,
+		'%%image_2%%'           => $image_2,
+		'%%image_3%%'           => $image_3,
+		'%%categories%%'        => $categories,
+		'%%tags%%'              => $tags,
+		// Default (first) author placeholders.
+		'%%author_name%%'       => isset( $authors[0]['name'] ) ? $authors[0]['name'] : '',
+		'%%author_first_name%%' => isset( $authors[0]['first'] ) ? $authors[0]['first'] : '',
+		'%%author_last_name%%'  => isset( $authors[0]['last'] ) ? $authors[0]['last'] : '',
+		'%%author_url%%'        => isset( $authors[0]['url'] ) ? $authors[0]['url'] : '',
+		'%%author_bio%%'        => isset( $authors[0]['bio'] ) ? $authors[0]['bio'] : '',
+		'%%author_avatar%%'     => isset( $authors[0]['avatar'] ) ? $authors[0]['avatar'] : '',
+		// Site placeholders.
+		'%%site_name%%'         => $site_name,
+		'%%site_description%%'  => $site_description,
+		'%%site_url%%'          => $site_url,
+		'%%site_logo%%'         => $site_logo,
+		'%%site_email%%'        => $site_email,
+	];
+
+	// Add dynamic multi-author placeholders.
+	if ( $authors ) {
+		foreach ( $authors as $index => $author ) {
+			$author_num = $index + 1;
+			$replacements[ "%%author_{$author_num}_name%%" ]   = $author['name'];
+			$replacements[ "%%author_{$author_num}_first%%" ]  = $author['first'];
+			$replacements[ "%%author_{$author_num}_last%%" ]   = $author['last'];
+			$replacements[ "%%author_{$author_num}_url%%" ]    = $author['url'];
+			$replacements[ "%%author_{$author_num}_bio%%" ]    = $author['bio'];
+			$replacements[ "%%author_{$author_num}_avatar%%" ] = $author['avatar'];
+		}
+	}
+
+	// Replace static placeholders.
+	$schema = str_replace( array_keys( $replacements ), array_values( $replacements ), $schema );
+
+	// Handle dynamic placeholders: custom fields, taxonomies, meta, shortcodes.
+	$schema = preg_replace_callback(
+		'/%%custom_field_([a-zA-Z0-9_-]+)%%/',
+		function( $matches ) use ( $post_id ) {
+			$value = get_post_meta( $post_id, $matches[1], true );
+			return $value ? esc_html( $value ) : '';
+		},
+		$schema
+	);
+
+	$schema = preg_replace_callback(
+		'/%%taxonomy_([a-zA-Z0-9_-]+)%%/',
+		function( $matches ) use ( $post_id ) {
+			$terms = wp_get_post_terms( $post_id, $matches[1], [ 'fields' => 'names' ] );
+			return $terms ? implode( ', ', $terms ) : '';
+		},
+		$schema
+	);
+
+	$schema = preg_replace_callback(
+		'/%%meta_([a-zA-Z0-9_-]+)%%/',
+		function( $matches ) use ( $post_id ) {
+			$value = get_post_meta( $post_id, $matches[1], true );
+			return $value ? esc_html( $value ) : '';
+		},
+		$schema
+	);
+
+	$schema = preg_replace_callback(
+		'/%%shortcode_\[([^\]]+)\]%%/',
+		function( $matches ) {
+			return do_shortcode( '[' . $matches[1] . ']' );
+		},
+		$schema
+	);
+
+	return $schema;
+}

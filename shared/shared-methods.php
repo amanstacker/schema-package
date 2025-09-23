@@ -219,7 +219,7 @@ function smpg_sanitize_schema_meta( $data ) {
 					// Sanitize URLs
 					$sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
 				}else{
-					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );
+					$sanitized_data[$sanitized_key] = sanitize_text_field( $value );					
 				}
                 
             }
@@ -227,8 +227,8 @@ function smpg_sanitize_schema_meta( $data ) {
 
         return $sanitized_data;
     }
-
-    return sanitize_text_field( $data );
+	// Allow placeholders like %%post_title%%
+    return preg_match('/%%[a-zA-Z0-9_\-]+%%/', $data ) ? $data : sanitize_text_field( $data );
 }
 
 function smpg_get_posts_by_arg( $arg ) {

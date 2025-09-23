@@ -994,7 +994,8 @@ function smpg_get_custom_schema_individual_json_ld( $json_ld, $properties, $sche
 
     if ( ! empty ( $properties['editor']['value'] ) ) {
 
-        $js_decoded = json_decode( $properties['editor']['value'], true );
+        $replaced_data = smpg_replace_variables_and_placeholders( $properties['editor']['value'] );                
+        $js_decoded = json_decode( $replaced_data, true );        
         
         if ( json_last_error() === JSON_ERROR_NONE ) {
 

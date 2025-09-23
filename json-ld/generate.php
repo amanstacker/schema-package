@@ -305,9 +305,10 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         
             case 'customschema':
 
-            if ( ! empty( $schema_data['_custom_schema'][0] ) ) {
-
-                $js_decoded = json_decode( $schema_data['_custom_schema'][0], true );
+            if ( ! empty( $schema_data['_custom_schema'][0] ) ) {                
+                
+                $replaced_data = smpg_replace_variables_and_placeholders( $schema_data['_custom_schema'][0] );                
+                $js_decoded = json_decode( $replaced_data, true );
         
                 if ( json_last_error() === JSON_ERROR_NONE ) {
 

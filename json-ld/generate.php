@@ -6,8 +6,9 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
 
     $json_ld = [];    
     
-    $properties  = $schema_data['properties'];  
-    $schema_type = $schema_data['id'];  
+    $properties    = $schema_data['properties'];  
+    $properties    = smpg_replace_properties_placeholders( $properties );
+    $schema_type   = $schema_data['id'];  
             
     switch ( $schema_type ) {
         
@@ -39,6 +40,8 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'scholarlyarticle':
         case 'socialmediaposting':
         case 'creativework':
+        case 'report':
+        case 'discussionforumposting':
             
             $json_ld = smpg_get_different_article_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -296,14 +299,17 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
     if ( empty( $schema_data['_schema_type'][0] ) ) {
         return $json_ld;
     }      
+
+    $schema_type_key = $schema_data['_schema_type'][0];
                               
-    switch ( $schema_data['_schema_type'][0] ) {
+    switch ( $schema_type_key ) {
         
             case 'customschema':
 
-            if ( ! empty( $schema_data['_custom_schema'][0] ) ) {
-
-                $js_decoded = json_decode( $schema_data['_custom_schema'][0], true );
+            if ( ! empty( $schema_data['_custom_schema'][0] ) ) {                
+                
+                $replaced_data = smpg_replace_variables_and_placeholders( $schema_data['_custom_schema'][0] );                
+                $js_decoded = json_decode( $replaced_data, true );
         
                 if ( json_last_error() === JSON_ERROR_NONE ) {
 
@@ -322,16 +328,19 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             case 'scholarlyarticle':
             case 'socialmediaposting':     
             case 'creativework':
+            case 'report':
+            case 'discussionforumposting':
             
             $json_ld['@context']                  = smpg_get_context_url();
-            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']                       = smpg_get_permalink();
             $json_ld['headline']                  = smpg_get_the_title();
             $json_ld['description']               = smpg_get_description();    
             $json_ld['datePublished']             = smpg_get_published_date();
             $json_ld['dateModified']              = smpg_get_modified_date();    
 
-            if ( $schema_data['_schema_type'][0] != 'creativework' ) {
+            if ( $schema_type_key != 'creativework' ) {
 
                 $json_ld['wordCount']                 = smpg_get_word_count();
                 $json_ld['articleSection']            = smpg_get_categories();
@@ -361,7 +370,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'webpage':
             
             $json_ld['@context']                  = smpg_get_context_url();
-            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']                       = smpg_get_permalink();            
             $json_ld['description']               = smpg_get_description();                     
             $json_ld['inLanguage']                = smpg_get_inlanguage();
@@ -380,7 +390,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'profilepage':
             
             $json_ld['@context']                  = smpg_get_context_url();
-            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']                       = smpg_get_permalink();            
             $json_ld['description']               = smpg_get_description();    
             $json_ld['dateCreated']               = smpg_get_published_date();                                        
@@ -400,7 +411,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'person':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']              = smpg_get_permalink();
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
@@ -411,7 +423,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'jobposting':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']              = smpg_get_permalink();
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
@@ -456,7 +469,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'faqpage':
 
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']              = smpg_get_permalink();
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
@@ -529,7 +543,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'review':
             $json_ld['@context']                         = smpg_get_context_url();
-            $json_ld['@type']                            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']                            = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']                              = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['reviewBody']                       = smpg_get_description();    
             $json_ld['datePublished']                    = smpg_get_published_date();
             $json_ld['author']                           = smpg_get_author_detail();
@@ -674,7 +689,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         
         case 'book':
             $json_ld['@context']         = smpg_get_context_url();
-            $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
+            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
             $json_ld['url']              = smpg_get_permalink();
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
@@ -1126,6 +1142,7 @@ function smpg_common_default_json_ld( $json_ld, $schema_data ) {
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+    $json_ld['@id']              = smpg_get_permalink().'#'.$schema_data['_schema_type'][0];
     $json_ld['url']              = smpg_get_permalink();
     $json_ld['name']             = smpg_get_the_title();
     $json_ld['description']      = smpg_get_description();    

@@ -23,7 +23,7 @@ const LicenseActivation = ({ licenseData, updateLicenseData }) => {
     setStatus("");
 
     try {
-      let url = smpg_local.rest_url + 'smpg-route/license-action';
+      let url = smpg_local.rest_url + 'license-action';
       const response = await fetch( url, {
         method: "POST",
         headers: {

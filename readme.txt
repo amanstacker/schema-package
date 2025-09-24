@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.20
+Stable tag: 1.0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,9 +26,7 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
-* <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
-* <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
-* <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Advanced Custom Fields </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
 * <strong>Custom Schema</strong>: Custom Schema lets you add your own JSON-LD markup to individual posts or across your entire site, giving you full control and advanced flexibility beyond built-in schema types.
@@ -36,9 +34,13 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>Schema Package Generator Control Center</strong>: Enable SPG based on selected post types, taxonomies or author profile.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
-* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup
+* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup.
+* <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
+* <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
+* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
@@ -84,9 +86,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [WebSite](https://schema.org/WebSite)
 - [WebPage](https://schema.org/WebPage)
 - [Article](https://schema.org/Article)
+- [Report](https://schema.org/Report)
 - [NewsArticle](https://schema.org/NewsArticle)
 - [BlogPosting](https://schema.org/BlogPosting)
 - [Guide](https://schema.org/Guide)
+- [DiscussionForumPosting](https://schema.org/DiscussionForumPosting)
 - [FAQPage](https://schema.org/FAQPage)
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
@@ -141,7 +145,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Athlete](https://schema.org/Person)
 - [Politician](https://schema.org/Person)
 
-=== 7. Health & Medical ===
+=== 7. Health & Medical ( Premium ) ===
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [Hospital](https://schema.org/Hospital)
 - [Physician](https://schema.org/Physician)
@@ -484,8 +488,44 @@ To explore all the advanced features and benefits included in the Schema Package
 🔗 https://schemapackage.com/premium/
 
 
+== Screenshots ==
+
+1. `screenshot-1.png` - Overview of the Schema Package dashboard
+2. `screenshot-2.png` - Miscellaneous schema setup dashboard
+3. `screenshot-3.png` - Complete Schema Package settings overview
+4. `screenshot-4.png` - Singular schema edit page
+5. `screenshot-5.png` - Singular schema targeting options overview
+6. `screenshot-6.png` - Carousel schema edit page
+7. `screenshot-7.png` - Carousel schema targeting options overview
+8. `screenshot-8.png` - Schema Package tools settings overview
+9. `screenshot-9.png` - Schema Package Generator popup
+10. `screenshot-10.png` - Selecting a schema type in Schema Package Generator
+11. `screenshot-11.png` - List of added schema types via Schema Package Generator in Classic Editor
+12. `screenshot-12.png` - Editing added schema types via Schema Package Generator
+13. `screenshot-13.png` - List of added schema types via Schema Package Generator in Gutenberg Editor
+14. `screenshot-14.png` - JSON-LD output in page source
+
+== Upgrade Notice ==
+= 1.0.21 =
+This update brings several useful improvements and new features:
+
+* Added support for the ID property across all schema types.
+* Improved messages in the schema mapping properties list for better clarity.
+* Added two new schema types: DiscussionForumPosting and Report.
+* Variables and placeholders can now be used to dynamically populate schema data.
+* Fixed minor bugs to make the plugin more stable and reliable.
+
 
 == Changelog ==
+
+= 1.0.21 =
+
+* Added: ID property support for all schema types  
+* Added: Clearer messages in the schema mapping properties list  
+* Added: DiscussionForumPosting schema type  
+* Added: Report schema type  
+* Added: Variables and placeholders support  
+* Fixed: Minor bugs
 
 = 1.0.20 =
 

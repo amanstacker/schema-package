@@ -46,7 +46,7 @@ const MiscSchema = () => {
     const formData = new FormData();
             
     formData.append("misc_schema", JSON.stringify(miscSchema));    
-    let url = smpg_local.rest_url + 'smpg-route/update-misc-schema';
+    let url = smpg_local.rest_url + 'update-misc-schema';
     fetch(url,{
       method: "post",
       headers: {
@@ -72,7 +72,7 @@ const MiscSchema = () => {
     
       setMainSpinner(true);
 
-      let url = smpg_local.rest_url + "smpg-route/get-misc-schema";
+      let url = smpg_local.rest_url + "get-misc-schema";
       
       fetch(url, {
         headers: {                    
@@ -117,10 +117,10 @@ const MiscSchema = () => {
 
   const handlePlacementSearch = (search, name) => {
     
-    let url = smpg_local.rest_url + "smpg-route/placement-search?type=page&search="+search;
+    let url = smpg_local.rest_url + "placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=page&search=" + search;
 
     if((name).includes('site_navigation')){
-        url = smpg_local.rest_url + "smpg-route/placement-search?type=menu&search="+search;
+        url = smpg_local.rest_url + "placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=menu&search=" + search;
     }
           
     fetch(url, {

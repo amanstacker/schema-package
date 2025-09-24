@@ -316,7 +316,7 @@ const {
     body_json.user_id        = smpg_local.user_id;
     body_json.post_meta      = postMeta;        
     
-    let url = smpg_local.rest_url + 'smpg-route/save-post-meta';
+    let url = smpg_local.rest_url + 'save-post-meta';
       
     fetch(url,{
       method: "post",
@@ -390,7 +390,7 @@ const {
 
     }else{
         
-        let url = smpg_local.rest_url + "smpg-route/get-repeater-element?schema_id="+ copyMeta[i]['id'] + "&element_name=" + j ;
+        let url = smpg_local.rest_url + "get-repeater-element" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_id=" + copyMeta[i]['id'] + "&element_name=" + j;
         
         fetch(url, {
         headers: {                    
@@ -428,7 +428,7 @@ const {
         body_json.user_id       = smpg_local.user_id;
         body_json.init          = init;        
         
-        let url = smpg_local.rest_url + 'smpg-route/get-selected-schema-properties';
+        let url = smpg_local.rest_url + 'get-selected-schema-properties';
         
         fetch(url,{
         method: "post",

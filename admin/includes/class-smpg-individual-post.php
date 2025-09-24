@@ -141,7 +141,7 @@ class SMPG_Individual_Post {
                         
             $local_data = [
                 'smpg_plugin_url'      => SMPG_PLUGIN_URL,
-                'rest_url'             => esc_url_raw( rest_url() ),
+                'rest_url'             => esc_url_raw( rest_url( 'smpg-individual-route/' ) ),
                 'nonce'                => wp_create_nonce( 'wp_rest' ),
                 'post_id'              => get_the_ID(),
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data

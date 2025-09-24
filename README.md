@@ -46,6 +46,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
+* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
@@ -57,7 +58,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>Schema Package Generator Control Center</strong>: Enable SPG based on selected post types, taxonomies or author profile.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
-* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup
+* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup.
+* <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
@@ -106,9 +108,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [WebSite](https://schema.org/WebSite)
 - [WebPage](https://schema.org/WebPage)
 - [Article](https://schema.org/Article)
+- [Report](https://schema.org/Report)
 - [NewsArticle](https://schema.org/NewsArticle)
 - [BlogPosting](https://schema.org/BlogPosting)
 - [Guide](https://schema.org/Guide)
+- [DiscussionForumPosting](https://schema.org/DiscussionForumPosting)
 - [FAQPage](https://schema.org/FAQPage)
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
@@ -161,7 +165,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Athlete](https://schema.org/Person)
 - [Politician](https://schema.org/Person)
 
-#### 7. Health & Medical
+#### 7. Health & Medical ( Premium )
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [Hospital](https://schema.org/Hospital)
 - [Physician](https://schema.org/Physician)

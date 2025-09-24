@@ -30,21 +30,21 @@ class SMPG_Api_Individual_Controller {
         
         public function register_admin_routes() {
             
-            register_rest_route( 'smpg-individual-router', 'get-repeater-element', [
+            register_rest_route( 'smpg-individual-route', 'get-repeater-element', [
                 'methods'    => 'GET',
                 'callback'   => [ $this->_apiAction, 'get_repeater_element' ],
                 'permission_callback' => function() {
                     return current_user_can( 'manage_options' );
                 }
             ]);            
-            register_rest_route( 'smpg-individual-router', 'get-selected-schema-properties', [
+            register_rest_route( 'smpg-individual-route', 'get-selected-schema-properties', [
                 'methods'    => 'POST',
                 'callback'   => [ $this->_apiAction, 'get_selected_schema_properties' ],
                 'permission_callback' => function() {
                     return current_user_can( 'manage_options' );
                 }
             ]);   
-            register_rest_route( 'smpg-individual-router', 'save-post-meta', [
+            register_rest_route( 'smpg-individual-route', 'save-post-meta', [
                 'methods'    => 'POST',
                 'callback'   => [ $this->_apiAction, 'save_post_meta' ],
                 'permission_callback' => function() {

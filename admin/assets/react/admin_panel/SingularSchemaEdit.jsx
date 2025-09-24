@@ -96,7 +96,7 @@ const SingularSchemaEdit = () => {
     try {
         setMainSpinner(true);
 
-        let url = smpg_local.rest_url + "smpg-route/get-schema-data?post_id=" + post_id;
+        let url = smpg_local.rest_url + "get-schema-data" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "post_id=" + post_id;        
         
         const response = await fetch(url, {
             headers: {                    
@@ -129,7 +129,7 @@ const SingularSchemaEdit = () => {
 
       setIsLoaded(false);
 
-      let url = smpg_local.rest_url + 'smpg-route/save-schema-data';
+      let url = smpg_local.rest_url + 'save-schema-data';
         
       fetch(url,{
         method: "post",
@@ -163,7 +163,7 @@ const SingularSchemaEdit = () => {
 
   const handleGetSchemaProperties = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-schema-properties?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "get-schema-properties" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_type=" + schema_type;
         
     fetch(url, {
       headers: {                    
@@ -184,7 +184,7 @@ const SingularSchemaEdit = () => {
   }
   const handleGetAutomation = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-automation-with?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "get-automation-with" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_type=" + schema_type;
         
     fetch(url, {
       headers: {                    
@@ -251,7 +251,7 @@ const SingularSchemaEdit = () => {
 
   const handlePlacementSearch = (type, search, name) => {
         
-      let url = smpg_local.rest_url + "smpg-route/placement-search?type="+type+"&search="+search;
+      let url = smpg_local.rest_url + "placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=" + type + "&search=" + search;
         
       fetch(url, {
         headers: {                    
@@ -565,17 +565,15 @@ const SingularSchemaEdit = () => {
       
       <div className="smpg-right-section">  
       { postMeta._schema_type != 'customschema' ?
-        <Accordion title="Schema Properties" isExpand={true}>  
-        <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
-        </div>
+        <Accordion title="Schema Properties" isExpand={true}>                  
         <div className="smpg-accordion-body">
+          <p>{__('No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values.', 'schema-package')} <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a></p>                              
           <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
         </div>      
         </Accordion>
       : '' }        
       
-       {postMeta._schema_type == 'article' ?
+       { ( postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' ) ?
         <Accordion title="Additional Schema" isExpand={true}>
           <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>

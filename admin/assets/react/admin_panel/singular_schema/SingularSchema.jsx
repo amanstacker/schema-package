@@ -25,7 +25,7 @@ const SingularSchema = () => {
     body_json._current_status = status;
     body_json.action         = action;
     
-    let url = smpg_local.rest_url + 'smpg-route/change-post-status';
+    let url = smpg_local.rest_url + 'change-post-status';
       
     fetch(url,{
       method: "post",
@@ -50,7 +50,7 @@ const SingularSchema = () => {
 
   const getSchemaLoop = (page) => {
     setMainSpinner(true);
-    let url = smpg_local.rest_url + "smpg-route/get-schema-loop?post_type=smpg_singular_schema&page="+page;
+    let url = smpg_local.rest_url + "get-schema-loop" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "post_type=smpg_singular_schema&page=" + page;
       
       fetch(url, {
         headers: {                    

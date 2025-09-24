@@ -56,7 +56,7 @@ const CarouselSchemaEdit = () => {
     
     setMainSpinner(true);
 
-    let url = smpg_local.rest_url + "smpg-route/get-carousel-schema-data?post_id="+post_id;
+    let url = smpg_local.rest_url + "get-carousel-schema-data" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "post_id=" + post_id;
       
       fetch(url, {
         headers: {                    
@@ -85,7 +85,7 @@ const CarouselSchemaEdit = () => {
 
       setIsLoaded(false);
 
-      let url = smpg_local.rest_url + 'smpg-route/save-carousel-schema-data';
+      let url = smpg_local.rest_url + 'save-carousel-schema-data';
         
       fetch(url,{
         method: "post",
@@ -118,7 +118,7 @@ const CarouselSchemaEdit = () => {
   }
   const handleGetAutomation = (schema_type) => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-carousel-automation-with?schema_type="+schema_type;
+    let url = smpg_local.rest_url + "get-carousel-automation-with" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_type=" + schema_type;
         
     fetch(url, {
       headers: {                    
@@ -150,7 +150,7 @@ const CarouselSchemaEdit = () => {
   }
   const handlePlacementSearch = (id, type, search, name) => {
         
-      let url = smpg_local.rest_url + "smpg-route/carousel-placement-search?type="+type+"&search="+search;
+      let url = smpg_local.rest_url + "carousel-placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=" + type + "&search=" + search;
         
       fetch(url, {
         headers: {                    

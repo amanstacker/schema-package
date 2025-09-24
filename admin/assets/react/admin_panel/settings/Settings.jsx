@@ -37,7 +37,8 @@ const Settings = () => {
         website_json_ld:          true,
         defragment_json_ld:       false,  
         json_ld_in_footer:        false,
-        json_ld_in_rest:          false,        
+        json_ld_in_rest:          false, 
+        dynamic_placeholders:     false,        
         clean_micro_data:         false,  
         clean_rdfa_data:          false,  
         multisize_image:          false,
@@ -95,7 +96,7 @@ const Settings = () => {
       formData.append("file", importFile);        
     }        
     formData.append("settings", JSON.stringify(settings));    
-    let url = smpg_local.rest_url + 'smpg-route/update-settings';
+    let url = smpg_local.rest_url + 'update-settings';
     fetch(url,{
       method: "post",
       headers: {
@@ -125,7 +126,7 @@ const Settings = () => {
     
     setMainSpinner(true);
 
-    let url = smpg_local.rest_url + "smpg-route/get-settings";
+    let url = smpg_local.rest_url + "get-settings";
       
       fetch(url, {
         headers: {                    
@@ -181,7 +182,7 @@ const Settings = () => {
       body_json.message  = supportMessage;
       body_json.email    = supportEmail;
       
-      let url = smpg_local.rest_url + 'smpg-route/send-customer-query';
+      let url = smpg_local.rest_url + 'send-customer-query';
 
       setIsQuerySent(false);
 
@@ -240,7 +241,7 @@ const Settings = () => {
 
   const handleGetPluginList = () => {
 
-    let url = smpg_local.rest_url + "smpg-route/get-plugin-list?filter=has_own_json_ld";
+    let url = smpg_local.rest_url + "get-plugin-list" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "filter=has_own_json_ld";
         
     fetch(url, {
       headers: {                    
@@ -282,7 +283,7 @@ const Settings = () => {
     // setError(null);
     // setSuccess(null);
     try {
-      let fetch_url = smpg_local.rest_url + 'smpg-route/export-settings';
+      let fetch_url = smpg_local.rest_url + 'export-settings';
       const response = await fetch(fetch_url,{
         headers: {          
           'X-WP-Nonce': smpg_local.nonce,                  
@@ -436,6 +437,18 @@ const Settings = () => {
             <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                                    
+                  <tr>
+                    <th><label htmlFor="dynamic_placeholders">{__('Dynamic Placeholders', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='dynamic_placeholders'
+                      id='dynamic_placeholders' 
+                      checked={!!settings.dynamic_placeholders}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>                  
                   <tr>
                     <th><label htmlFor="json_ld_in_rest">{__('JSON-LD in Rest API', 'schema-package')}</label></th>
                     <td>

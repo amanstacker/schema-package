@@ -15,7 +15,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   useEffect(() => {
     const fetchMetaFields = async () => {
       try {
-        const url = smpg_local.rest_url + "smpg-route/get-mapping-meta-list";
+        const url = smpg_local.rest_url + "get-mapping-meta-list";
         const response = await fetch(url, {
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });
@@ -32,7 +32,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   useEffect(() => {
     const fetchCustomFields = async () => {
       try {
-        const url = `${smpg_local.rest_url}smpg-route/get-custom-fields?search=${encodeURIComponent(customFieldSearch)}`;
+        const url = smpg_local.rest_url + "get-custom-fields" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "search=" + encodeURIComponent(customFieldSearch);
         const response = await fetch(url, {
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });
@@ -73,7 +73,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   useEffect(() => {
     const fetchAdvancedCustomFields = async () => {
       try {
-        const url = `${smpg_local.rest_url}smpg-route/get-advanced-custom-fields?search=${encodeURIComponent(advancedCustomFieldSearch)}`;
+        const url = smpg_local.rest_url + "get-advanced-custom-fields" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "search=" + encodeURIComponent(advancedCustomFieldSearch);
         const response = await fetch(url, {
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });
@@ -116,7 +116,7 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
   useEffect(() => {
     const fetchTaxonomyValues = async () => {
       try {
-        const url = smpg_local.rest_url + "smpg-route/get-taxonomies";
+        const url = smpg_local.rest_url + "get-taxonomies";
         const response = await fetch(url, {
           headers: { "X-WP-Nonce": smpg_local.nonce },
         });

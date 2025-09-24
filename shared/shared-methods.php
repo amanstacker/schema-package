@@ -84,7 +84,7 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 				switch ( $field_type ) {
 
 					case 'text':					
-						$sanitized_array[ $sanitized_key ] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value ) ? $value : sanitize_text_field( $value );						
+						$sanitized_array[ $sanitized_key ] = smpg_sanitize_with_placeholders( $value );
 						break;
 					case 'select':					
 						$sanitized_array[ $sanitized_key ] = sanitize_text_field( $value );
@@ -163,6 +163,74 @@ function smpg_sanitize_schema_array( $input_array, $field_type ) {
 }
 
 
+/**
+ * Sanitize a value while preserving allowed placeholders.
+ *
+ * @param string $value The input value.
+ * @return string Sanitized value with placeholders preserved.
+ */
+function smpg_sanitize_with_placeholders( $value ) {
+
+	// Default allowed placeholders (whitelist).
+	$allowed_placeholders = [
+		// Post placeholders.
+		'%%post_title%%',
+		'%%post_excerpt%%',
+		'%%post_content%%',
+		'%%post_url%%',
+		'%%post_id%%',
+		'%%post_type%%',
+		'%%date_published%%',
+		'%%date_modified%%',
+		'%%featured_image%%',
+		'%%image_1%%',
+		'%%image_2%%',
+		'%%image_3%%',
+		'%%categories%%',
+		'%%tags%%',
+
+		// Default author placeholders (first author).
+		'%%author_name%%',
+		'%%author_first_name%%',
+		'%%author_last_name%%',
+		'%%author_url%%',
+		'%%author_bio%%',
+		'%%author_avatar%%',
+
+		// Site placeholders.
+		'%%site_name%%',
+		'%%site_description%%',
+		'%%site_url%%',
+		'%%site_logo%%',
+		'%%site_email%%',
+	];
+
+	/**
+	 * Filter the allowed placeholders.
+	 *
+	 * @param array $allowed_placeholders Array of allowed placeholder strings.
+	 */
+	$allowed_placeholders = apply_filters( 'smpg_allowed_placeholders', $allowed_placeholders );
+
+	// Temporary token replacement for placeholders.
+	$tokens = [];
+	foreach ( $allowed_placeholders as $i => $ph ) {
+		$token          = "__PH_{$i}__";
+		$tokens[$token] = $ph;
+		$value          = str_replace( $ph, $token, $value );
+	}
+
+	// Sanitize everything else.
+	$value = sanitize_text_field( $value );
+
+	// Restore allowed placeholders.
+	foreach ( $tokens as $token => $ph ) {
+		$value = str_replace( $token, $ph, $value );
+	}
+
+	return $value;
+}
+
 function smpg_sanitize_schema_meta( $data ) {
 	
     if ( is_array( $data ) ) {
@@ -202,7 +270,7 @@ function smpg_sanitize_schema_meta( $data ) {
                             break;                        
                         default:
                             // Unknown type, sanitize as text                            
-							$sanitized_data[$sanitized_key] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value['value'] ) ? $value['value'] : sanitize_text_field( $value['value'] );
+							$sanitized_data[$sanitized_key] = smpg_sanitize_with_placeholders( $value['value'] ); 
                             break;
                     }
                 } else {
@@ -220,7 +288,7 @@ function smpg_sanitize_schema_meta( $data ) {
 					$sanitized_data[ $sanitized_key ] = esc_url_raw( $value );
 				}else{					
 					// Allow placeholders like %%post_title%%
-                    $sanitized_data[$sanitized_key] = preg_match('/%%[a-zA-Z0-9_\-]+%%/', $value) ? $value : sanitize_text_field( $value );
+                    $sanitized_data[$sanitized_key] = smpg_sanitize_with_placeholders( $value );
 				}
                 
             }
@@ -228,8 +296,8 @@ function smpg_sanitize_schema_meta( $data ) {
 
         return $sanitized_data;
     }
-	// Allow placeholders like %%post_title%%
-    return preg_match('/%%[a-zA-Z0-9_\-]+%%/', $data ) ? $data : sanitize_text_field( $data );
+	
+    return smpg_sanitize_with_placeholders( $data );
 }
 
 function smpg_get_posts_by_arg( $arg ) {

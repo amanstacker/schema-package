@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.20
+Stable tag: 1.0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,7 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 
 * <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
 * <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
+* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
@@ -489,6 +490,15 @@ To explore all the advanced features and benefits included in the Schema Package
 
 
 == Changelog ==
+
+= 1.0.21 =
+
+* Added: ID property support for all schema types  
+* Added: Clearer messages in the schema mapping properties list  
+* Added: DiscussionForumPosting schema type  
+* Added: Report schema type  
+* Added: Variables and placeholders support  
+* Fixed: Minor bugs
 
 = 1.0.20 =
 

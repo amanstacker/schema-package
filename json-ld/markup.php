@@ -309,19 +309,49 @@ function smpg_clean_other_format_schema($content){
     global $smpg_settings;
 
     if ( ! empty( $smpg_settings['clean_micro_data'] ) ) {
-        $content = preg_replace( [ '/itemscope=\\"[^\\"]*\\"/i', '/itemType=\\"[^\\"]*\\"/i', '/itemprop=\\"[^\\"]*\\"/i', '/itemscope/i' ], '', $content );
+        
+         if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
+
+            $processor = new WP_HTML_Tag_Processor( $content );
+
+            while ( $processor->next_tag() ) {
+
+                $processor->remove_attribute( 'itemscope' );
+                $processor->remove_attribute( 'itemtype' );
+                $processor->remove_attribute( 'itemprop' );                
+
+            }
+            
+            $content = $processor->get_updated_html();
+        }
     }
     
     if ( ! empty( $smpg_settings['clean_rdfa_data'] ) ) {
-        $content = preg_replace_callback(
-            '/<(?!meta\b)[^>]+?\s(property|typeof)=\\"[^\\"]*\\"/i',
-            function ( $matches ) {
-                return preg_replace( '/\s(property|typeof)=\\"[^\\"]*\\"/i', '', $matches[0] );
-            },
-            $content
-        );        
-    }    
+        
+        if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
 
+            $processor = new WP_HTML_Tag_Processor( $content );
+
+            while ( $processor->next_tag() ) {
+                // Skip <meta> tags
+                if ( 'META' === $processor->get_tag() ) {
+                    continue;
+                }
+
+                // Remove RDFa attributes if present
+                if ( $processor->get_attribute( 'property' ) ) {
+                    $processor->remove_attribute( 'property' );
+                }
+
+                if ( $processor->get_attribute( 'typeof' ) ) {
+                    $processor->remove_attribute( 'typeof' );
+                }
+            }
+
+            $content = $processor->get_updated_html();
+        }
+    }
+    
     return $content;
 }
 

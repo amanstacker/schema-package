@@ -502,16 +502,39 @@ function smpg_get_modified_date($post_id = null){
 
 }
 
-function smpg_get_the_title( $post_id = null ){
 
-	global $post;
-	
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
+function smpg_get_the_title( $post_id = null ) {
 
-	$title  		= wp_filter_nohtml_kses( get_the_title() );
+	global $post, $smpg_settings;
 
-	return apply_filters( 'smpg_change_the_title', $title );		
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}
 
+	$title = '';
+
+	// Yoast SEO
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_title = WPSEO_Meta::get_value( 'title', $post_id );
+		if ( ! empty( $yoast_title ) ) {
+			$title = wp_strip_all_tags( $yoast_title );
+		}
+	}
+
+	// Rank Math
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_title = \RankMath\Post::get_meta( 'title', $post_id );
+		if ( ! empty( $rankmath_title ) ) {
+			$title = wp_strip_all_tags( $rankmath_title );
+		}
+	}
+
+	// Fallback: WordPress title
+	if ( empty( $title ) ) {
+		$title = wp_filter_nohtml_kses( get_the_title( $post_id ) );
+	}
+
+	return apply_filters( 'smpg_change_the_title', $title );
 }
 
 function smpg_get_the_content($post_id = null){
@@ -535,42 +558,94 @@ function smpg_get_the_content($post_id = null){
 }
 
 function smpg_get_description( $post_id = null ) {
-	
-	global $post;
-	
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
-				
-	$full_content		= $post ? $post->post_content : '';
-	$excerpt			= $post ? $post->post_excerpt : '';
-		
-	$full_content 		= preg_replace('#\[[^\]]+\]#', '', $full_content);
-	$full_content 		= wp_strip_all_tags( $full_content );	
-	
-	$desc_word_count	= apply_filters( 'smpg_change_description_word_count', 49 );
-	$short_content		= wp_trim_words( $full_content, $desc_word_count, '' ); 
-		
-	$description		= apply_filters( 'smpg_change_description', ( $excerpt != '' ) ? $excerpt : $short_content ); 
-	
-	return $description;
+
+	global $post, $smpg_settings;
+
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}
+
+	$description = '';
+
+	// Yoast SEO
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_desc = WPSEO_Meta::get_value( 'metadesc', $post_id );
+		if ( ! empty( $yoast_desc ) ) {
+			$description = wp_strip_all_tags( $yoast_desc );
+		}
+	}
+
+	//  Rank Math
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_desc = \RankMath\Post::get_meta( 'description', $post_id );
+		if ( ! empty( $rankmath_desc ) ) {
+			$description = wp_strip_all_tags( $rankmath_desc );
+		}
+	}
+
+	//  Fallback: excerpt/content
+	if ( empty( $description ) ) {
+
+		$full_content = $post ? $post->post_content : '';
+		$excerpt      = $post ? $post->post_excerpt : '';
+
+		$full_content = preg_replace( '#\[[^\]]+\]#', '', $full_content );
+		$full_content = wp_strip_all_tags( $full_content );
+
+		$desc_word_count = apply_filters( 'smpg_change_description_word_count', 49 );
+		$short_content   = wp_trim_words( $full_content, $desc_word_count, '' );
+
+		$description = ( $excerpt != '' ) ? $excerpt : $short_content;
+	}
+
+	return apply_filters( 'smpg_change_description', $description );
 }
 
 function smpg_get_post_tags( $post_id = null ) {
-	
-	global $post;
-	
-	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
-	
+
+	global $post, $smpg_settings;
+
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}
+
 	$tags = '';
-	$posttags = get_the_tags();
-    if ($posttags) {
-       $taglist = "";
-       foreach($posttags as $tag) {
-           $taglist .=  $tag->name . ', '; 
-       }
-      $tags =  rtrim($taglist, ", ");
-   }
-   
-   return $tags;
+
+	// Yoast SEO (focus keyword)
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_focuskw = WPSEO_Meta::get_value( 'focuskw', $post_id );
+		if ( ! empty( $yoast_focuskw ) ) {
+			$tags = $yoast_focuskw;
+		}
+	}
+
+	// Rank Math (focus keyword)
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_focuskw = \RankMath\Post::get_meta( 'focus_keyword', $post_id );
+		if ( ! empty( $rankmath_focuskw ) ) {
+			$tags = $rankmath_focuskw;
+		}
+	}
+
+	//  Fallback: WordPress tags
+	if ( empty( $tags ) ) {
+
+		$posttags = get_the_tags( $post_id );
+
+		if ( $posttags ) {
+
+			$taglist = [];
+
+			foreach ( $posttags as $tag ) {
+				$taglist[] = $tag->name;
+			}
+
+			$tags = implode( ', ', $taglist );
+			
+		}
+	}
+
+	return $tags;
 }
 
 function smpg_get_categories( $post_id = null ) {

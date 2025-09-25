@@ -43,6 +43,8 @@ const Settings = () => {
         clean_rdfa_data:          false,  
         multisize_image:          false,
         image_object:             false,
+        rankmath_cmp:             false,
+        yoast_cmp:                false,
         wpgraphql_cmp:            false,          
         simple_author_box_cmp:    false,        
         delete_data_on_uninstall: false,      
@@ -656,15 +658,39 @@ const Settings = () => {
             <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                    
+                <tr>
+                    <th><label htmlFor="yoast_cmp">{__('Yoast SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='yoast_cmp'
+                        id='yoast_cmp' 
+                        checked={!!settings.yoast_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically pull schema-related values (title, description, focus keyword, etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema Package will use them instead of WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="rankmath_cmp">{__('Rank Math SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='rankmath_cmp'
+                        id='rankmath_cmp' 
+                        checked={!!settings.rankmath_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
                   <tr>
                     <th><label htmlFor="wpgraphql_cmp">{__('WPGraphQL', 'schema-package')}</label></th>
                     <td>
-                    <Checkbox                     
-                      name='wpgraphql_cmp'
-                      id='wpgraphql_cmp' 
-                      checked={!!settings.wpgraphql_cmp}
-                      onChange={formChangeHandler}
-                    />                      
+                      <Checkbox                     
+                        name='wpgraphql_cmp'
+                        id='wpgraphql_cmp' 
+                        checked={!!settings.wpgraphql_cmp}
+                        onChange={formChangeHandler}
+                      />                      
                       <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr> 

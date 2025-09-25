@@ -349,6 +349,8 @@ function smpg_default_settings_data() {
 		'clean_rdfa_data' 			=> 0,
 		'multisize_image' 			=> 0,
 		'image_object' 				=> 0,
+		'rankmath_cmp' 			    => 0,
+		'yoast_cmp' 			    => 0,
 		'wpgraphql_cmp' 		    => 0,
 		'simple_author_box_cmp'     => 0,		
 		'delete_data_on_uninstall'  => 0,

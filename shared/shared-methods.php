@@ -411,9 +411,29 @@ function smpg_get_author_detail( $post_id = null ) {
 	global $post, $smpg_settings;
 		
 	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
-				
-	$content_post	= get_post( $post_id );
-	$post_author	= get_userdata( $content_post->post_author );
+	
+	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_author_id = WPSEO_Meta::get_value( 'author_id', $post_id );
+		if ( $yoast_author_id ) {
+			$post_author = get_userdata( $yoast_author_id );
+		}
+	}
+
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_author_id = \RankMath\Post::get_meta( 'seo_author', $post_id );
+		if ( $rankmath_author_id ) {
+			$post_author = get_userdata( $rankmath_author_id );
+		}
+	}
+
+	if ( ! isset( $post_author ) || ! $post_author ) {
+
+		$content_post	= get_post( $post_id );
+		$post_author	= get_userdata( $content_post->post_author );
+		
+	}		
+
 	$email 			= $post_author->user_email; 		
 	
 	$author = [

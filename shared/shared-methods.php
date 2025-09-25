@@ -665,7 +665,7 @@ function smpg_get_post_tags( $post_id = null ) {
 		}
 	}
 
-	return $tags;
+	return apply_filters( 'smpg_change_tags', $tags );	
 }
 
 function smpg_get_categories( $post_id = null ) {

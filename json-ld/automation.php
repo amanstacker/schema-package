@@ -119,6 +119,7 @@ function smpg_get_masterstudy_course_json_ld( $json_ld, $post_id ) {
                             'post_type' 	     => 'stm-reviews', 
                             'posts_per_page'     => -1,   
                             'post_status'        => 'publish',
+                            //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query                            
                             'meta_query'     => [
                                 [
                                     'key'     => 'review_course',

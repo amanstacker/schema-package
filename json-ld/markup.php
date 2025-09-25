@@ -136,7 +136,7 @@ function smpg_json_ld_output() {
             echo wp_json_encode( $json_ld );
 
         }else{
-
+            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	-- Reason: already escaped
             echo smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings );
             
         }        

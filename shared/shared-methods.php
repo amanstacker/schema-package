@@ -2240,3 +2240,47 @@ function smpg_convert_to_schema_duration( $input ) {
 
 	return $time !== 'T' ? $period . $time : $period;
 }
+
+/**
+ * Check if a post/page is set to noindex in Yoast or Rank Math
+ * Returns false if schema should be skipped due to noindex
+ */
+function smpg_skip_schema_due_to_noindex( $post_id = null ) {
+
+	global $post, $smpg_settings;
+
+	if ( ! $post_id && $post ) {
+		$post_id = $post->ID;
+	}
+
+	// Check Yoast noindex
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+
+		$yoast_noindex = WPSEO_Meta::get_value( 'meta-robots-noindex', $post_id );
+
+		if ( $yoast_noindex === '1' ) {
+			return true;
+		}
+		
+	}
+
+	// Check Rank Math noindex
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		
+		if ( $post_id ) {
+
+			$rankmath_robots = \RankMath\Post::get_meta( 'robots', $post_id );
+
+			// Ensure it's a string
+			if ( is_array( $rankmath_robots ) ) {
+				$rankmath_robots = implode( ',', $rankmath_robots ); // convert array to comma-separated string
+			}
+			
+			if ( strpos( $rankmath_robots, 'noindex' ) !== false ) {
+				return true;
+			}
+		}
+	}
+
+	return false; // safe to output schema
+}

@@ -121,6 +121,9 @@ function smpg_json_ld_init(){
 function smpg_json_ld_output() {
     
 	global $smpg_settings;        
+    
+    if ( smpg_skip_schema_due_to_noindex() ) return;
+    
     $json_ld = apply_filters( 'smpg_filter_final_json_ld', smpg_get_json_ld() );    
 
     if ( ! empty($json_ld) ) {

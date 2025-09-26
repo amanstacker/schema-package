@@ -397,6 +397,9 @@ function smpg_manage_conflict() {
                 case 'rankmath':                    
                     add_action( 'rank_math/json_ld', 'smpg_remove_rank_math_json_ld',99 );   
                     break;
+                case 'aioseo':                       
+                    add_filter( 'aioseo_schema_disable', '__return_true' );
+                    break;
                 case 'yoastseo':                    
                     add_filter('wpseo_json_ld_output', '__return_false');         
                     smpg_remove_yoast_product_json_ld();                  

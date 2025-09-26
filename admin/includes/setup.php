@@ -259,6 +259,15 @@ function smpg_load_smpg_plugin_list_settings() {
 		'slug_pro_v'  		=> 'seo-by-rank-math-premium/rank-math-premium.php',
 		'wp_org_url'  		=> 'https://wordpress.org/plugins/seo-by-rank-math/'
 	];
+	$smpg_plugin_list['aioseo'] = [
+		'is_active'   		=> false,
+		'has_own_json_ld' 	=> true,
+		'id'          		=> 'aioseo',
+		'name'        		=> 'All in One SEO',
+		'slug_free_v' 		=> 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+		'slug_pro_v'  		=> 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+		'wp_org_url'  		=> 'https://wordpress.org/plugins/all-in-one-seo-pack/'
+	];
 	$smpg_plugin_list['yoastseo'] = [
 		'is_active'   		=> false,
 		'has_own_json_ld' 	=> true,

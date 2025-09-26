@@ -2331,6 +2331,46 @@ function smpg_convert_to_schema_duration( $input ) {
 }
 
 /**
+ * Check if a post is set to noindex in AIOSEO.
+ *
+ * @param int $post_id Post ID.
+ * @return bool True if noindex, false otherwise.
+ */
+function smpg_is_aioseo_noindex( $post_id ) {
+	if ( ! function_exists( 'aioseo' ) ) {
+		return false;
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return false;
+	}
+
+	// 1. MetaData API (preferred)
+	if ( isset( aioseo()->meta ) && isset( aioseo()->meta->metaData ) && method_exists( aioseo()->meta->metaData, 'getMetaData' ) ) {
+		$meta = aioseo()->meta->metaData->getMetaData( $post );
+		if ( isset( $meta->robots_noindex ) ) {
+			return (bool) $meta->robots_noindex;
+		}
+	}
+
+	// 2. Fallback to post meta (older versions)
+	$meta_keys = array(
+		'_aioseo_robots_noindex', // current
+		'_aioseop_robots_noindex', // old
+	);
+
+	foreach ( $meta_keys as $key ) {
+		$val = get_post_meta( $post_id, $key, true );
+		if ( $val === '1' || $val === 1 || $val === true ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Check if a post/page is set to noindex in Yoast or Rank Math
  * Returns false if schema should be skipped due to noindex
  */
@@ -2355,12 +2395,11 @@ function smpg_skip_schema_due_to_noindex( $post_id = null ) {
 
 	// Check AIOSEO noindex
 	if ( ! empty( $smpg_settings['aioseo_cmp'] ) && class_exists( 'AIOSEO\Plugin\Common\Main\Main' ) ) {
-		$aioseo_robots = get_post_meta( $post_id, '_aioseo_robots_meta', true );
-
-		if ( ! empty( $aioseo_robots['noindex'] ) && $aioseo_robots['noindex'] === 'on' ) {
+		if ( smpg_is_aioseo_noindex( $post_id ) ) {			
 			return true;
 		}
 	}
+
 
 
 	// Check Rank Math noindex

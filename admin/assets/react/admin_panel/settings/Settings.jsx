@@ -45,6 +45,7 @@ const Settings = () => {
         image_object:             false,
         rankmath_cmp:             false,
         yoast_cmp:                false,
+        aioseo_cmp:               false,
         wpgraphql_cmp:            false,          
         simple_author_box_cmp:    false,        
         delete_data_on_uninstall: false,      
@@ -680,6 +681,18 @@ const Settings = () => {
                         onChange={formChangeHandler}
                       />                      
                       <span className="smpg-tooltip"><Popup content={__('Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="aioseo_cmp">{__('All in One SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='aioseo_cmp'
+                        id='aioseo_cmp' 
+                        checked={!!settings.aioseo_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically fetch schema-related values (title, description, focus keyword, etc.) from All in One SEO settings. If All in One SEO values are available, Schema Package will prioritize them over WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>

@@ -427,6 +427,13 @@ function smpg_get_author_detail( $post_id = null ) {
 		}
 	}
 
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) && class_exists( 'AIOSEO\Plugin\Common\Main\Main' ) ) {
+		$aioseo_author_id = get_post_meta( $post_id, '_aioseo_author', true );
+		if ( $aioseo_author_id ) {
+			$post_author = get_userdata( $aioseo_author_id );
+		}
+	}
+
 	if ( ! isset( $post_author ) || ! $post_author ) {
 
 		$content_post	= get_post( $post_id );
@@ -533,12 +540,9 @@ function smpg_get_the_title( $post_id = null ) {
 
 	$title = '';
 
-	// Yoast SEO
-	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
-		$yoast_title = WPSEO_Meta::get_value( 'title', $post_id );
-		if ( ! empty( $yoast_title ) ) {
-			$title = wp_strip_all_tags( $yoast_title );
-		}
+	// Yoast SEO	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) ) {
+		$title = smpg_get_yoast_rendered_value( 'title', $post_id );
 	}
 
 	// Rank Math
@@ -547,6 +551,11 @@ function smpg_get_the_title( $post_id = null ) {
 		if ( ! empty( $rankmath_title ) ) {
 			$title = wp_strip_all_tags( $rankmath_title );
 		}
+	}
+
+	// AIOSEO
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) ) {
+		$title       = smpg_get_aioseo_rendered_value( 'title', $post_id );	
 	}
 
 	// Fallback: WordPress title
@@ -577,6 +586,84 @@ function smpg_get_the_content($post_id = null){
 
 }
 
+/**
+ * Get AIOSEO meta value (title or description) with smart tags replaced.
+ *
+ * @param string $field   'title' or 'description'.
+ * @param int    $post_id Post ID.
+ * @return string Rendered value (safe / stripped).
+ */
+function smpg_get_aioseo_rendered_value( $field, $post_id ) {
+	
+	if ( ! function_exists( 'aioseo' ) ) {
+		return '';
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return '';
+	}
+
+	$value = '';
+
+	// -------- Title / Description --------
+	if ( 'title' === $field || 'description' === $field ) {
+
+		$meta_key = ( 'title' === $field ) ? '_aioseo_title' : '_aioseo_description';
+
+		// 1. Try raw meta
+		$value = get_post_meta( $post_id, $meta_key, true );
+
+		// 2. Fallback to MetaData API
+		if ( empty( $value ) && isset( aioseo()->meta ) && isset( aioseo()->meta->metaData ) && method_exists( aioseo()->meta->metaData, 'getMetaData' ) ) {
+			$meta = aioseo()->meta->metaData->getMetaData( $post );
+			if ( isset( $meta->{$field} ) && ! empty( $meta->{$field} ) ) {
+				$value = $meta->{$field};
+			}
+		}
+
+		// 3. Replace smart tags
+		if ( ! empty( $value ) && isset( aioseo()->tags ) && method_exists( aioseo()->tags, 'replaceTags' ) ) {
+			$value = aioseo()->tags->replaceTags( $value, $post_id );
+		}
+	}
+
+	return wp_strip_all_tags( $value );
+}
+
+/**
+ * Get Yoast meta value with variables replaced.
+ *
+ * @param string $key     Yoast meta key (e.g. 'title', 'metadesc').
+ * @param int    $post_id Post ID.
+ * @return string Rendered value (stripped).
+ */
+function smpg_get_yoast_rendered_value( $key, $post_id ) {
+
+	if ( ! class_exists( 'WPSEO_Meta' ) ) {
+		return '';
+	}
+
+	$value = WPSEO_Meta::get_value( $key, $post_id );
+	if ( empty( $value ) ) {
+		return '';
+	}
+
+	$post_obj = get_post( $post_id );
+
+	/* Use WPSEO_Replace_Vars when available to replace variables like %%title%%. */
+	if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+		// reuse global instance if present
+		global $wpseo_replace_vars;
+		if ( ! ( $wpseo_replace_vars instanceof WPSEO_Replace_Vars ) ) {
+			$wpseo_replace_vars = new WPSEO_Replace_Vars();
+		}
+		$value = $wpseo_replace_vars->replace( $value, $post_obj );
+	}
+
+	return wp_strip_all_tags( $value );
+}
+
 function smpg_get_description( $post_id = null ) {
 
 	global $post, $smpg_settings;
@@ -587,12 +674,9 @@ function smpg_get_description( $post_id = null ) {
 
 	$description = '';
 
-	// Yoast SEO
-	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
-		$yoast_desc = WPSEO_Meta::get_value( 'metadesc', $post_id );
-		if ( ! empty( $yoast_desc ) ) {
-			$description = wp_strip_all_tags( $yoast_desc );
-		}
+	// Yoast SEO	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) ) {
+		$description = smpg_get_yoast_rendered_value( 'metadesc', $post_id );
 	}
 
 	//  Rank Math
@@ -601,6 +685,11 @@ function smpg_get_description( $post_id = null ) {
 		if ( ! empty( $rankmath_desc ) ) {
 			$description = wp_strip_all_tags( $rankmath_desc );
 		}
+	}
+
+	// AIOSEO
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) ) {
+		$description = smpg_get_aioseo_rendered_value( 'description', $post_id );
 	}
 
 	//  Fallback: excerpt/content
@@ -646,7 +735,7 @@ function smpg_get_post_tags( $post_id = null ) {
 			$tags = $rankmath_focuskw;
 		}
 	}
-
+	
 	//  Fallback: WordPress tags
 	if ( empty( $tags ) ) {
 
@@ -2263,6 +2352,16 @@ function smpg_skip_schema_due_to_noindex( $post_id = null ) {
 		}
 		
 	}
+
+	// Check AIOSEO noindex
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) && class_exists( 'AIOSEO\Plugin\Common\Main\Main' ) ) {
+		$aioseo_robots = get_post_meta( $post_id, '_aioseo_robots_meta', true );
+
+		if ( ! empty( $aioseo_robots['noindex'] ) && $aioseo_robots['noindex'] === 'on' ) {
+			return true;
+		}
+	}
+
 
 	// Check Rank Math noindex
 	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {

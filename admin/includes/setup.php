@@ -351,6 +351,7 @@ function smpg_default_settings_data() {
 		'image_object' 				=> 0,
 		'rankmath_cmp' 			    => 0,
 		'yoast_cmp' 			    => 0,
+		'aioseo_cmp' 			    => 0,
 		'wpgraphql_cmp' 		    => 0,
 		'simple_author_box_cmp'     => 0,		
 		'delete_data_on_uninstall'  => 0,

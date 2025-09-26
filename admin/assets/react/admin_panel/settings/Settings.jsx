@@ -540,7 +540,7 @@ const Settings = () => {
                 <tbody>
                 <tr>
                     <th><strong>{__('SPG for Post Types', 'schema-package')}</strong></th>
-                    <td>
+                    <td style={{display:"inline-flex"}}>
                     <Dropdown
                       style={{maxWidth:"300px"}}
                       data_type="spg_post_types"
@@ -554,12 +554,12 @@ const Settings = () => {
                       onChange={handleSPGPostTypes}                      
                       options={spgPostTypes}
                    />
-                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for post type pages.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                 </tr>
                 <tr>
                     <th><strong>{__('SPG for Taxonomies', 'schema-package')}</strong></th>
-                    <td>
+                    <td style={{display:"inline-flex"}}>
                     <Dropdown
                       style={{maxWidth:"300px"}}
                       data_type="spg_taxonomies"
@@ -573,7 +573,7 @@ const Settings = () => {
                       onChange={handleSPGTaxonomies}                      
                       options={spgTaxonomies}
                    />
-                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for taxonomy archive pages.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                 </tr>  
 
@@ -586,7 +586,7 @@ const Settings = () => {
                         checked={!!settings.spg_author ? true : false}
                         onChange={formChangeHandler}
                       />                                            
-                      {/* <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for the author’s profile page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>
 

@@ -16,9 +16,20 @@ function smpg_enqueue_client_side_script() {
          $localdata = [
                 'ajax_url'      		=> admin_url( 'admin-ajax.php' ),
                 'smpg_security_nonce'   => wp_create_nonce( 'smpg_ajax_check_nonce' ),
-                'post_id'               => get_the_ID()
-         ];
-
+                'post_id'               => get_the_ID(),
+                'spg_id'                => get_queried_object_id()                
+         ];     
+         
+         if ( is_singular() ) {
+            $localdata['page_type'] = 'singular';
+         }else if( is_tax() || is_category() || is_tag() ){
+            $localdata['page_type'] = 'archive';
+         }else if( is_author() ){
+            $localdata['page_type'] = 'author';
+         }else{
+            $localdata['page_type'] = 'none';
+         }
+         
         wp_localize_script( 'smpg-client-side', 'smpg_client_local', $localdata );
         wp_enqueue_script( 'smpg-client-side' );
                 
@@ -38,9 +49,11 @@ function smpg_json_ld_client_side_output() {
 
     if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) {
         
-        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;    
+        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
+        $spg_id = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
+        $page_type = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
 
-        $json_ld = smpg_get_json_ld( $post_id );                
+        $json_ld = smpg_get_json_ld( $post_id, $spg_id, $page_type,   'client_side' );
         wp_send_json_success( $json_ld );
 
     }	
@@ -218,17 +231,19 @@ function smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings ) {
 
 }
 
-function smpg_get_json_ld( $post_id = null ) {
+function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $render_method = null ) {
 
     global $post;
-
-    $post_id     = $spg_id = null;
+        
     $response    = $spg_schema_meta = [];            
+  
+    if ( ( $render_method === 'client_side' && $page_type === 'archive') || is_tax() || is_category() || is_tag() ) {
     
-    if ( is_tax() || is_category() || is_tag() ) {
-
-        $spg_id = get_queried_object_id();
-        $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );      
+        if ( $render_method !== 'client_side' ) {
+            $spg_id = get_queried_object_id();
+        }
+                
+        $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );              
 
         //Carousel schema markup addition
         $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
@@ -257,16 +272,17 @@ function smpg_get_json_ld( $post_id = null ) {
             }
 
         }
-
-
-        ///
+        
     }
     
     //Singular schema markup addition
 
-    if ( is_singular() || (  defined( 'REST_REQUEST' ) && REST_REQUEST  ) ) {
-
-        $post_id = $post->ID;
+    if ( ( $render_method === 'client_side' && $page_type === 'singular') || is_singular() || (  defined( 'REST_REQUEST' ) && REST_REQUEST  ) ) {
+            
+        if ( is_object( $post ) ) {
+            $post_id = $post->ID;
+        }
+        
         $spg_id  = $post_id;
         
         $spg_schema_meta = get_post_meta( $spg_id, '_smpg_schema_meta', true );        
@@ -280,6 +296,7 @@ function smpg_get_json_ld( $post_id = null ) {
                 $schema_meta = get_post_meta( $id );            
                 
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
+                    
                     if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
 
                         $global_json_ld = smpg_prepare_global_json_ld( $schema_meta, $post_id );
@@ -296,10 +313,14 @@ function smpg_get_json_ld( $post_id = null ) {
 
     }            
 
-    if ( is_author() ) {
+    if ( ( $render_method === 'client_side' && $page_type === 'author') || is_author() ) {
+            
+        if ( $render_method !== 'client_side' ) {
+            $spg_id = get_queried_object_id();
+        }
 
-        $spg_id = get_queried_object_id();        
         $spg_schema_meta = get_user_meta( $spg_id, '_smpg_schema_meta', true );      
+
     }
 
     //Schema Package Generator schema markup addition

@@ -469,6 +469,18 @@ const Settings = () => {
                     </td>  
                   </tr>
                   <tr>
+                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='multisize_image'
+                      id='multisize_image' 
+                      checked={!!settings.multisize_image}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
                     <th><label htmlFor="dynamic_placeholders">{__('Dynamic Placeholders', 'schema-package')}</label></th>
                     <td>
                     <Checkbox                     
@@ -491,19 +503,7 @@ const Settings = () => {
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
-                  </tr>                  
-                  <tr>
-                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
-                    <td>
-                    <Checkbox                     
-                      name='multisize_image'
-                      id='multisize_image' 
-                      checked={!!settings.multisize_image}
-                      onChange={formChangeHandler}
-                    />                      
-                      <span className="smpg-tooltip"><Popup content={__('Generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>                 
+                  </tr>                                                     
                 </tbody>
               </table>
             </div>

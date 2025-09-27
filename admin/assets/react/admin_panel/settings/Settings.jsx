@@ -52,6 +52,7 @@ const Settings = () => {
         default_logo_id:          null,
         default_image_id:         null,
         default_logo_url:         '',
+        json_ld_render_method:    'server_side',
         default_image_url:        '',
         manage_conflict  :        [],
         spg_post_types   :        [],
@@ -60,7 +61,12 @@ const Settings = () => {
     });
           
   const page = queryString.parse(window.location.search);   
-  const {__} = wp.i18n;         
+  const {__} = wp.i18n;   
+  
+  const handleDropdownChange = (e, { name, value }) => {
+    setSettings({ ...settings, [name]: value });
+  };
+
 
   const formChangeHandler = (event) => {
               
@@ -440,6 +446,28 @@ const Settings = () => {
             <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                                    
+                  <tr>
+                    <th><label>{__('JSON-LD Render Method', 'schema-package')}</label></th>
+                    <td>
+                      <Dropdown                                                
+                        selection
+                        name="json_ld_render_method"
+                        value={settings.json_ld_render_method}
+                        onChange={handleDropdownChange}
+                        options={[{
+                          key: 'server_side',
+                          text: 'Server-Side Rendering',
+                          value: 'server_side',                          
+                        },
+                        {
+                          key: 'client_side',
+                          text: 'Client-Side Injection',
+                          value: 'client_side',                          
+                        }]}
+                      />                    
+                      <span className="smpg-tooltip"><Popup content={__('Choose how Schema Package should render schema markup ( JSON-LD ) on your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
                   <tr>
                     <th><label htmlFor="dynamic_placeholders">{__('Dynamic Placeholders', 'schema-package')}</label></th>
                     <td>

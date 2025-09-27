@@ -2,6 +2,55 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Enqueue the client-side schema script
+function smpg_enqueue_client_side_script() {
+
+	global $smpg_settings; 
+
+    if ( ! is_admin() && ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) ) {
+        
+        $min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        
+        wp_register_script( 'smpg-client-side', SMPG_PLUGIN_URL . "json-ld/assets/smpg-client-side-injection{$min}.js", [ 'jquery' ],  SMPG_VERSION, true );
+
+         $localdata = [
+                'ajax_url'      		=> admin_url( 'admin-ajax.php' ),
+                'smpg_security_nonce'   => wp_create_nonce( 'smpg_ajax_check_nonce' ),
+                'post_id'               => get_the_ID()
+         ];
+
+        wp_localize_script( 'smpg-client-side', 'smpg_client_local', $localdata );
+        wp_enqueue_script( 'smpg-client-side' );
+                
+    }
+
+}
+
+add_action( 'wp_enqueue_scripts', 'smpg_enqueue_client_side_script' );
+
+function smpg_json_ld_client_side_output() {
+    
+	if ( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'smpg_ajax_check_nonce', 'security', false ) ) {
+		wp_send_json_error( [ 'message' => 'Invalid security token (nonce).' ], 403 );
+	}
+    
+    global $smpg_settings; 
+
+    if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) {
+        
+        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;    
+
+        $json_ld = smpg_get_json_ld( $post_id );                
+        wp_send_json_success( $json_ld );
+
+    }	
+
+}
+
+add_action('wp_ajax_smpg_json_ld_client_side_output', 'smpg_json_ld_client_side_output');
+add_action('wp_ajax_nopriv_smpg_json_ld_client_side_output', 'smpg_json_ld_client_side_output');
+
+
 //Expose Jsonld in WPGraphQL starts here
 
 add_action( 'graphql_register_types', 'smpg_register_jsonld_wpgraphql_field' );
@@ -112,7 +161,12 @@ function smpg_json_ld_init(){
 
     smpg_manage_conflict();
 
-    add_action('wp_head', 'smpg_json_ld_output');    
+    global $smpg_settings;        
+    
+    if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'server_side' ) {
+        add_action('wp_head', 'smpg_json_ld_output');    
+    }
+
     ob_start('smpg_clean_other_format_schema');            
             
 }

@@ -333,25 +333,25 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']                       = smpg_get_permalink();
-            $json_ld['headline']                  = smpg_get_the_title();
-            $json_ld['description']               = smpg_get_description();    
-            $json_ld['datePublished']             = smpg_get_published_date();
-            $json_ld['dateModified']              = smpg_get_modified_date();    
+            $json_ld['@id']                       = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']                       = smpg_get_permalink( $post_id );
+            $json_ld['headline']                  = smpg_get_the_title( $post_id );
+            $json_ld['description']               = smpg_get_description( $post_id );    
+            $json_ld['datePublished']             = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']              = smpg_get_modified_date( $post_id );    
 
             if ( $schema_type_key != 'creativework' ) {
 
-                $json_ld['wordCount']                 = smpg_get_word_count();
-                $json_ld['articleSection']            = smpg_get_categories();
+                $json_ld['wordCount']                 = smpg_get_word_count( $post_id );
+                $json_ld['articleSection']            = smpg_get_categories( $post_id );
                 
             }                
 
-            $json_ld['inLanguage']                = smpg_get_inlanguage();
-            $json_ld['keywords']                  = smpg_get_post_tags();                            
-            $json_ld['author']                    = smpg_get_author_detail();
+            $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
+            $json_ld['keywords']                  = smpg_get_post_tags( $post_id );                            
+            $json_ld['author']                    = smpg_get_author_detail( $post_id );
 
-            $json_ld['publisher']                 = smpg_get_publisher();
+            $json_ld['publisher']                 = smpg_get_publisher( $post_id );
 
             $image = smpg_get_image();
 
@@ -371,12 +371,12 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']                       = smpg_get_permalink();            
-            $json_ld['description']               = smpg_get_description();                     
-            $json_ld['inLanguage']                = smpg_get_inlanguage();
+            $json_ld['@id']                       = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']                       = smpg_get_permalink( $post_id );            
+            $json_ld['description']               = smpg_get_description( $post_id );                     
+            $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
 
-            $image = smpg_get_image();
+            $image = smpg_get_image( $post_id );
 
             if ( ! empty( $image ) ) {
                 $json_ld = array_merge( $json_ld, $image );
@@ -391,13 +391,13 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             
             $json_ld['@context']                  = smpg_get_context_url();
             $json_ld['@type']                     = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']                       = smpg_get_permalink();            
-            $json_ld['description']               = smpg_get_description();    
-            $json_ld['dateCreated']               = smpg_get_published_date();                                        
-            $json_ld['inLanguage']                = smpg_get_inlanguage();
+            $json_ld['@id']                       = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']                       = smpg_get_permalink( $post_id );            
+            $json_ld['description']               = smpg_get_description( $post_id );    
+            $json_ld['dateCreated']               = smpg_get_published_date( $post_id );                                        
+            $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
 
-            $image = smpg_get_image();
+            $image = smpg_get_image( $post_id );
 
             if ( ! empty( $image ) ) {
                 $json_ld = array_merge( $json_ld, $image );
@@ -410,10 +410,10 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'person':
 
-            $json_ld['@context']         = smpg_get_context_url();
+            $json_ld['@context']         = smpg_get_context_url( $post_id );
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']                       = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']              = smpg_get_permalink();
+            $json_ld['@id']              = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']              = smpg_get_permalink( $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_person_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -424,8 +424,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']              = smpg_get_permalink();
+            $json_ld['@id']              = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']              = smpg_get_permalink( $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_jobposting_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -434,15 +434,15 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'course':
 
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
-            $json_ld['datePublished']             = smpg_get_published_date();
-            $json_ld['dateModified']              = smpg_get_modified_date();    
-			$json_ld['publisher']                 = smpg_get_publisher();
-            $json_ld['provider']                  = smpg_get_publisher();
+            $json_ld['datePublished']             = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']              = smpg_get_modified_date( $post_id );    
+			$json_ld['publisher']                 = smpg_get_publisher( $post_id );
+            $json_ld['provider']                  = smpg_get_publisher( $post_id );
 			
 			
-			$image = smpg_get_image();
+			$image = smpg_get_image( $post_id );
 
             if ( ! empty( $image ) ) {
                 $json_ld = array_merge( $json_ld, $image );
@@ -459,7 +459,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'product':
 
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_product_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -470,8 +470,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']              = smpg_get_permalink();
+            $json_ld['@id']              = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']              = smpg_get_permalink( $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_faqpage_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -480,7 +480,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'softwareapplication':
 
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_softwareapplication_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -489,7 +489,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'imagegallery':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_imagegallery_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -498,7 +498,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'mediagallery':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_mediagallery_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -507,7 +507,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'imageobject':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_imageobject_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -516,7 +516,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'photograph':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_photograph_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -525,7 +525,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'apartment':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_apartment_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -534,7 +534,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'house':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_house_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -544,14 +544,14 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'review':
             $json_ld['@context']                         = smpg_get_context_url();
             $json_ld['@type']                            = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']                              = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['reviewBody']                       = smpg_get_description();    
-            $json_ld['datePublished']                    = smpg_get_published_date();
-            $json_ld['author']                           = smpg_get_author_detail();
+            $json_ld['@id']                              = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['reviewBody']                       = smpg_get_description( $post_id );    
+            $json_ld['datePublished']                    = smpg_get_published_date( $post_id );
+            $json_ld['author']                           = smpg_get_author_detail( $post_id );
             $json_ld['itemReviewed']['@type']            = 'Product';
-            $json_ld['itemReviewed']['url']              = smpg_get_permalink();
-            $json_ld['itemReviewed']['name']             = smpg_get_the_title();
-            $json_ld['itemReviewed']['description']      = smpg_get_description();    
+            $json_ld['itemReviewed']['url']              = smpg_get_permalink( $post_id );
+            $json_ld['itemReviewed']['name']             = smpg_get_the_title( $post_id );
+            $json_ld['itemReviewed']['description']      = smpg_get_description( $post_id );    
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_review_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -560,7 +560,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'singlefamilyresidence':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_singlefamilyresidence_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -569,7 +569,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'mobileapplication':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_mobileapplication_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -578,7 +578,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'organization':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_organization_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -587,7 +587,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'trip':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_trip_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -595,7 +595,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         break;
         case 'event':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_event_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -603,7 +603,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         break;
         case 'recipe':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_recipe_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -612,7 +612,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'musicplaylist':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_musicplaylist_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -621,7 +621,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'musicalbum':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_musicalbum_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -630,7 +630,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'liveblogposting':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_liveblogposting_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -639,7 +639,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'vacationrental':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_vacationrental_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -648,7 +648,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         
         case 'certification':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_certification_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -664,7 +664,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'icecreamshop':
         case 'restaurant':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_localbusiness_json_ld', $json_ld, $schema_data, $post_id );
@@ -680,7 +680,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'taxiservice':
         case 'webapi':
             
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_service_json_ld', $json_ld, $schema_data, $post_id );             
@@ -690,8 +690,8 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'book':
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = smpg_get_schema_type_text( $schema_type_key );
-            $json_ld['@id']              = smpg_get_permalink().'#'.$schema_type_key;
-            $json_ld['url']              = smpg_get_permalink();
+            $json_ld['@id']              = smpg_get_permalink( $post_id ).'#'.$schema_type_key;
+            $json_ld['url']              = smpg_get_permalink( $post_id );
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_book_json_ld', $json_ld, $schema_data, $post_id ); 
@@ -700,12 +700,12 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'videoobject':
 
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
-            $json_ld['datePublished']    = smpg_get_published_date();
-            $json_ld['dateModified']     = smpg_get_modified_date();
-            $json_ld['uploadDate']       = smpg_get_modified_date(); 
-            $json_ld['author']           = smpg_get_author_detail();    
+            $json_ld['datePublished']    = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']     = smpg_get_modified_date( $post_id );
+            $json_ld['uploadDate']       = smpg_get_modified_date( $post_id ); 
+            $json_ld['author']           = smpg_get_author_detail( $post_id );    
 
             $video_data = smpg_get_video_metadata();            
 
@@ -729,12 +729,12 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
         case 'audioobject':
 
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data );
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
             
-            $json_ld['datePublished']    = smpg_get_published_date();
-            $json_ld['dateModified']     = smpg_get_modified_date();
-            $json_ld['uploadDate']       = smpg_get_modified_date(); 
-            $json_ld['author']           = smpg_get_author_detail();    
+            $json_ld['datePublished']    = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']     = smpg_get_modified_date( $post_id );
+            $json_ld['uploadDate']       = smpg_get_modified_date( $post_id ); 
+            $json_ld['author']           = smpg_get_author_detail( $post_id );    
 
             $video_data = smpg_get_video_metadata();            
 
@@ -765,15 +765,15 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
 }
 
-function smpg_prepare_breadcrumbs_json_ld() {
+function smpg_prepare_breadcrumbs_json_ld( $post_id = null, $spg_id = null, $render_method = null, $page_type = null ) {
 
     if ( is_front_page() || is_home() ) {
         return [];
     }
-
+    
     global $smpg_misc_schema;
     
-    $bread_data = smpg_breadcrumbs_data();
+    $bread_data = smpg_breadcrumbs_data( $post_id, $spg_id, $render_method, $page_type );
     
     $json_ld       = [];
 
@@ -812,7 +812,7 @@ function smpg_prepare_breadcrumbs_json_ld() {
     return apply_filters( 'smpg_filter_breadcrumbs_json_ld', $json_ld );
 }
 
-function smpg_breadcrumbs_data() {
+function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method = null, $page_type = null ) {
     
     $response    = [];
     $crumbslist  = [];    
@@ -890,13 +890,13 @@ function smpg_breadcrumbs_data() {
 
         }
 
-        if ( is_singular() ) {
+        if ( ( $render_method === 'client_side' && $page_type === 'singular') || is_singular() ) {
                                                                         
-                $current_url            = get_permalink();                                                                     
+                $current_url            = get_permalink( $post_id ); 
 
                 $crumbslist[] = [
-                    'name' => smpg_get_the_title(),
-                    'link' => get_permalink()
+                    'name' => smpg_get_the_title( $post_id ),
+                    'link' => get_permalink( $post_id )
                 ];
 
         }
@@ -1138,14 +1138,14 @@ function smpg_prepare_contact_page_json_ld() {
 	return $json_ld;	
 }
 
-function smpg_common_default_json_ld( $json_ld, $schema_data ) {
+function smpg_common_default_json_ld( $json_ld, $schema_data, $post_id = null ) {
 
     $json_ld['@context']         = smpg_get_context_url();
     $json_ld['@type']            = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
-    $json_ld['@id']              = smpg_get_permalink().'#'.$schema_data['_schema_type'][0];
-    $json_ld['url']              = smpg_get_permalink();
-    $json_ld['name']             = smpg_get_the_title();
-    $json_ld['description']      = smpg_get_description();    
+    $json_ld['@id']              = smpg_get_permalink( $post_id ).'#'.$schema_data['_schema_type'][0];
+    $json_ld['url']              = smpg_get_permalink( $post_id );
+    $json_ld['name']             = smpg_get_the_title( $post_id );
+    $json_ld['description']      = smpg_get_description( $post_id );    
 
     return $json_ld;
 }

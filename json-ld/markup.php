@@ -343,7 +343,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
 
     }    
     //MISC Schema Output
-    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld( $post_id, $spg_id, $render_method, $page_type );    
     
     if(!empty($breadcrumbs)){
         $response [] = $breadcrumbs;

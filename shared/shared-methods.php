@@ -670,6 +670,10 @@ function smpg_get_description( $post_id = null ) {
 
 	if ( ! isset( $post_id ) && $post ) {
 		$post_id = $post->ID;
+	}else {
+		if ( ! $post ) {
+			$post = get_post( $post_id );
+		}		
 	}
 
 	$description = '';
@@ -782,7 +786,7 @@ function smpg_get_categories( $post_id = null ) {
 	return apply_filters( 'smpg_change_categories', $categories );
 }
 
-function smpg_get_image() {
+function smpg_get_image( $post_id = null ) {
             
 	global $smpg_settings, $smpg_image;
 

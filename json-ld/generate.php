@@ -1089,11 +1089,14 @@ function smpg_prepare_site_navigation_json_ld() {
 }
 
 
-function smpg_prepare_about_page_json_ld() {
+function smpg_prepare_about_page_json_ld( $post_id = null ) {
 
 	global $smpg_misc_schema;
     
-    $page_id       = get_the_ID();
+    if ( ! $post_id ) {
+        $post_id       = get_the_ID();    
+    }
+
     $json_ld       = [];   
     $pages_arr     = [];
 
@@ -1101,16 +1104,16 @@ function smpg_prepare_about_page_json_ld() {
 
         $pages_arr = $smpg_misc_schema['about_pages'];
 
-        if ( in_array( $page_id, $pages_arr ) ) {
+        if ( in_array( $post_id, $pages_arr ) ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = 'AboutPage';
-            $json_ld['url']              = smpg_get_permalink();
-            $json_ld['headline']         = smpg_get_the_title();
-            $json_ld['description']      = smpg_get_description();
-            $json_ld['publisher']        = smpg_get_publisher();
+            $json_ld['url']              = smpg_get_permalink( $post_id );
+            $json_ld['headline']         = smpg_get_the_title( $post_id );
+            $json_ld['description']      = smpg_get_description( $post_id );
+            $json_ld['publisher']        = smpg_get_publisher( $post_id );
 
-            $image = smpg_get_image();
+            $image = smpg_get_image( $post_id );
 
             if ( ! empty( $image ) ) {
                 $json_ld = array_merge( $json_ld,$image );
@@ -1124,11 +1127,14 @@ function smpg_prepare_about_page_json_ld() {
 	
 }
 
-function smpg_prepare_contact_page_json_ld() { 
+function smpg_prepare_contact_page_json_ld( $post_id = null ) { 
 
 	global $smpg_misc_schema;
     
-    $page_id       = get_the_ID();
+    if ( ! $post_id ) {
+        $post_id       = get_the_ID();    
+    }
+    
     $json_ld       = [];   
     $pages_arr     = [];
 
@@ -1136,16 +1142,16 @@ function smpg_prepare_contact_page_json_ld() {
 
         $pages_arr = $smpg_misc_schema['contact_pages'];
 
-        if ( in_array( $page_id, $pages_arr ) ) {
+        if ( in_array( $post_id, $pages_arr ) ) {
 
             $json_ld['@context']         = smpg_get_context_url();
             $json_ld['@type']            = 'ContactPage';
-            $json_ld['url']              = smpg_get_permalink();
-            $json_ld['headline']         = smpg_get_the_title();
-            $json_ld['description']      = smpg_get_description();    
-            $json_ld['publisher']        = smpg_get_publisher();
+            $json_ld['url']              = smpg_get_permalink( $post_id );
+            $json_ld['headline']         = smpg_get_the_title( $post_id );
+            $json_ld['description']      = smpg_get_description( $post_id );    
+            $json_ld['publisher']        = smpg_get_publisher( $post_id );
 
-            $image = smpg_get_image();
+            $image = smpg_get_image( $post_id );
 
             if ( ! empty( $image ) ) {
                 $json_ld = array_merge( $json_ld,$image );

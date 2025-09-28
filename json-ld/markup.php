@@ -354,33 +354,33 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
     //MISC Schema Output
     $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld( $post_id, $spg_id, $render_method, $page_type, $is_home, $is_front_page );    
     
-    if(!empty($breadcrumbs)){
+    if ( ! empty( $breadcrumbs ) ) {
         $response [] = $breadcrumbs;
     }
 
-    $profilepage       = smpg_prepare_profilepage_json_ld( $is_home, $is_front_page );    
-    if(!empty($profilepage)){
+    $profilepage       = smpg_prepare_profilepage_json_ld( $spg_id, $page_type );    
+    if ( ! empty( $profilepage ) ) {
         $response [] = $profilepage;
     }
 
     $site_navigation       = smpg_prepare_site_navigation_json_ld( $is_home, $is_front_page );    
-    if(!empty($site_navigation)){
+    if ( ! empty( $site_navigation ) ) {
         $response [] = $site_navigation;
     }
 
     $website       = smpg_prepare_website_json_ld( $is_home, $is_front_page );    
-    if(!empty($website)){
+    if ( ! empty( $website ) ) {
         $response [] = $website;
     }
 
     $about_page    = smpg_prepare_about_page_json_ld( $post_id );
-    if(!empty($about_page)){
+    if ( ! empty( $about_page ) ) {
         $response [] = $about_page;
     }
 
     $contact_page  = smpg_prepare_contact_page_json_ld( $post_id );  
 
-    if(!empty($contact_page)){
+    if ( ! empty( $contact_page ) ) {
         $response [] = $contact_page;
     }    
     

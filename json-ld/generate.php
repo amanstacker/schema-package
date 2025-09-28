@@ -955,14 +955,19 @@ function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method 
         return $response;
 }
 
-function smpg_prepare_profilepage_json_ld() {
+function smpg_prepare_profilepage_json_ld( $spg_id = null, $page_type = null ) {
 
     global $smpg_misc_schema;
     $json_ld = [];
 
-    if ( ! empty( $smpg_misc_schema['profilepage'] ) && is_author() ) {
+    if ( ! empty( $smpg_misc_schema['profilepage'] ) && ( is_author() || $page_type === 'author') ) {
 
         $author_id    = get_queried_object_id();
+
+        if ( $page_type === 'author' ) {
+            $author_id    = $spg_id;
+        }
+
         $author_name  = get_the_author_meta( 'display_name', $author_id );
         $author_url   = get_author_posts_url( $author_id );
         $author_desc  = get_the_author_meta( 'description', $author_id );
@@ -993,7 +998,6 @@ function smpg_prepare_profilepage_json_ld() {
                 'sameAs'       => ! empty( $social_profiles ) ? $social_profiles : null,
             ],
         ];
-
         // Remove null values to keep JSON clean
         $json_ld['mainEntity'] = array_filter( $json_ld['mainEntity'] );
     }
@@ -1040,13 +1044,13 @@ function smpg_prepare_website_json_ld( $is_home, $is_front_page ) {
     return $json_ld;
 }
 
-function smpg_prepare_site_navigation_json_ld() {
+function smpg_prepare_site_navigation_json_ld( $is_home = null, $is_front_page = null ) {
 
 	global $smpg_misc_schema;
 	$json_ld = [];
 
 	// Run only if there are menus selected and we're on home or front page
-	if ( ! empty( $smpg_misc_schema['site_navigations'] ) && ( is_home() || is_front_page() ) ) {
+	if ( ! empty( $smpg_misc_schema['site_navigations'] ) && ( ( is_home() || is_front_page() ) || ( $is_home || $is_front_page ) ) ) {
 
 		$nav_items = [];
 
@@ -1134,7 +1138,7 @@ function smpg_prepare_contact_page_json_ld( $post_id = null ) {
     if ( ! $post_id ) {
         $post_id       = get_the_ID();    
     }
-    
+
     $json_ld       = [];   
     $pages_arr     = [];
 

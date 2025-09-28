@@ -1383,7 +1383,7 @@ function smpg_get_blog_description(){
 	return $blog_description;
 }
 
-function smpg_get_request_url() {
+function smpg_get_request_url( $render_method = null ) {
  
     $link = "http"; 
       
@@ -1399,12 +1399,21 @@ function smpg_get_request_url() {
 
 		$link .= sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
 	}
-    	
-	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+    
+	if ( $render_method === 'client_side' ) {
+
+		if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
 		
-		$link .= sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-	}    
-      
+			$link .= sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+		}
+	} else {
+
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+			
+			$link .= sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		}
+	}
+	          
     return $link;
 	
 }

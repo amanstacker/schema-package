@@ -814,22 +814,26 @@ function smpg_prepare_breadcrumbs_json_ld( $post_id = null, $spg_id = null, $ren
 
 function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method = null, $page_type = null ) {
     
-    $response    = [];
-    $crumbslist  = [];    
-    $current_url = '';
-    $blog_name   = get_bloginfo();        
-    $current_url = get_home_url();
+        $response    = [];
+        $crumbslist  = [];    
+        $current_url = '';
+        $blog_name   = get_bloginfo();        
+        $current_url = get_home_url();
 
-    $crumbslist[] = [
-        'name' => $blog_name ? $blog_name : 'HomePage',
-        'link' => get_home_url()
-    ];
+        $crumbslist[] = [
+            'name' => $blog_name ? $blog_name : 'HomePage',
+            'link' => get_home_url()
+        ];
 
 
-        if ( is_author() ){
+        if ( ( $render_method === 'client_side' && $page_type === 'author' ) || is_author() ){
 
             global $authordata;
-                
+            
+                if ( ! $authordata ) {                    
+                    $authordata = get_userdata( $spg_id );
+                }
+
                 if ( $authordata ) {
                     
                     $author_url             = get_author_posts_url( $authordata->ID );
@@ -844,9 +848,9 @@ function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method 
 
         }
 
-        if ( is_category() ) {
+        if ( ( $render_method === 'client_side' && $page_type === 'category' ) || is_category() ) {
 
-            $current_url   = smpg_get_request_url();
+            $current_url   = smpg_get_request_url( $render_method );
             $exploded_cat  = explode( '/', $current_url );
                             
             if ( ! empty( $exploded_cat ) && is_array( $exploded_cat ) ) {
@@ -872,9 +876,14 @@ function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method 
 
         }
 
-        if ( is_tag() ) {
+        if ( ( $render_method === 'client_side' && $page_type === 'tag' ) || is_tag() ) {
 
                 $term_id        = get_query_var( 'tag_id' );
+
+                if ( ! $term_id ) {
+                    $term_id = $spg_id;
+                }
+
                 $get_term       = get_term( $term_id );
                 
                 if ( is_object( $get_term ) && isset( $get_term->name ) ) {
@@ -890,7 +899,7 @@ function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method 
 
         }
 
-        if ( ( $render_method === 'client_side' && $page_type === 'singular') || is_singular() ) {
+        if ( ( $render_method === 'client_side' && $page_type === 'singular' ) || is_singular() ) {
                                                                         
                 $current_url            = get_permalink( $post_id ); 
 
@@ -901,16 +910,20 @@ function smpg_breadcrumbs_data( $post_id = null, $spg_id = null, $render_method 
 
         }
 
-        if ( is_tax() ) {
+        if ( ( $render_method === 'client_side' && $page_type === 'taxonomy' ) || is_tax() ) {
                                                         
             $queried_obj = get_queried_object();
+
+            if( ! $queried_obj ) {
+                $queried_obj = get_term( $spg_id );
+            }
             
             if ( is_object( $queried_obj ) ) {
 
                 $current_url            = get_term_link( $queried_obj->term_id );
                 
                 $crumbslist[] = [
-                    'name' => get_queried_object()->name,
+                    'name' => $queried_obj->name,
                     'link' => get_term_link( $queried_obj->term_id )
                 ];
             }          

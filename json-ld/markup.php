@@ -20,15 +20,20 @@ function smpg_enqueue_client_side_script() {
                 'spg_id'                => get_queried_object_id()                
          ];     
          
-         if ( is_singular() ) {
+        if ( is_singular() ) {
             $localdata['page_type'] = 'singular';
-         }else if( is_tax() || is_category() || is_tag() ){
-            $localdata['page_type'] = 'archive';
-         }else if( is_author() ){
+        } else if ( is_category() ) {
+            $localdata['page_type'] = 'category';
+        } else if ( is_tag() ) {
+            $localdata['page_type'] = 'tag';
+        } else if ( is_tax() ) {
+            $localdata['page_type'] = 'taxonomy';
+        } else if ( is_author() ) {
             $localdata['page_type'] = 'author';
-         }else{
+        } else {
             $localdata['page_type'] = 'none';
-         }
+        }
+
          
         wp_localize_script( 'smpg-client-side', 'smpg_client_local', $localdata );
         wp_enqueue_script( 'smpg-client-side' );
@@ -237,7 +242,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
         
     $response    = $spg_schema_meta = [];            
   
-    if ( ( $render_method === 'client_side' && $page_type === 'archive') || is_tax() || is_category() || is_tag() ) {
+    if ( ( $render_method === 'client_side' && ( $page_type === 'category' || $page_type === 'tag' || $page_type === 'taxonomy' ) ) || is_tax() || is_category() || is_tag() ) {
     
         if ( $render_method !== 'client_side' ) {
             $spg_id = get_queried_object_id();

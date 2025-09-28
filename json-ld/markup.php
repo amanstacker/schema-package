@@ -265,7 +265,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
                 
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                     
-                    if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+                    if ( smpg_is_carousel_placement_matched( $schema_meta, $page_type, $spg_id ) ) {
 
                         $carousel_json_ld = smpg_prepare_carousel_json_ld( $schema_meta );
 

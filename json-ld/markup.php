@@ -17,7 +17,9 @@ function smpg_enqueue_client_side_script() {
                 'ajax_url'      		=> admin_url( 'admin-ajax.php' ),
                 'smpg_security_nonce'   => wp_create_nonce( 'smpg_ajax_check_nonce' ),
                 'post_id'               => get_the_ID(),
-                'spg_id'                => get_queried_object_id()                
+                'spg_id'                => get_queried_object_id(),
+                'is_home'               => is_home(),
+                'is_front_page'         => is_front_page()
          ];     
          
         if ( is_singular() ) {
@@ -54,11 +56,13 @@ function smpg_json_ld_client_side_output() {
 
     if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) {
         
-        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
-        $spg_id = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
-        $page_type = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
+        $post_id       = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
+        $spg_id        = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
+        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
+        $is_home       = isset($_POST['is_home']) ? (bool)$_POST['is_home'] : 0;
+        $is_front_page = isset($_POST['is_front_page']) ? (bool)$_POST['is_front_page'] : 0;
 
-        $json_ld = smpg_get_json_ld( $post_id, $spg_id, $page_type,   'client_side' );
+        $json_ld = smpg_get_json_ld( $post_id, $spg_id, $page_type,   'client_side', $is_home, $is_front_page );
         wp_send_json_success( $json_ld );
 
     }	
@@ -236,7 +240,7 @@ function smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings ) {
 
 }
 
-function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $render_method = null ) {
+function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $render_method = null, $is_home = null, $is_front_page = null  ) {
 
     global $post;
         
@@ -348,7 +352,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
 
     }    
     //MISC Schema Output
-    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld( $post_id, $spg_id, $render_method, $page_type );    
+    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld( $post_id, $spg_id, $render_method, $page_type, $is_home, $is_front_page );    
     
     if(!empty($breadcrumbs)){
         $response [] = $breadcrumbs;
@@ -364,7 +368,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
         $response [] = $site_navigation;
     }
 
-    $website       = smpg_prepare_website_json_ld();    
+    $website       = smpg_prepare_website_json_ld( $is_home, $is_front_page );    
     if(!empty($website)){
         $response [] = $website;
     }

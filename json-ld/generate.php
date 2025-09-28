@@ -765,10 +765,17 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
 }
 
-function smpg_prepare_breadcrumbs_json_ld( $post_id = null, $spg_id = null, $render_method = null, $page_type = null ) {
+function smpg_prepare_breadcrumbs_json_ld( $post_id = null, $spg_id = null, $render_method = null, $page_type = null, $is_home = null, $is_front_page = null ) {
 
     if ( is_front_page() || is_home() ) {
         return [];
+    }
+
+    if ( $render_method === 'client_side' ) {
+
+        if ( $is_home || $is_front_page ) {
+            return [];
+        }
     }
     
     global $smpg_misc_schema;
@@ -994,12 +1001,12 @@ function smpg_prepare_profilepage_json_ld() {
     return $json_ld;
 }
 
-function smpg_prepare_website_json_ld() {
+function smpg_prepare_website_json_ld( $is_home, $is_front_page ) {
 
     global $smpg_misc_schema;
     $json_ld       = [];
 
-    if ( !empty($smpg_misc_schema['website']) && ( is_home() || is_front_page() ) ) {
+    if ( ! empty( $smpg_misc_schema['website'] ) && ( ( $is_home || $is_front_page ) || ( is_home() || is_front_page() ) ) ) {
     
         $site_url  = get_home_url();
 

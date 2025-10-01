@@ -44,7 +44,7 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 ### Schema Package Key Features
 
-* <strong>Unlimited Schema</strong>: No limitation on schema type selection, Add as much as you want.
+* <strong>Unlimited Schema</strong>: There is no restriction on the number or type of schema you can add. You can select multiple schema types per page or post and customize them to match your content for maximum flexibility.
 * <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
 * <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.

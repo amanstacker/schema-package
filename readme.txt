@@ -490,20 +490,20 @@ To explore all the advanced features and benefits included in the Schema Package
 
 == Screenshots ==
 
-1. `screenshot-1.png` - Overview of the Schema Package dashboard
-2. `screenshot-2.png` - Miscellaneous schema setup dashboard
-3. `screenshot-3.png` - Complete Schema Package settings overview
-4. `screenshot-4.png` - Singular schema edit page
-5. `screenshot-5.png` - Singular schema targeting options overview
-6. `screenshot-6.png` - Carousel schema edit page
-7. `screenshot-7.png` - Carousel schema targeting options overview
-8. `screenshot-8.png` - Schema Package tools settings overview
-9. `screenshot-9.png` - Schema Package Generator popup
-10. `screenshot-10.png` - Selecting a schema type in Schema Package Generator
-11. `screenshot-11.png` - List of added schema types via Schema Package Generator in Classic Editor
-12. `screenshot-12.png` - Editing added schema types via Schema Package Generator
-13. `screenshot-13.png` - List of added schema types via Schema Package Generator in Gutenberg Editor
-14. `screenshot-14.png` - JSON-LD output in page source
+1. Overview of the Schema Package dashboard
+2. Miscellaneous schema setup dashboard
+3. Complete Schema Package settings overview
+4. Singular schema edit page
+5. Singular schema targeting options overview
+6. Carousel schema edit page
+7. Carousel schema targeting options overview
+8. Schema Package tools settings overview
+9. Schema Package Generator popup
+10. Selecting a schema type in Schema Package Generator
+11. List of added schema types via Schema Package Generator in Classic Editor
+12. Editing added schema types via Schema Package Generator
+13. List of added schema types via Schema Package Generator in Gutenberg Editor
+14. JSON-LD output in page source
 
 == Upgrade Notice ==
 = 1.0.21 =

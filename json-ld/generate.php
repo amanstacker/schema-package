@@ -1073,7 +1073,7 @@ function smpg_prepare_site_navigation_json_ld( $is_home = null, $is_front_page =
 					$nav_items[] = [
                         '@context' => smpg_get_context_url(),
 						'@type'    => 'SiteNavigationElement',
-						'@id'      => trailingslashit( get_home_url() ) . '#' . $menu_name,
+						'@id'      => trailingslashit( get_home_url() ) . '#' . sanitize_title( $item->title ),
 						'name'     => wp_strip_all_tags( $item->title ),
 						'url'      => $item->url,
 					];

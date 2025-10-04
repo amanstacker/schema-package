@@ -1075,7 +1075,7 @@ function smpg_prepare_site_navigation_json_ld( $is_home = null, $is_front_page =
 						'@type'    => 'SiteNavigationElement',
 						'@id'      => trailingslashit( get_home_url() ) . '#' . sanitize_title( $item->title ),
 						'name'     => wp_strip_all_tags( $item->title ),
-						'url'      => $item->url,
+						'url'      => ( strpos( $item->url, 'http' ) === 0 ) ? $item->url : trailingslashit( get_home_url() ) . ltrim( $item->url, '/' ),
 					];
 				}
 			}

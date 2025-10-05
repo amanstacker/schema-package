@@ -503,7 +503,9 @@ To explore all the advanced features and benefits included in the Schema Package
 11. List of added schema types via Schema Package Generator in Classic Editor
 12. Editing added schema types via Schema Package Generator
 13. List of added schema types via Schema Package Generator in Gutenberg Editor
-14. JSON-LD output in page source
+14. Schema Package Generator popup on categories page
+15. Schema Package Generator popup on edit author page
+16. JSON-LD output in page source
 
 == Upgrade Notice ==
 = 1.0.21 =

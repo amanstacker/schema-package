@@ -259,6 +259,15 @@ function smpg_load_smpg_plugin_list_settings() {
 		'slug_pro_v'  		=> 'seo-by-rank-math-premium/rank-math-premium.php',
 		'wp_org_url'  		=> 'https://wordpress.org/plugins/seo-by-rank-math/'
 	];
+	$smpg_plugin_list['aioseo'] = [
+		'is_active'   		=> false,
+		'has_own_json_ld' 	=> true,
+		'id'          		=> 'aioseo',
+		'name'        		=> 'All in One SEO',
+		'slug_free_v' 		=> 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+		'slug_pro_v'  		=> 'all-in-one-seo-pack/all_in_one_seo_pack.php',
+		'wp_org_url'  		=> 'https://wordpress.org/plugins/all-in-one-seo-pack/'
+	];
 	$smpg_plugin_list['yoastseo'] = [
 		'is_active'   		=> false,
 		'has_own_json_ld' 	=> true,
@@ -349,6 +358,9 @@ function smpg_default_settings_data() {
 		'clean_rdfa_data' 			=> 0,
 		'multisize_image' 			=> 0,
 		'image_object' 				=> 0,
+		'rankmath_cmp' 			    => 0,
+		'yoast_cmp' 			    => 0,
+		'aioseo_cmp' 			    => 0,
 		'wpgraphql_cmp' 		    => 0,
 		'simple_author_box_cmp'     => 0,		
 		'delete_data_on_uninstall'  => 0,
@@ -582,7 +594,7 @@ function smpg_entry_page(){
 		echo '<div id="smpg-entry-div"></div>';
 		echo '<div id="smpg-page-footer">
 		<span>'.esc_html__( 'Thanks for choosing the Schema Package! Your feedback matters to us', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'share your thoughts to help us improve.', 'schema-package' ).'</a> </span>
-		<span class="smpg-version-footer">'.esc_html__( 'Schema Package Version', 'schema-package' ).' '.SMPG_VERSION.'</span>
+		<span class="smpg-version-footer">'.esc_html__( 'Schema Package Version', 'schema-package' ).' '.esc_html( SMPG_VERSION ) .'</span>
 		</div>';		
 
 }

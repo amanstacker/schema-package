@@ -438,7 +438,7 @@ class SMPG_Api_Action {
             }
         
             $query .= " LIMIT 10"; // Add the limit
-        
+            //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
             $meta_keys = $wpdb->get_col($query);
         
             // Format response

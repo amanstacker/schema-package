@@ -2,6 +2,77 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Enqueue the client-side schema script
+function smpg_enqueue_client_side_script() {
+
+	global $smpg_settings; 
+
+    if ( ! is_admin() && ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) ) {
+        
+        $min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+        
+        wp_register_script( 'smpg-client-side', SMPG_PLUGIN_URL . "json-ld/assets/smpg-client-side-injection{$min}.js", [ 'jquery' ],  SMPG_VERSION, true );
+
+         $localdata = [
+                'ajax_url'      		=> admin_url( 'admin-ajax.php' ),
+                'smpg_security_nonce'   => wp_create_nonce( 'smpg_ajax_check_nonce' ),
+                'post_id'               => get_the_ID(),
+                'spg_id'                => get_queried_object_id(),
+                'is_home'               => is_home(),
+                'is_front_page'         => is_front_page()
+         ];     
+         
+        if ( is_singular() ) {
+            $localdata['page_type'] = 'singular';
+        } else if ( is_category() ) {
+            $localdata['page_type'] = 'category';
+        } else if ( is_tag() ) {
+            $localdata['page_type'] = 'tag';
+        } else if ( is_tax() ) {
+            $localdata['page_type'] = 'taxonomy';
+        } else if ( is_author() ) {
+            $localdata['page_type'] = 'author';
+        } else {
+            $localdata['page_type'] = 'none';
+        }
+
+         
+        wp_localize_script( 'smpg-client-side', 'smpg_client_local', $localdata );
+        wp_enqueue_script( 'smpg-client-side' );
+                
+    }
+
+}
+
+add_action( 'wp_enqueue_scripts', 'smpg_enqueue_client_side_script' );
+
+function smpg_json_ld_client_side_output() {
+    
+	if ( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'smpg_ajax_check_nonce', 'security', false ) ) {
+		wp_send_json_error( [ 'message' => 'Invalid security token (nonce).' ], 403 );
+	}
+    
+    global $smpg_settings; 
+
+    if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'client_side' ) {
+        
+        $post_id       = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
+        $spg_id        = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
+        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
+        $is_home       = isset($_POST['is_home']) ? (bool)$_POST['is_home'] : 0;
+        $is_front_page = isset($_POST['is_front_page']) ? (bool)$_POST['is_front_page'] : 0;
+
+        $json_ld = smpg_get_json_ld( $post_id, $spg_id, $page_type,   'client_side', $is_home, $is_front_page );
+        wp_send_json_success( $json_ld );
+
+    }	
+
+}
+
+add_action('wp_ajax_smpg_json_ld_client_side_output', 'smpg_json_ld_client_side_output');
+add_action('wp_ajax_nopriv_smpg_json_ld_client_side_output', 'smpg_json_ld_client_side_output');
+
+
 //Expose Jsonld in WPGraphQL starts here
 
 add_action( 'graphql_register_types', 'smpg_register_jsonld_wpgraphql_field' );
@@ -112,7 +183,12 @@ function smpg_json_ld_init(){
 
     smpg_manage_conflict();
 
-    add_action('wp_head', 'smpg_json_ld_output');    
+    global $smpg_settings;        
+    
+    if ( isset( $smpg_settings['json_ld_render_method'] ) && $smpg_settings['json_ld_render_method'] === 'server_side' ) {
+        add_action('wp_head', 'smpg_json_ld_output');    
+    }
+
     ob_start('smpg_clean_other_format_schema');            
             
 }
@@ -121,6 +197,9 @@ function smpg_json_ld_init(){
 function smpg_json_ld_output() {
     
 	global $smpg_settings;        
+    
+    if ( smpg_skip_schema_due_to_noindex() ) return;
+    
     $json_ld = apply_filters( 'smpg_filter_final_json_ld', smpg_get_json_ld() );    
 
     if ( ! empty($json_ld) ) {
@@ -136,7 +215,7 @@ function smpg_json_ld_output() {
             echo wp_json_encode( $json_ld );
 
         }else{
-
+            //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	-- Reason: already escaped
             echo smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings );
             
         }        
@@ -161,17 +240,19 @@ function smpg_get_json_ld_based_on_constant( $json_ld, $smpg_settings ) {
 
 }
 
-function smpg_get_json_ld( $post_id = null ) {
+function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $render_method = null, $is_home = null, $is_front_page = null  ) {
 
     global $post;
-
-    $post_id     = $spg_id = null;
+        
     $response    = $spg_schema_meta = [];            
+  
+    if ( ( $render_method === 'client_side' && ( $page_type === 'category' || $page_type === 'tag' || $page_type === 'taxonomy' ) ) || is_tax() || is_category() || is_tag() ) {
     
-    if ( is_tax() || is_category() || is_tag() ) {
-
-        $spg_id = get_queried_object_id();
-        $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );      
+        if ( $render_method !== 'client_side' ) {
+            $spg_id = get_queried_object_id();
+        }
+                
+        $spg_schema_meta = get_term_meta( $spg_id, '_smpg_schema_meta', true );              
 
         //Carousel schema markup addition
         $carousel_schema_ids = smpg_get_schema_ids( 'smpg_cached_key_carousel_schema' , 'smpg_carousel_schema' );
@@ -184,7 +265,7 @@ function smpg_get_json_ld( $post_id = null ) {
                 
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
                     
-                    if ( smpg_is_carousel_placement_matched( $schema_meta ) ) {
+                    if ( smpg_is_carousel_placement_matched( $schema_meta, $page_type, $spg_id ) ) {
 
                         $carousel_json_ld = smpg_prepare_carousel_json_ld( $schema_meta );
 
@@ -200,16 +281,17 @@ function smpg_get_json_ld( $post_id = null ) {
             }
 
         }
-
-
-        ///
+        
     }
     
     //Singular schema markup addition
 
-    if ( is_singular() || (  defined( 'REST_REQUEST' ) && REST_REQUEST  ) ) {
-
-        $post_id = $post->ID;
+    if ( ( $render_method === 'client_side' && $page_type === 'singular') || is_singular() || (  defined( 'REST_REQUEST' ) && REST_REQUEST  ) ) {
+            
+        if ( is_object( $post ) ) {
+            $post_id = $post->ID;
+        }
+        
         $spg_id  = $post_id;
         
         $spg_schema_meta = get_post_meta( $spg_id, '_smpg_schema_meta', true );        
@@ -223,6 +305,7 @@ function smpg_get_json_ld( $post_id = null ) {
                 $schema_meta = get_post_meta( $id );            
                 
                 if ( isset( $schema_meta['_current_status'][0] ) && $schema_meta['_current_status'][0] == 1 ) {
+                    
                     if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
 
                         $global_json_ld = smpg_prepare_global_json_ld( $schema_meta, $post_id );
@@ -239,10 +322,14 @@ function smpg_get_json_ld( $post_id = null ) {
 
     }            
 
-    if ( is_author() ) {
+    if ( ( $render_method === 'client_side' && $page_type === 'author') || is_author() ) {
+            
+        if ( $render_method !== 'client_side' ) {
+            $spg_id = get_queried_object_id();
+        }
 
-        $spg_id = get_queried_object_id();        
         $spg_schema_meta = get_user_meta( $spg_id, '_smpg_schema_meta', true );      
+
     }
 
     //Schema Package Generator schema markup addition
@@ -265,35 +352,35 @@ function smpg_get_json_ld( $post_id = null ) {
 
     }    
     //MISC Schema Output
-    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld();    
+    $breadcrumbs       = smpg_prepare_breadcrumbs_json_ld( $post_id, $spg_id, $render_method, $page_type, $is_home, $is_front_page );    
     
-    if(!empty($breadcrumbs)){
+    if ( ! empty( $breadcrumbs ) ) {
         $response [] = $breadcrumbs;
     }
 
-    $profilepage       = smpg_prepare_profilepage_json_ld();    
-    if(!empty($profilepage)){
+    $profilepage       = smpg_prepare_profilepage_json_ld( $spg_id, $page_type );    
+    if ( ! empty( $profilepage ) ) {
         $response [] = $profilepage;
     }
 
-    $site_navigation       = smpg_prepare_site_navigation_json_ld();    
-    if(!empty($site_navigation)){
+    $site_navigation       = smpg_prepare_site_navigation_json_ld( $is_home, $is_front_page );    
+    if ( ! empty( $site_navigation ) ) {
         $response [] = $site_navigation;
     }
 
-    $website       = smpg_prepare_website_json_ld();    
-    if(!empty($website)){
+    $website       = smpg_prepare_website_json_ld( $is_home, $is_front_page );    
+    if ( ! empty( $website ) ) {
         $response [] = $website;
     }
 
-    $about_page    = smpg_prepare_about_page_json_ld();
-    if(!empty($about_page)){
+    $about_page    = smpg_prepare_about_page_json_ld( $post_id );
+    if ( ! empty( $about_page ) ) {
         $response [] = $about_page;
     }
 
-    $contact_page  = smpg_prepare_contact_page_json_ld();  
+    $contact_page  = smpg_prepare_contact_page_json_ld( $post_id );  
 
-    if(!empty($contact_page)){
+    if ( ! empty( $contact_page ) ) {
         $response [] = $contact_page;
     }    
     
@@ -309,19 +396,49 @@ function smpg_clean_other_format_schema($content){
     global $smpg_settings;
 
     if ( ! empty( $smpg_settings['clean_micro_data'] ) ) {
-        $content = preg_replace( [ '/itemscope=\\"[^\\"]*\\"/i', '/itemType=\\"[^\\"]*\\"/i', '/itemprop=\\"[^\\"]*\\"/i', '/itemscope/i' ], '', $content );
+        
+         if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
+
+            $processor = new WP_HTML_Tag_Processor( $content );
+
+            while ( $processor->next_tag() ) {
+
+                $processor->remove_attribute( 'itemscope' );
+                $processor->remove_attribute( 'itemtype' );
+                $processor->remove_attribute( 'itemprop' );                
+
+            }
+            
+            $content = $processor->get_updated_html();
+        }
     }
     
     if ( ! empty( $smpg_settings['clean_rdfa_data'] ) ) {
-        $content = preg_replace_callback(
-            '/<(?!meta\b)[^>]+?\s(property|typeof)=\\"[^\\"]*\\"/i',
-            function ( $matches ) {
-                return preg_replace( '/\s(property|typeof)=\\"[^\\"]*\\"/i', '', $matches[0] );
-            },
-            $content
-        );        
-    }    
+        
+        if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
 
+            $processor = new WP_HTML_Tag_Processor( $content );
+
+            while ( $processor->next_tag() ) {
+                // Skip <meta> tags
+                if ( 'META' === $processor->get_tag() ) {
+                    continue;
+                }
+
+                // Remove RDFa attributes if present
+                if ( $processor->get_attribute( 'property' ) ) {
+                    $processor->remove_attribute( 'property' );
+                }
+
+                if ( $processor->get_attribute( 'typeof' ) ) {
+                    $processor->remove_attribute( 'typeof' );
+                }
+            }
+
+            $content = $processor->get_updated_html();
+        }
+    }
+    
     return $content;
 }
 
@@ -363,6 +480,9 @@ function smpg_manage_conflict() {
                     break;
                 case 'rankmath':                    
                     add_action( 'rank_math/json_ld', 'smpg_remove_rank_math_json_ld',99 );   
+                    break;
+                case 'aioseo':                       
+                    add_filter( 'aioseo_schema_disable', '__return_true' );
                     break;
                 case 'yoastseo':                    
                     add_filter('wpseo_json_ld_output', '__return_false');         

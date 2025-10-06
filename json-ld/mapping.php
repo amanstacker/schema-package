@@ -77,7 +77,7 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                         $mapped_value = get_the_modified_date("c");
                         break;
                     case 'post_content':
-                        $mapped_value = get_the_content();
+                        $mapped_value = wp_strip_all_tags( get_the_content() );
                         break;
                     case 'custom_text':                                        
                         $mapped_value = smpg_replace_variables_and_placeholders( $value['custom_text'] );

@@ -115,8 +115,8 @@ function smpg_send_feedback() {
 
         //phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason : Since form is serialised nonce is verified after parsing the recieved data.
     if ( isset( $_POST['data'] ) ) {
-        //phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason : Since form is serialised nonce is verified after parsing the recieved data.
-        parse_str( $_POST['data'], $form );
+        //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason : Since form is serialised nonce is verified after parsing the recieved data and we are not saving data here in db. 
+        parse_str( wp_unslash( $_POST['data'] ), $form );
     }
     
     if ( ! isset( $form['smpg_security_nonce'] ) || isset( $form['smpg_security_nonce'] ) && !wp_verify_nonce( sanitize_text_field( $form['smpg_security_nonce'] ), 'smpg_ajax_check_nonce' ) ) {

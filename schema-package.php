@@ -2,9 +2,8 @@
 /*
 Plugin Name: Schema Package - Structured Data & Rich Snippets Tool for SEO
 Description: Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
-Version: 1.0.21
+Version: 1.0.22
 Text Domain: schema-package
-Domain Path: /languages
 Author: amanstacker
 Author URI: https://profiles.wordpress.org/amanstacker/
 License: GPLv2 or later
@@ -13,7 +12,7 @@ License: GPLv2 or later
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('SMPG_VERSION', '1.0.21');
+define('SMPG_VERSION', '1.0.22');
 define('SMPG_DIR_NAME_FILE', __FILE__ );
 define('SMPG_DIR_NAME', dirname( __FILE__ ));
 define('SMPG_DIR_URI', plugin_dir_url(__FILE__));
@@ -48,14 +47,6 @@ require_once SMPG_PLUGIN_DIR_PATH .'shared/shared-methods.php';
 
 register_uninstall_hook( __FILE__, 'smpg_on_plugin_uninstall' );
 register_activation_hook( __FILE__, 'smpg_on_plugin_activation' );
-
-function smpg_load_plugin_textdomain() {    
-
-    load_plugin_textdomain( 'schema-package', false, basename( dirname( __FILE__ ) ) . '/languages/' );
-    
-}
-
-add_action( 'plugins_loaded', 'smpg_load_plugin_textdomain' );
 
 add_filter( 'plugin_action_links_' . SMPG_PLUGIN_BASENAME, 'smpg_plugin_action_links' );
 

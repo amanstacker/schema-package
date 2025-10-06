@@ -411,9 +411,36 @@ function smpg_get_author_detail( $post_id = null ) {
 	global $post, $smpg_settings;
 		
 	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
-				
-	$content_post	= get_post( $post_id );
-	$post_author	= get_userdata( $content_post->post_author );
+	
+	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_author_id = WPSEO_Meta::get_value( 'author_id', $post_id );
+		if ( $yoast_author_id ) {
+			$post_author = get_userdata( $yoast_author_id );
+		}
+	}
+
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_author_id = \RankMath\Post::get_meta( 'seo_author', $post_id );
+		if ( $rankmath_author_id ) {
+			$post_author = get_userdata( $rankmath_author_id );
+		}
+	}
+
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) && class_exists( 'AIOSEO\Plugin\Common\Main\Main' ) ) {
+		$aioseo_author_id = get_post_meta( $post_id, '_aioseo_author', true );
+		if ( $aioseo_author_id ) {
+			$post_author = get_userdata( $aioseo_author_id );
+		}
+	}
+
+	if ( ! isset( $post_author ) || ! $post_author ) {
+
+		$content_post	= get_post( $post_id );
+		$post_author	= get_userdata( $content_post->post_author );
+		
+	}		
+
 	$email 			= $post_author->user_email; 		
 	
 	$author = [
@@ -502,16 +529,41 @@ function smpg_get_modified_date($post_id = null){
 
 }
 
-function smpg_get_the_title( $post_id = null ){
 
-	global $post;
-	
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
+function smpg_get_the_title( $post_id = null ) {
 
-	$title  		= wp_filter_nohtml_kses( get_the_title() );
+	global $post, $smpg_settings;
 
-	return apply_filters( 'smpg_change_the_title', $title );		
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}
 
+	$title = '';
+
+	// Yoast SEO	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) ) {
+		$title = smpg_get_yoast_rendered_value( 'title', $post_id );
+	}
+
+	// Rank Math
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_title = \RankMath\Post::get_meta( 'title', $post_id );
+		if ( ! empty( $rankmath_title ) ) {
+			$title = wp_strip_all_tags( $rankmath_title );
+		}
+	}
+
+	// AIOSEO
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) ) {
+		$title       = smpg_get_aioseo_rendered_value( 'title', $post_id );	
+	}
+
+	// Fallback: WordPress title
+	if ( empty( $title ) ) {
+		$title = wp_filter_nohtml_kses( get_the_title( $post_id ) );
+	}
+
+	return apply_filters( 'smpg_change_the_title', $title );
 }
 
 function smpg_get_the_content($post_id = null){
@@ -534,43 +586,179 @@ function smpg_get_the_content($post_id = null){
 
 }
 
+/**
+ * Get AIOSEO meta value (title or description) with smart tags replaced.
+ *
+ * @param string $field   'title' or 'description'.
+ * @param int    $post_id Post ID.
+ * @return string Rendered value (safe / stripped).
+ */
+function smpg_get_aioseo_rendered_value( $field, $post_id ) {
+	
+	if ( ! function_exists( 'aioseo' ) ) {
+		return '';
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return '';
+	}
+
+	$value = '';
+
+	// -------- Title / Description --------
+	if ( 'title' === $field || 'description' === $field ) {
+
+		$meta_key = ( 'title' === $field ) ? '_aioseo_title' : '_aioseo_description';
+
+		// 1. Try raw meta
+		$value = get_post_meta( $post_id, $meta_key, true );
+
+		// 2. Fallback to MetaData API
+		if ( empty( $value ) && isset( aioseo()->meta ) && isset( aioseo()->meta->metaData ) && method_exists( aioseo()->meta->metaData, 'getMetaData' ) ) {
+			$meta = aioseo()->meta->metaData->getMetaData( $post );
+			if ( isset( $meta->{$field} ) && ! empty( $meta->{$field} ) ) {
+				$value = $meta->{$field};
+			}
+		}
+
+		// 3. Replace smart tags
+		if ( ! empty( $value ) && isset( aioseo()->tags ) && method_exists( aioseo()->tags, 'replaceTags' ) ) {
+			$value = aioseo()->tags->replaceTags( $value, $post_id );
+		}
+	}
+
+	return wp_strip_all_tags( $value );
+}
+
+/**
+ * Get Yoast meta value with variables replaced.
+ *
+ * @param string $key     Yoast meta key (e.g. 'title', 'metadesc').
+ * @param int    $post_id Post ID.
+ * @return string Rendered value (stripped).
+ */
+function smpg_get_yoast_rendered_value( $key, $post_id ) {
+
+	if ( ! class_exists( 'WPSEO_Meta' ) ) {
+		return '';
+	}
+
+	$value = WPSEO_Meta::get_value( $key, $post_id );
+	if ( empty( $value ) ) {
+		return '';
+	}
+
+	$post_obj = get_post( $post_id );
+
+	/* Use WPSEO_Replace_Vars when available to replace variables like %%title%%. */
+	if ( class_exists( 'WPSEO_Replace_Vars' ) ) {
+		// reuse global instance if present
+		global $wpseo_replace_vars;
+		if ( ! ( $wpseo_replace_vars instanceof WPSEO_Replace_Vars ) ) {
+			$wpseo_replace_vars = new WPSEO_Replace_Vars();
+		}
+		$value = $wpseo_replace_vars->replace( $value, $post_obj );
+	}
+
+	return wp_strip_all_tags( $value );
+}
+
 function smpg_get_description( $post_id = null ) {
-	
-	global $post;
-	
-	if ( ! isset($post_id) && $post ) $post_id = $post->ID;
-				
-	$full_content		= $post ? $post->post_content : '';
-	$excerpt			= $post ? $post->post_excerpt : '';
-		
-	$full_content 		= preg_replace('#\[[^\]]+\]#', '', $full_content);
-	$full_content 		= wp_strip_all_tags( $full_content );	
-	
-	$desc_word_count	= apply_filters( 'smpg_change_description_word_count', 49 );
-	$short_content		= wp_trim_words( $full_content, $desc_word_count, '' ); 
-		
-	$description		= apply_filters( 'smpg_change_description', ( $excerpt != '' ) ? $excerpt : $short_content ); 
-	
-	return $description;
+
+	global $post, $smpg_settings;
+
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}else {
+		if ( ! $post ) {
+			$post = get_post( $post_id );
+		}		
+	}
+
+	$description = '';
+
+	// Yoast SEO	
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) ) {
+		$description = smpg_get_yoast_rendered_value( 'metadesc', $post_id );
+	}
+
+	//  Rank Math
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_desc = \RankMath\Post::get_meta( 'description', $post_id );
+		if ( ! empty( $rankmath_desc ) ) {
+			$description = wp_strip_all_tags( $rankmath_desc );
+		}
+	}
+
+	// AIOSEO
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) ) {
+		$description = smpg_get_aioseo_rendered_value( 'description', $post_id );
+	}
+
+	//  Fallback: excerpt/content
+	if ( empty( $description ) ) {
+
+		$full_content = $post ? $post->post_content : '';
+		$excerpt      = $post ? $post->post_excerpt : '';
+
+		$full_content = preg_replace( '#\[[^\]]+\]#', '', $full_content );
+		$full_content = wp_strip_all_tags( $full_content );
+
+		$desc_word_count = apply_filters( 'smpg_change_description_word_count', 49 );
+		$short_content   = wp_trim_words( $full_content, $desc_word_count, '' );
+
+		$description = ( $excerpt != '' ) ? $excerpt : $short_content;
+	}
+
+	return apply_filters( 'smpg_change_description', $description );
 }
 
 function smpg_get_post_tags( $post_id = null ) {
-	
-	global $post;
-	
-	if ( ! isset( $post_id ) && $post ) $post_id = $post->ID;
-	
+
+	global $post, $smpg_settings;
+
+	if ( ! isset( $post_id ) && $post ) {
+		$post_id = $post->ID;
+	}
+
 	$tags = '';
-	$posttags = get_the_tags();
-    if ($posttags) {
-       $taglist = "";
-       foreach($posttags as $tag) {
-           $taglist .=  $tag->name . ', '; 
-       }
-      $tags =  rtrim($taglist, ", ");
-   }
-   
-   return $tags;
+
+	// Yoast SEO (focus keyword)
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+		$yoast_focuskw = WPSEO_Meta::get_value( 'focuskw', $post_id );
+		if ( ! empty( $yoast_focuskw ) ) {
+			$tags = $yoast_focuskw;
+		}
+	}
+
+	// Rank Math (focus keyword)
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		$rankmath_focuskw = \RankMath\Post::get_meta( 'focus_keyword', $post_id );
+		if ( ! empty( $rankmath_focuskw ) ) {
+			$tags = $rankmath_focuskw;
+		}
+	}
+	
+	//  Fallback: WordPress tags
+	if ( empty( $tags ) ) {
+
+		$posttags = get_the_tags( $post_id );
+
+		if ( $posttags ) {
+
+			$taglist = [];
+
+			foreach ( $posttags as $tag ) {
+				$taglist[] = $tag->name;
+			}
+
+			$tags = implode( ', ', $taglist );
+			
+		}
+	}
+
+	return apply_filters( 'smpg_change_tags', $tags );	
 }
 
 function smpg_get_categories( $post_id = null ) {
@@ -598,7 +786,7 @@ function smpg_get_categories( $post_id = null ) {
 	return apply_filters( 'smpg_change_categories', $categories );
 }
 
-function smpg_get_image() {
+function smpg_get_image( $post_id = null ) {
             
 	global $smpg_settings, $smpg_image;
 
@@ -1195,7 +1383,7 @@ function smpg_get_blog_description(){
 	return $blog_description;
 }
 
-function smpg_get_request_url() {
+function smpg_get_request_url( $render_method = null ) {
  
     $link = "http"; 
       
@@ -1211,12 +1399,21 @@ function smpg_get_request_url() {
 
 		$link .= sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
 	}
-    	
-	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+    
+	if ( $render_method === 'client_side' ) {
+
+		if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
 		
-		$link .= sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-	}    
-      
+			$link .= sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+		}
+	} else {
+
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+			
+			$link .= sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		}
+	}
+	          
     return $link;
 	
 }
@@ -2144,4 +2341,97 @@ function smpg_convert_to_schema_duration( $input ) {
 	}
 
 	return $time !== 'T' ? $period . $time : $period;
+}
+
+/**
+ * Check if a post is set to noindex in AIOSEO.
+ *
+ * @param int $post_id Post ID.
+ * @return bool True if noindex, false otherwise.
+ */
+function smpg_is_aioseo_noindex( $post_id ) {
+	if ( ! function_exists( 'aioseo' ) ) {
+		return false;
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return false;
+	}
+
+	// 1. MetaData API (preferred)
+	if ( isset( aioseo()->meta ) && isset( aioseo()->meta->metaData ) && method_exists( aioseo()->meta->metaData, 'getMetaData' ) ) {
+		$meta = aioseo()->meta->metaData->getMetaData( $post );
+		if ( isset( $meta->robots_noindex ) ) {
+			return (bool) $meta->robots_noindex;
+		}
+	}
+
+	// 2. Fallback to post meta (older versions)
+	$meta_keys = array(
+		'_aioseo_robots_noindex', // current
+		'_aioseop_robots_noindex', // old
+	);
+
+	foreach ( $meta_keys as $key ) {
+		$val = get_post_meta( $post_id, $key, true );
+		if ( $val === '1' || $val === 1 || $val === true ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Check if a post/page is set to noindex in Yoast or Rank Math
+ * Returns false if schema should be skipped due to noindex
+ */
+function smpg_skip_schema_due_to_noindex( $post_id = null ) {
+
+	global $post, $smpg_settings;
+
+	if ( ! $post_id && $post ) {
+		$post_id = $post->ID;
+	}
+
+	// Check Yoast noindex
+	if ( ! empty( $smpg_settings['yoast_cmp'] ) && class_exists( 'WPSEO_Meta' ) ) {
+
+		$yoast_noindex = WPSEO_Meta::get_value( 'meta-robots-noindex', $post_id );
+
+		if ( $yoast_noindex === '1' ) {
+			return true;
+		}
+		
+	}
+
+	// Check AIOSEO noindex
+	if ( ! empty( $smpg_settings['aioseo_cmp'] ) && class_exists( 'AIOSEO\Plugin\Common\Main\Main' ) ) {
+		if ( smpg_is_aioseo_noindex( $post_id ) ) {			
+			return true;
+		}
+	}
+
+
+
+	// Check Rank Math noindex
+	if ( ! empty( $smpg_settings['rankmath_cmp'] ) && class_exists( '\RankMath\Post' ) ) {
+		
+		if ( $post_id ) {
+
+			$rankmath_robots = \RankMath\Post::get_meta( 'robots', $post_id );
+
+			// Ensure it's a string
+			if ( is_array( $rankmath_robots ) ) {
+				$rankmath_robots = implode( ',', $rankmath_robots ); // convert array to comma-separated string
+			}
+			
+			if ( strpos( $rankmath_robots, 'noindex' ) !== false ) {
+				return true;
+			}
+		}
+	}
+
+	return false; // safe to output schema
 }

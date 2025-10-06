@@ -43,12 +43,16 @@ const Settings = () => {
         clean_rdfa_data:          false,  
         multisize_image:          false,
         image_object:             false,
+        rankmath_cmp:             false,
+        yoast_cmp:                false,
+        aioseo_cmp:               false,
         wpgraphql_cmp:            false,          
         simple_author_box_cmp:    false,        
         delete_data_on_uninstall: false,      
         default_logo_id:          null,
         default_image_id:         null,
         default_logo_url:         '',
+        json_ld_render_method:    'server_side',
         default_image_url:        '',
         manage_conflict  :        [],
         spg_post_types   :        [],
@@ -57,7 +61,12 @@ const Settings = () => {
     });
           
   const page = queryString.parse(window.location.search);   
-  const {__} = wp.i18n;         
+  const {__} = wp.i18n;   
+  
+  const handleDropdownChange = (e, { name, value }) => {
+    setSettings({ ...settings, [name]: value });
+  };
+
 
   const formChangeHandler = (event) => {
               
@@ -438,6 +447,40 @@ const Settings = () => {
               <table className="form-table">
                 <tbody>                                                    
                   <tr>
+                    <th><label>{__('JSON-LD Render Method', 'schema-package')}</label></th>
+                    <td>
+                      <Dropdown                                                
+                        selection
+                        name="json_ld_render_method"
+                        value={settings.json_ld_render_method}
+                        onChange={handleDropdownChange}
+                        options={[{
+                          key: 'server_side',
+                          text: 'Server-Side Rendering',
+                          value: 'server_side',                          
+                        },
+                        {
+                          key: 'client_side',
+                          text: 'Client-Side Injection',
+                          value: 'client_side',                          
+                        }]}
+                      />                    
+                      <span className="smpg-tooltip"><Popup content={__('Choose how Schema Package should render schema markup ( JSON-LD ) on your site.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
+                    <td>
+                    <Checkbox                     
+                      name='multisize_image'
+                      id='multisize_image' 
+                      checked={!!settings.multisize_image}
+                      onChange={formChangeHandler}
+                    />                      
+                      <span className="smpg-tooltip"><Popup content={__('Generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
                     <th><label htmlFor="dynamic_placeholders">{__('Dynamic Placeholders', 'schema-package')}</label></th>
                     <td>
                     <Checkbox                     
@@ -460,19 +503,7 @@ const Settings = () => {
                     />                      
                       <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
-                  </tr>                  
-                  <tr>
-                    <th><label htmlFor="multisize_image">{__('Multiple Size Images', 'schema-package')}</label></th>
-                    <td>
-                    <Checkbox                     
-                      name='multisize_image'
-                      id='multisize_image' 
-                      checked={!!settings.multisize_image}
-                      onChange={formChangeHandler}
-                    />                      
-                      <span className="smpg-tooltip"><Popup content={__('Generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
-                    </td>  
-                  </tr>                 
+                  </tr>                                                     
                 </tbody>
               </table>
             </div>
@@ -537,9 +568,9 @@ const Settings = () => {
                 <tbody>
                 <tr>
                     <th><strong>{__('SPG for Post Types', 'schema-package')}</strong></th>
-                    <td>
+                    <td style={{display:"inline-flex"}}>
                     <Dropdown
-                      style={{maxWidth:"300px"}}
+                      style={{ minWidth: "200px", maxWidth: "300px" }}
                       data_type="spg_post_types"
                       name="spg_post_types"
                       placeholder={__('Search For Post Types', 'schema-package') }
@@ -551,14 +582,14 @@ const Settings = () => {
                       onChange={handleSPGPostTypes}                      
                       options={spgPostTypes}
                    />
-                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for post type pages.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                 </tr>
                 <tr>
                     <th><strong>{__('SPG for Taxonomies', 'schema-package')}</strong></th>
-                    <td>
+                    <td style={{display:"inline-flex"}}>
                     <Dropdown
-                      style={{maxWidth:"300px"}}
+                      style={{ minWidth: "200px", maxWidth: "300px" }}
                       data_type="spg_taxonomies"
                       name="spg_taxonomies"
                       placeholder={__('Search For Taxonomies', 'schema-package') }
@@ -570,7 +601,7 @@ const Settings = () => {
                       onChange={handleSPGTaxonomies}                      
                       options={spgTaxonomies}
                    />
-                      {/* <span className="smpg-tooltip"><Popup content={__('It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for taxonomy archive pages.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>
                 </tr>  
 
@@ -583,7 +614,7 @@ const Settings = () => {
                         checked={!!settings.spg_author ? true : false}
                         onChange={formChangeHandler}
                       />                                            
-                      {/* <span className="smpg-tooltip"><Popup content={__('It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when the application is uninstalled, helping maintain privacy and free up storage space.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>   */}
+                      <span className="smpg-tooltip"><Popup content={__('Enable the Schema Package Generator editor to add or customize schema markup specifically for the author’s profile page.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                       </td>
                   </tr>
 
@@ -656,15 +687,51 @@ const Settings = () => {
             <Divider style={{ margin: '5px 0' }} />
               <table className="form-table">
                 <tbody>                                    
+                <tr>
+                    <th><label htmlFor="yoast_cmp">{__('Yoast SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='yoast_cmp'
+                        id='yoast_cmp' 
+                        checked={!!settings.yoast_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically pull schema-related values (title, description, focus keyword, etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema Package will use them instead of WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="rankmath_cmp">{__('Rank Math SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='rankmath_cmp'
+                        id='rankmath_cmp' 
+                        checked={!!settings.rankmath_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="aioseo_cmp">{__('All in One SEO', 'schema-package')}</label></th>
+                    <td>
+                      <Checkbox                     
+                        name='aioseo_cmp'
+                        id='aioseo_cmp' 
+                        checked={!!settings.aioseo_cmp}
+                        onChange={formChangeHandler}
+                      />                      
+                      <span className="smpg-tooltip"><Popup content={__('Automatically fetch schema-related values (title, description, focus keyword, etc.) from All in One SEO settings. If All in One SEO values are available, Schema Package will prioritize them over WordPress defaults.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                    </td>  
+                  </tr>
                   <tr>
                     <th><label htmlFor="wpgraphql_cmp">{__('WPGraphQL', 'schema-package')}</label></th>
                     <td>
-                    <Checkbox                     
-                      name='wpgraphql_cmp'
-                      id='wpgraphql_cmp' 
-                      checked={!!settings.wpgraphql_cmp}
-                      onChange={formChangeHandler}
-                    />                      
+                      <Checkbox                     
+                        name='wpgraphql_cmp'
+                        id='wpgraphql_cmp' 
+                        checked={!!settings.wpgraphql_cmp}
+                        onChange={formChangeHandler}
+                      />                      
                       <span className="smpg-tooltip"><Popup content={__('Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr> 

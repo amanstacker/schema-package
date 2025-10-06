@@ -161,7 +161,7 @@ function smpg_is_singular_placement_matched( $schema_data, $post_id ){
     
 }
 
-function smpg_is_carousel_placement_matched( $schema_data ){
+function smpg_is_carousel_placement_matched( $schema_data, $page_type = null, $spg_id = null ){
 
 		$response = false;		
 
@@ -173,18 +173,18 @@ function smpg_is_carousel_placement_matched( $schema_data ){
 		
 		foreach ( $unser_schema_data as $tax_data ) {
 
-			if ( is_category() && $tax_data['taxonomy'] == 'category' && $tax_data['status'] ) {
+			if ( ( $page_type === 'category' || is_category() ) && $tax_data['taxonomy'] == 'category' && $tax_data['status'] ) {
 
-				smpg_is_carousel_placement_logic_check( $tax_data );		
+				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );		
 				
 
-			} else if ( is_tag() && $tax_data['taxonomy'] == 'post_tag' && $tax_data['status'] ) {
+			} else if ( ( $page_type === 'tag' || is_tag() ) && $tax_data['taxonomy'] == 'post_tag' && $tax_data['status'] ) {
 				
-				smpg_is_carousel_placement_logic_check( $tax_data );
+				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
 
 			} else if ( is_tax( $tax_data['taxonomy'] ) && $tax_data['status'] ) {
 				
-				smpg_is_carousel_placement_logic_check( $tax_data );
+				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
 
 			} 						
 
@@ -194,7 +194,7 @@ function smpg_is_carousel_placement_matched( $schema_data ){
     
 }
 
-function smpg_is_carousel_placement_logic_check( $tax_data ) {
+function smpg_is_carousel_placement_logic_check( $tax_data, $spg_id = null ) {
 
 	$response = false;
 
@@ -203,6 +203,10 @@ function smpg_is_carousel_placement_logic_check( $tax_data ) {
 	}else{
 
 		$queried_id = get_queried_object_id();
+		
+		if ( ! $queried_id ) {
+			$queried_id = $spg_id;
+		}
 
 		if ( in_array( $queried_id, $tax_data['value'] ) ){
 			$response = true;

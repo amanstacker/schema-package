@@ -46,11 +46,8 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 
 * <strong>Unlimited Schema</strong>: There is no restriction on the number or type of schema you can add. You can select multiple schema types per page or post and customize them to match your content for maximum flexibility.
 * <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
-* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
-* <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
-* <strong>Schema Mapping for Advanced Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
-* <strong>Schema Mapping for Secure Custom Fields Plugin </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Advanced Custom Fields </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
 * <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
 * <strong>Custom Schema</strong>: Custom Schema lets you add your own JSON-LD markup to individual posts or across your entire site, giving you full control and advanced flexibility beyond built-in schema types.
@@ -62,8 +59,13 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
+* <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
+* <strong>JSON-LD Render Method</strong>: Controls how JSON-LD schema markup is injected into your site (e.g., server-side rendering vs. client-side injection).
+* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
+* <strong>Skip Schema Markup on Noindex</strong>: Prevents schema markup (JSON-LD) from being added to pages marked as noindex by SEO plugins, ensuring cleaner indexing and better SEO compliance.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
 * <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
@@ -255,6 +257,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [WP-PostRatings](https://wordpress.org/plugins/wp-postratings/)
 * [Rank Math](https://wordpress.org/plugins/seo-by-rank-math/)
 * [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/)
+* [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/)
 * [The SEO Framework](https://wordpress.org/plugins/autodescription/)
 * [Squirrly SEO](https://wordpress.org/plugins/squirrly-seo/)
 * [SmartCrawl SEO](https://wordpress.org/plugins/smartcrawl-seo/)

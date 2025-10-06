@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.21
+Stable tag: 1.0.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,11 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
 * <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
+* <strong>JSON-LD Render Method</strong>: Controls how JSON-LD schema markup is injected into your site (e.g., server-side rendering vs. client-side injection).
 * <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
+* <strong>Skip Schema Markup on Noindex</strong>: Prevents schema markup (JSON-LD) from being added to pages marked as noindex by SEO plugins, ensuring cleaner indexing and better SEO compliance.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
 * <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
@@ -235,6 +237,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [WP-PostRatings](https://wordpress.org/plugins/wp-postratings/)
 * [Rank Math](https://wordpress.org/plugins/seo-by-rank-math/)
 * [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/)
+* [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/)
 * [The SEO Framework](https://wordpress.org/plugins/autodescription/)
 * [Squirrly SEO](https://wordpress.org/plugins/squirrly-seo/)
 * [SmartCrawl SEO](https://wordpress.org/plugins/smartcrawl-seo/)
@@ -246,7 +249,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Rate My Post – Star Rating Plugin by FeedbackWP](https://wordpress.org/plugins/rate-my-post/)
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
 * [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
-* [MasterStudy LMS WordPress Plugin – for Online Courses and Education](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
+* [MasterStudy LMS WordPress Plugin](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
 == Notes ==
@@ -275,8 +278,9 @@ Encounter an issue with Schema Package? or wanted to contribute. Kindly visit Sc
 == Support & Documentation ==
 
 For help, documentation, and tutorials, visit our official website:
-📚 [Knowledge Base](https://schemapackage.com/knowledge-base/)
-💬 [Help & Support](https://schemapackage.com/contactus/)
+
+[Knowledge Base](https://schemapackage.com/knowledge-base/)
+[Help & Support](https://schemapackage.com/contactus/)
 
 Inside WordPress, you can also go to:  
 **Schema Package → Settings → Help & Support**
@@ -519,6 +523,17 @@ This update brings several useful improvements and new features:
 
 
 == Changelog ==
+
+= 1.0.22 =
+
+* Added: JSON-LD Render Method
+* Added: Do not add schema markup ( json-ld ), If any page is set to noindex by seo plugins.
+* Added: Manage Conflict with All in One SEO plugin
+* Added: Missing tooltip for SPG control.
+* Enhancement: Clean micro data code improvement.
+* Enhancement: Compatibility setting improvement.
+* Enhancement: Screenshots updated.
+* Fixed: SiteNavigationElement schema id issue.
 
 = 1.0.21 =
 

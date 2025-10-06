@@ -570,7 +570,7 @@ const Settings = () => {
                     <th><strong>{__('SPG for Post Types', 'schema-package')}</strong></th>
                     <td style={{display:"inline-flex"}}>
                     <Dropdown
-                      style={{maxWidth:"300px"}}
+                      style={{ minWidth: "200px", maxWidth: "300px" }}
                       data_type="spg_post_types"
                       name="spg_post_types"
                       placeholder={__('Search For Post Types', 'schema-package') }
@@ -589,7 +589,7 @@ const Settings = () => {
                     <th><strong>{__('SPG for Taxonomies', 'schema-package')}</strong></th>
                     <td style={{display:"inline-flex"}}>
                     <Dropdown
-                      style={{maxWidth:"300px"}}
+                      style={{ minWidth: "200px", maxWidth: "300px" }}
                       data_type="spg_taxonomies"
                       name="spg_taxonomies"
                       placeholder={__('Search For Taxonomies', 'schema-package') }

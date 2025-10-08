@@ -377,7 +377,7 @@ const Settings = () => {
                       checked={!!settings.minified_json}
                       onChange={formChangeHandler}
                     />                      
-                      <span className="smpg-tooltip"><Popup content={__('Minified JSON-LD reduces file size and improves page load speed by removing unnecessary spaces and line breaks.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                      <span className="smpg-tooltip"><Popup content={__('Remove unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>                      
                   <tr>

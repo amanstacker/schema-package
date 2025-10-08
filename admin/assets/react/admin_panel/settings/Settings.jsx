@@ -477,7 +477,7 @@ const Settings = () => {
                       checked={!!settings.multisize_image}
                       onChange={formChangeHandler}
                     />                      
-                      <span className="smpg-tooltip"><Popup content={__('Generates multiple images from a single image based on search engine image recommendations. This may increase the size of the upload folder, so enable it if you are okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
+                      <span className="smpg-tooltip"><Popup content={__('Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations. This will create extra images and may increase your upload folder size, so enable it only if you’re okay with that.', 'schema-package') } trigger={<i aria-hidden="true" className="question circle outline icon"/>} /></span>  
                     </td>  
                   </tr>
                   <tr>

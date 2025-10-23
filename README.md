@@ -170,14 +170,17 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Athlete](https://schema.org/Person)
 - [Politician](https://schema.org/Person)
 
-#### 7. Health & Medical ( Premium )
+#### 7. Health & Medical ( Premium ) ===
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [Hospital](https://schema.org/Hospital)
 - [Physician](https://schema.org/Physician)
 - [Clinic](https://schema.org/MedicalClinic)
 - [MedicalProcedure](https://schema.org/MedicalProcedure)
+- [MedicalTherapy](https://schema.org/MedicalTherapy)
 - [MedicalCondition](https://schema.org/MedicalCondition)
 - [Drug](https://schema.org/Drug)
+- [DietarySupplement](https://schema.org/DietarySupplement)
+- [ExercisePlan](https://schema.org/ExercisePlan)
 
 #### 8. Recipes & Food
 - [Recipe](https://schema.org/Recipe)

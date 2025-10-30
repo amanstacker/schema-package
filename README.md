@@ -62,13 +62,16 @@ JSON-LD is a lightweight Linked Data format that uses JSON to encode structured 
 * <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>JSON-LD Render Method</strong>: Controls how JSON-LD schema markup is injected into your site (e.g., server-side rendering vs. client-side injection).
+* <strong>Multiple Size Images</strong>: Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations.
 * <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
+* <strong>Minified JSON-LD</strong>: Removes unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Skip Schema Markup on Noindex</strong>: Prevents schema markup (JSON-LD) from being added to pages marked as noindex by SEO plugins, ensuring cleaner indexing and better SEO compliance.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
 * <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
+* <strong>Multisite Support</strong>: Schema Package fully supports WordPress Multisite networks, allowing you to manage and deploy schema markup across all sites effortlessly.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
 
@@ -167,14 +170,17 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Athlete](https://schema.org/Person)
 - [Politician](https://schema.org/Person)
 
-#### 7. Health & Medical ( Premium )
+#### 7. Health & Medical ( Premium ) ===
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [Hospital](https://schema.org/Hospital)
 - [Physician](https://schema.org/Physician)
 - [Clinic](https://schema.org/MedicalClinic)
 - [MedicalProcedure](https://schema.org/MedicalProcedure)
+- [MedicalTherapy](https://schema.org/MedicalTherapy)
 - [MedicalCondition](https://schema.org/MedicalCondition)
 - [Drug](https://schema.org/Drug)
+- [DietarySupplement](https://schema.org/DietarySupplement)
+- [ExercisePlan](https://schema.org/ExercisePlan)
 
 #### 8. Recipes & Food
 - [Recipe](https://schema.org/Recipe)

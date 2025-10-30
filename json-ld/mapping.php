@@ -20,9 +20,13 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
         foreach ( $mp_values as $key => $value ) {
 
             if ( in_array( $key, $mp_keys ) ) {
-            
+                
+                $parent_data = [];
+
                 if ( empty( $properties['properties'][$key]['parent_data'] ) ) {
                     $key = smpg_snake_to_camel_case( $key );
+                }else{
+                    $parent_data = $properties['properties'][$key]['parent_data'];
                 }            
                 
                 switch ( $value['meta_field'] ) {
@@ -56,7 +60,9 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                         }                                           
                         break;
                     case 'post_excerpt':
+                        
                         $mapped_value = get_the_excerpt(); 
+                        
                         break;
                     case 'post_permalink':
                         $mapped_value = get_permalink();
@@ -98,7 +104,13 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                         //todo
                         break;
                     case 'no_value':          
-                        unset( $json_ld[$key] );
+
+                        if ( ! empty( $parent_data ) ) {                            
+                            unset( $json_ld[$parent_data['key']][$parent_data['child_key']] );   
+                        }else{
+                            unset( $json_ld[$key] );
+                        }                        
+                        
                         break;
                     case 'custom_field':                    
                         $mapped_value = get_post_meta( get_the_ID(), $value['custom_field'], true );
@@ -128,8 +140,8 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
 
                 if ( $mapped_value !== null ) {
 
-                    if ( ! empty( $properties['properties'][$key]['parent_data'] ) ) {
-
+                    if ( ! empty( $parent_data ) ) {
+                        
                             smpg_map_nested_schema_property( $json_ld, $properties, $key, $mapped_value );
                             
                     }else{

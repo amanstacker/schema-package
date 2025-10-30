@@ -367,6 +367,7 @@ function smpg_default_settings_data() {
 		'default_logo_id' 			=> null,
 		'default_image_id' 			=> null,
 		'default_logo_url' 			=> '',
+		'json_ld_render_method' 	=> 'server_side',
 		'default_image_url' 		=> '',
 		'manage_conflict' 			=> [],
 		'spg_post_types' 			=> $spg_post_types,

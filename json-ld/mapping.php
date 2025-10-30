@@ -5,8 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function smpg_mapping_properties( $json_ld, $schema_data ) {
     
     $mp_values    = $properties = $mp_keys = [];
-    $mapped_value = null;
-
+    
     if ( ! empty ( $schema_data['_mapped_properties_value'][0] ) ){
 
         $mp_values = unserialize( $schema_data['_mapped_properties_value'][0] );                
@@ -21,7 +20,8 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
 
             if ( in_array( $key, $mp_keys ) ) {
                 
-                $parent_data = [];
+                $parent_data  = [];
+                $mapped_value = null;
 
                 if ( empty( $properties['properties'][$key]['parent_data'] ) ) {
                     $key = smpg_snake_to_camel_case( $key );

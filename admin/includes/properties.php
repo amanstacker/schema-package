@@ -530,6 +530,20 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                 'child_key' => 'url'
             ]
         ],
+        'author_image' => [            
+            'label'       => 'Author Image',                    
+            'type'        => 'media',
+            'multiple'    => false,
+            'value'       => [],            
+            'recommended' => true,
+            'display'     => true,
+            'tooltip'     => 'The author image of this content',
+            'parent_data'   => [
+                'key'       => 'author', 
+                'type'      => 'Person',
+                'child_key' => 'image'
+            ]
+        ],
         'seller_name' => [                                     
             'placeholder' => 'Seller Name',                    
             'label'       => 'Seller Name',                    
@@ -1057,6 +1071,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     'author_type'         => $author_type,
                     'author_name'         => $author_name,
                     'author_url'          => $author_url,
+                    'author_image'        => $author_image,
                     'publisher_name'      => $publisher_name,
                     'speakable'           => $speakable,
                     'speakable_selectors' => $speakable_selectors,        

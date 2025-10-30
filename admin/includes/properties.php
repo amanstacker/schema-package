@@ -148,7 +148,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => '',                                
+            'tooltip'     => '',
+            'parent_data'   => [
+                'key'       => 'address', 
+                'type'      => 'PostalAddress',
+                'child_key' => 'streetAddress'
+            ]                                
         ],
         'address_locality' => [                        
             'placeholder' => 'Detroit',                    
@@ -157,7 +162,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',        
+            'parent_data'   => [
+                'key'       => 'address', 
+                'type'      => 'PostalAddress',
+                'child_key' => 'addressLocality'
+            ]
         ],
         'address_region' => [                        
             'placeholder' => 'MI',                    
@@ -166,7 +176,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data'   => [
+                'key'       => 'address', 
+                'type'      => 'PostalAddress',
+                'child_key' => 'addressRegion'
+            ]        
         ],
         'postal_code' => [                        
             'placeholder' => '48201',                    
@@ -175,7 +190,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data'   => [
+                'key'       => 'address', 
+                'type'      => 'PostalAddress',
+                'child_key' => 'postalCode'
+            ]        
         ],
         'address_country' => [                        
             'placeholder' => 'US',                    
@@ -184,7 +204,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => ''        
+            'tooltip'     => '',
+            'parent_data'   => [
+                'key'       => 'address', 
+                'type'      => 'PostalAddress',
+                'child_key' => 'addressCountry'
+            ]        
         ],
         'name' => [                        
             'placeholder' => 'Enter Name',                    
@@ -1452,7 +1477,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                         'id'               => $id,
                         'name'             => $name,    
                         'description'      => $description,
-                        'url'              => $url,                                                
+                        'url'              => $url,
+                        'image'            => $image,                                                
                         'street_address'   => $street_address,
                         'address_locality' => $address_locality,
                         'address_region'   => $address_region,

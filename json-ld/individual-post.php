@@ -2073,6 +2073,9 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
         if(!empty($properties['author_name']['value'])){
             $json_ld['author']['name']     = $properties['author_name']['value']; 
         }
+        if(!empty($properties['author_url']['value'])){
+            $json_ld['author']['url']     = $properties['author_url']['value']; 
+        }
     
         $json_ld = smpg_get_speakable_xpath( $json_ld, $properties ); 
         $json_ld = smpg_get_paywalled_json_ld( $json_ld, $properties );    
@@ -2084,6 +2087,11 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
         
         $logo  = smpg_make_the_logo_json($properties['publisher_logo']['value']);
         $image = smpg_make_the_image_json($properties['image']['value'], true);
+        $author_image = smpg_make_the_image_json($properties['author_image']['value'], true);
+
+        if(!empty($author_image)){
+            $json_ld['author']['image']    = $author_image; 
+        }
 
         if(!empty($logo)){
             $json_ld['publisher']['logo']  = $logo;  

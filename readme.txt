@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.22
+Stable tag: 1.0.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -518,17 +518,18 @@ To explore all the advanced features and benefits included in the Schema Package
 16. JSON-LD output in page source
 
 == Upgrade Notice ==
-= 1.0.21 =
-This update brings several useful improvements and new features:
-
-* Added support for the ID property across all schema types.
-* Improved messages in the schema mapping properties list for better clarity.
-* Added two new schema types: DiscussionForumPosting and Report.
-* Variables and placeholders can now be used to dynamically populate schema data.
-* Fixed minor bugs to make the plugin more stable and reliable.
-
+= 1.0.23 =
+Fixed missing image in Organization schema, added post_summary meta (respects More tag), improved author mapping, removed unused publisher property, and made general improvements.
 
 == Changelog ==
+
+= 1.0.23 =
+
+* Fixed: Organization schema missing image property
+* Added: A post meta field ( post_summary ) which respect more tag
+* Added: Author image and url properties for better mapping
+* Fixed: Remove publisher property from organization as not needed.
+* More improvement
 
 = 1.0.22 =
 

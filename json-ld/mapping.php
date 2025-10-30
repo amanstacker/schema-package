@@ -59,10 +59,15 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                             $mapped_value = $cat_val;
                         }                                           
                         break;
-                    case 'post_excerpt':
-                        
-                        $mapped_value = get_the_excerpt(); 
-                        
+                    case 'post_summary':
+                        if ( function_exists( 'get_extended' ) ) {
+                            $post_content   = get_post_field('post_content', get_the_ID());
+                            $parts          = get_extended($post_content);
+                            $mapped_value   = wp_strip_all_tags( $parts['main'] );
+                        }                                                                        
+                    break;
+                    case 'post_excerpt':                        
+                        $mapped_value = get_the_excerpt();                         
                         break;
                     case 'post_permalink':
                         $mapped_value = get_permalink();

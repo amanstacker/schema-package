@@ -1465,6 +1465,8 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;
 
                 case 'organization':
+                    
+                unset( $publisher_logo['parent_data'] );    
 
                 $properties = [
                     'is_enable'         => true,

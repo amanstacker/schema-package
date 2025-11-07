@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.23
+Stable tag: 1.0.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -522,6 +522,13 @@ To explore all the advanced features and benefits included in the Schema Package
 Fixed missing image in Organization schema, added post_summary meta (respects More tag), improved author mapping, removed unused publisher property, and made general improvements.
 
 == Changelog ==
+
+= 1.0.24 =
+
+* Fixed: Missing thumbnailUrl property in VideoObject schema.
+* Fixed: Undefined variable.
+* Added: Missing tooltip for few options.
+
 
 = 1.0.23 =
 

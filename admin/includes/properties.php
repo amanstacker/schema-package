@@ -607,7 +607,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
             ]
         ],
         'image' => [                                                      
-            'label'       => 'Images',                    
+            'label'       => 'Image',                    
             'type'        => 'media',
             'multiple'    => true,
             'value'       => [],
@@ -2738,8 +2738,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                     break;    
 
                 case 'videoobject':
-
-                    $image['label']    = 'Thumbnail Images';
+                    
                     $hours['label']    = 'Duration ( Hours )';
                     $minutes['label']  = 'Duration ( minutes )';
                     $seconds['label']  = 'Duration ( seconds )';
@@ -2758,11 +2757,20 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
                             'url'              => $url,
                             'content_url'      => $content_url,
                             'embed_url'        => $embed_url,
+                            'thumbnail_url'    => [                                                      
+                                    'label'       => 'Thumbnail URL',                    
+                                    'type'        => 'media',                                    
+                                    'multiple'    => false,
+                                    'value'       => [],
+                                    'recommended' => true,
+                                    'display'     => false,
+                                    'tooltip'     => 'An image of the item. This can be a URL or a fully described ImageObject.'
+                            ],
                             'upload_date'      => $upload_date,
                             'hours'            => $hours,
                             'minutes'          => $minutes,
                             'seconds'          => $seconds,
-                            'in_language'       => $in_language,
+                            'in_language'      => $in_language,
                             'image'            => $image,                            
                             'author_type'      => $author_type,
                             'author_name'      => $author_name,                            

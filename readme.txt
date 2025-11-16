@@ -528,6 +528,7 @@ Fixed missing image in Organization schema, added post_summary meta (respects Mo
 * Fixed: Missing thumbnailUrl property in VideoObject schema.
 * Fixed: Undefined variable.
 * Added: Missing tooltip for few options.
+* Enhancement: Footer note updated in plugin dashboard.
 
 
 = 1.0.23 =

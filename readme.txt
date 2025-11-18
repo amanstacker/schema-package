@@ -53,6 +53,14 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Multisite Support</strong>: Schema Package fully supports WordPress Multisite networks, allowing you to manage and deploy schema markup across all sites effortlessly.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
+== Schema Package for LLMO (AI Search) ==
+
+* <strong>AI-Ready Structured Data</strong>: Generates clean and precise JSON-LD markup that helps AI platforms like ChatGPT, Perplexity, Claude, and Google AI Overview understand your content with higher accuracy.
+* <strong>LLMO Supported (Large Language Model Optimization)</strong>: Built to optimize your website for AI-driven search experiences, ensuring large language models correctly interpret your pages, products, and content.
+* <strong>Future-Proof SEO</strong>: Keeps your site compatible with both traditional search engines and next-generation AI search systems that depend heavily on structured data.
+* <strong>Enhanced AI Crawling Signals</strong>: Provides well-structured markup that improves how AI crawlers such as GPTBot, PerplexityBot, and CCBot index your content.
+* <strong>Ecommerce AI Boost</strong>: Adds complete Product Schema including pricing, availability, ratings, SKU, GTIN, and more to increase the chances of your products appearing inside AI-powered product recommendations and buying guides.
+
 == Schema Package Premium Features ==
 
 Take your schema & structured data to the next level with **Schema Package Premium**:
@@ -258,7 +266,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [MasterStudy LMS WordPress Plugin](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
 
 
-== Notes ==
+== Important Notes on Schema Markup & Validation ==
 
 The Schema package is a tool for adding schema markup to websites according to search engine guidelines and validating it using tools recommended by Search Engines. It does not guarantee that your content will appear in search engine results as you desire. It entirely depends on the Search Engines.
 
@@ -274,6 +282,14 @@ While it can validate whether your structured data is correctly implemented for 
 #### 2. [Schema Markup Validator](https://validator.schema.org/)
 
 The "Schema Markup Validator" by Google validates all schema.org types, not just those that are eligible for rich results. This tool checks whether your structured data is correctly implemented according to the schema.org specifications, regardless of whether the type is eligible for rich results.
+
+== Important Note About LLMO (AI Search) ==
+
+AI search tools like ChatGPT, Gemini, and Perplexity currently do not provide official documentation on how they read or rank structured data. Unlike Google Search, the LLM ecosystem is still new and evolving.
+
+However, most AI platforms appear to rely on standard SEO signals, good content, clean site structure, and valid Schema.org markup. Schema Package focuses on generating high-quality, standards-based JSON-LD that helps AI systems better understand your content.
+
+Still, there is no guarantee that adding schema will directly improve visibility in AI search results. Our goal is simply to make your site technically prepared based on current best practices as the LLM landscape continues to grow.
 
 
 == Report Bug or Contribute fix ==

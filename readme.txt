@@ -4,8 +4,8 @@ Tags: Rich Results, carousel schema, json-ld, product schema, local business sch
 Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 5.6.20
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.0.24
+Tested up to: 6.9
+Stable tag: 1.0.25
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -538,6 +538,10 @@ To explore all the advanced features and benefits included in the Schema Package
 Fixed missing image in Organization schema, added post_summary meta (respects More tag), improved author mapping, removed unused publisher property, and made general improvements.
 
 == Changelog ==
+
+= 1.0.25 =
+
+* Verified full compatibility and smooth performance with WordPress 6.9
 
 = 1.0.24 =
 

@@ -582,7 +582,7 @@ function smpg_get_the_content($post_id = null){
 		$content = str_replace( ["\n","\r\n","\r" ], ' ', $content);
 	}
 	
-	return apply_filters('smpg_the_content' ,$content);
+	return apply_filters('smpg_change_the_content' ,$content);
 
 }
 
@@ -710,7 +710,7 @@ function smpg_get_description( $post_id = null ) {
 
 		$description = ( $excerpt != '' ) ? $excerpt : $short_content;
 	}
-
+	
 	return apply_filters( 'smpg_change_description', $description );
 }
 

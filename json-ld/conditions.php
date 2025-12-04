@@ -25,12 +25,8 @@ function smpg_placement_condition_checker( $type, $post_id, $value ) {
 			break;
 			
 		case 'language':
-
-			global $TRP_LANGUAGE;
 			
-			if ( $TRP_LANGUAGE == $value ) {
-				$response = true;
-			}
+			$response = apply_filters( 'smpg_change_language_placement_cc', $response, $value );
 
 		break;
 		
@@ -39,7 +35,7 @@ function smpg_placement_condition_checker( $type, $post_id, $value ) {
 			break;
 
 	}
-
+	
 	return $response;
 
 }
@@ -57,12 +53,10 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 		$post_types = empty( $condition['post_type'] ) ? [] : $condition['post_type'];
 		$posts      = empty( $condition['post'] ) ? [] : $condition['post'];
 		$pages      = empty( $condition['page'] ) ? [] : $condition['page'];
-		$languages  = empty( $condition['language'] ) ? [] : $condition['language'];
 
 		$post_type_status = $schema_data['_enabled_on_post_type'][0];
 		$post_status      = $schema_data['_enabled_on_post'][0];
-		$page_status      = $schema_data['_enabled_on_page'][0];
-		$language_status  = $schema_data['_enabled_on_language'][0];
+		$page_status      = $schema_data['_enabled_on_page'][0];	
 
 		
 		if($post_type_status && !empty($post_types)){
@@ -84,15 +78,7 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 		if( $page_status && !empty($pages) ){
 
 			foreach ($pages as $value) {
-				$stack_contition[] = smpg_placement_condition_checker( 'page', $post_id, $value );
-			}
-
-		}
-
-		if( $language_status && !empty( $languages ) ){
-
-			foreach ($languages as $value) {
-				$stack_contition[] = smpg_placement_condition_checker( 'language', $post_id, $value );
+				$stack_contition[] = smpg_placement_condition_checker('page', $post_id, $value);
 			}
 
 		}
@@ -105,6 +91,8 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 		}
 
 	}				
+
+	$response = apply_filters( 'smpg_change_placement_added_on_response', $response, $schema_data, $condition, $post_id );
 
 	return $response;
 	

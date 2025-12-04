@@ -469,8 +469,8 @@ class SMPG_Api_Mapper {
 
           case "language":
           
-            // NEED TO BE DEVELL TOMORROW
-            
+            $choices = apply_filters( 'smpg_get_languages_list', $choices ); 
+                                    
           break;
               
           case "all":

@@ -466,9 +466,15 @@ const SingularSchemaEdit = () => {
                    /> : ''
                      }
                   </td>
-                   </tr>
-                    {/* TranslatePress target on starts here */}
-                   <tr> 
+                   </tr>                    
+                  </tbody>
+                </table>
+                {smpg_local.is_multilingual ?
+                <div>
+                <div style={{textAlign:"center", fontWeight:"600"}}>AND</div>
+                <table className="smpg-placement-table">
+                  <tbody>
+                    <tr> 
                    <td><Label>{__('Languages', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
@@ -493,10 +499,12 @@ const SingularSchemaEdit = () => {
                    /> : ''
                      }
                   </td>
+                    <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr>
-                  {/* TranslatePess target on ends here */}
                   </tbody>
                 </table>
+                </div>
+                 : ''}
               </div>                  
               <div>
               <Divider horizontal style={{marginTop:"40px"}}>{__("Target Off", "schema-package")}</Divider>
@@ -584,9 +592,15 @@ const SingularSchemaEdit = () => {
                   : ''
                     }
                   </td>
-                   </tr>
-                   {/* TranslatePess target off starts here */}
-                   <tr> 
+                   </tr>                   
+                  </tbody>
+                </table>
+                { smpg_local.is_multilingual ? 
+                <div>
+                  <div style={{textAlign:"center", fontWeight:"600"}}>AND</div>
+                <table className="smpg-placement-table">
+                  <tbody>
+                    <tr> 
                    <td><Label>{__('Languages', 'schema-package') }</Label></td>
                    <td>
                    <div className="ui fitted toggle checkbox">
@@ -612,10 +626,12 @@ const SingularSchemaEdit = () => {
                   : ''
                     }
                   </td>
+                  <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
                    </tr>
-                   {/* TranslatePess target off ends here */}
                   </tbody>
                 </table>
+                </div>
+                : ''}
               </div>  
       </div>
     </Accordion>               

@@ -29,7 +29,9 @@ require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-action.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-mapper.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/setup.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-individual-post.php';
+require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/schema-loader.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/properties.php';
+
 //Frontend
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/mapping.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/generate.php';

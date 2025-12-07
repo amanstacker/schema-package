@@ -7,7 +7,7 @@ function smpg_schema_profilepage( $schema_id, $common_properties ) {
     extract( $common_properties );
 
     $social_links = [                            
-        'label'         => 'Social Links',
+        'label'         => 'Person Social Links',
         'button_text'   => 'Add More Social Links', 
         'type'          => 'repeater', 
         'display'       => true,
@@ -21,8 +21,7 @@ function smpg_schema_profilepage( $schema_id, $common_properties ) {
     $image['label']          = 'Person Image';
     $name['label']           = 'Person Name';
     $alternate_name['label'] = 'Person Alternate Name';
-    $description['label']    = 'Person Description';                    
-    $social_links['label']   = 'Person Social Links';
+    $description['label']    = 'Person Description';                        
 
     $properties = [
         'is_enable'         => true,

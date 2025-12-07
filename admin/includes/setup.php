@@ -551,6 +551,8 @@ function smpg_get_schema_type_text( $id ) {
 		'discussionforumposting'    => 'DiscussionForumPosting',
 	];	
 
+	$response = apply_filters( 'smpg_filter_schema_types_list', $response );
+
 	if ( array_key_exists( $id, $response ) ) {
 		return $response[$id];
 	}

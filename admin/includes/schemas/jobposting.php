@@ -7,7 +7,7 @@ function smpg_schema_jobposting( $schema_id, $common_properties ) {
     extract( $common_properties );
 
     $social_links = [                            
-        'label'         => 'Social Links',
+        'label'         => 'Hiring Organization Social Links',
         'button_text'   => 'Add More Social Links', 
         'type'          => 'repeater', 
         'display'       => true,
@@ -16,9 +16,7 @@ function smpg_schema_jobposting( $schema_id, $common_properties ) {
                 'url'     => $url,                                            
             ]
         ]                                                                                                                      
-    ];
-
-    $social_links['label'] = 'Hiring Organization Social Links';
+    ];    
 
     $properties = [
         'is_enable'         => true,

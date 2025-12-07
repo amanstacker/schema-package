@@ -992,6 +992,72 @@ function smpg_get_common_properties( $post_id ) {
             'type'        => 'checkbox',                             
             'value'       => false,                        
             'display'     => true,
-        ]
+        ],
+        'opening_hours' => [                            
+                'label'         => 'Opening Hours',    
+                'button_text'   => 'Add More Opening Hours', 
+                'type'          => 'repeater', 
+                'display'       => true,
+                'elements'      => [
+                    [
+                        'monday' => [                                                                                                                                              
+                            'label'       => 'Monday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'tuesday' => [                                                                                                                                              
+                            'label'       => 'Tuesday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'wednesday' => [                                                                                                                                              
+                            'label'       => 'Wednesday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'thursday' => [                                                                                                                                              
+                            'label'       => 'Thursday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'friday' => [                                                                                                                                              
+                            'label'       => 'Friday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'saturday' => [                                                                                                                                              
+                            'label'       => 'Saturday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => true,
+                            'display'     => true
+                        ],
+                        'sunday' => [                                                                                                                                              
+                            'label'       => 'Sunday',                    
+                            'type'        => 'checkbox',                                                                                    
+                            'value'       => false,
+                            'display'     => true
+                        ],
+                        'opens' => [                                                                                                                                              
+                            'label'       => 'Opens',                    
+                            'type'        => 'text',                                    
+                            'placeholder' => '09:00',                    
+                            'value'       => '',
+                            'display'     => true
+                        ],
+                        'closes' => [                                                                                                                                              
+                            'label'       => 'Closes',                    
+                            'type'        => 'text',                                    
+                            'placeholder' => '19:00',                    
+                            'value'       => '',
+                            'display'     => true
+                        ],                                          
+                    ]
+                ]                                                                                                                      
+            ]
     ];
 }

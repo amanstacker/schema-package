@@ -1483,7 +1483,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
 											$new_elements[$nkey][$zkey]['value'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['value'];
 										}
 
-										if ( is_array( $value['properties'][$pkey]['elements'][$nkey][$zkey] ) && array_key_exists( 'display',  $value['properties'][$pkey]['elements'][$nkey][$zkey] ) ) {
+										if ( ( isset($value['properties'][$pkey]['elements'][$nkey][$zkey]) && is_array( $value['properties'][$pkey]['elements'][$nkey][$zkey] ) ) && array_key_exists( 'display',  $value['properties'][$pkey]['elements'][$nkey][$zkey] ) ) {
 											$new_elements[$nkey][$zkey]['display'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['display'];
 										}
 										                                        

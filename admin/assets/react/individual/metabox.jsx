@@ -1,27 +1,14 @@
 /**
  * WordPress dependencies
  */
-const { subscribe, select } = wp.data;
-
-const {
-	BaseControl,
-	Button,
-	ExternalLink,
-	PanelBody,
-	PanelRow,
-	Placeholder,
-	Spinner,
-	ToggleControl,
-    SelectControl,
-    Modal,
-    ComboboxControl,
-    Tooltip
+const {	
+	Button,		
+	ToggleControl,   
+    Modal,    
 } = wp.components;
 
 const {
-	render,
-	Component,
-	Fragment,
+	render,	
     useState,
     useEffect,
     useRef

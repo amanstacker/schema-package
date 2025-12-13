@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
 
-    $json_ld = [];    
-    
+    $json_ld = [];            
     $properties    = $schema_data['properties'];  
+    $properties    = apply_filters( 'smpg_change_schema_properties', $properties, $schema_data );
     $properties    = smpg_replace_properties_placeholders( $properties );
     $schema_type   = $schema_data['id'];  
             

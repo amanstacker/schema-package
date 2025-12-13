@@ -182,3 +182,22 @@ textarea.smpg-form-control {
         width: auto;
     }
 }
+
+.smpg-lang-tabs {
+    display: flex;
+    gap: 1px;    
+}
+
+.smpg-tab-btn {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 4px 10px;    
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.smpg-tab-btn.active {
+    background: #007cba;
+    color: #fff;
+    border-color: #007cba;
+}

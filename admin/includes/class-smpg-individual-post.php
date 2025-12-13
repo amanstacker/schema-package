@@ -150,6 +150,7 @@ class SMPG_Individual_Post {
                 'is_free'              => true,
 				'is_multilingual'      => false,
                 'language_list'        => [],
+                'default_language'     => '',
 			] );
                                     
             wp_enqueue_media();    

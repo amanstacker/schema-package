@@ -88,8 +88,12 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
     $handlers = apply_filters( 'smpg_extra_schema_handlers', $handlers );
 
     // Return mapped handler if available
-    if ( isset( $handlers[ $schema_id ] ) && function_exists( $handlers[ $schema_id ] ) ) {
-        return call_user_func( $handlers[ $schema_id ], $schema_id, $common_prop );
+    if ( isset( $handlers[ $schema_id ] ) && function_exists( $handlers[ $schema_id ] ) ) {        
+
+        $result = call_user_func( $handlers[ $schema_id ], $schema_id, $common_prop );
+        $result = apply_filters( 'smpg_change_properties', $result );
+
+        return $result;
     }
 
     return [];

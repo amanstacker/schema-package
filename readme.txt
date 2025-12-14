@@ -2,10 +2,10 @@
 Contributors: amanstacker
 Tags: Rich Results, carousel schema, json-ld, product schema, local business schema
 Donate link: https://www.paypal.com/paypalme/amanstacker
-Requires PHP: 5.6.20
+Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.25
+Stable tag: 1.0.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -264,6 +264,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Meta Box](https://wordpress.org/plugins/meta-box/)
 * [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
 * [MasterStudy LMS WordPress Plugin](https://wordpress.org/plugins/masterstudy-lms-learning-management-system/)
+* [Translate Multilingual sites – TranslatePress (Premium)](https://wordpress.org/plugins/translatepress-multilingual/)
+* [Polylang (Premium)](https://wordpress.org/plugins/polylang/)
+* [WP Multilang (Premium)](https://wordpress.org/plugins/wp-multilang/)
+* [WPML (Premium)](https://wpml.org/)
+* [Weglot (Premium)](https://wordpress.org/plugins/weglot/)
 
 
 == Important Notes on Schema Markup & Validation ==
@@ -534,10 +539,17 @@ To explore all the advanced features and benefits included in the Schema Package
 16. JSON-LD output in page source
 
 == Upgrade Notice ==
-= 1.0.23 =
-Fixed missing image in Organization schema, added post_summary meta (respects More tag), improved author mapping, removed unused publisher property, and made general improvements.
+= 1.0.26 =
+Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
 
 == Changelog ==
+
+= 1.0.26 =
+
+* Added: TranslatePress compatibility in the premium version
+* Fixed: Increased Schema Package Generator modal height and width for better visibility
+* Fixed: Made the “Save for the Post” button in SPG sticky
+* Fixed: Minor bugs and improvements
 
 = 1.0.25 =
 

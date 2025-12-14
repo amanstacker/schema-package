@@ -14,12 +14,7 @@ class SMPG_Api_Action {
             }                                                
                                  
         }                        
-       
-        public function delete_individual_schema_by_id( $request ) {
-
-
-        }
-
+               
         public function change_post_status($request){
             
             $parameters     = $request->get_params();
@@ -438,7 +433,7 @@ class SMPG_Api_Action {
             }
         
             $query .= " LIMIT 10"; // Add the limit
-            //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+            //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter - Reason: All query preparation and escaping are already handled just above.
             $meta_keys = $wpdb->get_col($query);
         
             // Format response

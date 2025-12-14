@@ -53,9 +53,11 @@ const SingularSchemaEdit = () => {
     _enabled_on_post_type: false,
     _enabled_on_post: false,
     _enabled_on_page: false,
+    _enabled_on_language: false,
     _disabled_on_post_type: false,
     _disabled_on_post: false,
     _disabled_on_page: false,
+    _disabled_on_language: false,
     _enabled_on: { post_type: [], post: [], page: [] },
     _disabled_on: { post_type: [], post: [], page: [] },
     _automation_with: [],
@@ -464,9 +466,45 @@ const SingularSchemaEdit = () => {
                    /> : ''
                      }
                   </td>
-                   </tr>                                       
+                   </tr>                    
                   </tbody>
                 </table>
+                {smpg_local.is_multilingual ?
+                <div>
+                <div style={{textAlign:"center", fontWeight:"600"}}>AND</div>
+                <table className="smpg-placement-table">
+                  <tbody>
+                    <tr> 
+                   <td><Label>{__('Languages', 'schema-package') }</Label></td>
+                   <td>
+                   <div className="ui fitted toggle checkbox">
+                  <input type="checkbox" name="_enabled_on_language" checked={postMeta._enabled_on_language} onChange={handleFormChange} />
+                  <label></label>
+                  </div>
+                   </td>
+                   <td>
+                     {enabledOnOption?.page ? 
+                     <Dropdown
+                     data_type="language"
+                     name="_enabled_on_language"
+                     placeholder='Search For Language'
+                     fluid
+                     multiple
+                     search
+                     selection                     
+                     value={postMeta._enabled_on?.language || []}
+                     onChange={handlePlacementChange}
+                     onSearchChange={handlePlacementSearchChange}
+                     options={enabledOnOption?.language || []}
+                   /> : ''
+                     }
+                  </td>
+                    <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
+                   </tr>
+                  </tbody>
+                </table>
+                </div>
+                 : ''}
               </div>                  
               <div>
               <Divider horizontal style={{marginTop:"40px"}}>{__("Target Off", "schema-package")}</Divider>
@@ -554,9 +592,46 @@ const SingularSchemaEdit = () => {
                   : ''
                     }
                   </td>
-                   </tr>                                       
+                   </tr>                   
                   </tbody>
                 </table>
+                { smpg_local.is_multilingual ? 
+                <div>
+                  <div style={{textAlign:"center", fontWeight:"600"}}>AND</div>
+                <table className="smpg-placement-table">
+                  <tbody>
+                    <tr> 
+                   <td><Label>{__('Languages', 'schema-package') }</Label></td>
+                   <td>
+                   <div className="ui fitted toggle checkbox">
+                  <input type="checkbox" name="_disabled_on_language" checked={postMeta._disabled_on_language} onChange={handleFormChange} />
+                  <label></label>
+                  </div>
+                   </td>
+                   <td>
+                    {disabledOnOption?.language ?
+                    <Dropdown
+                    data_type="language"
+                    name="_disabled_on_language"
+                    placeholder={__('Search For Language', 'schema-package') }
+                    fluid
+                    multiple
+                    search
+                    selection                    
+                    value={postMeta._disabled_on?.language || []}
+                    onChange={handlePlacementChange}
+                    onSearchChange={handlePlacementSearchChange}
+                    options={disabledOnOption?.language || []}
+                  />
+                  : ''
+                    }
+                  </td>
+                  <td className='smpg-placement-or'><span>{__('OR', 'schema-package') }</span></td>
+                   </tr>
+                  </tbody>
+                </table>
+                </div>
+                : ''}
               </div>  
       </div>
     </Accordion>               

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Schema Package - Structured Data & Rich Snippets Tool for SEO
 Description: Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results.
-Version: 1.0.24
+Version: 1.0.26
 Text Domain: schema-package
 Author: amanstacker
 Author URI: https://profiles.wordpress.org/amanstacker/
@@ -12,7 +12,7 @@ License: GPLv2 or later
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('SMPG_VERSION', '1.0.24');
+define('SMPG_VERSION', '1.0.26');
 define('SMPG_DIR_NAME_FILE', __FILE__ );
 define('SMPG_DIR_NAME', dirname( __FILE__ ));
 define('SMPG_DIR_URI', plugin_dir_url(__FILE__));
@@ -29,7 +29,9 @@ require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-action.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-api-mapper.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/setup.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/class-smpg-individual-post.php';
+require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/schema-loader.php';
 require_once SMPG_PLUGIN_DIR_PATH .'admin/includes/properties.php';
+
 //Frontend
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/mapping.php';
 require_once SMPG_PLUGIN_DIR_PATH .'json-ld/generate.php';

@@ -22,14 +22,20 @@ function smpg_placement_condition_checker( $type, $post_id, $value ) {
 					$response = true;
 				}
 
-			break;						
+			break;
+			
+		case 'language':
+			
+			$response = apply_filters( 'smpg_change_language_placement_cc', $response, $value );
+
+		break;
 		
 		default:
 			
 			break;
 
 	}
-
+	
 	return $response;
 
 }
@@ -85,6 +91,8 @@ function smpg_placement_added_on( $schema_data, $post_id ){
 		}
 
 	}				
+
+	$response = apply_filters( 'smpg_change_placement_added_on_response', $response, $schema_data, $condition, $post_id );
 
 	return $response;
 	

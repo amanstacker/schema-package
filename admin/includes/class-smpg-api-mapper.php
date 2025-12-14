@@ -237,6 +237,7 @@ class SMPG_Api_Mapper {
             }          
               
             $choices = $post_type;
+            
           break;                         
   
         case "page_template" :
@@ -465,6 +466,12 @@ class SMPG_Api_Mapper {
           }
                                        
           break;      
+
+          case "language":
+          
+            $choices = apply_filters( 'smpg_get_languages_list', $choices ); 
+                                    
+          break;
               
           case "all":
   
@@ -630,14 +637,17 @@ class SMPG_Api_Mapper {
         $post_type_plc = $this->get_placement_data('post_type');
         $post_plc      = $this->get_placement_data('post');        
         $page_plc      = $this->get_placement_data('page');
+        $language_plc  = $this->get_placement_data('language');
 
         $enabled_on['post_type'] = $post_type_plc;
         $enabled_on['post']      = $post_plc;
         $enabled_on['page']      = $page_plc;
+        $enabled_on['language']  = $language_plc;
 
         $disabled_on['post_type'] = $post_type_plc;
         $disabled_on['post']      = $post_plc;
         $disabled_on['page']      = $page_plc;
+        $disabled_on['language']  = $language_plc;
         
         if($post_id){
 

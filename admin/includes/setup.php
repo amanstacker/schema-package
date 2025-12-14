@@ -551,6 +551,8 @@ function smpg_get_schema_type_text( $id ) {
 		'discussionforumposting'    => 'DiscussionForumPosting',
 	];	
 
+	$response = apply_filters( 'smpg_filter_schema_types_list', $response );
+
 	if ( array_key_exists( $id, $response ) ) {
 		return $response[$id];
 	}
@@ -594,7 +596,7 @@ function smpg_entry_page(){
 		
 		echo '<div id="smpg-entry-div"></div>';
 		echo '<div id="smpg-page-footer">
-		<span>'.esc_html__( 'Thanks for choosing the Schema Package! Your feedback matters to us', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'share your thoughts to help us improve.', 'schema-package' ).'</a> </span>
+		<span>'.esc_html__( 'Thanks for trusting Schema Package! Your support is what keeps this project alive.', 'schema-package' ).' — <a target="_blank" href="https://wordpress.org/support/plugin/schema-package/reviews/#new-post">'.esc_html__( 'Click here to inspire us with a review.', 'schema-package' ).'</a> </span>
 		<span class="smpg-version-footer">'.esc_html__( 'Schema Package Version', 'schema-package' ).' '.esc_html( SMPG_VERSION ) .'</span>
 		</div>';		
 
@@ -613,7 +615,9 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'rest_url'             => esc_url_raw( rest_url( 'smpg-route/' ) ),
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'smpg_plugin_list'     => $smpg_plugin_list,
-				'is_free'              => true
+				'is_free'              => true,
+				'is_multilingual'      => false,
+				'language_list'        => [],
 			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );

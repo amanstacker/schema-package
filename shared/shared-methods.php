@@ -582,7 +582,7 @@ function smpg_get_the_content($post_id = null){
 		$content = str_replace( ["\n","\r\n","\r" ], ' ', $content);
 	}
 	
-	return apply_filters('smpg_the_content' ,$content);
+	return apply_filters('smpg_change_the_content' ,$content);
 
 }
 
@@ -656,6 +656,7 @@ function smpg_get_yoast_rendered_value( $key, $post_id ) {
 		// reuse global instance if present
 		global $wpseo_replace_vars;
 		if ( ! ( $wpseo_replace_vars instanceof WPSEO_Replace_Vars ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Reason: Using WPSEO's global variable to make its compatibility.
 			$wpseo_replace_vars = new WPSEO_Replace_Vars();
 		}
 		$value = $wpseo_replace_vars->replace( $value, $post_obj );
@@ -710,7 +711,7 @@ function smpg_get_description( $post_id = null ) {
 
 		$description = ( $excerpt != '' ) ? $excerpt : $short_content;
 	}
-
+	
 	return apply_filters( 'smpg_change_description', $description );
 }
 
@@ -1444,7 +1445,7 @@ function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
 
 	if ( ! empty( $post_id ) ) {
 
-		$post_meta_data = get_post_meta( $post_id, '_smpg_schema_meta', true );
+		$post_meta_data = get_post_meta( $post_id, '_smpg_schema_meta', true );		
 
 		if ( ! empty( $post_meta_data ) ) {
 			$schema_meta = $post_meta_data;
@@ -1454,81 +1455,108 @@ function smpg_get_initial_post_meta( $post_id, $tag_id, $user_id ) {
     
     if ( ! empty( $schema_meta ) && is_array( $schema_meta ) ) {
 
-            foreach ( $schema_meta as $key => $value ) {
+		foreach ( $schema_meta as $key => $value ) {
+			
+			$schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id, $user_id );
+			
+			if ( ! empty( $schema ) ) {
+				
+				$schema_meta[$key]['properties']       = smpg_prepare_initial_post_meta( $schema['properties'], $value );
+				
+				if ( function_exists('smpgp_get_site_languages') ){
 
-                $schema                             = smpg_get_schema_properties( $value['id'], $post_id, $tag_id, $user_id );
-                
-                if ( ! empty( $schema ) ) {
+					$lang_list = smpgp_get_site_languages();
+					
+					if ( ! empty( $lang_list ) ) {
 
-                    foreach( $schema['properties'] as $pkey => $pval ) {
-                        
-                        if ( $pval['type'] == 'repeater' ) {   
-                            
-                            $new_elements = [];
-							$reptcount    = 1;
-
-							if ( isset( $value['properties'][$pkey]['elements'] ) ) {
-								$reptcount = count( $value['properties'][$pkey]['elements'] );
-							}
-                            
-                            for ( $i = 0; $i < $reptcount; $i++ ) {
-                                $new_elements[] = $schema['properties'][$pkey]['elements'][0];    
-                            }
-
-                            foreach ( $new_elements as $nkey => $nval ) {
-
-                                    foreach ( $nval as $zkey => $zval ) {
-
-										if ( isset( $value['properties'][$pkey]['elements'][$nkey][$zkey]['value'] ) ) {
-											$new_elements[$nkey][$zkey]['value'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['value'];
-										}
-
-										if ( is_array( $value['properties'][$pkey]['elements'][$nkey][$zkey] ) && array_key_exists( 'display',  $value['properties'][$pkey]['elements'][$nkey][$zkey] ) ) {
-											$new_elements[$nkey][$zkey]['display'] = $value['properties'][$pkey]['elements'][$nkey][$zkey]['display'];
-										}
-										                                        
-                                    }
-                            }
-                            
-                            $schema['properties'][$pkey]['elements'] = $new_elements;
+						foreach ( $lang_list as $lang_code => $lang_name ) {
 							
-                        }elseif( $pval['type'] == 'groups' ){
-
-							$new_elements = $schema['properties'][$pkey]['elements'];
-							
-							foreach ( $new_elements as $nkey => $nval ) {
-
-								$new_elements[$nkey]['value'] =  $value['properties'][$pkey]['elements'][$nkey]['value'];
-							}
-
-							$schema['properties'][$pkey]['elements'] = $new_elements;
-
+							$schema_meta[$key]['properties_'.$lang_code] = smpg_prepare_initial_post_meta( $schema['properties_'.$lang_code], $value, $lang_code );
+						
 						}
-						else{
-
-							if ( is_array( $value['properties'][$pkey] ) ) {
-								
-								$schema['properties'][$pkey]['value'] = $value['properties'][$pkey]['value'];								
-	
-								if ( array_key_exists( 'display', $value['properties'][$pkey] ) ) {
-									$schema['properties'][$pkey]['display'] = $value['properties'][$pkey]['display'];
-								}
-
-							}							
-							                            
-                        }                        
-
-                    }
-                }
-                
-                $data_properties = $schema['properties'];
-                $schema_meta[$key]['properties']    = $data_properties;
-            }
+					}					
+					
+				}
+			
+			}
+							
+		}
             
     }
-    
+
     return $schema_meta;
 
+}
+
+function smpg_prepare_initial_post_meta( $schema_properties, $value, $lang_code = null ){
+
+	$prop_key = 'properties';
+
+	if ( ! empty( $lang_code ) ) {		
+		$prop_key  = 'properties_' . $lang_code;
+	}
+
+	foreach( $schema_properties as $pkey => $pval ) {
+                        
+		if ( $pval['type'] == 'repeater' ) {   
+			
+			$new_elements = [];
+			$reptcount    = 1;
+
+			if ( isset( $value[$prop_key][$pkey]['elements'] ) ) {
+				$reptcount = count( $value[$prop_key][$pkey]['elements'] );
+			}
+			
+			for ( $i = 0; $i < $reptcount; $i++ ) {
+				$new_elements[] = $schema_properties[$pkey]['elements'][0];    
+			}
+
+			foreach ( $new_elements as $nkey => $nval ) {
+
+					foreach ( $nval as $zkey => $zval ) {
+
+						if ( isset( $value[$prop_key][$pkey]['elements'][$nkey][$zkey]['value'] ) ) {
+							$new_elements[$nkey][$zkey]['value'] = $value[$prop_key][$pkey]['elements'][$nkey][$zkey]['value'];
+						}
+
+						if ( ( isset($value[$prop_key][$pkey]['elements'][$nkey][$zkey]) && is_array( $value[$prop_key][$pkey]['elements'][$nkey][$zkey] ) ) && array_key_exists( 'display',  $value[$prop_key][$pkey]['elements'][$nkey][$zkey] ) ) {
+							$new_elements[$nkey][$zkey]['display'] = $value[$prop_key][$pkey]['elements'][$nkey][$zkey]['display'];
+						}
+																
+					}
+			}
+			
+			$schema_properties[$pkey]['elements'] = $new_elements;
+			
+		}elseif( $pval['type'] == 'groups' ){
+
+			$new_elements = $schema_properties[$pkey]['elements'];
+			
+			foreach ( $new_elements as $nkey => $nval ) {
+
+				$new_elements[$nkey]['value'] =  $value[$prop_key][$pkey]['elements'][$nkey]['value'];
+			}
+
+			$schema_properties[$pkey]['elements'] = $new_elements;
+
+		}
+		else{
+
+			if ( is_array( $value[$prop_key][$pkey] ) ) {
+				
+				$schema_properties[$pkey]['value'] = $value[$prop_key][$pkey]['value'];
+
+				if ( array_key_exists( 'display', $value[$prop_key][$pkey] ) ) {
+					$schema_properties[$pkey]['display'] = $value[$prop_key][$pkey]['display'];
+				}
+
+			}							
+										
+		}                        
+
+	}
+
+	return $schema_properties;
 }
 
 function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, int $tag_id, int $user_id ) {
@@ -1538,7 +1566,7 @@ function smpg_get_multiple_schema_properties(array $slected_ids, int $post_id, i
     foreach ($slected_ids as $value) {
         $response[$value] = smpg_get_schema_properties($value, $post_id, $tag_id, $user_id);
     }
-
+	
     return $response;
 
 }

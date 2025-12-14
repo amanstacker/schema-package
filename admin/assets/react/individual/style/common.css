@@ -36,12 +36,6 @@
     font-style: normal;    
     color: #000;
 }
-.smpg-add-schema-action{ 
-    padding-top: 15px;        
-}
-.smpg-add-schema-select{
-    display: flex;
-}
 .smpg-select{
     float: left;
     width: 60%;
@@ -134,13 +128,6 @@ textarea.smpg-form-control {
 .smpg-item-box-selected{
     border: 2px solid #990000;
 }
-.smpg-schema-list{
-    width: 800px;
-}
-.smpg-choose-ok{
-    margin-top: 25px;
-    text-align: center;
-}
 .smpg-list-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -181,4 +168,66 @@ textarea.smpg-form-control {
     .smpg-i-schema-setup{
         width: auto;
     }
+}
+
+
+/* Tabs wrapper */
+.smpg-lang-tabs {	
+	border-bottom: 1px solid #dcdcde; /* full width bottom border */	
+	margin-bottom: 15px;
+}
+
+/* Each tab button */
+.smpg-lang-tabs button {
+	background: none;
+	border: none;			
+	font-size: 18px;
+	font-weight: 500;
+	color: #50575e;
+	border-bottom: 2px solid transparent;	
+}
+
+/* Hover state */
+.smpg-lang-tabs button:hover {
+	color: #1d2327;
+}
+
+/* Active tab (RankMath style) */
+.smpg-lang-tabs button.active {
+	color: #2271b1;
+	border-bottom-color: #2271b1; /* WP blue */	
+}
+
+/* Prevent outline on focus (WP admin already handles accessibility) */
+.smpg-lang-tabs button:focus {
+	outline: none;
+	box-shadow: none;
+}
+/* Modal container */
+.smpg-spg-modal {
+	height: 94vh;
+	max-height: 94vh;
+}
+.smpg-spg-modal .components-modal__content {
+    padding-bottom: 0px;
+}
+.smpg-spg-modal-footer{
+    position: sticky;
+    z-index: 1;
+    bottom: 0;
+    margin: 20px -20px -20px;
+    padding: 15px 20px;
+    border-top: 1px solid #b5bfc9;
+    background: #fff;
+}
+.smpg-choose-ok{    
+    text-align: center;
+}
+.smpg-spg-choose-modal {
+	height: 94vh;
+	max-height: 94vh;
+    width: 100%;
+}
+.smpg-spg-choose-modal .components-modal__content{
+    padding-bottom: 0px;
 }

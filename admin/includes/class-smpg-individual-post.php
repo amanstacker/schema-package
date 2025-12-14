@@ -138,17 +138,21 @@ class SMPG_Individual_Post {
                     $user_id = intval( $_GET['user_id'] );                
                 }
             }
-                        
-            $local_data = [
-                'smpg_plugin_url'      => SMPG_PLUGIN_URL,
+
+            $local_data = apply_filters( 'smpg_local_filter', [
+				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
                 'rest_url'             => esc_url_raw( rest_url( 'smpg-individual-route/' ) ),
                 'nonce'                => wp_create_nonce( 'wp_rest' ),
                 'post_id'              => get_the_ID(),
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
                 'tag_id'               => ! empty( $_GET['tag_ID'] ) ? intval( wp_unslash( $_GET['tag_ID'] ) ) : '',
                 'user_id'              => $user_id,
-            ];
-
+                'is_free'              => true,
+				'is_multilingual'      => false,
+                'language_list'        => [],
+                'default_language'     => '',
+			] );
+                                    
             wp_enqueue_media();    
             wp_enqueue_style( 'wp-components' );
             wp_register_script( 'smpg-individual-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/individual_post.js', [ 'wp-i18n', 'wp-components', 'wp-element', 'wp-api', 'wp-editor', 'wp-blocks' ], SMPG_VERSION, true );    

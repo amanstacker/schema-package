@@ -58,7 +58,7 @@ function smpg_json_ld_client_side_output() {
         
         $post_id       = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
         $spg_id        = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
-        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
+        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( wp_unslash( $_POST['page_type'] ) ) : 'none';    
         $is_home       = isset($_POST['is_home']) ? (bool)$_POST['is_home'] : 0;
         $is_front_page = isset($_POST['is_front_page']) ? (bool)$_POST['is_front_page'] : 0;
 
@@ -309,6 +309,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
                     if ( smpg_is_singular_placement_matched( $schema_meta, $post_id ) ) {
 
                         $global_json_ld = smpg_prepare_global_json_ld( $schema_meta, $post_id );
+                        $global_json_ld = apply_filters( 'smpg_change_global_schema_json_ld', $global_json_ld, $schema_meta, $post_id );
 
                         if ( ! empty( $global_json_ld ) ) {
                             $response[] = $global_json_ld;
@@ -341,7 +342,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
             if ( isset( $meta['is_enable'] ) && $meta['is_enable'] == 1 ) {
 
                 $particular_data = smpg_prepare_particular_post_json_ld( $meta, $spg_id );                
-
+                $particular_data = apply_filters( 'smpg_change_particular_schema_json_ld', $particular_data, $meta, $spg_id );
                 if ( ! empty( $particular_data ) ) {
                     $response[] = $particular_data;
                 }

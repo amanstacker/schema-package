@@ -56,5 +56,18 @@ export const schemaTypes = [
     { key: 54, value: 'certification', text: 'Certification' },
     { key: 55, value: 'vacationrental', text: 'VacationRental' },
     { key: 56, value: 'report', text: 'Report' },
-    { key: 57, value: 'discussionforumposting', text: 'DiscussionForumPosting' }
+    { key: 57, value: 'discussionforumposting', text: 'DiscussionForumPosting' },
+
+    // ------------------------ PRO ONLY ------------------------
+    ...( !smpg_local.is_free ? [
+        { key: 58, value: 'medicalclinic', text: 'MedicalClinic' },
+        { key: 59, value: 'dietarysupplement', text: 'DietarySupplement' },
+        { key: 60, value: 'exerciseplan', text: 'ExercisePlan' },
+        { key: 61, value: 'drug', text: 'Drug' },
+        { key: 62, value: 'medicalcondition', text: 'MedicalCondition' },
+        { key: 63, value: 'medicaltherapy', text: 'MedicalTherapy' },
+        { key: 64, value: 'medicalprocedure', text: 'MedicalProcedure' },
+        { key: 65, value: 'physician', text: 'Physician' },
+        { key: 66, value: 'hospital', text: 'Hospital' }
+    ] : [])
 ];

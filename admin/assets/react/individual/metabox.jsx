@@ -1,27 +1,15 @@
 /**
  * WordPress dependencies
  */
-const { subscribe, select } = wp.data;
-
-const {
-	BaseControl,
-	Button,
-	ExternalLink,
-	PanelBody,
-	PanelRow,
-	Placeholder,
-	Spinner,
-	ToggleControl,
-    SelectControl,
-    Modal,
-    ComboboxControl,
-    Tooltip
+const {	
+	Button,		
+	ToggleControl,   
+    Modal,    
+    TabPanel 
 } = wp.components;
 
 const {
-	render,
-	Component,
-	Fragment,
+	render,	
     useState,
     useEffect,
     useRef
@@ -43,6 +31,12 @@ const {
     const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
     const [selectedSchema, setSelectedSchema]       = useState([]);
     const [dataUpdated, setdataUpdated]             = useState(false);
+    const [activeTab, setActiveTab] = useState({0: smpg_local.default_language });
+
+    useEffect(() => {
+        console.log(activeTab);
+    }, [activeTab]);
+
     
     const handleSchemaTurnOnOff = (i,id) => {
         let copyMeta = [...postMeta];
@@ -82,222 +76,150 @@ const {
       setPostMeta(copyMeta);        
   }
 
-  const handleRemoveImage = (e, i, j, k, id, elid, tid, repeater) => {
-
-    e.preventDefault()
+  const handleRemoveImage = (e, i, j, k, id, elid, tid, repeater, langKey = null) => {
+    e.preventDefault();
 
     let copyMeta = [...postMeta];
 
-    if(repeater){
-        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'].splice(k,1);                    
-    }else{            
-        copyMeta[i]['properties'][j]['value'].splice(k,1);                
+    // Determine property key based on language
+    const propKey = langKey ? `properties_${langKey}` : 'properties';
+
+    if (repeater) {
+
+        copyMeta[i][propKey][j]['elements'][elid][tid]['value'].splice(k, 1);
+        
+    } else {        
+
+        copyMeta[i][propKey][j]['value'].splice(k, 1);        
+
     }
 
-    setPostMeta(copyMeta);        
-    
-  }
+    setPostMeta(copyMeta);
+};
+
   
-  const handlePropertyChange = (e, i, j, property_type, multiple, elid, tid, repeater ) =>{
-    
+  const handlePropertyChange = (e, i, j, property_type, multiple, elid, tid, repeater, langKey = null) => {
     let copyMeta = [...postMeta];
 
-    if(property_type == 'media'){
+    // Determine property key based on language
+    const propKey = langKey ? `properties_${langKey}` : 'properties';
+
+    if (property_type === 'media') {
 
         let image_arr = [];
         let media_uploader = wp.media({
             title: "Schema Image",
-            button: {
-              text: "Select Image"
-            },
-            multiple: multiple,  
-            library:{type : 'image'}
-          }).on("select", function() {
+            button: { text: "Select Image" },
+            multiple: multiple,
+            library: { type: 'image' }
+        }).on("select", function () {
 
-             media_uploader.state().get('selection').map( 
-
-                function( attachment ) {
-
-                    attachment.toJSON();
-
-                    let image_data = {};
-                        image_data.id        = attachment['id'];
-                        image_data.url       = attachment.attributes.sizes.full.url;                
-                        image_data.width     = attachment.attributes.sizes.full.width;
-                        image_data.height    = attachment.attributes.sizes.full.height;
-                        image_arr.push(image_data);                                                     
-               });   
-
-
-               if(repeater){
-
-                     let arrold = copyMeta[i]['properties'][j]['elements'][elid][tid]['value'];
-
-                    if(multiple){               
-                        let merged = [...arrold, ...image_arr];
-                        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = Array.from(new Set(merged.map(JSON.stringify))).map(JSON.parse);    
-                    }else{
-                        copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = image_arr;
-                    }
-                    setPostMeta(copyMeta);   
-
-               }else{
-
-                    let arrold = copyMeta[i]['properties'][j]['value'];
-
-                    if(multiple){               
-                    let merged = [...arrold, ...image_arr];
-                    copyMeta[i]['properties'][j]['value'] = Array.from(new Set(merged.map(JSON.stringify))).map(JSON.parse);    
-                    }else{
-                    copyMeta[i]['properties'][j]['value'] = image_arr;
-                    }
-                    setPostMeta(copyMeta);   
-
-               }                              
-               
-          }).open();
-          
-    }else{     
-        
-      if(repeater){
-        
-        if ( repeater === 'repeater' ) {
-
-            let value;
-
-            if(copyMeta[i]['properties'][j]['elements'][elid][tid]['type'] == 'checkbox'){
-                value = e.target.checked;
-            }else{
-                value = e.target.value;                
-            }
-            
-            copyMeta[i]['properties'][j]['elements'][elid][tid]['value'] = value;              
-            setPostMeta(copyMeta);  
-
-        }   
-
-        if ( repeater === 'groups' ) {
-            
-            let value;
-
-            if(copyMeta[i]['properties'][j]['elements'][tid]['type'] == 'checkbox'){
-                value = e.target.checked;
-            }else{
-                value = e.target.value;                
-            }
-            
-            copyMeta[i]['properties'][j]['elements'][tid]['value'] = value;              
-            setPostMeta(copyMeta);  
-            
-        }
-        
-      }else{
-
-        if(property_type == 'checkbox'){
-
-          let value = e.target.checked;
-            
-          if( j == 'speakable' ){
-
-            if(value){
-                copyMeta[i]['properties']['speakable_selectors']['display'] = true;
-            }else{
-                copyMeta[i]['properties']['speakable_selectors']['display'] = false;
-            }
-            
-          }
-
-          if( j == 'is_paywalled'){
-
-            if(value){
-                copyMeta[i]['properties']['paywalled_selectors']['display'] = true;
-            }else{
-                copyMeta[i]['properties']['paywalled_selectors']['display'] = false;
-            }
-            
-          }
-
-          if( j == 'include_video'){
-                        
-            Object.keys(copyMeta[i]['properties']).forEach(function (key) {
-
-                if(copyMeta[i]['properties'][key]['type'] == 'repeater'){
-
-                    copyMeta[i]['properties'][key]['elements'].map( (item, o) => {
-                        
-                        Object.keys(item).forEach(function (ekey) {
-
-                            if(typeof item[ekey]['class'] !== "undefined"){
-
-                                if(item[ekey]['class'].includes('smpg_common_properties')){
-                                    if(value){
-                                        item[ekey]['display'] = true;                                        
-                                    }else{
-                                        item[ekey]['display'] = false;
-                                    }
-                                }
-
-                            }
-
-                        }) 
-                                                   
-                    })
-
-                }else{
-
-                    if(typeof copyMeta[i]['properties'][key]['class'] !== "undefined"){
-
-                        if(copyMeta[i]['properties'][key]['class'].includes('smpg_common_properties')){
-                        
-                            if(value){
-                                copyMeta[i]['properties'][key]['display'] = true;
-                            }else{
-                                copyMeta[i]['properties'][key]['display'] = false;
-                            }
-        
-                        }
-                    }
-
-                }
-                                                                         
+            media_uploader.state().get('selection').map(function (attachment) {
+                attachment.toJSON();
+                let image_data = {
+                    id: attachment['id'],
+                    url: attachment.attributes.sizes.full.url,
+                    width: attachment.attributes.sizes.full.width,
+                    height: attachment.attributes.sizes.full.height
+                };
+                image_arr.push(image_data);
             });
-                        
-          }
 
-          copyMeta[i]['properties'][j]['value'] = value;   
-          
-          setPostMeta(copyMeta);    
+            if (repeater) {
+                let arrold = copyMeta[i][propKey][j]['elements'][elid][tid]['value'];
 
-        }else{
-
-            let {value} = e.target;
-
-            if(j == 'offer_type'){
-
-                if(value == 'AggregateOffer'){
-                    copyMeta[i]['properties']['high_price']['display']  = true;
-                    copyMeta[i]['properties']['low_price']['display']   = true;
-                    copyMeta[i]['properties']['offer_count']['display'] = true;
-                    copyMeta[i]['properties']['offer_price']['display'] = false;
-                }else{
-                    copyMeta[i]['properties']['high_price']['display']  = false;
-                    copyMeta[i]['properties']['low_price']['display']   = false;
-                    copyMeta[i]['properties']['offer_count']['display'] = false;
-                    copyMeta[i]['properties']['offer_price']['display'] = true;
+                if (multiple) {
+                    let merged = [...arrold, ...image_arr];
+                    copyMeta[i][propKey][j]['elements'][elid][tid]['value'] = Array.from(new Set(merged.map(JSON.stringify))).map(JSON.parse);
+                } else {
+                    copyMeta[i][propKey][j]['elements'][elid][tid]['value'] = image_arr;
                 }
-                                
+
+            } else {
+                let arrold = copyMeta[i][propKey][j]['value'];
+
+                if (multiple) {
+                    let merged = [...arrold, ...image_arr];
+                    copyMeta[i][propKey][j]['value'] = Array.from(new Set(merged.map(JSON.stringify))).map(JSON.parse);
+                } else {
+                    copyMeta[i][propKey][j]['value'] = image_arr;
+                }
             }
 
-            copyMeta[i]['properties'][j]['value'] = value;      
-            setPostMeta(copyMeta);    
-            
+            setPostMeta(copyMeta);
+        }).open();
+
+    } else {
+
+        if (repeater) {
+
+            if (repeater === 'repeater') {
+                let value = copyMeta[i][propKey][j]['elements'][elid][tid]['type'] === 'checkbox' ? e.target.checked : e.target.value;
+                copyMeta[i][propKey][j]['elements'][elid][tid]['value'] = value;
+            }
+
+            if (repeater === 'groups') {
+                let value = copyMeta[i][propKey][j]['elements'][tid]['type'] === 'checkbox' ? e.target.checked : e.target.value;
+                copyMeta[i][propKey][j]['elements'][tid]['value'] = value;
+            }
+
+        } else {
+
+            if (property_type === 'checkbox') {
+                let value = e.target.checked;
+
+                // Special property handling
+                if (j === 'speakable') {
+                    copyMeta[i][propKey]['speakable_selectors']['display'] = value;
+                }
+                if (j === 'is_paywalled') {
+                    copyMeta[i][propKey]['paywalled_selectors']['display'] = value;
+                }
+                if (j === 'include_video') {
+                    Object.keys(copyMeta[i][propKey]).forEach(key => {
+                        const item = copyMeta[i][propKey][key];
+                        if (item.type === 'repeater') {
+                            item.elements.forEach(el => {
+                                Object.keys(el).forEach(ekey => {
+                                    if (el[ekey]?.class?.includes('smpg_common_properties')) {
+                                        el[ekey].display = value;
+                                    }
+                                });
+                            });
+                        } else if (item.class?.includes('smpg_common_properties')) {
+                            item.display = value;
+                        }
+                    });
+                }
+
+                copyMeta[i][propKey][j]['value'] = value;
+
+            } else {
+
+                let { value } = e.target;
+
+                if (j === 'offer_type') {
+                    if (value === 'AggregateOffer') {
+                        copyMeta[i][propKey]['high_price']['display'] = true;
+                        copyMeta[i][propKey]['low_price']['display'] = true;
+                        copyMeta[i][propKey]['offer_count']['display'] = true;
+                        copyMeta[i][propKey]['offer_price']['display'] = false;
+                    } else {
+                        copyMeta[i][propKey]['high_price']['display'] = false;
+                        copyMeta[i][propKey]['low_price']['display'] = false;
+                        copyMeta[i][propKey]['offer_count']['display'] = false;
+                        copyMeta[i][propKey]['offer_price']['display'] = true;
+                    }
+                }
+
+                copyMeta[i][propKey][j]['value'] = value;
+            }
         }
-                              
-      }  
-            
-    }    
-    
-  }
+
+        setPostMeta(copyMeta);
+    }
+};
+
   
   const handleSaveForThePost = ( i ) => {
 
@@ -361,60 +283,68 @@ const {
         setSelectedSchema(copydata);
   }
   
-  const handleDeleteRepeater = (e, i, j, elid) => {
+  const handleDeleteRepeater = (e, i, j, elid, langKey = null) => {
+    e.preventDefault();
 
-    let copyMeta = [...postMeta];    
-     copyMeta[i]['properties'][j]['elements'].splice(elid, 1); 
-     setPostMeta(copyMeta);    
+    let copyMeta = [...postMeta];
 
-  }
+    // Build language-specific property key
+    const propKey = langKey ? `properties_${langKey}` : 'properties';    
+    copyMeta[i][propKey][j].elements.splice(elid, 1);    
+    setPostMeta(copyMeta);
+};
 
-  const handleAddMoreRepeater = (e, i, j) => {
 
-    let copyMeta    = [...postMeta];    
+  const handleAddMoreRepeater = (e, i, j, langKey = null) => {
+    e.preventDefault();
 
-    if (typeof copyMeta[i]['properties'][j]['elements'][0] !== "undefined") {
+    let copyMeta = [...postMeta];
 
-        let new_element   = copyMeta[i]['properties'][j]['elements'][0];
+    // Use language-specific property key or default
+    const propKey = langKey ? `properties_${langKey}` : 'properties';
+
+    if (typeof copyMeta[i][propKey][j]?.elements[0] !== "undefined") {
+
+        let new_element = copyMeta[i][propKey][j].elements[0];
         let fresh_element = [];
-        
-        Object.keys(new_element).forEach(function (key) {
+
+        Object.keys(new_element).forEach((key) => {
             let obj = JSON.parse(JSON.stringify(new_element[key]));
             obj['value'] = '';
-            fresh_element[key] = obj;            
+            fresh_element[key] = obj;
         });
 
-        let new_obj = Object.assign({}, fresh_element);                         
-        copyMeta[i]['properties'][j]['elements'].push(JSON.parse(JSON.stringify(new_obj)));
-        setPostMeta(copyMeta);    
+        let new_obj = Object.assign({}, fresh_element);
+        copyMeta[i][propKey][j].elements.push(JSON.parse(JSON.stringify(new_obj)));
+        setPostMeta(copyMeta);
 
-    }else{
-        
-        let url = smpg_local.rest_url + "get-repeater-element" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "schema_id=" + copyMeta[i]['id'] + "&element_name=" + j;
-        
+    } else {
+
+        let url = smpg_local.rest_url + "get-repeater-element" 
+            + (smpg_local.rest_url.includes("?") ? "&" : "?") 
+            + "schema_id=" + copyMeta[i]['id'] 
+            + "&element_name=" + j;
+
         fetch(url, {
-        headers: {                    
-            'X-WP-Nonce': smpg_local.nonce,
-        }
+            headers: {
+                'X-WP-Nonce': smpg_local.nonce,
+            }
         })
         .then(res => res.json())
         .then(
-        (result) => {         
-    
-           if(result.status == 'success' && result.data){
-            copyMeta[i]['properties'][j]['elements'].push(result.data);
-            setPostMeta(copyMeta);  
-           }
-                                                                        
-        },        
-        (error) => {
-        
-        }
-        );  
+            (result) => {
+                if (result.status === 'success' && result.data) {
+                    copyMeta[i][propKey][j].elements.push(result.data);
+                    setPostMeta(copyMeta);
+                }
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
+    }
+};
 
-    } 
-    
-  }
 
   const getMetaData = ( init ) => {
 
@@ -493,7 +423,102 @@ const {
                     return(
                         <li key={i}>
                             { item.is_setup_popup && (
-                                <Modal title={`Edit ${item.text}`} shouldCloseOnClickOutside={false} onRequestClose={ () => handleCloseModal(i, item.id) }>
+                                <>
+                                {
+                                    Object.keys(smpg_local?.language_list ?? {}).length > 0  ? 
+                                    // multiple modal when language available
+                                   <Modal title={`Edit ${item.text}`}
+                                        shouldCloseOnClickOutside={false}
+                                        onRequestClose={() => handleCloseModal(i, item.id)}
+                                        className="smpg-spg-modal"
+                                    >
+                                        <div className="smpg-modal-title-wrap">
+
+    <TabPanel
+        className="smpg-lang-tabs"
+        activeClass="active"
+        initialTabName={
+            activeTab[i] ?? Object.keys( smpg_local.language_list )[0]
+        }
+        tabs={
+            Object.entries( smpg_local.language_list ).map(
+                ([ langKey, langLabel ]) => ({
+                    name: langKey,
+                    title: __( langLabel, 'schema-package' ),
+                })
+            )
+        }
+        onSelect={ ( langKey ) => {
+            setActiveTab( ( prev ) => ( {
+                ...prev,
+                [ i ]: langKey,
+            } ) );
+        } }
+    >
+        { () => <></> }
+    </TabPanel>
+    
+</div>
+
+
+    {/* TAB CONTENTS */}
+    {(() => {
+    const langs            = smpg_local?.language_list;
+    const defaultLanguage  = smpg_local?.default_language;
+
+    if (!langs || typeof langs !== "object") return null;
+
+    const langKeys = Object.keys(langs);
+    if (langKeys.length === 0) return null;
+
+    // active tab
+    const currentTab = activeTab[i] || langKeys[0];
+
+    // check if current language is default
+    const isDefaultLang = currentTab === defaultLanguage;
+
+    // build propKey
+    const propKey = isDefaultLang
+        ? 'properties'
+        : `properties_${currentTab}`;
+
+    // get properties with fallback
+    const props =
+        item?.[propKey] ??
+        item?.properties ??
+        {};
+
+    return (
+        <div className="smpg-i-schema-setup">
+            {Object.entries(props).map(([j, property]) => (
+                <div key={j} className="smpg-property-fields">
+                    <ElementGenerator
+                        i={i}
+                        j={j}
+                        property={property}
+                        langKey={isDefaultLang ? null : currentTab}
+                        handlePropertyChange={handlePropertyChange}
+                        handleRemoveImage={handleRemoveImage}
+                        handleDeleteRepeater={handleDeleteRepeater}
+                        handleAddMoreRepeater={handleAddMoreRepeater}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+})()}
+
+    <div className="smpg-spg-modal-footer">
+        <Button onClick={() => handleSaveForThePost(i)} isPrimary>
+            {__('Save For The Post', 'schema-package')}
+        </Button>
+    </div>
+    
+</Modal>
+
+                                    : 
+                                    // single modal when language not available
+                                    <Modal title={`Edit ${item.text}`} shouldCloseOnClickOutside={false} onRequestClose={ () => handleCloseModal(i, item.id) } className="smpg-spg-modal"  >
                                     <div className="smpg-i-schema-setup">
                                         {
                                             Object.entries(item.properties).map(([j, property]) => {                                            
@@ -513,10 +538,14 @@ const {
                                             })
                                         }
                                     </div>
+                                    <div className="smpg-spg-modal-footer">
                                     <Button onClick={() => handleSaveForThePost(i)} isPrimary >
                                         {__('Save For The Post', 'schema-package') }                                        
                                     </Button>
+                                    </div>
                                 </Modal>
+                                }
+                                </>                                                                
                             ) }
 
                             {item.has_warning ? <span className="dashicons dashicons-warning smpg-i-warning-icon"></span> : ''}                
@@ -557,7 +586,7 @@ const {
             <div className="smpg-add-schema-select">    
             {
                 chooseSchemaModal ? 
-                <Modal title="Choose Schema Types" shouldCloseOnClickOutside={false} onRequestClose={handleChooseModalClose}>
+                <Modal className="smpg-spg-choose-modal" title="Choose Schema Types" shouldCloseOnClickOutside={false} onRequestClose={handleChooseModalClose}>
 
                  <div className="smpg-schema-list">
                         <div className="smpg-list-grid">
@@ -571,7 +600,9 @@ const {
                         </div>   
                  </div>  
 
-                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button></div>
+                 <div className="smpg-spg-modal-footer smpg-choose-ok">
+                    <Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button>
+                </div>
 
                 </Modal>: ''
             }

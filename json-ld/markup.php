@@ -58,7 +58,7 @@ function smpg_json_ld_client_side_output() {
         
         $post_id       = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0; 
         $spg_id        = isset($_POST['spg_id']) ? absint($_POST['spg_id']) : 0;    
-        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( $_POST['page_type'] ) : 'none';    
+        $page_type     = isset($_POST['page_type']) ? sanitize_text_field( wp_unslash( $_POST['page_type'] ) ) : 'none';    
         $is_home       = isset($_POST['is_home']) ? (bool)$_POST['is_home'] : 0;
         $is_front_page = isset($_POST['is_front_page']) ? (bool)$_POST['is_front_page'] : 0;
 

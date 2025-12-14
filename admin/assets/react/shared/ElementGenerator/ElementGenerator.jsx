@@ -1,27 +1,5 @@
 const { __ } = wp.i18n;
-const {
-	BaseControl,
-	Button,
-	ExternalLink,
-    Panel,
-	PanelBody,
-	PanelRow,
-	Placeholder,
-	Spinner,
-	ToggleControl,
-    SelectControl,
-    Modal,
-    ComboboxControl,
-    Tooltip
-} = wp.components;
-
-const {
-	render,
-	Component,
-	Fragment,
-    useState,
-    useEffect  
-} = wp.element;
+const {	Button,	Panel, PanelBody } = wp.components;
 
 import './ElementGenerator.css';
 

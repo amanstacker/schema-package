@@ -656,6 +656,7 @@ function smpg_get_yoast_rendered_value( $key, $post_id ) {
 		// reuse global instance if present
 		global $wpseo_replace_vars;
 		if ( ! ( $wpseo_replace_vars instanceof WPSEO_Replace_Vars ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Reason: Using WPSEO's global variable to make its compatibility.
 			$wpseo_replace_vars = new WPSEO_Replace_Vars();
 		}
 		$value = $wpseo_replace_vars->replace( $value, $post_obj );

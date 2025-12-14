@@ -92,11 +92,11 @@ require_once SMPG_PLUGIN_DIR_PATH . 'admin/includes/properties-common.php';
 /**
  * Auto-load all schema files based on mapping
  */
-foreach ( $smpg_schema_map as $schema_type => $file_name ) {
+foreach ( $smpg_schema_map as $smpg_schema_type => $smpg_file_name ) {
 
-    $file = SMPG_PLUGIN_DIR_PATH . 'admin/includes/schemas/' . $file_name;
+    $smpg_file = SMPG_PLUGIN_DIR_PATH . 'admin/includes/schemas/' . $smpg_file_name;
 
-    if ( file_exists( $file ) ) {
-        require_once $file;
+    if ( file_exists( $smpg_file ) ) {
+        require_once $smpg_file;
     }
 }

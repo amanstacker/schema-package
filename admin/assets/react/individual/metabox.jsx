@@ -5,6 +5,7 @@ const {
 	Button,		
 	ToggleControl,   
     Modal,    
+    TabPanel 
 } = wp.components;
 
 const {
@@ -30,7 +31,11 @@ const {
     const [chooseSchemaModal, setChooseSchemaModal] = useState(false);
     const [selectedSchema, setSelectedSchema]       = useState([]);
     const [dataUpdated, setdataUpdated]             = useState(false);
-    const [activeTab, setActiveTab] = useState({});
+    const [activeTab, setActiveTab] = useState({0: smpg_local.default_language });
+
+    useEffect(() => {
+        console.log(activeTab);
+    }, [activeTab]);
 
     
     const handleSchemaTurnOnOff = (i,id) => {
@@ -422,33 +427,39 @@ const {
                                 {
                                     Object.keys(smpg_local?.language_list ?? {}).length > 0  ? 
                                     // multiple modal when language available
-                                   <Modal 
-    title={
-        <div className="smpg-modal-title-wrap">
-            {/* LANGUAGE TABS IN HEADER */}
-            <div className="smpg-lang-tabs">
-                {smpg_local.language_list && 
-                    Object.entries(smpg_local.language_list).map(([langKey, langLabel]) => (
-                        <button 
-                            key={langKey}
-                            className={`smpg-tab-btn ${activeTab[i] === langKey ? 'active' : ''}`}
-                            onClick={() => setActiveTab(prev => ({ ...prev, [i]: langKey }))}
-                        >
-                            {__(langLabel, 'schema-package')}
-                        </button>
-                    ))
-                }
-            </div>
+                                   <Modal title={`Edit ${item.text}`}
+                                        shouldCloseOnClickOutside={false}
+                                        onRequestClose={() => handleCloseModal(i, item.id)}
+                                        className="smpg-spg-modal"
+                                    >
+                                        <div className="smpg-modal-title-wrap">
 
-            <hr />
-            <span>Edit {item.text}</span>
-        </div>
-    }
+    <TabPanel
+        className="smpg-lang-tabs"
+        activeClass="active"
+        initialTabName={
+            activeTab[i] ?? Object.keys( smpg_local.language_list )[0]
+        }
+        tabs={
+            Object.entries( smpg_local.language_list ).map(
+                ([ langKey, langLabel ]) => ({
+                    name: langKey,
+                    title: __( langLabel, 'schema-package' ),
+                })
+            )
+        }
+        onSelect={ ( langKey ) => {
+            setActiveTab( ( prev ) => ( {
+                ...prev,
+                [ i ]: langKey,
+            } ) );
+        } }
+    >
+        { () => <></> }
+    </TabPanel>
+    
+</div>
 
-    shouldCloseOnClickOutside={false}
-    onRequestClose={() => handleCloseModal(i, item.id)}
-    className="smpg-modal-with-tabs"
->
 
     {/* TAB CONTENTS */}
     {(() => {
@@ -497,15 +508,17 @@ const {
     );
 })()}
 
-
-    <Button onClick={() => handleSaveForThePost(i)} isPrimary>
-        {__('Save For The Post', 'schema-package')}
-    </Button>
+    <div className="smpg-spg-modal-footer">
+        <Button onClick={() => handleSaveForThePost(i)} isPrimary>
+            {__('Save For The Post', 'schema-package')}
+        </Button>
+    </div>
+    
 </Modal>
 
                                     : 
                                     // single modal when language not available
-                                    <Modal title={`Edit ${item.text}`} shouldCloseOnClickOutside={false} onRequestClose={ () => handleCloseModal(i, item.id) }>
+                                    <Modal title={`Edit ${item.text}`} shouldCloseOnClickOutside={false} onRequestClose={ () => handleCloseModal(i, item.id) } className="smpg-spg-modal"  >
                                     <div className="smpg-i-schema-setup">
                                         {
                                             Object.entries(item.properties).map(([j, property]) => {                                            
@@ -525,9 +538,11 @@ const {
                                             })
                                         }
                                     </div>
+                                    <div className="smpg-spg-modal-footer">
                                     <Button onClick={() => handleSaveForThePost(i)} isPrimary >
                                         {__('Save For The Post', 'schema-package') }                                        
                                     </Button>
+                                    </div>
                                 </Modal>
                                 }
                                 </>                                                                
@@ -571,7 +586,7 @@ const {
             <div className="smpg-add-schema-select">    
             {
                 chooseSchemaModal ? 
-                <Modal title="Choose Schema Types" shouldCloseOnClickOutside={false} onRequestClose={handleChooseModalClose}>
+                <Modal className="smpg-spg-choose-modal" title="Choose Schema Types" shouldCloseOnClickOutside={false} onRequestClose={handleChooseModalClose}>
 
                  <div className="smpg-schema-list">
                         <div className="smpg-list-grid">
@@ -585,7 +600,9 @@ const {
                         </div>   
                  </div>  
 
-                 <div className="smpg-choose-ok"><Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button></div>
+                 <div className="smpg-spg-modal-footer smpg-choose-ok">
+                    <Button isPrimary onClick={()=> getMetaData(false)}>{__('Selected', 'schema-package') }</Button>
+                </div>
 
                 </Modal>: ''
             }

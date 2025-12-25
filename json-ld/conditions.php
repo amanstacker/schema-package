@@ -175,24 +175,24 @@ function smpg_is_carousel_placement_matched( $schema_data, $page_type = null, $s
 
 		$unser_schema_data = [];
 
-		if ( isset( $schema_data['taxonomies'][0] ) ) {
-			$unser_schema_data = unserialize($schema_data['taxonomies'][0]);
+		if ( isset( $schema_data['_taxonomies'][0] ) ) {
+			$unser_schema_data = unserialize($schema_data['_taxonomies'][0]);
 		}		
 		
 		foreach ( $unser_schema_data as $tax_data ) {
 
 			if ( ( $page_type === 'category' || is_category() ) && $tax_data['taxonomy'] == 'category' && $tax_data['status'] ) {
 
-				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );		
+				$response = smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );		
 				
 
 			} else if ( ( $page_type === 'tag' || is_tag() ) && $tax_data['taxonomy'] == 'post_tag' && $tax_data['status'] ) {
 				
-				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
+				$response = smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
 
 			} else if ( is_tax( $tax_data['taxonomy'] ) && $tax_data['status'] ) {
 				
-				smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
+				$response = smpg_is_carousel_placement_logic_check( $tax_data, $spg_id );
 
 			} 						
 

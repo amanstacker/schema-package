@@ -172,12 +172,20 @@ function smpg_is_singular_placement_matched( $schema_data, $post_id ){
 function smpg_is_carousel_placement_matched( $schema_data, $page_type = null, $spg_id = null ){
 
 		$response = false;		
-
-		$unser_schema_data = [];
+		
+		$unser_schema_data = [];		
 
 		if ( isset( $schema_data['_taxonomies'][0] ) ) {
 			$unser_schema_data = unserialize($schema_data['_taxonomies'][0]);
-		}		
+		}	
+		
+		if ( is_home() ) {
+			$is_home = true;
+			if ( isset( $schema_data['_is_home'][0] ) ) {
+				$is_home = $schema_data['_is_home'][0];
+			}			
+			return $is_home;
+		}
 		
 		foreach ( $unser_schema_data as $tax_data ) {
 

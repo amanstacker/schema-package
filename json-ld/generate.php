@@ -255,41 +255,37 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
     return $json_ld;
 }
 
-function smpg_prepare_carousel_json_ld( $schema_data ) {
-    
-        global $query_string;    
-        
-        $json_ld      = [];
-        $list_element = [];    
-    
-        $i = 1;
-        $query_loop = new WP_Query( $query_string );
-        
-        if ( $query_loop->have_posts() ):
+function smpg_prepare_carousel_json_ld() {
 
-            while( $query_loop->have_posts() ): $query_loop->the_post();
-                                                                                    
-                                $list_element[]       =  [
-                                    '@type'    => 'ListItem',
-                                    'position' => $i,
-                                    'url'      => get_permalink()
-                                ];
-                                
-                $i++;
+	global $wp_query;
 
-            endwhile;
-        endif;		
-        wp_reset_postdata();
+	$json_ld      = [];
+	$list_element = [];
+	$i            = 1;
 
+	// Safety check.
+	if ( empty( $wp_query ) || ! $wp_query->have_posts() ) {
+		return [];
+	}
 
-        if ( ! empty( $list_element ) ) {
-            $json_ld['@context']           = smpg_get_context_url();
-            $json_ld['@type']              = 'ItemList';
-            $json_ld['itemListElement']    = $list_element;
-        }
-    
-        return apply_filters( 'smpg_filter_carousel_json_ld', $json_ld ); 
+	foreach ( $wp_query->posts as $post ) {
 
+		$list_element[] = [
+			'@type'    => 'ListItem',
+			'position' => $i,
+			'url'      => get_permalink( $post ),
+		];
+
+		$i++;
+	}
+
+	if ( ! empty( $list_element ) ) {
+		$json_ld['@context']        = smpg_get_context_url();
+		$json_ld['@type']           = 'ItemList';
+		$json_ld['itemListElement'] = $list_element;
+	}
+
+	return apply_filters( 'smpg_filter_carousel_json_ld', $json_ld );
 }
 
 function smpg_prepare_global_json_ld( $schema_data, $post_id ) {

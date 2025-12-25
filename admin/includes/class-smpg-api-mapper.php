@@ -558,12 +558,17 @@ class SMPG_Api_Mapper {
         $taxonomies_list  = [];               
         $saved_taxonomies = [];
         $saved_schema     = 'course';
+        $saved_is_home    = true;
         $response['post_data']      = get_post( $post_id, ARRAY_A );
         $post_meta                  = get_metadata( 'post', $post_id );   
 
         if ( isset( $post_meta['_schema_type'][0] ) ) {
           $saved_schema = $post_meta['_schema_type'][0];
-        }        
+        }
+        
+        if ( isset( $post_meta['_is_home'][0] ) ) {
+          $saved_is_home = $post_meta['_is_home'][0];
+        }
 
         if ( isset( $post_meta['_taxonomies'][0] ) && is_serialized( $post_meta['_taxonomies'][0] ) ) {
           $saved_taxonomies = unserialize($post_meta['_taxonomies'][0]);
@@ -624,6 +629,7 @@ class SMPG_Api_Mapper {
         //Taxonomies data ends here
         $meta_data['_taxonomies']    = $taxonomies_list;
         $meta_data['_schema_type']   = $saved_schema;
+        $meta_data['_is_home']       = $saved_is_home;
 
         $response['post_meta']      = $meta_data;                                               
                         

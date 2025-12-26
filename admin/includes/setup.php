@@ -625,6 +625,12 @@ function smpg_enqueue_admin_panel( $hook ) {
 			wp_localize_script( 'smpg-admin-script', 'smpg_local', $data );            
 			wp_enqueue_script( 'smpg-admin-script');
 
+			wp_set_script_translations(
+				'smpg-admin-script',
+				'schema-package',
+				SMPG_PLUGIN_DIR_PATH . 'languages'
+			);
+
 	}
 		
 }

@@ -159,6 +159,12 @@ class SMPG_Individual_Post {
             wp_localize_script( 'smpg-individual-script', 'smpg_local', $local_data );
             wp_enqueue_script( 'smpg-individual-script');
 
+            wp_set_script_translations(
+				'smpg-individual-script',
+				'schema-package',
+				SMPG_PLUGIN_DIR_PATH . 'languages'
+			);
+
     }
     
     public function enqueue_script( $hook ) {

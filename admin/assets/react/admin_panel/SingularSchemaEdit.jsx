@@ -376,7 +376,7 @@ const SingularSchemaEdit = () => {
 
     <Accordion title="Targeting" isExpand={true}>
       <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package#singular-targeting'>{__('Learn More', 'schema-package')}</a>
         </div>
       <div className="smpg-accordion-body">
     <div>

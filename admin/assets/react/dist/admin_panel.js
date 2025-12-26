@@ -270,7 +270,7 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     rel: "noopener noreferrer",
     target: "_blank",
-    href: "https://schemapackage.com/knowledge-base/"
+    href: "https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/#carousel-targeting"
   }, __('Learn More', 'schema-package'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-accordion-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -830,7 +830,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     rel: "noopener noreferrer",
     target: "_blank",
-    href: "https://schemapackage.com/knowledge-base/"
+    href: "https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package#singular-targeting"
   }, __('Learn More', 'schema-package'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-accordion-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -1471,7 +1471,15 @@ var CarouselSchema = function CarouselSchema() {
     className: "smpg-single-schema-table"
   }, postsFound > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "ui single line table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Schema Type', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Modify Date', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Status', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Action', 'schema-package')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, schemaLoop ? schemaLoop.map(function (item, i) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Schema Type', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Modify Date', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Status', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Action', 'schema-package'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    style: {
+      "float": 'right'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, __('Read Full Guide', 'schema-package')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, schemaLoop ? schemaLoop.map(function (item, i) {
     return item.post_meta._schema_type ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, extractSchemaTypeText(item.post_meta._schema_type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, item.post.post_modified), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4607,7 +4615,15 @@ var SingularSchema = function SingularSchema() {
     className: "smpg-single-schema-table"
   }, postsFound > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "ui single line table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Schema Type', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Modify Date', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Status', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Action', 'schema-package')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, schemaLoop ? schemaLoop.map(function (item, i) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Schema Type', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Modify Date', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Status', 'schema-package')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, __('Action', 'schema-package'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    style: {
+      "float": 'right'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package/",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, __('Read Full Guide', 'schema-package')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, schemaLoop ? schemaLoop.map(function (item, i) {
     return item.post_meta._schema_type ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, extractSchemaTypeText(item.post_meta._schema_type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, item.post.post_modified), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -9490,6 +9506,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.smpg-edit-close{
     display: block;
     text-align: right;
     font-weight: 600;
+}
+.smpg-single-schema-table table th,
+.smpg-single-schema-table table td {
+	width: 25%;
 }`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);

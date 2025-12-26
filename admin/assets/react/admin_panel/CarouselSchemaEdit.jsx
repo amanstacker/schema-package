@@ -264,7 +264,7 @@ const CarouselSchemaEdit = () => {
     {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
       <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/#carousel-targeting'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
                 <Divider horizontal>{__("Target On", "schema-package")}</Divider>

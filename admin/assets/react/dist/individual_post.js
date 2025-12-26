@@ -1789,7 +1789,14 @@ var Metabox = function Metabox() {
   }, [dataUpdated]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
     className: "smpg-description"
-  }, __('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package'))), postMeta.length > 0 ? /*#__PURE__*/React.createElement("div", {
+  }, __('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package'), /*#__PURE__*/React.createElement("a", {
+    style: {
+      marginLeft: "2px"
+    },
+    className: "smpg-learn-more",
+    target: "_blank",
+    href: "https://schemapackage.com/knowledge-base/"
+  }, __('Learn More', 'schema-package')))), postMeta.length > 0 ? /*#__PURE__*/React.createElement("div", {
     className: "smpg-individual-schema-list"
   }, /*#__PURE__*/React.createElement("ul", null, postMeta.map(function (item, i) {
     var _smpg_local$language_, _smpg_local, _activeTab$i;
@@ -1872,7 +1879,17 @@ var Metabox = function Metabox() {
         return handleSaveForThePost(i);
       },
       isPrimary: true
-    }, __('Save For The Post', 'schema-package')))) :
+    }, __('Save For The Post', 'schema-package')), /*#__PURE__*/React.createElement("a", {
+      style: {
+        "float": "right",
+        fontSize: '15px',
+        fontWeight: 600,
+        textDecoration: "none"
+      },
+      className: "smpg-learn-more",
+      target: "_blank",
+      href: "https://schemapackage.com/knowledge-base/"
+    }, __('Read Full Guide', 'schema-package')))) :
     /*#__PURE__*/
     // single modal when language not available
     React.createElement(Modal, {

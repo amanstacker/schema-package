@@ -413,7 +413,10 @@ const {
     return (
         <>                    
         <div>
-        <p className="smpg-description">{__('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package') }</p>
+        <p className="smpg-description">
+            {__('Include schema types to enhance structured data, enabling rich results in search engine listings.', 'schema-package') }
+                <a style={{marginLeft:"2px"}} className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
+        </p>
         </div>
         {(postMeta.length > 0) ?
         <div className="smpg-individual-schema-list">               
@@ -512,6 +515,7 @@ const {
         <Button onClick={() => handleSaveForThePost(i)} isPrimary>
             {__('Save For The Post', 'schema-package')}
         </Button>
+        <a style={{float:"right", fontSize: '15px', fontWeight:600, textDecoration:"none"}} className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Read Full Guide', 'schema-package')}</a>
     </div>
     
 </Modal>

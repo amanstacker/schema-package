@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.26
+Stable tag: 1.0.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -543,6 +543,13 @@ To explore all the advanced features and benefits included in the Schema Package
 Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
 
 == Changelog ==
+
+= 1.0.27 =
+
+* Fixed: Carousel schema was not working.
+* Fixed: Typo Fixed in readme
+* Added: Pot file generatoed for traslation support.
+* Added: Docs links are added on more places
 
 = 1.0.26 =
 

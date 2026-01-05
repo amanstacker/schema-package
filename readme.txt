@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.26
+Stable tag: 1.0.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,9 +34,9 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>Schema Package Generator Control Center</strong>: Enable SPG based on selected post types, taxonomies or author profile.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
-* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may confict and throw error in schema validator tool. Using Schema Package keep required schema markup.
+* <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may conflict and throw error in schema validator tool. Using Schema Package keep required schema markup.
 * <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
-* <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. Its a single page dashboard which is very fast in navigation.
+* <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. It’s a single-page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
 * <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
@@ -49,7 +49,7 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Skip Schema Markup on Noindex</strong>: Prevents schema markup (JSON-LD) from being added to pages marked as noindex by SEO plugins, ensuring cleaner indexing and better SEO compliance.
 * <strong>RDFa Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy RDFa injected by themes or plugins, ensuring your markup stays clean and consistent.
 * <strong>Default Data Option</strong>: Set global fallback values for schema fields to prevent errors and save time when dynamic data is missing.
-* <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Pacakge plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
+* <strong>Delete Data on Uninstall</strong>: Option to remove all Schema Package plugin data from the database when Schema Package plugin is uninstalled, ensuring a clean removal.
 * <strong>Multisite Support</strong>: Schema Package fully supports WordPress Multisite networks, allowing you to manage and deploy schema markup across all sites effortlessly.
 * <strong>Fast Help & Support</strong>: If you are unable to find any features related to schema package or found any bug. Please contact us, Schema Package team would try to solve it quickly.
 
@@ -347,7 +347,7 @@ Schema Package uses the following external services:
 
 #### 1. Ryviu API
 
-Schema Package connects to Ryviu API to fetch product reviews. Its needed to generate Reviews schema markup for WooCommerce product.
+Schema Package connects to Ryviu API to fetch product reviews. It is needed to generate Reviews schema markup for WooCommerce product.
 
 It sends the user's site url when Ryviu option is enabled inside automation metabox and "Ryviu – Product Reviews for WooCommerce" plugin is active.
 This service is provided by "Ryviu": [terms of use](https://www.ryviu.com/terms-and-conditions), [privacy policy](https://www.ryviu.com/privacy-policy).
@@ -355,7 +355,7 @@ This service is provided by "Ryviu": [terms of use](https://www.ryviu.com/terms-
 
 #### 2. YouTube API
 
-Schema Package connects to YouTube API to get video details. Its needed to generate VideoObject schema markup.
+Schema Package connects to YouTube API to get video details. It is needed to generate VideoObject schema markup.
 
 It sends youtube video url from posts when VideoObject schema is selected.
 This service is provided by "YouTube Inc": [terms of use](https://www.youtube.com/t/terms), [privacy policy](https://www.youtube.com/about/policies/).
@@ -363,7 +363,7 @@ This service is provided by "YouTube Inc": [terms of use](https://www.youtube.co
 
 #### 3. Google API
 
-Schema Package connects to Google API to get video details. Its needed to generate VideoObject schema markup.
+Schema Package connects to Google API to get video details. It is needed to generate VideoObject schema markup.
 
 It sends youtube video vid got from youtube api, api key and part ( 'contentDetails, snippet, statistics' ) when VideoObject schema is selected.
 This service is provided by "Google Inc": [terms of use](https://developers.google.com/terms), [privacy policy](https://developers.google.com/terms/api-services-user-data-policy).
@@ -371,7 +371,7 @@ This service is provided by "Google Inc": [terms of use](https://developers.goog
 
 #### 4. Yotpo API
 
-Schema Package connects to Yotpo API to fetch product reviews. Its needed to generate Reviews schema markup for WooCommerce product.
+Schema Package connects to Yotpo API to fetch product reviews. It is needed to generate Reviews schema markup for WooCommerce product.
 
 It sends product id, api key when Yotpo option is enabled inside automation metabox and "Yotpo: Product & Photo Reviews for WooCommerce" plugin is active. API gets store url and api key from Yotpo settings option
 This service is provided by "Yotpo": [terms of use](https://www.yotpo.com/terms-of-service/), [privacy policy](https://www.yotpo.com/privacy-policy/).
@@ -543,6 +543,13 @@ To explore all the advanced features and benefits included in the Schema Package
 Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
 
 == Changelog ==
+
+= 1.0.27 =
+
+* Fixed: Carousel schema was not working.
+* Fixed: Typo Fixed in readme
+* Added: Pot file generatoed for traslation support.
+* Added: Docs links are added on more places
 
 = 1.0.26 =
 

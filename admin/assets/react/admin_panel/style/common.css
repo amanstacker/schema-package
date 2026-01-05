@@ -99,3 +99,7 @@
     text-align: right;
     font-weight: 600;
 }
+.smpg-single-schema-table table th,
+.smpg-single-schema-table table td {
+	width: 25%;
+}

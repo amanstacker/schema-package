@@ -1,0 +1,1013 @@
+# Copyright (C) 2025 amanstacker
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Schema Package - Structured Data & Rich Snippets Tool for SEO 1.0.26\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/schema-package\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-12-26T14:00:03+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: schema-package\n"
+
+#. Plugin Name of the plugin
+#: schema-package.php
+msgid "Schema Package - Structured Data & Rich Snippets Tool for SEO"
+msgstr ""
+
+#. Description of the plugin
+#: schema-package.php
+msgid "Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results."
+msgstr ""
+
+#. Author of the plugin
+#: schema-package.php
+msgid "amanstacker"
+msgstr ""
+
+#. Author URI of the plugin
+#: schema-package.php
+msgid "https://profiles.wordpress.org/amanstacker/"
+msgstr ""
+
+#: admin/feedback/feedback.php:48
+msgid "Deactivating Schema Package"
+msgstr ""
+
+#: admin/feedback/feedback.php:55
+msgid "Help us improve — why are you deactivating the plugin?"
+msgstr ""
+
+#: admin/feedback/feedback.php:59
+msgid "The deactivation is temporary"
+msgstr ""
+
+#: admin/feedback/feedback.php:63
+msgid "No longer using schema markup"
+msgstr ""
+
+#: admin/feedback/feedback.php:67
+msgid "Needed feature not available"
+msgstr ""
+
+#: admin/feedback/feedback.php:71
+msgid "Facing Technical Difficulties"
+msgstr ""
+
+#: admin/feedback/feedback.php:75
+msgid "Switched to a different plugin"
+msgstr ""
+
+#: admin/feedback/feedback.php:79
+msgid "Other reason"
+msgstr ""
+
+#: admin/feedback/feedback.php:83
+msgid "Kindly describe the feature you found missing."
+msgstr ""
+
+#: admin/feedback/feedback.php:84
+msgid "Kindly provide details about the difficulties you're facing."
+msgstr ""
+
+#: admin/feedback/feedback.php:85
+msgid "If you don't mind, name the plugin you switched to."
+msgstr ""
+
+#: admin/feedback/feedback.php:86
+msgid "Kindly provide a brief explanation."
+msgstr ""
+
+#: admin/feedback/feedback.php:95
+msgid "Submit & Deactivate"
+msgstr ""
+
+#: admin/feedback/feedback.php:96
+msgid "Skip & Deactivate"
+msgstr ""
+
+#: admin/feedback/feedback.php:97
+msgid "Don't Deactivate"
+msgstr ""
+
+#: admin/feedback/feedback.php:124
+msgid "Nonce Not Verified"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:67
+#: admin/includes/class-smpg-api-action.php:88
+msgid "data not found"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:163
+msgid "Reset Successfully"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:202
+msgid "Please provide message and email"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:313
+#: admin/includes/class-smpg-api-action.php:334
+#: admin/includes/class-smpg-api-action.php:350
+msgid "Schema type is required"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:380
+msgid "filter required"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:545
+msgid "Data has been saved successfully"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:562
+msgid "Please upload a valid .json file"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:567
+msgid "Please upload a file to import"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:572
+msgid "file uploaded successfully"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:574
+msgid "File not found"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:582
+msgid "Settings has been saved successfully"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:619
+msgid "Saved Successfully"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:623
+#: admin/includes/class-smpg-api-action.php:670
+msgid "Post id is missing"
+msgstr ""
+
+#: admin/includes/class-smpg-api-action.php:691
+msgid "Properties not found"
+msgstr ""
+
+#: admin/includes/class-smpg-api-mapper.php:392
+msgid "Super Admin"
+msgstr ""
+
+#: admin/includes/class-smpg-individual-post.php:82
+msgid "Schema Package Generator"
+msgstr ""
+
+#: admin/includes/setup.php:567
+#: admin/includes/setup.php:568
+msgid "Schema Package"
+msgstr ""
+
+#: admin/includes/setup.php:599
+msgid "Thanks for trusting Schema Package! Your support is what keeps this project alive."
+msgstr ""
+
+#: admin/includes/setup.php:599
+msgid "Click here to inspire us with a review."
+msgstr ""
+
+#: admin/includes/setup.php:600
+msgid "Schema Package Version"
+msgstr ""
+
+#: admin/includes/setup.php:699
+msgid "Site Title"
+msgstr ""
+
+#: admin/includes/setup.php:700
+msgid "Tagline"
+msgstr ""
+
+#: admin/includes/setup.php:701
+msgid "Site URL"
+msgstr ""
+
+#: admin/includes/setup.php:702
+msgid "Post Title"
+msgstr ""
+
+#: admin/includes/setup.php:703
+msgid "Content"
+msgstr ""
+
+#: admin/includes/setup.php:704
+msgid "Category"
+msgstr ""
+
+#: admin/includes/setup.php:705
+msgid "Excerpt"
+msgstr ""
+
+#: admin/includes/setup.php:706
+msgid "Post Summary"
+msgstr ""
+
+#: admin/includes/setup.php:707
+msgid "Permalink"
+msgstr ""
+
+#: admin/includes/setup.php:708
+msgid "Author Name"
+msgstr ""
+
+#: admin/includes/setup.php:709
+msgid "Author First Name"
+msgstr ""
+
+#: admin/includes/setup.php:710
+msgid "Author Last Name"
+msgstr ""
+
+#: admin/includes/setup.php:711
+msgid "Publish Date"
+msgstr ""
+
+#: admin/includes/setup.php:712
+msgid "Last Modify Date"
+msgstr ""
+
+#: admin/includes/setup.php:713
+msgid "Featured Image"
+msgstr ""
+
+#: admin/includes/setup.php:714
+msgid "Author Image"
+msgstr ""
+
+#: admin/includes/setup.php:715
+msgid "Logo Image"
+msgstr ""
+
+#: admin/includes/setup.php:716
+msgid "Taxonomy Term"
+msgstr ""
+
+#: admin/includes/setup.php:717
+msgid "Custom Text"
+msgstr ""
+
+#: admin/includes/setup.php:718
+msgid "Custom Field"
+msgstr ""
+
+#: admin/includes/setup.php:719
+msgid "Custom Image"
+msgstr ""
+
+#: admin/includes/setup.php:720
+msgid "No Value"
+msgstr ""
+
+#: admin/includes/setup.php:725
+msgid "Advanced Custom Field"
+msgstr ""
+
+#: admin/includes/setup.php:728
+msgid "Secure Custom Field"
+msgstr ""
+
+#: json-ld/markup.php:97
+msgid "Schema Package JSON-LD"
+msgstr ""
+
+#: schema-package.php:58
+#: admin/assets/react/dist/admin_panel.js:1213
+msgid "Settings"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:255
+#: admin/assets/react/dist/admin_panel.js:274
+#: admin/assets/react/dist/admin_panel.js:330
+#: admin/assets/react/dist/admin_panel.js:807
+#: admin/assets/react/dist/admin_panel.js:834
+#: admin/assets/react/dist/admin_panel.js:1036
+#: admin/assets/react/dist/admin_panel.js:1049
+#: admin/assets/react/dist/admin_panel.js:1076
+#: admin/assets/react/dist/admin_panel.js:2983
+#: admin/assets/react/dist/admin_panel.js:3019
+#: admin/assets/react/dist/admin_panel.js:3038
+#: admin/assets/react/dist/admin_panel.js:3062
+#: admin/assets/react/dist/admin_panel.js:3086
+#: admin/assets/react/dist/admin_panel.js:3110
+msgid "Learn More"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:258
+#: admin/assets/react/dist/admin_panel.js:810
+msgid "Select Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:278
+#: admin/assets/react/dist/admin_panel.js:838
+msgid "Target On"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:282
+msgid "Home Page"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:292
+#: admin/assets/react/dist/admin_panel.js:318
+#: admin/assets/react/dist/admin_panel.js:861
+#: admin/assets/react/dist/admin_panel.js:882
+#: admin/assets/react/dist/admin_panel.js:929
+#: admin/assets/react/dist/admin_panel.js:957
+#: admin/assets/react/dist/admin_panel.js:978
+#: admin/assets/react/dist/admin_panel.js:1025
+msgid "OR"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:342
+#: admin/assets/react/dist/admin_panel.js:1088
+msgid "None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:348
+#: admin/assets/react/dist/admin_panel.js:1094
+msgid "Automation List"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:348
+#: admin/assets/react/dist/admin_panel.js:1094
+msgid "Can't find your plugin in the list? Request automation from us!"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:354
+#: admin/assets/react/dist/admin_panel.js:1100
+msgid "Feature Request"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:359
+#: admin/assets/react/dist/admin_panel.js:1105
+#: admin/assets/react/dist/admin_panel.js:3115
+#: admin/assets/react/dist/admin_panel.js:4275
+msgid "Save"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:840
+#: admin/assets/react/dist/admin_panel.js:936
+msgid "Post Types"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:850
+msgid "Search For Post Type"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:861
+#: admin/assets/react/dist/admin_panel.js:957
+msgid "Posts"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:871
+#: admin/assets/react/dist/admin_panel.js:967
+msgid "Search For Post"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:882
+#: admin/assets/react/dist/admin_panel.js:978
+msgid "Pages"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:908
+#: admin/assets/react/dist/admin_panel.js:1004
+msgid "Languages"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:934
+msgid "Target Off"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:988
+msgid "Search For Page"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1014
+msgid "Search For Language"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1032
+msgid "No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1054
+msgid "Comments"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1062
+msgid "Speakable"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1204
+msgid "Singular Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1207
+msgid "Carousel Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1210
+msgid "Misc Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1221
+msgid "Upgrade to Premium"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1449
+#: admin/assets/react/dist/admin_panel.js:4593
+msgid "Delete Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1451
+#: admin/assets/react/dist/admin_panel.js:4595
+msgid "Are you sure you want to delete schema ?"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1456
+#: admin/assets/react/dist/admin_panel.js:4600
+#: admin/assets/react/dist/individual_post.js:1926
+msgid "No"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1459
+#: admin/assets/react/dist/admin_panel.js:4603
+#: admin/assets/react/dist/individual_post.js:1921
+msgid "Yes"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1470
+#: admin/assets/react/dist/admin_panel.js:4614
+msgid "Add Schema"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1474
+#: admin/assets/react/dist/admin_panel.js:4618
+msgid "Schema Type"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1474
+#: admin/assets/react/dist/admin_panel.js:4618
+msgid "Modify Date"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1474
+#: admin/assets/react/dist/admin_panel.js:4618
+msgid "Status"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1474
+#: admin/assets/react/dist/admin_panel.js:4618
+msgid "Action"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1482
+#: admin/assets/react/dist/admin_panel.js:3715
+#: admin/assets/react/dist/admin_panel.js:3810
+#: admin/assets/react/dist/admin_panel.js:3897
+#: admin/assets/react/dist/admin_panel.js:3935
+#: admin/assets/react/dist/admin_panel.js:4098
+#: admin/assets/react/dist/admin_panel.js:4178
+#: admin/assets/react/dist/admin_panel.js:4220
+#: admin/assets/react/dist/admin_panel.js:4626
+msgid "Read Full Guide"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1514
+#: admin/assets/react/dist/admin_panel.js:4658
+msgid "You have not configured any schema types. Please add one or more schemas to continue."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1808
+msgid "Activate Your License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1808
+msgid "Enter your license key to unlock premium features and updates."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1814
+msgid "Enter License Key"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1827
+msgid "Activate License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1841
+msgid "Unlock premium features"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1844
+msgid "Get automatic updates"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1847
+msgid "Access priority support"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1851
+msgid "Need a license?"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1855
+msgid "Get One Here"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1855
+msgid "Having trouble?"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1859
+msgid "Contact Support"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1980
+msgid "License Information"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:1987
+msgid "License Key:"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2020
+msgid "Status:"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2031
+msgid "Expiry Date:"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2040
+msgid "Account Email:"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2049
+msgid "Left Activation Limit:"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2056
+msgid "Your license key is active!"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2056
+msgid "You are receiving updates and priority support."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2071
+msgid "Deactivate License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2082
+msgid "Refresh License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2091
+msgid "Renew License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2094
+msgid "Confirm Deactivation"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2094
+msgid "Are you sure you want to deactivate your license?"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2099
+msgid "Cancel"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2109
+msgid "Deactivate"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2574
+msgid "Select or Upload an Image"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2576
+msgid "Use this image"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2594
+msgid "Mapping"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2603
+msgid "Schema Properties"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2609
+msgid "Post Meta Fields"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2615
+msgid "Custom Meta Fields"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2707
+msgid "Change Image"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2707
+msgid "Upload Image"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2966
+msgid "Website"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2974
+msgid "Helps search engines understand the content of your site. It appears on homepage only."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2987
+msgid "Sitelinks Search Box"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:2995
+msgid "A sitelinks search box is a quick way for people to search your site or app immediately on the search results page."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3002
+msgid "Breadcrumbs"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3010
+msgid "A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3021
+msgid "Profile Page"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3029
+msgid "Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3038
+msgid "Site Navigation Element"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3041
+msgid "Search for Menus"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3053
+msgid "Helps search engines understand the structure of your site's navigation menus and how different pages are connected."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3062
+msgid "About Pages"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3065
+#: admin/assets/react/dist/admin_panel.js:3089
+msgid "Search for Page"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3077
+msgid "Helps search engines understand the content and purpose of an \"About Us\" page on a website."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3086
+msgid "Contact Pages"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3101
+msgid "Helps search engines understand the content and purpose of an \"Contact Us\" page on a website."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3118
+msgid "Loading"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3215
+msgid "General"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3220
+msgid "Advanced"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3225
+msgid "Manage Conflict"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3230
+msgid "Compatibility"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3235
+msgid "Default Data"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3240
+msgid "Tools"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3245
+msgid "License"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3250
+msgid "Help & Support"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3723
+msgid "Minified JSON-LD"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3731
+msgid "Remove unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3738
+msgid "Escaped Unicode JSON-LD"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3746
+msgid "Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially for special or multilingual characters."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3753
+msgid "Clean MicroData"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3761
+msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3768
+msgid "Clean RDFA Data"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3776
+msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3783
+msgid "ImageObject"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3791
+msgid "By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3816
+msgid "JSON-LD Render Method"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3833
+msgid "Choose how Schema Package should render schema markup ( JSON-LD ) on your site."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3840
+msgid "Multiple Size Images"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3848
+msgid "Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations. This will create extra images and may increase your upload folder size, so enable it only if you’re okay with that."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3855
+msgid "Dynamic Placeholders"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3863
+msgid "Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3870
+msgid "JSON-LD in Rest API"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3878
+msgid "Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3921
+msgid "No Conflicts Detected"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3921
+msgid "This plugin does not conflict with any other installed plugins."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3941
+msgid "SPG for Post Types"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3952
+msgid "Search For Post Types"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3963
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for post type pages."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3968
+msgid "SPG for Taxonomies"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3979
+msgid "Search For Taxonomies"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3990
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for taxonomy archive pages."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:3997
+msgid "SPG for Author"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4005
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for the author’s profile page."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4010
+msgid "Export Data "
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4015
+msgid "Export"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4018
+msgid "It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4023
+msgid "Import Data"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4043
+msgid "Choose a file..."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4049
+msgid "Choose"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4064
+msgid "Restore your data back from previous imported file"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4071
+msgid "Delete Data on Uninstall"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4079
+msgid "It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4106
+msgid "Yoast SEO"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4114
+msgid "Automatically pull schema-related values (title, description, focus keyword, etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema Package will use them instead of WordPress defaults."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4121
+msgid "Rank Math SEO"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4129
+msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4136
+msgid "All in One SEO"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4144
+msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from All in One SEO settings. If All in One SEO values are available, Schema Package will prioritize them over WordPress defaults."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4151
+msgid "WPGraphQL"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4159
+msgid "Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4184
+msgid "Logo"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4190
+msgid "Logo size must be 160*50 or 600*60"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4195
+msgid "Image"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4201
+msgid "When a post does not have featured image, It will be added to Json-Ld image field to remove warning from google testing tool"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4230
+msgid "Reach Out via Email"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4235
+msgid "Your Email"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4242
+msgid "Your email"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4249
+msgid "Your Query"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4254
+msgid "Enter your query here..."
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4260
+msgid "Send"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4262
+msgid "Loadingqq"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4295
+msgid "Elevate with Premium Features!"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4306
+msgid "WooCommerce Variable Product Automation"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4314
+msgid "RealEstate Schema Types & Automation"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4322
+msgid "Healthcare Schema Types & Automation"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4330
+msgid "Carousel Schema Details Page List"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4338
+msgid "Multilinugal Schema Markup Support"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4346
+msgid "Advanced ACF/SCF Mapping"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4354
+msgid "Schema Markup Setup & Error Clean Up"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4362
+msgid "24/7 Priority Email Support"
+msgstr ""
+
+#: admin/assets/react/dist/admin_panel.js:4370
+msgid "Premium Features on Demand"
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1792
+msgid "Include schema types to enhance structured data, enabling rich results in search engine listings."
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1875
+#: admin/assets/react/dist/individual_post.js:1910
+msgid "Save For The Post"
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1916
+msgid "Delete ?"
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1978
+msgid "Selected"
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1981
+msgid "Choose Schema Types"
+msgstr ""

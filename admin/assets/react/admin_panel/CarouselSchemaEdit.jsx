@@ -34,20 +34,26 @@ const CarouselSchemaEdit = () => {
       _current_status          : true,
       _schema_type             : 'course',                                       
       _automation_with         : [],
-      _taxonomies              : []
+      _taxonomies              : [],
+      _is_home                 : true,
     }            
   );
   
   const handleFormChange = e => {
 
-    let { name, value, type, id } = e.target;
+    let { value, type, id } = e.target;
 
     if( type === "checkbox" ){
       value = e.target.checked;
     }
     
     let clonedata = {...postMeta};   
-    clonedata._taxonomies[id].status = value    
+
+    if( id === "is_home" ){
+      clonedata._is_home = value;    
+    }else{
+      clonedata._taxonomies[id].status = value;    
+    }    
     setPostMeta(clonedata);
             
   }  
@@ -258,13 +264,24 @@ const CarouselSchemaEdit = () => {
     {postMeta._taxonomies ?
     <Accordion title="Targeting" isExpand={true}>
       <div className="smpg-learn-more-acc">
-            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
+            <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/#carousel-targeting'>{__('Learn More', 'schema-package')}</a>
         </div>
         <div className="smpg-accordion-body">
                 <Divider horizontal>{__("Target On", "schema-package")}</Divider>
 
                 <table className="smpg-placement-table">
                   <tbody>                    
+                  <tr key="is_home">
+                        <td><Label>{__("Home Page", "schema-package")}</Label></td>
+                        <td>
+                          <div className="ui fitted toggle checkbox">
+                          <input id="is_home" type="checkbox" name="is_home" checked={postMeta._is_home} onChange={handleFormChange} />
+                          <label></label>
+                          </div>                         
+                        </td>     
+                        <td></td>                   
+                        <td className='smpg-placement-or'><span>{__("OR", "schema-package")}</span></td>
+                        </tr>
                   {
                     postMeta._taxonomies.map((item, i) => {
                       return(
@@ -294,7 +311,7 @@ const CarouselSchemaEdit = () => {
                             options={item.options}
                           />                                          
                         </td>
-                        <td className='smpg-placement-or'>{(i+1) < postMeta._taxonomies.length ? <span>OR</span> : ''}</td>
+                        <td className='smpg-placement-or'>{(i+1) < postMeta._taxonomies.length ? <span>{__("OR", "schema-package")}</span> : ''}</td>
                         </tr>
                       )
                     })

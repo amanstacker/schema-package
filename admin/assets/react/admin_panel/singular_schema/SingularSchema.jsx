@@ -177,7 +177,19 @@ const SingularSchema = () => {
               <th>{__('Schema Type', 'schema-package') }</th>
               <th>{__('Modify Date', 'schema-package') }</th>      
               <th>{__('Status', 'schema-package') }</th>
-              <th>{__('Action', 'schema-package') }</th>
+              <th>
+                {__('Action', 'schema-package') } 
+                <span style={{ float: 'right' }}>
+                <a
+                  href="https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {__('Read Full Guide', 'schema-package')}    
+                </a>
+                </span>
+                  
+              </th>
             </tr>
           </thead>  
           <tbody >

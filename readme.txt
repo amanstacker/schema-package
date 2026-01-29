@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.27
+Stable tag: 1.0.28
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,7 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 * <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. It’s a single-page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
+* <strong>Subscription & Paywalled Content</strong>: Add structured data for subscription-based or paywalled content to help search engines understand access restrictions.
 * <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>JSON-LD Render Method</strong>: Controls how JSON-LD schema markup is injected into your site (e.g., server-side rendering vs. client-side injection).
@@ -544,6 +545,12 @@ To explore all the advanced features and benefits included in the Schema Package
 Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
 
 == Changelog ==
+
+= 1.0.28 =
+
+* Added: Schema Markup for Subscription & Paywalled Content
+* Added: CreativeWork Schema
+* Fixed: Minor improvements
 
 = 1.0.27 =
 

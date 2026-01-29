@@ -1991,6 +1991,37 @@ function smpg_get_gutenberg_block_data($block){
     
 }
 
+function smpg_map_paywalled_selectors( $mapped_value ){
+
+	$has_part = [];
+
+	if( $mapped_value ) {
+
+		$exploded = explode(',', $mapped_value);
+		
+		if( $exploded ) {			
+
+			foreach ( $exploded as $value ) {
+
+				if( $value ){
+
+					$has_part[] = [
+						'@type'               => 'WebPageElement',
+						'isAccessibleForFree' => 'https://schema.org/False',
+						'cssSelector'         => $value,
+					];
+
+				}
+				
+			}			
+			
+		}
+		
+	}
+
+	return $has_part;
+
+}
 
 function smpg_get_paywalled_json_ld( $json_ld, $properties ){
 

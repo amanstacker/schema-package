@@ -166,6 +166,12 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                             case 'id':
                                 $json_ld['@id'] = $mapped_value;
                                 break;
+                            case 'isPaywalled':
+                                $json_ld['isAccessibleForFree'] = $mapped_value;
+                            break;
+                            case 'paywalledSelectors':                                
+                                $json_ld['hasPart'] = smpg_map_paywalled_selectors( $mapped_value );                                
+                            break;
 
                             default:
                                 $json_ld[ $key ] = $mapped_value;

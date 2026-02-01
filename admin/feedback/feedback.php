@@ -81,7 +81,7 @@ function smpg_deactivation_feedback_modal() {
         </ul>
         <p class="smpg-feedback-note">
             <strong><?php esc_html_e('Heads up: ', 'schema-package'); ?></strong>
-            <?php esc_html_e( 'By Clicking "Submit & Deactivate" will email your feedback to the developer. No site data is collected. Click "Skip & Deactivate" to deactivate without sending feedback.', 'schema-package' ); ?>    
+            <?php esc_html_e( 'Clicking "Submit & Deactivate" will email your feedback to the developer. No site data is collected. Click "Skip & Deactivate" to deactivate without sending feedback.', 'schema-package' ); ?>    
         </p>
 
 	    <div class="smpg-reason-details">

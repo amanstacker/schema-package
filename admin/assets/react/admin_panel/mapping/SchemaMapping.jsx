@@ -189,13 +189,13 @@ const SchemaMapping = ({ schemaProperties, mappedPropertiesKey, mappedProperties
             </Label>
           </Grid.Column>
           <Grid.Column textAlign="center">
-            <Label as="a" color="blue" ribbon>
-              {__("Post Meta Fields", "schema-package")}
+            <Label as="a" color="blue" ribbon style={{ marginLeft: "15px" }}>
+              {__("Source / Value Selector", "schema-package")}
             </Label>
           </Grid.Column>
           <Grid.Column textAlign="center">
-            <Label as="a" color="blue" ribbon>
-              {__("Custom Meta Fields", "schema-package")}
+            <Label as="a" color="blue" ribbon style={{ marginLeft: "9px" }}>
+              {__("Fields / Value Selector", "schema-package")}
             </Label>
           </Grid.Column>
         </Grid.Row>

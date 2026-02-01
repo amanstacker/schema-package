@@ -38,6 +38,14 @@ msgstr ""
 msgid "Deactivating Schema Package"
 msgstr ""
 
+#: admin/feedback/feedback.php:83
+msgid "Heads up: "
+msgstr ""
+
+#: admin/feedback/feedback.php:84
+msgid "Clicking \"Submit & Deactivate\" will email your feedback to the developer. No site data is collected. Click \"Skip & Deactivate\" to deactivate without sending feedback."
+msgstr ""
+
 #: admin/feedback/feedback.php:55
 msgid "Help us improve — why are you deactivating the plugin?"
 msgstr ""
@@ -611,11 +619,11 @@ msgid "Schema Properties"
 msgstr ""
 
 #: admin/assets/react/dist/admin_panel.js:2609
-msgid "Post Meta Fields"
+msgid "Source / Value Selector"
 msgstr ""
 
 #: admin/assets/react/dist/admin_panel.js:2615
-msgid "Custom Meta Fields"
+msgid "Fields / Value Selector"
 msgstr ""
 
 #: admin/assets/react/dist/admin_panel.js:2707

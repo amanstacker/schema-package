@@ -187,11 +187,6 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     });
   };
   var handlePlacementChange = function handlePlacementChange(e, data) {
-    // let data_id = data.data_id;      
-    // let copydata = {...postMeta};
-    // copydata._taxonomies[data_id].value = data.value;
-    // setPostMeta(copydata); 
-
     setPostMeta(function (prev) {
       return _objectSpread(_objectSpread({}, prev), {}, {
         _taxonomies: prev._taxonomies.map(function (tax, index) {

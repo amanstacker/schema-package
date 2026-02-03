@@ -163,12 +163,7 @@ const CarouselSchemaEdit = () => {
       }));
   }
   const handlePlacementChange = (e, data) => {
-    
-      // let data_id = data.data_id;      
-      // let copydata = {...postMeta};
-      // copydata._taxonomies[data_id].value = data.value;
-      // setPostMeta(copydata); 
-      
+                
       setPostMeta(prev => ({
         ...prev,
         _taxonomies: prev._taxonomies.map((tax, index) =>

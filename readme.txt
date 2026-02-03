@@ -69,7 +69,7 @@ Take your schema & structured data to the next level with **Schema Package Premi
 * WooCommerce Variable Product Automation
 * RealEstate Schema Types & Automation
 * Healthcare Schema Types & Automation
-* Carousel Schema Details Page List
+* Carousel Schema Single, all-in-one-page list
 * Multilingual Schema Markup Support
 * Advanced ACF/SCF Mapping
 * Schema Markup Setup & Error Clean Up

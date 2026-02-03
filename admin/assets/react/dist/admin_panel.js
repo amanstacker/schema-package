@@ -68,6 +68,10 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     _useState6 = _slicedToArray(_useState5, 2),
     automationList = _useState6[0],
     setAutomationList = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isSchemaDataLoaded = _useState8[0],
+    setIsSchemaDataLoaded = _useState8[1];
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(function (state, newState) {
       return _objectSpread(_objectSpread({}, state), newState);
     }, {
@@ -79,9 +83,13 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     _useReducer2 = _slicedToArray(_useReducer, 2),
     postData = _useReducer2[0],
     setPostData = _useReducer2[1];
-  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(function (state, newState) {
-      return _objectSpread(_objectSpread({}, state), newState);
-    }, {
+  var postMetaReducer = function postMetaReducer(state, newState) {
+    if (typeof newState === "function") {
+      return _objectSpread(_objectSpread({}, state), newState(state)); // Handles function-based updates
+    }
+    return _objectSpread(_objectSpread({}, state), newState);
+  };
+  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(postMetaReducer, {
       _current_status: true,
       _schema_type: 'course',
       _automation_with: [],
@@ -99,13 +107,20 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     if (type === "checkbox") {
       value = e.target.checked;
     }
-    var clonedata = _objectSpread({}, postMeta);
-    if (id === "is_home") {
-      clonedata._is_home = value;
-    } else {
-      clonedata._taxonomies[id].status = value;
-    }
-    setPostMeta(clonedata);
+    setPostMeta(function (prev) {
+      if (id === 'is_home') {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          _is_home: value
+        });
+      }
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        _taxonomies: prev._taxonomies.map(function (tax, index) {
+          return index == id ? _objectSpread(_objectSpread({}, tax), {}, {
+            status: value
+          }) : tax;
+        })
+      });
+    });
   };
   var getSchemaData = function getSchemaData() {
     var post_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -121,6 +136,7 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
       setMainSpinner(false);
       setPostData(result.post_data);
       setPostMeta(result.post_meta);
+      setIsSchemaDataLoaded(true);
     }, function (error) {});
   };
   var handleSaveFormData = function handleSaveFormData() {
@@ -164,15 +180,27 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     }, function (error) {});
   };
   var handleSchemaTypeChange = function handleSchemaTypeChange(e, data) {
-    setPostMeta({
-      _schema_type: data.value
+    setPostMeta(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        _schema_type: data.value
+      });
     });
   };
   var handlePlacementChange = function handlePlacementChange(e, data) {
-    var data_id = data.data_id;
-    var copydata = _objectSpread({}, postMeta);
-    copydata._taxonomies[data_id].value = data.value;
-    setPostMeta(copydata);
+    // let data_id = data.data_id;      
+    // let copydata = {...postMeta};
+    // copydata._taxonomies[data_id].value = data.value;
+    // setPostMeta(copydata); 
+
+    setPostMeta(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        _taxonomies: prev._taxonomies.map(function (tax, index) {
+          return index === data.data_id ? _objectSpread(_objectSpread({}, tax), {}, {
+            value: data.value
+          }) : tax;
+        })
+      });
+    });
   };
   var handlePlacementSearch = function handlePlacementSearch(id, type, search, name) {
     var url = smpg_local.rest_url + "carousel-placement-search" + (smpg_local.rest_url.includes("?") ? "&" : "?") + "type=" + type + "&search=" + search;
@@ -205,16 +233,15 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
       }, 1000);
     }
   };
-  var handleAutomationChange = function handleAutomationChange(e) {
-    var name = e.target.name;
-    var copydata = _objectSpread({}, postMeta);
-    var index = copydata._automation_with.indexOf(name);
-    if (index !== -1) {
-      copydata._automation_with.splice(index, 1);
-    } else {
-      copydata._automation_with.push(name);
-    }
-    setPostMeta(copydata);
+  var handleAutomationChange = function handleAutomationChange(key) {
+    console.log(key);
+    setPostMeta(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        _automation_with: prevState._automation_with.includes(key) ? prevState._automation_with.filter(function (item) {
+          return item !== key;
+        }) : [].concat(_toConsumableArray(prevState._automation_with), [key])
+      });
+    });
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var post_id = '';
@@ -224,10 +251,10 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     getSchemaData(post_id);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (postMeta._schema_type != '') {
+    if (isSchemaDataLoaded && postMeta !== null && postMeta !== void 0 && postMeta._schema_type) {
       handleGetAutomation(postMeta._schema_type);
     }
-  }, [postMeta._schema_type]);
+  }, [isSchemaDataLoaded, postMeta === null || postMeta === void 0 ? void 0 : postMeta._schema_type]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-edit-page"
   }, mainSpinner ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_common_main_spinner_MainSpinner__WEBPACK_IMPORTED_MODULE_1__["default"], null) : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

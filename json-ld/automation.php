@@ -1089,9 +1089,7 @@ function smpg_get_accordionfaq_json_ld($json_ld, $post_id){
 
 add_filter('smpg_filter_product_json_ld', 'smpg_woocommerce_product_singular_automation',10,3);
 
-/* WooCommerce Plugin By Automattic
-   Plugin URL : https://wordpress.org/plugins/woocommerce/
-*/
+
 function smpg_woocommerce_product_singular_automation( $json_ld, $schema_data, $post_id ){
 
     global $smpg_plugin_list;

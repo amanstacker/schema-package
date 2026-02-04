@@ -267,7 +267,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
                     
                     if ( smpg_is_carousel_placement_matched( $schema_meta, $page_type, $spg_id ) ) {
                         
-                        $carousel_json_ld = smpg_prepare_carousel_json_ld();
+                        $carousel_json_ld = smpg_prepare_carousel_json_ld( $schema_meta );
 
                         if ( ! empty( $carousel_json_ld ) ) {
                             $response[] = $carousel_json_ld;

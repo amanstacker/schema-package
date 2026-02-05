@@ -2,6 +2,16 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+function smpg_is_archive_page() {
+
+	$is_shop               = function_exists( 'is_shop' ) ? is_shop() : false;
+	$is_product_taxonomy   = function_exists( 'is_product_taxonomy' ) ? is_product_taxonomy() : false;
+
+	return is_home() || is_tax() || is_category() || is_tag() || $is_shop || $is_product_taxonomy;
+	
+}
+
+
 function smpg_is_admin_rest_request() {
 
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';

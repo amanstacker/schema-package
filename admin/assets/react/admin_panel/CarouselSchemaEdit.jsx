@@ -42,6 +42,7 @@ const CarouselSchemaEdit = () => {
       _automation_with         : [],
       _taxonomies              : [],
       _is_home                 : true,
+      _is_shop                 : false,
     });
   
   const handleFormChange = e => {
@@ -57,6 +58,13 @@ const CarouselSchemaEdit = () => {
         return {
           ...prev,
           _is_home: value,
+        };
+      }
+
+      if (id === 'is_shop') {
+        return {
+          ...prev,
+          _is_shop: value,
         };
       }
 
@@ -283,7 +291,7 @@ const CarouselSchemaEdit = () => {
 
                 <table className="smpg-placement-table">
                   <tbody>                    
-                  <tr key="is_home">
+                      <tr key="is_home">
                         <td><Label>{__("Home Page", "schema-package")}</Label></td>
                         <td>
                           <div className="ui fitted toggle checkbox">
@@ -293,7 +301,22 @@ const CarouselSchemaEdit = () => {
                         </td>     
                         <td></td>                   
                         <td className='smpg-placement-or'><span>{__("OR", "schema-package")}</span></td>
+                      </tr>
+                      { smpg_local.woocommerce_active ?
+                        <tr key="is_shop">
+                          <td style={{ paddingTop: '15px' }}><Label>{__("Shop Page", "schema-package")}</Label></td>
+                          <td style={{ paddingTop: '15px' }}>
+                            <div className="ui fitted toggle checkbox">
+                            <input id="is_shop" type="checkbox" name="is_shop" checked={postMeta._is_shop} onChange={handleFormChange} />
+                            <label></label>
+                            </div>                         
+                          </td>     
+                          <td></td>                   
+                          <td className='smpg-placement-or'><span>{__("OR", "schema-package")}</span></td>
                         </tr>
+                      : null
+                      }
+                      
                   {
                     postMeta._taxonomies.map((item, i) => {
                       return(

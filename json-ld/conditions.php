@@ -185,6 +185,14 @@ function smpg_is_carousel_placement_matched( $schema_data, $page_type = null, $s
 				$is_home = $schema_data['_is_home'][0];
 			}			
 			return $is_home;
+		}		
+
+		if ( function_exists( 'is_shop' ) && is_shop() ) {
+			$is_shop = false;
+			if ( isset( $schema_data['_is_shop'][0] ) ) {
+				$is_shop = $schema_data['_is_shop'][0];
+			}			
+			return $is_shop;
 		}
 		
 		foreach ( $unser_schema_data as $tax_data ) {

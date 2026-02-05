@@ -618,6 +618,7 @@ function smpg_enqueue_admin_panel( $hook ) {
 				'is_free'              => true,
 				'is_multilingual'      => false,
 				'language_list'        => [],
+				'woocommerce_active'   => function_exists( 'WC' ) ? true : false,
 			] );
 
 			wp_register_script( 'smpg-admin-script', SMPG_PLUGIN_URL . 'admin/assets/react/dist/admin_panel.js', [ 'wp-i18n' ], SMPG_VERSION, true );

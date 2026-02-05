@@ -94,7 +94,8 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
       _schema_type: 'course',
       _automation_with: [],
       _taxonomies: [],
-      _is_home: true
+      _is_home: true,
+      _is_shop: false
     }),
     _useReducer4 = _slicedToArray(_useReducer3, 2),
     postMeta = _useReducer4[0],
@@ -111,6 +112,11 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
       if (id === 'is_home') {
         return _objectSpread(_objectSpread({}, prev), {}, {
           _is_home: value
+        });
+      }
+      if (id === 'is_shop') {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          _is_shop: value
         });
       }
       return _objectSpread(_objectSpread({}, prev), {}, {
@@ -311,7 +317,27 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     onChange: handleFormChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
     className: "smpg-placement-or"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, __("OR", "schema-package")))), postMeta._taxonomies.map(function (item, i) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, __("OR", "schema-package")))), smpg_local.woocommerce_active ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    key: "is_shop"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    style: {
+      paddingTop: '15px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__["default"], null, __("Shop Page", "schema-package"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    style: {
+      paddingTop: '15px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ui fitted toggle checkbox"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "is_shop",
+    type: "checkbox",
+    name: "is_shop",
+    checked: postMeta._is_shop,
+    onChange: handleFormChange
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "smpg-placement-or"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, __("OR", "schema-package")))) : null, postMeta._taxonomies.map(function (item, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__["default"], null, item.label)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

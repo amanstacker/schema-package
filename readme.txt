@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.28
+Stable tag: 1.0.29
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -546,6 +546,15 @@ To explore all the advanced features and benefits included in the Schema Package
 Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
 
 == Changelog ==
+
+= 1.0.29 =
+
+* Added: Heads up note added to feedback form
+* Added: Mapping section columns fields name improvement 
+* Added: Single, all-in-one-page list carousel schema
+* Added: Docs link added in readme.txt
+* Fixed: Carousel automation checkbox not saving.
+
 
 = 1.0.28 =
 

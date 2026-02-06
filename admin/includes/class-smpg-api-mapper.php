@@ -557,8 +557,10 @@ class SMPG_Api_Mapper {
         $meta_data        = [];        
         $taxonomies_list  = [];               
         $saved_taxonomies = [];
+        $saved_automation = [];
         $saved_schema     = 'course';
         $saved_is_home    = true;
+        $saved_is_shop    = false;
         $response['post_data']      = get_post( $post_id, ARRAY_A );
         $post_meta                  = get_metadata( 'post', $post_id );   
 
@@ -570,9 +572,18 @@ class SMPG_Api_Mapper {
           $saved_is_home = $post_meta['_is_home'][0];
         }
 
+        if ( isset( $post_meta['_is_shop'][0] ) ) {
+          $saved_is_shop = $post_meta['_is_shop'][0];
+        }
+
         if ( isset( $post_meta['_taxonomies'][0] ) && is_serialized( $post_meta['_taxonomies'][0] ) ) {
           $saved_taxonomies = unserialize($post_meta['_taxonomies'][0]);
-        }        
+        }
+        
+        if ( isset( $post_meta['_automation_with'][0] ) && is_serialized( $post_meta['_automation_with'][0] ) ) {
+          $saved_automation = unserialize($post_meta['_automation_with'][0]);
+        }
+
         //Taxonomies data starts here     
         
         $taxonomies = get_taxonomies( [], 'objects' );
@@ -627,9 +638,11 @@ class SMPG_Api_Mapper {
 
         }
         //Taxonomies data ends here
-        $meta_data['_taxonomies']    = $taxonomies_list;
-        $meta_data['_schema_type']   = $saved_schema;
-        $meta_data['_is_home']       = $saved_is_home;
+        $meta_data['_taxonomies']      = $taxonomies_list;
+        $meta_data['_schema_type']     = $saved_schema;
+        $meta_data['_is_home']         = $saved_is_home;
+        $meta_data['_is_shop']         = $saved_is_shop;
+        $meta_data['_automation_with'] = $saved_automation;
 
         $response['post_meta']      = $meta_data;                                               
                         

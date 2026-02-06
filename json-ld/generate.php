@@ -255,7 +255,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
     return $json_ld;
 }
 
-function smpg_prepare_carousel_json_ld() {
+function smpg_prepare_carousel_json_ld( $schema_meta ) {
 
 	global $wp_query;
 
@@ -285,7 +285,7 @@ function smpg_prepare_carousel_json_ld() {
 		$json_ld['itemListElement'] = $list_element;
 	}
 
-	return apply_filters( 'smpg_filter_carousel_json_ld', $json_ld );
+	return apply_filters( 'smpg_filter_carousel_json_ld', $json_ld, $schema_meta );
 }
 
 function smpg_prepare_global_json_ld( $schema_data, $post_id ) {

@@ -79,6 +79,11 @@ function smpg_deactivation_feedback_modal() {
                 <label for="smpg-reason6"><?php esc_html_e('Other reason', 'schema-package') ?></label>
             </li>
         </ul>
+        <p class="smpg-feedback-note">
+            <strong><?php esc_html_e('Heads up: ', 'schema-package'); ?></strong>
+            <?php esc_html_e( 'Clicking "Submit & Deactivate" will email your feedback to the developer. No site data is collected. Click "Skip & Deactivate" to deactivate without sending feedback.', 'schema-package' ); ?>    
+        </p>
+
 	    <div class="smpg-reason-details">
 				<textarea data-id="smpg-reason3" class="smpg-d-none" rows="3" name="smpg_missing_feature_text" placeholder="<?php esc_attr_e( 'Kindly describe the feature you found missing.', 'schema-package' ); ?>"></textarea>
                 <textarea data-id="smpg-reason4" class="smpg-d-none" rows="3" name="smpg_technical_difficulties_text" placeholder="<?php esc_attr_e( 'Kindly provide details about the difficulties you\'re facing.', 'schema-package' ); ?>"></textarea>

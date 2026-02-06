@@ -17,6 +17,7 @@ const CarouselSchemaEdit = () => {
   const [mainSpinner, setMainSpinner]           = useState(false);
   const [isLoaded, setIsLoaded]                 = useState(true);        
   const [automationList, setAutomationList]     = useState([]);
+  const [isSchemaDataLoaded, setIsSchemaDataLoaded] = useState(false);
 
   const [postData, setPostData] = useReducer(
     (state, newState) => ({...state, ...newState}),
@@ -28,16 +29,21 @@ const CarouselSchemaEdit = () => {
     }                      
   );
 
-  const [postMeta, setPostMeta] = useReducer(
-    (state, newState) => ({...state, ...newState}),
-    {
+  const postMetaReducer = (state, newState) => {
+    if (typeof newState === "function") {
+      return { ...state, ...newState(state) }; // Handles function-based updates
+    }
+    return { ...state, ...newState };
+  };
+
+  const [postMeta, setPostMeta] = useReducer(postMetaReducer, {
       _current_status          : true,
       _schema_type             : 'course',                                       
       _automation_with         : [],
       _taxonomies              : [],
       _is_home                 : true,
-    }            
-  );
+      _is_shop                 : false,
+    });
   
   const handleFormChange = e => {
 
@@ -47,14 +53,28 @@ const CarouselSchemaEdit = () => {
       value = e.target.checked;
     }
     
-    let clonedata = {...postMeta};   
+    setPostMeta(prev => {
+      if (id === 'is_home') {
+        return {
+          ...prev,
+          _is_home: value,
+        };
+      }
 
-    if( id === "is_home" ){
-      clonedata._is_home = value;    
-    }else{
-      clonedata._taxonomies[id].status = value;    
-    }    
-    setPostMeta(clonedata);
+      if (id === 'is_shop') {
+        return {
+          ...prev,
+          _is_shop: value,
+        };
+      }
+
+      return {
+        ...prev,
+        _taxonomies: prev._taxonomies.map((tax, index) =>
+          index == id ? { ...tax, status: value } : tax
+        ),
+      };
+    });
             
   }  
 
@@ -74,7 +94,8 @@ const CarouselSchemaEdit = () => {
         (result) => {              
           setMainSpinner(false);     
           setPostData(result.post_data);
-          setPostMeta(result.post_meta);                                      
+          setPostMeta(result.post_meta);  
+          setIsSchemaDataLoaded(true);                                    
         },        
         (error) => {         
         }
@@ -144,14 +165,21 @@ const CarouselSchemaEdit = () => {
 
   }
   const handleSchemaTypeChange = (e, data) => {    
-    setPostMeta({_schema_type: data.value});     
+        setPostMeta(prev => ({
+        ...prev,
+        _schema_type: data.value,
+      }));
   }
   const handlePlacementChange = (e, data) => {
-    
-      let data_id = data.data_id;      
-      let copydata = {...postMeta};
-      copydata._taxonomies[data_id].value = data.value;
-      setPostMeta(copydata);    
+                
+      setPostMeta(prev => ({
+        ...prev,
+        _taxonomies: prev._taxonomies.map((tax, index) =>
+          index === data.data_id
+            ? { ...tax, value: data.value }
+            : tax
+        ),
+      }));
 
   }
   const handlePlacementSearch = (id, type, search, name) => {
@@ -198,22 +226,15 @@ const CarouselSchemaEdit = () => {
       
   }
 
-  const handleAutomationChange = (e) => {
-    
-    let { name } = e.target;
-
-    let copydata = {...postMeta};
-
-    let index = copydata._automation_with.indexOf(name);
-
-    if(index !== -1){  
-      copydata._automation_with.splice(index, 1); 
-    }else{
-      copydata._automation_with.push(name);
-    }
-    setPostMeta(copydata);
-    
-  }
+  const handleAutomationChange = (key) => {
+    console.log(key);
+    setPostMeta((prevState) => ({
+      ...prevState,
+      _automation_with: prevState._automation_with.includes(key)
+        ? prevState._automation_with.filter((item) => item !== key)
+        : [...prevState._automation_with, key],
+    }));
+  };
 
   useEffect(() => {
     let post_id = '';
@@ -225,12 +246,11 @@ const CarouselSchemaEdit = () => {
   }, []);
 
   useEffect(() => {
-    if(postMeta._schema_type != ''){
-      handleGetAutomation(postMeta._schema_type);    
-    }    
-  }, [postMeta._schema_type]);
+      if (isSchemaDataLoaded && postMeta?._schema_type) {
+          handleGetAutomation(postMeta._schema_type);          
+      }
+  }, [isSchemaDataLoaded, postMeta?._schema_type]);
 
-  
   return(
     <div className="smpg-edit-page">
 
@@ -271,7 +291,7 @@ const CarouselSchemaEdit = () => {
 
                 <table className="smpg-placement-table">
                   <tbody>                    
-                  <tr key="is_home">
+                      <tr key="is_home">
                         <td><Label>{__("Home Page", "schema-package")}</Label></td>
                         <td>
                           <div className="ui fitted toggle checkbox">
@@ -281,7 +301,22 @@ const CarouselSchemaEdit = () => {
                         </td>     
                         <td></td>                   
                         <td className='smpg-placement-or'><span>{__("OR", "schema-package")}</span></td>
+                      </tr>
+                      { smpg_local.woocommerce_active ?
+                        <tr key="is_shop">
+                          <td style={{ paddingTop: '15px' }}><Label>{__("Shop Page", "schema-package")}</Label></td>
+                          <td style={{ paddingTop: '15px' }}>
+                            <div className="ui fitted toggle checkbox">
+                            <input id="is_shop" type="checkbox" name="is_shop" checked={postMeta._is_shop} onChange={handleFormChange} />
+                            <label></label>
+                            </div>                         
+                          </td>     
+                          <td></td>                   
+                          <td className='smpg-placement-or'><span>{__("OR", "schema-package")}</span></td>
                         </tr>
+                      : null
+                      }
+                      
                   {
                     postMeta._taxonomies.map((item, i) => {
                       return(

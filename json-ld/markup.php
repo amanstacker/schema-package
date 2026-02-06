@@ -246,8 +246,8 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
         
     $response    = $spg_schema_meta = [];            
   
-    if ( ( $render_method === 'client_side' && ( $page_type === 'category' || $page_type === 'tag' || $page_type === 'taxonomy' ) ) || is_home() || is_tax() || is_category() || is_tag() ) {
-    
+    if ( ( $render_method === 'client_side' && ( $page_type === 'category' || $page_type === 'tag' || $page_type === 'taxonomy' ) ) || smpg_is_archive_page() ) {
+        
         if ( $render_method !== 'client_side' ) {
             $spg_id = get_queried_object_id();
         }
@@ -267,7 +267,7 @@ function smpg_get_json_ld( $post_id = null, $spg_id = null, $page_type = null, $
                     
                     if ( smpg_is_carousel_placement_matched( $schema_meta, $page_type, $spg_id ) ) {
                         
-                        $carousel_json_ld = smpg_prepare_carousel_json_ld();
+                        $carousel_json_ld = smpg_prepare_carousel_json_ld( $schema_meta );
 
                         if ( ! empty( $carousel_json_ld ) ) {
                             $response[] = $carousel_json_ld;

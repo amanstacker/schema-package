@@ -24,26 +24,26 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 == Schema Package Key Features ==
 
 * <strong>Unlimited Schema</strong>: There is no restriction on the number or type of schema you can add. You can select multiple schema types per page or post and customize them to match your content for maximum flexibility.
-* <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements.
-* <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface.
-* <strong>Schema Mapping for Advanced Custom Fields </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation.
-* <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc.
-* <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views.
+* <strong>Singular Schema</strong>: Easily apply different schema types to singular posts as per your content requirements. [Learn More](https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package/)
+* <strong>Schema Mapping</strong>: Effortless schema mapping. Quickly select post meta fields, search custom fields, and map them to schema properties with a user-friendly interface. [Learn More](https://schemapackage.com/knowledge-base/mapping-schema-properties-in-schema-package/)
+* <strong>Schema Mapping for Advanced Custom Fields </strong>: Seamlessly map singular schema properties with the Advanced Custom Fields plugin, enhancing automation flexibility for schema implementation. [Learn More](https://schemapackage.com/knowledge-base/mapping-schema-properties-with-advanced-custom-fields-acf-in-schema-package/)
+* <strong>Targeting</strong>: Target your selected Singular schema types based on your needs, such as posts, pages, custom post types, taxonomies, etc. [Learn More](https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package/#singular-targeting)
+* <strong>Carousel Schema</strong>: Choose various schema types according to your requirements and automate them for detailed JSON-LD views. [Learn More](https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/)
 * <strong>Custom Schema</strong>: Custom Schema lets you add your own JSON-LD markup to individual posts or across your entire site, giving you full control and advanced flexibility beyond built-in schema types.
 * <strong>Carousel Targeting</strong>: Target your selected Carousel schema types based on your needs, such as categories, tags, Product categories, taxonomies, etc.
 * <strong>Schema Package Generator</strong>: Select different kinds of schema based on your needs.
 * <strong>Schema Package Generator Control Center</strong>: Enable SPG based on selected post types, taxonomies or author profile.
 * <strong>JSON-LD Format</strong>: Schema Package only supports JSON-LD Format as recommended by most of the Search Engines. Like Google, Bing, Yahoo etc.
 * <strong>Manage Conflict</strong>: If two or more schema plugins used on same website. They may conflict and throw error in schema validator tool. Using Schema Package keep required schema markup.
-* <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand.
+* <strong>Knowledge Graph</strong>: Add organization or personal details (like name, logo, and social profiles) to help search engines generate a rich Knowledge Graph panel for your brand. [Learn More](https://schemapackage.com/knowledge-base/what-is-google-knowledge-graph-and-how-to-set-it-up-using-schema-package/)
 * <strong>Easy To Use UI</strong>: No need to reload schema package dashboard again and again to complete setup. It’s a single-page dashboard which is very fast in navigation.
 * <strong>Compatibility</strong>: Automate schema markup for the plugins who generate schema related contents. You can find the compatibility list down the order.
-* <strong>Subscription & Paywalled Content</strong>: Add structured data for subscription-based or paywalled content to help search engines understand access restrictions.
-* <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation.
+* <strong>Subscription & Paywalled Content</strong>: Add structured data for subscription-based or paywalled content to help search engines understand access restrictions. [Learn More](https://schemapackage.com/knowledge-base/how-to-set-up-schema-markup-for-subscription-paywalled-content-using-schema-package/)
+* <strong>Schema Mapping for Secure Custom Fields </strong>: Seamlessly map singular schema properties with the Secure Custom Fields plugin, enhancing automation flexibility for schema implementation. [Learn More](https://schemapackage.com/knowledge-base/mapping-schema-properties-with-secure-custom-fields-scf-in-schema-package/)
 * <strong>Schema Mapping for Custom Fields </strong>: Seamlessly map singular schema properties with the core WordPress Custom Fields , enhancing automation flexibility for schema implementation.
 * <strong>JSON-LD Render Method</strong>: Controls how JSON-LD schema markup is injected into your site (e.g., server-side rendering vs. client-side injection).
 * <strong>Multiple Size Images</strong>: Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations.
-* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup.
+* <strong>Dynamic Placeholders</strong>: Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup. [Learn More](https://schemapackage.com/knowledge-base/how-to-use-variables-and-placeholders-in-schema-markup-json-ld-using-schema-package/)
 * <strong>JSON-LD in Rest API</strong>: Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations.
 * <strong>Minified JSON-LD</strong>: Removes unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data.
 * <strong>MicroData Cleaner</strong>: Since JSON-LD is the preferred format for structured data, Schema Package helps remove any legacy microdata injected by themes or plugins, ensuring your markup stays clean and consistent.
@@ -66,12 +66,13 @@ In some cases, automation isn't enough and requires manual data entry. For such 
 
 Take your schema & structured data to the next level with **Schema Package Premium**:
 
-* WooCommerce Variable Product Automation
+* WooCommerce Variable Product Automation [Learn More](https://schemapackage.com/knowledge-base/how-to-add-product-schema-markup-automatically-for-woocommerce-products-using-schema-package/)
+* Healthcare Schema Types & Automation [Learn More](https://schemapackage.com/knowledge-base/medical-healthcare-schema-types-setup-guide/)
+* Carousel Schema Single, all-in-one-page list [Learn More](https://schemapackage.com/knowledge-base/how-to-add-a-single-all-in-one-page-list-carousel-schema-to-woocommerce-product-archives/)
+* Multilingual Schema Markup Support [Learn More](https://schemapackage.com/knowledge-base/generate-schema-markup-for-translatepress-websites-using-schema-package/)
+* Advanced ACF Mapping [Learn More](https://schemapackage.com/knowledge-base/mapping-schema-properties-with-advanced-custom-fields-acf-in-schema-package/)
+* Advanced SCF Mapping [Learn More](https://schemapackage.com/knowledge-base/mapping-schema-properties-with-secure-custom-fields-scf-in-schema-package/)
 * RealEstate Schema Types & Automation
-* Healthcare Schema Types & Automation
-* Carousel Schema Single, all-in-one-page list
-* Multilingual Schema Markup Support
-* Advanced ACF/SCF Mapping
 * Schema Markup Setup & Error Clean Up
 * 24/7 Priority Support
 * Premium Features On Demand

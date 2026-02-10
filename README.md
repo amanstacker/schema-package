@@ -222,6 +222,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [TVSeries](https://schema.org/TVSeries)
 - [MusicAlbum](https://schema.org/MusicAlbum)
 - [MusicPlaylist](https://schema.org/MusicPlaylist)
+- [MusicRelease](https://schema.org/MusicRelease)
 - [VideoObject](https://schema.org/VideoObject)
 - [AudioObject](https://schema.org/AudioObject)
 - [BroadcastService](https://schema.org/BroadcastService)

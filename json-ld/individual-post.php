@@ -1817,6 +1817,27 @@ function smpg_get_musicalbum_individual_json_ld( $json_ld, $properties, $schema_
    return $json_ld;
 }
 
+function smpg_get_musicrelease_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+                           
+   return $json_ld;
+}
+
 function smpg_get_liveblogposting_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();

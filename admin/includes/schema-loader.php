@@ -65,6 +65,7 @@ $smpg_schema_map = [
     'liveblogposting'           => 'liveblogposting.php',
     'person'                    => 'person.php',
     'musicalbum'                => 'musicalbum.php',
+    'musicrelease'              => 'musicrelease.php',
     'musicplaylist'             => 'musicplaylist.php',
     'audioobject'               => 'audioobject.php',
     'trip'                      => 'trip.php',

@@ -78,6 +78,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'trip'                  => 'smpg_schema_trip',
         'musicplaylist'         => 'smpg_schema_musicplaylist',
         'musicalbum'            => 'smpg_schema_musicalbum',
+        'musicrelease'          => 'smpg_schema_musicrelease',
         'liveblogposting'       => 'smpg_schema_liveblogposting',
         'person'                => 'smpg_schema_person',
         'product'               => 'smpg_schema_product',

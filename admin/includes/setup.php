@@ -529,6 +529,7 @@ function smpg_get_schema_type_text( $id ) {
 		'liveblogposting'           => 'LiveBlogPosting',
 		'person'              		=> 'Person',
 		'musicalbum'              	=> 'MusicAlbum',
+		'musicrelease'              => 'MusicRelease',
 		'musicplaylist'             => 'MusicPlaylist',
 		'audioobject'               => 'AudioObject',
 		'trip'              		=> 'Trip',

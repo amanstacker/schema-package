@@ -350,7 +350,11 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             }                
 
             $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
-            $json_ld['keywords']                  = smpg_get_post_tags( $post_id );                            
+
+            if ( smpg_get_post_tags( $post_id ) ) {
+                $json_ld['keywords']              = smpg_get_post_tags( $post_id );                            
+            }
+            
             $json_ld['author']                    = smpg_get_author_detail( $post_id );
 
             $json_ld['publisher']                 = smpg_get_publisher( $post_id );

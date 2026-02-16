@@ -2055,7 +2055,7 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
     if(!empty($properties['telephone']['value'])){
         $json_ld['telephone'] =      $properties['telephone']['value'];
     }
-    if(!empty($properties['telephone']['value'])){
+    if(!empty($properties['email']['value'])){
         $json_ld['email']   =      $properties['email']['value'];
     }
     if(!empty($properties['price_range']['value'])){

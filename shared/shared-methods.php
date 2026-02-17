@@ -290,7 +290,13 @@ function smpg_sanitize_schema_meta( $data ) {
             } else {
                 
 				if ( is_bool( $value ) || $value === '1' || $value === '0' ) {
-					$sanitized_data[$sanitized_key] = boolval( $value );
+
+					if ( $sanitized_key === 'custom_text') {
+							$sanitized_data[$sanitized_key] = sanitize_textarea_field( $value );
+					} else {
+							$sanitized_data[$sanitized_key] = boolval( $value );
+					}							
+
 				}elseif ( is_numeric( $value ) ) {					
 					$sanitized_data[ $sanitized_key ] = intval( $value );
 				}elseif ( filter_var( $value, FILTER_VALIDATE_URL ) ) {

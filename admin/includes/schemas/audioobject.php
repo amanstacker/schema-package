@@ -6,10 +6,11 @@ function smpg_schema_audioobject( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $image['label']    = 'Thumbnail Images';
-    $hours['label']    = 'Duration ( Hours )';
-    $minutes['label']  = 'Duration ( minutes )';
-    $seconds['label']  = 'Duration ( seconds )';
+    $image['label']   = esc_html__( 'Thumbnail Images', 'schema-package' );
+    $hours['label']   = esc_html__( 'Duration ( Hours )', 'schema-package' );
+    $minutes['label'] = esc_html__( 'Duration ( minutes )', 'schema-package' );
+    $seconds['label'] = esc_html__( 'Duration ( seconds )', 'schema-package' );
+
 
     $properties = [
         'is_enable'         => true,

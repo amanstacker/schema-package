@@ -6,8 +6,9 @@ function smpg_schema_course( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $start_date['label'] = 'Course Schedule Start Date';
-    $end_date['label']   = 'Course Schedule End Date';
+    $start_date['label'] = esc_html__( 'Course Schedule Start Date', 'schema-package' );
+    $end_date['label']   = esc_html__( 'Course Schedule End Date', 'schema-package' );
+
 
     $properties = [
         'is_enable'         => true,
@@ -37,63 +38,63 @@ function smpg_schema_course( $schema_id, $common_properties ) {
             'rating_count'     => $rating_count,
             'review_count'     => $review_count,
             'has_course_instance' => [
-                'label'         => 'Course Instance',
-                'button_text'   => 'Add More Course Instance', 
+                'label'       => esc_html__( 'Course Instance', 'schema-package' ),
+                'button_text' => esc_html__( 'Add More Course Instance', 'schema-package' ),
                 'type'          => 'repeater', 
                 'display'     => true,
                 'elements'      => [    
                                         [                                                          
                                             'course_mode' => [                                                                                                                                              
-                                                'label'       => 'Course Mode',                    
+                                                'label' => esc_html__( 'Course Mode', 'schema-package' ),                 
                                                 'type'        => 'select',                                                                                    
                                                 'value'       => '',
-                                                'options'     => [
-                                                        ''           => 'Select',
-                                                        'Online'     => 'Online',
-                                                        'Onsite'     => 'Onsite',
-                                                        'Blended'    => 'Blended',                                                                    
+                                                'options' => [
+                                                    ''        => esc_html__( 'Select', 'schema-package' ),
+                                                    'Online'  => esc_html__( 'Online', 'schema-package' ),
+                                                    'Onsite'  => esc_html__( 'Onsite', 'schema-package' ),
+                                                    'Blended' => esc_html__( 'Blended', 'schema-package' ),
                                                 ],
                                                 'display'     => true
                                             ],
                                             'location' => [
-                                                'label'       => 'Location',                    
+                                                'placeholder' => esc_attr__( 'Example University', 'schema-package' ),  
+                                                'label'       => esc_html__( 'Location', 'schema-package' ),                    
                                                 'type'        => 'text',                                                                                    
-                                                'value'       => '',
-                                                'placeholder' => 'Example University',  
+                                                'value'       => '',                                                
                                                 'display'     => true
                                             ],
                                             'course_workload' => [
-                                                'label'       => 'Course Workload',
-                                                'type'        => 'text',                                                                                    
-                                                'value'       => '',
                                                 'placeholder' => 'PT22H',  
+                                                'label'       => esc_html__( 'Course Workload', 'schema-package' ),
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',                                                
                                                 'display'     => true
                                             ],
                                             'repeat_count' => [
-                                                'label'       => 'Course Schedule Repeat Count',
-                                                'type'        => 'text',                                                                                    
-                                                'value'       => '',
                                                 'placeholder' => '6',  
+                                                'label'       => esc_html__( 'Course Schedule Repeat Count', 'schema-package' ),
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',                                                
                                                 'display'     => true
                                             ],
                                             'repeat_frequency' => [
-                                                'label'       => 'Course Schedule Repeat Frequency',
+                                                'label'   => esc_html__( 'Course Schedule Repeat Frequency', 'schema-package' ),
                                                 'type'        => 'select',                                                                                    
                                                 'value'       => '',
-                                                'options'     => [
-                                                        ''           => 'Select',
-                                                        'Daily'      => 'Daily',
-                                                        'Weekly'     => 'Weekly',
-                                                        'Monthly'    => 'Monthly',                                                                    
-                                                        'Yearly'     => 'Yearly',                                                                    
+                                                'options' => [
+                                                    ''        => esc_html__( 'Select', 'schema-package' ),
+                                                    'Daily'   => esc_html__( 'Daily', 'schema-package' ),
+                                                    'Weekly'  => esc_html__( 'Weekly', 'schema-package' ),
+                                                    'Monthly' => esc_html__( 'Monthly', 'schema-package' ),                                                                    
+                                                    'Yearly'  => esc_html__( 'Yearly', 'schema-package' ),                                                                    
                                                 ],
                                                 'display'     => true
                                             ],
                                             'duration' => [
-                                                'label'       => 'Course Schedule Duration',
-                                                'type'        => 'text',                                                                                    
-                                                'value'       => '',
                                                 'placeholder' => 'PT1H',  
+                                                'label'       => esc_html__( 'Course Schedule Duration', 'schema-package' ),
+                                                'type'        => 'text',                                                                                    
+                                                'value'       => '',                                                
                                                 'display'     => true
                                             ],                                                           
                                             'start_date'   => $start_date,

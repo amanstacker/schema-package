@@ -36,11 +36,11 @@ function smpg_schema_customschema( $schema_id, $common_properties ) {
         'properties'        => [                                                            
                 'editor'            => [
                     'placeholder' => $placeholder_json,                    
-                    'label'       => 'Editor',
+                    'label'       => esc_html__( 'Editor', 'schema-package' ),
                     'type'        => 'editor',                                                                        
                     'recommended' => true,
                     'display'     => true,
-                    'tooltip'     => 'Enter your custom schema (Json-ld). Must be Valid Json'
+                    'tooltip'     => esc_html__( 'Enter your custom schema (Json-ld). Must be Valid Json', 'schema-package' )
                 ],                                
         ]                      
     ];

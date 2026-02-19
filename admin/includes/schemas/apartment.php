@@ -14,7 +14,7 @@ function smpg_schema_apartment( $schema_id, $common_properties ) {
         'id'                => 'apartment',
         'text'              => 'Apartment',
         'properties'        => [
-                'id'                  => $id,
+                'id'                   => $id,
                 'name'                 => $name, 
                 'description'          => $description, 
                 'url'                  => $url                                                                                          

@@ -14,7 +14,7 @@ function smpg_schema_person( $schema_id, $common_properties ) {
         'id'                => 'person',           
         'text'              => 'Person',
         'properties'        => [
-                'id'                  => $id,
+                'id'                 => $id,
                 'name'               => $name,
                 'job_title'          => $job_title,
                 'email'              => $email,

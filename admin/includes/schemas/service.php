@@ -26,69 +26,69 @@ function smpg_schema_service( $schema_id, $common_properties ) {
         'text'              => $service_type[$schema_id],
         'properties'        => [
             'id'              => $id,                                
-            'service_type'          => [
-                'label'       => 'Service Type',                    
-                'type'        => 'text',                                    
-                'placeholder' => 'Weekly home cleaning',                    
+            'service_type' => [
+                'label'       => esc_html__( 'Service Type', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => esc_attr__( 'Weekly home cleaning', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
             'provider_mobility'          => [
-                'label'       => 'Provider Mobility',                    
+                'label'       => esc_html__( 'Provider Mobility', 'schema-package' ),                    
                 'type'        => 'text',                                    
-                'placeholder' => 'e.g. static or dynamic',
+                'placeholder' => esc_attr__( 'e.g. static or dynamic', 'schema-package' ),
                 'value'       => '',
                 'display'     => true
             ],
             'provider_name'          => [
-                'label'       => 'Provider Name',                    
+                'label'       => esc_html__( 'Provider Name', 'schema-package' ),                    
                 'type'        => 'text',                                    
-                'placeholder' => 'name',                    
+                'placeholder' => esc_attr__( 'name', 'schema-package' ),                    
                 'value'       => '',
                 'display'     => true
             ],
             'provider_url'    => [
-                'label'       => 'Provider URL',                    
+                'label'       => esc_html__( 'Provider URL', 'schema-package' ),                    
                 'type'        => 'text',                                    
                 'placeholder' => smpg_get_permalink($post_id),    
                 'value'       => '',
                 'display'     => true
             ],
-            'provider_type' =>  [ 
-                    'label'       => 'Provider Type',
-                    'type'        => 'select',
-                    'value'       => 'LocalBusiness',
-                    'options'     => [
-                            ''                             => 'Select',
-                            'Organization'                 => 'Organization',
-                            'LocalBusiness'                => 'Local Business',
-                            'Airline'                      => 'Airline',
-                            'Corporation'                  => 'Corporation',
-                            'EducationalOrganization'      => 'Educational Organization',
-                            'School'                       => 'School',
-                            'GovernmentOrganization'       => 'Government Organization',                                                
-                            'MedicalOrganization'          => 'Medical Organization',  
-                            'NGO'                          => 'NGO', 
-                            'PerformingGroup'              => 'Performing Group', 
-                            'SportsOrganization'           => 'Sports Organization',
-                    ],
-                    'recommended' => true,
-                    'display'     => true,
-                'tooltip'     => 'The author type of this content'
+            'provider_type' => [
+                'label'       => esc_html__( 'Provider Type', 'schema-package' ),
+                'type'        => 'select',
+                'value'       => 'LocalBusiness',
+                'options'     => [
+                    ''                        => esc_html__( 'Select', 'schema-package' ),
+                    'Organization'            => esc_html__( 'Organization', 'schema-package' ),
+                    'LocalBusiness'           => esc_html__( 'Local Business', 'schema-package' ),
+                    'Airline'                 => esc_html__( 'Airline', 'schema-package' ),
+                    'Corporation'             => esc_html__( 'Corporation', 'schema-package' ),
+                    'EducationalOrganization' => esc_html__( 'Educational Organization', 'schema-package' ),
+                    'School'                  => esc_html__( 'School', 'schema-package' ),
+                    'GovernmentOrganization'  => esc_html__( 'Government Organization', 'schema-package' ),
+                    'MedicalOrganization'     => esc_html__( 'Medical Organization', 'schema-package' ),
+                    'NGO'                     => esc_html__( 'NGO', 'schema-package' ),
+                    'PerformingGroup'         => esc_html__( 'Performing Group', 'schema-package' ),
+                    'SportsOrganization'      => esc_html__( 'Sports Organization', 'schema-package' ),
+                ],
+                'recommended' => true,
+                'display'     => true,
+                'tooltip'     => esc_html__( 'Select the provider type for this content.', 'schema-package' ),
             ],
-            'area_served'          => [
-                'label'       => 'Area Served',                    
-                'type'        => 'textarea',                                    
-                'placeholder' => 'New York, Los Angeles',                    
+            'area_served' => [
+                'label'       => esc_html__( 'Area Served', 'schema-package' ),
+                'type'        => 'textarea',
+                'placeholder' => esc_attr__( 'New York, Los Angeles', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'service_offered'          => [
-                'label'       => 'Service Offered',                    
-                'type'        => 'textarea',                                    
-                'placeholder' => 'Apartment light cleaning, carpet cleaning',
+            'service_offered' => [
+                'label'       => esc_html__( 'Service Offered', 'schema-package' ),
+                'type'        => 'textarea',
+                'placeholder' => esc_attr__( 'Apartment light cleaning, carpet cleaning', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],                                
             'description'        => $description,
             'url'                => $url,
@@ -110,129 +110,129 @@ function smpg_schema_service( $schema_id, $common_properties ) {
             'offer_price_validuntil' => $offer_price_validuntil,                                                                      
             'offer_item_condition'   => $offer_item_condition,
             'offer_availability'     => $offer_availability,                        
-            'eligible_customer_type'   => [
-                'label'       => 'Eligible Customer Type',                    
-                'type'        => 'text',                                    
-                'placeholder' => '40 - 80 Years',                    
+            'eligible_customer_type' => [
+                'label'       => esc_html__( 'Eligible Customer Type', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => esc_attr__( '40 - 80 Years', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'terms_of_service'          => [
-                'label'       => 'Terms Of Service',                    
-                'type'        => 'text',                                    
-                'placeholder' => 'Minimum Entry Age: 18 years, Maximum Entry Age: 85 years',                    
+            'terms_of_service' => [
+                'label'       => esc_html__( 'Terms of Service', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => esc_attr__( 'Minimum Entry Age: 18 years, Maximum Entry Age: 85 years', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'annual_percentage_rate'    => [
-                'label'       => 'Annual Percentage Rate',
-                'type'        => 'text',                                    
-                'placeholder' => '30%',                    
+            'annual_percentage_rate' => [
+                'label'       => esc_html__( 'Annual Percentage Rate', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => esc_attr__( '30%', 'schema-package' ),
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'interest_rate'          => [
-                'label'       => 'Interest Rate',
-                'type'        => 'text',                                    
-                'placeholder' => '5%',                    
+            'interest_rate' => [
+                'label'       => esc_html__( 'Interest Rate', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '5%',
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'fees_And_Commissions_Specification'  => [
-                'label'       => 'Fees And Commissions Specification',
-                'type'        => 'text',                                    
-                'placeholder' => '',                    
+            'fees_and_commissions_specification' => [
+                'label'       => esc_html__( 'Fees and Commissions Specification', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '',
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
             'latitude'           => $latitude,
             'longitude'          => $longitude,
             'image'              => $image,
-            'additional_property' => [                            
-                'label'         => 'Additional Property',    
-                'button_text'   => 'Add More Properties', 
-                'type'          => 'repeater', 
-                'display'       => true,
-                'elements'      => [
+            'additional_property' => [
+                'label'       => esc_html__( 'Additional Property', 'schema-package' ),
+                'button_text' => esc_html__( 'Add More Properties', 'schema-package' ),
+                'type'        => 'repeater',
+                'display'     => true,
+                'elements'    => [
                     [
-                        'name' => [                                                                                                                                              
-                            'label'       => 'Name',                    
-                            'type'        => 'text',                                                                                    
-                            'value'       => '',
-                            'display'     => true
+                        'name'  => [
+                            'label'   => esc_html__( 'Name', 'schema-package' ),
+                            'type'    => 'text',
+                            'value'   => '',
+                            'display' => true,
                         ],
-                        'value' => [                                                                                                                                              
-                            'label'       => 'Value',                    
-                            'type'        => 'textarea',                                                                                    
-                            'value'       => '',
-                            'display'     => true
-                        ],                                           
-                    ]
-                ]                                                                                                                      
+                        'value' => [
+                            'label'   => esc_html__( 'Value', 'schema-package' ),
+                            'type'    => 'textarea',
+                            'value'   => '',
+                            'display' => true,
+                        ],
+                    ],
+                ],
             ],
             'opening_hours' => [                            
-                'label'         => 'Opening Hours',    
-                'button_text'   => 'Add More Opening Hours', 
+                'label'         => esc_html__( 'Opening Hours', 'schema-package' ),
+                'button_text'   => esc_html__( 'Add Another Opening Hour', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [
                     [
-                        'monday' => [                                                                                                                                              
-                            'label'       => 'Monday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'monday' => [
+                            'label'   => esc_html__( 'Monday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'tuesday' => [                                                                                                                                              
-                            'label'       => 'Tuesday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'tuesday' => [
+                            'label'   => esc_html__( 'Tuesday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'wednesday' => [                                                                                                                                              
-                            'label'       => 'Wednesday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'wednesday' => [
+                            'label'   => esc_html__( 'Wednesday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'thursday' => [                                                                                                                                              
-                            'label'       => 'Thursday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'thursday' => [
+                            'label'   => esc_html__( 'Thursday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'friday' => [                                                                                                                                              
-                            'label'       => 'Friday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'friday' => [
+                            'label'   => esc_html__( 'Friday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'saturday' => [                                                                                                                                              
-                            'label'       => 'Saturday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => true,
-                            'display'     => true
+                        'saturday' => [
+                            'label'   => esc_html__( 'Saturday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => true,
+                            'display' => true,
                         ],
-                        'sunday' => [                                                                                                                                              
-                            'label'       => 'Sunday',                    
-                            'type'        => 'checkbox',                                                                                    
-                            'value'       => false,
-                            'display'     => true
+                        'sunday' => [
+                            'label'   => esc_html__( 'Sunday', 'schema-package' ),
+                            'type'    => 'checkbox',
+                            'value'   => false,
+                            'display' => true,
                         ],
-                        'opens' => [                                                                                                                                              
-                            'label'       => 'Opens',                    
-                            'type'        => 'text',                                    
-                            'placeholder' => '09:00',                    
+                        'opens' => [
+                            'label'       => esc_html__( 'Opens', 'schema-package' ),
+                            'type'        => 'text',
+                            'placeholder' => '09:00',
                             'value'       => '',
-                            'display'     => true
+                            'display'     => true,
                         ],
-                        'closes' => [                                                                                                                                              
-                            'label'       => 'Closes',                    
-                            'type'        => 'text',                                    
-                            'placeholder' => '19:00',                    
+                        'closes' => [
+                            'label'       => esc_html__( 'Closes', 'schema-package' ),
+                            'type'        => 'text',
+                            'placeholder' => '19:00',
                             'value'       => '',
-                            'display'     => true
-                        ],                                          
+                            'display'     => true,
+                        ],
                     ]
                 ]                                                                                                                      
             ],

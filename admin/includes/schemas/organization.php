@@ -6,16 +6,16 @@ function smpg_schema_organization( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $social_links = [                            
-        'label'         => 'Social Links',
-        'button_text'   => 'Add More Social Links', 
-        'type'          => 'repeater', 
-        'display'       => true,
-        'elements'      => [
+    $social_links = [
+        'label'       => esc_html__( 'Social Links', 'schema-package' ),
+        'button_text' => esc_html__( 'Add Another Social Link', 'schema-package' ),
+        'type'        => 'repeater',
+        'display'     => true,
+        'elements'    => [
             [
-                'url'     => $url,                                            
-            ]
-        ]                                                                                                                      
+                'url' => $url,
+            ],
+        ],
     ];
 
     unset( $publisher_logo['parent_data'] );    

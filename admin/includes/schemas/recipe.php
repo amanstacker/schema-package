@@ -6,9 +6,9 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $hours['label']    = 'Duration ( Hours )';
-    $minutes['label']  = 'Duration ( minutes )';
-    $seconds['label']  = 'Duration ( seconds )';
+    $hours['label']   = esc_html__( 'Duration (Hours)', 'schema-package' );
+    $minutes['label'] = esc_html__( 'Duration (Minutes)', 'schema-package' );
+    $seconds['label'] = esc_html__( 'Duration (Seconds)', 'schema-package' );
 
     $video_name['display']        = false;
     $video_description['display'] = false;
@@ -35,27 +35,27 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
             'image'            => $image,     
             'date_published'   => $date_published,
             'keywords'         => $keywords,
-            'prep_time'        => [
-                'placeholder' => 'MM',                    
-                'label'       => 'Prepare Time',
+            'prep_time' => [
+                'placeholder' => 'MM',
+                'label'       => esc_html__( 'Preparation Time (Minutes)', 'schema-package' ),
                 'type'        => 'number',
                 'value'       => '',
                 'recommended' => true,
                 'display'     => true,
-                'tooltip'     => ''    
+                'tooltip'     => '',
             ],
-            'cook_time'        => [
-                    'placeholder' => '20',                    
-                    'label'       => 'Cooking Time',
-                    'type'        => 'number',
-                    'value'       => '',
-                    'recommended' => true,
-                    'display'     => true,
-                    'tooltip'     => ''    
+            'cook_time' => [
+                'placeholder' => '20',
+                'label'       => esc_html__( 'Cooking Time (Minutes)', 'schema-package' ),
+                'type'        => 'number',
+                'value'       => '',
+                'recommended' => true,
+                'display'     => true,
+                'tooltip'     => '',
             ],
             'total_time'        => [
                     'placeholder' => '30',                    
-                    'label'       => 'Total Time',
+                    'label'       => esc_html__( 'Total Time (Minutes)', 'schema-package' ),
                     'type'        => 'number',
                     'value'       => '',
                     'recommended' => true,
@@ -64,7 +64,7 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
             ], 
             'recipe_yield'        => [
                     'placeholder' => '50',                    
-                    'label'       => 'Number Of Servings',
+                    'label'       => esc_html__( 'Number Of Servings', 'schema-package' ),
                     'type'        => 'number',
                     'value'       => '',
                     'recommended' => true,
@@ -72,26 +72,26 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                     'tooltip'     => ''    
             ], 
             'recipe_category' => [
-                    'placeholder' => 'Recipe Category',
-                    'label'       => 'Recipe Category',
-                    'type'        => 'text',
-                    'value'       => '',
-                    'recommended' => true,
-                    'display'     => true,
-                    'tooltip'     => ''    
+                'placeholder' => esc_attr__( 'Recipe Category', 'schema-package' ),
+                'label'       => esc_html__( 'Recipe Category', 'schema-package' ),
+                'type'        => 'text',
+                'value'       => '',
+                'recommended' => true,
+                'display'     => true,
+                'tooltip'     => '',
             ],
             'recipe_cuisine' => [
-                    'placeholder' => 'Recipe Cuisine',                    
-                    'label'       => 'Recipe Cuisine',
-                    'type'        => 'text',
-                    'value'       => '',
-                    'recommended' => true,
-                    'display'     => true,
-                    'tooltip'     => ''    
+                'placeholder' => esc_attr__( 'Recipe Cuisine', 'schema-package' ),
+                'label'       => esc_html__( 'Recipe Cuisine', 'schema-package' ),
+                'type'        => 'text',
+                'value'       => '',
+                'recommended' => true,
+                'display'     => true,
+                'tooltip'     => '',
             ],                            
             'calories' => [
-                'placeholder' => '240 calories',                    
-                'label'       => 'Calories',
+                'placeholder' => esc_attr__( '240 calories', 'schema-package' ),
+                'label'       => esc_html__( 'Calories', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -104,8 +104,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]                                
             ],
             'carbohydrate' => [
-                'placeholder' => '9 grams carbohydrates',                    
-                'label'       => 'Carbohydrate Content',
+                'placeholder' => esc_attr__( '9 grams carbohydrates', 'schema-package' ),
+                'label'       => esc_html__( 'Carbohydrate Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -118,8 +118,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'cholesterol' => [
-                'placeholder' => '10 milligrams cholesterol',                    
-                'label'       => 'Cholesterol Content',
+                'placeholder' => esc_attr__( '10 milligrams cholesterol', 'schema-package' ),
+                'label'       => esc_html__( 'Cholesterol Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -132,8 +132,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'fat' => [
-                'placeholder' => '11 grams fat',                    
-                'label'       => 'Fat Content',
+                'placeholder' => esc_attr__( '11 grams fat', 'schema-package' ),
+                'label'       => esc_html__( 'Fat Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -146,8 +146,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'fiber' => [
-                'placeholder' => '15 grams fiber',
-                'label'       => 'Fiber Content',
+                'placeholder' => esc_attr__( '15 grams fiber', 'schema-package' ),
+                'label'       => esc_html__( 'Fiber Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -160,8 +160,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'protein' => [
-                'placeholder' => '10 grams protein',                    
-                'label'       => 'Protein Content',
+                'placeholder' => esc_attr__( '10 grams protein', 'schema-package' ),
+                'label'       => esc_html__( 'Protein Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -174,8 +174,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'saturated_fat' => [
-                'placeholder' => '5 grams saturated fat',                    
-                'label'       => 'Saturated Fat Content',
+                'placeholder' => esc_attr__( '5 grams saturated fat', 'schema-package' ),
+                'label'       => esc_html__( 'Saturated Fat Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -188,8 +188,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'sodium' => [
-                'placeholder' => '3 milligrams sodium',                    
-                'label'       => 'Sodium Content',
+                'placeholder' => esc_attr__( '3 milligrams sodium', 'schema-package' ),
+                'label'       => esc_html__( 'Sodium Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -202,8 +202,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'sugar' => [
-                'placeholder' => '15 grams sugar',                    
-                'label'       => 'Sugar Content',
+                'placeholder' => esc_attr__( '15 grams sugar', 'schema-package' ),
+                'label'       => esc_html__( 'Sugar Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -216,8 +216,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'trans_fat' => [
-                'placeholder' => '12 grams trans fat',                    
-                'label'       => 'Trans Fat Content',
+                'placeholder' => esc_attr__( '12 grams trans fat', 'schema-package' ),
+                'label'       => esc_html__( 'Trans Fat Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -230,8 +230,8 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                 ]
             ],
             'unsaturated_fat' => [
-                'placeholder' => '16 grams unsaturated fat',                    
-                'label'       => 'Unsaturated Fat Content',
+                'placeholder' => esc_attr__( '16 grams unsaturated fat', 'schema-package' ),
+                'label'       => esc_html__( 'Unsaturated Fat Content', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -249,14 +249,14 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
             'content_url'         => $content_url,
             'embed_url'           => $embed_url,
             'thumbnail_image'     => [                                                      
-                    'label'       => 'Thumbnail Image',                    
+                    'label' => esc_html__( 'Thumbnail Image', 'schema-package' ),                  
                     'type'        => 'media',
                     'class'       => ['smpg_common_properties'],
                     'multiple'    => false,
                     'value'       => [],
                     'recommended' => true,
                     'display'     => false,
-                    'tooltip'     => 'An image of the item. This can be a URL or a fully described ImageObject.'
+                    'tooltip'     => esc_html__( 'An image of the item. This can be a URL or a fully described ImageObject.', 'schema-package' )
             ],
             'upload_date'         => $upload_date,
             'hours'               => $hours,
@@ -272,15 +272,15 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
             'rating_count'     => $rating_count,
             'review_count'     => $review_count,
             'recipe_ingredient' => [
-                'label'         => 'Recipe Ingredient',
-                'button_text'   => 'Add More Ingredient', 
+                'label'         => esc_html__( 'Recipe Ingredient', 'schema-package' ),
+                'button_text'   => esc_html__( 'Add Another Ingredient', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [['name'   => $name ]]                                                                                                                      
             ],
             'recipe_instructions'  =>   [                        
-                'label'         => 'Recipe Instructions',    
-                'button_text'   => 'Add More Instructions', 
+                'label'       => esc_html__( 'Recipe Instructions', 'schema-package' ),
+                'button_text' => esc_html__( 'Add More Instructions', 'schema-package' ),
                 'type'          => 'repeater',
                 'display'     => true, 
                 'elements'      => [    
@@ -289,15 +289,15 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                                     'description'    => $description,                                                                                                
                                     'image'          => $image,
                                     'clip_name'      => [                                                                                                                                              
-                                        'label'       => 'Clip Name',                    
+                                        'label'       => esc_html__( 'Clip Name', 'schema-package' ),
                                         'type'        => 'text',
                                         'class'       => ['smpg_common_properties'],
-                                        'placeholder' => 'Name',                    
+                                        'placeholder' => esc_attr__( 'Name', 'schema-package' ),                    
                                         'value'       => '',
                                         'display'     => false
                                     ],
                                     'clip_start_offset'      => [                                                                                                                                              
-                                        'label'       => 'Clip Start Offset',                    
+                                        'label'       => esc_html__( 'Clip Start Offset', 'schema-package' ),                    
                                         'type'        => 'number',
                                         'class'       => ['smpg_common_properties'],
                                         'placeholder' => '29',                    
@@ -305,7 +305,7 @@ function smpg_schema_recipe( $schema_id, $common_properties ) {
                                         'display'     => false
                                     ],
                                     'clip_end_offset'      => [                                                                                                                                              
-                                        'label'       => 'Clip End Offset',                    
+                                        'label'       => esc_html__( 'Clip End Offset', 'schema-package' ),                    
                                         'type'        => 'number',
                                         'class'       => ['smpg_common_properties'],
                                         'placeholder' => '36',                    

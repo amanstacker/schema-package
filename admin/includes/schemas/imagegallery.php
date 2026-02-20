@@ -14,7 +14,7 @@ function smpg_schema_imagegallery( $schema_id, $common_properties ) {
         'id'                => 'imagegallery',
         'text'              => 'ImageGallery',
         'properties'        => [
-                'id'                  => $id,
+                'id'                   => $id,
                 'name'                 => $name, 
                 'description'          => $description,                                
                 'url'                  => $url                                

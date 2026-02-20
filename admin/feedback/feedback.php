@@ -68,7 +68,7 @@ function smpg_deactivation_feedback_modal() {
             </li>
             <li>
                 <input type="radio" id="smpg-reason4" name="smpg_disable_reason" value="technical_difficulties" />
-                <label for="smpg-reason4"><?php esc_html_e('Facing Technical Difficulties', 'schema-package') ?></label>
+                <label for="smpg-reason4"><?php esc_html_e('Facing technical difficulties', 'schema-package') ?></label>
             </li>
             <li>
                 <input type="radio" id="smpg-reason5" name="smpg_disable_reason" value="switched_plugin" />

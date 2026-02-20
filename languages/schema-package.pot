@@ -352,7 +352,6 @@ msgstr ""
 
 #: admin/includes/properties-common.php:301
 #: admin/includes/properties-common.php:302
-msgctxt "शीर्षक"
 msgid "Headline"
 msgstr ""
 
@@ -2255,7 +2254,6 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:21
 #: admin/assets/react/dist/admin_panel.js:1252
-msgctxt "विलक्षण योजना"
 msgid "Singular Schema"
 msgstr ""
 

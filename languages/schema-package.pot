@@ -1,23 +1,18 @@
 # Copyright (C) 2026 amanstacker
 # This file is distributed under the GPLv2 or later.
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Schema Package - Structured Data & Rich Snippets Tool "
-"for SEO 1.0.29\n"
+"Project-Id-Version: Schema Package - Structured Data & Rich Snippets Tool for SEO 1.0.29\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/schema-package\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-20 16:26+0000\n"
+"POT-Creation-Date: 2026-02-20T17:22:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: Loco https://localise.biz/\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: schema-package\n"
-"\n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
 
 #. Plugin Name of the plugin
 #: schema-package.php
@@ -26,9 +21,7 @@ msgstr ""
 
 #. Description of the plugin
 #: schema-package.php
-msgid ""
-"Helps website owners automate and add versatile schema markup to their "
-"websites, enabling more informative and visually appealing search results."
+msgid "Helps website owners automate and add versatile schema markup to their websites, enabling more informative and visually appealing search results."
 msgstr ""
 
 #. Author of the plugin
@@ -78,10 +71,7 @@ msgid "Heads up: "
 msgstr ""
 
 #: admin/feedback/feedback.php:84
-msgid ""
-"Clicking \"Submit & Deactivate\" will email your feedback to the developer. "
-"No site data is collected. Click \"Skip & Deactivate\" to deactivate without "
-"sending feedback."
+msgid "Clicking \"Submit & Deactivate\" will email your feedback to the developer. No site data is collected. Click \"Skip & Deactivate\" to deactivate without sending feedback."
 msgstr ""
 
 #: admin/feedback/feedback.php:88
@@ -283,10 +273,16 @@ msgstr ""
 
 #: admin/includes/properties-common.php:213
 #: admin/includes/properties-common.php:283
-#: admin/includes/schemas/howto.php:100 admin/includes/schemas/recipe.php:295
+#: admin/includes/schemas/howto.php:100
+#: admin/includes/schemas/recipe.php:295
 #: admin/includes/schemas/service.php:159
 #: admin/includes/schemas/vacationrental.php:191
 msgid "Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:218
+#: admin/includes/properties-common.php:289
+msgid "Name of the item"
 msgstr ""
 
 #: admin/includes/properties-common.php:221
@@ -297,6 +293,10 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
+#: admin/includes/properties-common.php:227
+msgid "Identifier of the item"
+msgstr ""
+
 #: admin/includes/properties-common.php:230
 msgid "Enter Alternate Name"
 msgstr ""
@@ -305,8 +305,16 @@ msgstr ""
 msgid "Alternate Name "
 msgstr ""
 
+#: admin/includes/properties-common.php:236
+msgid "Alternate Name of the item or person"
+msgstr ""
+
 #: admin/includes/properties-common.php:240
 msgid "Price Range"
+msgstr ""
+
+#: admin/includes/properties-common.php:245
+msgid "Price Range of an item"
 msgstr ""
 
 #: admin/includes/properties-common.php:248
@@ -346,8 +354,7 @@ msgid "ID"
 msgstr ""
 
 #: admin/includes/properties-common.php:298
-msgid ""
-"Globally unique identifier (IRI/URL) that you assign to a particular entity."
+msgid "Globally unique identifier (IRI/URL) that you assign to a particular entity."
 msgstr ""
 
 #: admin/includes/properties-common.php:301
@@ -392,9 +399,7 @@ msgid "Keywords"
 msgstr ""
 
 #: admin/includes/properties-common.php:346
-msgid ""
-"Keywords or tags used to describe this content. Multiple entries in a "
-"keywords list are typically delimited by commas."
+msgid "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas."
 msgstr ""
 
 #: admin/includes/properties-common.php:350
@@ -414,12 +419,11 @@ msgid "Article Section (Opt.)"
 msgstr ""
 
 #: admin/includes/properties-common.php:364
-msgid ""
-"Articles may belong to one or more sections in a magazine or newspaper, such "
-"as Sports, Lifestyle, etc."
+msgid "Articles may belong to one or more sections in a magazine or newspaper, such as Sports, Lifestyle, etc."
 msgstr ""
 
-#: admin/includes/properties-common.php:368 admin/includes/schemas/qna.php:27
+#: admin/includes/properties-common.php:368
+#: admin/includes/schemas/qna.php:27
 msgid "URL"
 msgstr ""
 
@@ -488,9 +492,11 @@ msgstr ""
 #: admin/includes/properties-common.php:674
 #: admin/includes/properties-common.php:823
 #: admin/includes/properties-common.php:839
-#: admin/includes/schemas/course.php:52 admin/includes/schemas/course.php:85
+#: admin/includes/schemas/course.php:52
+#: admin/includes/schemas/course.php:85
 #: admin/includes/schemas/musicrelease.php:35
-#: admin/includes/schemas/review.php:55 admin/includes/schemas/service.php:62
+#: admin/includes/schemas/review.php:55
+#: admin/includes/schemas/service.php:62
 #: admin/includes/schemas/vacationrental.php:42
 #: admin/includes/schemas/vacationrental.php:87
 msgid "Select"
@@ -503,7 +509,8 @@ msgstr ""
 
 #: admin/includes/properties-common.php:446
 #: admin/includes/properties-common.php:464
-#: admin/includes/schemas/review.php:68 admin/includes/schemas/service.php:63
+#: admin/includes/schemas/review.php:68
+#: admin/includes/schemas/service.php:63
 msgid "Organization"
 msgstr ""
 
@@ -560,7 +567,8 @@ msgid "Other"
 msgstr ""
 
 #: admin/includes/properties-common.php:528
-#: admin/includes/properties-common.php:529 admin/includes/setup.php:710
+#: admin/includes/properties-common.php:529
+#: admin/includes/setup.php:710
 msgid "Author Name"
 msgstr ""
 
@@ -577,7 +585,8 @@ msgstr ""
 msgid "The author url of this content"
 msgstr ""
 
-#: admin/includes/properties-common.php:556 admin/includes/setup.php:716
+#: admin/includes/properties-common.php:556
+#: admin/includes/setup.php:716
 msgid "Author Image"
 msgstr ""
 
@@ -619,11 +628,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: admin/includes/properties-common.php:613 admin/includes/schemas/howto.php:55
+#: admin/includes/properties-common.php:613
+#: admin/includes/schemas/howto.php:55
 #: admin/includes/schemas/recipe.php:259
 #: admin/includes/schemas/videoobject.php:34
-msgid ""
-"An image of the item. This can be a URL or a fully described ImageObject."
+msgid "An image of the item. This can be a URL or a fully described ImageObject."
 msgstr ""
 
 #: admin/includes/properties-common.php:616
@@ -634,7 +643,8 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: admin/includes/properties-common.php:625 admin/includes/setup.php:706
+#: admin/includes/properties-common.php:625
+#: admin/includes/setup.php:706
 msgid "Category"
 msgstr ""
 
@@ -758,7 +768,8 @@ msgstr ""
 msgid "Subscription"
 msgstr ""
 
-#: admin/includes/properties-common.php:686 admin/includes/schemas/event.php:90
+#: admin/includes/properties-common.php:686
+#: admin/includes/schemas/event.php:90
 msgid "Offer URL"
 msgstr ""
 
@@ -1081,7 +1092,8 @@ msgstr ""
 msgid "Thumbnail Images"
 msgstr ""
 
-#: admin/includes/schemas/audioobject.php:10 admin/includes/schemas/howto.php:9
+#: admin/includes/schemas/audioobject.php:10
+#: admin/includes/schemas/howto.php:9
 #: admin/includes/schemas/musicrelease.php:9
 #: admin/includes/schemas/videoobject.php:9
 msgid "Duration ( Hours )"
@@ -1115,7 +1127,8 @@ msgstr ""
 msgid "Course Mode"
 msgstr ""
 
-#: admin/includes/schemas/course.php:53 admin/includes/schemas/event.php:49
+#: admin/includes/schemas/course.php:53
+#: admin/includes/schemas/event.php:49
 msgid "Online"
 msgstr ""
 
@@ -1255,7 +1268,8 @@ msgstr ""
 msgid "Duration ( Seconds )"
 msgstr ""
 
-#: admin/includes/schemas/howto.php:48 admin/includes/schemas/recipe.php:252
+#: admin/includes/schemas/howto.php:48
+#: admin/includes/schemas/recipe.php:252
 msgid "Thumbnail Image"
 msgstr ""
 
@@ -1285,15 +1299,18 @@ msgstr ""
 msgid "Add Another Step"
 msgstr ""
 
-#: admin/includes/schemas/howto.php:101 admin/includes/schemas/recipe.php:292
+#: admin/includes/schemas/howto.php:101
+#: admin/includes/schemas/recipe.php:292
 msgid "Clip Name"
 msgstr ""
 
-#: admin/includes/schemas/howto.php:109 admin/includes/schemas/recipe.php:300
+#: admin/includes/schemas/howto.php:109
+#: admin/includes/schemas/recipe.php:300
 msgid "Clip Start Offset"
 msgstr ""
 
-#: admin/includes/schemas/howto.php:117 admin/includes/schemas/recipe.php:308
+#: admin/includes/schemas/howto.php:117
+#: admin/includes/schemas/recipe.php:308
 msgid "Clip End Offset"
 msgstr ""
 
@@ -1583,11 +1600,13 @@ msgstr ""
 msgid "Number Of Servings"
 msgstr ""
 
-#: admin/includes/schemas/recipe.php:75 admin/includes/schemas/recipe.php:76
+#: admin/includes/schemas/recipe.php:75
+#: admin/includes/schemas/recipe.php:76
 msgid "Recipe Category"
 msgstr ""
 
-#: admin/includes/schemas/recipe.php:84 admin/includes/schemas/recipe.php:85
+#: admin/includes/schemas/recipe.php:84
+#: admin/includes/schemas/recipe.php:85
 msgid "Recipe Cuisine"
 msgstr ""
 
@@ -1787,7 +1806,8 @@ msgstr ""
 msgid "Game"
 msgstr ""
 
-#: admin/includes/schemas/review.php:63 admin/includes/schemas/service.php:64
+#: admin/includes/schemas/review.php:63
+#: admin/includes/schemas/service.php:64
 msgid "Local Business"
 msgstr ""
 
@@ -2140,14 +2160,13 @@ msgstr ""
 msgid "Thumbnail URL"
 msgstr ""
 
-#: admin/includes/setup.php:568 admin/includes/setup.php:569
+#: admin/includes/setup.php:568
+#: admin/includes/setup.php:569
 msgid "Schema Package"
 msgstr ""
 
 #: admin/includes/setup.php:600
-msgid ""
-"Thanks for trusting Schema Package! Your support is what keeps this project "
-"alive."
+msgid "Thanks for trusting Schema Package! Your support is what keeps this project alive."
 msgstr ""
 
 #: admin/includes/setup.php:600
@@ -2272,6 +2291,11 @@ msgstr ""
 msgid "Upgrade to Premium"
 msgstr ""
 
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:268
+#: admin/assets/react/dist/admin_panel.js:275
+msgid "Carousel Type"
+msgstr ""
+
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:270
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:287
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:368
@@ -2312,6 +2336,13 @@ msgstr ""
 msgid "Select Schema"
 msgstr ""
 
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:285
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:377
+#: admin/assets/react/dist/admin_panel.js:294
+#: admin/assets/react/dist/admin_panel.js:874
+msgid "Targeting"
+msgstr ""
+
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:290
 #: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:383
 #: admin/assets/react/dist/admin_panel.js:306
@@ -2350,13 +2381,18 @@ msgstr ""
 msgid "Shop Page"
 msgstr ""
 
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:366
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:688
+#: admin/assets/react/dist/admin_panel.js:370
+#: admin/assets/react/dist/admin_panel.js:1116
+msgid "Automation"
+msgstr ""
+
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:394
 #: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:715
 #: admin/assets/react/dist/admin_panel.js:390
 #: admin/assets/react/dist/admin_panel.js:1136
-msgid ""
-"None of the supported Schema Package Automation plugins are currently active,"
-" preventing automated schema markup."
+msgid "None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup."
 msgstr ""
 
 #: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:395
@@ -2431,7 +2467,9 @@ msgid "Add Schema"
 msgstr ""
 
 #: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:177
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:350
 #: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:177
+#: admin/assets/react/dist/admin_panel.js:847
 #: admin/assets/react/dist/admin_panel.js:1522
 #: admin/assets/react/dist/admin_panel.js:4672
 msgid "Schema Type"
@@ -2478,9 +2516,7 @@ msgstr ""
 #: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:226
 #: admin/assets/react/dist/admin_panel.js:1562
 #: admin/assets/react/dist/admin_panel.js:4712
-msgid ""
-"You have not configured any schema types. Please add one or more schemas to "
-"continue."
+msgid "You have not configured any schema types. Please add one or more schemas to continue."
 msgstr ""
 
 #: admin/assets/react/admin_panel/license/LicenseActivation.jsx:63
@@ -2629,6 +2665,8 @@ msgid "Mapping"
 msgstr ""
 
 #: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:188
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:643
+#: admin/assets/react/dist/admin_panel.js:1076
 #: admin/assets/react/dist/admin_panel.js:2651
 msgid "Schema Properties"
 msgstr ""
@@ -2660,9 +2698,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:201
 #: admin/assets/react/dist/admin_panel.js:3028
-msgid ""
-"Helps search engines understand the content of your site. It appears on "
-"homepage only."
+msgid "Helps search engines understand the content of your site. It appears on homepage only."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:209
@@ -2672,9 +2708,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:217
 #: admin/assets/react/dist/admin_panel.js:3049
-msgid ""
-"A sitelinks search box is a quick way for people to search your site or app "
-"immediately on the search results page."
+msgid "A sitelinks search box is a quick way for people to search your site or app immediately on the search results page."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:223
@@ -2684,9 +2718,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:231
 #: admin/assets/react/dist/admin_panel.js:3064
-msgid ""
-"A breadcrumb trail on a page indicates the page's position in the site "
-"hierarchy, and it may help users understand and explore a site effectively."
+msgid "A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:237
@@ -2696,9 +2728,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:245
 #: admin/assets/react/dist/admin_panel.js:3083
-msgid ""
-"Showcase the author's biography, expertise, and social profiles for a richer,"
-" more engaging author page."
+msgid "Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:251
@@ -2713,9 +2743,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:266
 #: admin/assets/react/dist/admin_panel.js:3107
-msgid ""
-"Helps search engines understand the structure of your site's navigation "
-"menus and how different pages are connected."
+msgid "Helps search engines understand the structure of your site's navigation menus and how different pages are connected."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:272
@@ -2732,9 +2760,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:287
 #: admin/assets/react/dist/admin_panel.js:3131
-msgid ""
-"Helps search engines understand the content and purpose of an \"About Us\" "
-"page on a website."
+msgid "Helps search engines understand the content and purpose of an \"About Us\" page on a website."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:293
@@ -2744,9 +2770,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:308
 #: admin/assets/react/dist/admin_panel.js:3155
-msgid ""
-"Helps search engines understand the content and purpose of an \"Contact Us\" "
-"page on a website."
+msgid "Helps search engines understand the content and purpose of an \"Contact Us\" page on a website."
 msgstr ""
 
 #: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:317
@@ -2796,9 +2820,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:380
 #: admin/assets/react/dist/admin_panel.js:3785
-msgid ""
-"Remove unnecessary spaces and line breaks, reducing page size and improving "
-"loading speed without changing the schema data."
+msgid "Remove unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:384
@@ -2808,9 +2830,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:392
 #: admin/assets/react/dist/admin_panel.js:3800
-msgid ""
-"Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially "
-"for special or multilingual characters."
+msgid "Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially for special or multilingual characters."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:396
@@ -2820,9 +2840,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:404
 #: admin/assets/react/dist/admin_panel.js:3815
-msgid ""
-"Search engines and AI tools recommend using the JSON-LD format. This option "
-"will clean and remove all Microdata schema markup from your site."
+msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:408
@@ -2832,9 +2850,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:416
 #: admin/assets/react/dist/admin_panel.js:3830
-msgid ""
-"Search engines and AI tools recommend using the JSON-LD format. This option "
-"will clean and remove all RDFA schema markup from your site."
+msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:420
@@ -2844,9 +2860,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:428
 #: admin/assets/react/dist/admin_panel.js:3845
-msgid ""
-"By default, the image property accepts a URL. However, if you prefer to use "
-"the ImageObject type, enable this option."
+msgid "By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:450
@@ -2856,9 +2870,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:468
 #: admin/assets/react/dist/admin_panel.js:3887
-msgid ""
-"Choose how Schema Package should render schema markup ( JSON-LD ) on your "
-"site."
+msgid "Choose how Schema Package should render schema markup ( JSON-LD ) on your site."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:472
@@ -2868,11 +2880,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:480
 #: admin/assets/react/dist/admin_panel.js:3902
-msgid ""
-"Generates two additional versions of the featured image for every post in "
-"different sizes based on search engine recommendations. This will create "
-"extra images and may increase your upload folder size, so enable it only if "
-"you’re okay with that."
+msgid "Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations. This will create extra images and may increase your upload folder size, so enable it only if you’re okay with that."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:484
@@ -2882,9 +2890,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:492
 #: admin/assets/react/dist/admin_panel.js:3917
-msgid ""
-"Automatically replace placeholders (like %%post_title%%, %%date_published%%) "
-"with actual post or site data when generating schema markup."
+msgid "Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:496
@@ -2894,10 +2900,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:504
 #: admin/assets/react/dist/admin_panel.js:3932
-msgid ""
-"Include the generated Schema.org JSON-LD markup in WordPress REST API "
-"responses for supported post types. Useful for headless setups or external "
-"integrations."
+msgid "Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:548
@@ -2922,9 +2925,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:585
 #: admin/assets/react/dist/admin_panel.js:4017
-msgid ""
-"Enable the Schema Package Generator editor to add or customize schema markup "
-"specifically for post type pages."
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for post type pages."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:589
@@ -2939,9 +2940,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:604
 #: admin/assets/react/dist/admin_panel.js:4044
-msgid ""
-"Enable the Schema Package Generator editor to add or customize schema markup "
-"specifically for taxonomy archive pages."
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for taxonomy archive pages."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:609
@@ -2951,9 +2950,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:617
 #: admin/assets/react/dist/admin_panel.js:4059
-msgid ""
-"Enable the Schema Package Generator editor to add or customize schema markup "
-"specifically for the author’s profile page."
+msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for the author’s profile page."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:622
@@ -2968,9 +2965,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:628
 #: admin/assets/react/dist/admin_panel.js:4072
-msgid ""
-"It exports all the data related to this plugin in json format. Such as:- "
-"Schema Types, Settings etc."
+msgid "It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:632
@@ -3000,10 +2995,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:668
 #: admin/assets/react/dist/admin_panel.js:4133
-msgid ""
-"It ensures all Schema Package related data, such as singular schema, "
-"carousel schema, and saved settings, are deleted when Schema Package plugin "
-"is uninstalled, helping maintain privacy and free up storage space."
+msgid "It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:691
@@ -3013,10 +3005,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:699
 #: admin/assets/react/dist/admin_panel.js:4168
-msgid ""
-"Automatically pull schema-related values (title, description, focus keyword, "
-"etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema "
-"Package will use them instead of WordPress defaults."
+msgid "Automatically pull schema-related values (title, description, focus keyword, etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema Package will use them instead of WordPress defaults."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:703
@@ -3026,10 +3015,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:711
 #: admin/assets/react/dist/admin_panel.js:4183
-msgid ""
-"Automatically fetch schema-related values (title, description, focus keyword,"
-" etc.) from Rank Math SEO settings. If Rank Math values are available, "
-"Schema Package will prioritize them over WordPress defaults."
+msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:715
@@ -3039,10 +3025,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:723
 #: admin/assets/react/dist/admin_panel.js:4198
-msgid ""
-"Automatically fetch schema-related values (title, description, focus keyword,"
-" etc.) from All in One SEO settings. If All in One SEO values are available, "
-"Schema Package will prioritize them over WordPress defaults."
+msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from All in One SEO settings. If All in One SEO values are available, Schema Package will prioritize them over WordPress defaults."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:727
@@ -3052,9 +3035,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:735
 #: admin/assets/react/dist/admin_panel.js:4213
-msgid ""
-"Include the generated Schema.org JSON-LD markup in WPGraphQL responses. "
-"Useful for headless WordPress setups or external GraphQL-based integrations."
+msgid "Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations."
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:761
@@ -3064,9 +3045,7 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:768
 #: admin/assets/react/dist/admin_panel.js:4255
-msgid ""
-"When a post does not have featured image, It will be added to Json-Ld image "
-"field to remove warning from google testing tool"
+msgid "When a post does not have featured image, It will be added to Json-Ld image field to remove warning from google testing tool"
 msgstr ""
 
 #: admin/assets/react/admin_panel/settings/Settings.jsx:795
@@ -3211,9 +3190,12 @@ msgstr ""
 
 #: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:645
 #: admin/assets/react/dist/admin_panel.js:1080
-msgid ""
-"No need to map all listed properties. Available post data is auto-mapped. "
-"Map only to override default values or add missing values."
+msgid "No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values."
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:652
+#: admin/assets/react/dist/admin_panel.js:1089
+msgid "Additional Schema"
 msgstr ""
 
 #: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:663
@@ -3223,9 +3205,7 @@ msgstr ""
 
 #: admin/assets/react/dist/individual_post.js:1796
 #: admin/assets/react/individual/metabox.jsx:417
-msgid ""
-"Include schema types to enhance structured data, enabling rich results in "
-"search engine listings."
+msgid "Include schema types to enhance structured data, enabling rich results in search engine listings."
 msgstr ""
 
 #: admin/assets/react/dist/individual_post.js:1886

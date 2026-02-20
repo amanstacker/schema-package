@@ -215,7 +215,7 @@ function smpg_get_common_properties( $post_id ) {
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Name of the item'        
+            'tooltip'     => esc_html__( 'Name of the item', 'schema-package' )        
         ],
         'identifier' => [                        
             'placeholder' => esc_attr__( 'Enter Identifier', 'schema-package' ),                    
@@ -224,7 +224,7 @@ function smpg_get_common_properties( $post_id ) {
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Identifier of the item'        
+            'tooltip'     => esc_html__( 'Identifier of the item', 'schema-package' )        
         ],
         'alternate_name' => [                        
             'placeholder' => esc_attr__( 'Enter Alternate Name', 'schema-package' ),                    
@@ -233,7 +233,7 @@ function smpg_get_common_properties( $post_id ) {
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Alternate Name of the item or person'
+            'tooltip'     => esc_html__( 'Alternate Name of the item or person', 'schema-package' )
         ],
         'price_range' => [
             'placeholder' => '$$$',                    
@@ -242,7 +242,7 @@ function smpg_get_common_properties( $post_id ) {
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Price Range of an item'        
+            'tooltip'     => esc_html__( 'Price Range of an item', 'schema-package' )        
         ],
         'email' => [
             'placeholder' => esc_attr__( 'Enter Email', 'schema-package' ),
@@ -286,7 +286,7 @@ function smpg_get_common_properties( $post_id ) {
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Name of the item'        
+            'tooltip'     => esc_html__( 'Name of the item', 'schema-package' )
         ],               
         'id' => [                        
             'placeholder' => 'https://example.com/blog/post_name/#schema_type',

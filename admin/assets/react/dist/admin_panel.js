@@ -272,7 +272,7 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-edit-page-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Carousel Type",
+    title: __('Carousel Type', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -291,7 +291,7 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
     options: _shared_carouselSchemaTypes__WEBPACK_IMPORTED_MODULE_2__.schemaTypes,
     onChange: handleSchemaTypeChange
   }))), postMeta._taxonomies ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Targeting",
+    title: __('Targeting', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -367,7 +367,7 @@ var CarouselSchemaEdit = function CarouselSchemaEdit() {
   }))))) : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-right-section"
   }, postMeta._schema_type ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Automation",
+    title: __('Automation', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -844,7 +844,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-edit-page-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Schema Type",
+    title: __('Schema Type', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -871,7 +871,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
     setCustomSchema: handleCustomSchema,
     customSchemaValue: postMeta._custom_schema
   }) : '')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Targeting",
+    title: __('Targeting', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -1073,7 +1073,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, __('OR', 'schema-package'))))))) : ''))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-right-section"
   }, postMeta._schema_type != 'customschema' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Schema Properties",
+    title: __('Schema Properties', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-accordion-body"
@@ -1086,7 +1086,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
     mappedPropertiesKey: postMeta._mapped_properties_key,
     onSelectProperty: handlePropertySelection
   }))) : '', postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Additional Schema",
+    title: __('Additional Schema', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"
@@ -1113,7 +1113,7 @@ var SingularSchemaEdit = function SingularSchemaEdit() {
     checked: !!postMeta._add_speakable,
     onChange: handleFormChange
   })))))))) : '', postMeta._schema_type ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_Accordion_Accordion__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: "Automation",
+    title: __('Automation', 'schema-package'),
     isExpand: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "smpg-learn-more-acc"

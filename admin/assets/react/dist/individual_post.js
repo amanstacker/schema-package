@@ -1288,60 +1288,112 @@ var schemaTypes = [{
   text: 'Organization'
 }, {
   key: 54,
+  value: 'airline',
+  text: 'Airline'
+}, {
+  key: 55,
+  value: 'consortium',
+  text: 'Consortium'
+}, {
+  key: 56,
+  value: 'corporation',
+  text: 'Corporation'
+}, {
+  key: 57,
+  value: 'educationalOrganization',
+  text: 'EducationalOrganization'
+}, {
+  key: 58,
+  value: 'school',
+  text: 'School'
+}, {
+  key: 59,
+  value: 'governmentorganization',
+  text: 'GovernmentOrganization'
+}, {
+  key: 60,
+  value: 'librarysystem',
+  text: 'LibrarySystem'
+}, {
+  key: 61,
+  value: 'newsmediaorganization',
+  text: 'NewsMediaOrganization'
+}, {
+  key: 62,
+  value: 'ngo',
+  text: 'NGO'
+}, {
+  key: 63,
+  value: 'performinggroup',
+  text: 'PerformingGroup'
+}, {
+  key: 64,
+  value: 'sportsorganization',
+  text: 'SportsOrganization'
+}, {
+  key: 65,
+  value: 'workersunion',
+  text: 'WorkersUnion'
+}, {
+  key: 66,
   value: 'certification',
   text: 'Certification'
 }, {
-  key: 55,
+  key: 67,
   value: 'vacationrental',
   text: 'VacationRental'
 }, {
-  key: 56,
+  key: 68,
   value: 'report',
   text: 'Report'
 }, {
-  key: 57,
+  key: 69,
   value: 'discussionforumposting',
   text: 'DiscussionForumPosting'
 }, {
-  key: 58,
+  key: 70,
   value: 'musicrelease',
   text: 'MusicRelease'
 }].concat(_toConsumableArray(!smpg_local.is_free ? [{
-  key: 59,
+  key: 71,
   value: 'medicalclinic',
   text: 'MedicalClinic'
 }, {
-  key: 60,
+  key: 72,
   value: 'dietarysupplement',
   text: 'DietarySupplement'
 }, {
-  key: 61,
+  key: 73,
   value: 'exerciseplan',
   text: 'ExercisePlan'
 }, {
-  key: 62,
+  key: 74,
   value: 'drug',
   text: 'Drug'
 }, {
-  key: 63,
+  key: 75,
   value: 'medicalcondition',
   text: 'MedicalCondition'
 }, {
-  key: 64,
+  key: 76,
   value: 'medicaltherapy',
   text: 'MedicalTherapy'
 }, {
-  key: 65,
+  key: 77,
   value: 'medicalprocedure',
   text: 'MedicalProcedure'
 }, {
-  key: 66,
+  key: 78,
   value: 'physician',
   text: 'Physician'
 }, {
-  key: 67,
+  key: 79,
   value: 'hospital',
   text: 'Hospital'
+}, {
+  key: 80,
+  value: 'medicalorganization',
+  text: 'MedicalOrganization'
 }] : []));
 
 /***/ })

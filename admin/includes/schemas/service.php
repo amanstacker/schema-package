@@ -127,7 +127,7 @@ function smpg_schema_service( $schema_id, $common_properties ) {
             'annual_percentage_rate' => [
                 'label'       => esc_html__( 'Annual Percentage Rate', 'schema-package' ),
                 'type'        => 'text',
-                'placeholder' => esc_attr__( '30%', 'schema-package' ),
+                'placeholder' => '30%',
                 'value'       => '',
                 'display'     => true,
             ],

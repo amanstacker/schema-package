@@ -80,7 +80,21 @@ $smpg_schema_map = [
     'review'                    => 'review.php',
     'profilepage'               => 'profilepage.php',
     'webpage'                   => 'webpage.php',
-    'organization'              => 'organization.php',
+
+    'organization'            => 'organization.php',
+    'airline'                 => 'organization.php',
+    'consortium'              => 'organization.php',
+    'corporation'             => 'organization.php',
+    'educationalorganization' => 'organization.php',
+    'school'                  => 'organization.php',
+    'governmentorganization'  => 'organization.php',
+    'librarysystem'           => 'organization.php',
+    'newsmediaorganization'   => 'organization.php',
+    'ngo'                     => 'organization.php',
+    'performinggroup'         => 'organization.php',
+    'sportsorganization'      => 'organization.php',
+    'workersunion'            => 'organization.php',
+
     'certification'             => 'certification.php',
     'vacationrental'            => 'vacationrental.php',
 ];

@@ -20,13 +20,29 @@ function smpg_schema_organization( $schema_id, $common_properties ) {
 
     unset( $publisher_logo['parent_data'] );    
 
+    $organization_type = [
+        'organization'             => 'Organization',
+        'airline'                  => 'Airline',
+        'consortium'               => 'Consortium',
+        'corporation'              => 'Corporation',
+        'educationalorganization'  => 'EducationalOrganization',
+        'school'                   => 'School',
+        'governmentorganization'   => 'GovernmentOrganization',
+        'librarysystem'            => 'LibrarySystem',
+        'newsmediaorganization'    => 'NewsMediaOrganization',
+        'ngo'                      => 'NGO',
+        'performinggroup'          => 'PerformingGroup',
+        'sportsorganization'       => 'SportsOrganization',
+        'workersunion'             => 'WorkersUnion',        
+    ];
+
     $properties = [
         'is_enable'         => true,
         'is_delete_popup'   => false, 
         'is_setup_popup'    => false,
         'has_warning'       => false,
-        'id'                => 'organization',           
-        'text'              => 'Organization',
+        'id'                => $schema_id,           
+        'text'              => $organization_type[ $schema_id ],
         'properties'        => [
             'id'               => $id,
             'name'             => $name,    

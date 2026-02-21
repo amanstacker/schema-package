@@ -1390,10 +1390,6 @@ var schemaTypes = [{
   key: 79,
   value: 'hospital',
   text: 'Hospital'
-}, {
-  key: 80,
-  value: 'medicalorganization',
-  text: 'MedicalOrganization'
 }] : []));
 
 /***/ })

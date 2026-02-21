@@ -81,7 +81,6 @@ export const schemaTypes = [
         { key: 76, value: 'medicaltherapy', text: 'MedicalTherapy' },
         { key: 77, value: 'medicalprocedure', text: 'MedicalProcedure' },
         { key: 78, value: 'physician', text: 'Physician' },
-        { key: 79, value: 'hospital', text: 'Hospital' },
-        { key: 80, value: 'medicalorganization', text: 'MedicalOrganization' },
+        { key: 79, value: 'hospital', text: 'Hospital' },        
     ] : [])
 ];

@@ -54,7 +54,7 @@ function smpg_schema_article( $schema_id, $common_properties ) {
         if ( $schema_id == 'report' ) {
             
             $properties['properties']['report_number'] = [
-                                'label'       => 'Report Number',
+                                'label'       => esc_html__( 'Report Number', 'schema-package' ),
                                 'type'        => 'text',
                                 'placeholder' => '75847575',
                                 'value'       => '',

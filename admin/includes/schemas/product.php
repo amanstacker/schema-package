@@ -16,14 +16,15 @@ function smpg_schema_product( $schema_id, $common_properties ) {
         'worst_rating'        => $worst_rating,
     ];
 
-    $reviews  =   [                            
-                'label'         => 'Reviews',    
-                'button_text'   => 'Add More Reviews', 
-                'type'          => 'repeater',
-                'display'       => true, 
-                'elements'      => [ $reviews_elements ]
+    $reviews = [
+        'label'       => esc_html__( 'Reviews', 'schema-package' ),
+        'button_text' => esc_html__( 'Add Another Review', 'schema-package' ),
+        'type'        => 'repeater',
+        'display'     => true,
+        'elements'    => [ $reviews_elements ],
     ];
 
+    
     $properties = [
         'is_enable'         => true,
         'is_delete_popup'   => false, 

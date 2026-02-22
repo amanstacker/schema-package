@@ -19,8 +19,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'cafeorcoffeeshop':
         case 'fastfoodrestaurant':
         case 'icecreamshop':
-        case 'restaurant':
-        case 'organization':
+        case 'restaurant':        
             
             $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);              
                                     
@@ -130,6 +129,18 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
             break;
 
         case 'organization':
+        case 'airline':
+        case 'consortium':
+        case 'corporation':
+        case 'educationalorganization':
+        case 'school':
+        case 'governmentorganization':
+        case 'librarysystem':
+        case 'newsmediaorganization':
+        case 'ngo':
+        case 'performinggroup':
+        case 'sportsorganization':
+        case 'workersunion':
 
             $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);            
                         
@@ -163,6 +174,12 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
 
             $json_ld = smpg_get_musicalbum_individual_json_ld($json_ld, $properties, $schema_type);            
                         
+        break;
+
+        case 'musicrelease':
+
+            $json_ld = smpg_get_musicrelease_individual_json_ld($json_ld, $properties, $schema_type);
+
         break;
 
         case 'liveblogposting':
@@ -344,7 +361,11 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             }                
 
             $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
-            $json_ld['keywords']                  = smpg_get_post_tags( $post_id );                            
+
+            if ( smpg_get_post_tags( $post_id ) ) {
+                $json_ld['keywords']              = smpg_get_post_tags( $post_id );                            
+            }
+            
             $json_ld['author']                    = smpg_get_author_detail( $post_id );
 
             $json_ld['publisher']                 = smpg_get_publisher( $post_id );
@@ -573,6 +594,18 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         break;
 
         case 'organization':
+        case 'airline':
+        case 'consortium':
+        case 'corporation':
+        case 'educationalorganization':
+        case 'school':
+        case 'governmentorganization':
+        case 'librarysystem':
+        case 'newsmediaorganization':
+        case 'ngo':
+        case 'performinggroup':
+        case 'sportsorganization':
+        case 'workersunion':
             
             $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
@@ -621,6 +654,29 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
 
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_musicalbum_json_ld', $json_ld, $schema_data, $post_id ); 
+
+        break;
+
+        case 'musicrelease':
+            
+            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
+
+            $json_ld['datePublished']             = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']              = smpg_get_modified_date( $post_id );    
+            $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );
+
+            $image = smpg_get_image();
+
+            if ( ! empty( $image ) ) {
+                $json_ld = array_merge( $json_ld, $image );
+            }
+
+            if ( isset( $schema_data['add_comments'][0] ) && $schema_data['add_comments'][0] == 1 ) {
+                $json_ld['comment'] = smpg_get_post_comments($post_id);
+            }
+            
+            $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
+            $json_ld = apply_filters( 'smpg_filter_musicrelease_json_ld', $json_ld, $schema_data, $post_id ); 
 
         break;
 

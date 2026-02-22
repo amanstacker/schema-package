@@ -1817,6 +1817,101 @@ function smpg_get_musicalbum_individual_json_ld( $json_ld, $properties, $schema_
    return $json_ld;
 }
 
+function smpg_get_musicrelease_individual_json_ld( $json_ld, $properties, $schema_type ){
+
+    $json_ld['@context']         = smpg_get_context_url();
+    $json_ld['@type']            = smpg_get_schema_type_text( $schema_type );
+
+    if(!empty($properties['id']['value'])){
+        $json_ld['@id'] =      $properties['id']['value'];
+    }
+    if(!empty($properties['name']['value'])){
+       $json_ld['name'] =      $properties['name']['value'];
+    }
+    if(!empty($properties['alternate_name']['value'])){
+       $json_ld['alternateName'] =      $properties['alternate_name']['value'];
+    }
+    if(!empty($properties['url']['value'])){
+        $json_ld['url'] =      $properties['url']['value'];
+    }
+    if(!empty($properties['in_language']['value'])){
+        $json_ld['inLanguage'] =      $properties['in_language']['value'];
+    }
+    if(!empty($properties['date_published']['value'])){
+        $json_ld['datePublished']      = $properties['date_published']['value'];
+    }
+    if(!empty($properties['date_modified']['value'])){
+        $json_ld['dateModified']       = $properties['date_modified']['value'];
+    }
+    if(!empty($properties['description']['value'])){
+        $json_ld['description'] =      $properties['description']['value'];
+    }
+    $image = smpg_make_the_image_json($properties['image']['value'], true);
+
+    if(!empty($image)){
+        $json_ld['image']              =  $image;   
+    }
+
+    if(!empty($properties['music_release_format']['value'])){
+        $json_ld['musicReleaseFormat'] =      $properties['music_release_format']['value'];
+    }
+    if(!empty($properties['catalog_number']['value'])){
+        $json_ld['catalogNumber'] =      $properties['catalog_number']['value'];
+    }
+    if(!empty($properties['genre']['value'])){
+        $json_ld['genre'] =      $properties['genre']['value'];
+    }
+    
+    if(!empty($properties['record_label']['value'])){
+        
+        $json_ld['recordLabel']['@type'] = 'Organization'; 
+        $json_ld['recordLabel']['name']  = $properties['record_label']['value'];    
+
+        if(!empty($properties['record_label_id']['value'])){
+            $json_ld['recordLabel']['@id']  = $properties['record_label_id']['value'];    
+        }
+    }
+
+    $duration = '';
+    if(!empty($properties['hours']['value'])){
+        $duration .=      $properties['hours']['value'].'H';
+    }
+    if(!empty($properties['minutes']['value'])){
+        $duration .=      $properties['minutes']['value'].'M';
+    }
+    if(!empty($properties['seconds']['value'])){
+        $duration .=      $properties['seconds']['value'].'S';
+    }
+    if($duration){
+        $json_ld['duration']              =  'PT'.$duration;    
+    }
+
+    if(!empty($properties['producers']['elements'])){
+
+        $producers      = $properties['producers']['elements'];
+        $producers_data = [];
+
+        foreach ($producers as $key => $value) {
+
+            $supply = [];
+
+            if(!empty($value['name']['value'])){
+
+                $supply['@type'] = 'Person';
+                $supply['name']  = $value['name']['value'];                
+            }   
+            
+            $producers_data[] = $supply;
+        }
+
+        $json_ld['producer'] = $producers_data;
+    }
+    
+    $json_ld = smpg_prepare_aggregate_rating( $json_ld, $properties );
+
+   return $json_ld;
+}
+
 function smpg_get_liveblogposting_individual_json_ld( $json_ld, $properties, $schema_type ){
 
     $json_ld['@context']         = smpg_get_context_url();
@@ -1960,7 +2055,7 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
     if(!empty($properties['telephone']['value'])){
         $json_ld['telephone'] =      $properties['telephone']['value'];
     }
-    if(!empty($properties['telephone']['value'])){
+    if(!empty($properties['email']['value'])){
         $json_ld['email']   =      $properties['email']['value'];
     }
     if(!empty($properties['price_range']['value'])){

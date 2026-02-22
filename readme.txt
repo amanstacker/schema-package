@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.29
+Stable tag: 1.0.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,13 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [SportsOrganization](https://schema.org/SportsOrganization)
 - [Store](https://schema.org/Store)
+- [Airline](https://schema.org/Airline)
+- [Consortium](https://schema.org/Consortium)
+- [School](https://schema.org/School)
+- [LibrarySystem](https://schema.org/LibrarySystem)
+- [NewsMediaOrganization](https://schema.org/NewsMediaOrganization)
+- [PerformingGroup](https://schema.org/PerformingGroup)
+- [WorkersUnion](https://schema.org/WorkersUnion)
 
 === 2. Website & Content ===
 - [WebSite](https://schema.org/WebSite)
@@ -212,6 +219,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [TVSeries](https://schema.org/TVSeries)
 - [MusicAlbum](https://schema.org/MusicAlbum)
 - [MusicPlaylist](https://schema.org/MusicPlaylist)
+- [MusicRelease](https://schema.org/MusicRelease)
 - [VideoObject](https://schema.org/VideoObject)
 - [AudioObject](https://schema.org/AudioObject)
 - [BroadcastService](https://schema.org/BroadcastService)
@@ -233,7 +241,6 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 
 * [WooCommerce](https://wordpress.org/plugins/woocommerce)
 * [Simple Job Board](https://wordpress.org/plugins/simple-job-board/)
-* [Mooberry Book Manager](https://wordpress.org/plugins/mooberry-book-manager)
 * [Brands for WooCommerce](https://wordpress.org/plugins/brands-for-woocommerce)
 * [Perfect Brands for WooCommerce](https://wordpress.org/plugins/perfect-woocommerce-brands)
 * [Ryviu – Product Reviews for WooCommerce](https://wordpress.org/plugins/ryviu)
@@ -542,10 +549,20 @@ To explore all the advanced features and benefits included in the Schema Package
 16. JSON-LD output in page source
 
 == Upgrade Notice ==
-= 1.0.26 =
-Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
+
+= 1.0.30 =
+Adds MusicRelease schema support, new Organization schema types, improved translation handling, updated .pot file, and fixes for email property and boolean mapping issues.
 
 == Changelog ==
+
+= 1.0.30 =
+
+* Added: MusicRelease schema support.
+* Added: Applied proper escaping for previously missing translation strings.
+* Updated: .pot file with the latest translatable strings.
+* Added: Additional Organization schema types including Airline, Consortium, Corporation, EducationalOrganization, GovernmentOrganization, and NewsMediaOrganization.
+* Fixed: Incorrect email property value in LocalBusiness JSON-LD markup.
+* Fixed: Resolved issue where 0 and 1 were being converted to true and false during schema property mapping.
 
 = 1.0.29 =
 

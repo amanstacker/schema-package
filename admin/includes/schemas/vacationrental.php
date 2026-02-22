@@ -16,12 +16,12 @@ function smpg_schema_vacationrental( $schema_id, $common_properties ) {
         'worst_rating'        => $worst_rating,
     ];
 
-    $reviews  =   [                            
-                'label'         => 'Reviews',    
-                'button_text'   => 'Add More Reviews', 
-                'type'          => 'repeater',
-                'display'       => true, 
-                'elements'      => [ $reviews_elements ]
+    $reviews = [
+        'label'       => esc_html__( 'Reviews', 'schema-package' ),
+        'button_text' => esc_html__( 'Add Another Review', 'schema-package' ),
+        'type'        => 'repeater',
+        'display'     => true,
+        'elements'    => [ $reviews_elements ],
     ];
 
     $properties = [
@@ -34,37 +34,38 @@ function smpg_schema_vacationrental( $schema_id, $common_properties ) {
         'properties'        => [                                
             'id'               => $id,
             'name'             => $name,    
-            'additional_type'          => [
-                'label'       => 'Vacation Rental Type',
-                'type'        => 'select',                                                                        
-                'value'       => '',
-                'options'     => [
-                            ''                      => 'Select',                                                
-                            'Villa'                 => 'Villa',
-                            'House'                 => 'House',
-                            'HolidayVillageRental'  => 'HolidayVillageRental',
-                            'Gite'                  => 'Gite',
-                            'Cottage'               => 'Cottage',
-                            'Chalet'                => 'Chalet',
-                            'Cabin'                 => 'Cabin',                                                
-                            'Bungalow'              => 'Bungalow',  
-                            'Apartment'             => 'Apartment',                                                 
-                    ],
-                'display'     => true
+            'additional_type' => [
+                'label'   => esc_html__( 'Vacation Rental Type', 'schema-package' ),
+                'type'    => 'select',
+                'value'   => '',
+                'options' => [
+                    ''                     => esc_html__( 'Select', 'schema-package' ),
+                    'Villa'                => esc_html__( 'Villa', 'schema-package' ),
+                    'House'                => esc_html__( 'House', 'schema-package' ),
+                    'HolidayVillageRental' => esc_html__( 'Holiday Village Rental', 'schema-package' ),
+                    'Gite'                 => esc_html__( 'Gite', 'schema-package' ),
+                    'Cottage'              => esc_html__( 'Cottage', 'schema-package' ),
+                    'Chalet'               => esc_html__( 'Chalet', 'schema-package' ),
+                    'Cabin'                => esc_html__( 'Cabin', 'schema-package' ),
+                    'Bungalow'             => esc_html__( 'Bungalow', 'schema-package' ),
+                    'Apartment'            => esc_html__( 'Apartment', 'schema-package' ),
+                ],
+                'display' => true,
             ],
-            'checkin_time'          => [
-                'label'       => 'Checkin Time',                    
-                'type'        => 'text',                                    
-                'placeholder' => '18:00:00+08:00',                    
+            'checkin_time' => [
+                'placeholder' => '18:00:00+08:00',
+                'label'       => esc_html__( 'Check-in Time', 'schema-package' ),
+                'type'        => 'text',                
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
-            'checkout_time'          => [
-                'label'       => 'Checkout Time',                    
-                'type'        => 'text',                                    
-                'placeholder' => '11:00:00+08:00',                    
+
+            'checkout_time' => [
+                'placeholder' => '11:00:00+08:00',
+                'label'       => esc_html__( 'Check-out Time', 'schema-package' ),
+                'type'        => 'text',                
                 'value'       => '',
-                'display'     => true
+                'display'     => true,
             ],
             'brand'            => $brand,
             'description'      => $description,
@@ -78,90 +79,90 @@ function smpg_schema_vacationrental( $schema_id, $common_properties ) {
             'identifier'       => $identifier,
             'latitude'         => $latitude,
             'longitude'        => $longitude,
-            'type_of_room'         => [
-                'label'       => 'Type of room',
-                'type'        => 'select',                                                                                         
-                'value'       => 'EntirePlace',
-                'options'     => [
-                            ''             => 'Select',                                                
-                            'EntirePlace'  => 'EntirePlace',
-                            'PrivateRoom'  => 'PrivateRoom',
-                            'SharedRoom'   => 'SharedRoom',                                                
-                    ],
-                'display'     => true
-            ],
-            'occupancy'          => [
-                'label'       => 'Occupancy',                    
-                'type'        => 'text',                                    
-                'placeholder' => '2',                    
-                'value'       => '',
-                'display'     => true
-            ],
-            'number_of_bathrooms_total'          => [
-                'label'       => 'Number Of Bathrooms Total',
-                'type'        => 'text',                                    
-                'placeholder' => '1',                    
-                'value'       => '',
-                'display'     => true
-            ],
-            'number_of_bedrooms'          => [
-                'label'       => 'Number Of Bedrooms',                    
-                'type'        => 'text',                                    
-                'placeholder' => '3',                    
-                'value'       => '',
-                'display'     => true
-            ],
-            'number_of_rooms'          => [
-                'label'       => 'Number Of Rooms',
-                'type'        => 'text',                                    
-                'placeholder' => '5',                    
-                'value'       => '',
-                'display'     => true
-            ],
-            'floor_size'          => [
-                'label'       => 'Floor Size',                    
-                'type'        => 'text',                                    
-                'placeholder' => '75',                    
-                'value'       => '',
-                'display'     => true
-            ],
-            'floor_size_unit_text' => [                                                                                                                                              
-                'label'       => 'Floor Size Unit Text',
-                'type'        => 'select',                                                                                            
-                'value'       => 'FTK',
-                'options'     => [
-                        'FTK'    => 'FTK',
-                        'MTK'    => 'MTK',
-                        'SQFT'   => 'SQFT',
-                        'SQM'    => 'SQM',                                            
+            'type_of_room' => [
+                'label'   => esc_html__( 'Type of Room', 'schema-package' ),
+                'type'    => 'select',
+                'value'   => 'EntirePlace',
+                'options' => [
+                    ''            => esc_html__( 'Select', 'schema-package' ),
+                    'EntirePlace' => esc_html__( 'Entire Place', 'schema-package' ),
+                    'PrivateRoom' => esc_html__( 'Private Room', 'schema-package' ),
+                    'SharedRoom'  => esc_html__( 'Shared Room', 'schema-package' ),
                 ],
-                'display'     => true
+                'display' => true,
+            ],
+            'occupancy' => [
+                'label'       => esc_html__( 'Occupancy', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '2',
+                'value'       => '',
+                'display'     => true,
+            ],
+            'number_of_bathrooms_total' => [
+                'label'       => esc_html__( 'Number of Bathrooms (Total)', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '1',
+                'value'       => '',
+                'display'     => true,
+            ],
+            'number_of_bedrooms' => [
+                'label'       => esc_html__( 'Number of Bedrooms', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '3',
+                'value'       => '',
+                'display'     => true,
+            ],
+            'number_of_rooms' => [
+                'label'       => esc_html__( 'Number of Rooms', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '5',
+                'value'       => '',
+                'display'     => true,
+            ],
+            'floor_size' => [
+                'label'       => esc_html__( 'Floor Size', 'schema-package' ),
+                'type'        => 'text',
+                'placeholder' => '75',
+                'value'       => '',
+                'display'     => true,
+            ],
+            'floor_size_unit_text' => [
+                'label'   => esc_html__( 'Floor Size Unit', 'schema-package' ),
+                'type'    => 'select',
+                'value'   => 'FTK',
+                'options' => [
+                    'FTK'  => esc_html__( 'FTK', 'schema-package' ),
+                    'MTK'  => esc_html__( 'MTK', 'schema-package' ),
+                    'SQFT' => esc_html__( 'SQFT', 'schema-package' ),
+                    'SQM'  => esc_html__( 'SQM', 'schema-package' ),
+                ],
+                'display' => true,
             ],
             'bed' => [
-                'label'         => 'Bed Details',    
-                'button_text'   => 'Add More Bed', 
+                'label'         => esc_html__( 'Bed Details', 'schema-package' ),    
+                'button_text'   => esc_html__( 'Add Another Bed', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [
                     [
                         'number_of_beds' => [                                                                                                                                              
-                            'label'       => 'Number Of Beds',
+                            'label'       => esc_html__( 'Number Of Beds', 'schema-package' ),
                             'type'        => 'text',                                                                                    
                             'value'       => '',
                             'display'     => true
                         ],
                         'type_of_bed' => [
-                            'label'       => 'Type Of Bed',                    
+                            'label'       => esc_html__( 'Type Of Bed', 'schema-package' ),                    
                             'type'        => 'select',                                                                                    
                             'value'       => 'Single',
                             'options'     => [
-                                                'Single'         => 'Single',
-                                                'Double'         => 'Double',
-                                                'SemiDouble'     => 'SemiDouble',
-                                                'Full'           => 'Full',                                                                    
-                                                'Queen'          => 'Queen',
-                                                'King'           => 'King',
-                                                'CaliforniaKing' => 'CaliforniaKing',                                                                    
+                                                'Single'         => esc_html__( 'Single', 'schema-package' ),
+                                                'Double'         => esc_html__( 'Double', 'schema-package' ),
+                                                'SemiDouble'     => esc_html__( 'SemiDouble', 'schema-package' ),
+                                                'Full'           => esc_html__( 'Full', 'schema-package' ),
+                                                'Queen'          => esc_html__( 'Queen', 'schema-package' ),
+                                                'King'           => esc_html__( 'King', 'schema-package' ),
+                                                'CaliforniaKing' => esc_html__( 'California King', 'schema-package' ),                                                                    
                                             ],
                             'display'     => true
                         ],                                           
@@ -169,53 +170,54 @@ function smpg_schema_vacationrental( $schema_id, $common_properties ) {
                 ]                                                                                                                      
             ],
             'images' => [
-                'label'         => 'Images',    
-                'button_text'   => 'Add More Image', 
-                'type'          => 'repeater', 
-                'display'       => true,
-                'elements'      => [
+                'label'       => esc_html__( 'Images', 'schema-package' ),
+                'button_text' => esc_html__( 'Add Another Image', 'schema-package' ),
+                'type'        => 'repeater',
+                'display'     => true,
+                'elements'    => [
                     [
-                        'image'    => $image,
-                    ]
-                ]                                                                                                                      
+                        'image' => $image,
+                    ],
+                ],
             ],
             'amenity_feature' => [
-                'label'         => 'Amenity Feature',    
-                'button_text'   => 'Add More Amenity', 
+                'label'         => esc_html__( 'Amenity Feature', 'schema-package' ),    
+                'button_text'   => esc_html__( 'Add Another Amenity', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [
                     [
-                        'name' => [                                                                                                                                              
-                            'label'       => 'Name',                    
-                            'type'        => 'text',                                                                                    
-                            'value'       => '',
-                            'display'     => true
+                        'name' => [
+                            'label'   => esc_html__( 'Name', 'schema-package' ),
+                            'type'    => 'text',
+                            'value'   => '',
+                            'display' => true,
                         ],
-                        'value' => [                                                                                                                                              
-                            'label'       => 'Value',                    
-                            'type'        => 'text',                                                                                    
-                            'value'       => '',
-                            'display'     => true
+
+                        'value' => [
+                            'label'   => esc_html__( 'Value', 'schema-package' ),
+                            'type'    => 'text',
+                            'value'   => '',
+                            'display' => true,
                         ],                                           
                     ]
                 ]                                                                                                                      
             ],
             'knows_language' => [
-                'label'         => 'Knows Language',    
-                'button_text'   => 'Add More Language', 
-                'type'          => 'repeater', 
-                'display'       => true,
-                'elements'      => [
+                'label'       => esc_html__( 'Knows Language', 'schema-package' ),
+                'button_text' => esc_html__( 'Add Another Language', 'schema-package' ),
+                'type'        => 'repeater',
+                'display'     => true,
+                'elements'    => [
                     [
-                        'language' => [                                                                                                                                              
-                            'label'       => 'Language',
-                            'type'        => 'text',                                                                                    
-                            'value'       => '',
-                            'display'     => true
-                        ],                                                                                       
-                    ]
-                ]                                                                                                                      
+                        'language' => [
+                            'label'   => esc_html__( 'Language', 'schema-package' ),
+                            'type'    => 'text',
+                            'value'   => '',
+                            'display' => true,
+                        ],
+                    ],
+                ],
             ],
             'rating_value'     => $rating_value,
             'best_rating'      => $best_rating,

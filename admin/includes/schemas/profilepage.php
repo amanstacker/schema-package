@@ -6,22 +6,23 @@ function smpg_schema_profilepage( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $social_links = [                            
-        'label'         => 'Person Social Links',
-        'button_text'   => 'Add More Social Links', 
-        'type'          => 'repeater', 
-        'display'       => true,
-        'elements'      => [
+    $social_links = [
+        'label'       => esc_html__( 'Person Social Links', 'schema-package' ),
+        'button_text' => esc_html__( 'Add Another Social Link', 'schema-package' ),
+        'type'        => 'repeater',
+        'display'     => true,
+        'elements'    => [
             [
-                'url'     => $url,                                            
-            ]
-        ]                                                                                                                      
+                'url' => $url,
+            ],
+        ],
     ];
 
-    $image['label']          = 'Person Image';
-    $name['label']           = 'Person Name';
-    $alternate_name['label'] = 'Person Alternate Name';
-    $description['label']    = 'Person Description';                        
+    $image['label']          = esc_html__( 'Person Image', 'schema-package' );
+    $name['label']           = esc_html__( 'Person Name', 'schema-package' );
+    $alternate_name['label'] = esc_html__( 'Person Alternate Name', 'schema-package' );
+    $description['label']    = esc_html__( 'Person Description', 'schema-package' );
+
 
     $properties = [
         'is_enable'         => true,

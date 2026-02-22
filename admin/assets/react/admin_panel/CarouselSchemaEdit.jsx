@@ -265,7 +265,7 @@ const CarouselSchemaEdit = () => {
       <div className="smpg-left-section">
       <div className="smpg-edit-page-content">
         
-      <Accordion title="Carousel Type" isExpand={true}>
+      <Accordion title={__('Carousel Type', 'schema-package') } isExpand={true}>
         <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/carousel-schema/'>{__('Learn More', 'schema-package')}</a>
         </div>
@@ -282,7 +282,7 @@ const CarouselSchemaEdit = () => {
       </div>
       </Accordion>               
     {postMeta._taxonomies ?
-    <Accordion title="Targeting" isExpand={true}>
+    <Accordion title={__('Targeting', 'schema-package')} isExpand={true}>
       <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/how-to-configure-carousel-schema-using-the-schema-package/#carousel-targeting'>{__('Learn More', 'schema-package')}</a>
         </div>
@@ -363,7 +363,7 @@ const CarouselSchemaEdit = () => {
 
          {postMeta._schema_type ?                
         
-        <Accordion title="Automation" isExpand={true}>  
+        <Accordion title={__('Automation', 'schema-package')} isExpand={true}>  
         <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/automation/'>{__('Learn More', 'schema-package')}</a>
         </div>    

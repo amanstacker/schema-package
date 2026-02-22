@@ -109,6 +109,13 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [SportsOrganization](https://schema.org/SportsOrganization)
 - [Store](https://schema.org/Store)
+- [Airline](https://schema.org/Airline)
+- [Consortium](https://schema.org/Consortium)
+- [School](https://schema.org/School)
+- [LibrarySystem](https://schema.org/LibrarySystem)
+- [NewsMediaOrganization](https://schema.org/NewsMediaOrganization)
+- [PerformingGroup](https://schema.org/PerformingGroup)
+- [WorkersUnion](https://schema.org/WorkersUnion)
 
 #### 2. Website & Content
 - [WebSite](https://schema.org/WebSite)
@@ -222,6 +229,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [TVSeries](https://schema.org/TVSeries)
 - [MusicAlbum](https://schema.org/MusicAlbum)
 - [MusicPlaylist](https://schema.org/MusicPlaylist)
+- [MusicRelease](https://schema.org/MusicRelease)
 - [VideoObject](https://schema.org/VideoObject)
 - [AudioObject](https://schema.org/AudioObject)
 - [BroadcastService](https://schema.org/BroadcastService)
@@ -243,7 +251,6 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 
 * [WooCommerce](https://wordpress.org/plugins/woocommerce)
 * [Simple Job Board](https://wordpress.org/plugins/simple-job-board/)
-* [Mooberry Book Manager](https://wordpress.org/plugins/mooberry-book-manager)
 * [Brands for WooCommerce](https://wordpress.org/plugins/brands-for-woocommerce)
 * [Perfect Brands for WooCommerce](https://wordpress.org/plugins/perfect-woocommerce-brands)
 * [Ryviu – Product Reviews for WooCommerce](https://wordpress.org/plugins/ryviu)

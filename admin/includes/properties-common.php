@@ -6,8 +6,8 @@ function smpg_get_common_properties( $post_id ) {
 
     return [
         'start_date' => [                        
-            'placeholder' => '2025-07-21T19:00-05:00',                    
-            'label'       => 'Start Date',
+            'placeholder' => '2025-07-21T19:00-05:00', 
+            'label'       => esc_html__( 'Start Date', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -15,8 +15,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'prev_start_date' => [                        
-            'placeholder' => '2025-07-21T23:00-05:00',                    
-            'label'       => 'Previous Start Date',
+            'placeholder' => '2025-07-21T23:00-05:00',
+			'label'       => esc_html__( 'Previous Start Date', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -24,8 +24,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'end_date' => [                        
-            'placeholder' => '2025-07-21T23:00-05:00',                    
-            'label'       => 'End Date',
+            'placeholder' => '2025-07-21T23:00-05:00',
+			'label'       => esc_html__( 'End Date', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -33,8 +33,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'place_name' => [                        
-            'placeholder' => 'Snickerpark Stadium',                    
-            'label'       => 'Place Name',
+            'placeholder' => esc_attr__( 'Snickerpark Stadium', 'schema-package' ),
+			'label'       => esc_html__( 'Place Name', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -42,8 +42,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => '',                                            
         ],
         'latitude' => [                        
-            'placeholder' => '40.761293',                    
-            'label'       => 'GeoCoordinates Latitude',
+            'placeholder' => '40.761293',
+			'label'       => esc_html__( 'GeoCoordinates Latitude', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -51,8 +51,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => '',                    
         ],
         'longitude' => [                        
-            'placeholder' => '-73.982294',                    
-            'label'       => 'GeoCoordinates Longitude',
+            'placeholder' => '-73.982294',
+			'label'       => esc_html__( 'GeoCoordinates Longitude', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -60,8 +60,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => '',                    
         ],
         'rating_value' => [                        
-            'placeholder' => '5',                    
-            'label'       => 'Rating Value',
+            'placeholder' => '5',
+			'label'       => esc_html__( 'Rating Value', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -74,8 +74,8 @@ function smpg_get_common_properties( $post_id ) {
             ]       
         ],
         'rating_count' => [                        
-            'placeholder' => '100',                    
-            'label'       => 'Rating Count',
+            'placeholder' => '100',
+			'label'       => esc_html__( 'Rating Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -89,7 +89,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'review_count' => [                        
             'placeholder' => '100',                    
-            'label'       => 'Review Count',
+            'label'       => esc_html__( 'Review Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -103,7 +103,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'best_rating' => [                        
             'placeholder' => '5',                    
-            'label'       => 'Best Rating',
+            'label'       => esc_html__( 'Best Rating', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -117,7 +117,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'worst_rating' => [             
             'placeholder' => '0',                    
-            'label'       => 'Worst Rating',
+            'label'       => esc_html__( 'Worst Rating', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -130,8 +130,8 @@ function smpg_get_common_properties( $post_id ) {
             ]        
         ],        
         'review_aspect' => [                        
-            'placeholder' => 'Ambiance',                    
-            'label'       => 'Review Aspect',
+            'placeholder' => esc_attr__( 'Ambiance', 'schema-package' ),                    
+            'label'       => esc_html__( 'Review Aspect', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -139,8 +139,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],        
         'street_address' => [                        
-            'placeholder' => '555 Clancy St',                    
-            'label'       => 'Street Address',
+            'placeholder' => esc_attr__( '555 Clancy St', 'schema-package' ),                    
+            'label'       => esc_html__( 'Street Address', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -153,8 +153,8 @@ function smpg_get_common_properties( $post_id ) {
             ]                                
         ],
         'address_locality' => [                        
-            'placeholder' => 'Detroit',                    
-            'label'       => 'Address Locality',
+            'placeholder' => esc_attr__( 'Detroit', 'schema-package' ),                    
+            'label'       => esc_html__( 'Address Locality', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -167,8 +167,8 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'address_region' => [                        
-            'placeholder' => 'MI',                    
-            'label'       => 'Address Region',
+            'placeholder' => esc_attr__( 'MI', 'schema-package' ),                    
+            'label'       => esc_html__( 'Address Region', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -182,7 +182,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'postal_code' => [                        
             'placeholder' => '48201',                    
-            'label'       => 'Postal Code',
+            'label'       => esc_html__( 'Postal Code', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -195,8 +195,8 @@ function smpg_get_common_properties( $post_id ) {
             ]        
         ],
         'address_country' => [                        
-            'placeholder' => 'US',                    
-            'label'       => 'Address Country',
+            'placeholder' => esc_attr__( 'US', 'schema-package' ),                    
+            'label'       => esc_html__( 'Address Country', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -209,44 +209,44 @@ function smpg_get_common_properties( $post_id ) {
             ]        
         ],
         'name' => [                        
-            'placeholder' => 'Enter Name',                    
-            'label'       => 'Name',
+            'placeholder' => esc_attr__( 'Enter Name', 'schema-package' ),                    
+            'label'       => esc_html__( 'Name', 'schema-package' ),
             'type'        => 'text',
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Name of the item'        
+            'tooltip'     => esc_html__( 'Name of the item', 'schema-package' )        
         ],
         'identifier' => [                        
-            'placeholder' => 'Enter Identifier',                    
-            'label'       => 'Identifier',
+            'placeholder' => esc_attr__( 'Enter Identifier', 'schema-package' ),                    
+            'label'       => esc_html__( 'Identifier', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Identifier of the item'        
+            'tooltip'     => esc_html__( 'Identifier of the item', 'schema-package' )        
         ],
         'alternate_name' => [                        
-            'placeholder' => 'Enter Alternate Name',                    
-            'label'       => 'Alternate Name ',
+            'placeholder' => esc_attr__( 'Enter Alternate Name', 'schema-package' ),                    
+            'label'       => esc_html__( 'Alternate Name ', 'schema-package' ),
             'type'        => 'text',
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Alternate Name of the item or person'
+            'tooltip'     => esc_html__( 'Alternate Name of the item or person', 'schema-package' )
         ],
         'price_range' => [
             'placeholder' => '$$$',                    
-            'label'       => 'Price Range',                    
+            'label'       => esc_html__( 'Price Range', 'schema-package' ),                     
             'type'        => 'text',                                                
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Price Range of an item'        
+            'tooltip'     => esc_html__( 'Price Range of an item', 'schema-package' )        
         ],
         'email' => [
-            'placeholder' => 'Enter Email',
-            'label'       => 'Email',
+            'placeholder' => esc_attr__( 'Enter Email', 'schema-package' ),
+            'label'       => esc_html__( 'Email', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -254,15 +254,15 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => 'Email of the Person'        
         ],
         'telephone'          => [
-            'label'       => 'Telephone',                    
-            'type'        => 'text',                                    
             'placeholder' => '+14088717984',                    
+            'label'       => esc_html__( 'Telephone', 'schema-package' ),                                       
+            'type'        => 'text',                                                                    
             'value'       => '',
             'display'     => true
         ],
         'job_title' => [                        
-            'placeholder' => 'Enter Job Title',                    
-            'label'       => 'Job Title',
+            'placeholder' => esc_attr__( 'Enter Job Title', 'schema-package' ),                    
+            'label'       => esc_html__( 'Job Title', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -270,184 +270,184 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => 'Job Title of the item'
         ],
         'title' => [                        
-            'placeholder' => 'Enter Title',                    
-            'label'       => 'Title',
+            'placeholder' => esc_attr__( 'Enter Title', 'schema-package' ),                    
+            'label'       => esc_html__( 'Title', 'schema-package' ),
             'type'        => 'text',
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Title of the item'        
+            'tooltip'     => esc_html__( 'Title of the item', 'schema-package' )             
         ],
         'video_name' => [                        
-            'placeholder' => 'Enter Name',                    
-            'label'       => 'Name',
+            'placeholder' => esc_attr__( 'Enter Name', 'schema-package' ),                    
+            'label'       => esc_html__( 'Name', 'schema-package' ),
             'type'        => 'text',
             'class'       => ['smpg_common_properties'],
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Name of the item'        
+            'tooltip'     => esc_html__( 'Name of the item', 'schema-package' )
         ],               
         'id' => [                        
             'placeholder' => 'https://example.com/blog/post_name/#schema_type',
-            'label'       => 'ID',
+            'label'       => esc_html__( 'ID', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Globally unique identifier (IRI/URL) that you assign to a particular entity.'        
+            'tooltip'     => esc_html__( 'Globally unique identifier (IRI/URL) that you assign to a particular entity.', 'schema-package' )        
         ],
         'headline' => [                        
-            'placeholder' => 'Headline',                    
-            'label'       => 'Headline',
+            'placeholder' => esc_attr__( 'Headline', 'schema-package' ),                    
+            'label'       => esc_html__( 'Headline', 'schema-package' ),
             'type'        => 'text',
             'value'       => smpg_get_the_title( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Headline of the article.'        
+            'tooltip'     => esc_html__( 'Headline of the article.', 'schema-package' )              
         ],
         'description' => [                        
-            'placeholder' => 'Description',                    
-            'label'       => 'Description',                    
+            'placeholder' => esc_attr__( 'Description', 'schema-package' ),                    
+            'label'       => esc_html__( 'Description', 'schema-package' ),                     
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
             'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'A description of the item.'
+            'tooltip'     => esc_html__( 'A description of the item.', 'schema-package' )
         ],
         'review_body' => [                        
-            'placeholder' => 'Review Body Text',                    
-            'label'       => 'Review Body',                    
+            'placeholder' => esc_attr__( 'Review Body Text', 'schema-package' ),                    
+            'label'       => esc_html__( 'Review Body', 'schema-package' ),                     
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
             'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Review body content'
+            'tooltip'     => esc_html__( 'Review body content', 'schema-package' )
         ],
         'video_description' => [                        
-            'placeholder' => 'Description',                    
-            'label'       => 'Description',                    
+            'placeholder' => esc_attr__( 'Description', 'schema-package' ),                    
+            'label'       => esc_html__( 'Description', 'schema-package' ),                     
             'type'        => 'textarea',
             'class'       => ['smpg_common_properties'],
             'value'       => smpg_get_description( $post_id ),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'A description of the item.'
+            'tooltip'     => esc_html__( 'A description of the item.', 'schema-package' )
         ],
         'keywords' => [                        
-            'placeholder' => 'tag1, tag2, tag3',                    
-            'label'       => 'Keywords',                    
+            'placeholder' => esc_attr__( 'tag1, tag2, tag3', 'schema-package' ),                    
+            'label'       => esc_html__( 'Keywords', 'schema-package' ), 
             'type'        => 'text',
             'value'       => smpg_get_post_tags($post_id),
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.'
+            'tooltip'     => esc_html__( 'Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.', 'schema-package' )
         ],
         'word_count' => [                        
             'placeholder' => '300',                    
-            'label'       => 'Word Count (Opt.)',                    
+            'label'       => esc_html__( 'Word Count (Opt.)', 'schema-package' ),                     
             'type'        => 'number',
             'value'       => smpg_get_word_count($post_id),
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'The number of words in the text of the Article.'
+            'tooltip'     => esc_html__( 'The number of words in the text of the Article.', 'schema-package' )
         ],
         'article_section' => [                        
-            'placeholder' => 'Sports, Lifestyle',                    
-            'label'       => 'Article Section (Opt.)',                    
+            'placeholder' => esc_attr__( 'Sports, Lifestyle', 'schema-package' ),                    
+            'label'       => esc_html__( 'Article Section (Opt.)', 'schema-package' ),                     
             'type'        => 'text',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.'
+            'tooltip'     => esc_html__( 'Articles may belong to one or more sections in a magazine or newspaper, such as Sports, Lifestyle, etc.', 'schema-package' )
         ],
         'url' => [                        
             'placeholder' => 'https://example.com/post-name',                    
-            'label'       => 'URL',                    
+            'label'       => esc_html__( 'URL', 'schema-package' ),                    
             'type'        => 'text',
             'value'       => smpg_get_permalink($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'URL of the item.'
+            'tooltip'     => esc_html__( 'URL of the item.', 'schema-package' )
         ],
         'in_language' => [                        
-            'placeholder' => 'en',                    
-            'label'       => 'In Language',                    
+            'placeholder' => esc_attr__( 'en', 'schema-package' ),                    
+            'label'       => esc_html__( 'In Language', 'schema-package' ),                     
             'type'        => 'text',
             'class'       => ['smpg_common_properties'],
             'value'       => smpg_get_inlanguage($post_id),
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'The language of the content or performance or used in an action'
+            'tooltip'     => esc_html__( 'The language of the content or performance or used in an action', 'schema-package' )
         ],                
         'date_published' => [                        
             'placeholder' => '2015-02-05T08:00:00+08:00',                    
-            'label'       => 'Date Published',                    
+            'label'       => esc_html__( 'Date Published', 'schema-package' ),                     
             'type'        => 'text',
             'value'       => smpg_get_published_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Date of first broadcast/publication.'
+            'tooltip'     => esc_html__( 'Date of first broadcast/publication.', 'schema-package' )
         ],
         'date_posted' => [                        
             'placeholder' => '2015-02-05T08:00:00+08:00',                    
-            'label'       => 'Date Posted',                    
+            'label'       => esc_html__( 'Date Posted', 'schema-package' ),                     
             'type'        => 'text',
             'value'       => smpg_get_published_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Date of first broadcast/publication.'
+            'tooltip'     => esc_html__( 'Date of first broadcast/publication.', 'schema-package' )
         ],
         'valid_through' => [                        
             'placeholder' => '2015-02-05T08:00:00+08:00',                    
-            'label'       => 'Valid Through',                    
+            'label'       => esc_html__( 'Valid Through', 'schema-package' ),                     
             'type'        => 'text',
             'value'       => smpg_get_published_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Date of first broadcast/publication.'
+            'tooltip'     => esc_html__( 'Date of first broadcast/publication.', 'schema-package' )
         ],
         'valid_from' => [                        
             'placeholder' => '2015-02-05T08:00:00+08:00',                    
-            'label'       => 'Valid From',                    
+            'label'       => esc_html__( 'Valid From', 'schema-package' ),                
             'type'        => 'text',
             'value'       => smpg_get_published_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Date of first broadcast/publication.'
+            'tooltip'     => esc_html__( 'Date of first broadcast/publication.', 'schema-package' )
         ],
         'date_modified' => [                        
-            'placeholder' => '2015-02-05T09:20:00+08:00',                    
-            'label'       => 'Date Modified',                    
+            'placeholder' => '2015-02-05T08:00:00+08:00',                    
+            'label'       => esc_html__( 'Date Modified', 'schema-package' ),                   
             'type'        => 'text',
             'value'       => smpg_get_modified_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The date on which the article was most recently modified'
+            'tooltip'     => esc_html__( 'The date on which the article was most recently modified', 'schema-package' )
         ],
         'date_created' => [                        
-            'placeholder' => '2015-02-05T09:20:00+08:00',                    
-            'label'       => 'Date Created',                    
+            'placeholder' => '2015-02-05T08:00:00+08:00',                    
+            'label'       => esc_html__( 'Date Created', 'schema-package' ),                    
             'type'        => 'text',
             'value'       => smpg_get_modified_date($post_id),
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The date on which things created'
+            'tooltip'     => esc_html__( 'The date on which things created', 'schema-package' )
         ],
         'author_type' => [                                     
-            'label'       => 'Author Type',                    
+            'label'       => esc_html__( 'Author Type', 'schema-package' ),                                    
             'type'        => 'select',
             'value'       => 'Person',
             'options'      => [
-                ''                 => 'Select',
-                'Person'           => 'Person',
-                'Organization'     => 'Organization',                        
+                ''             => esc_html__( 'Select', 'schema-package' ),
+                'Person'       => esc_html__( 'Person', 'schema-package' ),
+                'Organization' => esc_html__( 'Organization', 'schema-package' ),                        
             ],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author type of this content',
+            'tooltip'     => esc_html__( 'The author type of this content', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'author', 
                 'type'      => '',
@@ -455,69 +455,69 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'seller_type' => [                                     
-            'label'       => 'Seller Type',
+            'label'       => esc_html__( 'Seller Type', 'schema-package' ),
             'type'        => 'select',
             'value'       => 'Person',
             'options'      => [
-                ''                 => 'Select',
-                'Person'           => 'Person',
-                'Organization'     => 'Organization',                        
+                ''             => esc_html__( 'Select', 'schema-package' ),
+                'Person'       => esc_html__( 'Person', 'schema-package' ),
+                'Organization' => esc_html__( 'Organization', 'schema-package' ),                        
             ],
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'The seller type for the product'
+            'tooltip'     => esc_html__( 'The seller type for the product', 'schema-package' )
         ],
         'employment_type' => [                          
-            'label'       => 'Employment Type',                    
+            'label'       => esc_html__( 'Employment Type', 'schema-package' ),                                       
             'type'        => 'groups',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'Employment types',
+            'tooltip'     => esc_html__( 'Employment types', 'schema-package' ),
             'elements'      => [
                 'full_time' => [                                                                                                                                              
-                    'label'       => 'Full Time',                    
+                    'label'   => esc_html__( 'Full Time', 'schema-package' ),                    
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'part_time' => [                                                                                                                                              
-                    'label'       => 'Part Time',                    
+                    'label'       => esc_html__( 'Part Time', 'schema-package' ),                    
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'contractor' => [                                                                                                                                              
-                    'label'       => 'Contractor',                    
+                    'label'       => esc_html__( 'Contractor', 'schema-package' ),                    
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'temporary' => [                                                                                                                                              
-                    'label'       => 'Temporary',                    
+                    'label'       => esc_html__( 'Temporary', 'schema-package' ),                  
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'intern' => [                                                                                                                                              
-                    'label'       => 'Intern',                    
+                    'label'       => esc_html__( 'Intern', 'schema-package' ),                    
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'volunteer' => [
-                    'label'       => 'Volunteer',
+                    'label'       => esc_html__( 'Volunteer', 'schema-package' ),
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'per_diem' => [                                                                                                                                              
-                    'label'       => 'Per Diem',                    
+                    'label'       => esc_html__( 'Per Diem', 'schema-package' ),                   
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
                 ],
                 'other' => [                                                                                                                                              
-                    'label'       => 'Other',        
+                    'label'       => esc_html__( 'Other', 'schema-package' ),   
                     'type'        => 'checkbox',                                                                                    
                     'value'       => true,
                     'display'     => true
@@ -525,13 +525,13 @@ function smpg_get_common_properties( $post_id ) {
             ]            
         ],
         'author_name' => [                                     
-            'placeholder' => 'Author Name',                    
-            'label'       => 'Author Name',                    
+            'placeholder' => esc_attr__( 'Author Name', 'schema-package' ),
+            'label'       => esc_html__( 'Author Name', 'schema-package' ),                  
             'type'        => 'text',
             'value'       => '',            
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author name of this content',
+            'tooltip'     => esc_html__( 'The author name of this content', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'author', 
                 'type'      => 'Person',
@@ -539,13 +539,13 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'author_url' => [                                     
-            'placeholder' => 'Author URL',                    
-            'label'       => 'Author URL',                    
+            'placeholder' => esc_attr__( 'Author URL', 'schema-package' ),
+            'label'       => esc_html__( 'Author URL', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',            
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author url of this content',
+            'tooltip'     => esc_html__( 'The author url of this content', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'author', 
                 'type'      => 'Person',
@@ -553,13 +553,13 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'author_image' => [            
-            'label'       => 'Author Image',                    
+            'label'       => esc_html__( 'Author Image', 'schema-package' ),                   
             'type'        => 'media',
             'multiple'    => false,
             'value'       => [],            
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The author image of this content',
+            'tooltip'     => esc_html__( 'The author image of this content', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'author', 
                 'type'      => 'Person',
@@ -567,22 +567,22 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'seller_name' => [                                     
-            'placeholder' => 'Seller Name',                    
-            'label'       => 'Seller Name',                    
+            'placeholder' => esc_attr__( 'Seller Name', 'schema-package' ),
+            'label'       => esc_html__( 'Seller Name', 'schema-package' ),                  
             'type'        => 'text',
             'value'       => '',            
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'The seller name for the product'
+            'tooltip'     => esc_html__( 'The seller name for the product', 'schema-package' )
         ],
         'publisher_name' => [                        
-            'placeholder' => 'Publisher Name',                    
-            'label'       => 'Publisher Name',                    
+            'placeholder' => esc_attr__( 'Publisher Name', 'schema-package' ),
+            'label'       => esc_html__( 'Publisher Name', 'schema-package' ),                  
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'The publisher of the creative work.',
+            'tooltip'     => esc_html__( 'The publisher of the creative work.', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'publisher', 
                 'type'      => 'Organization',
@@ -590,13 +590,13 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'publisher_logo' => [                                            
-            'label'       => 'Logo',                    
+            'label'       => esc_html__( 'Logo', 'schema-package' ),                 
             'type'        => 'media',
             'multiple'    => false,
             'value'       => [],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'An associated logo.',
+            'tooltip'     => esc_html__( 'An associated logo.', 'schema-package' ),
             'parent_data'   => [
                 'key'       => 'publisher', 
                 'type'      => 'Organization',
@@ -604,17 +604,17 @@ function smpg_get_common_properties( $post_id ) {
             ]
         ],
         'image' => [                                                      
-            'label'       => 'Image',                    
+            'label'       => esc_html__( 'Image', 'schema-package' ),                                   
             'type'        => 'media',
             'multiple'    => true,
             'value'       => [],
             'recommended' => true,
             'display'     => true,
-            'tooltip'     => 'An image of the item. This can be a URL or a fully described ImageObject.'
+            'tooltip'     => esc_html__( 'An image of the item. This can be a URL or a fully described ImageObject.', 'schema-package' )
         ],
         'operating_system' => [                        
-            'placeholder' => 'ANDROID',                    
-            'label'       => 'Operating System',
+            'placeholder' => esc_attr__( 'ANDROID', 'schema-package' ),                    
+            'label'       => esc_html__( 'Operating System', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -622,60 +622,60 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''
         ],
         'application_category' => [                                                    
-            'label'       => 'Category',                    
+            'label'       => esc_html__( 'Category', 'schema-package' ),                                        
             'type'        => 'select',
             'value'       => '',
             'options'      => [
-                'GameApplication'               => 'GameApplication',
-                'SocialNetworkingApplication'   => 'SocialNetworkingApplication',
-                'TravelApplication'             => 'TravelApplication',
-                'ShoppingApplication'           => 'ShoppingApplication',                         
-                'SportsApplication'             => 'SportsApplication',
-                'LifestyleApplication'          => 'LifestyleApplication',
-                'BusinessApplication'           => 'BusinessApplication',
-                'DesignApplication'             => 'DesignApplication',                         
-                'DeveloperApplication'          => 'DeveloperApplication',
-                'DriverApplication'             => 'DriverApplication',
-                'EducationalApplication'        => 'EducationalApplication',
-                'HealthApplication'             => 'HealthApplication',                         
-                'FinanceApplication'            => 'FinanceApplication',
-                'SecurityApplication'           => 'SecurityApplication',
-                'BrowserApplication'            => 'BrowserApplication',
-                'CommunicationApplication'      => 'CommunicationApplication',                                 
-                'DesktopEnhancementApplication' => 'DesktopEnhancementApplication', 
-                'EntertainmentApplication'      => 'EntertainmentApplication', 
-                'MultimediaApplication'         => 'MultimediaApplication', 
-                'HomeApplication'               => 'HomeApplication', 
-                'UtilitiesApplication'          => 'UtilitiesApplication', 
-                'ReferenceApplication'          => 'ReferenceApplication', 
+                'GameApplication'               => esc_html__( 'GameApplication', 'schema-package' ),
+                'SocialNetworkingApplication'   => esc_html__( 'SocialNetworkingApplication', 'schema-package' ),
+                'TravelApplication'             => esc_html__( 'TravelApplication', 'schema-package' ),
+                'ShoppingApplication'           => esc_html__( 'ShoppingApplication', 'schema-package' ),
+                'SportsApplication'             => esc_html__( 'SportsApplication', 'schema-package' ),
+                'LifestyleApplication'          => esc_html__( 'LifestyleApplication', 'schema-package' ),
+                'BusinessApplication'           => esc_html__( 'BusinessApplication', 'schema-package' ),
+                'DesignApplication'             => esc_html__( 'DesignApplication', 'schema-package' ),
+                'DeveloperApplication'          => esc_html__( 'DeveloperApplication', 'schema-package' ),
+                'DriverApplication'             => esc_html__( 'DriverApplication', 'schema-package' ),
+                'EducationalApplication'        => esc_html__( 'EducationalApplication', 'schema-package' ),
+                'HealthApplication'             => esc_html__( 'HealthApplication', 'schema-package' ),
+                'FinanceApplication'            => esc_html__( 'FinanceApplication', 'schema-package' ),
+                'SecurityApplication'           => esc_html__( 'SecurityApplication', 'schema-package' ),
+                'BrowserApplication'            => esc_html__( 'BrowserApplication', 'schema-package' ),
+                'CommunicationApplication'      => esc_html__( 'CommunicationApplication', 'schema-package' ),
+                'DesktopEnhancementApplication' => esc_html__( 'DesktopEnhancementApplication', 'schema-package' ),
+                'EntertainmentApplication'      => esc_html__( 'EntertainmentApplication', 'schema-package' ),
+                'MultimediaApplication'         => esc_html__( 'MultimediaApplication', 'schema-package' ),
+                'HomeApplication'               => esc_html__( 'HomeApplication', 'schema-package' ),
+                'UtilitiesApplication'          => esc_html__( 'UtilitiesApplication', 'schema-package' ),
+                'ReferenceApplication'          => esc_html__( 'ReferenceApplication', 'schema-package' ),
             ],
             'recommended' => true,
             'display'     => true,
             'tooltip'     => ''
         ],
         'offer_type' => [                                    
-            'label'       => 'Offer Type',
+            'label'       => esc_html__( 'Offer Type', 'schema-package' ),
             'type'        => 'select',
             'value'       => 'Offer',
             'options'     => [
-                ''               => 'Select',
-                'Offer'          => 'Offer',
-                'AggregateOffer' => 'AggregateOffer'
+                ''               => esc_html__( 'Select', 'schema-package' ),
+                'Offer'          => esc_html__( 'Offer', 'schema-package' ),
+                'AggregateOffer' => esc_html__( 'AggregateOffer', 'schema-package' )
             ],
             'recommended' => true,
             'display'     => true,
             'tooltip'     => ''        
         ],
         'offer_category' => [
-            'label'       => 'Offer Category',
+            'label'       => esc_html__( 'Offer Category', 'schema-package' ),
             'type'        => 'select',
             'value'       => 'Free',
             'options'     => [
-                ''               => 'Select',
-                'Free'           => 'Free',
-                'Paid'           => 'Paid',
-                'Partially Free' => 'Partially Free',
-                'Subscription'   => 'Subscription',                
+                 ''              => esc_html__( 'Select', 'schema-package' ),
+                'Free'           => esc_html__( 'Free', 'schema-package' ),
+                'Paid'           => esc_html__( 'Paid', 'schema-package' ),
+                'Partially Free' => esc_html__( 'Partially Free', 'schema-package' ),
+                'Subscription'   => esc_html__( 'Subscription', 'schema-package' ),                
             ],
             'recommended' => true,
             'display'     => true,
@@ -683,7 +683,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'offer_url' => [                        
             'placeholder' => 'https://example.com/anvil',                    
-            'label'       => 'Offer URL',
+            'label'       => esc_html__( 'Offer URL', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -691,8 +691,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'offer_currency' => [                        
-            'placeholder' => 'USD',                    
-            'label'       => 'Offer Currency',
+            'placeholder' => esc_attr__( 'USD', 'schema-package' ),                    
+            'label'       => esc_html__( 'Offer Currency', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -701,7 +701,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'high_price' => [                        
             'placeholder' => '25.36',                    
-            'label'       => 'High Price',
+            'label'       => esc_html__( 'High Price', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -710,7 +710,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'low_price' => [                        
             'placeholder' => '12.36',                    
-            'label'       => 'Low Price',
+            'label'       => esc_html__( 'Low Price', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -719,7 +719,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'offer_count' => [                        
             'placeholder' => '2',                    
-            'label'       => 'Offer Count',
+            'label'       => esc_html__( 'Offer Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -728,52 +728,52 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'follow_count' => [                        
             'placeholder' => '2',                    
-            'label'       => 'Follow Count',
+            'label'       => esc_html__( 'Follow Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Number of times the profile has been followed'        
+            'tooltip'     => esc_html__( 'Number of times the profile has been followed', 'schema-package' )               
         ],
         'like_count' => [                        
             'placeholder' => '2',                    
-            'label'       => 'Like Count',
+            'label'       => esc_html__( 'Like Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Number of likes received'        
+            'tooltip'     => esc_html__( 'Number of likes received', 'schema-package' )        
         ],
         'comment_count' => [                        
             'placeholder' => '10',                    
-            'label'       => 'Comment Count',
+            'label'       => esc_html__( 'Comment Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Number of comments'        
+            'tooltip'     => esc_html__( 'Number of comments', 'schema-package' )             
         ],
         'share_count' => [                        
             'placeholder' => '5',                    
-            'label'       => 'Share Count',
+            'label'       => esc_html__( 'Share Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Number of times the profile has been shared'        
+            'tooltip'     => esc_html__( 'Number of times the profile has been shared', 'schema-package' )        
         ],
         'post_count' => [                        
             'placeholder' => '100',                    
-            'label'       => 'Post Count',
+            'label'       => esc_html__( 'Post Count', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => false,
             'display'     => true,
-            'tooltip'     => 'Number of posts/articles written by the profile owner'        
+            'tooltip'     => esc_html__( 'Number of posts/articles written by the profile owner', 'schema-package' )        
         ],
         'offer_price' => [                        
             'placeholder' => '119.99',                    
-            'label'       => 'Offer Price',
+            'label'       => esc_html__( 'Offer Price', 'schema-package' ),
             'type'        => 'number',
             'value'       => '0',
             'recommended' => true,
@@ -782,7 +782,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'offer_price_validuntil' => [                        
             'placeholder' => '2023-11-20',                    
-            'label'       => 'Price ValidUntil',
+            'label'       => esc_html__( 'Price ValidUntil', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -791,7 +791,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'sku' => [                        
             'placeholder' => '0446310786',                    
-            'label'       => 'SKU',
+            'label'       => esc_html__( 'SKU', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -800,7 +800,7 @@ function smpg_get_common_properties( $post_id ) {
         ],
         'mpn' => [                        
             'placeholder' => '925872',                    
-            'label'       => 'MPN',
+            'label'       => esc_html__( 'MPN', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -808,8 +808,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'brand' => [                        
-            'placeholder' => 'ACME',                    
-            'label'       => 'Brand',
+            'placeholder' => esc_attr__( 'ACME', 'schema-package' ),                    
+            'label'       => esc_html__( 'Brand', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -817,14 +817,14 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'offer_item_condition' => [                                                                        
-            'label'       => 'Item Condition',
+            'label'       => esc_html__( 'Item Condition', 'schema-package' ),
             'type'        => 'select',
             'options'      => [
-                     ''                                             => 'Select',
-                     'https://schema.org/NewCondition'              => 'New',
-                     'https://schema.org/UsedCondition'             => 'Used',
-                     'https://schema.org/RefurbishedCondition'      => 'Refurbished',
-                     'https://schema.org/DamagedCondition'          => 'Damaged',                         
+                     ''                                             => esc_html__( 'Select', 'schema-package' ),
+                     'https://schema.org/NewCondition'              => esc_html__( 'New', 'schema-package' ),
+                     'https://schema.org/UsedCondition'             => esc_html__( 'Used', 'schema-package' ),
+                     'https://schema.org/RefurbishedCondition'      => esc_html__( 'Refurbished', 'schema-package' ),
+                     'https://schema.org/DamagedCondition'          => esc_html__( 'Damaged', 'schema-package' ),
             ],
             'value'       => 'https://schema.org/NewCondition',
             'recommended' => true,
@@ -832,43 +832,43 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],        
         'offer_availability' => [                                                       
-            'label'       => 'Availability',
+            'label'       => esc_html__( 'Availability', 'schema-package' ),
             'type'        => 'select',
             'value'       => 'https://schema.org/InStock',
             'options'      => [
-                ''                                        => 'Select',
-                'https://schema.org/InStock'              => 'InStock',
-                'https://schema.org/OutOfStock'           => 'OutOfStock',
-                'https://schema.org/SoldOut'              => 'SoldOut',    
-                'https://schema.org/BackOrder'            => 'BackOrder',
-                'https://schema.org/Discontinued'         => 'Discontinued',                
-                'https://schema.org/InStoreOnly'          => 'InStoreOnly',                         
-                'https://schema.org/LimitedAvailability'  => 'LimitedAvailability',
-                'https://schema.org/OnlineOnly'           => 'OnlineOnly',                
-                'https://schema.org/PreOrder'             => 'PreOrder',                         
-                'https://schema.org/PreSale'              => 'PreSale'                            
+                ''                                        => esc_html__( 'Select', 'schema-package' ),
+                'https://schema.org/InStock'              => esc_html__( 'InStock', 'schema-package' ),
+                'https://schema.org/OutOfStock'           => esc_html__( 'OutOfStock', 'schema-package' ),
+                'https://schema.org/SoldOut'              => esc_html__( 'SoldOut', 'schema-package' ),    
+                'https://schema.org/BackOrder'            => esc_html__( 'BackOrder', 'schema-package' ),
+                'https://schema.org/Discontinued'         => esc_html__( 'Discontinued', 'schema-package' ),                
+                'https://schema.org/InStoreOnly'          => esc_html__( 'InStoreOnly', 'schema-package' ),                         
+                'https://schema.org/LimitedAvailability'  => esc_html__( 'LimitedAvailability', 'schema-package' ),
+                'https://schema.org/OnlineOnly'           => esc_html__( 'OnlineOnly', 'schema-package' ),                
+                'https://schema.org/PreOrder'             => esc_html__( 'PreOrder', 'schema-package' ),                         
+                'https://schema.org/PreSale'              => esc_html__( 'PreSale', 'schema-package' ),                             
             ],
             'recommended' => true,
             'display'     => true,
             'tooltip'     => ''        
         ],
-        'question' => [                                                                                                                                                      
-            'label'       => 'Question',                    
-            'type'        => 'text',
-            'placeholder' => 'Enter your question',
+        'question' => [             
+            'placeholder' => esc_attr__( 'Enter your question', 'schema-package' ),                                                                                                                                         
+            'label'       => esc_html__( 'Question', 'schema-package' ),                                 
+            'type'        => 'text',            
             'display'     => true,                    
             'value'       => ''
         ],                                                        
-        'answer' => [                                                               
-            'label'       => 'Answer',                    
-            'type'        => 'textarea',
-            'placeholder' => 'Enter your Answer',
+        'answer' => [                                             
+            'placeholder' => esc_attr__( 'Enter your answer', 'schema-package' ),                  
+            'label'       => esc_html__( 'Answer', 'schema-package' ),                                   
+            'type'        => 'textarea',            
             'display'     => true,                    
             'value'       => ''
         ],
         'e_cost_currency' => [                        
-            'placeholder' => 'USD',                    
-            'label'       => 'Estimated Cost Currency',
+            'placeholder' => esc_attr__( 'USD', 'schema-package' ),                    
+            'label'       => esc_html__( 'Estimated Cost Currency', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -877,7 +877,7 @@ function smpg_get_common_properties( $post_id ) {
         ],        
         'e_cost_value' => [                        
             'placeholder' => '100',                    
-            'label'       => 'Estimated Cost Value',
+            'label'       => esc_html__( 'Estimated Cost Value', 'schema-package' ),
             'type'        => 'text',
             'value'       => '',
             'recommended' => true,
@@ -885,8 +885,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'days_needed' => [                        
-            'placeholder' => 'DD',                    
-            'label'       => 'Days Needed',
+            'placeholder' => esc_attr__( 'DD', 'schema-package' ),                    
+            'label'       => esc_html__( 'Days Needed', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -894,8 +894,8 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],
         'hours_needed' => [                        
-            'placeholder' => 'HH',                    
-            'label'       => 'Hours Needed',
+            'placeholder' => esc_attr__( 'HH', 'schema-package' ),                    
+            'label'       => esc_html__( 'Hours Needed', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
@@ -903,154 +903,154 @@ function smpg_get_common_properties( $post_id ) {
             'tooltip'     => ''        
         ],         
         'minutes_needed' => [                        
-            'placeholder' => 'MM',                    
-            'label'       => 'Minutes Needed',
+            'placeholder' => esc_attr__( 'MM', 'schema-package' ),                    
+            'label'       => esc_html__( 'Minutes Needed', 'schema-package' ),
             'type'        => 'number',
             'value'       => '',
             'recommended' => true,
             'display'     => true,
             'tooltip'     => ''        
         ],                
-        'content_url' => [                                                                                                                                              
-            'label'       => 'Content URL',                    
+        'content_url' => [                              
+            'placeholder' => 'https://www.example.com/video/how-to-tie-a-tie/file.mp4',                                                                                                                                    
+            'label'       => esc_html__( 'Content URL', 'schema-package' ),                              
             'type'        => 'text',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => 'https://www.example.com/video/how-to-tie-a-tie/file.mp4',                    
+            'class'       => ['smpg_common_properties'],            
             'value'       => '',
             'display'     => true,
         ],
-        'embed_url' => [                                                                                                                                              
-            'label'       => 'Embed URL',                    
+        'embed_url' => [                                
+            'placeholder' => 'https://www.example.com/embed/how-to-tie-a-tie',                                                                                                                                  
+            'label'       => esc_html__( 'Embed URL', 'schema-package' ),                                     
             'type'        => 'text',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => 'https://www.example.com/embed/how-to-tie-a-tie',                    
+            'class'       => ['smpg_common_properties'],            
             'value'       => '',
             'display'     => true,
         ],
-        'upload_date' => [                                                                                                                                              
-            'label'       => 'Upload Date',                    
+        'upload_date' => [                              
+            'placeholder' => '2019-02-28T08:00:00+08:00',                                                                                                                                    
+            'label'       => esc_html__( 'Upload Date', 'schema-package' ),                                    
             'type'        => 'text',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => '2019-02-28T08:00:00+08:00',                    
+            'class'       => ['smpg_common_properties'],            
             'value'       => '',
             'display'     => true,
         ],
-        'hours' => [                                                                                                                                              
-            'label'       => 'Hours',                    
+        'hours' => [                                    
+            'placeholder' => '2',
+            'label'       => esc_html__( 'Hours', 'schema-package' ),                     
             'type'        => 'number',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => 2,                    
+            'class'       => ['smpg_common_properties'],            
             'value'       => '',
             'display'     => true,
         ],
-        'minutes' => [                                                                                                                                              
-            'label'       => 'Minutes',                    
+        'minutes' => [                                  
+            'placeholder' => '30',
+            'label'       => esc_html__( 'Minutes', 'schema-package' ),                    
             'type'        => 'number',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => 30,                    
+            'class'       => ['smpg_common_properties'],             
             'value'       => '',
             'display'     => true,
         ],
-        'seconds' => [                                                                                                                                              
-            'label'       => 'Seconds',                    
+        'seconds' => [                                  
+            'placeholder' => '55',
+            'label'       => esc_html__( 'Seconds', 'schema-package' ),                    
             'type'        => 'number',
-            'class'       => ['smpg_common_properties'],
-            'placeholder' => 55,                    
+            'class'       => ['smpg_common_properties'],             
             'value'       => '',
             'display'     => true,
         ],
         'speakable' => [                                                                                                                                              
-            'label'       => 'Speakable',                    
+            'label'       => esc_html__( 'Speakable', 'schema-package' ),                                        
             'type'        => 'checkbox',                             
             'value'       => false,
             'display'     => true,
         ],
         'speakable_selectors' => [                                                                                                                                              
-            'label'       => 'Speakable Selectors',                    
+            'placeholder' => esc_attr__( 'title, *description, #elementid, .elementclass', 'schema-package' ),
+            'label'       => esc_html__( 'Speakable Selectors', 'schema-package' ),                   
             'type'        => 'textarea',                             
-            'value'       => '',
-            'placeholder' => 'title, *description, #elementid, .elementclass',
-            'tooltip'     => 'Separate selectors with comma ( , ).',
+            'value'       => '',            
+            'tooltip'     => esc_html__( 'Separate selectors with comma ( , ).', 'schema-package' ),
             'display'     => false,
         ],
         'is_paywalled' => [                                                                                                                                              
-            'label'       => 'Is Paywalled Content ?',                    
+            'label'       => esc_html__( 'Is Paywalled Content ?', 'schema-package' ),                                       
             'type'        => 'checkbox',                             
             'value'       => false,
             'display'     => true,
         ],
         'paywalled_selectors' => [                                                                                                                                              
-            'label'       => 'Paywalled Content Selectors',                    
+            'placeholder' => esc_attr__( '.section1, .section2', 'schema-package' ),
+            'label'       => esc_html__( 'Paywalled Content Selectors', 'schema-package' ),                   
             'type'        => 'textarea',                             
-            'value'       => '',
-            'placeholder' => '.section1, .section2',
-            'tooltip'     => 'Separate selectors with comma ( , ).',
+            'value'       => '',            
+            'tooltip'     => esc_html__( 'Separate selectors with comma ( , ).', 'schema-package' ),
             'display'     => false,
         ],
         'include_video' => [                                                                                                                                              
-            'label'       => 'Include Video',                    
+            'label'       => esc_html__( 'Include Video', 'schema-package' ),                                       
             'type'        => 'checkbox',                             
             'value'       => false,                        
             'display'     => true,
         ],
         'opening_hours' => [                            
-                'label'         => 'Opening Hours',    
-                'button_text'   => 'Add More Opening Hours', 
+                'label'         => esc_html__( 'Opening Hours', 'schema-package' ),    
+                'button_text'   => esc_html__( 'Add More Opening Hours', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [
                     [
                         'monday' => [                                                                                                                                              
-                            'label'       => 'Monday',                    
+                            'label'       => esc_html__( 'Monday', 'schema-package' ),                                      
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'tuesday' => [                                                                                                                                              
-                            'label'       => 'Tuesday',                    
+                            'label'       => esc_html__( 'Tuesday', 'schema-package' ),                                      
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'wednesday' => [                                                                                                                                              
-                            'label'       => 'Wednesday',                    
+                            'label'       => esc_html__( 'Wednesday', 'schema-package' ),                                       
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'thursday' => [                                                                                                                                              
-                            'label'       => 'Thursday',                    
+                            'label'       => esc_html__( 'Thursday', 'schema-package' ),                                        
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'friday' => [                                                                                                                                              
-                            'label'       => 'Friday',                    
+                            'label'       => esc_html__( 'Friday', 'schema-package' ),                                        
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'saturday' => [                                                                                                                                              
-                            'label'       => 'Saturday',                    
+                            'label'       => esc_html__( 'Saturday', 'schema-package' ),                                       
                             'type'        => 'checkbox',                                                                                    
                             'value'       => true,
                             'display'     => true
                         ],
                         'sunday' => [                                                                                                                                              
-                            'label'       => 'Sunday',                    
+                            'label'       => esc_html__( 'Sunday', 'schema-package' ),                                        
                             'type'        => 'checkbox',                                                                                    
                             'value'       => false,
                             'display'     => true
                         ],
                         'opens' => [                                                                                                                                              
-                            'label'       => 'Opens',                    
+                            'label'       => esc_html__( 'Opens', 'schema-package' ),                                       
                             'type'        => 'text',                                    
                             'placeholder' => '09:00',                    
                             'value'       => '',
                             'display'     => true
                         ],
                         'closes' => [                                                                                                                                              
-                            'label'       => 'Closes',                    
+                            'label'       => esc_html__( 'Closes', 'schema-package' ),                                        
                             'type'        => 'text',                                    
                             'placeholder' => '19:00',                    
                             'value'       => '',

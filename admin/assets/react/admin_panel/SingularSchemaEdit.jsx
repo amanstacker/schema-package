@@ -347,7 +347,7 @@ const SingularSchemaEdit = () => {
       <div className="smpg-left-section">
       <div className="smpg-edit-page-content">
         
-      <Accordion title="Schema Type" isExpand={true}>
+      <Accordion title={__('Schema Type', 'schema-package') } isExpand={true}>
         <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/schema-types/'>{__('Learn More', 'schema-package')}</a>
         </div>
@@ -374,7 +374,7 @@ const SingularSchemaEdit = () => {
     </div>
       </Accordion>               
 
-    <Accordion title="Targeting" isExpand={true}>
+    <Accordion title={__('Targeting', 'schema-package') } isExpand={true}>
       <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/how-to-configure-schema-markup-for-singular-posts-using-the-schema-package#singular-targeting'>{__('Learn More', 'schema-package')}</a>
         </div>
@@ -640,7 +640,7 @@ const SingularSchemaEdit = () => {
       
       <div className="smpg-right-section">  
       { postMeta._schema_type != 'customschema' ?
-        <Accordion title="Schema Properties" isExpand={true}>                  
+        <Accordion title={__('Schema Properties', 'schema-package') } isExpand={true}>                  
         <div className="smpg-accordion-body">
           <p>{__('No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values.', 'schema-package')} <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a></p>                              
           <PropertySelector schemaProperties={schemaProperties} mappedPropertiesKey={postMeta._mapped_properties_key} onSelectProperty={handlePropertySelection} />
@@ -649,7 +649,7 @@ const SingularSchemaEdit = () => {
       : '' }        
       
        { ( postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' ) ?
-        <Accordion title="Additional Schema" isExpand={true}>
+        <Accordion title={__('Additional Schema', 'schema-package') } isExpand={true}>
           <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>
         </div>
@@ -685,7 +685,7 @@ const SingularSchemaEdit = () => {
        : '' }  
 
          {postMeta._schema_type ? 
-        <Accordion title="Automation" isExpand={true}>      
+        <Accordion title={__('Automation', 'schema-package')} isExpand={true}>      
         <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/category/automation/'>{__('Learn More', 'schema-package')}</a>
         </div>

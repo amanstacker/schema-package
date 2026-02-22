@@ -41,32 +41,32 @@ function smpg_schema_event( $schema_id, $common_properties ) {
             'start_date'       => $start_date,
             'end_date'         => $end_date,
             'attendance_mode'      => [                                                                                                                                              
-                'label'       => 'Attendance Mode',                    
+                'label'   => esc_html__( 'Attendance Mode', 'schema-package' ),                                      
                 'type'        => 'select',
-                'options'     => [
-                    'https://schema.org/MixedEventAttendanceMode'   => 'Mixed',
-                    'https://schema.org/OfflineEventAttendanceMode' => 'Offline',
-                    'https://schema.org/OnlineEventAttendanceMode'  => 'Online',                                        
+                'options' => [
+                    'https://schema.org/MixedEventAttendanceMode'   => esc_html__( 'Mixed', 'schema-package' ),
+                    'https://schema.org/OfflineEventAttendanceMode' => esc_html__( 'Offline', 'schema-package' ),
+                    'https://schema.org/OnlineEventAttendanceMode'  => esc_html__( 'Online', 'schema-package' ),                                      
                 ],                                                                                        
                 'value'       => 'https://schema.org/OfflineEventAttendanceMode',
                 'display'     => true
             ], 
             'status'      => [                                                                                                                                              
-                'label'       => 'Status',                    
+                'label'   => esc_html__( 'Status', 'schema-package' ),                                        
                 'type'        => 'select',
-                'options'     => [
-                    'https://schema.org/EventScheduled'   => 'EventScheduled',
-                    'https://schema.org/EventCancelled'   => 'EventCancelled',
-                    'https://schema.org/EventMovedOnline' => 'EventMovedOnline',
-                    'https://schema.org/EventPostponed'   => 'EventPostponed',
-                    'https://schema.org/EventRescheduled' => 'EventRescheduled'
-                ],                                                                                        
+                'options' => [
+                    'https://schema.org/EventScheduled'   => esc_html__( 'EventScheduled', 'schema-package' ),
+                    'https://schema.org/EventCancelled'   => esc_html__( 'EventCancelled', 'schema-package' ),
+                    'https://schema.org/EventMovedOnline' => esc_html__( 'EventMovedOnline', 'schema-package' ),
+                    'https://schema.org/EventPostponed'   => esc_html__( 'EventPostponed', 'schema-package' ),
+                    'https://schema.org/EventRescheduled' => esc_html__( 'EventRescheduled', 'schema-package' )
+                ],                                                                                         
                 'value'       => 'https://schema.org/EventScheduled',
                 'display'     => true
             ],
             'v_location' => [
                 'placeholder' => 'https://operaonline.stream5.com/',                    
-                'label'       => 'Virtual Location',
+                'label'       => esc_html__( 'Virtual Location', 'schema-package' ),
                 'type'        => 'text',
                 'value'       => '',
                 'recommended' => true,
@@ -87,7 +87,7 @@ function smpg_schema_event( $schema_id, $common_properties ) {
             'valid_from'           => $valid_from,                                                                                                         
             'offer_url'            => [
                     'placeholder' => 'https://operaonline.stream5.com/',                    
-                    'label'       => 'Offer URL',
+                    'label'       => esc_html__( 'Offer URL', 'schema-package' ),
                     'type'        => 'text',
                     'value'       => '',
                     'recommended' => true,
@@ -100,9 +100,9 @@ function smpg_schema_event( $schema_id, $common_properties ) {
             'worst_rating'     => $worst_rating,
             'rating_count'     => $rating_count,
             'review_count'     => $review_count,
-            'performer' => [                            
-                'label'         => 'Performer',    
-                'button_text'   => 'Add More Performer', 
+            'performer' => [       
+                'label'         => esc_html__( 'Performer', 'schema-package' ),
+                'button_text'   => esc_html__( 'Add More Performer', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [
@@ -112,8 +112,8 @@ function smpg_schema_event( $schema_id, $common_properties ) {
                 ]                                                                                                                      
             ],
             'organizer' => [                            
-                'label'         => 'Organizer',    
-                'button_text'   => 'Add More organizer', 
+                'label'         => esc_html__( 'Organizer', 'schema-package' ),
+                'button_text'   => esc_html__( 'Add More organizer', 'schema-package' ), 
                 'type'          => 'repeater', 
                 'display'       => true,
                 'elements'      => [

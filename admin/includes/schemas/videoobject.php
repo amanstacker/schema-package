@@ -6,9 +6,9 @@ function smpg_schema_videoobject( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $hours['label']    = 'Duration ( Hours )';
-    $minutes['label']  = 'Duration ( minutes )';
-    $seconds['label']  = 'Duration ( seconds )';
+    $hours['label']   = esc_html__( 'Duration ( Hours )', 'schema-package' );
+    $minutes['label'] = esc_html__( 'Duration ( Minutes )', 'schema-package' );
+    $seconds['label'] = esc_html__( 'Duration ( Seconds )', 'schema-package' );
 
     $properties = [
         'is_enable'         => true,
@@ -25,13 +25,13 @@ function smpg_schema_videoobject( $schema_id, $common_properties ) {
             'content_url'      => $content_url,
             'embed_url'        => $embed_url,
             'thumbnail_url'    => [                                                      
-                    'label'       => 'Thumbnail URL',                    
+                    'label'       => esc_html__( 'Thumbnail URL', 'schema-package' ),                  
                     'type'        => 'media',                                    
                     'multiple'    => false,
                     'value'       => [],
                     'recommended' => true,
                     'display'     => false,
-                    'tooltip'     => 'An image of the item. This can be a URL or a fully described ImageObject.'
+                   	'tooltip'     => esc_html__( 'An image of the item. This can be a URL or a fully described ImageObject.', 'schema-package' ),
             ],
             'upload_date'      => $upload_date,
             'hours'            => $hours,

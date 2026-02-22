@@ -6,9 +6,10 @@ function smpg_schema_howto( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
-    $hours['label']    = 'Duration ( Hours )';
-    $minutes['label']  = 'Duration ( minutes )';
-    $seconds['label']  = 'Duration ( seconds )';
+    $hours['label']   = esc_html__( 'Duration ( Hours )', 'schema-package' );
+    $minutes['label'] = esc_html__( 'Duration ( Minutes )', 'schema-package' );
+    $seconds['label'] = esc_html__( 'Duration ( Seconds )', 'schema-package' );
+
 
     $video_name['display']        = false;
     $video_description['display'] = false;
@@ -44,22 +45,22 @@ function smpg_schema_howto( $schema_id, $common_properties ) {
                 'content_url'         => $content_url,
                 'embed_url'           => $embed_url,
                 'thumbnail_image'     => [                                                      
-                        'label'       => 'Thumbnail Image',                    
+                        'label'       => esc_html__( 'Thumbnail Image', 'schema-package' ),                    
                         'type'        => 'media',
                         'class'       => ['smpg_common_properties'],
                         'multiple'    => false,
                         'value'       => [],
                         'recommended' => true,
                         'display'     => false,
-                        'tooltip'     => 'An image of the item. This can be a URL or a fully described ImageObject.'
+                        'tooltip'     => esc_html__( 'An image of the item. This can be a URL or a fully described ImageObject.', 'schema-package' ),
                 ],
                 'upload_date'         => $upload_date,
                 'hours'               => $hours,
                 'minutes'             => $minutes,
                 'seconds'             => $seconds,                            
                 'supplies' => [                            
-                    'label'         => 'Supplies',    
-                    'button_text'   => 'Add More Supply', 
+                    'label'       => esc_html__( 'Supplies', 'schema-package' ),
+                    'button_text' => esc_html__( 'Add Another Supply', 'schema-package' ),
                     'type'          => 'repeater', 
                     'display'     => true,
                     'elements'      => [    
@@ -72,8 +73,8 @@ function smpg_schema_howto( $schema_id, $common_properties ) {
                                         ]
                     ],
                 'tools' => [                                
-                            'label'         => 'Tools',    
-                            'button_text'   => 'Add More Tool', 
+                            'label'       => esc_html__( 'Tools', 'schema-package' ),
+                            'button_text' => esc_html__( 'Add Another Tool', 'schema-package' ),
                             'type'          => 'repeater',
                             'display'     => true, 
                             'elements'      => [    
@@ -86,8 +87,8 @@ function smpg_schema_howto( $schema_id, $common_properties ) {
                                     ]
                         ],
                 'steps'  =>   [                        
-                'label'         => 'Steps',    
-                'button_text'   => 'Add More Step', 
+                'label'       => esc_html__( 'Steps', 'schema-package' ),
+                'button_text' => esc_html__( 'Add Another Step', 'schema-package' ),
                 'type'          => 'repeater',
                 'display'     => true, 
                 'elements'      => [    
@@ -95,27 +96,27 @@ function smpg_schema_howto( $schema_id, $common_properties ) {
                                     'name'           => $name,
                                     'description'    => $description,                                                                                                
                                     'image'          => $image,
-                                    'clip_name'      => [                                                                                                                                              
-                                        'label'       => 'Clip Name',                    
+                                    'clip_name'      => [                           
+                                        'placeholder' => esc_attr__( 'Name', 'schema-package' ),
+                                        'label'       => esc_html__( 'Clip Name', 'schema-package' ),
                                         'type'        => 'text',
-                                        'class'       => ['smpg_common_properties'],
-                                        'placeholder' => 'Name',                    
+                                        'class'       => ['smpg_common_properties'],                                                            
                                         'value'       => '',
                                         'display'     => false
                                     ],
-                                    'clip_start_offset'      => [                                                                                                                                              
-                                        'label'       => 'Clip Start Offset',                    
+                                    'clip_start_offset'      => [                   
+                                        'placeholder' => '29',                                                                                                                             
+                                        'label'       => esc_html__( 'Clip Start Offset', 'schema-package' ),                    
                                         'type'        => 'number',
-                                        'class'       => ['smpg_common_properties'],
-                                        'placeholder' => '29',                    
+                                        'class'       => ['smpg_common_properties'],                                                          
                                         'value'       => '',
                                         'display'     => false
                                     ],
-                                    'clip_end_offset'      => [                                                                                                                                              
-                                        'label'       => 'Clip End Offset',                    
+                                    'clip_end_offset'      => [                     
+                                        'placeholder' => '36',                                                                                                                           
+                                        'label'       => esc_html__( 'Clip End Offset', 'schema-package' ),
                                         'type'        => 'number',
-                                        'class'       => ['smpg_common_properties'],
-                                        'placeholder' => '36',                    
+                                        'class'       => ['smpg_common_properties'],                                                          
                                         'value'       => '',
                                         'display'     => false
                                     ],

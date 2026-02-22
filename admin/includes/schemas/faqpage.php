@@ -15,8 +15,8 @@ function smpg_schema_faqpage( $schema_id, $common_properties ) {
         'text'              => 'FAQs',
         'properties'        => [                    
                 'main_entity' =>    [                            
-                    'label'         => 'Main Entity',    
-                    'button_text'   => 'Add More Faqs', 
+                    'label'       => esc_html__( 'Main Entity', 'schema-package' ),
+                    'button_text' => esc_html__( 'Add More Faqs', 'schema-package' ),
                     'type'          => 'repeater',
                     'display'     => true, 
                     'elements'      => [    

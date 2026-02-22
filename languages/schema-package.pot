@@ -1,15 +1,15 @@
-# Copyright (C) 2025 amanstacker
+# Copyright (C) 2026 amanstacker
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Schema Package - Structured Data & Rich Snippets Tool for SEO 1.0.26\n"
+"Project-Id-Version: Schema Package - Structured Data & Rich Snippets Tool for SEO 1.0.29\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/schema-package\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-26T14:00:03+00:00\n"
+"POT-Creation-Date: 2026-02-20T17:22:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: schema-package\n"
@@ -36,14 +36,6 @@ msgstr ""
 
 #: admin/feedback/feedback.php:48
 msgid "Deactivating Schema Package"
-msgstr ""
-
-#: admin/feedback/feedback.php:83
-msgid "Heads up: "
-msgstr ""
-
-#: admin/feedback/feedback.php:84
-msgid "Clicking \"Submit & Deactivate\" will email your feedback to the developer. No site data is collected. Click \"Skip & Deactivate\" to deactivate without sending feedback."
 msgstr ""
 
 #: admin/feedback/feedback.php:55
@@ -75,34 +67,42 @@ msgid "Other reason"
 msgstr ""
 
 #: admin/feedback/feedback.php:83
-msgid "Kindly describe the feature you found missing."
+msgid "Heads up: "
 msgstr ""
 
 #: admin/feedback/feedback.php:84
+msgid "Clicking \"Submit & Deactivate\" will email your feedback to the developer. No site data is collected. Click \"Skip & Deactivate\" to deactivate without sending feedback."
+msgstr ""
+
+#: admin/feedback/feedback.php:88
+msgid "Kindly describe the feature you found missing."
+msgstr ""
+
+#: admin/feedback/feedback.php:89
 msgid "Kindly provide details about the difficulties you're facing."
 msgstr ""
 
-#: admin/feedback/feedback.php:85
+#: admin/feedback/feedback.php:90
 msgid "If you don't mind, name the plugin you switched to."
 msgstr ""
 
-#: admin/feedback/feedback.php:86
+#: admin/feedback/feedback.php:91
 msgid "Kindly provide a brief explanation."
 msgstr ""
 
-#: admin/feedback/feedback.php:95
+#: admin/feedback/feedback.php:100
 msgid "Submit & Deactivate"
 msgstr ""
 
-#: admin/feedback/feedback.php:96
+#: admin/feedback/feedback.php:101
 msgid "Skip & Deactivate"
 msgstr ""
 
-#: admin/feedback/feedback.php:97
+#: admin/feedback/feedback.php:102
 msgid "Don't Deactivate"
 msgstr ""
 
-#: admin/feedback/feedback.php:124
+#: admin/feedback/feedback.php:129
 msgid "Nonce Not Verified"
 msgstr ""
 
@@ -174,116 +174,2090 @@ msgstr ""
 msgid "Schema Package Generator"
 msgstr ""
 
-#: admin/includes/setup.php:567
-#: admin/includes/setup.php:568
-msgid "Schema Package"
+#: admin/includes/properties-common.php:10
+msgid "Start Date"
 msgstr ""
 
-#: admin/includes/setup.php:599
-msgid "Thanks for trusting Schema Package! Your support is what keeps this project alive."
+#: admin/includes/properties-common.php:19
+msgid "Previous Start Date"
 msgstr ""
 
-#: admin/includes/setup.php:599
-msgid "Click here to inspire us with a review."
+#: admin/includes/properties-common.php:28
+msgid "End Date"
 msgstr ""
 
-#: admin/includes/setup.php:600
-msgid "Schema Package Version"
+#: admin/includes/properties-common.php:36
+msgid "Snickerpark Stadium"
 msgstr ""
 
-#: admin/includes/setup.php:699
-msgid "Site Title"
+#: admin/includes/properties-common.php:37
+msgid "Place Name"
 msgstr ""
 
-#: admin/includes/setup.php:700
-msgid "Tagline"
+#: admin/includes/properties-common.php:46
+msgid "GeoCoordinates Latitude"
 msgstr ""
 
-#: admin/includes/setup.php:701
-msgid "Site URL"
+#: admin/includes/properties-common.php:55
+msgid "GeoCoordinates Longitude"
 msgstr ""
 
-#: admin/includes/setup.php:702
-msgid "Post Title"
+#: admin/includes/properties-common.php:64
+msgid "Rating Value"
 msgstr ""
 
-#: admin/includes/setup.php:703
-msgid "Content"
+#: admin/includes/properties-common.php:78
+msgid "Rating Count"
 msgstr ""
 
-#: admin/includes/setup.php:704
-msgid "Category"
+#: admin/includes/properties-common.php:92
+msgid "Review Count"
 msgstr ""
 
-#: admin/includes/setup.php:705
-msgid "Excerpt"
+#: admin/includes/properties-common.php:106
+msgid "Best Rating"
 msgstr ""
 
-#: admin/includes/setup.php:706
-msgid "Post Summary"
+#: admin/includes/properties-common.php:120
+msgid "Worst Rating"
 msgstr ""
 
-#: admin/includes/setup.php:707
-msgid "Permalink"
+#: admin/includes/properties-common.php:133
+msgid "Ambiance"
 msgstr ""
 
-#: admin/includes/setup.php:708
+#: admin/includes/properties-common.php:134
+msgid "Review Aspect"
+msgstr ""
+
+#: admin/includes/properties-common.php:142
+msgid "555 Clancy St"
+msgstr ""
+
+#: admin/includes/properties-common.php:143
+msgid "Street Address"
+msgstr ""
+
+#: admin/includes/properties-common.php:156
+msgid "Detroit"
+msgstr ""
+
+#: admin/includes/properties-common.php:157
+msgid "Address Locality"
+msgstr ""
+
+#: admin/includes/properties-common.php:170
+msgid "MI"
+msgstr ""
+
+#: admin/includes/properties-common.php:171
+msgid "Address Region"
+msgstr ""
+
+#: admin/includes/properties-common.php:185
+msgid "Postal Code"
+msgstr ""
+
+#: admin/includes/properties-common.php:198
+msgid "US"
+msgstr ""
+
+#: admin/includes/properties-common.php:199
+msgid "Address Country"
+msgstr ""
+
+#: admin/includes/properties-common.php:212
+#: admin/includes/properties-common.php:282
+msgid "Enter Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:213
+#: admin/includes/properties-common.php:283
+#: admin/includes/schemas/howto.php:100
+#: admin/includes/schemas/recipe.php:295
+#: admin/includes/schemas/service.php:159
+#: admin/includes/schemas/vacationrental.php:191
+msgid "Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:218
+#: admin/includes/properties-common.php:289
+msgid "Name of the item"
+msgstr ""
+
+#: admin/includes/properties-common.php:221
+msgid "Enter Identifier"
+msgstr ""
+
+#: admin/includes/properties-common.php:222
+msgid "Identifier"
+msgstr ""
+
+#: admin/includes/properties-common.php:227
+msgid "Identifier of the item"
+msgstr ""
+
+#: admin/includes/properties-common.php:230
+msgid "Enter Alternate Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:231
+msgid "Alternate Name "
+msgstr ""
+
+#: admin/includes/properties-common.php:236
+msgid "Alternate Name of the item or person"
+msgstr ""
+
+#: admin/includes/properties-common.php:240
+msgid "Price Range"
+msgstr ""
+
+#: admin/includes/properties-common.php:245
+msgid "Price Range of an item"
+msgstr ""
+
+#: admin/includes/properties-common.php:248
+msgid "Enter Email"
+msgstr ""
+
+#: admin/includes/properties-common.php:249
+msgid "Email"
+msgstr ""
+
+#: admin/includes/properties-common.php:258
+msgid "Telephone"
+msgstr ""
+
+#: admin/includes/properties-common.php:264
+msgid "Enter Job Title"
+msgstr ""
+
+#: admin/includes/properties-common.php:265
+msgid "Job Title"
+msgstr ""
+
+#: admin/includes/properties-common.php:273
+msgid "Enter Title"
+msgstr ""
+
+#: admin/includes/properties-common.php:274
+msgid "Title"
+msgstr ""
+
+#: admin/includes/properties-common.php:279
+msgid "Title of the item"
+msgstr ""
+
+#: admin/includes/properties-common.php:293
+msgid "ID"
+msgstr ""
+
+#: admin/includes/properties-common.php:298
+msgid "Globally unique identifier (IRI/URL) that you assign to a particular entity."
+msgstr ""
+
+#: admin/includes/properties-common.php:301
+#: admin/includes/properties-common.php:302
+msgid "Headline"
+msgstr ""
+
+#: admin/includes/properties-common.php:307
+msgid "Headline of the article."
+msgstr ""
+
+#: admin/includes/properties-common.php:310
+#: admin/includes/properties-common.php:311
+#: admin/includes/properties-common.php:330
+#: admin/includes/properties-common.php:331
+msgid "Description"
+msgstr ""
+
+#: admin/includes/properties-common.php:317
+#: admin/includes/properties-common.php:337
+msgid "A description of the item."
+msgstr ""
+
+#: admin/includes/properties-common.php:320
+msgid "Review Body Text"
+msgstr ""
+
+#: admin/includes/properties-common.php:321
+msgid "Review Body"
+msgstr ""
+
+#: admin/includes/properties-common.php:327
+msgid "Review body content"
+msgstr ""
+
+#: admin/includes/properties-common.php:340
+msgid "tag1, tag2, tag3"
+msgstr ""
+
+#: admin/includes/properties-common.php:341
+msgid "Keywords"
+msgstr ""
+
+#: admin/includes/properties-common.php:346
+msgid "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas."
+msgstr ""
+
+#: admin/includes/properties-common.php:350
+msgid "Word Count (Opt.)"
+msgstr ""
+
+#: admin/includes/properties-common.php:355
+msgid "The number of words in the text of the Article."
+msgstr ""
+
+#: admin/includes/properties-common.php:358
+msgid "Sports, Lifestyle"
+msgstr ""
+
+#: admin/includes/properties-common.php:359
+msgid "Article Section (Opt.)"
+msgstr ""
+
+#: admin/includes/properties-common.php:364
+msgid "Articles may belong to one or more sections in a magazine or newspaper, such as Sports, Lifestyle, etc."
+msgstr ""
+
+#: admin/includes/properties-common.php:368
+#: admin/includes/schemas/qna.php:27
+msgid "URL"
+msgstr ""
+
+#: admin/includes/properties-common.php:373
+msgid "URL of the item."
+msgstr ""
+
+#: admin/includes/properties-common.php:376
+msgid "en"
+msgstr ""
+
+#: admin/includes/properties-common.php:377
+msgid "In Language"
+msgstr ""
+
+#: admin/includes/properties-common.php:383
+msgid "The language of the content or performance or used in an action"
+msgstr ""
+
+#: admin/includes/properties-common.php:387
+msgid "Date Published"
+msgstr ""
+
+#: admin/includes/properties-common.php:392
+#: admin/includes/properties-common.php:401
+#: admin/includes/properties-common.php:410
+#: admin/includes/properties-common.php:419
+msgid "Date of first broadcast/publication."
+msgstr ""
+
+#: admin/includes/properties-common.php:396
+msgid "Date Posted"
+msgstr ""
+
+#: admin/includes/properties-common.php:405
+msgid "Valid Through"
+msgstr ""
+
+#: admin/includes/properties-common.php:414
+msgid "Valid From"
+msgstr ""
+
+#: admin/includes/properties-common.php:423
+msgid "Date Modified"
+msgstr ""
+
+#: admin/includes/properties-common.php:428
+msgid "The date on which the article was most recently modified"
+msgstr ""
+
+#: admin/includes/properties-common.php:432
+msgid "Date Created"
+msgstr ""
+
+#: admin/includes/properties-common.php:437
+msgid "The date on which things created"
+msgstr ""
+
+#: admin/includes/properties-common.php:440
+msgid "Author Type"
+msgstr ""
+
+#: admin/includes/properties-common.php:444
+#: admin/includes/properties-common.php:462
+#: admin/includes/properties-common.php:661
+#: admin/includes/properties-common.php:674
+#: admin/includes/properties-common.php:823
+#: admin/includes/properties-common.php:839
+#: admin/includes/schemas/course.php:52
+#: admin/includes/schemas/course.php:85
+#: admin/includes/schemas/musicrelease.php:35
+#: admin/includes/schemas/review.php:55
+#: admin/includes/schemas/service.php:62
+#: admin/includes/schemas/vacationrental.php:42
+#: admin/includes/schemas/vacationrental.php:87
+msgid "Select"
+msgstr ""
+
+#: admin/includes/properties-common.php:445
+#: admin/includes/properties-common.php:463
+msgid "Person"
+msgstr ""
+
+#: admin/includes/properties-common.php:446
+#: admin/includes/properties-common.php:464
+#: admin/includes/schemas/review.php:68
+#: admin/includes/schemas/service.php:63
+msgid "Organization"
+msgstr ""
+
+#: admin/includes/properties-common.php:450
+msgid "The author type of this content"
+msgstr ""
+
+#: admin/includes/properties-common.php:458
+msgid "Seller Type"
+msgstr ""
+
+#: admin/includes/properties-common.php:468
+msgid "The seller type for the product"
+msgstr ""
+
+#: admin/includes/properties-common.php:471
+msgid "Employment Type"
+msgstr ""
+
+#: admin/includes/properties-common.php:475
+msgid "Employment types"
+msgstr ""
+
+#: admin/includes/properties-common.php:478
+msgid "Full Time"
+msgstr ""
+
+#: admin/includes/properties-common.php:484
+msgid "Part Time"
+msgstr ""
+
+#: admin/includes/properties-common.php:490
+msgid "Contractor"
+msgstr ""
+
+#: admin/includes/properties-common.php:496
+msgid "Temporary"
+msgstr ""
+
+#: admin/includes/properties-common.php:502
+msgid "Intern"
+msgstr ""
+
+#: admin/includes/properties-common.php:508
+msgid "Volunteer"
+msgstr ""
+
+#: admin/includes/properties-common.php:514
+msgid "Per Diem"
+msgstr ""
+
+#: admin/includes/properties-common.php:520
+msgid "Other"
+msgstr ""
+
+#: admin/includes/properties-common.php:528
+#: admin/includes/properties-common.php:529
+#: admin/includes/setup.php:710
 msgid "Author Name"
 msgstr ""
 
-#: admin/includes/setup.php:709
-msgid "Author First Name"
+#: admin/includes/properties-common.php:534
+msgid "The author name of this content"
 msgstr ""
 
-#: admin/includes/setup.php:710
-msgid "Author Last Name"
+#: admin/includes/properties-common.php:542
+#: admin/includes/properties-common.php:543
+msgid "Author URL"
 msgstr ""
 
-#: admin/includes/setup.php:711
-msgid "Publish Date"
+#: admin/includes/properties-common.php:548
+msgid "The author url of this content"
 msgstr ""
 
-#: admin/includes/setup.php:712
-msgid "Last Modify Date"
-msgstr ""
-
-#: admin/includes/setup.php:713
-msgid "Featured Image"
-msgstr ""
-
-#: admin/includes/setup.php:714
+#: admin/includes/properties-common.php:556
+#: admin/includes/setup.php:716
 msgid "Author Image"
 msgstr ""
 
-#: admin/includes/setup.php:715
-msgid "Logo Image"
+#: admin/includes/properties-common.php:562
+msgid "The author image of this content"
 msgstr ""
 
-#: admin/includes/setup.php:716
-msgid "Taxonomy Term"
+#: admin/includes/properties-common.php:570
+#: admin/includes/properties-common.php:571
+msgid "Seller Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:576
+msgid "The seller name for the product"
+msgstr ""
+
+#: admin/includes/properties-common.php:579
+#: admin/includes/properties-common.php:580
+msgid "Publisher Name"
+msgstr ""
+
+#: admin/includes/properties-common.php:585
+msgid "The publisher of the creative work."
+msgstr ""
+
+#: admin/includes/properties-common.php:593
+#: admin/assets/react/admin_panel/settings/Settings.jsx:757
+#: admin/assets/react/dist/admin_panel.js:4238
+msgid "Logo"
+msgstr ""
+
+#: admin/includes/properties-common.php:599
+msgid "An associated logo."
+msgstr ""
+
+#: admin/includes/properties-common.php:607
+#: admin/assets/react/admin_panel/settings/Settings.jsx:765
+#: admin/assets/react/dist/admin_panel.js:4249
+msgid "Image"
+msgstr ""
+
+#: admin/includes/properties-common.php:613
+#: admin/includes/schemas/howto.php:55
+#: admin/includes/schemas/recipe.php:259
+#: admin/includes/schemas/videoobject.php:34
+msgid "An image of the item. This can be a URL or a fully described ImageObject."
+msgstr ""
+
+#: admin/includes/properties-common.php:616
+msgid "ANDROID"
+msgstr ""
+
+#: admin/includes/properties-common.php:617
+msgid "Operating System"
+msgstr ""
+
+#: admin/includes/properties-common.php:625
+#: admin/includes/setup.php:706
+msgid "Category"
+msgstr ""
+
+#: admin/includes/properties-common.php:629
+msgid "GameApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:630
+msgid "SocialNetworkingApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:631
+msgid "TravelApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:632
+msgid "ShoppingApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:633
+msgid "SportsApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:634
+msgid "LifestyleApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:635
+msgid "BusinessApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:636
+msgid "DesignApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:637
+msgid "DeveloperApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:638
+msgid "DriverApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:639
+msgid "EducationalApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:640
+msgid "HealthApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:641
+msgid "FinanceApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:642
+msgid "SecurityApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:643
+msgid "BrowserApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:644
+msgid "CommunicationApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:645
+msgid "DesktopEnhancementApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:646
+msgid "EntertainmentApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:647
+msgid "MultimediaApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:648
+msgid "HomeApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:649
+msgid "UtilitiesApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:650
+msgid "ReferenceApplication"
+msgstr ""
+
+#: admin/includes/properties-common.php:657
+msgid "Offer Type"
+msgstr ""
+
+#: admin/includes/properties-common.php:662
+msgid "Offer"
+msgstr ""
+
+#: admin/includes/properties-common.php:663
+msgid "AggregateOffer"
+msgstr ""
+
+#: admin/includes/properties-common.php:670
+msgid "Offer Category"
+msgstr ""
+
+#: admin/includes/properties-common.php:675
+msgid "Free"
+msgstr ""
+
+#: admin/includes/properties-common.php:676
+msgid "Paid"
+msgstr ""
+
+#: admin/includes/properties-common.php:677
+msgid "Partially Free"
+msgstr ""
+
+#: admin/includes/properties-common.php:678
+msgid "Subscription"
+msgstr ""
+
+#: admin/includes/properties-common.php:686
+#: admin/includes/schemas/event.php:90
+msgid "Offer URL"
+msgstr ""
+
+#: admin/includes/properties-common.php:694
+#: admin/includes/properties-common.php:870
+#: admin/includes/schemas/jobposting.php:87
+msgid "USD"
+msgstr ""
+
+#: admin/includes/properties-common.php:695
+msgid "Offer Currency"
+msgstr ""
+
+#: admin/includes/properties-common.php:704
+msgid "High Price"
+msgstr ""
+
+#: admin/includes/properties-common.php:713
+msgid "Low Price"
+msgstr ""
+
+#: admin/includes/properties-common.php:722
+msgid "Offer Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:731
+msgid "Follow Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:736
+msgid "Number of times the profile has been followed"
+msgstr ""
+
+#: admin/includes/properties-common.php:740
+msgid "Like Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:745
+msgid "Number of likes received"
+msgstr ""
+
+#: admin/includes/properties-common.php:749
+msgid "Comment Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:754
+msgid "Number of comments"
+msgstr ""
+
+#: admin/includes/properties-common.php:758
+msgid "Share Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:763
+msgid "Number of times the profile has been shared"
+msgstr ""
+
+#: admin/includes/properties-common.php:767
+msgid "Post Count"
+msgstr ""
+
+#: admin/includes/properties-common.php:772
+msgid "Number of posts/articles written by the profile owner"
+msgstr ""
+
+#: admin/includes/properties-common.php:776
+msgid "Offer Price"
+msgstr ""
+
+#: admin/includes/properties-common.php:785
+msgid "Price ValidUntil"
+msgstr ""
+
+#: admin/includes/properties-common.php:794
+msgid "SKU"
+msgstr ""
+
+#: admin/includes/properties-common.php:803
+msgid "MPN"
+msgstr ""
+
+#: admin/includes/properties-common.php:811
+msgid "ACME"
+msgstr ""
+
+#: admin/includes/properties-common.php:812
+msgid "Brand"
+msgstr ""
+
+#: admin/includes/properties-common.php:820
+msgid "Item Condition"
+msgstr ""
+
+#: admin/includes/properties-common.php:824
+msgid "New"
+msgstr ""
+
+#: admin/includes/properties-common.php:825
+msgid "Used"
+msgstr ""
+
+#: admin/includes/properties-common.php:826
+msgid "Refurbished"
+msgstr ""
+
+#: admin/includes/properties-common.php:827
+msgid "Damaged"
+msgstr ""
+
+#: admin/includes/properties-common.php:835
+msgid "Availability"
+msgstr ""
+
+#: admin/includes/properties-common.php:840
+msgid "InStock"
+msgstr ""
+
+#: admin/includes/properties-common.php:841
+msgid "OutOfStock"
+msgstr ""
+
+#: admin/includes/properties-common.php:842
+msgid "SoldOut"
+msgstr ""
+
+#: admin/includes/properties-common.php:843
+msgid "BackOrder"
+msgstr ""
+
+#: admin/includes/properties-common.php:844
+msgid "Discontinued"
+msgstr ""
+
+#: admin/includes/properties-common.php:845
+msgid "InStoreOnly"
+msgstr ""
+
+#: admin/includes/properties-common.php:846
+msgid "LimitedAvailability"
+msgstr ""
+
+#: admin/includes/properties-common.php:847
+msgid "OnlineOnly"
+msgstr ""
+
+#: admin/includes/properties-common.php:848
+msgid "PreOrder"
+msgstr ""
+
+#: admin/includes/properties-common.php:849
+msgid "PreSale"
+msgstr ""
+
+#: admin/includes/properties-common.php:856
+msgid "Enter your question"
+msgstr ""
+
+#: admin/includes/properties-common.php:857
+msgid "Question"
+msgstr ""
+
+#: admin/includes/properties-common.php:863
+msgid "Enter your answer"
+msgstr ""
+
+#: admin/includes/properties-common.php:864
+msgid "Answer"
+msgstr ""
+
+#: admin/includes/properties-common.php:871
+msgid "Estimated Cost Currency"
+msgstr ""
+
+#: admin/includes/properties-common.php:880
+msgid "Estimated Cost Value"
+msgstr ""
+
+#: admin/includes/properties-common.php:888
+msgid "DD"
+msgstr ""
+
+#: admin/includes/properties-common.php:889
+msgid "Days Needed"
+msgstr ""
+
+#: admin/includes/properties-common.php:897
+msgid "HH"
+msgstr ""
+
+#: admin/includes/properties-common.php:898
+msgid "Hours Needed"
+msgstr ""
+
+#: admin/includes/properties-common.php:906
+msgid "MM"
+msgstr ""
+
+#: admin/includes/properties-common.php:907
+msgid "Minutes Needed"
+msgstr ""
+
+#: admin/includes/properties-common.php:916
+msgid "Content URL"
+msgstr ""
+
+#: admin/includes/properties-common.php:924
+msgid "Embed URL"
+msgstr ""
+
+#: admin/includes/properties-common.php:932
+msgid "Upload Date"
+msgstr ""
+
+#: admin/includes/properties-common.php:940
+msgid "Hours"
+msgstr ""
+
+#: admin/includes/properties-common.php:948
+msgid "Minutes"
+msgstr ""
+
+#: admin/includes/properties-common.php:956
+msgid "Seconds"
+msgstr ""
+
+#: admin/includes/properties-common.php:963
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:672
+#: admin/assets/react/dist/admin_panel.js:1110
+msgid "Speakable"
+msgstr ""
+
+#: admin/includes/properties-common.php:969
+msgid "title, *description, #elementid, .elementclass"
+msgstr ""
+
+#: admin/includes/properties-common.php:970
+msgid "Speakable Selectors"
+msgstr ""
+
+#: admin/includes/properties-common.php:973
+#: admin/includes/properties-common.php:987
+msgid "Separate selectors with comma ( , )."
+msgstr ""
+
+#: admin/includes/properties-common.php:977
+msgid "Is Paywalled Content ?"
+msgstr ""
+
+#: admin/includes/properties-common.php:983
+msgid ".section1, .section2"
+msgstr ""
+
+#: admin/includes/properties-common.php:984
+msgid "Paywalled Content Selectors"
+msgstr ""
+
+#: admin/includes/properties-common.php:991
+msgid "Include Video"
+msgstr ""
+
+#: admin/includes/properties-common.php:997
+#: admin/includes/schemas/service.php:174
+msgid "Opening Hours"
+msgstr ""
+
+#: admin/includes/properties-common.php:998
+msgid "Add More Opening Hours"
+msgstr ""
+
+#: admin/includes/properties-common.php:1004
+#: admin/includes/schemas/service.php:181
+msgid "Monday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1010
+#: admin/includes/schemas/service.php:187
+msgid "Tuesday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1016
+#: admin/includes/schemas/service.php:193
+msgid "Wednesday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1022
+#: admin/includes/schemas/service.php:199
+msgid "Thursday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1028
+#: admin/includes/schemas/service.php:205
+msgid "Friday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1034
+#: admin/includes/schemas/service.php:211
+msgid "Saturday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1040
+#: admin/includes/schemas/service.php:217
+msgid "Sunday"
+msgstr ""
+
+#: admin/includes/properties-common.php:1046
+#: admin/includes/schemas/service.php:223
+msgid "Opens"
+msgstr ""
+
+#: admin/includes/properties-common.php:1053
+#: admin/includes/schemas/service.php:230
+msgid "Closes"
+msgstr ""
+
+#: admin/includes/schemas/article.php:57
+msgid "Report Number"
+msgstr ""
+
+#: admin/includes/schemas/audioobject.php:9
+msgid "Thumbnail Images"
+msgstr ""
+
+#: admin/includes/schemas/audioobject.php:10
+#: admin/includes/schemas/howto.php:9
+#: admin/includes/schemas/musicrelease.php:9
+#: admin/includes/schemas/videoobject.php:9
+msgid "Duration ( Hours )"
+msgstr ""
+
+#: admin/includes/schemas/audioobject.php:11
+msgid "Duration ( minutes )"
+msgstr ""
+
+#: admin/includes/schemas/audioobject.php:12
+msgid "Duration ( seconds )"
+msgstr ""
+
+#: admin/includes/schemas/course.php:9
+msgid "Course Schedule Start Date"
+msgstr ""
+
+#: admin/includes/schemas/course.php:10
+msgid "Course Schedule End Date"
+msgstr ""
+
+#: admin/includes/schemas/course.php:41
+msgid "Course Instance"
+msgstr ""
+
+#: admin/includes/schemas/course.php:42
+msgid "Add More Course Instance"
+msgstr ""
+
+#: admin/includes/schemas/course.php:48
+msgid "Course Mode"
+msgstr ""
+
+#: admin/includes/schemas/course.php:53
+#: admin/includes/schemas/event.php:49
+msgid "Online"
+msgstr ""
+
+#: admin/includes/schemas/course.php:54
+msgid "Onsite"
+msgstr ""
+
+#: admin/includes/schemas/course.php:55
+msgid "Blended"
+msgstr ""
+
+#: admin/includes/schemas/course.php:60
+msgid "Example University"
+msgstr ""
+
+#: admin/includes/schemas/course.php:61
+msgid "Location"
+msgstr ""
+
+#: admin/includes/schemas/course.php:68
+msgid "Course Workload"
+msgstr ""
+
+#: admin/includes/schemas/course.php:75
+msgid "Course Schedule Repeat Count"
+msgstr ""
+
+#: admin/includes/schemas/course.php:81
+msgid "Course Schedule Repeat Frequency"
+msgstr ""
+
+#: admin/includes/schemas/course.php:86
+msgid "Daily"
+msgstr ""
+
+#: admin/includes/schemas/course.php:87
+msgid "Weekly"
+msgstr ""
+
+#: admin/includes/schemas/course.php:88
+msgid "Monthly"
+msgstr ""
+
+#: admin/includes/schemas/course.php:89
+msgid "Yearly"
+msgstr ""
+
+#: admin/includes/schemas/course.php:95
+msgid "Course Schedule Duration"
+msgstr ""
+
+#: admin/includes/schemas/customschema.php:39
+msgid "Editor"
+msgstr ""
+
+#: admin/includes/schemas/customschema.php:43
+msgid "Enter your custom schema (Json-ld). Must be Valid Json"
+msgstr ""
+
+#: admin/includes/schemas/event.php:44
+msgid "Attendance Mode"
+msgstr ""
+
+#: admin/includes/schemas/event.php:47
+msgid "Mixed"
+msgstr ""
+
+#: admin/includes/schemas/event.php:48
+msgid "Offline"
+msgstr ""
+
+#: admin/includes/schemas/event.php:55
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:179
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:179
+#: admin/assets/react/dist/admin_panel.js:1522
+#: admin/assets/react/dist/admin_panel.js:4672
+msgid "Status"
+msgstr ""
+
+#: admin/includes/schemas/event.php:58
+msgid "EventScheduled"
+msgstr ""
+
+#: admin/includes/schemas/event.php:59
+msgid "EventCancelled"
+msgstr ""
+
+#: admin/includes/schemas/event.php:60
+msgid "EventMovedOnline"
+msgstr ""
+
+#: admin/includes/schemas/event.php:61
+msgid "EventPostponed"
+msgstr ""
+
+#: admin/includes/schemas/event.php:62
+msgid "EventRescheduled"
+msgstr ""
+
+#: admin/includes/schemas/event.php:69
+msgid "Virtual Location"
+msgstr ""
+
+#: admin/includes/schemas/event.php:104
+msgid "Performer"
+msgstr ""
+
+#: admin/includes/schemas/event.php:105
+msgid "Add More Performer"
+msgstr ""
+
+#: admin/includes/schemas/event.php:115
+msgid "Organizer"
+msgstr ""
+
+#: admin/includes/schemas/event.php:116
+msgid "Add More organizer"
+msgstr ""
+
+#: admin/includes/schemas/faqpage.php:18
+msgid "Main Entity"
+msgstr ""
+
+#: admin/includes/schemas/faqpage.php:19
+msgid "Add More Faqs"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:10
+#: admin/includes/schemas/musicrelease.php:10
+#: admin/includes/schemas/videoobject.php:10
+msgid "Duration ( Minutes )"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:11
+#: admin/includes/schemas/musicrelease.php:11
+#: admin/includes/schemas/videoobject.php:11
+msgid "Duration ( Seconds )"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:48
+#: admin/includes/schemas/recipe.php:252
+msgid "Thumbnail Image"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:62
+msgid "Supplies"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:63
+msgid "Add Another Supply"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:76
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:26
+#: admin/assets/react/dist/admin_panel.js:3294
+msgid "Tools"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:77
+msgid "Add Another Tool"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:90
+msgid "Steps"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:91
+msgid "Add Another Step"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:101
+#: admin/includes/schemas/recipe.php:292
+msgid "Clip Name"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:109
+#: admin/includes/schemas/recipe.php:300
+msgid "Clip Start Offset"
+msgstr ""
+
+#: admin/includes/schemas/howto.php:117
+#: admin/includes/schemas/recipe.php:308
+msgid "Clip End Offset"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:10
+msgid "Hiring Organization Social Links"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:11
+msgid "Add Another Social Links"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:37
+msgid "TELECOMMUTE"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:38
+msgid "Job Location Type"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:44
+msgid "Bachelor Degree"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:45
+msgid "Education Requirements"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:52
+msgid "Experience Requirements"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:58
+#: admin/includes/schemas/jobposting.php:72
+msgid "MagsRUs Wheel Company"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:59
+msgid "Identifier Name"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:66
+msgid "Identifier Value"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:73
+msgid "Hiring Organization Name"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:80
+msgid "Hiring Organization Logo"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:88
+msgid "Base Salary Currency"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:95
+msgid "Base Salary"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:102
+msgid "Base Salary Minimum"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:109
+msgid "Base Salary Maximum"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:115
+msgid "Base Salary Unit Text"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:119
+msgid "HOUR"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:120
+msgid "DAY"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:121
+msgid "WEEK"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:122
+msgid "MONTH"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:123
+msgid "YEAR"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:128
+msgid "Job Location"
+msgstr ""
+
+#: admin/includes/schemas/jobposting.php:129
+msgid "Add Another Location"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:31
+msgid "Music Release Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:36
+msgid "CD Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:37
+msgid "Cassette Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:38
+msgid "DVD Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:39
+msgid "Digital Audio Tape Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:40
+msgid "Digital Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:41
+msgid "Laser Disc Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:42
+msgid "Vinyl Format"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:50
+msgid "SWBO 101"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:51
+msgid "Catalog Number"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:57
+msgid "Rock, Pop, Jazz..."
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:58
+msgid "Genre"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:64
+#: admin/includes/schemas/musicrelease.php:65
+msgid "Record Label"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:71
+#: admin/includes/schemas/musicrelease.php:72
+msgid "Record Label ID"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:78
+msgid "Producers"
+msgstr ""
+
+#: admin/includes/schemas/musicrelease.php:79
+msgid "Add Another Producer"
+msgstr ""
+
+#: admin/includes/schemas/organization.php:10
+msgid "Social Links"
+msgstr ""
+
+#: admin/includes/schemas/organization.php:11
+#: admin/includes/schemas/profilepage.php:11
+msgid "Add Another Social Link"
+msgstr ""
+
+#: admin/includes/schemas/product.php:20
+#: admin/includes/schemas/vacationrental.php:20
+msgid "Reviews"
+msgstr ""
+
+#: admin/includes/schemas/product.php:21
+#: admin/includes/schemas/vacationrental.php:21
+msgid "Add Another Review"
+msgstr ""
+
+#: admin/includes/schemas/profilepage.php:10
+msgid "Person Social Links"
+msgstr ""
+
+#: admin/includes/schemas/profilepage.php:21
+msgid "Person Image"
+msgstr ""
+
+#: admin/includes/schemas/profilepage.php:22
+msgid "Person Name"
+msgstr ""
+
+#: admin/includes/schemas/profilepage.php:23
+msgid "Person Alternate Name"
+msgstr ""
+
+#: admin/includes/schemas/profilepage.php:24
+msgid "Person Description"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:11
+msgid "Enter answer text"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:12
+msgid "Text"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:20
+msgid "Up Vote Count"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:45
+msgid "Enter question title"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:46
+msgid "Question Title"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:52
+msgid "Enter question description"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:53
+msgid "Question Description"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:60
+msgid "Question Upvote Count"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:67
+msgid "Question Date Created"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:76
+msgid "Answer Count"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:82
+msgid "Accepted Answers"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:83
+msgid "Add Another Accepted Answer"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:89
+msgid "Suggested Answers"
+msgstr ""
+
+#: admin/includes/schemas/qna.php:90
+msgid "Add Another Suggested Answer"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:9
+msgid "Duration (Hours)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:10
+msgid "Duration (Minutes)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:11
+msgid "Duration (Seconds)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:40
+msgid "Preparation Time (Minutes)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:49
+msgid "Cooking Time (Minutes)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:58
+msgid "Total Time (Minutes)"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:67
+msgid "Number Of Servings"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:75
+#: admin/includes/schemas/recipe.php:76
+msgid "Recipe Category"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:84
+#: admin/includes/schemas/recipe.php:85
+msgid "Recipe Cuisine"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:93
+msgid "240 calories"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:94
+msgid "Calories"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:107
+msgid "9 grams carbohydrates"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:108
+msgid "Carbohydrate Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:121
+msgid "10 milligrams cholesterol"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:122
+msgid "Cholesterol Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:135
+msgid "11 grams fat"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:136
+msgid "Fat Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:149
+msgid "15 grams fiber"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:150
+msgid "Fiber Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:163
+msgid "10 grams protein"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:164
+msgid "Protein Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:177
+msgid "5 grams saturated fat"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:178
+msgid "Saturated Fat Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:191
+msgid "3 milligrams sodium"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:192
+msgid "Sodium Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:205
+msgid "15 grams sugar"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:206
+msgid "Sugar Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:219
+msgid "12 grams trans fat"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:220
+msgid "Trans Fat Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:233
+msgid "16 grams unsaturated fat"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:234
+msgid "Unsaturated Fat Content"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:275
+msgid "Recipe Ingredient"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:276
+msgid "Add Another Ingredient"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:282
+msgid "Recipe Instructions"
+msgstr ""
+
+#: admin/includes/schemas/recipe.php:283
+msgid "Add More Instructions"
+msgstr ""
+
+#: admin/includes/schemas/review.php:9
+msgid "Item Reviewed Name"
+msgstr ""
+
+#: admin/includes/schemas/review.php:10
+msgid "Item Reviewed Description"
+msgstr ""
+
+#: admin/includes/schemas/review.php:11
+msgid "Item Reviewed Price Range"
+msgstr ""
+
+#: admin/includes/schemas/review.php:12
+msgid "Item Reviewed Telephone"
+msgstr ""
+
+#: admin/includes/schemas/review.php:13
+msgid "Item Reviewed URL"
+msgstr ""
+
+#: admin/includes/schemas/review.php:14
+msgid "Item Reviewed Street Address"
+msgstr ""
+
+#: admin/includes/schemas/review.php:15
+msgid "Item Reviewed Locality"
+msgstr ""
+
+#: admin/includes/schemas/review.php:16
+msgid "Item Reviewed Region"
+msgstr ""
+
+#: admin/includes/schemas/review.php:17
+msgid "Item Reviewed Postal Code"
+msgstr ""
+
+#: admin/includes/schemas/review.php:18
+msgid "Item Reviewed Country"
+msgstr ""
+
+#: admin/includes/schemas/review.php:19
+msgid "Item Reviewed Image"
+msgstr ""
+
+#: admin/includes/schemas/review.php:20
+msgid "Item Reviewed Price"
+msgstr ""
+
+#: admin/includes/schemas/review.php:21
+msgid "Item Reviewed Currency"
+msgstr ""
+
+#: admin/includes/schemas/review.php:22
+msgid "Item Reviewed Seller Type"
+msgstr ""
+
+#: admin/includes/schemas/review.php:23
+msgid "Item Reviewed Seller Name"
+msgstr ""
+
+#: admin/includes/schemas/review.php:51
+msgid "Item Reviewed"
+msgstr ""
+
+#: admin/includes/schemas/review.php:56
+msgid "Book"
+msgstr ""
+
+#: admin/includes/schemas/review.php:57
+msgid "Course"
+msgstr ""
+
+#: admin/includes/schemas/review.php:58
+msgid "Creative Work Season"
+msgstr ""
+
+#: admin/includes/schemas/review.php:59
+msgid "Creative Work Series"
+msgstr ""
+
+#: admin/includes/schemas/review.php:60
+msgid "Episode"
+msgstr ""
+
+#: admin/includes/schemas/review.php:61
+msgid "Event"
+msgstr ""
+
+#: admin/includes/schemas/review.php:62
+msgid "Game"
+msgstr ""
+
+#: admin/includes/schemas/review.php:63
+#: admin/includes/schemas/service.php:64
+msgid "Local Business"
+msgstr ""
+
+#: admin/includes/schemas/review.php:64
+msgid "Media Object"
+msgstr ""
+
+#: admin/includes/schemas/review.php:65
+msgid "Movie"
+msgstr ""
+
+#: admin/includes/schemas/review.php:66
+msgid "Music Playlist"
+msgstr ""
+
+#: admin/includes/schemas/review.php:67
+msgid "Music Recording"
+msgstr ""
+
+#: admin/includes/schemas/review.php:69
+msgid "Product"
+msgstr ""
+
+#: admin/includes/schemas/review.php:70
+msgid "Recipe"
+msgstr ""
+
+#: admin/includes/schemas/review.php:71
+msgid "Software Application"
+msgstr ""
+
+#: admin/includes/schemas/review.php:75
+msgid "Select the item reviewed type."
+msgstr ""
+
+#: admin/includes/schemas/service.php:30
+msgid "Service Type"
+msgstr ""
+
+#: admin/includes/schemas/service.php:32
+msgid "Weekly home cleaning"
+msgstr ""
+
+#: admin/includes/schemas/service.php:37
+msgid "Provider Mobility"
+msgstr ""
+
+#: admin/includes/schemas/service.php:39
+msgid "e.g. static or dynamic"
+msgstr ""
+
+#: admin/includes/schemas/service.php:44
+msgid "Provider Name"
+msgstr ""
+
+#: admin/includes/schemas/service.php:46
+msgid "name"
+msgstr ""
+
+#: admin/includes/schemas/service.php:51
+msgid "Provider URL"
+msgstr ""
+
+#: admin/includes/schemas/service.php:58
+msgid "Provider Type"
+msgstr ""
+
+#: admin/includes/schemas/service.php:65
+msgid "Airline"
+msgstr ""
+
+#: admin/includes/schemas/service.php:66
+msgid "Corporation"
+msgstr ""
+
+#: admin/includes/schemas/service.php:67
+msgid "Educational Organization"
+msgstr ""
+
+#: admin/includes/schemas/service.php:68
+msgid "School"
+msgstr ""
+
+#: admin/includes/schemas/service.php:69
+msgid "Government Organization"
+msgstr ""
+
+#: admin/includes/schemas/service.php:70
+msgid "Medical Organization"
+msgstr ""
+
+#: admin/includes/schemas/service.php:71
+msgid "NGO"
+msgstr ""
+
+#: admin/includes/schemas/service.php:72
+msgid "Performing Group"
+msgstr ""
+
+#: admin/includes/schemas/service.php:73
+msgid "Sports Organization"
+msgstr ""
+
+#: admin/includes/schemas/service.php:77
+msgid "Select the provider type for this content."
+msgstr ""
+
+#: admin/includes/schemas/service.php:80
+msgid "Area Served"
+msgstr ""
+
+#: admin/includes/schemas/service.php:82
+msgid "New York, Los Angeles"
+msgstr ""
+
+#: admin/includes/schemas/service.php:87
+msgid "Service Offered"
+msgstr ""
+
+#: admin/includes/schemas/service.php:89
+msgid "Apartment light cleaning, carpet cleaning"
+msgstr ""
+
+#: admin/includes/schemas/service.php:114
+msgid "Eligible Customer Type"
+msgstr ""
+
+#: admin/includes/schemas/service.php:116
+msgid "40 - 80 Years"
+msgstr ""
+
+#: admin/includes/schemas/service.php:121
+msgid "Terms of Service"
+msgstr ""
+
+#: admin/includes/schemas/service.php:123
+msgid "Minimum Entry Age: 18 years, Maximum Entry Age: 85 years"
+msgstr ""
+
+#: admin/includes/schemas/service.php:128
+msgid "Annual Percentage Rate"
+msgstr ""
+
+#: admin/includes/schemas/service.php:130
+msgid "30%"
+msgstr ""
+
+#: admin/includes/schemas/service.php:135
+msgid "Interest Rate"
+msgstr ""
+
+#: admin/includes/schemas/service.php:142
+msgid "Fees and Commissions Specification"
+msgstr ""
+
+#: admin/includes/schemas/service.php:152
+msgid "Additional Property"
+msgstr ""
+
+#: admin/includes/schemas/service.php:153
+msgid "Add More Properties"
+msgstr ""
+
+#: admin/includes/schemas/service.php:165
+#: admin/includes/schemas/vacationrental.php:198
+msgid "Value"
+msgstr ""
+
+#: admin/includes/schemas/service.php:175
+msgid "Add Another Opening Hour"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:38
+msgid "Vacation Rental Type"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:43
+msgid "Villa"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:44
+msgid "House"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:45
+msgid "Holiday Village Rental"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:46
+msgid "Gite"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:47
+msgid "Cottage"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:48
+msgid "Chalet"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:49
+msgid "Cabin"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:50
+msgid "Bungalow"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:51
+msgid "Apartment"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:57
+msgid "Check-in Time"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:65
+msgid "Check-out Time"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:83
+msgid "Type of Room"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:88
+msgid "Entire Place"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:89
+msgid "Private Room"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:90
+msgid "Shared Room"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:95
+msgid "Occupancy"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:102
+msgid "Number of Bathrooms (Total)"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:109
+msgid "Number of Bedrooms"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:116
+msgid "Number of Rooms"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:123
+msgid "Floor Size"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:130
+msgid "Floor Size Unit"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:134
+msgid "FTK"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:135
+msgid "MTK"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:136
+msgid "SQFT"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:137
+msgid "SQM"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:142
+msgid "Bed Details"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:143
+msgid "Add Another Bed"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:149
+msgid "Number Of Beds"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:155
+msgid "Type Of Bed"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:159
+msgid "Single"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:160
+msgid "Double"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:161
+msgid "SemiDouble"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:162
+msgid "Full"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:163
+msgid "Queen"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:164
+msgid "King"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:165
+msgid "California King"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:173
+msgid "Images"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:174
+msgid "Add Another Image"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:184
+msgid "Amenity Feature"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:185
+msgid "Add Another Amenity"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:207
+msgid "Knows Language"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:208
+msgid "Add Another Language"
+msgstr ""
+
+#: admin/includes/schemas/vacationrental.php:214
+msgid "Language"
+msgstr ""
+
+#: admin/includes/schemas/videoobject.php:28
+msgid "Thumbnail URL"
+msgstr ""
+
+#: admin/includes/setup.php:568
+#: admin/includes/setup.php:569
+msgid "Schema Package"
+msgstr ""
+
+#: admin/includes/setup.php:600
+msgid "Thanks for trusting Schema Package! Your support is what keeps this project alive."
+msgstr ""
+
+#: admin/includes/setup.php:600
+msgid "Click here to inspire us with a review."
+msgstr ""
+
+#: admin/includes/setup.php:601
+msgid "Schema Package Version"
+msgstr ""
+
+#: admin/includes/setup.php:701
+msgid "Site Title"
+msgstr ""
+
+#: admin/includes/setup.php:702
+msgid "Tagline"
+msgstr ""
+
+#: admin/includes/setup.php:703
+msgid "Site URL"
+msgstr ""
+
+#: admin/includes/setup.php:704
+msgid "Post Title"
+msgstr ""
+
+#: admin/includes/setup.php:705
+msgid "Content"
+msgstr ""
+
+#: admin/includes/setup.php:707
+msgid "Excerpt"
+msgstr ""
+
+#: admin/includes/setup.php:708
+msgid "Post Summary"
+msgstr ""
+
+#: admin/includes/setup.php:709
+msgid "Permalink"
+msgstr ""
+
+#: admin/includes/setup.php:711
+msgid "Author First Name"
+msgstr ""
+
+#: admin/includes/setup.php:712
+msgid "Author Last Name"
+msgstr ""
+
+#: admin/includes/setup.php:713
+msgid "Publish Date"
+msgstr ""
+
+#: admin/includes/setup.php:714
+msgid "Last Modify Date"
+msgstr ""
+
+#: admin/includes/setup.php:715
+msgid "Featured Image"
 msgstr ""
 
 #: admin/includes/setup.php:717
-msgid "Custom Text"
+msgid "Logo Image"
 msgstr ""
 
 #: admin/includes/setup.php:718
-msgid "Custom Field"
+msgid "Taxonomy Term"
 msgstr ""
 
 #: admin/includes/setup.php:719
-msgid "Custom Image"
+msgid "Custom Text"
 msgstr ""
 
 #: admin/includes/setup.php:720
+msgid "Custom Field"
+msgstr ""
+
+#: admin/includes/setup.php:721
+msgid "Custom Image"
+msgstr ""
+
+#: admin/includes/setup.php:722
 msgid "No Value"
 msgstr ""
 
-#: admin/includes/setup.php:725
+#: admin/includes/setup.php:727
 msgid "Advanced Custom Field"
 msgstr ""
 
-#: admin/includes/setup.php:728
+#: admin/includes/setup.php:730
 msgid "Secure Custom Field"
 msgstr ""
 
@@ -292,730 +2266,966 @@ msgid "Schema Package JSON-LD"
 msgstr ""
 
 #: schema-package.php:58
-#: admin/assets/react/dist/admin_panel.js:1213
+#: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:24
+#: admin/assets/react/dist/admin_panel.js:1261
 msgid "Settings"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:255
-#: admin/assets/react/dist/admin_panel.js:274
-#: admin/assets/react/dist/admin_panel.js:330
-#: admin/assets/react/dist/admin_panel.js:807
-#: admin/assets/react/dist/admin_panel.js:834
-#: admin/assets/react/dist/admin_panel.js:1036
-#: admin/assets/react/dist/admin_panel.js:1049
-#: admin/assets/react/dist/admin_panel.js:1076
-#: admin/assets/react/dist/admin_panel.js:2983
-#: admin/assets/react/dist/admin_panel.js:3019
-#: admin/assets/react/dist/admin_panel.js:3038
-#: admin/assets/react/dist/admin_panel.js:3062
-#: admin/assets/react/dist/admin_panel.js:3086
-#: admin/assets/react/dist/admin_panel.js:3110
-msgid "Learn More"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:258
-#: admin/assets/react/dist/admin_panel.js:810
-msgid "Select Schema"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:278
-#: admin/assets/react/dist/admin_panel.js:838
-msgid "Target On"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:282
-msgid "Home Page"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:292
-#: admin/assets/react/dist/admin_panel.js:318
-#: admin/assets/react/dist/admin_panel.js:861
-#: admin/assets/react/dist/admin_panel.js:882
-#: admin/assets/react/dist/admin_panel.js:929
-#: admin/assets/react/dist/admin_panel.js:957
-#: admin/assets/react/dist/admin_panel.js:978
-#: admin/assets/react/dist/admin_panel.js:1025
-msgid "OR"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:342
-#: admin/assets/react/dist/admin_panel.js:1088
-msgid "None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup."
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:348
-#: admin/assets/react/dist/admin_panel.js:1094
-msgid "Automation List"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:348
-#: admin/assets/react/dist/admin_panel.js:1094
-msgid "Can't find your plugin in the list? Request automation from us!"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:354
-#: admin/assets/react/dist/admin_panel.js:1100
-msgid "Feature Request"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:359
-#: admin/assets/react/dist/admin_panel.js:1105
-#: admin/assets/react/dist/admin_panel.js:3115
-#: admin/assets/react/dist/admin_panel.js:4275
-msgid "Save"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:840
-#: admin/assets/react/dist/admin_panel.js:936
-msgid "Post Types"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:850
-msgid "Search For Post Type"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:861
-#: admin/assets/react/dist/admin_panel.js:957
-msgid "Posts"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:871
-#: admin/assets/react/dist/admin_panel.js:967
-msgid "Search For Post"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:882
-#: admin/assets/react/dist/admin_panel.js:978
-msgid "Pages"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:908
-#: admin/assets/react/dist/admin_panel.js:1004
-msgid "Languages"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:934
-msgid "Target Off"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:988
-msgid "Search For Page"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1014
-msgid "Search For Language"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1032
-msgid "No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values."
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1054
-msgid "Comments"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1062
-msgid "Speakable"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1204
+#: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:21
+#: admin/assets/react/dist/admin_panel.js:1252
 msgid "Singular Schema"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1207
+#: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:22
+#: admin/assets/react/dist/admin_panel.js:1255
 msgid "Carousel Schema"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1210
+#: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:23
+#: admin/assets/react/dist/admin_panel.js:1258
 msgid "Misc Schema"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1221
+#: admin/assets/react/admin_panel/admin-nav-link/AdminNavLink.jsx:29
+#: admin/assets/react/dist/admin_panel.js:1269
 msgid "Upgrade to Premium"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1449
-#: admin/assets/react/dist/admin_panel.js:4593
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:268
+#: admin/assets/react/dist/admin_panel.js:275
+msgid "Carousel Type"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:270
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:287
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:368
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:202
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:232
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:246
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:267
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:288
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:309
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:352
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:379
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:645
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:654
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:690
+#: admin/assets/react/dist/admin_panel.js:283
+#: admin/assets/react/dist/admin_panel.js:302
+#: admin/assets/react/dist/admin_panel.js:378
+#: admin/assets/react/dist/admin_panel.js:855
+#: admin/assets/react/dist/admin_panel.js:882
+#: admin/assets/react/dist/admin_panel.js:1084
+#: admin/assets/react/dist/admin_panel.js:1097
+#: admin/assets/react/dist/admin_panel.js:1124
+#: admin/assets/react/dist/admin_panel.js:3037
+#: admin/assets/react/dist/admin_panel.js:3073
+#: admin/assets/react/dist/admin_panel.js:3092
+#: admin/assets/react/dist/admin_panel.js:3116
+#: admin/assets/react/dist/admin_panel.js:3140
+#: admin/assets/react/dist/admin_panel.js:3164
+#: admin/assets/react/dist/individual_post.js:1803
+#: admin/assets/react/individual/metabox.jsx:418
+msgid "Learn More"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:274
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:356
+#: admin/assets/react/dist/admin_panel.js:286
+#: admin/assets/react/dist/admin_panel.js:858
+msgid "Select Schema"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:285
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:377
+#: admin/assets/react/dist/admin_panel.js:294
+#: admin/assets/react/dist/admin_panel.js:874
+msgid "Targeting"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:290
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:383
+#: admin/assets/react/dist/admin_panel.js:306
+#: admin/assets/react/dist/admin_panel.js:886
+msgid "Target On"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:295
+#: admin/assets/react/dist/admin_panel.js:310
+msgid "Home Page"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:303
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:315
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:349
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:413
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:442
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:502
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:539
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:567
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:629
+#: admin/assets/react/dist/admin_panel.js:320
+#: admin/assets/react/dist/admin_panel.js:340
+#: admin/assets/react/dist/admin_panel.js:366
+#: admin/assets/react/dist/admin_panel.js:909
+#: admin/assets/react/dist/admin_panel.js:930
+#: admin/assets/react/dist/admin_panel.js:977
+#: admin/assets/react/dist/admin_panel.js:1005
+#: admin/assets/react/dist/admin_panel.js:1026
+#: admin/assets/react/dist/admin_panel.js:1073
+msgid "OR"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:307
+#: admin/assets/react/dist/admin_panel.js:326
+msgid "Shop Page"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:366
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:688
+#: admin/assets/react/dist/admin_panel.js:370
+#: admin/assets/react/dist/admin_panel.js:1116
+msgid "Automation"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:394
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:715
+#: admin/assets/react/dist/admin_panel.js:390
+#: admin/assets/react/dist/admin_panel.js:1136
+msgid "None of the supported Schema Package Automation plugins are currently active, preventing automated schema markup."
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:395
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:716
+#: admin/assets/react/dist/admin_panel.js:396
+#: admin/assets/react/dist/admin_panel.js:1142
+msgid "Automation List"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:397
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:718
+#: admin/assets/react/dist/admin_panel.js:396
+#: admin/assets/react/dist/admin_panel.js:1142
+msgid "Can't find your plugin in the list? Request automation from us!"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:398
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:719
+#: admin/assets/react/dist/admin_panel.js:402
+#: admin/assets/react/dist/admin_panel.js:1148
+msgid "Feature Request"
+msgstr ""
+
+#: admin/assets/react/admin_panel/CarouselSchemaEdit.jsx:407
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:317
+#: admin/assets/react/admin_panel/settings/Settings.jsx:847
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:725
+#: admin/assets/react/dist/admin_panel.js:407
+#: admin/assets/react/dist/admin_panel.js:1153
+#: admin/assets/react/dist/admin_panel.js:3169
+#: admin/assets/react/dist/admin_panel.js:4329
+msgid "Save"
+msgstr ""
+
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:154
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:154
+#: admin/assets/react/dist/admin_panel.js:1497
+#: admin/assets/react/dist/admin_panel.js:4647
 msgid "Delete Schema"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1451
-#: admin/assets/react/dist/admin_panel.js:4595
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:155
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:155
+#: admin/assets/react/dist/admin_panel.js:1499
+#: admin/assets/react/dist/admin_panel.js:4649
 msgid "Are you sure you want to delete schema ?"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1456
-#: admin/assets/react/dist/admin_panel.js:4600
-#: admin/assets/react/dist/individual_post.js:1926
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:157
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:157
+#: admin/assets/react/dist/admin_panel.js:1504
+#: admin/assets/react/dist/admin_panel.js:4654
+#: admin/assets/react/dist/individual_post.js:1947
+#: admin/assets/react/individual/metabox.jsx:564
 msgid "No"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1459
-#: admin/assets/react/dist/admin_panel.js:4603
-#: admin/assets/react/dist/individual_post.js:1921
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:158
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:158
+#: admin/assets/react/dist/admin_panel.js:1507
+#: admin/assets/react/dist/admin_panel.js:4657
+#: admin/assets/react/dist/individual_post.js:1942
+#: admin/assets/react/individual/metabox.jsx:564
 msgid "Yes"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1470
-#: admin/assets/react/dist/admin_panel.js:4614
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:168
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:168
+#: admin/assets/react/dist/admin_panel.js:1518
+#: admin/assets/react/dist/admin_panel.js:4668
 msgid "Add Schema"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1474
-#: admin/assets/react/dist/admin_panel.js:4618
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:177
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:350
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:177
+#: admin/assets/react/dist/admin_panel.js:847
+#: admin/assets/react/dist/admin_panel.js:1522
+#: admin/assets/react/dist/admin_panel.js:4672
 msgid "Schema Type"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1474
-#: admin/assets/react/dist/admin_panel.js:4618
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:178
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:178
+#: admin/assets/react/dist/admin_panel.js:1522
+#: admin/assets/react/dist/admin_panel.js:4672
 msgid "Modify Date"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1474
-#: admin/assets/react/dist/admin_panel.js:4618
-msgid "Status"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:1474
-#: admin/assets/react/dist/admin_panel.js:4618
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:181
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:181
+#: admin/assets/react/dist/admin_panel.js:1522
+#: admin/assets/react/dist/admin_panel.js:4672
 msgid "Action"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1482
-#: admin/assets/react/dist/admin_panel.js:3715
-#: admin/assets/react/dist/admin_panel.js:3810
-#: admin/assets/react/dist/admin_panel.js:3897
-#: admin/assets/react/dist/admin_panel.js:3935
-#: admin/assets/react/dist/admin_panel.js:4098
-#: admin/assets/react/dist/admin_panel.js:4178
-#: admin/assets/react/dist/admin_panel.js:4220
-#: admin/assets/react/dist/admin_panel.js:4626
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:188
+#: admin/assets/react/admin_panel/settings/Settings.jsx:365
+#: admin/assets/react/admin_panel/settings/Settings.jsx:443
+#: admin/assets/react/admin_panel/settings/Settings.jsx:519
+#: admin/assets/react/admin_panel/settings/Settings.jsx:563
+#: admin/assets/react/admin_panel/settings/Settings.jsx:684
+#: admin/assets/react/admin_panel/settings/Settings.jsx:750
+#: admin/assets/react/admin_panel/settings/Settings.jsx:783
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:188
+#: admin/assets/react/dist/admin_panel.js:1530
+#: admin/assets/react/dist/admin_panel.js:3769
+#: admin/assets/react/dist/admin_panel.js:3864
+#: admin/assets/react/dist/admin_panel.js:3951
+#: admin/assets/react/dist/admin_panel.js:3989
+#: admin/assets/react/dist/admin_panel.js:4152
+#: admin/assets/react/dist/admin_panel.js:4232
+#: admin/assets/react/dist/admin_panel.js:4274
+#: admin/assets/react/dist/admin_panel.js:4680
+#: admin/assets/react/dist/individual_post.js:1896
+#: admin/assets/react/individual/metabox.jsx:518
 msgid "Read Full Guide"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1514
-#: admin/assets/react/dist/admin_panel.js:4658
+#: admin/assets/react/admin_panel/carousel_schema/CarouselSchema.jsx:226
+#: admin/assets/react/admin_panel/singular_schema/SingularSchema.jsx:226
+#: admin/assets/react/dist/admin_panel.js:1562
+#: admin/assets/react/dist/admin_panel.js:4712
 msgid "You have not configured any schema types. Please add one or more schemas to continue."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1808
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:63
+#: admin/assets/react/dist/admin_panel.js:1856
 msgid "Activate Your License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1808
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:64
+#: admin/assets/react/dist/admin_panel.js:1856
 msgid "Enter your license key to unlock premium features and updates."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1814
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:71
+#: admin/assets/react/dist/admin_panel.js:1862
 msgid "Enter License Key"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1827
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:82
+#: admin/assets/react/dist/admin_panel.js:1875
 msgid "Activate License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1841
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:97
+#: admin/assets/react/dist/admin_panel.js:1889
 msgid "Unlock premium features"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1844
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:100
+#: admin/assets/react/dist/admin_panel.js:1892
 msgid "Get automatic updates"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1847
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:103
+#: admin/assets/react/dist/admin_panel.js:1895
 msgid "Access priority support"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1851
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:108
+#: admin/assets/react/dist/admin_panel.js:1899
 msgid "Need a license?"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1855
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:108
+#: admin/assets/react/dist/admin_panel.js:1903
 msgid "Get One Here"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1855
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:109
+#: admin/assets/react/dist/admin_panel.js:1903
 msgid "Having trouble?"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1859
+#: admin/assets/react/admin_panel/license/LicenseActivation.jsx:109
+#: admin/assets/react/dist/admin_panel.js:1907
 msgid "Contact Support"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1980
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:55
+#: admin/assets/react/dist/admin_panel.js:2028
 msgid "License Information"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:1987
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:59
+#: admin/assets/react/dist/admin_panel.js:2035
 msgid "License Key:"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2020
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:77
+#: admin/assets/react/dist/admin_panel.js:2068
 msgid "Status:"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2031
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:81
+#: admin/assets/react/dist/admin_panel.js:2079
 msgid "Expiry Date:"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2040
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:85
+#: admin/assets/react/dist/admin_panel.js:2088
 msgid "Account Email:"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2049
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:89
+#: admin/assets/react/dist/admin_panel.js:2097
 msgid "Left Activation Limit:"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2056
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:96
+#: admin/assets/react/dist/admin_panel.js:2104
 msgid "Your license key is active!"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2056
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:97
+#: admin/assets/react/dist/admin_panel.js:2104
 msgid "You are receiving updates and priority support."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2071
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:106
+#: admin/assets/react/dist/admin_panel.js:2119
 msgid "Deactivate License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2082
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:109
+#: admin/assets/react/dist/admin_panel.js:2130
 msgid "Refresh License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2091
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:112
+#: admin/assets/react/dist/admin_panel.js:2139
 msgid "Renew License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2094
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:118
+#: admin/assets/react/dist/admin_panel.js:2142
 msgid "Confirm Deactivation"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2094
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:120
+#: admin/assets/react/dist/admin_panel.js:2142
 msgid "Are you sure you want to deactivate your license?"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2099
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:123
+#: admin/assets/react/dist/admin_panel.js:2147
 msgid "Cancel"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2109
+#: admin/assets/react/admin_panel/license/LicenseInformation.jsx:125
+#: admin/assets/react/dist/admin_panel.js:2157
 msgid "Deactivate"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2574
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:164
+#: admin/assets/react/dist/admin_panel.js:2622
 msgid "Select or Upload an Image"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2576
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:165
+#: admin/assets/react/dist/admin_panel.js:2624
 msgid "Use this image"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2594
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:183
+#: admin/assets/react/dist/admin_panel.js:2642
 msgid "Mapping"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2603
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:188
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:643
+#: admin/assets/react/dist/admin_panel.js:1076
+#: admin/assets/react/dist/admin_panel.js:2651
 msgid "Schema Properties"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2609
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:193
+#: admin/assets/react/dist/admin_panel.js:2660
 msgid "Source / Value Selector"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2615
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:198
+#: admin/assets/react/dist/admin_panel.js:2669
 msgid "Fields / Value Selector"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2707
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:275
+#: admin/assets/react/dist/admin_panel.js:2761
 msgid "Change Image"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2707
+#: admin/assets/react/admin_panel/mapping/SchemaMapping.jsx:275
+#: admin/assets/react/dist/admin_panel.js:2761
 msgid "Upload Image"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2966
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:193
+#: admin/assets/react/dist/admin_panel.js:3020
 msgid "Website"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2974
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:201
+#: admin/assets/react/dist/admin_panel.js:3028
 msgid "Helps search engines understand the content of your site. It appears on homepage only."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2987
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:209
+#: admin/assets/react/dist/admin_panel.js:3041
 msgid "Sitelinks Search Box"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:2995
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:217
+#: admin/assets/react/dist/admin_panel.js:3049
 msgid "A sitelinks search box is a quick way for people to search your site or app immediately on the search results page."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3002
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:223
+#: admin/assets/react/dist/admin_panel.js:3056
 msgid "Breadcrumbs"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3010
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:231
+#: admin/assets/react/dist/admin_panel.js:3064
 msgid "A breadcrumb trail on a page indicates the page's position in the site hierarchy, and it may help users understand and explore a site effectively."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3021
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:237
+#: admin/assets/react/dist/admin_panel.js:3075
 msgid "Profile Page"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3029
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:245
+#: admin/assets/react/dist/admin_panel.js:3083
 msgid "Showcase the author's biography, expertise, and social profiles for a richer, more engaging author page."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3038
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:251
+#: admin/assets/react/dist/admin_panel.js:3092
 msgid "Site Navigation Element"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3041
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:256
+#: admin/assets/react/dist/admin_panel.js:3095
 msgid "Search for Menus"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3053
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:266
+#: admin/assets/react/dist/admin_panel.js:3107
 msgid "Helps search engines understand the structure of your site's navigation menus and how different pages are connected."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3062
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:272
+#: admin/assets/react/dist/admin_panel.js:3116
 msgid "About Pages"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3065
-#: admin/assets/react/dist/admin_panel.js:3089
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:277
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:298
+#: admin/assets/react/dist/admin_panel.js:3119
+#: admin/assets/react/dist/admin_panel.js:3143
 msgid "Search for Page"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3077
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:287
+#: admin/assets/react/dist/admin_panel.js:3131
 msgid "Helps search engines understand the content and purpose of an \"About Us\" page on a website."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3086
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:293
+#: admin/assets/react/dist/admin_panel.js:3140
 msgid "Contact Pages"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3101
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:308
+#: admin/assets/react/dist/admin_panel.js:3155
 msgid "Helps search engines understand the content and purpose of an \"Contact Us\" page on a website."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3118
+#: admin/assets/react/admin_panel/misc_schema/MiscSchema.jsx:317
+#: admin/assets/react/dist/admin_panel.js:3172
 msgid "Loading"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3215
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:21
+#: admin/assets/react/dist/admin_panel.js:3269
 msgid "General"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3220
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:22
+#: admin/assets/react/dist/admin_panel.js:3274
 msgid "Advanced"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3225
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:23
+#: admin/assets/react/dist/admin_panel.js:3279
 msgid "Manage Conflict"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3230
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:24
+#: admin/assets/react/dist/admin_panel.js:3284
 msgid "Compatibility"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3235
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:25
+#: admin/assets/react/dist/admin_panel.js:3289
 msgid "Default Data"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3240
-msgid "Tools"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:3245
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:27
+#: admin/assets/react/dist/admin_panel.js:3299
 msgid "License"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3250
+#: admin/assets/react/admin_panel/settings-nav-link/SettingsNavLink.jsx:28
+#: admin/assets/react/dist/admin_panel.js:3304
 msgid "Help & Support"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3723
+#: admin/assets/react/admin_panel/settings/Settings.jsx:372
+#: admin/assets/react/dist/admin_panel.js:3777
 msgid "Minified JSON-LD"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3731
+#: admin/assets/react/admin_panel/settings/Settings.jsx:380
+#: admin/assets/react/dist/admin_panel.js:3785
 msgid "Remove unnecessary spaces and line breaks, reducing page size and improving loading speed without changing the schema data."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3738
+#: admin/assets/react/admin_panel/settings/Settings.jsx:384
+#: admin/assets/react/dist/admin_panel.js:3792
 msgid "Escaped Unicode JSON-LD"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3746
+#: admin/assets/react/admin_panel/settings/Settings.jsx:392
+#: admin/assets/react/dist/admin_panel.js:3800
 msgid "Escaped Unicode (\\uXXXX) in JSON helps maintain data integrity, especially for special or multilingual characters."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3753
+#: admin/assets/react/admin_panel/settings/Settings.jsx:396
+#: admin/assets/react/dist/admin_panel.js:3807
 msgid "Clean MicroData"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3761
+#: admin/assets/react/admin_panel/settings/Settings.jsx:404
+#: admin/assets/react/dist/admin_panel.js:3815
 msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all Microdata schema markup from your site."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3768
+#: admin/assets/react/admin_panel/settings/Settings.jsx:408
+#: admin/assets/react/dist/admin_panel.js:3822
 msgid "Clean RDFA Data"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3776
+#: admin/assets/react/admin_panel/settings/Settings.jsx:416
+#: admin/assets/react/dist/admin_panel.js:3830
 msgid "Search engines and AI tools recommend using the JSON-LD format. This option will clean and remove all RDFA schema markup from your site."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3783
+#: admin/assets/react/admin_panel/settings/Settings.jsx:420
+#: admin/assets/react/dist/admin_panel.js:3837
 msgid "ImageObject"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3791
+#: admin/assets/react/admin_panel/settings/Settings.jsx:428
+#: admin/assets/react/dist/admin_panel.js:3845
 msgid "By default, the image property accepts a URL. However, if you prefer to use the ImageObject type, enable this option."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3816
+#: admin/assets/react/admin_panel/settings/Settings.jsx:450
+#: admin/assets/react/dist/admin_panel.js:3870
 msgid "JSON-LD Render Method"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3833
+#: admin/assets/react/admin_panel/settings/Settings.jsx:468
+#: admin/assets/react/dist/admin_panel.js:3887
 msgid "Choose how Schema Package should render schema markup ( JSON-LD ) on your site."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3840
+#: admin/assets/react/admin_panel/settings/Settings.jsx:472
+#: admin/assets/react/dist/admin_panel.js:3894
 msgid "Multiple Size Images"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3848
+#: admin/assets/react/admin_panel/settings/Settings.jsx:480
+#: admin/assets/react/dist/admin_panel.js:3902
 msgid "Generates two additional versions of the featured image for every post in different sizes based on search engine recommendations. This will create extra images and may increase your upload folder size, so enable it only if you’re okay with that."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3855
+#: admin/assets/react/admin_panel/settings/Settings.jsx:484
+#: admin/assets/react/dist/admin_panel.js:3909
 msgid "Dynamic Placeholders"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3863
+#: admin/assets/react/admin_panel/settings/Settings.jsx:492
+#: admin/assets/react/dist/admin_panel.js:3917
 msgid "Automatically replace placeholders (like %%post_title%%, %%date_published%%) with actual post or site data when generating schema markup."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3870
+#: admin/assets/react/admin_panel/settings/Settings.jsx:496
+#: admin/assets/react/dist/admin_panel.js:3924
 msgid "JSON-LD in Rest API"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3878
+#: admin/assets/react/admin_panel/settings/Settings.jsx:504
+#: admin/assets/react/dist/admin_panel.js:3932
 msgid "Include the generated Schema.org JSON-LD markup in WordPress REST API responses for supported post types. Useful for headless setups or external integrations."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3921
+#: admin/assets/react/admin_panel/settings/Settings.jsx:548
+#: admin/assets/react/dist/admin_panel.js:3975
 msgid "No Conflicts Detected"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3921
+#: admin/assets/react/admin_panel/settings/Settings.jsx:550
+#: admin/assets/react/dist/admin_panel.js:3975
 msgid "This plugin does not conflict with any other installed plugins."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3941
+#: admin/assets/react/admin_panel/settings/Settings.jsx:570
+#: admin/assets/react/dist/admin_panel.js:3995
 msgid "SPG for Post Types"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3952
+#: admin/assets/react/admin_panel/settings/Settings.jsx:576
+#: admin/assets/react/dist/admin_panel.js:4006
 msgid "Search For Post Types"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3963
+#: admin/assets/react/admin_panel/settings/Settings.jsx:585
+#: admin/assets/react/dist/admin_panel.js:4017
 msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for post type pages."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3968
+#: admin/assets/react/admin_panel/settings/Settings.jsx:589
+#: admin/assets/react/dist/admin_panel.js:4022
 msgid "SPG for Taxonomies"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3979
+#: admin/assets/react/admin_panel/settings/Settings.jsx:595
+#: admin/assets/react/dist/admin_panel.js:4033
 msgid "Search For Taxonomies"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3990
+#: admin/assets/react/admin_panel/settings/Settings.jsx:604
+#: admin/assets/react/dist/admin_panel.js:4044
 msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for taxonomy archive pages."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:3997
+#: admin/assets/react/admin_panel/settings/Settings.jsx:609
+#: admin/assets/react/dist/admin_panel.js:4051
 msgid "SPG for Author"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4005
+#: admin/assets/react/admin_panel/settings/Settings.jsx:617
+#: admin/assets/react/dist/admin_panel.js:4059
 msgid "Enable the Schema Package Generator editor to add or customize schema markup specifically for the author’s profile page."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4010
+#: admin/assets/react/admin_panel/settings/Settings.jsx:622
+#: admin/assets/react/dist/admin_panel.js:4064
 msgid "Export Data "
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4015
+#: admin/assets/react/admin_panel/settings/Settings.jsx:626
+#: admin/assets/react/dist/admin_panel.js:4069
 msgid "Export"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4018
+#: admin/assets/react/admin_panel/settings/Settings.jsx:628
+#: admin/assets/react/dist/admin_panel.js:4072
 msgid "It exports all the data related to this plugin in json format. Such as:- Schema Types, Settings etc."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4023
+#: admin/assets/react/admin_panel/settings/Settings.jsx:632
+#: admin/assets/react/dist/admin_panel.js:4077
 msgid "Import Data"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4043
+#: admin/assets/react/admin_panel/settings/Settings.jsx:639
+#: admin/assets/react/dist/admin_panel.js:4097
 msgid "Choose a file..."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4049
+#: admin/assets/react/admin_panel/settings/Settings.jsx:643
+#: admin/assets/react/dist/admin_panel.js:4103
 msgid "Choose"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4064
+#: admin/assets/react/admin_panel/settings/Settings.jsx:656
+#: admin/assets/react/dist/admin_panel.js:4118
 msgid "Restore your data back from previous imported file"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4071
+#: admin/assets/react/admin_panel/settings/Settings.jsx:660
+#: admin/assets/react/dist/admin_panel.js:4125
 msgid "Delete Data on Uninstall"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4079
+#: admin/assets/react/admin_panel/settings/Settings.jsx:668
+#: admin/assets/react/dist/admin_panel.js:4133
 msgid "It ensures all Schema Package related data, such as singular schema, carousel schema, and saved settings, are deleted when Schema Package plugin is uninstalled, helping maintain privacy and free up storage space."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4106
+#: admin/assets/react/admin_panel/settings/Settings.jsx:691
+#: admin/assets/react/dist/admin_panel.js:4160
 msgid "Yoast SEO"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4114
+#: admin/assets/react/admin_panel/settings/Settings.jsx:699
+#: admin/assets/react/dist/admin_panel.js:4168
 msgid "Automatically pull schema-related values (title, description, focus keyword, etc.) from Yoast SEO settings. If Yoast SEO values are available, Schema Package will use them instead of WordPress defaults."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4121
+#: admin/assets/react/admin_panel/settings/Settings.jsx:703
+#: admin/assets/react/dist/admin_panel.js:4175
 msgid "Rank Math SEO"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4129
+#: admin/assets/react/admin_panel/settings/Settings.jsx:711
+#: admin/assets/react/dist/admin_panel.js:4183
 msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from Rank Math SEO settings. If Rank Math values are available, Schema Package will prioritize them over WordPress defaults."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4136
+#: admin/assets/react/admin_panel/settings/Settings.jsx:715
+#: admin/assets/react/dist/admin_panel.js:4190
 msgid "All in One SEO"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4144
+#: admin/assets/react/admin_panel/settings/Settings.jsx:723
+#: admin/assets/react/dist/admin_panel.js:4198
 msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from All in One SEO settings. If All in One SEO values are available, Schema Package will prioritize them over WordPress defaults."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4151
+#: admin/assets/react/admin_panel/settings/Settings.jsx:727
+#: admin/assets/react/dist/admin_panel.js:4205
 msgid "WPGraphQL"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4159
+#: admin/assets/react/admin_panel/settings/Settings.jsx:735
+#: admin/assets/react/dist/admin_panel.js:4213
 msgid "Include the generated Schema.org JSON-LD markup in WPGraphQL responses. Useful for headless WordPress setups or external GraphQL-based integrations."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4184
-msgid "Logo"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:4190
+#: admin/assets/react/admin_panel/settings/Settings.jsx:761
+#: admin/assets/react/dist/admin_panel.js:4244
 msgid "Logo size must be 160*50 or 600*60"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4195
-msgid "Image"
-msgstr ""
-
-#: admin/assets/react/dist/admin_panel.js:4201
+#: admin/assets/react/admin_panel/settings/Settings.jsx:768
+#: admin/assets/react/dist/admin_panel.js:4255
 msgid "When a post does not have featured image, It will be added to Json-Ld image field to remove warning from google testing tool"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4230
+#: admin/assets/react/admin_panel/settings/Settings.jsx:795
+#: admin/assets/react/dist/admin_panel.js:4284
 msgid "Reach Out via Email"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4235
+#: admin/assets/react/admin_panel/settings/Settings.jsx:801
+#: admin/assets/react/dist/admin_panel.js:4289
 msgid "Your Email"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4242
+#: admin/assets/react/admin_panel/settings/Settings.jsx:808
+#: admin/assets/react/dist/admin_panel.js:4296
 msgid "Your email"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4249
+#: admin/assets/react/admin_panel/settings/Settings.jsx:818
+#: admin/assets/react/dist/admin_panel.js:4303
 msgid "Your Query"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4254
+#: admin/assets/react/admin_panel/settings/Settings.jsx:823
+#: admin/assets/react/dist/admin_panel.js:4308
 msgid "Enter your query here..."
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4260
+#: admin/assets/react/admin_panel/settings/Settings.jsx:833
+#: admin/assets/react/dist/admin_panel.js:4314
 msgid "Send"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4262
+#: admin/assets/react/admin_panel/settings/Settings.jsx:833
+#: admin/assets/react/dist/admin_panel.js:4316
 msgid "Loadingqq"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4295
+#: admin/assets/react/admin_panel/settings/Settings.jsx:859
+#: admin/assets/react/dist/admin_panel.js:4349
 msgid "Elevate with Premium Features!"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4306
+#: admin/assets/react/admin_panel/settings/Settings.jsx:861
+#: admin/assets/react/dist/admin_panel.js:4360
 msgid "WooCommerce Variable Product Automation"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4314
+#: admin/assets/react/admin_panel/settings/Settings.jsx:862
+#: admin/assets/react/dist/admin_panel.js:4368
 msgid "RealEstate Schema Types & Automation"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4322
+#: admin/assets/react/admin_panel/settings/Settings.jsx:863
+#: admin/assets/react/dist/admin_panel.js:4376
 msgid "Healthcare Schema Types & Automation"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4330
+#: admin/assets/react/admin_panel/settings/Settings.jsx:864
+#: admin/assets/react/dist/admin_panel.js:4384
 msgid "Carousel Schema Details Page List"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4338
+#: admin/assets/react/admin_panel/settings/Settings.jsx:865
+#: admin/assets/react/dist/admin_panel.js:4392
 msgid "Multilinugal Schema Markup Support"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4346
+#: admin/assets/react/admin_panel/settings/Settings.jsx:866
+#: admin/assets/react/dist/admin_panel.js:4400
 msgid "Advanced ACF/SCF Mapping"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4354
+#: admin/assets/react/admin_panel/settings/Settings.jsx:867
+#: admin/assets/react/dist/admin_panel.js:4408
 msgid "Schema Markup Setup & Error Clean Up"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4362
+#: admin/assets/react/admin_panel/settings/Settings.jsx:868
+#: admin/assets/react/dist/admin_panel.js:4416
 msgid "24/7 Priority Email Support"
 msgstr ""
 
-#: admin/assets/react/dist/admin_panel.js:4370
+#: admin/assets/react/admin_panel/settings/Settings.jsx:869
+#: admin/assets/react/dist/admin_panel.js:4424
 msgid "Premium Features on Demand"
 msgstr ""
 
-#: admin/assets/react/dist/individual_post.js:1792
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:387
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:514
+#: admin/assets/react/dist/admin_panel.js:888
+#: admin/assets/react/dist/admin_panel.js:984
+msgid "Post Types"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:399
+#: admin/assets/react/dist/admin_panel.js:898
+msgid "Search For Post Type"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:416
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:542
+#: admin/assets/react/dist/admin_panel.js:909
+#: admin/assets/react/dist/admin_panel.js:1005
+msgid "Posts"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:429
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:554
+#: admin/assets/react/dist/admin_panel.js:919
+#: admin/assets/react/dist/admin_panel.js:1015
+msgid "Search For Post"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:445
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:570
+#: admin/assets/react/dist/admin_panel.js:930
+#: admin/assets/react/dist/admin_panel.js:1026
+msgid "Pages"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:478
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:604
+#: admin/assets/react/dist/admin_panel.js:956
+#: admin/assets/react/dist/admin_panel.js:1052
+msgid "Languages"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:510
+#: admin/assets/react/dist/admin_panel.js:982
+msgid "Target Off"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:582
+#: admin/assets/react/dist/admin_panel.js:1036
+msgid "Search For Page"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:616
+#: admin/assets/react/dist/admin_panel.js:1062
+msgid "Search For Language"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:645
+#: admin/assets/react/dist/admin_panel.js:1080
+msgid "No need to map all listed properties. Available post data is auto-mapped. Map only to override default values or add missing values."
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:652
+#: admin/assets/react/dist/admin_panel.js:1089
+msgid "Additional Schema"
+msgstr ""
+
+#: admin/assets/react/admin_panel/SingularSchemaEdit.jsx:663
+#: admin/assets/react/dist/admin_panel.js:1102
+msgid "Comments"
+msgstr ""
+
+#: admin/assets/react/dist/individual_post.js:1796
+#: admin/assets/react/individual/metabox.jsx:417
 msgid "Include schema types to enhance structured data, enabling rich results in search engine listings."
 msgstr ""
 
-#: admin/assets/react/dist/individual_post.js:1875
-#: admin/assets/react/dist/individual_post.js:1910
+#: admin/assets/react/dist/individual_post.js:1886
+#: admin/assets/react/dist/individual_post.js:1931
+#: admin/assets/react/individual/metabox.jsx:516
+#: admin/assets/react/individual/metabox.jsx:547
 msgid "Save For The Post"
 msgstr ""
 
-#: admin/assets/react/dist/individual_post.js:1916
+#: admin/assets/react/dist/individual_post.js:1937
+#: admin/assets/react/individual/metabox.jsx:563
 msgid "Delete ?"
 msgstr ""
 
-#: admin/assets/react/dist/individual_post.js:1978
+#: admin/assets/react/dist/individual_post.js:1999
+#: admin/assets/react/individual/metabox.jsx:608
 msgid "Selected"
 msgstr ""
 
-#: admin/assets/react/dist/individual_post.js:1981
+#: admin/assets/react/dist/individual_post.js:2002
+#: admin/assets/react/individual/metabox.jsx:614
 msgid "Choose Schema Types"
 msgstr ""

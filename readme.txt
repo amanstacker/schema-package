@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.0.29
+Stable tag: 1.0.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -549,10 +549,20 @@ To explore all the advanced features and benefits included in the Schema Package
 16. JSON-LD output in page source
 
 == Upgrade Notice ==
-= 1.0.26 =
-Added TranslatePress compatibility, improved SPG modal visibility, made the “Save for the Post” button sticky, and fixed minor bugs.
+
+= 1.0.30 =
+Adds MusicRelease schema support, new Organization schema types, improved translation handling, updated .pot file, and fixes for email property and boolean mapping issues.
 
 == Changelog ==
+
+= 1.0.30 =
+
+* Added: MusicRelease schema support.
+* Added: Applied proper escaping for previously missing translation strings.
+* Updated: .pot file with the latest translatable strings.
+* Added: Additional Organization schema types including Airline, Consortium, Corporation, EducationalOrganization, GovernmentOrganization, and NewsMediaOrganization.
+* Fixed: Incorrect email property value in LocalBusiness JSON-LD markup.
+* Fixed: Resolved issue where 0 and 1 were being converted to true and false during schema property mapping.
 
 = 1.0.29 =
 

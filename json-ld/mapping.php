@@ -172,6 +172,9 @@ function smpg_mapping_properties( $json_ld, $schema_data ) {
                             case 'paywalledSelectors':                                
                                 $json_ld['hasPart'] = smpg_map_paywalled_selectors( $mapped_value );                                
                             break;
+                            case 'socialLinks':                                
+                                $json_ld['sameAs'] = smpg_convert_comma_to_array( $mapped_value );                                
+                            break;
 
                             default:
                                 $json_ld[ $key ] = $mapped_value;

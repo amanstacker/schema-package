@@ -76574,40 +76574,44 @@ var schemaTypes = [{
   key: 70,
   value: 'musicrelease',
   text: 'MusicRelease'
-}].concat(_toConsumableArray(!smpg_local.is_free ? [{
+}, {
   key: 71,
+  value: 'legalservice',
+  text: 'LegalService'
+}].concat(_toConsumableArray(!smpg_local.is_free ? [{
+  key: 72,
   value: 'medicalclinic',
   text: 'MedicalClinic'
 }, {
-  key: 72,
+  key: 73,
   value: 'dietarysupplement',
   text: 'DietarySupplement'
 }, {
-  key: 73,
+  key: 74,
   value: 'exerciseplan',
   text: 'ExercisePlan'
 }, {
-  key: 74,
+  key: 75,
   value: 'drug',
   text: 'Drug'
 }, {
-  key: 75,
+  key: 76,
   value: 'medicalcondition',
   text: 'MedicalCondition'
 }, {
-  key: 76,
+  key: 77,
   value: 'medicaltherapy',
   text: 'MedicalTherapy'
 }, {
-  key: 77,
+  key: 78,
   value: 'medicalprocedure',
   text: 'MedicalProcedure'
 }, {
-  key: 78,
+  key: 79,
   value: 'physician',
   text: 'Physician'
 }, {
-  key: 79,
+  key: 80,
   value: 'hospital',
   text: 'Hospital'
 }] : []));

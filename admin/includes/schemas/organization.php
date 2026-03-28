@@ -54,6 +54,8 @@ function smpg_schema_organization( $schema_id, $common_properties ) {
             'address_region'   => $address_region,
             'postal_code'      => $postal_code,
             'address_country'  => $address_country,
+            'latitude'         => $latitude,
+            'longitude'        => $longitude,
             'telephone'        => $telephone,
             'email'            => $email,
             'logo'             => $publisher_logo,

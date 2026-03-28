@@ -562,6 +562,7 @@ function smpg_get_schema_type_text( $id ) {
 		'vacationrental'            => 'VacationRental',
 		'report'            	    => 'Report',
 		'discussionforumposting'    => 'DiscussionForumPosting',
+		'legalservice'              => 'LegalService',
 	];	
 
 	$response = apply_filters( 'smpg_filter_schema_types_list', $response );

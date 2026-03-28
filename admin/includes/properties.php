@@ -58,6 +58,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'fastfoodrestaurant'    => 'smpg_schema_localbusiness',
         'icecreamshop'          => 'smpg_schema_localbusiness',
         'restaurant'            => 'smpg_schema_localbusiness',
+        'legalservice'          => 'smpg_schema_localbusiness',
 
         // Service family
         'certification'         => 'smpg_schema_certification',

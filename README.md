@@ -101,6 +101,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 #### 1. Organization & Business
 - [Organization](https://schema.org/Organization)
 - [LocalBusiness](https://schema.org/LocalBusiness)
+- [LegalService](https://schema.org/LegalService)
 - [VacationRental](https://schema.org/VacationRental)
 - [Corporation](https://schema.org/Corporation)
 - [NGO](https://schema.org/NGO)

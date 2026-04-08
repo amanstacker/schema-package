@@ -75,7 +75,7 @@ Take your schema & structured data to the next level with **Schema Package Premi
 * RealEstate Schema Types & Automation
 * Schema Markup Setup & Error Clean Up
 * 24/7 Priority Support
-* Premium Features On Demand
+* Premium Features on Demand
 * ...and more!
 
 [Learn more](https://schemapackage.com/premium/)

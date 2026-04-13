@@ -35,6 +35,10 @@ $smpg_schema_map = [
     'icecreamshop'              => 'localbusiness.php',
     'restaurant'                => 'localbusiness.php',
     'legalservice'              => 'localbusiness.php',
+    'healthandbeautybusiness'   => 'localbusiness.php',
+    'beautysalon'               => 'localbusiness.php',
+    'hairsalon'                 => 'localbusiness.php',
+    'dayspa'                    => 'localbusiness.php',
 
     // -------------------------------
     // Service-based schemas → service.php

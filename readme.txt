@@ -88,6 +88,10 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 === 1. Organization & Business ===
 - [Organization](https://schema.org/Organization)
 - [LocalBusiness](https://schema.org/LocalBusiness)
+- [HealthAndBeautyBusiness](https://schema.org/HealthAndBeautyBusiness)
+- [BeautySalon](https://schema.org/BeautySalon)
+- [HairSalon](https://schema.org/HairSalon)
+- [DaySpa](https://schema.org/DaySpa)
 - [LegalService](https://schema.org/LegalService)
 - [VacationRental](https://schema.org/VacationRental)
 - [Corporation](https://schema.org/Corporation)

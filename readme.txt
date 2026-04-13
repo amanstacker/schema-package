@@ -4,8 +4,8 @@ Tags: Rich Results, carousel schema, json-ld, product schema, local business sch
 Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.0.30
+Tested up to: 7.0
+Stable tag: 1.0.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -557,10 +557,16 @@ To explore all the advanced features and benefits included in the Schema Package
 
 == Upgrade Notice ==
 
-= 1.0.30 =
-Adds MusicRelease schema support, new Organization schema types, improved translation handling, updated .pot file, and fixes for email property and boolean mapping issues.
+= 1.0.31 =
+Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.31 =
+
+* Added: HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
+* Added: sameAS properties, Its label is social links inside properties list.
+* Fixed: LiveBlogPosting was missing liveblogupdate schema properties.
 
 = 1.0.30 =
 

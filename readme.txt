@@ -260,7 +260,6 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Quick and Easy FAQs](https://wordpress.org/plugins/quick-and-easy-faqs/)
 * [Accordion FAQ](https://wordpress.org/plugins/responsive-accordion-and-collapse)
 * [Easy Accordion](https://wordpress.org/plugins/easy-accordion-free)
-* [WP Responsive FAQ with Category Plugin](https://wordpress.org/plugins/sp-faq)
 * [Arconix FAQ](https://wordpress.org/plugins/arconix-faq)
 * [kk Star Ratings](https://wordpress.org/plugins/kk-star-ratings/)
 * [WooCommerce Event Manager](https://wordpress.org/plugins/mage-eventpress/)

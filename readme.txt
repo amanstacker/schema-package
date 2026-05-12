@@ -102,6 +102,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [SportsOrganization](https://schema.org/SportsOrganization)
 - [SportsTeam](https://schema.org/SportsTeam)
 - [Store](https://schema.org/Store)
+- [ClothingStore](https://schema.org/ClothingStore)
 - [Airline](https://schema.org/Airline)
 - [Consortium](https://schema.org/Consortium)
 - [School](https://schema.org/School)

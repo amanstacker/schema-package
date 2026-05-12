@@ -2226,6 +2226,28 @@ function smpg_get_steps_json_ld( $json_ld, $properties, $schema_type ){
 	return $json_ld;
 }
 
+/**
+ * Convert comma-separated string into array
+ *
+ * @param string $value
+ * @return array
+ */
+function smpg_convert_comma_to_array( $value ) {
+
+	if ( empty( $value ) ) {
+		return [];
+	}
+
+	// Convert to array
+	$array = explode( ',', $value );
+
+	// Trim spaces and remove empty values
+	$array = array_map( 'trim', $array );
+	$array = array_filter( $array );
+
+	return array_values( $array );
+}
+
 function smpg_get_commaa_seprated_value ( $data, $type ) {
 
     $response = [];

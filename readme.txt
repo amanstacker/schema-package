@@ -4,8 +4,8 @@ Tags: Rich Results, carousel schema, json-ld, product schema, local business sch
 Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.0.30
+Tested up to: 7.0
+Stable tag: 1.0.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,7 +75,7 @@ Take your schema & structured data to the next level with **Schema Package Premi
 * RealEstate Schema Types & Automation
 * Schema Markup Setup & Error Clean Up
 * 24/7 Priority Support
-* Premium Features On Demand
+* Premium Features on Demand
 * ...and more!
 
 [Learn more](https://schemapackage.com/premium/)
@@ -88,6 +88,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 === 1. Organization & Business ===
 - [Organization](https://schema.org/Organization)
 - [LocalBusiness](https://schema.org/LocalBusiness)
+- [HealthAndBeautyBusiness](https://schema.org/HealthAndBeautyBusiness)
+- [BeautySalon](https://schema.org/BeautySalon)
+- [HairSalon](https://schema.org/HairSalon)
+- [DaySpa](https://schema.org/DaySpa)
+- [LegalService](https://schema.org/LegalService)
 - [VacationRental](https://schema.org/VacationRental)
 - [Corporation](https://schema.org/Corporation)
 - [NGO](https://schema.org/NGO)
@@ -95,6 +100,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [EducationalOrganization](https://schema.org/EducationalOrganization)
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [SportsOrganization](https://schema.org/SportsOrganization)
+- [SportsTeam](https://schema.org/SportsTeam)
 - [Store](https://schema.org/Store)
 - [Airline](https://schema.org/Airline)
 - [Consortium](https://schema.org/Consortium)
@@ -118,6 +124,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
 - [ItemList](https://schema.org/ItemList)
+- [OfferCatalog](https://schema.org/OfferCatalog)
 - [CollectionPage](https://schema.org/CollectionPage)
 - [LiveBlogPosting](https://schema.org/LiveBlogPosting)
 - [QAPage](https://schema.org/QAPage)
@@ -253,7 +260,6 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Quick and Easy FAQs](https://wordpress.org/plugins/quick-and-easy-faqs/)
 * [Accordion FAQ](https://wordpress.org/plugins/responsive-accordion-and-collapse)
 * [Easy Accordion](https://wordpress.org/plugins/easy-accordion-free)
-* [WP Responsive FAQ with Category Plugin](https://wordpress.org/plugins/sp-faq)
 * [Arconix FAQ](https://wordpress.org/plugins/arconix-faq)
 * [kk Star Ratings](https://wordpress.org/plugins/kk-star-ratings/)
 * [WooCommerce Event Manager](https://wordpress.org/plugins/mage-eventpress/)
@@ -550,10 +556,16 @@ To explore all the advanced features and benefits included in the Schema Package
 
 == Upgrade Notice ==
 
-= 1.0.30 =
-Adds MusicRelease schema support, new Organization schema types, improved translation handling, updated .pot file, and fixes for email property and boolean mapping issues.
+= 1.0.31 =
+Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.31 =
+
+* Added: HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
+* Added: sameAS properties, Its label is social links inside properties list.
+* Fixed: LiveBlogPosting was missing liveblogupdate schema properties.
 
 = 1.0.30 =
 

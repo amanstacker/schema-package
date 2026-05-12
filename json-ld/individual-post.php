@@ -1920,14 +1920,50 @@ function smpg_get_liveblogposting_individual_json_ld( $json_ld, $properties, $sc
     if(!empty($properties['id']['value'])){
         $json_ld['@id'] =      $properties['id']['value'];
     }
-    if(!empty($properties['name']['value'])){
-       $json_ld['name'] =      $properties['name']['value'];
+    if(!empty($properties['headline']['value'])){
+       $json_ld['headline'] =      $properties['headline']['value'];
     }
     if(!empty($properties['url']['value'])){
         $json_ld['url'] =      $properties['url']['value'];
     }
     if(!empty($properties['description']['value'])){
         $json_ld['description'] =      $properties['description']['value'];
+    }
+    if(!empty($properties['date_published']['value'])){
+            $json_ld['datePublished']      = $properties['date_published']['value'];
+    }
+    if(!empty($properties['date_modified']['value'])){
+        $json_ld['dateModified']       = $properties['date_modified']['value'];
+    }
+    if(!empty($properties['coverage_start_time']['value'])){
+            $json_ld['coverageStartTime']      = $properties['coverage_start_time']['value'];
+    }
+    if(!empty($properties['coverage_end_time']['value'])){
+        $json_ld['coverageEndTime']       = $properties['coverage_end_time']['value'];
+    }
+    
+    if(!empty($properties['live_blog_update']['elements'])){
+
+        $updates      = $properties['live_blog_update']['elements'];
+        $updates_data = [];
+
+        foreach ($updates as $key => $value) {
+
+            $update = [];
+
+            if(!empty($value['headline']['value'])){
+
+                $update['@type'] = 'BlogPosting';
+                $update['headline']  = $value['headline']['value'];
+                $update['datePublished']  = $value['date_published']['value'];
+                $update['articleBody']  = $value['article_body']['value'];
+                
+            }   
+            
+            $updates_data[] = $update;
+        }
+
+        $json_ld['liveBlogUpdate'] = $updates_data;
     }
                            
    return $json_ld;

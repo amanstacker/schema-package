@@ -6,6 +6,20 @@ function smpg_schema_localbusiness( $schema_id, $common_properties ) {
 
     extract( $common_properties );
 
+    $social_links = [
+        'label'       => esc_html__( 'Social Links', 'schema-package' ),
+        'button_text' => esc_html__( 'Add Another Social Link', 'schema-package' ),
+        'type'        => 'repeater',
+        'display'     => true,
+        'elements'    => [
+            [
+                'url' => $url,
+            ],
+        ],
+    ];
+
+    unset( $publisher_logo['parent_data'] ); 
+
     $business_type = [
         'localbusiness'            => 'LocalBusiness',
         'store'                    => 'Store', 
@@ -15,6 +29,11 @@ function smpg_schema_localbusiness( $schema_id, $common_properties ) {
         'fastfoodrestaurant'       => 'FastFoodRestaurant',  
         'icecreamshop'             => 'IceCreamShop',  
         'restaurant'               => 'Restaurant',
+        'legalservice'             => 'LegalService',
+        'healthandbeautybusiness'  => 'HealthAndBeautyBusiness',
+        'beautysalon'              => 'BeautySalon',
+        'hairsalon'                => 'HairSalon',
+        'dayspa'                   => 'DaySpa',
     ];
 
     $properties = [
@@ -36,9 +55,12 @@ function smpg_schema_localbusiness( $schema_id, $common_properties ) {
             'postal_code'      => $postal_code,
             'address_country'  => $address_country,
             'telephone'        => $telephone,
+            'email'            => $email,
+            'logo'             => $publisher_logo,
             'price_range'      => $price_range,
             'latitude'         => $latitude,
             'longitude'        => $longitude,
+            'social_links'     => $social_links,
             'rating_value'     => $rating_value,
             'best_rating'      => $best_rating,
             'worst_rating'     => $worst_rating,

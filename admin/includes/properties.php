@@ -50,14 +50,19 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'vacationrental'          => 'smpg_schema_vacationrental',
 
         // Local business family
-        'localbusiness'         => 'smpg_schema_localbusiness',
-        'store'                 => 'smpg_schema_localbusiness',
-        'bakery'                => 'smpg_schema_localbusiness',
-        'barorpub'              => 'smpg_schema_localbusiness',
-        'cafeorcoffeeshop'      => 'smpg_schema_localbusiness',
-        'fastfoodrestaurant'    => 'smpg_schema_localbusiness',
-        'icecreamshop'          => 'smpg_schema_localbusiness',
-        'restaurant'            => 'smpg_schema_localbusiness',
+        'localbusiness'           => 'smpg_schema_localbusiness',
+        'store'                   => 'smpg_schema_localbusiness',
+        'bakery'                  => 'smpg_schema_localbusiness',
+        'barorpub'                => 'smpg_schema_localbusiness',
+        'cafeorcoffeeshop'        => 'smpg_schema_localbusiness',
+        'fastfoodrestaurant'      => 'smpg_schema_localbusiness',
+        'icecreamshop'            => 'smpg_schema_localbusiness',
+        'restaurant'              => 'smpg_schema_localbusiness',
+        'legalservice'            => 'smpg_schema_localbusiness',
+        'healthandbeautybusiness' => 'smpg_schema_localbusiness',
+        'beautysalon'             => 'smpg_schema_localbusiness',
+        'hairsalon'               => 'smpg_schema_localbusiness',
+        'dayspa'                  => 'smpg_schema_localbusiness',
 
         // Service family
         'certification'         => 'smpg_schema_certification',

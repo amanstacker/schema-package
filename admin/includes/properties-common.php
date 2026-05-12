@@ -363,6 +363,15 @@ function smpg_get_common_properties( $post_id ) {
             'display'     => true,
             'tooltip'     => esc_html__( 'Articles may belong to one or more sections in a magazine or newspaper, such as Sports, Lifestyle, etc.', 'schema-package' )
         ],
+        'article_body' => [                        
+            'placeholder' => esc_attr__( 'The full description of the post', 'schema-package' ),                    
+            'label'       => esc_html__( 'Article Body (Opt.)', 'schema-package' ),                     
+            'type'        => 'textarea',
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => esc_html__( 'The body of the article.', 'schema-package' )
+        ],
         'url' => [                        
             'placeholder' => 'https://example.com/post-name',                    
             'label'       => esc_html__( 'URL', 'schema-package' ),                    

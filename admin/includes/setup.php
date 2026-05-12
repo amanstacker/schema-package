@@ -514,7 +514,11 @@ function smpg_get_schema_type_text( $id ) {
 		'bakery'                    => 'Bakery',  
 		'barorpub'                  => 'BarOrPub',  
 		'cafeorcoffeeshop'          => 'CafeOrCoffeeShop',  
-		'fastfoodrestaurant'        => 'FastFoodRestaurant',  
+		'fastfoodrestaurant'        => 'FastFoodRestaurant',
+		'healthandbeautybusiness'   => 'HealthAndBeautyBusiness',
+		'beautysalon'               => 'BeautySalon',
+		'hairsalon'                 => 'HairSalon',
+		'dayspa'                    => 'DaySpa',  
 		'icecreamshop'              => 'IceCreamShop',  
 		'restaurant'                => 'Restaurant',                                                                                
 		'service'                   => 'Service',
@@ -562,6 +566,7 @@ function smpg_get_schema_type_text( $id ) {
 		'vacationrental'            => 'VacationRental',
 		'report'            	    => 'Report',
 		'discussionforumposting'    => 'DiscussionForumPosting',
+		'legalservice'              => 'LegalService',
 	];	
 
 	$response = apply_filters( 'smpg_filter_schema_types_list', $response );

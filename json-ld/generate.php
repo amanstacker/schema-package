@@ -19,9 +19,14 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'cafeorcoffeeshop':
         case 'fastfoodrestaurant':
         case 'icecreamshop':
-        case 'restaurant':        
+        case 'restaurant':
+        case 'legalservice':
+        case 'healthandbeautybusiness':
+        case 'beautysalon':
+        case 'hairsalon':
+        case 'dayspa':        
             
-            $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);              
+            $json_ld = smpg_get_different_localbusiness_individual_json_ld($json_ld, $properties, $schema_type);
                                     
         break;
 
@@ -681,9 +686,18 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         break;
 
         case 'liveblogposting':
-            
-            $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 
+            $json_ld['@context']           = smpg_get_context_url();
+            $json_ld['@type']              = smpg_get_schema_type_text( $schema_data['_schema_type'][0] );
+            $json_ld['@id']                = smpg_get_permalink( $post_id ).'#'.$schema_data['_schema_type'][0];
+            $json_ld['url']                = smpg_get_permalink( $post_id );
+            $json_ld['headline']           = smpg_get_the_title( $post_id );
+            $json_ld['description']        = smpg_get_description( $post_id ); 
+            $json_ld['datePublished']      = smpg_get_published_date( $post_id );
+            $json_ld['dateModified']       = smpg_get_modified_date( $post_id );
+            $json_ld['coverageStartTime']  = smpg_get_published_date( $post_id );
+            $json_ld['coverageEndTime']    = smpg_get_modified_date( $post_id );
+                        
             $json_ld = smpg_mapping_properties( $json_ld, $schema_data );
             $json_ld = apply_filters( 'smpg_filter_liveblogposting_json_ld', $json_ld, $schema_data, $post_id ); 
 
@@ -715,6 +729,11 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
         case 'fastfoodrestaurant':
         case 'icecreamshop':
         case 'restaurant':
+        case 'legalservice':
+        case 'healthandbeautybusiness':
+        case 'beautysalon':
+        case 'hairsalon':
+        case 'dayspa':        
             
             $json_ld = smpg_common_default_json_ld( $json_ld, $schema_data, $post_id );
 

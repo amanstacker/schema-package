@@ -88,7 +88,7 @@ Take your schema & structured data to the next level with **Schema Package Premi
 * Advanced ACF/SCF Mapping
 * Schema Markup Setup & Error Clean Up
 * 24/7 Priority Support
-* Premium Features On Demand
+* Premium Features on Demand
 * ...and more!
 
 [Learn more](https://schemapackage.com/premium/)
@@ -101,6 +101,11 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 #### 1. Organization & Business
 - [Organization](https://schema.org/Organization)
 - [LocalBusiness](https://schema.org/LocalBusiness)
+- [HealthAndBeautyBusiness](https://schema.org/HealthAndBeautyBusiness)
+- [BeautySalon](https://schema.org/BeautySalon)
+- [HairSalon](https://schema.org/HairSalon)
+- [DaySpa](https://schema.org/DaySpa)
+- [LegalService](https://schema.org/LegalService)
 - [VacationRental](https://schema.org/VacationRental)
 - [Corporation](https://schema.org/Corporation)
 - [NGO](https://schema.org/NGO)
@@ -108,6 +113,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [EducationalOrganization](https://schema.org/EducationalOrganization)
 - [MedicalOrganization](https://schema.org/MedicalOrganization)
 - [SportsOrganization](https://schema.org/SportsOrganization)
+- [SportsTeam](https://schema.org/SportsTeam)
 - [Store](https://schema.org/Store)
 - [Airline](https://schema.org/Airline)
 - [Consortium](https://schema.org/Consortium)
@@ -130,6 +136,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
 - [ItemList](https://schema.org/ItemList)
+- [OfferCatalog](https://schema.org/OfferCatalog)
 - [CollectionPage](https://schema.org/CollectionPage)
 - [LiveBlogPosting](https://schema.org/LiveBlogPosting)
 - [QAPage](https://schema.org/QAPage)

@@ -2097,6 +2097,13 @@ function smpg_get_different_localbusiness_individual_json_ld( $json_ld, $propert
     if(!empty($properties['price_range']['value'])){
         $json_ld['priceRange'] =      $properties['price_range']['value'];
     }
+        
+    if(!empty($properties['has_menu']['value'])){
+        $json_ld['hasMenu'] =      $properties['has_menu']['value'];
+    }
+    if(!empty($properties['serves_cuisine']['value'])){
+        $json_ld['servesCuisine'] =      $properties['serves_cuisine']['value'];
+    }
 
     if(!empty($properties['social_links']['elements'])){
         $same_as = [];

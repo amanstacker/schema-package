@@ -648,7 +648,7 @@ const SingularSchemaEdit = () => {
         </Accordion>
       : '' }        
       
-       { ( postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' ) ?
+       { ( postMeta._schema_type == 'article' || postMeta._schema_type == 'report' || postMeta._schema_type == 'techarticle' || postMeta._schema_type == 'newsarticle' || postMeta._schema_type == 'advertisercontentarticle' || postMeta._schema_type == 'satiricalarticle' || postMeta._schema_type == 'scholarlyarticle' || postMeta._schema_type == 'socialmediaposting' || postMeta._schema_type == 'creativework' || postMeta._schema_type == 'visualartwork' ) ?
         <Accordion title={__('Additional Schema', 'schema-package') } isExpand={true}>
           <div className="smpg-learn-more-acc">
             <a rel="noopener noreferrer" target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Learn More', 'schema-package')}</a>

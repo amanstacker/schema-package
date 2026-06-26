@@ -2186,7 +2186,7 @@ function smpg_get_different_article_individual_json_ld( $json_ld, $properties, $
             $json_ld['keywords']           = $properties['keywords']['value'];   
         }
 
-        if ( $schema_type != 'creativework' ) {
+        if ( ! in_array( $schema_type, [ 'creativework', 'visualartwork' ], true ) ) {
 
             if(!empty($properties['word_count']['value'])){
                 $json_ld['wordCount']          = $properties['word_count']['value'];   

@@ -121,6 +121,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Guide](https://schema.org/Guide)
 - [DiscussionForumPosting](https://schema.org/DiscussionForumPosting)
 - [CreativeWork](https://schema.org/CreativeWork)
+- [VisualArtwork](https://schema.org/VisualArtwork)
 - [FAQPage](https://schema.org/FAQPage)
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)

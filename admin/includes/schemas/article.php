@@ -15,6 +15,7 @@ function smpg_schema_article( $schema_id, $common_properties ) {
         'scholarlyarticle'         => 'ScholarlyArticle',
         'socialmediaposting'       => 'SocialMediaPosting',
         'creativework'             => 'CreativeWork',
+        'visualartwork'            => 'VisualArtwork',
         'report'                   => 'Report',
         'discussionforumposting'   => 'DiscussionForumPosting',
     ];

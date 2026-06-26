@@ -20,6 +20,7 @@ $smpg_schema_map = [
     'scholarlyarticle'          => 'article.php',
     'socialmediaposting'        => 'article.php',
     'creativework'              => 'article.php',
+    'visualartwork'             => 'article.php',
     'report'                    => 'article.php',
     'discussionforumposting'    => 'article.php',
 

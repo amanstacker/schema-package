@@ -546,6 +546,7 @@ function smpg_get_schema_type_text( $id ) {
 		'mediagallery'              => 'MediaGallery',
 		'imagegallery'              => 'ImageGallery',
 		'creativework'              => 'CreativeWork',
+		'visualartwork'             => 'VisualArtwork',
 		'review'                    => 'Review',
 		'profilepage'               => 'ProfilePage',
 		'webpage'                   => 'WebPage',

@@ -44,6 +44,7 @@ function smpg_prepare_particular_post_json_ld( $schema_data, $post_id ) {
         case 'scholarlyarticle':
         case 'socialmediaposting':
         case 'creativework':
+        case 'visualartwork':
         case 'report':
         case 'discussionforumposting':
             
@@ -346,6 +347,7 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             case 'scholarlyarticle':
             case 'socialmediaposting':     
             case 'creativework':
+            case 'visualartwork':
             case 'report':
             case 'discussionforumposting':
             
@@ -358,11 +360,10 @@ function smpg_prepare_global_json_ld( $schema_data, $post_id ) {
             $json_ld['datePublished']             = smpg_get_published_date( $post_id );
             $json_ld['dateModified']              = smpg_get_modified_date( $post_id );    
 
-            if ( $schema_type_key != 'creativework' ) {
+            if ( ! in_array( $schema_type_key, [ 'creativework', 'visualartwork' ], true ) ) {
 
-                $json_ld['wordCount']                 = smpg_get_word_count( $post_id );
-                $json_ld['articleSection']            = smpg_get_categories( $post_id );
-                
+                $json_ld['wordCount']      = smpg_get_word_count( $post_id );
+                $json_ld['articleSection'] = smpg_get_categories( $post_id );
             }                
 
             $json_ld['inLanguage']                = smpg_get_inlanguage( $post_id );

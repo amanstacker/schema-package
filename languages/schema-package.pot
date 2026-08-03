@@ -3229,3 +3229,13 @@ msgstr ""
 #: admin/assets/react/individual/metabox.jsx:614
 msgid "Choose Schema Types"
 msgstr ""
+
+#: admin/assets/react/individual/metabox.jsx:531
+#: admin/assets/react/individual/metabox.jsx:563
+msgid "Google Rich Results"
+msgstr ""
+
+#: admin/assets/react/individual/metabox.jsx:534
+#: admin/assets/react/individual/metabox.jsx:566
+msgid "Schema Validator"
+msgstr ""

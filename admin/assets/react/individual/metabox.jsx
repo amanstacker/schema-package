@@ -229,6 +229,20 @@ const {
         setdataUpdated(prevState => !prevState);     
   }
 
+  const handleValidateSchema = (i, tool) => {
+    handleSaveForThePost(i);
+    const permalink = smpg_local.permalink ? encodeURIComponent(smpg_local.permalink) : '';
+    let validationUrl = '';
+    if (tool === 'google') {
+        validationUrl = permalink ? `https://search.google.com/test/rich-results?url=${permalink}` : 'https://search.google.com/test/rich-results';
+    } else if (tool === 'schema') {
+        validationUrl = permalink ? `https://validator.schema.org/#url=${permalink}` : 'https://validator.schema.org/';
+    }
+    if (validationUrl) {
+        window.open(validationUrl, '_blank');
+    }
+  }
+
   const savewholeSchemaGeneratorData = () => {
 
     const body_json          = {};
@@ -511,11 +525,17 @@ const {
     );
 })()}
 
-    <div className="smpg-spg-modal-footer">
+    <div className="smpg-spg-modal-footer" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
         <Button onClick={() => handleSaveForThePost(i)} isPrimary>
             {__('Save For The Post', 'schema-package')}
         </Button>
-        <a style={{float:"right", fontSize: '15px', fontWeight:600, textDecoration:"none"}} className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Read Full Guide', 'schema-package')}</a>
+        <Button onClick={() => handleValidateSchema(i, 'google')} isSecondary>
+            {__('Google Rich Results', 'schema-package')}
+        </Button>
+        <Button onClick={() => handleValidateSchema(i, 'schema')} isSecondary>
+            {__('Schema Validator', 'schema-package')}
+        </Button>
+        <a style={{marginLeft: "auto", fontSize: '15px', fontWeight:600, textDecoration:"none"}} className='smpg-learn-more' target="_blank" href='https://schemapackage.com/knowledge-base/'>{__('Read Full Guide', 'schema-package')}</a>
     </div>
     
 </Modal>
@@ -537,14 +557,20 @@ const {
                                                         handleDeleteRepeater = {handleDeleteRepeater}
                                                         handleAddMoreRepeater = {handleAddMoreRepeater}
                                                         />   
-                                                    </div>
+                                                     </div>
                                                 );
                                             })
                                         }
                                     </div>
-                                    <div className="smpg-spg-modal-footer">
+                                    <div className="smpg-spg-modal-footer" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
                                     <Button onClick={() => handleSaveForThePost(i)} isPrimary >
                                         {__('Save For The Post', 'schema-package') }                                        
+                                    </Button>
+                                    <Button onClick={() => handleValidateSchema(i, 'google')} isSecondary>
+                                        {__('Google Rich Results', 'schema-package')}
+                                    </Button>
+                                    <Button onClick={() => handleValidateSchema(i, 'schema')} isSecondary>
+                                        {__('Schema Validator', 'schema-package')}
                                     </Button>
                                     </div>
                                 </Modal>

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.0.31
+Stable tag: 1.0.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -562,6 +562,13 @@ To explore all the advanced features and benefits included in the Schema Package
 Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.32 =
+
+* Added: Google Rich Results and Schema Validator links dirlcyt in SPG post editor
+* Added: servesCuisine hasMenu properties in LocalBusiness Schema
+* Added: ClothingStore and VisualArtwork schema.
+* Added: Testimonials links in readme.txt
 
 = 1.0.31 =
 

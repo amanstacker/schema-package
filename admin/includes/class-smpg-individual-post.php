@@ -139,6 +139,26 @@ class SMPG_Individual_Post {
                 }
             }
 
+            $permalink = '';
+            if ( $hook == 'profile.php' || $hook == 'user-edit.php' ) {
+                if ( $user_id ) {
+                    $permalink = get_author_posts_url( $user_id );
+                }
+            } elseif ( ! empty( $_GET['tag_ID'] ) ) {
+                $term_id = intval( $_GET['tag_ID'] );
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Not processing form data
+                $taxonomy_slug = ! empty( $_GET['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ) : '';
+                $permalink = get_term_link( $term_id, $taxonomy_slug );
+            } else {
+                $post_id = get_the_ID();
+                if ( $post_id ) {
+                    $permalink = get_permalink( $post_id );
+                }
+            }
+            if ( is_wp_error( $permalink ) ) {
+                $permalink = '';
+            }
+
             $local_data = apply_filters( 'smpg_local_filter', [
 				'smpg_plugin_url'      => SMPG_PLUGIN_URL,
                 'rest_url'             => esc_url_raw( rest_url( 'smpg-individual-route/' ) ),
@@ -151,6 +171,7 @@ class SMPG_Individual_Post {
 				'is_multilingual'      => false,
                 'language_list'        => [],
                 'default_language'     => '',
+                'permalink'            => $permalink,
 			] );
                                     
             wp_enqueue_media();    

@@ -31,7 +31,7 @@ function smpg_schema_webpage( $schema_id, $common_properties ) {
         ]
     ];
     
-    if ( $schema_id == 'creativework' ) {
+    if ( $schema_id == 'creativework' || $schema_id == 'visualartwork' ) {
         unset( $properties['properties']['word_count'] );
         unset( $properties['properties']['article_section'] );
     }

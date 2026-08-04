@@ -244,6 +244,24 @@ function smpg_get_common_properties( $post_id ) {
             'display'     => true,
             'tooltip'     => esc_html__( 'Price Range of an item', 'schema-package' )        
         ],
+        'serves_cuisine' => [
+            'placeholder' => 'Italian, Chinese, Mexican',                    
+            'label'       => esc_html__( 'Serves Cuisine', 'schema-package' ),                     
+            'type'        => 'text',                                                
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => esc_html__( 'Cuisine served by the restaurant', 'schema-package' )        
+        ],
+        'has_menu' => [
+            'placeholder' => 'https://example.com/menu',                    
+            'label'       => esc_html__( 'Has Menu', 'schema-package' ),                     
+            'type'        => 'text',                                                
+            'value'       => '',
+            'recommended' => false,
+            'display'     => true,
+            'tooltip'     => esc_html__( 'Link to the menu of the restaurant', 'schema-package' )        
+        ],
         'email' => [
             'placeholder' => esc_attr__( 'Enter Email', 'schema-package' ),
             'label'       => esc_html__( 'Email', 'schema-package' ),

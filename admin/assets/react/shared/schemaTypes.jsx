@@ -74,18 +74,19 @@ export const schemaTypes = [
     { key: 72, value: 'healthandbeautybusiness', text: 'HealthAndBeautyBusiness' },
     { key: 73, value: 'beautysalon', text: 'BeautySalon' },
     { key: 74, value: 'hairsalon', text: 'HairSalon' },
-    { key: 75, value: 'dayspa', text: 'DaySpa' },
+    { key: 75, value: 'dayspa', text: 'DaySpa' },    
+    { key: 76, value: 'visualartwork', text: 'VisualArtwork' },
 
     // ------------------------ PRO ONLY ------------------------
     ...( !smpg_local.is_free ? [
-        { key: 76, value: 'medicalclinic', text: 'MedicalClinic' },
-        { key: 77, value: 'dietarysupplement', text: 'DietarySupplement' },
-        { key: 78, value: 'exerciseplan', text: 'ExercisePlan' },
-        { key: 79, value: 'drug', text: 'Drug' },
-        { key: 80, value: 'medicalcondition', text: 'MedicalCondition' },
-        { key: 81, value: 'medicaltherapy', text: 'MedicalTherapy' },
-        { key: 82, value: 'medicalprocedure', text: 'MedicalProcedure' },
-        { key: 83, value: 'physician', text: 'Physician' },
-        { key: 84, value: 'hospital', text: 'Hospital' },        
+        { key: 77, value: 'medicalclinic', text: 'MedicalClinic' },
+        { key: 78, value: 'dietarysupplement', text: 'DietarySupplement' },
+        { key: 79, value: 'exerciseplan', text: 'ExercisePlan' },
+        { key: 80, value: 'drug', text: 'Drug' },
+        { key: 81, value: 'medicalcondition', text: 'MedicalCondition' },
+        { key: 82, value: 'medicaltherapy', text: 'MedicalTherapy' },
+        { key: 83, value: 'medicalprocedure', text: 'MedicalProcedure' },
+        { key: 84, value: 'physician', text: 'Physician' },
+        { key: 85, value: 'hospital', text: 'Hospital' },        
     ] : [])
 ];

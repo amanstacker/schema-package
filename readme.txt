@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.0.31
+Stable tag: 1.0.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ Helps website owners automate and add versatile schema markup to their websites,
 
 The main purpose of the Schema Package is to automate the creation of schema markup (JSON-LD) for websites. Instead of manually entering the same information twice — once in the actual content and again in the **Schema Package Generator** metabox or other custom fields. Schema Package simplifies the process. It achieves this by integrating with plugins or themes that generate content, ensuring compatibility and automation.
 
-[Home](https://schemapackage.com/) | [Knowledge Base](https://schemapackage.com/knowledge-base/) | [Help & Support](https://schemapackage.com/contactus/) | [Premium](https://schemapackage.com/premium/)
+[Home](https://schemapackage.com/) | [Knowledge Base](https://schemapackage.com/knowledge-base/) | [Help & Support](https://schemapackage.com/contactus/) | [Testimonials](https://schemapackage.com/#testimonials) | [Premium](https://schemapackage.com/premium/)
 
 We have automated the creation of schema markup (JSON-LD) for some of the plugins listed below. If your plugin is not on the list, please [request](https://github.com/amanstacker/schema-package/issues/new) or contact us, and we will automate it as well.
 
@@ -102,6 +102,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [SportsOrganization](https://schema.org/SportsOrganization)
 - [SportsTeam](https://schema.org/SportsTeam)
 - [Store](https://schema.org/Store)
+- [ClothingStore](https://schema.org/ClothingStore)
 - [Airline](https://schema.org/Airline)
 - [Consortium](https://schema.org/Consortium)
 - [School](https://schema.org/School)
@@ -120,6 +121,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 - [Guide](https://schema.org/Guide)
 - [DiscussionForumPosting](https://schema.org/DiscussionForumPosting)
 - [CreativeWork](https://schema.org/CreativeWork)
+- [VisualArtwork](https://schema.org/VisualArtwork)
 - [FAQPage](https://schema.org/FAQPage)
 - [HowTo](https://schema.org/HowTo)
 - [BreadcrumbList](https://schema.org/BreadcrumbList)
@@ -560,6 +562,13 @@ To explore all the advanced features and benefits included in the Schema Package
 Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.32 =
+
+* Added: Direct links to Google Rich Results Test and Schema Validator in the SPG post editor.
+* Added: Support for the `servesCuisine` and `hasMenu` properties in the LocalBusiness schema.
+* Added: Support for the ClothingStore and VisualArtwork schema types.
+* Added: Testimonial links to the `readme.txt` file.
 
 = 1.0.31 =
 

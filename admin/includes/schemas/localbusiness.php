@@ -58,6 +58,8 @@ function smpg_schema_localbusiness( $schema_id, $common_properties ) {
             'email'            => $email,
             'logo'             => $publisher_logo,
             'price_range'      => $price_range,
+            'serves_cuisine'   => $serves_cuisine,
+            'has_menu'         => $has_menu,
             'latitude'         => $latitude,
             'longitude'        => $longitude,
             'social_links'     => $social_links,

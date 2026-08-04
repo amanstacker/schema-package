@@ -20,6 +20,7 @@ function smpg_get_schema_properties( $schema_id, $post_id = null, $tag_id = null
         'scholarlyarticle'          => 'smpg_schema_article',
         'socialmediaposting'        => 'smpg_schema_article',
         'creativework'              => 'smpg_schema_article',
+        'visualartwork'             => 'smpg_schema_article',
         'report'                    => 'smpg_schema_article',
         'discussionforumposting'    => 'smpg_schema_article',
 

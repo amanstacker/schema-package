@@ -565,10 +565,10 @@ Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa sch
 
 = 1.0.32 =
 
-* Added: Google Rich Results and Schema Validator links dirlcyt in SPG post editor
-* Added: servesCuisine hasMenu properties in LocalBusiness Schema
-* Added: ClothingStore and VisualArtwork schema.
-* Added: Testimonials links in readme.txt
+* Added: Direct links to Google Rich Results Test and Schema Validator in the SPG post editor.
+* Added: Support for the `servesCuisine` and `hasMenu` properties in the LocalBusiness schema.
+* Added: Support for the ClothingStore and VisualArtwork schema types.
+* Added: Testimonial links to the `readme.txt` file.
 
 = 1.0.31 =
 

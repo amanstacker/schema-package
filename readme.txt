@@ -4,8 +4,8 @@ Tags: Rich Results, carousel schema, json-ld, product schema, local business sch
 Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 1.0.32
+Tested up to: 7.1
+Stable tag: 1.0.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -562,6 +562,10 @@ To explore all the advanced features and benefits included in the Schema Package
 Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.33 =
+
+* Tested with WordPress 7.1 and confirmed to be fully compatible with it.
 
 = 1.0.32 =
 

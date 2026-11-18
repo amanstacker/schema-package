@@ -3239,3 +3239,12 @@ msgstr ""
 #: admin/assets/react/individual/metabox.jsx:566
 msgid "Schema Validator"
 msgstr ""
+
+#: admin/includes/setup.php:319
+#: admin/assets/react/admin_panel/settings/Settings.jsx:728
+msgid "SureRank SEO"
+msgstr ""
+
+#: admin/assets/react/admin_panel/settings/Settings.jsx:736
+msgid "Automatically fetch schema-related values (title, description, focus keyword, etc.) from SureRank SEO settings. If SureRank SEO values are available, Schema Package will prioritize them over WordPress defaults."
+msgstr ""

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/paypalme/amanstacker
 Requires PHP: 7.4
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.0.33
+Stable tag: 1.0.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -274,6 +274,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Squirrly SEO](https://wordpress.org/plugins/squirrly-seo/)
 * [SmartCrawl SEO](https://wordpress.org/plugins/smartcrawl-seo/)
 * [SEOPress](https://wordpress.org/plugins/wp-seopress/)
+* [SureRank SEO](https://wordpress.org/plugins/surerank/)
 * [Advanced Custom Fields (ACF®)](https://wordpress.org/plugins/advanced-custom-fields/)
 * [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/)
 * [Smart Custom Fields](https://wordpress.org/plugins/smart-custom-fields/)
@@ -558,10 +559,19 @@ To explore all the advanced features and benefits included in the Schema Package
 
 == Upgrade Notice ==
 
+= 1.0.34 =
+Adds SureRank SEO compatibility and schema conflict management support.
+
 = 1.0.31 =
 Adds HealthAndBeautyBusiness, BeautySalon, HairSalon, LegalService, & DaySpa schema support.
 
 == Changelog ==
+
+= 1.0.34 =
+
+* Added: SureRank SEO compatibility support to automatically fetch title, description, and focus keywords.
+* Added: SureRank SEO conflict management support to disable duplicate schema output.
+* Updated: Translation template (.pot) with latest strings.
 
 = 1.0.33 =
 

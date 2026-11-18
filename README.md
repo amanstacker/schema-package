@@ -284,6 +284,7 @@ The Schema Package plugin supports a wide range of Schema.org types, covering va
 * [Squirrly SEO](https://wordpress.org/plugins/squirrly-seo/)
 * [SmartCrawl SEO](https://wordpress.org/plugins/smartcrawl-seo/)
 * [SEOPress](https://wordpress.org/plugins/wp-seopress/)
+* [SureRank SEO](https://wordpress.org/plugins/surerank/)
 * [Advanced Custom Fields (ACF®)](https://wordpress.org/plugins/advanced-custom-fields/)
 * [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/)
 * [Smart Custom Fields](https://wordpress.org/plugins/smart-custom-fields/)

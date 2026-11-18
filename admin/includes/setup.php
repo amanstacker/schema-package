@@ -313,6 +313,15 @@ function smpg_load_smpg_plugin_list_settings() {
 		'slug_pro_v'  		=> 'wp-seopress/seopress.php',
 		'wp_org_url'  		=> 'https://wordpress.org/plugins/wp-seopress/'
 	];
+	$smpg_plugin_list['surerank'] = [
+		'is_active'   		=> false,
+		'has_own_json_ld' 	=> true,
+		'id'          		=> 'surerank',
+		'name'        		=> 'SureRank SEO',
+		'slug_free_v' 		=> 'surerank/surerank.php',
+		'slug_pro_v'  		=> 'surerank-pro/surerank-pro.php',
+		'wp_org_url'  		=> 'https://wordpress.org/plugins/surerank/'
+	];
 			
 	if(!function_exists('is_plugin_active')){
 		include_once(ABSPATH.'wp-admin/includes/plugin.php');
@@ -361,6 +370,7 @@ function smpg_default_settings_data() {
 		'rankmath_cmp' 			    => 0,
 		'yoast_cmp' 			    => 0,
 		'aioseo_cmp' 			    => 0,
+		'surerank_cmp' 			    => 0,
 		'wpgraphql_cmp' 		    => 0,
 		'simple_author_box_cmp'     => 0,		
 		'delete_data_on_uninstall'  => 0,

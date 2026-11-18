@@ -501,6 +501,13 @@ function smpg_manage_conflict() {
                 case 'seopress':                    
                     add_action('wp_head', 'smpg_seo_press_remove_json_ld',0);    
                     break;
+                case 'surerank':
+                    add_filter( 'surerank_print_schema', '__return_false', 99 );
+                    add_filter( 'surerank_set_schema', '__return_empty_array', 99 );
+                    if ( class_exists( '\SureRank\Inc\Schema\Schemas' ) ) {
+                        remove_action( 'surerank_print_meta', [ \SureRank\Inc\Schema\Schemas::get_instance(), 'print_schema_data' ], 10 );
+                    }
+                    break;
                 case 'wpeventmanager':                    
                     if(class_exists('WP_Event_Manager_Post_Types')){
                         remove_action( 'wp_footer', [ WP_Event_Manager_Post_Types::instance(), 'output_structured_data' ], 10 ); 
